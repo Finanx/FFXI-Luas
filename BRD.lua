@@ -497,6 +497,7 @@ function init_gear_sets()
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}
 		
 	sets.midcast['Herb Pastoral'] = set_combine(sets.precast.FC, {range="Daurdabla"})
+	sets.midcast['Shining Fantasia'] = set_combine(sets.precast.FC, {range="Daurdabla"})
 
 
     -- Defines Song sets can also add equipment to increase certain songs.

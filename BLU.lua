@@ -126,7 +126,7 @@ function job_setup()
     blue_magic_maps.Magical = S{'Anvil Lightning','Blastbomb','Blazing Bound','Bomb Toss','Cursed Sphere',
         'Droning Whirlwind','Embalming Earth','Entomb','Firespit','Foul Waters','Ice Break','Leafstorm',
         'Maelstrom','Molting Plumage','Nectarous Deluge','Regurgitation','Rending Deluge','Scouring Spate',
-        'Silent Storm','Spectral Floe','Subduction','Tem. Upheaval','Water Bomb'}
+        'Spectral Floe','Subduction','Tem. Upheaval','Water Bomb'}
 
     blue_magic_maps.MagicalDark = S{'Dark Orb','Death Ray','Eyes On Me','Evryone. Grudge','Palling Salvo',
         'Tenebral Crush'}
@@ -154,7 +154,7 @@ function job_setup()
         'Enervation','Feather Tickle','Filamented Hold','Frightful Roar','Geist Wall','Hecatomb Wave',
         'Infrasonics','Jettatura','Light of Penance','Lowing','Mind Blast','Mortal Ray','MP Drainkiss',
         'Osmosis','Reaving Wind','Sandspin','Sandspray','Sheep Song','Soporific','Sound Blast',
-        'Stinking Gas','Sub-zero Smash','Venom Shell','Voracious Trunk','Yawn'}
+        'Stinking Gas','Sub-zero Smash','Venom Shell','Voracious Trunk','Yawn','Silent Storm'}
 
     -- Breath-based spells
     blue_magic_maps.Breath = S{'Bad Breath','Flying Hip Press','Frost Breath','Heat Breath','Hecatomb Wave',
@@ -786,17 +786,17 @@ function init_gear_sets()
 
     sets.midcast['Blue Magic'].MagicAccuracy = {
 		ammo="Pemphredo Tathlum",
-		head="Jhakri Coronal +2",
+		head={ name="Amalric Coif +1", augments={'INT+12','Mag. Acc.+25','Enmity-6',}},
 		body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		hands="Jhakri Cuffs +2",
-		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		feet={ name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}},
-		neck="Sanctity Necklace",
+		hands="Malignance Gloves",
+		legs="Malignance Tights",
+		feet="Malignance Boots",
+		neck="Erra Pendant",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
-		left_ear="Malignance Earring",
-		right_ear="Regal Earring",
+		left_ear="Gwati Earring",
+		right_ear="Digni. Earring",
 		left_ring="Stikini Ring +1",
-		right_ring="Stikini Ring +1",
+		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Rosmerta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},}
 
     sets.midcast['Subduction'] = {
@@ -1350,10 +1350,6 @@ end
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
-    if unbridled_spells:contains(spell.english) and not state.Buff['Unbridled Learning'] then
-        eventArgs.cancel = true
-        windower.send_command('@input /ja "Unbridled Learning" <me>; wait 1.5; input /ma "'..spell.name..'" '..spell.target.name)
-    end
     if spellMap == 'Utsusemi' then
         if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
             cancel_spell()

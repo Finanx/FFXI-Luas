@@ -142,12 +142,6 @@ function user_setup()
 	send_command('bind @4 gs c set WeaponSet Tauret')
 	send_command('bind @5 gs c set WeaponSet Maxentius')
 	
---	send_command('bind @1 gs c set WeaponLock false; gs c set WeaponSet Naegling; gs c set WeaponLock true')
---	send_command('bind @2 gs c set WeaponLock false; gs c set WeaponSet Crocea_Mors; gs c set WeaponLock true')
---	send_command('bind @3 gs c set WeaponLock false; gs c set WeaponSet Levante; gs c set WeaponLock true')
---	send_command('bind @4 gs c set WeaponLock false; gs c set WeaponSet Tauret; gs c set WeaponLock true')
---	send_command('bind @5 gs c set WeaponLock false; gs c set WeaponSet Maxentius; gs c set WeaponLock true')
-	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
     send_command('bind ^numpad1 input /ws "Sanguine Blade" <t>')
@@ -1516,18 +1510,6 @@ function update_combat_form()
     elseif DW == false then
         state.CombatForm:reset()
     end
-	
---	if state.WeaponLock.value == true then
---		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
---			equip(sets[state.WeaponSet.current])
---			disable('main','sub')
---		else
---			equip(sets[state.WeaponSet.current].SW)
---			disable('main','sub')
---		end
---	else
---		enable('main','sub')
---	end
 	
 	if state.WeaponSet.value == 'Naegling' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then

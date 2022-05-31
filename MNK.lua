@@ -402,16 +402,16 @@ function init_gear_sets()
 	sets.precast.WS['Tornado Kick'].Acc = {}
 	
 	sets.precast.WS['Raging Fists'] = {
-		ammo="Knobkierrie",
-		head={ name="Blistering Sallet +1", augments={'Path: A',}},
-		body={ name="Herculean Vest", augments={'Accuracy+4','Weapon skill damage +4%','DEX+10','Attack+13',}},
-		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs="Hiza. Hizayoroi +2",
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head="Mpaca's Cap",
+		body={ name="Adhemar Jacket +1", augments={'STR+12','DEX+12','Attack+20',}},
+		hands={ name="Adhemar Wrist. +1", augments={'STR+12','DEX+12','Attack+20',}},
+		legs="Mpaca's Hose",
 		feet={ name="Herculean Boots", augments={'Accuracy+10 Attack+10','"Triple Atk."+4','Accuracy+14',}},
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
-		left_ear="Sherida Earring",
-		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Sherida Earring",
 		left_ring="Niqmaddu Ring",
 		right_ring="Gere Ring",
 		back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},}
@@ -436,16 +436,16 @@ function init_gear_sets()
 	sets.precast.WS['Shijin Spiral'].Acc = {}
 	
 	sets.precast.WS['Howling Fist'] = {
-		ammo="Knobkierrie",
-		head={ name="Blistering Sallet +1", augments={'Path: A',}},
-		body={ name="Herculean Vest", augments={'Accuracy+4','Weapon skill damage +4%','DEX+10','Attack+13',}},
-		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs="Hiza. Hizayoroi +2",
+		ammo="Aurgelmir Orb +1",
+		head="Mpaca's Cap",
+		body={ name="Tatena. Harama. +1", augments={'Path: A',}},
+		hands={ name="Adhemar Wrist. +1", augments={'STR+12','DEX+12','Attack+20',}},
+		legs="Mpaca's Hose",
 		feet={ name="Herculean Boots", augments={'Accuracy+10 Attack+10','"Triple Atk."+4','Accuracy+14',}},
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
-		left_ear="Sherida Earring",
-		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear={ name="Schere Earring", augments={'Path: A',}},
 		left_ring="Niqmaddu Ring",
 		right_ring="Gere Ring",
 		back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},}
@@ -522,7 +522,7 @@ function init_gear_sets()
     
     -- Resting sets
     sets.resting = {
-		main="Kaja Knuckles",
+		main="Sakpata's Fists",
 		ammo="Staunch Tathlum +1",
 		head="Malignance Chapeau",
 		body="Malignance Tabard",
@@ -540,7 +540,7 @@ function init_gear_sets()
 
     -- Idle sets
     sets.idle = {
-		main="Kaja Knuckles",
+		main="Sakpata's Fists",
 		ammo="Staunch Tathlum +1",
 		head="Malignance Chapeau",
 		body="Malignance Tabard",
@@ -566,31 +566,31 @@ function init_gear_sets()
     
     -- Normal melee sets
     sets.engaged = {
-		ammo="Ginsen",
+		ammo="Aurgelmir Orb +1",
 		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		body="Ken. Samue",
+		body={ name="Tatena. Harama. +1", augments={'Path: A',}},
 		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs="Ken. Hakama",
-		feet={ name="Herculean Boots", augments={'Accuracy+10 Attack+10','"Triple Atk."+4','Accuracy+14',}},
-		neck="Moonbeam Nodowa",
+		legs={ name="Tatena. Haidate +1", augments={'Path: A',}},
+		feet={ name="Tatena. Sune. +1", augments={'Path: A',}},
+		neck="Combatant's Torque",
 		waist="Windbuffet Belt +1",
-		left_ear="Sherida Earring",
-		right_ear="Telos Earring",
+		left_ear="Telos Earring",
+		right_ear="Sherida Earring",
 		left_ring="Niqmaddu Ring",
 		right_ring="Gere Ring",
 		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 
     sets.engaged.Acc = {
-		ammo="Ginsen",
+		ammo="Aurgelmir Orb +1",
 		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		body="Ken. Samue",
+		body={ name="Tatena. Harama. +1", augments={'Path: A',}},
 		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs="Ken. Hakama",
-		feet={ name="Herculean Boots", augments={'Accuracy+10 Attack+10','"Triple Atk."+4','Accuracy+14',}},
-		neck="Moonbeam Nodowa",
+		legs={ name="Tatena. Haidate +1", augments={'Path: A',}},
+		feet={ name="Tatena. Sune. +1", augments={'Path: A',}},
+		neck="Combatant's Torque",
 		waist="Windbuffet Belt +1",
-		left_ear="Sherida Earring",
-		right_ear="Telos Earring",
+		left_ear="Telos Earring",
+		right_ear="Sherida Earring",
 		left_ring="Niqmaddu Ring",
 		right_ring="Gere Ring",
 		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
@@ -644,7 +644,7 @@ function init_gear_sets()
 		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
 		legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
 		feet={ name="Herculean Boots", augments={'Accuracy+10 Attack+10','"Triple Atk."+4','Accuracy+14',}},
-		neck="Moonbeam Nodowa",
+		neck="Combatant's Torque",
 		waist="Windbuffet Belt +1",
 		left_ear="Sherida Earring",
 		right_ear="Telos Earring",
@@ -659,7 +659,7 @@ function init_gear_sets()
 		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
 		legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
 		feet={ name="Herculean Boots", augments={'Accuracy+10 Attack+10','"Triple Atk."+4','Accuracy+14',}},
-		neck="Moonbeam Nodowa",
+		neck="Combatant's Torque",
 		waist="Windbuffet Belt +1",
 		left_ear="Sherida Earring",
 		right_ear="Telos Earring",
@@ -671,7 +671,7 @@ function init_gear_sets()
     -- Custom buff sets
     --------------------------------------
 
-    sets.impetus_body = {body="Tantra Cyclas +2"}
+    --sets.impetus_body = {body="Tantra Cyclas +2"}
 	
     sets.footwork_kick_feet = {feet="Anchorite's Gaiters +1"}
 
