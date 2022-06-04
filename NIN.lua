@@ -243,15 +243,28 @@ function user_unload()
 
 	--Remove Global Ninja Binds
 	
+	send_command('bind @t gs c cycle TreasureMode')
+	send_command('bind @1 input /equip sub; gs c set WeaponSet Physical_Katana')
+	send_command('bind @2 input /equip sub; gs c set WeaponSet Magic_Katana')
+	send_command('bind @3 input /equip sub; gs c set WeaponSet Naegling')
+	send_command('bind @4 input /equip sub; gs c set WeaponSet Dagger')
+	send_command('bind @w gs c toggle WeaponLock')
+    send_command('bind @c gs c toggle CP')
+	send_command('bind ^` input /ja "Yonin" <me>')
+	send_command('bind !` input /ja "Innin" <me>')
+	send_command('bind @` gs c toggle MagicBurst')
+	
+	
     send_command('unbind @t')
 	send_command('unbind @1')
 	send_command('unbind @2')
 	send_command('unbind @3')
 	send_command('unbind @4')
     send_command('unbind @w')
-    send_command('unbind @e')
+	send_command('unbind @c')
 	send_command('unbind ^`')
 	send_command('unbind !`')
+	send_command('unbind @`')
 	
 	
 	--Remove Dual Box Binds

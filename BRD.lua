@@ -465,7 +465,7 @@ function init_gear_sets()
     -- For song buffs (duration and AF3 set bonus)
 	
 	sets.midcast.SongEnhancing = {
-		main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
+		main="Carnwenhan",
 		sub={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
 		head="Fili Calot +1",
 		body="Fili Hongreline +1",
@@ -481,7 +481,7 @@ function init_gear_sets()
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}
 		
 	sets.midcast.SongPlaceholder = {
-		main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
+		mmain="Carnwenhan",
 		sub={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
 		head="Fili Calot +1",
 		body="Fili Hongreline +1",
@@ -796,11 +796,11 @@ function init_gear_sets()
 		main="Naegling",
 		sub="Genmei Shield",
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head="Aya. Zucchetto +2",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ayanmo Corazza +2",
-		hands="Nyame Gauntlets",
-		legs="Aya. Cosciales +2",
-		feet="Nyame Sollerets",
+		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet="Volte Spats",
 		neck="Combatant's Torque",
 		waist="Windbuffet Belt +1",
 		left_ear="Telos Earring",
@@ -813,15 +813,15 @@ function init_gear_sets()
 		main="Naegling",
 		sub="Genmei Shield",
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head="Aya. Zucchetto +2",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ayanmo Corazza +2",
-		hands="Nyame Gauntlets",
-		legs="Aya. Cosciales +2",
-		feet="Aya. Gambieras +2",
-		neck="Sanctity Necklace",
+		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet="Volte Spats",
+		neck="Combatant's Torque",
 		waist="Windbuffet Belt +1",
 		left_ear="Telos Earring",
-		right_ear="Mache Earring +1",
+		right_ear="Brutal Earring",
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
@@ -834,29 +834,29 @@ function init_gear_sets()
 		main="Naegling",
 		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head="Aya. Zucchetto +2",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ayanmo Corazza +2",
-		hands="Nyame Gauntlets",
-		legs="Aya. Cosciales +2",
-		feet="Nyame Sollerets",
+		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet="Volte Spats",
 		neck="Combatant's Torque",
 		waist="Reiki Yotai",												--7%
 		left_ear="Telos Earring",
 		right_ear="Eabani Earring",											--4%
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
-		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}	
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}		
 		--11%GDW + 25%JADW = 36%
 
     sets.engaged.DW.Acc = {
 		main="Naegling",
 		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head="Aya. Zucchetto +2",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ayanmo Corazza +2",
-		hands="Nyame Gauntlets",
-		legs="Aya. Cosciales +2",
-		feet="Nyame Sollerets",
+		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet="Volte Spats",
 		neck="Combatant's Torque",
 		waist="Reiki Yotai",												--7%
 		left_ear="Telos Earring",
@@ -883,11 +883,11 @@ function init_gear_sets()
 		main="Naegling",
 		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head="Aya. Zucchetto +2",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ayanmo Corazza +2",
-		hands="Nyame Gauntlets",
-		legs="Aya. Cosciales +2",
-		feet="Nyame Sollerets",
+		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet="Volte Spats",
 		neck="Combatant's Torque",
 		waist="Reiki Yotai",												--7%
 		left_ear="Telos Earring",
@@ -901,11 +901,11 @@ function init_gear_sets()
 		main="Naegling",
 		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head="Aya. Zucchetto +2",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ayanmo Corazza +2",
-		hands="Nyame Gauntlets",
-		legs="Aya. Cosciales +2",
-		feet="Nyame Sollerets",
+		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet="Volte Spats",
 		neck="Combatant's Torque",
 		waist="Reiki Yotai",												--7%
 		left_ear="Telos Earring",
@@ -920,17 +920,17 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged.Hybrid = {
-		range={ name="Linos", augments={'Mag. Evasion+15','Phys. dmg. taken -4%','HP+20',}},
-		head="Nyame Helm",
+		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Nyame Gauntlets",
+		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Nyame Sollerets",
-		neck={ name="Loricate Torque +1", augments={'Path: A',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck="Combatant's Torque",
 		waist="Reiki Yotai",
-		left_ear="Crep. Earring",
-		right_ear="Digni. Earring",
-		left_ring="Chirich Ring +1",
+		left_ear="Eabani Earring",
+		right_ear="Crep. Earring",
+		left_ring="Moonlight Ring",
 		right_ring="Chirich Ring +1",
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
@@ -964,7 +964,7 @@ function init_gear_sets()
 		waist="Chaac Belt",} --TH+1
 
 
-    sets.SongDWDuration = {main="Kali", sub="Kali"}
+    sets.SongDWDuration = {main="Carnwenhan", sub="Kali"}
 	sets.Dummy = {range="Daurdabla",}
 	sets.Effect = {range={ name="Linos", augments={'All Songs+2',}},}
 
