@@ -1,47 +1,30 @@
 -- Original: Finanx
+-- Haste/DW Detection Requires Gearinfo Addon
 -- Dressup is setup to auto load with this Lua
 -- Itemizer addon is required for auto gear sorting / Warp Scripts / Range Scripts
 --
 -------------------------------------------------------------------------------------------------------------------
---  Keybinds
+--  Keybinds (Global Binds for all Jobs)
 -------------------------------------------------------------------------------------------------------------------
-
---  Modes:      	[ F9 ]              Cycle Offense Mode
---              	[ F10 ]             Cycle Idle Mode
---              	[ F11 ]             Cycle Casting Mode
---              	[ F12 ]             Update Current Gear / Report Current Status
---					[ CTRL + F9 ]		Cycle Weapon Skill Mode
---					[ ALT + F9 ]		Cycle Range Mode
---              	[ Windows + F9 ]    Cycle Hybrid Modes
---					[ Windows + ` ]		Toggles Treasure Hunter Mode
---              	[ Windows + C ]     Toggle Capacity Points Mode
+--  Modes:      	[ F9 ]              	Cycle Offense Mode
+--              	[ F10 ]             	Cycle Idle Mode
+--              	[ F11 ]             	Cycle Casting Mode
+--              	[ F12 ]             	Update Current Gear / Report Current Status
+--					[ CTRL + F9 ]			Cycle Weapon Skill Mode
+--					[ ALT + F9 ]			Cycle Range Mode
+--              	[ Windows + F9 ]    	Cycle Hybrid Modes
+--			    	[ Windows + W ]         Toggles Weapon Lock
+--  				[ Windows + R ]         Toggles Range Lock
+--					[ Windows + T ]			Toggles Treasure Hunter Mode
+--              	[ Windows + C ]     	Toggle Capacity Points Mode
+--              	[ Windows + A ]     	AttackMode: Capped/Uncapped WS Modifier
 --
---
---  Abilities:  	[ CTRL + ` ]        Perfect Counter
---					[ Alt + ` ]        	Innin
---
---
---  Weapons:    	[ CTRL + W ]        Toggles Weapon Lock
---  				[ CTRL + R ]        Toggles Range Lock
---
---
---  WS:         	[ CTRL + Numpad1 ]    Victory Smite
---					[ CTRL + Numpad2 ]    Tornado Kick
---					[ CTRL + Numpad3 ]    Raging Fists
---					[ CTRL + Numpad4 ]    Howling Fist
---					[ CTRL + Numpad5 ]    Shijin Spiral
---					[ CTRL + Numpad6 ]    Asuran Fists
---					[ CTRL + Numpad7 ]    Spinning Attack
---				
---					[ ALT + Numpad1 ]     Shell Crusher
---
---
--- Item Binds:		[ Shift + Numpad1 ]	Echo Drop
---					[ Shift + Numpad2 ]	Holy Water
---					[ Shift + Numpad3 ]	Remedy
---					[ Shift + Numpad4 ]	Panacea
---					[ Shift + Numpad7 ]	Silent Oil
---					[ Shift + Numpad9 ]	Prism Powder
+-- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
+--					[ Shift + Numpad2 ]		Holy Water
+--					[ Shift + Numpad3 ]		Remedy
+--					[ Shift + Numpad4 ]		Panacea
+--					[ Shift + Numpad7 ]		Silent Oil
+--					[ Shift + Numpad9 ]		Prism Powder
 --
 --					[ Windows + Numpad1 ]	Sublime Sushi
 --					[ Windows + Numpad2 ]	Grape Daifuku
@@ -50,22 +33,30 @@
 --					[ Windows + Numpad5 ]	Red Curry Bun
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
+-- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
+--					[ ALT + Numpad+ ]		Dimensional Ring Dem
 --
--- Warp Script:		[ CTRL + Numpad+ ]	Warp Ring
---					[ ALT + Numpad+ ]	Dimensional Ring Dem
---
---
--- Range Script:	[ CTRL + Numpad0 ] Ranged Attack
---
+-- Range Script:	[ CTRL + Numpad0 ] 		Ranged Attack
 --
 -------------------------------------------------------------------------------------------------------------------
---  Custom Commands (preface with /console to use these in macros)
+--  Job Specific Keybinds (Monk Binds)
 -------------------------------------------------------------------------------------------------------------------
 --
+--	Modes:			[ Windows + 1 ]			Sets Weapon to Godhands
+--					[ Windows + 2 ]			Sets Weapon to Spharai
+--					[ Windows + 3 ]			Sets Weapon to Verethranga
+--					[ Windows + 4 ]			Sets Weapon to Xoanan
+--					[ Windows + 5 ]			Sets Weapon to Karambit
 --
---  TH Modes:  None                 Will never equip TH gear
---             Tag                  Will equip TH gear sufficient for initial contact with a mob
---
+--  WS:         	[ CTRL + Numpad1 ]		Victory Smite
+--					[ CTRL + Numpad2 ]		Tornado Kick
+--					[ CTRL + Numpad3 ]		Raging Fists
+--					[ CTRL + Numpad4 ]		Howling Fist
+--					[ CTRL + Numpad5 ]		Shijin Spiral
+--					[ CTRL + Numpad6 ]		Asuran Fists
+--					[ CTRL + Numpad7 ]		Spinning Attack
+--				
+--					[ ALT + Numpad1 ]		Shell Crusher
 --
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -82,6 +73,9 @@ end
 
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
+
+    no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring"}
 
 	include('Mote-TreasureHunter')
 	
@@ -109,6 +103,7 @@ function user_setup()
 	state.TreasureMode:options('Tag', 'None')
 
     state.CP = M(false, "Capacity Points Mode")
+	state.WeaponSet = M{['description']='Weapon Set', 'Godhands', 'Spharai', 'Verethranga', 'Xoanan', 'Karambit' }
     update_combat_form()
     update_melee_groups()
 	
@@ -122,6 +117,14 @@ function user_setup()
 	send_command('bind @w gs c cycle WeaponSet')
     send_command('bind @c gs c toggle CP')
 	send_command('bind ^` input /ja "Perfect Counter" <me>')
+	
+	--Weapon set Binds
+
+	send_command('bind @1 gs c set WeaponSet Godhands')
+	send_command('bind @2 gs c set WeaponSet Spharai')
+	send_command('bind @3 gs c set WeaponSet Verethranga')
+	send_command('bind @4 gs c set WeaponSet Xoanan')
+	send_command('bind @5 gs c set WeaponSet Karambit')
 
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
@@ -170,9 +173,7 @@ function user_setup()
 	send_command('bind !numpad+ input //get Dim. Ring (Dem) satchel; wait 1; input /equip Ring1 "Dim. Ring (Dem)"; wait 12; input /item "Dim. Ring (Dem)" <me>; wait 60; input //put Dim. Ring (Dem) satchel')
 	
 	--Gear Retrieval Commands
-	
-	send_command('wait 10; input //get Kaja Knuckles Case')
-	send_command('wait 10; input //get Segomo\'s Mantle Sack all')
+
 		
 	--Job Settings
 
@@ -193,9 +194,21 @@ function user_unload()
 	
 	--Remove Dual Box Binds
 	
+	--send_command('unbind @1')
+	--send_command('unbind @2')
+	--send_command('unbind @q')
+	
+	--Remove Weapon Set binds
+	
 	send_command('unbind @1')
 	send_command('unbind @2')
-	send_command('unbind @q')
+	send_command('unbind @3')
+	send_command('unbind @4')
+	send_command('unbind @5')
+	send_command('unbind @6')
+	send_command('unbind @7')
+	send_command('unbind @8')
+	send_command('unbind @9')
 	
 	--Remove Weaponskill Binds
     
@@ -686,6 +699,12 @@ function init_gear_sets()
 		ammo="Per. Lucky Egg", --TH1
 		body="Volte Jupon",		--TH2
 		waist="Chaac Belt",} --TH+1
+		
+	sets.Godhands = {main="Sakpata's Fists",}
+	sets.Spharai = {main="Sakpata's Fists",}
+	sets.Verethranga = {main="Sakpata's Fists",}
+	sets.Xoanan = {main="Sakpata's Fists",}
+	sets.Karambit = {main="Kaja Knuckles"}
 
 
 end
@@ -696,12 +715,6 @@ end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
-function job_precast(spell, action, spellMap, eventArgs)
-    -- Don't gearswap for weaponskills when Defense is on.
-    if spell.type == 'WeaponSkill' and state.DefenseMode.current ~= 'None' then
-        eventArgs.handled = true
-    end
-end
 
 -- Run after the general precast() is done.
 function job_post_precast(spell, action, spellMap, eventArgs)
@@ -716,9 +729,6 @@ function job_post_precast(spell, action, spellMap, eventArgs)
         end
         
         -- Replace Moonshade Earring if we're at cap TP
-        if player.tp == 3000 then
-            equip(sets.precast.MaxTP)
-        end
     end
 end
 
@@ -764,6 +774,12 @@ function job_buff_change(buff, gain)
     end
 end
 
+function job_update(cmdParams, eventArgs)
+	check_gear()
+    handle_equipping_gear(player.status)
+	equip(sets[state.WeaponSet.current])
+end
+
 
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.
@@ -793,21 +809,14 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
-function customize_melee_set(meleeSet)
-    if state.TreasureMode.value == 'Fulltime' then
-        meleeSet = set_combine(meleeSet, sets.TreasureHunter)
-    end
-
-    return meleeSet
-end
-
-
 function update_combat_form()
     if buffactive.footwork and not buffactive['hundred fists'] then
         state.CombatForm:set('Footwork')
     else
         state.CombatForm:reset()
     end
+	equip(sets[state.WeaponSet.current])
+	
 end
 
 function update_melee_groups()
@@ -821,6 +830,51 @@ function update_melee_groups()
         classes.CustomMeleeGroups:append('Impetus')
     end
 end
+
+function job_self_command(cmdParams, eventArgs)
+    gearinfo(cmdParams, eventArgs)
+end
+
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
+    end
+end
+
+function check_gear()
+    if no_swap_gear:contains(player.equipment.left_ring) then
+        disable("ring1")
+    else
+        enable("ring1")
+    end
+    if no_swap_gear:contains(player.equipment.right_ring) then
+        disable("ring2")
+    else
+        enable("ring2")
+    end
+end
+
+windower.register_event('zone change',
+    function()
+        if no_swap_gear:contains(player.equipment.left_ring) then
+            enable("ring1")
+            equip(sets.idle)
+        end
+        if no_swap_gear:contains(player.equipment.right_ring) then
+            enable("ring2")
+            equip(sets.idle)
+        end
+    end
+)
 
 function display_current_job_state(eventArgs)
     local cf_msg = ''

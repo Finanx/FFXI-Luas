@@ -77,19 +77,16 @@ end
 
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
-    -- QuickDraw Selector
 	
-	
-	no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
-					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring",
+    no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring",
 					"Dev. Bul. Pouch", "Chr. Bul. Pouch", "Liv. Bul. Pouch"}
 
     -- Whether to use Luzaf's Ring
     state.LuzafRing = M(false, "Luzaf's Ring")
+	
     -- Whether a warning has been given for low ammo
     state.warned = M(false)
-
-    -- For th_action_check():
 
 	include('Mote-TreasureHunter')
 
@@ -99,8 +96,6 @@ function job_setup()
     info.default_u_ja_ids = S{201, 202, 203, 205, 207}
 
     define_roll_values()
-
-
 
     lockstyleset = 6
 end
@@ -138,10 +133,14 @@ function user_setup()
 	--Global Corsair binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
     send_command ('bind ^` gs c toggle LuzafRing')
-	send_command('bind @r gs c cycle RangeSet')
 	send_command('bind @t gs c cycle TreasureMode')
+	
+	--Weapon set Binds
+	
 	send_command('bind @1 gs c set WeaponSet Naegling')
 	send_command('bind @2 gs c set WeaponSet Rostam')
+	
+	send_command('bind @r gs c cycle RangeSet')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -233,9 +232,21 @@ function user_unload()
 
 	--Remove Dual Box Binds
 	
+	--send_command('unbind @1')
+	--send_command('unbind @2')
+	--send_command('unbind @q')
+	
+	--Remove Weapon Set binds
+	
 	send_command('unbind @1')
 	send_command('unbind @2')
-	send_command('unbind @q')
+	send_command('unbind @3')
+	send_command('unbind @4')
+	send_command('unbind @5')
+	send_command('unbind @6')
+	send_command('unbind @7')
+	send_command('unbind @8')
+	send_command('unbind @9')
 	
 	--Remove Weaponskill Binds
     
@@ -1054,42 +1065,45 @@ function init_gear_sets()
 	
 	--Ammosets
 	sets.Devastating = {waist="Dev. Bul. Pouch",}
-	sets.Chrono = {"Chr. Bul. Pouch",}
+	sets.Chrono = {waist="Chr. Bul. Pouch",}
 	sets.Living = {waist="Liv. Bul. Pouch",}
 	
 
 end
 
 -------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for standard casting events.
+-- Job-specific Functions
 -------------------------------------------------------------------------------------------------------------------
 
--- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
--- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
 	
-    -- Check that proper ammo is available if we're using ranged attacks or similar.
+		-- Check that proper ammo is available if we're using ranged attacks or similar.
     if spell.action_type == 'Ranged Attack' or spell.type == 'WeaponSkill' or spell.type == 'CorsairShot' then
         do_bullet_checks(spell, spellMap, eventArgs)
     end
 
-    -- Gear
+		-- Handles Luzaf Ring if toggled on
     if state.LuzafRing.value == true then
         sets.precast.CorsairRoll = sets.precast.LuzafRing
 	end
 	if spell.english == "Double-Up" and state.LuzafRing.value == true then
 		equip(sets.precast.LuzafRing)
 	end
+
+		--Changes Quickdraw if casting mode is set to resistant
     if spell.type == 'CorsairShot' and state.CastingMode.value == 'Resistant' then
         classes.CustomClass = 'Acc'
     end
 
+		--handles Double Bust 
     if spell.english == 'Fold' and buffactive['Bust'] == 2 then
         if sets.precast.FoldDoubleBust then
             equip(sets.precast.FoldDoubleBust)
             eventArgs.handled = true
         end
     end
+	
+		--Will stop utsusemi from being cast if 2 shadows or more
     if spellMap == 'Utsusemi' then
         if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
             cancel_spell()
@@ -1100,24 +1114,30 @@ function job_precast(spell, action, spellMap, eventArgs)
             send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
         end
     end
+	
 end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
+
+		--Handles Snapshot sets based on if Flurry is on
     if spell.action_type == 'Ranged Attack' then
         if flurry == 2 then
             equip(sets.precast.RA.Flurry2)
         elseif flurry == 1 then
             equip(sets.precast.RA.Flurry1)
         end
-    -- Equip obi if weather/day matches for WS.
+		
+		-- Equip obi if weather/day matches for WS.
     elseif spell.type == 'WeaponSkill' then
-        if spell.english == 'Leaden Salute' then
+ 
+		if spell.english == 'Leaden Salute' then
             if player.tp > 2900 then
                 equip(sets.precast.WS['Leaden Salute'].FullTP)
             end
             if world.weather_element == 'Dark' or world.day_element == 'Dark' then
                 equip(sets.Obi)
             end
+			
         elseif spell.english == 'Wildfire' and (world.weather_element == 'Fire' or world.day_element == 'Fire') then
             equip(sets.Obi)
         end
@@ -1125,7 +1145,8 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
-    -- Equip obi if weather/day matches for Quick Draw.
+
+		--Equip obi if weather/day matches for Quick Draw.
     if spell.type == 'CorsairShot' then
         if (spell.element == world.day_element or spell.element == world.weather_element) and
         (spell.english ~= 'Light Shot' and spell.english ~= 'Dark Shot') then
@@ -1133,18 +1154,22 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
     elseif spell.action_type == 'Ranged Attack' then
     end
+	
 end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_aftercast(spell, action, spellMap, eventArgs)
 
+		--Handles Light Shot Timer
     if spell.english == "Light Shot" then
         send_command('@timers c "Light Shot ['..spell.target.name..']" 60 down abilities/00195.png')
     end
+	
 end
 
 function job_buff_change(buff,gain)
--- If we gain or lose any flurry buffs, adjust gear.
+
+		--If we gain or lose any flurry buffs, adjust gear.
     if S{'flurry'}:contains(buff:lower()) then
         if not gain then
             flurry = nil
@@ -1155,14 +1180,14 @@ function job_buff_change(buff,gain)
         end
     end
 
-
+		--Auto equips Cursna Recieved doom set when doom debuff is on
     if buff == "doom" then
         if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-            disable('ring1','ring2','waist')
+            disable('neck','waist')
         else
-            enable('ring1','ring2','waist')
+            enable('neck','waist')
             handle_equipping_gear(player.status)
         end
     end
@@ -1195,7 +1220,7 @@ function check_weaponset()
 	end
 end
 
---handles equiping ranged weapon
+--handles equiping ranged weapon sets
 
 function check_rangeset()
 	equip(sets[state.RangeSet.current])
@@ -1208,6 +1233,8 @@ end
 
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
+
+-- Handles Gearinfo / Melee / Weapon / Range Sets
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
@@ -1220,6 +1247,7 @@ function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
 end
 
+	--Determines Dual Wield melee set
 function update_combat_form()
     if DW == true then
         state.CombatForm:set('DW')
@@ -1228,8 +1256,10 @@ function update_combat_form()
     end
 end
 
--- Modify the default idle set after it was constructed.
+	
 function customize_idle_set(idleSet)
+
+		--Allows CP back to stay on if toggled on
     if state.CP.current == 'on' then
         equip(sets.CP)
         disable('back')
@@ -1239,7 +1269,7 @@ function customize_idle_set(idleSet)
     return idleSet
 end
 
--- Set eventArgs.handled to true if we don't want the automatic display to be run.
+	--Function to display the current relevant user state when doing an update.
 function display_current_job_state(eventArgs)
     local msg = ''
 
@@ -1269,7 +1299,7 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
---Read incoming packet to differentiate between Haste/Flurry I and II
+	--Read incoming packet to differentiate between Haste/Flurry I and II
 windower.register_event('action',
     function(act)
         --check if you are a target of spell
@@ -1295,6 +1325,7 @@ windower.register_event('action',
         end
     end)
 
+	--Determines Haste Group / Melee set for Gear Info
 function determine_haste_group()
     classes.CustomMeleeGroups:clear()
     if DW == true then
@@ -1314,6 +1345,7 @@ function determine_haste_group()
     end
 end
 
+	--Gear Info Functions
 function job_self_command(cmdParams, eventArgs)
     if cmdParams[1] == 'qd' then
         if cmdParams[2] == 't' then
@@ -1365,6 +1397,7 @@ function gearinfo(cmdParams, eventArgs)
     end
 end
 
+	--Defines Lucky/Unlucky Roll values
 function define_roll_values()
     rolls = {
         ["Corsair's Roll"] =    {lucky=5, unlucky=9, bonus="Experience Points"},
@@ -1414,7 +1447,7 @@ function display_roll_info(spell)
     end
 end
 
--- Determine whether we have sufficient ammo for the action being attempted.
+	-- Determine whether we have sufficient ammo for the action being attempted.
 function do_bullet_checks(spell, spellMap, eventArgs)
     local bullet_name
     local bullet_min_count = 1
@@ -1432,18 +1465,22 @@ function do_bullet_checks(spell, spellMap, eventArgs)
             -- Ignore non-ranged weaponskills
             return
         end
+		
     elseif spell.type == 'CorsairShot' then
         bullet_name = gear.QDbullet
+		
     elseif spell.action_type == 'Ranged Attack' then
         bullet_name = gear.RAbullet
+		
         if buffactive['Triple Shot'] then
             bullet_min_count = 3
         end
+		
     end
 
     local available_bullets = player.inventory[bullet_name] or player.wardrobe[bullet_name]
 
-    -- If no ammo is available, give appropriate warning and end.
+		--If no ammo is available, give appropriate warning and end.
     if not available_bullets then
         if spell.type == 'CorsairShot' and player.equipment.ammo ~= 'empty' then
             add_to_chat(104, 'No Quick Draw ammo left.  Using what\'s currently equipped ('..player.equipment.ammo..').')
@@ -1458,14 +1495,14 @@ function do_bullet_checks(spell, spellMap, eventArgs)
         end
     end
 
-    -- Don't allow shooting or weaponskilling with ammo reserved for quick draw.
+		--Don't allow shooting or weaponskilling with ammo reserved for quick draw.
     if spell.type ~= 'CorsairShot' and bullet_name == gear.QDbullet and available_bullets.count <= bullet_min_count then
         add_to_chat(104, 'No ammo will be left for Quick Draw.  Cancelling.')
         eventArgs.cancel = true
         return
     end
 
-    -- Low ammo warning.
+		--Low ammo warning.
     if spell.type ~= 'CorsairShot' and state.warned.value == false
         and available_bullets.count > 1 and available_bullets.count <= options.ammo_warning_limit then
         local msg = '*****  LOW AMMO WARNING: '..bullet_name..' *****'
@@ -1486,7 +1523,7 @@ function do_bullet_checks(spell, spellMap, eventArgs)
 end
 
 function special_ammo_check()
-    -- Stop if Animikii/Hauksbok equipped
+		--Stop if Animikii/Hauksbok equipped
     if no_shoot_ammo:contains(player.equipment.ammo) then
         cancel_spell()
         add_to_chat(123, '** Action Canceled: [ '.. player.equipment.ammo .. ' equipped!! ] **')
@@ -1494,6 +1531,7 @@ function special_ammo_check()
     end
 end
 
+	--Allows equipping of warp/exp rings and ammo belts without auto swapping back to current set
 function check_gear()
     if no_swap_gear:contains(player.equipment.left_ring) then
         disable("ring1")
@@ -1530,7 +1568,7 @@ windower.register_event('zone change',
     end
 )
 
-
+	--Auto Adjusts gear constantly if DW/Gearinfo is active
 windower.register_event('zone change', 
     function()
         send_command('gi ugs true')
@@ -1539,11 +1577,8 @@ windower.register_event('zone change',
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
-    if player.sub_job == 'DNC' then
-        set_macro_page(1, 19)
-    else
-        set_macro_page(1, 19)
-    end
+		--Default macro set/book
+    set_macro_page(1, 19)
 end
 
 function set_lockstyle()

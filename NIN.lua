@@ -4,48 +4,27 @@
 -- Itemizer addon is required for auto gear sorting / Warp Scripts / Range Scripts
 --
 -------------------------------------------------------------------------------------------------------------------
---  Keybinds
+--  Keybinds (Global Binds for all Jobs)
 -------------------------------------------------------------------------------------------------------------------
-
---  Modes:      	[ F9 ]              Cycle Offense Mode
---              	[ F10 ]             Cycle Idle Mode
---              	[ F11 ]             Cycle Casting Mode
---              	[ F12 ]             Update Current Gear / Report Current Status
---					[ CTRL + F9 ]		Cycle Weapon Skill Mode
---					[ ALT + F9 ]		Cycle Range Mode
---              	[ Windows + F9 ]    Cycle Hybrid Modes
---					[ Windows + ` ]		Toggles Treasure Hunter Mode
---              	[ Windows + C ]     Toggle Capacity Points Mode
+--  Modes:      	[ F9 ]              	Cycle Offense Mode
+--              	[ F10 ]             	Cycle Idle Mode
+--              	[ F11 ]             	Cycle Casting Mode
+--              	[ F12 ]             	Update Current Gear / Report Current Status
+--					[ CTRL + F9 ]			Cycle Weapon Skill Mode
+--					[ ALT + F9 ]			Cycle Range Mode
+--              	[ Windows + F9 ]    	Cycle Hybrid Modes
+--			    	[ Windows + W ]         Toggles Weapon Lock
+--  				[ Windows + R ]         Toggles Range Lock
+--					[ Windows + T ]			Toggles Treasure Hunter Mode
+--              	[ Windows + C ]     	Toggle Capacity Points Mode
+--              	[ Windows + A ]     	AttackMode: Capped/Uncapped WS Modifier
 --
---
---  Abilities:  	[ CTRL + ` ]        Yonin
---					[ Alt + ` ]        	Innin
---
---
---  Weapons:    	[ CTRL + W ]        Toggles Weapon Lock
---  				[ CTRL + R ]        Toggles Range Lock
---
---
---  WS:         	[ CTRL + Numpad1 ]    Blade: Shun
---					[ CTRL + Numpad2 ]    Blade: Ten
---					[ CTRL + Numpad3 ]    Blade: Hi
---					[ CTRL + Numpad4 ]    Blade: Kamu
---					[ CTRL + Numpad5 ]    Blade: Metsu
---					[ CTRL + Numpad6 ]    Blade: Yu
---					[ CTRL + Numpad7 ]    Blade: Ei
---				
---					[ ALT + Numpad1 ]     Aeolian Edge
---					[ ALT + Numpad2 ]     Evisceration
---					[ ALT + Numpad4 ]     Savage Blade
---					[ ALT + Numpad5 ]     Sanguine Blade
---
---
--- Item Binds:		[ Shift + Numpad1 ]	Echo Drop
---					[ Shift + Numpad2 ]	Holy Water
---					[ Shift + Numpad3 ]	Remedy
---					[ Shift + Numpad4 ]	Panacea
---					[ Shift + Numpad7 ]	Silent Oil
---					[ Shift + Numpad9 ]	Prism Powder
+-- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
+--					[ Shift + Numpad2 ]		Holy Water
+--					[ Shift + Numpad3 ]		Remedy
+--					[ Shift + Numpad4 ]		Panacea
+--					[ Shift + Numpad7 ]		Silent Oil
+--					[ Shift + Numpad9 ]		Prism Powder
 --
 --					[ Windows + Numpad1 ]	Sublime Sushi
 --					[ Windows + Numpad2 ]	Grape Daifuku
@@ -54,22 +33,35 @@
 --					[ Windows + Numpad5 ]	Red Curry Bun
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
+-- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
+--					[ ALT + Numpad+ ]		Dimensional Ring Dem
 --
--- Warp Script:		[ CTRL + Numpad+ ]	Warp Ring
---					[ ALT + Numpad+ ]	Dimensional Ring Dem
---
---
--- Range Script:	[ CTRL + Numpad0 ] Ranged Attack
---
+-- Range Script:	[ CTRL + Numpad0 ] 		Ranged Attack
 --
 -------------------------------------------------------------------------------------------------------------------
---  Custom Commands (preface with /console to use these in macros)
+--  Job Specific Keybinds (Ninja Binds)
 -------------------------------------------------------------------------------------------------------------------
 --
+--	Modes:			[ Windows + 1 ]			Sets Weapon to Physical_Katana
+--					[ Windows + 2 ]			Sets Weapon to Magical_Katana
+--					[ Windows + 3 ]			Sets Weapon to Naegling
+--					[ Windows + 4 ]			Sets Weapon to Gleti's_Knife
 --
---  TH Modes:  None                 Will never equip TH gear
---             Tag                  Will equip TH gear sufficient for initial contact with a mob
+--  WS:         	[ CTRL + Numpad1 ]		Blade: Shun
+--					[ CTRL + Numpad2 ]		Blade: Ten
+--					[ CTRL + Numpad3 ]		Blade: Hi
+--					[ CTRL + Numpad4 ]		Blade: Kamu
+--					[ CTRL + Numpad5 ]		Blade: Metsu
+--					[ CTRL + Numpad6 ]		Blade: Yu
+--					[ CTRL + Numpad7 ]		Blade: Ei
+--				
+--					[ ALT + Numpad1 ]		Aeolian Edge
+--					[ ALT + Numpad2 ]		Evisceration
+--					[ ALT + Numpad4 ]		Savage Blade
+--					[ ALT + Numpad5 ]		Sanguine Blade
 --
+--  Abilities:  	[ CTRL + ` ]        	Yonin
+--					[ Alt + ` ]        		Innin
 --
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -87,14 +79,13 @@ end
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
     state.Buff.Migawari = buffactive.migawari or false
-    state.Buff.Doom = buffactive.doom or false
     state.Buff.Yonin = buffactive.Yonin or false
     state.Buff.Innin = buffactive.Innin or false
     state.Buff.Futae = buffactive.Futae or false
     state.Buff.Sange = buffactive.Sange or false
 
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
-              "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring"}
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring"}
 
     include('Mote-TreasureHunter')
 
@@ -135,15 +126,18 @@ function user_setup()
     --Global Ninja binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
 	send_command('bind @t gs c cycle TreasureMode')
+    send_command('bind @c gs c toggle CP')
+	send_command('bind ^` input /ja "Yonin" <me>')
+	send_command('bind !` input /ja "Innin" <me>')
+	send_command('bind @` gs c toggle MagicBurst')
+	
+	--Weapon set Binds
+
 	send_command('bind @1 input /equip sub; gs c set WeaponSet Physical_Katana')
 	send_command('bind @2 input /equip sub; gs c set WeaponSet Magic_Katana')
 	send_command('bind @3 input /equip sub; gs c set WeaponSet Naegling')
 	send_command('bind @4 input /equip sub; gs c set WeaponSet Dagger')
 	send_command('bind @w gs c toggle WeaponLock')
-    send_command('bind @c gs c toggle CP')
-	send_command('bind ^` input /ja "Yonin" <me>')
-	send_command('bind !` input /ja "Innin" <me>')
-	send_command('bind @` gs c toggle MagicBurst')
 
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
@@ -244,10 +238,6 @@ function user_unload()
 	--Remove Global Ninja Binds
 	
 	send_command('bind @t gs c cycle TreasureMode')
-	send_command('bind @1 input /equip sub; gs c set WeaponSet Physical_Katana')
-	send_command('bind @2 input /equip sub; gs c set WeaponSet Magic_Katana')
-	send_command('bind @3 input /equip sub; gs c set WeaponSet Naegling')
-	send_command('bind @4 input /equip sub; gs c set WeaponSet Dagger')
 	send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @c gs c toggle CP')
 	send_command('bind ^` input /ja "Yonin" <me>')
@@ -256,10 +246,6 @@ function user_unload()
 	
 	
     send_command('unbind @t')
-	send_command('unbind @1')
-	send_command('unbind @2')
-	send_command('unbind @3')
-	send_command('unbind @4')
     send_command('unbind @w')
 	send_command('unbind @c')
 	send_command('unbind ^`')
@@ -269,9 +255,21 @@ function user_unload()
 	
 	--Remove Dual Box Binds
 	
+	--send_command('unbind @1')
+	--send_command('unbind @2')
+	--send_command('unbind @q')
+	
+	--Remove Weapon Set binds
+	
 	send_command('unbind @1')
 	send_command('unbind @2')
-	send_command('unbind @q')
+	send_command('unbind @3')
+	send_command('unbind @4')
+	send_command('unbind @5')
+	send_command('unbind @6')
+	send_command('unbind @7')
+	send_command('unbind @8')
+	send_command('unbind @9')
 	
 	--Remove Weaponskill Binds
     
@@ -952,9 +950,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 				end
 		end
     end
-    if state.Buff.Doom then
-        equip(sets.buff.Doom)
-    end
 end
 
 
@@ -990,9 +985,9 @@ function job_buff_change(buff, gain)
         if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-            disable('ring1','ring2','waist')
+            disable('neck','waist')
         else
-            enable('ring1','ring2','waist')
+            enable('neck','waist')
             handle_equipping_gear(player.status)
         end
     end

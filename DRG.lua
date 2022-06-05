@@ -1,42 +1,30 @@
 -- Original: Finanx
+-- Haste/DW Detection Requires Gearinfo Addon
 -- Dressup is setup to auto load with this Lua
 -- Itemizer addon is required for auto gear sorting / Warp Scripts / Range Scripts
 --
 -------------------------------------------------------------------------------------------------------------------
---  Keybinds
+--  Keybinds (Global Binds for all Jobs)
 -------------------------------------------------------------------------------------------------------------------
-
---  Modes:      	[ F9 ]              Cycle Offense Mode
---              	[ F10 ]             Cycle Idle Mode
---              	[ F11 ]             Cycle Casting Mode
---              	[ F12 ]             Update Current Gear / Report Current Status
---					[ CTRL + F9 ]		Cycle Weapon Skill Mode
---					[ ALT + F9 ]		Cycle Range Mode
---              	[ Windows + F9 ]    Cycle Hybrid Modes
---					[ Windows + ` ]		Toggles Treasure Hunter Mode
---              	[ Windows + C ]     Toggle Capacity Points Mode
+--  Modes:      	[ F9 ]              	Cycle Offense Mode
+--              	[ F10 ]             	Cycle Idle Mode
+--              	[ F11 ]             	Cycle Casting Mode
+--              	[ F12 ]             	Update Current Gear / Report Current Status
+--					[ CTRL + F9 ]			Cycle Weapon Skill Mode
+--					[ ALT + F9 ]			Cycle Range Mode
+--              	[ Windows + F9 ]    	Cycle Hybrid Modes
+--			    	[ Windows + W ]         Toggles Weapon Lock
+--  				[ Windows + R ]         Toggles Range Lock
+--					[ Windows + T ]			Toggles Treasure Hunter Mode
+--              	[ Windows + C ]     	Toggle Capacity Points Mode
+--              	[ Windows + A ]     	AttackMode: Capped/Uncapped WS Modifier
 --
---  Abilities:  	[ CTRL + ` ]        Hasso
---
---  Weapons:    	[ CTRL + W ]		Toggle Weapon sets
---					[ CTRL + E]			Toggle Grip Sets
---
---  WS:         	[ CTRL + Numpad1 ]    Tachi: Fudo
---					[ CTRL + Numpad2 ]    Tachi: Shoha
---					[ CTRL + Numpad3 ]    Tachi: Kasha
---					[ CTRL + Numpad4 ]    Tachi: Ageha
---					[ CTRL + Numpad5 ]    Tachi: Jinpu
---					[ CTRL + Numpad6 ]    Tachi: Yukikaze
---					[ CTRL + Numpad7 ]    Tachi: Rana
---				
---					[ ALT + Numpad1 ]     Impulse Drive
---
--- Item Binds:		[ Shift + Numpad1 ]	Echo Drop
---					[ Shift + Numpad2 ]	Holy Water
---					[ Shift + Numpad3 ]	Remedy
---					[ Shift + Numpad4 ]	Panacea
---					[ Shift + Numpad7 ]	Silent Oil
---					[ Shift + Numpad9 ]	Prism Powder
+-- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
+--					[ Shift + Numpad2 ]		Holy Water
+--					[ Shift + Numpad3 ]		Remedy
+--					[ Shift + Numpad4 ]		Panacea
+--					[ Shift + Numpad7 ]		Silent Oil
+--					[ Shift + Numpad9 ]		Prism Powder
 --
 --					[ Windows + Numpad1 ]	Sublime Sushi
 --					[ Windows + Numpad2 ]	Grape Daifuku
@@ -45,29 +33,28 @@
 --					[ Windows + Numpad5 ]	Red Curry Bun
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
--- Warp Script:		[ CTRL + Numpad+ ]	Warp Ring
---					[ ALT + Numpad+ ]	Dimensional Ring Dem
+-- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
+--					[ ALT + Numpad+ ]		Dimensional Ring Dem
 --
--- Range Script:	[ CTRL + Numpad0 ] Ranged Attack
+-- Range Script:	[ CTRL + Numpad0 ] 		Ranged Attack
 --
 -------------------------------------------------------------------------------------------------------------------
---  Job Specific Keybinds (Blue Mage Binds)
+--  Job Specific Keybinds (Dragoon Binds)
 -------------------------------------------------------------------------------------------------------------------
 --
---	Modes:			
+--	Modes:			[ Windows + 1 ]			Sets Weapon to Trishula
+--					[ Windows + 2 ]			Sets Weapon to Shining_One
+--					[ Windows + 3 ]			Sets Weapon to Naegling
 --
---  WS:         	[ CTRL + Numpad1 ]    	Sanguine Blade
---					[ CTRL + Numpad2 ]    	Flat Blade
---					[ CTRL + Numpad3 ]    	Requiescat
---					[ CTRL + Numpad4 ]    	Savage Blade
---					[ CTRL + Numpad5 ]    	Chant Du Cygne
---					[ CTRL + Numpad6 ]    	Expiacion
+--  WS:         	[ CTRL + Numpad1 ]    	Evisceration
+--					[ CTRL + Numpad2 ]    	Rudra's Storm
+--					[ CTRL + Numpad3 ]    	Mandalic Stab
+--					[ CTRL + Numpad4 ]    	Aeolian Edge
+--					[ CTRL + Numpad5 ]    	Exenterator
+--					[ CTRL + Numpad6 ]    	Shark Bite
 --				
---					[ ALT + Numpad1 ]     	Black Halo
---					[ ALT + Numpad2 ]     	True Strike
---					[ ALT + Numpad3 ]     	Judgment
---					[ ALT + Numpad4 ]     	Realm Razer
---					[ ALT + Numpad4 ]     	Moonlight
+--					[ ALT + Numpad1 ]     	Savage Blade
+--					[ ALT + Numpad2 ]     	Sanguine Blade
 --
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -86,10 +73,13 @@ end
 function job_setup()
 
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
-              "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring"}
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring"}
+
     wyv_breath_spells = S{'Dia', 'Poison', 'Blaze Spikes', 'Protect', 'Sprout Smack', 'Head Butt', 'Cocoon',
         'Barfira', 'Barblizzara', 'Baraera', 'Barstonra', 'Barthundra', 'Barwatera'}
     wyv_elem_breath = S{'Flame Breath', 'Frost Breath', 'Sand Breath', 'Hydro Breath', 'Gust Breath', 'Lightning Breath'}
+	
+	include('Mote-TreasureHunter')
 
     lockstyleset = 4
 
@@ -105,6 +95,7 @@ function user_setup()
     state.HybridMode:options('Normal', 'DT')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
+	state.WeaponSet = M{['description']='Weapon Set', 'Trishula', 'Shining_One', 'Naegling'}
 
     state.AttackMode = M{['description']='Attack', 'Capped', 'Uncapped'}
     state.CP = M(false, "Capacity Points Mode")
@@ -124,6 +115,12 @@ function user_setup()
 	send_command('bind @t gs c cycle TreasureMode')
 	send_command('bind @w gs c cycle WeaponSet')
 	send_command('bind @a gs c cycle AttackMode')
+
+	--Weapon set Binds
+
+	send_command('bind @1 gs c set WeaponSet Trishula')
+	send_command('bind @2 gs c set WeaponSet Shining_One')
+	send_command('bind @3 gs c set WeaponSet Naegling')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -180,9 +177,21 @@ function user_unload()
 	
 	--Remove Dual Box Binds
 	
+	--send_command('unbind @1')
+	--send_command('unbind @2')
+	--send_command('unbind @q')
+	
+	--Remove Weapon Set binds
+	
 	send_command('unbind @1')
 	send_command('unbind @2')
-	send_command('unbind @q')
+	send_command('unbind @3')
+	send_command('unbind @4')
+	send_command('unbind @5')
+	send_command('unbind @6')
+	send_command('unbind @7')
+	send_command('unbind @8')
+	send_command('unbind @9')
 	
 	--Remove Weaponskill Binds
     
@@ -369,6 +378,10 @@ function init_gear_sets()
     -- sets.CP = {back="Mecisto. Mantle"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
+	sets.Trishula = {main="Trishula", sub="Utu Grip"}
+	sets.Polearm = {main="Shining One", sub="Utu Grip"}
+	sets.Naegling = {main="Naegling"}
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -440,9 +453,9 @@ function job_buff_change(buff,gain)
         if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-             disable('ring1','ring2','waist')
+            disable('neck','waist')
         else
-            enable('ring1','ring2','waist')
+            enable('neck','waist')
             handle_equipping_gear(player.status)
         end
     end
@@ -465,6 +478,7 @@ end
 
 function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
+	equip(sets[state.WeaponSet.current])
 end
 
 function get_custom_wsmode(spell, action, spellMap)
@@ -532,6 +546,16 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
+
+function update_combat_form()
+    if buffactive.footwork and not buffactive['hundred fists'] then
+        state.CombatForm:set('Footwork')
+    else
+        state.CombatForm:reset()
+    end
+	equip(sets[state.WeaponSet.current])
+	
+end
 
 function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)

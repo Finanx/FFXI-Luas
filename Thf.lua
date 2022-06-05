@@ -4,41 +4,27 @@
 -- Itemizer addon is required for auto gear sorting / Warp Scripts / Range Scripts
 --
 -------------------------------------------------------------------------------------------------------------------
---  Keybinds
+--  Keybinds (Global Binds for all Jobs)
 -------------------------------------------------------------------------------------------------------------------
-
---  Modes:      	[ F9 ]              Cycle Offense Mode
---              	[ F10 ]             Cycle Idle Mode
---              	[ F11 ]             Cycle Casting Mode
---              	[ F12 ]             Update Current Gear / Report Current Status
---					[ CTRL + F9 ]		Cycle Weapon Skill Mode
---					[ ALT + F9 ]		Cycle Range Mode
---              	[ Windows + F9 ]    Cycle Hybrid Modes
---					[ Windows + ` ]		Toggles Treasure Hunter Mode
---              	[ Windows + C ]     Toggle Capacity Points Mode
+--  Modes:      	[ F9 ]              	Cycle Offense Mode
+--              	[ F10 ]             	Cycle Idle Mode
+--              	[ F11 ]             	Cycle Casting Mode
+--              	[ F12 ]             	Update Current Gear / Report Current Status
+--					[ CTRL + F9 ]			Cycle Weapon Skill Mode
+--					[ ALT + F9 ]			Cycle Range Mode
+--              	[ Windows + F9 ]    	Cycle Hybrid Modes
+--			    	[ Windows + W ]         Toggles Weapon Lock
+--  				[ Windows + R ]         Toggles Range Lock
+--					[ Windows + T ]			Toggles Treasure Hunter Mode
+--              	[ Windows + C ]     	Toggle Capacity Points Mode
+--              	[ Windows + A ]     	AttackMode: Capped/Uncapped WS Modifier
 --
---
---  Abilities:  	[ Alt + Numpad0 ]   Sneak Attack
---					[ Alt + Numpad. ]   Trick Attack
---
---
---  WS:         	[ CTRL + Numpad1 ]    Evisceration
---					[ CTRL + Numpad2 ]    Rudra's Storm
---					[ CTRL + Numpad3 ]    Mandalic Stab
---					[ CTRL + Numpad4 ]    Aeolian Edge
---					[ CTRL + Numpad5 ]    Exenterator
---					[ CTRL + Numpad6 ]    Shark Bite
---				
---					[ ALT + Numpad1 ]     Savage Blade
---					[ ALT + Numpad2 ]     Sanguine Blade
---
---
--- Item Binds:		[ Shift + Numpad1 ]	Echo Drop
---					[ Shift + Numpad2 ]	Holy Water
---					[ Shift + Numpad3 ]	Remedy
---					[ Shift + Numpad4 ]	Panacea
---					[ Shift + Numpad7 ]	Silent Oil
---					[ Shift + Numpad9 ]	Prism Powder
+-- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
+--					[ Shift + Numpad2 ]		Holy Water
+--					[ Shift + Numpad3 ]		Remedy
+--					[ Shift + Numpad4 ]		Panacea
+--					[ Shift + Numpad7 ]		Silent Oil
+--					[ Shift + Numpad9 ]		Prism Powder
 --
 --					[ Windows + Numpad1 ]	Sublime Sushi
 --					[ Windows + Numpad2 ]	Grape Daifuku
@@ -47,20 +33,36 @@
 --					[ Windows + Numpad5 ]	Red Curry Bun
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
+-- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
+--					[ ALT + Numpad+ ]		Dimensional Ring Dem
 --
--- Warp Script:		[ CTRL + Numpad+ ]	Warp Ring
---					[ ALT + Numpad+ ]	Dimensional Ring Dem
+-- Range Script:	[ CTRL + Numpad0 ] 		Ranged Attack
 --
+-------------------------------------------------------------------------------------------------------------------
+--  Job Specific Keybinds (Thief Binds)
+-------------------------------------------------------------------------------------------------------------------
 --
--- Range Script:	[ CTRL + Numpad0 ] Ranged Attack
+--	Modes:			[ Windows + 1 ]			Sets Weapon to Gleti's_Knife
+--					[ Windows + 2 ]			Sets Weapon to Tauret
+--					[ Windows + 3 ]			Sets Weapon to Naegling
+--					[ Windows + 4 ]			Sets Weapon to Karambit
 --
+--  WS:         	[ CTRL + Numpad1 ]    	Evisceration
+--					[ CTRL + Numpad2 ]    	Rudra's Storm
+--					[ CTRL + Numpad3 ]    	Mandalic Stab
+--					[ CTRL + Numpad4 ]    	Aeolian Edge
+--					[ CTRL + Numpad5 ]    	Exenterator
+--					[ CTRL + Numpad6 ]    	Shark Bite
+--				
+--					[ ALT + Numpad1 ]     	Savage Blade
+--					[ ALT + Numpad2 ]     	Sanguine Blade
+--
+--  Abilities:  	[ Alt + Numpad0 ]   	Sneak Attack
+--					[ Alt + Numpad. ]   	Trick Attack
 --
 -------------------------------------------------------------------------------------------------------------------
 --  Custom Commands (preface with /console to use these in macros)
 -------------------------------------------------------------------------------------------------------------------
---
---
---  gs c cycle treasuremode (set on ctrl-= by default): Cycles through the available treasure hunter modes.
 --
 --  TH Modes:  None                 Will never equip TH gear
 --             Tag                  Will equip TH gear sufficient for initial contact with a mob
@@ -88,7 +90,7 @@ function job_setup()
     state.Buff['Feint'] = buffactive['feint'] or false
 
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
-					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring"}
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring"}
 
 
 
@@ -116,7 +118,8 @@ function user_setup()
     state.RangedMode:options('Normal', 'Acc')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.IdleMode:options('Normal', 'Refresh')
-	
+
+	state.WeaponSet = M{['description']='Weapon Set', 'Gletis_Knife', 'Tauret', 'Naegling', 'Twashtar', 'Karambit'}
 	state.WeaponLock = M(false, 'Weapon Lock')
 
 	--Load Gearinfo/Dressup Lua
@@ -126,12 +129,19 @@ function user_setup()
 
     --Global Thief binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)	
 
-    send_command('bind @` gs c cycle TreasureMode')
+    send_command('bind @t gs c cycle TreasureMode')
     send_command('bind @c gs c toggle CP')
-	
-	send_command('bind @w gs c toggle WeaponLock')
 	send_command('bind !numpad0 input /ja "Sneak Attack" <me>')
     send_command('bind !numpad. input /ja "Trick Attack" <me>')
+	
+	--Weapon set Binds
+
+	send_command('bind @1 gs c set WeaponSet Gletis_Knife')
+	send_command('bind @2 gs c set WeaponSet Tauret')
+	send_command('bind @3 gs c set WeaponSet Naegling')
+	send_command('bind @4 gs c set WeaponSet Twashtar')
+	send_command('bind @5 gs c set WeaponSet Karambit')
+	send_command('bind @w gs c toggle WeaponLock')
 
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
@@ -147,9 +157,9 @@ function user_setup()
 	
 	--Dual Box binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
-	send_command('bind @1 input //assist me; wait 0.5; input //send Aurorasky /attack')
-	send_command('bind @2 input //assist me; wait 0.5; input //send Ardana /attack')
-	send_command('bind @q input //assist me; wait 0.5; input //send Ardana /ma "Distract" <t>')
+	--send_command('bind @1 input //assist me; wait 0.5; input //send Aurorasky /attack')
+	--send_command('bind @2 input //assist me; wait 0.5; input //send Ardana /attack')
+	--send_command('bind @q input //assist me; wait 0.5; input //send Ardana /ma "Distract" <t>')
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -177,12 +187,6 @@ function user_setup()
 	send_command('bind !numpad+ input //get Dim. Ring (Dem) satchel; wait 1; input /equip Ring1 "Dim. Ring (Dem)"; wait 12; input /item "Dim. Ring (Dem)" <me>; wait 60; input //put Dim. Ring (Dem) satchel')
 
 	--Gear Retrieval Commands
-
-	send_command('wait 10; input //get Levante Dagger Case')	
-	send_command('wait 10; input //get Ternion Dagger +1 Case')	
-	send_command('wait 10; input //get Sandung Case')	
-	send_command('wait 10; input //get Tauret Case')	
-	send_command('wait 10; input //get Toutatis\'s Cape Sack all')
 
 	--Job Settings
 	
@@ -212,9 +216,21 @@ function user_unload()
 
 	--Remove Dual Box Binds
 	
+	--send_command('unbind @1')
+	--send_command('unbind @2')
+	--send_command('unbind @q')
+	
+	--Remove Weapon Set binds
+	
 	send_command('unbind @1')
 	send_command('unbind @2')
-	send_command('unbind @q')
+	send_command('unbind @3')
+	send_command('unbind @4')
+	send_command('unbind @5')
+	send_command('unbind @6')
+	send_command('unbind @7')
+	send_command('unbind @8')
+	send_command('unbind @9')
 	
 	--Remove Weaponskill Binds
     
@@ -539,8 +555,6 @@ function init_gear_sets()
     sets.resting = {}
 
     sets.idle = {
-		main="Tauret",
-		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
 		ammo="Staunch Tathlum +1",	--3%
 		head="Nyame Helm",
 		body="Nyame Mail",
@@ -557,8 +571,6 @@ function init_gear_sets()
 		} --44% DT / 10% PDT
 		
 	sets.idle.Refresh = {
-		main="Tauret",
-		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
 		ammo="Staunch Tathlum +1",
 		head="Nyame Helm",
 		body="Nyame Mail",
@@ -834,6 +846,12 @@ function init_gear_sets()
         }
 
     sets.CP = {back="Mecisto. Mantle"}
+	
+	sets.Gletis_Knife = {main={ name="Gleti's Knife", augments={'Path: A',}},sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
+	sets.Tauret = {main="Tauret", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
+	sets.Twashtar = {main={ name="Gleti's Knife", augments={'Path: A',}},sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
+	sets.Naegling = {main="Naegling", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
+	sets.Karambit = {main="Kaja Knuckles"}
 
 end
 
@@ -899,9 +917,9 @@ function job_buff_change(buff,gain)
         if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-             disable('ring1','ring2','waist')
+            disable('neck','waist')
         else
-            enable('ring1','ring2','waist')
+            enable('neck','waist')
             handle_equipping_gear(player.status)
         end
     end
@@ -941,6 +959,28 @@ function update_combat_form()
     elseif DW == false then
         state.CombatForm:reset()
     end
+
+	if state.WeaponSet.value == 'Gletis_Knife' then
+		equip(sets.Gletis_Knife)
+	end
+
+	if state.WeaponSet.value == 'Tauret' then
+		equip(sets.Tauret)
+	end
+
+	if state.WeaponSet.value == 'Twashtar' then
+		equip(sets.Twashtar)
+	end
+
+	if state.WeaponSet.value == 'Naegling' then
+		equip(sets.Naegling)
+	end
+
+	if state.WeaponSet.value == 'Karambit' then
+		equip(sets.Karambit)
+	end
+
+					
 end
 
 function get_custom_wsmode(spell, spellMap, defaut_wsmode)

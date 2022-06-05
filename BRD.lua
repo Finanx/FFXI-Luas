@@ -13,7 +13,7 @@
 --					[ CTRL + F9 ]			Cycle Weapon Skill Mode
 --					[ ALT + F9 ]			Cycle Range Mode
 --              	[ Windows + F9 ]    	Cycle Hybrid Modes
---			    	[ Windows + W ]         Toggles Weapon Lock
+--			    	[ Windows + W ]         Toggles Weapon Lock OFF
 --  				[ Windows + R ]         Toggles Range Lock
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
@@ -43,6 +43,10 @@
 -------------------------------------------------------------------------------------------------------------------
 --
 --  Modes:      	[ CTRL + ` ]			Toggles Song Mode (Regular, Dummy)
+--					[ Windows + 1 ]			Sets Weapon to Naegling then locks Main/Sub Slots
+--					[ Windows + 2 ]			Sets Weapon to Carnwenhan then locks Main/Sub Slots
+--					[ Windows + 3 ]			Sets Weapon to Tauret then locks Main/Sub Slots
+--					[ Windows + 4 ]			Sets Weapon to Twashtar then locks Main/Sub Slots
 --
 --  WS:         	[ CTRL + Numpad1 ]    	Rudra's Storm
 --              	[ CTRL + Numpad2 ]    	Evisceration
@@ -86,7 +90,7 @@ function job_setup()
     state.Buff['Pianissimo'] = buffactive['pianissimo'] or false
 
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
-					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring"}
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring"}
 
     lockstyleset = 15
 end
@@ -104,8 +108,8 @@ function user_setup()
     state.IdleMode:options('Normal', 'Refresh')
 	state.TreasureMode:options('Tag', 'None')
 	state.SongMode = M{['description']='Song Mode', 'None', 'Placeholder'}
+	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Carnwenhan', 'Twashtar', 'Tauret'}
 
-    state.WeaponLock = M(false, 'Weapon Lock')
     state.CP = M(false, "Capacity Points Mode")
 	
 	state.Threnody = M{['description']='Threnody',
@@ -132,7 +136,6 @@ function user_setup()
 	--Global Bard binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
 	send_command('bind ^` gs c cycle SongMode')
-    send_command('bind @w gs c toggle WeaponLock')
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @t gs c cycle TreasureMode')
 	
@@ -151,6 +154,14 @@ function user_setup()
 	send_command('bind !numpad7 gs c cycleback Etude')
 	send_command('bind !numpad8 input //gs c Etude')
     send_command('bind !numpad9 gs c cycle Etude')
+	
+	--Weapon set Binds
+
+	send_command('bind @1 gs c set WeaponSet Naegling')
+	send_command('bind @2 gs c set WeaponSet Carnwenhan')
+	send_command('bind @3 gs c set WeaponSet Tauret')
+	--send_command('bind @4 gs c set WeaponSet Twashtar')
+	send_command('bind @w input /equip sub; gs c set WeaponSet None')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -246,9 +257,21 @@ function user_unload()
 	
 	--Remove Dual Box Binds
 	
+	--send_command('unbind @1')
+	--send_command('unbind @2')
+	--send_command('unbind @q')
+	
+	--Remove Weapon Set binds
+	
 	send_command('unbind @1')
 	send_command('unbind @2')
-	send_command('unbind @q')
+	send_command('unbind @3')
+	send_command('unbind @4')
+	send_command('unbind @5')
+	send_command('unbind @6')
+	send_command('unbind @7')
+	send_command('unbind @8')
+	send_command('unbind @9')
 	
 	--Remove Weaponskill Binds
     
@@ -779,7 +802,7 @@ function init_gear_sets()
     ---------------------------------------- Defense Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.latent_refresh = {head="Aya. Zucchetto +2", waist="Fucho-no-obi"}
+    sets.latent_refresh = {waist="Fucho-no-obi"}
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Engaged Sets ------------------------------------------
@@ -965,6 +988,7 @@ function init_gear_sets()
 
 
     sets.SongDWDuration = {main="Carnwenhan", sub="Kali"}
+	sets.SongSWDuration = {main="Carnwenhan", sub="Ammurapi Shield"}
 	sets.Dummy = {range="Daurdabla",}
 	sets.Effect = {range={ name="Linos", augments={'All Songs+2',}},}
 
@@ -978,34 +1002,34 @@ function init_gear_sets()
     sets.CP = {back="Mecisto. Mantle"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 	sets.Naegling = {main="Naegling", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
-	sets.NaeglingSW = {main="Naegling", sub="Genmei Shield"}
+	sets.Naegling.SW = {main="Naegling", sub="Genmei Shield"}
+	
+	sets.Carnwenhan = {main="Carnwenhan", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
+	sets.Carnwenhan.SW = {main="Carnwenhan", sub="Genmei Shield"}
+	
+	sets.Twashtar = {main="Twashtar", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
+	sets.Twashtar.SW = {main="Twashtar", sub="Genmei Shield"}
+	
+	sets.Tauret = {main="Tauret", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
+	sets.Tauret.SW = {main="Tauret", sub="Genmei Shield"}
 
 end
 
 
 -------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for standard casting events.
+-- Job-specific Functions
 -------------------------------------------------------------------------------------------------------------------
 
--- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
--- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
-    if spell.type == 'BardSong' then
-        --[[ Auto-Pianissimo
-        if ((spell.target.type == 'PLAYER' and not spell.target.charmed) or (spell.target.type == 'NPC' and spell.target.in_party)) and
-            not state.Buff['Pianissimo'] then
 
-            local spell_recasts = windower.ffxi.get_spell_recasts()
-            if spell_recasts[spell.recast_id] < 2 then
-                send_command('@input /ja "Pianissimo" <me>; wait 1.5; input /ma "'..spell.name..'" '..spell.target.name)
-                eventArgs.cancel = true
-                return
-            end
-        end]]
+		--Equips Marsyas for Honor March
+    if spell.type == 'BardSong' then
         if spell.name == 'Honor March' then
             equip({range="Marsyas"})
         end
     end
+
+		--Will stop utsusemi from being cast if 2 shadows or more
     if spellMap == 'Utsusemi' then
         if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
             cancel_spell()
@@ -1018,36 +1042,48 @@ function job_precast(spell, action, spellMap, eventArgs)
     end
 end
 
--- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_midcast(spell, action, spellMap, eventArgs)
+
     if spell.type == 'BardSong' then
         -- layer general gear on first, then let default handler add song-specific gear.
         local generalClass = get_song_class(spell)
         if generalClass and sets.midcast[generalClass] then
             equip(sets.midcast[generalClass])
         end
+		
+			--Equips Marsyas for Honor March
         if spell.name == 'Honor March' then
             equip(sets.midcast.HonorMarch)
         end
+
+			--Handles Lullaby accuracy sets
 		if spell.name == "Horde Lullaby" or spell.name == "Horde Lullaby II" and state.CastingMode.value == 'Normal' then 
 			equip(sets.midcast.Horde)
 		elseif spell.name == "Horde Lullaby" or spell.name == "Horde Lullaby II" and state.CastingMode.value == 'Resistant' then
 			equip(sets.midcast.HordeResist)
 		end
+		
 		if spell.name == "Foe Lullaby" or spell.name == "Foe Lullaby II" and state.CastingMode.value == 'Normal' then 
 			equip(sets.midcast.Foe)
 		elseif spell.name == "Foe Lullaby" or spell.name == "Foe Lullaby II" and state.CastingMode.value == 'Resistant' then
 			equip(sets.midcast.FoeResist)
 		end
+		
     end
 end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
+
+		--Handles Dualwield vs Singlewierd Bard songs
     if spell.type == 'BardSong' then
         if state.CombatForm.current == 'DW' then
             equip(sets.SongDWDuration)
+		else
+			equip(sets.SongSWDuration)
         end
     end
+	
+		--Changes Cure set if Curing yourself
 	if spellMap == 'Cure' and spell.target.type == 'SELF' then
         equip(sets.midcast.CureSelf)
     end
@@ -1056,49 +1092,80 @@ end
 
 function job_buff_change(buff,gain)
 
---    if buffactive['Reive Mark'] then
---        if gain then
---            equip(sets.Reive)
---            disable('neck')
---        else
---            enable('neck')
---        end
---    end
-
+		--Auto equips Cursna Recieved doom set when doom debuff is on
     if buff == "doom" then
         if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-            disable('waist')
+            disable('neck','waist')
         else
-            enable('waist')
+            enable('neck','waist')
             handle_equipping_gear(player.status)
         end
     end
 
 end
 
--- Handle notifications of general user state change.
+-------------------------------------------------------------------------------------------------------------------
+-- Code for Melee sets
+-------------------------------------------------------------------------------------------------------------------
+
+	--Adjusts Weapon sets for Dual Wield or Single Wield
 function job_state_change(stateField, newValue, oldValue)
-    if state.WeaponLock.value == true then
-		if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
+ 	if state.WeaponSet.value == 'Naegling' then
+		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+			enable('main','sub')
 			equip(sets.Naegling)
 			disable('main','sub')
 		else
-			equip(sets.NaeglingSW)
+			enable('main','sub')
+			equip(sets.Naegling.SW)
 			disable('main','sub')
 		end
-	else
-        enable('main','sub')
-    end
+	end
+	
+	if state.WeaponSet.value == 'Carnwenhan' then
+		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+			enable('main','sub')
+			equip(sets.Carnwenhan)
+			disable('main','sub')
+		else
+			enable('main','sub')
+			equip(sets.Carnwenhan.SW)
+			disable('main','sub')
+		end
+	end
+	
+	if state.WeaponSet.value == 'Twashtar' then
+		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+			enable('main','sub')
+			equip(sets.Twashtar)
+			disable('main','sub')
+		else
+			enable('main','sub')
+			equip(sets.Twashtar.SW)
+			disable('main','sub')
+		end
+	end
+	
+	if state.WeaponSet.value == 'Tauret' then
+		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+			enable('main','sub')
+			equip(sets.Tauret)
+			disable('main','sub')
+		else
+			enable('main','sub')
+			equip(sets.Tauret.SW)
+			disable('main','sub')
+		end
+	end
+	
+	if state.WeaponSet.value == 'None' then
+		enable('main','sub')
+	end
 end
 
--------------------------------------------------------------------------------------------------------------------
--- User code that supplements standard library decisions.
--------------------------------------------------------------------------------------------------------------------
-
--- Called by the 'update' self-command, for common needs.
--- Set eventArgs.handled to true if we don't want automatic equipping of gear.
+	--Gearinfo related function
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
     update_combat_form()
@@ -1118,7 +1185,7 @@ function update_combat_form()
     end
 end
 
--- Called for direct player commands.
+	--Handles Carol 1 / Carol 2 / Etude / Threnody keybinds
 function job_self_command(cmdParams, eventArgs)
     if cmdParams[1]:lower() == 'carol1' then
         send_command('@input /ma '..state.Carol1.value..' <t>')
@@ -1133,7 +1200,6 @@ function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
 end
 
--- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
     return meleeSet
 end
@@ -1149,15 +1215,22 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
+
+		--Allows CP back to stay on if toggled on
     if state.CP.current == 'on' then
          equip(sets.CP)
          disable('back')
      else
          enable('back')
      end
-    if player.mpp < 51 then
-        idleSet = set_combine(idleSet, sets.latent_refresh)
-    end
+
+		--Handles Latent Refresh
+	if player.sub_job == 'WHM' or player.sub_job == 'SCH' or player.sub_job == 'RDM' then
+		if player.mpp < 51 then
+			idleSet = set_combine(idleSet, sets.latent_refresh)
+		end
+	end
+	
     if state.Auto_Kite.value == true then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
@@ -1165,7 +1238,7 @@ function customize_idle_set(idleSet)
     return idleSet
 end
 
--- Set eventArgs.handled to true if we don't want the automatic display to be run.
+	--Function to display the current relevant user state when doing an update.
 function display_current_job_state(eventArgs)
     local cf_msg = ''
     if state.CombatForm.has_value then
@@ -1209,7 +1282,9 @@ end
 
 -- Determine the custom class to use for the given song.
 function get_song_class(spell)
-    -- Can't use spell.targets:contains() because this is being pulled from resources
+ 
+		--Can't use spell.targets:contains() because this is being pulled from resources
+		--Handles Accuracy for Enfeebling Songs
     if set.contains(spell.targets, 'Enemy') then
         if state.CastingMode.value == 'Resistant' then
             return 'SongEnfeebleAcc'
@@ -1217,15 +1292,17 @@ function get_song_class(spell)
             return 'SongEnfeeble'
         end
 	end
+	
+		--Handles the Dummy Song toggle allowing all songs to either use a normal instrument or multisong instrument
 	if state.SongMode.value == 'Placeholder' and spell.type == 'BardSong' then
 		equip(sets.Dummy)
 	else
 		equip(sets.Effect)
 	end
+
 end
 
-
-
+	--Determines Haste Group / Melee set for Gear Info
 function determine_haste_group()
     classes.CustomMeleeGroups:clear()
     if DW == true then
@@ -1243,6 +1320,7 @@ function determine_haste_group()
     end
 end
 
+	--Gear Info Functions
 function gearinfo(cmdParams, eventArgs)
     if cmdParams[1] == 'gearinfo' then
         if type(tonumber(cmdParams[2])) == 'number' then
@@ -1274,6 +1352,7 @@ function gearinfo(cmdParams, eventArgs)
     end
 end
 
+	--Auto_Kite function
 function check_moving()
     if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
         if state.Auto_Kite.value == false and moving then
@@ -1284,6 +1363,7 @@ function check_moving()
     end
 end
 
+	--Allows equipping of warp/exp rings without auto swapping back to current set
 function check_gear()
     if no_swap_gear:contains(player.equipment.left_ring) then
         disable("ring1")

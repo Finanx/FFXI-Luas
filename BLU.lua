@@ -186,7 +186,7 @@ function job_setup()
         'Polar Roar','Pyric Bulwark','Tearing Gust','Thunderbolt','Tourbillion','Uproot'}
 		
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
-					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring"}	
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring"}
 
     include('Mote-TreasureHunter')
 
@@ -228,6 +228,8 @@ function user_setup()
     send_command('bind @c gs c toggle CP')
 	send_command('bind @t gs c cycle TreasureMode')
 	send_command('bind ^` gs c toggle EvasiveMode')
+	
+	--Weapon set Binds
 	
 	send_command('bind @1 gs c set WeaponSet Naegling')
 	send_command('bind @2 gs c set WeaponSet Maxentius')
@@ -309,10 +311,22 @@ function user_unload()
 
 	--Remove Dual Box Binds
 	
+	--send_command('unbind @1')
+	--send_command('unbind @2')
+	--send_command('unbind @q')
+	--send_command('unbind ^`')
+	
+	--Remove Weapon Set binds
+	
 	send_command('unbind @1')
 	send_command('unbind @2')
-	send_command('unbind @q')
-	send_command('unbind ^`')
+	send_command('unbind @3')
+	send_command('unbind @4')
+	send_command('unbind @5')
+	send_command('unbind @6')
+	send_command('unbind @7')
+	send_command('unbind @8')
+	send_command('unbind @9')
 	
 	--Remove Weaponskill Binds
     
@@ -1344,12 +1358,12 @@ end
 
 
 -------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for standard casting events.
+-- Job-specific Functions
 -------------------------------------------------------------------------------------------------------------------
 
--- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
--- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
+
+		--Will stop utsusemi from being cast if 2 shadows or more
     if spellMap == 'Utsusemi' then
         if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
             cancel_spell()
@@ -1362,23 +1376,26 @@ function job_precast(spell, action, spellMap, eventArgs)
     end
 end
 
--- Run after the default midcast() is done.
--- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
-    -- Add enhancement gear for Chain Affinity, etc.
+	
+		--Changes Cure set if Curing yourself
 	if spellMap == 'Cure' and spell.target.type == 'SELF' then
 		equip(sets.midcast.CureSelf)
 	end
+	
+		--Add enhancement gear for Chain Affinity, etc.
     if spell.skill == 'Blue Magic' then
         for buff,active in pairs(state.Buff) do
             if active and sets.buff[buff] then
                 equip(sets.buff[buff])
             end
         end
-        --if spellMap == 'Healing' and spell.target.type == 'SELF' then
-            --equip(sets.midcast['Blue Magic'].HealingSelf)
-        --end
+        if spellMap == 'Healing' and spell.target.type == 'SELF' then
+            equip(sets.midcast['Blue Magic'].HealingSelf)
+        end
     end
+	
+		--Changes Dream Flower to use Defensive set and Entomb to use Treasure Hunter when cast while toggled
 	if state.EvasiveMode.value == true then 
 		if spell.english == "Dream Flower" then
 			equip(sets.idle)
@@ -1415,27 +1432,20 @@ end
 -- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff,gain)
 
---    if buffactive['Reive Mark'] then
---        if gain then
---            equip(sets.Reive)
---            disable('neck')
---        else
---            enable('neck')
---        end
---    end
-
+		--Auto equips Cursna Recieved doom set when doom debuff is on
     if buff == "doom" then
         if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-            disable('ring1','ring2','waist')
+            disable('neck','waist')
         else
-            enable('ring1','ring2','waist')
+            enable('neck','waist')
             handle_equipping_gear(player.status)
         end
     end
 
 end
+
 
 function check_weaponset()
 		if	state.WeaponSet.value == 'Naegling' then
@@ -1448,11 +1458,10 @@ end
 
 
 -------------------------------------------------------------------------------------------------------------------
--- User code that supplements standard library decisions.
+-- Code for Melee sets
 -------------------------------------------------------------------------------------------------------------------
 
--- Called by the 'update' self-command, for common needs.
--- Set eventArgs.handled to true if we don't want automatic equipping of gear.
+	--Gearinfo related function
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
@@ -1465,6 +1474,7 @@ function job_update(cmdParams, eventArgs)
     th_update(cmdParams, eventArgs)
 end
 
+	--Adjusts Melee/Weapon sets for Dual Wield or Single Wield
 function update_combat_form()
     if DW == true then
         state.CombatForm:set('DW')
@@ -1473,9 +1483,9 @@ function update_combat_form()
     end
 end
 
--- Custom spell mapping.
--- Return custom spellMap value that can override the default spell mapping.
--- Don't return anything to allow default spell mapping to be used.
+	--Custom spell mapping.
+	--Return custom spellMap value that can override the default spell mapping.
+	--Don't return anything to allow default spell mapping to be used.
 function job_get_spell_map(spell, default_spell_map)
     if spell.skill == 'Blue Magic' then
         for category,spell_list in pairs(blue_magic_maps) do
@@ -1488,38 +1498,26 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
+
+		--Latent Refresh function
 	if state.IdleMode.value == 'Refresh' then
 		if player.mpp < 51 then
 			idleSet = set_combine(idleSet, sets.latent_refresh)
 		end
 	end
+	
+		--Allows CP back to stay on if toggled on
     if state.CP.current == 'on' then
         equip(sets.CP)
         disable('back')
     else
         enable('back')
     end
-    --if state.IdleMode.value == 'Learning' then
-    --    equip(sets.Learning)
-    --    disable('hands')
-    --else
-    --    enable('hands')
-    --end
 
     return idleSet
 end
 
--- Modify the default melee set after it was constructed.
-function customize_melee_set(meleeSet)
-    if state.TreasureMode.value == 'Fulltime' then
-        meleeSet = set_combine(meleeSet, sets.TreasureHunter)
-    end
-
-    return meleeSet
-end
-
--- Function to display the current relevant user state when doing an update.
--- Return true if display was handled, and you don't want the default info shown.
+	--Function to display the current relevant user state when doing an update.
 function display_current_job_state(eventArgs)
     local cf_msg = ''
     if state.CombatForm.has_value then
@@ -1565,6 +1563,7 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
+	--Determines Haste Group / Melee set for Gear Info
 function determine_haste_group()
     classes.CustomMeleeGroups:clear()
     if DW == true then
@@ -1582,6 +1581,7 @@ function determine_haste_group()
     end
 end
 
+	--Gear Info Functions
 function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
 end
@@ -1617,13 +1617,14 @@ function gearinfo(cmdParams, eventArgs)
     end
 end
 
+	--Blue Job Ability Functions
 function update_active_abilities()
     state.Buff['Burst Affinity'] = buffactive['Burst Affinity'] or false
     state.Buff['Efflux'] = buffactive['Efflux'] or false
     state.Buff['Diffusion'] = buffactive['Diffusion'] or false
 end
 
--- State buff checks that will equip buff gear and mark the event as handled.
+	--State buff checks that will equip buff gear and mark the event as handled.
 function apply_ability_bonuses(spell, action, spellMap)
     if state.Buff['Burst Affinity'] and (spellMap == 'Magical' or spellMap == 'MagicalLight' or spellMap == 'MagicalDark' or spellMap == 'Breath') then
         equip(sets.buff['Burst Affinity'])
@@ -1653,7 +1654,7 @@ function th_action_check(category, param)
     end
 end
 
-
+	--Allows equipping of warp/exp rings without auto swapping back to current set
 function check_gear()
     if no_swap_gear:contains(player.equipment.left_ring) then
         disable("ring1")
@@ -1680,6 +1681,7 @@ windower.register_event('zone change',
     end
 )
 
+	--Auto Adjusts gear constantly if DW/Gearinfo is active
 windower.register_event('zone change', 
     function()
         send_command('gi ugs true')

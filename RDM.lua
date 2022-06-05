@@ -88,9 +88,8 @@ function job_setup()
     state.Buff.Saboteur = buffactive.Saboteur or false
     state.Buff.Stymie = buffactive.Stymie or false
 
-	
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
-					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring"}
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring"}
 
     skill_spells = S{
         'Temper', 'Temper II', 'Enfire', 'Enfire II', 'Enblizzard', 'Enblizzard II', 'Enaero', 'Enaero II',
@@ -114,7 +113,6 @@ function user_setup()
 	state.TreasureMode:options('Tag', 'None')
 	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Crocea_Mors', 'Levante', 'Tauret', 'Maxentius'}
 
-    state.WeaponLock = M(false, 'Weapon Lock')
 	state.RangeLock = M(false, 'Range Lock')
     state.MagicBurst = M(false, 'Magic Burst')
     state.NM = M(false, 'NM')
@@ -127,7 +125,6 @@ function user_setup()
     --Global Red Mage binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)	
 
     send_command('bind !` gs c toggle MagicBurst')
-	send_command('bind @w input /equip sub; gs c set WeaponSet None')
 	send_command('bind @r gs c toggle RangeLock')
 	send_command('bind @t gs c cycle TreasureMode')
     send_command('bind ^` input /ja "Composure" <me>')
@@ -141,6 +138,7 @@ function user_setup()
 	send_command('bind @3 gs c set WeaponSet Levante')
 	send_command('bind @4 gs c set WeaponSet Tauret')
 	send_command('bind @5 gs c set WeaponSet Maxentius')
+	send_command('bind @w input /equip sub; gs c set WeaponSet None')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
@@ -239,16 +237,16 @@ function user_unload()
 	send_command('unbind @3')
 	send_command('unbind @4')
 	send_command('unbind @5')
+	send_command('unbind @6')
+	send_command('unbind @7')
+	send_command('unbind @8')
+	send_command('unbind @9')
 	
 	--Remove Dual Box Binds
 	
-	send_command('unbind @1')
-	send_command('unbind @2')
-	send_command('unbind @q')
-	
-	send_command('unbind ~numpad1')
-    send_command('unbind ~numpad2')
-    send_command('unbind ~numpad3')
+	--send_command('unbind @1')
+	--send_command('unbind @2')
+	--send_command('unbind @q')
 	
 	--Remove Weaponskill Binds
     
@@ -1067,7 +1065,7 @@ function init_gear_sets()
 
     sets.resting = {}
 
-    sets.latent_refresh = {left_ring="Defending Ring",waist="Fucho-no-obi"}
+    sets.latent_refresh = {waist="Fucho-no-obi"}
 
 
     ------------------------------------------------------------------------------------------------
@@ -1378,10 +1376,12 @@ function init_gear_sets()
 end
 
 -------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for standard casting events.
+-- Job-specific Functions
 -------------------------------------------------------------------------------------------------------------------
 
 function job_precast(spell, action, spellMap, eventArgs)
+
+		--Will stop utsusemi from being cast if 2 shadows or more
     if spellMap == 'Utsusemi' then
         if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
             cancel_spell()
@@ -1392,31 +1392,40 @@ function job_precast(spell, action, spellMap, eventArgs)
             send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
         end
     end
+	
+	
 end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
+		--Equips gearset to precast Impact
     if spell.name == 'Impact' then
         equip(sets.precast.FC.Impact)
     end
-	    if spell.name == 'Dispelga' then
+		--Equips gearset to precast Dispelga
+	if spell.name == 'Dispelga' then
         equip(sets.precast.FC.Dispelga)
     end
 end
 
--- Run after the default midcast() is done.
--- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
+		--equips Saboteur set if active
     if spell.skill == 'Enfeebling Magic' then
         if state.Buff.Saboteur then
             equip(sets.buff.Saboteur)
         end
     end
+	
+		--Changes all Enfeebling magic to accuracy set
 	if state.CastingMode.value == 'MACC' and spell.skill == 'Enfeebling Magic' then
 		equip(sets.midcast['Enfeebling Magic'].MACC)
 	end
+	
+		--Handles Magic Burst Toggle
 	if state.MagicBurst.value == true and spell.skill == 'Elemental Magic' then
 		equip(sets.midcast['Elemental Magic'].MagicBurst)
 	end
+	
+		--Handles all Enhancing Magic mappings
     if spell.skill == 'Enhancing Magic' then
         if classes.NoSkillSpells:contains(spell.english) then
             equip(sets.midcast.EnhancingDuration)
@@ -1434,20 +1443,31 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 				end
 		end
     end
+	
+		--Changes Cure set if Curing yourself
     if spellMap == 'Cure' and spell.target.type == 'SELF' then
         equip(sets.midcast.CureSelf)
     end
+	
+		--Handles Elemental Magic Mappings
     if spell.skill == 'Elemental Magic' then
-        if spell.english == "Impact" then
+
+			--Equips gearset to cast Impact
+		if spell.english == "Impact" then
                 equip(sets.midcast.Impact)
         end
+		
+			--Equips gearset to cast Impact
 		if spell.english == "Dispelga" then
                 equip(sets.midcast.Dispelga)
         end
+		
+			--Equips Obi set if the correct day or weather matches Elemental Magic
         if (spell.element == world.day_element or spell.element == world.weather_element) then
             equip(sets.Obi)
         end
     end
+
 	    -- Equip obi if weather/day matches for WS.
     if spell.type == 'WeaponSkill' then
         if spell.english == 'Sanguine Blade' and world.weather_element == 'Dark' or world.day_element == 'Dark' then
@@ -1460,40 +1480,38 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             equip(sets.Obi)
         end
     end
+	
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
+
+		--Posts a Sleep Timer if it lands
     if spell.english:contains('Sleep') and not spell.interrupted then
         set_sleep_timer(spell)
     end
 end
 
--------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for non-casting events.
--------------------------------------------------------------------------------------------------------------------
-
 function job_buff_change(buff,gain)
+
+		--Auto equips Cursna Recieved doom set when doom debuff is on
     if buff == "doom" then
         if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-             disable('waist')
+            disable('neck','waist')
         else
-            enable('waist')
+            enable('neck','waist')
             handle_equipping_gear(player.status)
         end
     end
+	
 end
 
--- Handle notifications of general user state change.
-
-
 -------------------------------------------------------------------------------------------------------------------
--- User code that supplements standard library decisions.
+-- Code for Melee sets
 -------------------------------------------------------------------------------------------------------------------
 
--- Called by the 'update' self-command, for common needs.
--- Set eventArgs.handled to true if we don't want automatic equipping of gear.
+	--Gearinfo related function
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
@@ -1504,6 +1522,7 @@ function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
 end
 
+	--Adjusts Melee/Weapon sets for Dual Wield or Single Wield
 function update_combat_form()
     if DW == true then
         state.CombatForm:set('DW')
@@ -1575,6 +1594,7 @@ function update_combat_form()
 		enable('main','sub')
 	end
 
+		--Locks Ranged/ammo slots and equips Empyreal bow set
 	if state.RangeLock.value == true then
 		equip(sets.Empyreal)
 		disable('range','ammo')
@@ -1583,12 +1603,10 @@ function update_combat_form()
 	end
 end
 
--- Handle notifications of general user state change.
-function job_state_change(stateField, newValue, oldValue)
-end
-
 -- Custom spell mapping.
 function job_get_spell_map(spell, default_spell_map)
+
+		--Equips Cure weather set if weather/day is light
     if spell.action_type == 'Magic' then
         if default_spell_map == 'Cure' or default_spell_map == 'Curaga' then
             if (world.weather_element == 'Light' or world.day_element == 'Light') then
@@ -1599,7 +1617,7 @@ function job_get_spell_map(spell, default_spell_map)
 end
 
 -- Function to display the current relevant user state when doing an update.
--- Return true if display was handled, and you don't want the default info shown.
+
 function display_current_job_state(eventArgs)
     local cf_msg = ''
     if state.CombatForm.has_value then
@@ -1646,6 +1664,7 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
+	--Determines Haste Group / Melee set for Gear Info
 function determine_haste_group()
     classes.CustomMeleeGroups:clear()
     if DW == true then
@@ -1663,6 +1682,7 @@ function determine_haste_group()
     end
 end
 
+	--Gear Info Functions
 function job_self_command(cmdParams, eventArgs)
     if cmdParams[1]:lower() == 'scholar' then
         handle_strategems(cmdParams)
@@ -1706,6 +1726,7 @@ function gearinfo(cmdParams, eventArgs)
     end
 end
 
+	--Allows equipping of warp/exp rings without auto swapping back to current set
 function check_gear()
     if no_swap_gear:contains(player.equipment.left_ring) then
         disable("ring1")
@@ -1732,10 +1753,8 @@ windower.register_event('zone change',
     end
 )
 
--- Check for various actions that we've specified in user code as being used with TH gear.
--- This will only ever be called if TreasureMode is not 'None'.
--- Category and Param are as specified in the action event packet.
 
+	--Auto Adjusts gear constantly if DW/Gearinfo is active
 windower.register_event('zone change', 
     function()
         if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
@@ -1744,6 +1763,7 @@ windower.register_event('zone change',
     end
 )
 
+	--Handles Sleep Timers based off Saboteur
 function set_sleep_timer(spell)
     local self = windower.ffxi.get_player()
 
@@ -1771,7 +1791,7 @@ function set_sleep_timer(spell)
 	add_to_chat(004, 'Base Duration: ' ..base)
 
     --User enfeebling duration enhancing gear total
-    gear_mult = 1.10
+    gear_mult = 1.55
     --User enfeebling duration enhancing augment total
 	aug_mult = 1.17
 
@@ -1788,7 +1808,7 @@ end
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
-    -- Default macro set/book
+		--Default macro set/book
     set_macro_page(1, 6)
 end
 

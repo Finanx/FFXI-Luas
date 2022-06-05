@@ -42,7 +42,8 @@
 --
 --	Modes:			[ Windows + 1 ]			Epeolatry Weapon set
 --					[ Windows + 2 ]			Aettir Weapon set
---					[ Windows + 3 ]			Great_Axe Weapon set
+--					[ Windows + 3 ]			Lycurgos Weapon set
+--					[ Windows + 4 ]			Hepatizon_Axe Weapon set
 --					[ Windows + E]			Toggle Grip Sets
 --
 --  WS:         	[ CTRL + Numpad1 ]    	Resolution
@@ -79,6 +80,8 @@ end
 -- Setup vars that are user-independent.
 function job_setup()
 
+    no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring"}
 
 	include('Mote-TreasureHunter')
 
@@ -92,8 +95,6 @@ function job_setup()
 
     rayke_duration = 35
     gambit_duration = 96
-
-    lockstyleset = 9
 
 end
 
@@ -110,7 +111,7 @@ function user_setup()
 	state.TreasureMode:options('Tag', 'None')
 
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Aettir', 'Axe'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Aettir', 'Lycurgos', 'Hepatizon_Axe'}
 	state.GripSet = M{['description']='Grip Set', 'Refined', 'Utu'}
     state.AttackMode = M{['description']='Attack', 'Uncapped', 'Capped'}
     state.CP = M(false, "Capacity Points Mode")
@@ -125,15 +126,19 @@ function user_setup()
 	
     send_command('bind @a gs c cycle AttackMode')
     send_command('bind @c gs c toggle CP')
-	send_command('bind @e gs c cycle GripSet')
 	send_command('bind @t gs c cycle TreasureMode')
 	send_command('bind !` gs c cycle Runes')
 	send_command('bind ~` gs c cycleback Runes')
 	send_command('bind ^` input //gs c rune')
+	
+	--Weapon set Binds
+
 	send_command('bind @1 gs c set WeaponSet Epeolatry')
 	send_command('bind @2 gs c set WeaponSet Aettir')
-	send_command('bind @3 gs c set WeaponSet Axe')
+	send_command('bind @3 gs c set WeaponSet Lycurgos')
+	send_command('bind @4 gs c set WeaponSet Hepatizon_Axe')
 	
+	send_command('bind @e gs c cycle GripSet')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
@@ -211,6 +216,18 @@ function user_unload()
 	--send_command('unbind @1')
 	--send_command('unbind @2')
 	--send_command('unbind @q')
+	
+	--Remove Weapon Set binds
+	
+	send_command('unbind @1')
+	send_command('unbind @2')
+	send_command('unbind @3')
+	send_command('unbind @4')
+	send_command('unbind @5')
+	send_command('unbind @6')
+	send_command('unbind @7')
+	send_command('unbind @8')
+	send_command('unbind @9')
 	
 	--Remove Weaponskill Binds
     
@@ -735,7 +752,7 @@ function init_gear_sets()
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Phys. dmg. taken-10%',}},}
 		
-    sets.midcast.Refresh = {
+    sets.midcast['Refresh'] = {
 		ammo="Staunch Tathlum +1",
 		head="Erilaz Galea +1",
 		body="Nyame Mail",
@@ -935,7 +952,7 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
         }
 		
-    sets.Embolden = set_combine(sets.midcast.EnhancingDuration, {back="Evasionist's Cape"})
+    sets.Embolden = set_combine(sets.midcast['Enhancing Magic'], {back="Evasionist's Cape"})
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
 
@@ -943,7 +960,8 @@ function init_gear_sets()
 
     sets.Epeolatry = {main={ name="Epeolatry", augments={'Path: A',}},}
     sets.Aettir = {main="Aettir"}
-	sets.Axe = {main="Hepatizon Axe"}
+	sets.Lycurgos = {main="Kaja Chopper"}
+	sets.Hepatizon_Axe = {main="Hepatizon Axe"}
 	
 	--Grip Sets
 	
@@ -953,27 +971,19 @@ function init_gear_sets()
 end
 
 -------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for standard casting events.
+-- Job-specific Functions
 -------------------------------------------------------------------------------------------------------------------
 
 function job_precast(spell, action, spellMap, eventArgs)
-    equip(sets[state.WeaponSet.current])
-	equip(sets[state.GripSet.current])
 
-    if buffactive['terror'] or buffactive['petrification'] or buffactive['stun'] or buffactive['sleep'] then
+		--Stops gear from changing if unable to use due to status
+	if buffactive['terror'] or buffactive['petrification'] or buffactive['stun'] or buffactive['sleep'] then
         add_to_chat(167, 'Stopped due to status.')
         eventArgs.cancel = true
         return
     end
-    if spell.english == 'Lunge' then
-        local abil_recasts = windower.ffxi.get_ability_recasts()
-        if abil_recasts[spell.recast_id] > 0 then
-            send_command('input /jobability "Swipe" <t>')
---            add_to_chat(122, '***Lunge Aborted: Timer on Cooldown -- Downgrading to Swipe.***')
-            eventArgs.cancel = true
-            return
-        end
-    end
+
+		--Will use Vallation instead of Valiance if it is on cool down will also prevent from activating if Valiance is still up
     if spell.english == 'Valiance' then
         local abil_recasts = windower.ffxi.get_ability_recasts()
         if abil_recasts[spell.recast_id] > 0 then
@@ -985,6 +995,8 @@ function job_precast(spell, action, spellMap, eventArgs)
             send_command('cancel Vallation') -- command requires 'cancel' add-on to work
         end
     end
+	
+		--Will stop utsusemi from being cast if 2 shadows or more
     if spellMap == 'Utsusemi' then
         if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
             cancel_spell()
@@ -995,47 +1007,23 @@ function job_precast(spell, action, spellMap, eventArgs)
             send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
         end
     end
+	
+	
 end
 
-function job_midcast(spell, action, spellMap, eventArgs)
-    if state.DefenseMode.value == 'HP' and spell.english ~= "Phalanx" then
-        eventArgs.handled = true
-        if spell.action_type == 'Magic' then
-            if spell.English == 'Flash' or spell.English == 'Foil' or spell.English == 'Stun'
-                or blue_magic_maps.Enmity:contains(spell.english) then
-                equip(sets.Enmity)
-            elseif spell.skill == 'Enhancing Magic' then
-                equip(sets.midcast.EnhancingDuration)
-            end
-        end
-    end
-end
-
--- Run after the default midcast() is done.
--- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
+
+		--Equips Obi set if the correct day or weather matches on lunge/swipe
     if spell.english == 'Lunge' or spell.english == 'Swipe' then
         if (spell.element == world.day_element or spell.element == world.weather_element) then
             equip(sets.Obi)
         end
     end
-    if state.DefenseMode.value == 'None' then
-        if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
-            equip(sets.midcast.EnhancingDuration)
-            if spellMap == 'Refresh' then
-                equip(sets.midcast.Refresh)
-            end
-		end
-        if spell.english == 'Phalanx' and buffactive['Embolden'] then
-            equip(sets.midcast.EnhancingDuration)
-        end
-    end
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
-    equip(sets[state.WeaponSet.current])
-	equip(sets[state.GripSet.current])
 
+		--Lets you know when Rayke/Gambit Wears off
     if spell.name == 'Rayke' and not spell.interrupted then
         send_command('@timers c "Rayke ['..spell.target.name..']" '..rayke_duration..' down spells/00136.png')
         send_command('wait '..rayke_duration..';input /echo [Rayke just wore off!];')
@@ -1045,80 +1033,86 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     end
 end
 
--------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for non-casting events.
--------------------------------------------------------------------------------------------------------------------
-
--- Called when the player's status changes.
+	--Handles Weapon/Grip set changes
 function job_state_change(field, new_value, old_value)
-    classes.CustomDefenseGroups:clear()
-
     classes.CustomMeleeGroups:clear()
+    equip(sets[state.WeaponSet.current])
+	equip(sets[state.GripSet.current])
 end
 
 function job_buff_change(buff,gain)
 
+		--Changes gear to tanking idle set when terrorized
     if buff == "terror" then
         if gain then
-            equip(sets.defense.PDT)
+            equip(sets.idle)
         end
     end
 
+		--Auto equips Cursna Recieved doom set when doom debuff is on
     if buff == "doom" then
         if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-             disable('waist')
+            disable('neck','waist')
         else
-            enable('waist')
+            enable('neck','waist')
             handle_equipping_gear(player.status)
         end
     end
 
+		--equips Embolden duration back and locks while Embolden is active
     if buff == 'Embolden' then
         if gain then
             equip(sets.Embolden)
-            disable('head','legs','back')
+            disable('back')
         else
-            enable('head','legs','back')
+            enable('back')
             status_change(player.status)
         end
     end
 
+		--Changes Engaged set when Aftermath is up
     if buff:startswith('Aftermath') then
         state.Buff.Aftermath = gain
         customize_melee_set()
         handle_equipping_gear(player.status)
     end
 
-    if buff == 'Battuta' and not gain then
-        status_change(player.status)
-    end
-
 end
 
--- Handle notifications of general user state change.
-function job_state_change(stateField, newValue, oldValue)
-    equip(sets[state.WeaponSet.current])
-	equip(sets[state.GripSet.current])
-
+function customize_melee_set(meleeSet)
+	if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Epeolatry" and state.OffenseMode.value == 'Normal' and state.HybridMode.value == 'Normal' then
+		meleeSet = sets.engaged.Aftermath
+	end
+	if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Epeolatry" and state.OffenseMode.value == 'Acc' and state.HybridMode.value == 'Normal' then
+		meleeSet = sets.engaged.Acc.Aftermath
+	end
+	if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Epeolatry" and state.OffenseMode.value == 'Normal' and state.HybridMode.value == 'DT' then
+		meleeSet = sets.engaged.Hybrid.Aftermath
+	end
+		if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Epeolatry" and state.OffenseMode.value == 'Acc' and state.HybridMode.value == 'DT' then
+		meleeSet = sets.engaged.Hybrid.Aftermath
+	end
+	
+	
+--	if state.OffenseMode.value == 'Normal' and state.HybridMode.value == 'DT' then
+--		if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Epeolatry"then
+--			meleeSet = sets.engaged.Hybrid.Aftermath
+--		else
+--			meleeSet = sets.engaged.Hybrid
+--		end
+--	end
+	return meleeSet
 end
 
 -------------------------------------------------------------------------------------------------------------------
--- User code that supplements standard library decisions.
+-- Code for Melee sets
 -------------------------------------------------------------------------------------------------------------------
-
-function job_update(cmdParams, eventArgs)
-    equip(sets[state.WeaponSet.current])
-	equip(sets[state.GripSet.current])
-end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
-    if player.mpp < 51 then
-        idleSet = set_combine(idleSet, sets.latent_refresh)
-    end
-
+		--Allows CP back to stay on if toggled on
     if state.CP.current == 'on' then
         equip(sets.CP)
         disable('back')
@@ -1153,16 +1147,7 @@ function customize_melee_set(meleeSet)
 	return meleeSet
 end
 
-function customize_defense_set(defenseSet)
-    if buffactive['Battuta'] then
-        defenseSet = set_combine(defenseSet, sets.defense.Parry)
-    end
-
-    return defenseSet
-end
-
 -- Function to display the current relevant user state when doing an update.
--- Set eventArgs.handled to true if display was handled, and you don't want the default info shown.
 function display_current_job_state(eventArgs)
     local r_msg = state.Runes.current
     local r_color = ''
@@ -1217,7 +1202,7 @@ function display_current_job_state(eventArgs)
 end
 
 -------------------------------------------------------------------------------------------------------------------
--- General hooks for other events.
+-- handles Blue Magic Mapping
 -------------------------------------------------------------------------------------------------------------------
 function job_get_spell_map(spell, default_spell_map)
     if spell.skill == 'Blue Magic' then
@@ -1229,44 +1214,42 @@ function job_get_spell_map(spell, default_spell_map)
     end
 end
 
--- Check for various actions that we've specified in user code as being used with TH gear.
--- This will only ever be called if TreasureMode is not 'None'.
--- Category and Param are as specified in the action event packet.
-
 -------------------------------------------------------------------------------------------------------------------
--- User code that supplements self-commands.
+-- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
+	--Handles the state.Runes which allows you to bind a key to cast a rune
 function job_self_command(cmdParams, eventArgs)
     if cmdParams[1]:lower() == 'rune' then
         send_command('@input /ja '..state.Runes.value..' <me>')
     end
 end
 
+	--Allows an uncapped attack and a capped attack Weaponskill Set
 function get_custom_wsmode(spell, action, spellMap)
     if spell.type == 'WeaponSkill' and state.AttackMode.value == 'Uncapped' then
         return "Uncapped"
     end
 end
 
--------------------------------------------------------------------------------------------------------------------
--- Utility functions specific to this job.
--------------------------------------------------------------------------------------------------------------------
-
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
     -- Default macro set/book: (set, book)
     if player.sub_job == 'BLU' then
-        set_macro_page(1, 7)
+        set_macro_page(3, 7)
     elseif player.sub_job == 'DRK' then
+        set_macro_page(2, 7)
+    elseif player.sub_job == 'WAR' then
         set_macro_page(1, 7)
-    elseif player.sub_job == 'WHM' then
-        set_macro_page(1, 7)
+    elseif player.sub_job == 'SAM' then
+        set_macro_page(4, 7)
+    elseif player.sub_job == 'PLD' then
+        set_macro_page(5, 7)
     else
         set_macro_page(1, 7)
     end
 end
 
 function set_lockstyle()
-    send_command('wait 5; input /lockstyleset ' .. lockstyleset)
+    send_command('wait 5; input /lockstyleset 9')
 end

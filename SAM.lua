@@ -3,40 +3,25 @@
 -- Itemizer addon is required for auto gear sorting / Warp Scripts / Range Scripts
 --
 -------------------------------------------------------------------------------------------------------------------
---  Keybinds
+--  Keybinds (Global Binds for all Jobs)
 -------------------------------------------------------------------------------------------------------------------
-
---  Modes:      	[ F9 ]              Cycle Offense Mode
---              	[ F10 ]             Cycle Idle Mode
---              	[ F11 ]             Cycle Casting Mode
---              	[ F12 ]             Update Current Gear / Report Current Status
---					[ CTRL + F9 ]		Cycle Weapon Skill Mode
---					[ ALT + F9 ]		Cycle Range Mode
---              	[ Windows + F9 ]    Cycle Hybrid Modes
---					[ Windows + ` ]		Toggles Treasure Hunter Mode
---              	[ Windows + C ]     Toggle Capacity Points Mode
+--  Modes:      	[ F9 ]              	Cycle Offense Mode
+--              	[ F10 ]             	Cycle Idle Mode
+--              	[ F11 ]             	Cycle Casting Mode
+--              	[ F12 ]             	Update Current Gear / Report Current Status
+--					[ CTRL + F9 ]			Cycle Weapon Skill Mode
+--					[ ALT + F9 ]			Cycle Range Mode
+--              	[ Windows + F9 ]    	Cycle Hybrid Modes
+--					[ Windows + T ]			Toggles Treasure Hunter Mode
+--              	[ Windows + C ]     	Toggle Capacity Points Mode
+--              	[ Windows + A ]     	AttackMode: Capped/Uncapped WS Modifier
 --
---  Abilities:  	[ CTRL + ` ]        Hasso
---
---  Weapons:    	[ CTRL + W ]		Toggle Weapon sets
---					[ CTRL + E]			Toggle Grip Sets
---
---  WS:         	[ CTRL + Numpad1 ]    Tachi: Fudo
---					[ CTRL + Numpad2 ]    Tachi: Shoha
---					[ CTRL + Numpad3 ]    Tachi: Kasha
---					[ CTRL + Numpad4 ]    Tachi: Ageha
---					[ CTRL + Numpad5 ]    Tachi: Jinpu
---					[ CTRL + Numpad6 ]    Tachi: Yukikaze
---					[ CTRL + Numpad7 ]    Tachi: Rana
---				
---					[ ALT + Numpad1 ]     Impulse Drive
---
--- Item Binds:		[ Shift + Numpad1 ]	Echo Drop
---					[ Shift + Numpad2 ]	Holy Water
---					[ Shift + Numpad3 ]	Remedy
---					[ Shift + Numpad4 ]	Panacea
---					[ Shift + Numpad7 ]	Silent Oil
---					[ Shift + Numpad9 ]	Prism Powder
+-- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
+--					[ Shift + Numpad2 ]		Holy Water
+--					[ Shift + Numpad3 ]		Remedy
+--					[ Shift + Numpad4 ]		Panacea
+--					[ Shift + Numpad7 ]		Silent Oil
+--					[ Shift + Numpad9 ]		Prism Powder
 --
 --					[ Windows + Numpad1 ]	Sublime Sushi
 --					[ Windows + Numpad2 ]	Grape Daifuku
@@ -45,10 +30,31 @@
 --					[ Windows + Numpad5 ]	Red Curry Bun
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
--- Warp Script:		[ CTRL + Numpad+ ]	Warp Ring
---					[ ALT + Numpad+ ]	Dimensional Ring Dem
+-- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
+--					[ ALT + Numpad+ ]		Dimensional Ring Dem
 --
--- Range Script:	[ CTRL + Numpad0 ] Ranged Attack
+-- Range Script:	[ CTRL + Numpad0 ] 		Ranged Attack
+--
+-------------------------------------------------------------------------------------------------------------------
+--  Job Specific Keybinds (Samurai Binds)
+-------------------------------------------------------------------------------------------------------------------
+--
+--	Modes:			[ Windows + 1 ]			Sets Weapon to Dojikiri then locks Main/Sub Slots
+--					[ Windows + 2 ]			Sets Weapon to Shining_One then locks Main/Sub Slots
+--					[ Windows + 3 ]			Sets Weapon to Soboro then locks Main/Sub Slots
+--					[ Windows + 4 ]			Sets Weapon to Norifusa then locks Main/Sub Slots
+--
+--  WS:         	[ CTRL + Numpad1 ]    	Tachi: Fudo
+--					[ CTRL + Numpad2 ]    	Tachi: Shoha
+--					[ CTRL + Numpad3 ]    	Tachi: Kasha
+--					[ CTRL + Numpad4 ]    	Tachi: Ageha
+--					[ CTRL + Numpad5 ]    	Tachi: Jinpu
+--					[ CTRL + Numpad6 ]    	Tachi: Yukikaze
+--					[ CTRL + Numpad7 ]    	Tachi: Rana
+--				
+--					[ ALT + Numpad1 ]		Impulse Drive
+--
+--  Abilities:  	[ CTRL + ` ]        	Hasso
 --
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -66,16 +72,21 @@ end
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
 
+    no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring"}
+
 	include('Mote-TreasureHunter')
+	
+    -- JA IDs for actions that always have TH: Provoke, Animated Flourish
+    info.default_ja_ids = S{35, 204}
+    -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
+    info.default_u_ja_ids = S{201, 202, 203, 205, 207}
 
     state.Buff.Hasso = buffactive.Hasso or false
     state.Buff.Seigan = buffactive.Seigan or false
     state.Buff.Sekkanoki = buffactive.Sekkanoki or false
     state.Buff.Sengikori = buffactive.Sengikori or false
     state.Buff['Meikyo Shisui'] = buffactive['Meikyo Shisui'] or false
-	
-	state.WeaponSet = M{['description']='Weapon Set', 'Dojikiri', 'Norifusa', 'Soboro' }
-	state.GripSet = M{['description']='Grip Set', 'Utu'}
 	
 	lockstyleset = 13
 	
@@ -89,21 +100,33 @@ end
 function user_setup()
     state.OffenseMode:options('Normal', 'Acc')
     state.HybridMode:options('Normal', 'DT')
+    state.RangedMode:options('Normal', 'Acc')
     state.WeaponskillMode:options('Normal', 'Acc')
+    state.CastingMode:options('Normal', 'Resistant')
+    state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
-
-    update_combat_form()
+	state.WeaponSet = M{['description']='Weapon Set', 'Dojikiri', 'Shining_One', 'Norifusa', 'Soboro' }
+	state.AttackMode = M{['description']='Attack', 'Uncapped', 'Capped'}
+	state.Reraise = M(false, "Reraise Mode")
+	
+	state.CP = M(false, "Capacity Points Mode")
 	
 	--Load Dressup Lua
 
 	send_command('wait 10; lua l Dressup')
     
-    --Global Samurai binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)	
-
+    --Global Samurai binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	
 	send_command('bind @t gs c cycle TreasureMode')
-	send_command('bind @w gs c cycle WeaponSet')
-	send_command('bind @e gs c cycle GripSet')
+	send_command('bind @r gs c cycle Reraise')
     send_command('bind ^` input /ja "Hasso" <me>')
+	
+	--Weapon set Binds
+
+	send_command('bind @1 gs c set WeaponSet Dojikiri')
+	send_command('bind @2 gs c set WeaponSet Shining_One')
+	send_command('bind @3 gs c set WeaponSet Soboro')
+	send_command('bind @4 gs c set WeaponSet Norifusa')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
@@ -149,13 +172,6 @@ function user_setup()
 	send_command('bind !numpad+ input //get Dim. Ring (Dem) satchel; wait 1; input /equip Ring1 "Dim. Ring (Dem)"; wait 12; input /item "Dim. Ring (Dem)" <me>; wait 60; input //put Dim. Ring (Dem) satchel')
 	
 	--Gear Retrieval Commands 
-	
-	send_command('wait 10; input //get Dojikiri Yasutsuna Case')
-	send_command('wait 10; input //get Norifusa Case')
-	send_command('wait 10; input //get Soboro Sukehiro Case')
-	send_command('wait 10; input //get Utu Grip Case')
-	send_command('wait 10; input //get Smertrios\'s Mantle Case all')
-	send_command('wait 10; input //get Takaha Mantle Case')
 
 	--Job Settings
 
@@ -176,9 +192,21 @@ function user_unload()
 	
 	--Remove Dual Box Binds
 	
+	--send_command('unbind @1')
+	--send_command('unbind @2')
+	--send_command('unbind @q')
+	
+	--Remove Weapon Set binds
+	
 	send_command('unbind @1')
 	send_command('unbind @2')
-	send_command('unbind @q')
+	send_command('unbind @3')
+	send_command('unbind @4')
+	send_command('unbind @5')
+	send_command('unbind @6')
+	send_command('unbind @7')
+	send_command('unbind @8')
+	send_command('unbind @9')
 	
 	--Remove Weaponskill Binds
     
@@ -333,6 +361,7 @@ function init_gear_sets()
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
 
     sets.idle = {
+		sub="Utu Grip",
 		ammo="Staunch Tathlum +1",
 		head="Flam. Zucchetto +2",
 		body="Ken. Samue",
@@ -422,17 +451,15 @@ function init_gear_sets()
 		--31% DT + 6% PDT
 	
 	sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)	
-
+	
+	
+	------------------------------------------------------------------------------------------------
+    ---------------------------------------- Special Sets ------------------------------------------
+    ------------------------------------------------------------------------------------------------
 
     sets.buff.Sekkanoki = {hands="Unkai Kote +2"}
     sets.buff.Sengikori = {feet="Unkai Sune-ate +2"}
     sets.buff['Meikyo Shisui'] = {feet="Sakonji Sune-ate"}
-	
-	
-	    ------------------------------------------------------------------------------------------------
-    ---------------------------------------- Special Sets ------------------------------------------
-    ------------------------------------------------------------------------------------------------
-
 
     sets.TreasureHunter = {
 		ammo="Per. Lucky Egg", --TH1
@@ -445,37 +472,25 @@ function init_gear_sets()
         }
 	
 	sets.Dojikiri = {main={ name="Dojikiri Yasutsuna", augments={'Path: A',}},}
-	sets.Norifusa = {main= "Norifusa"}
+	sets.Shining_One = {main='Shining One'}
 	sets.Soboro = {main= "Soboro Sukehiro"}
-
-	sets.Utu = {sub="Utu Grip",}
+	sets.Norifusa = {main= "Norifusa"}
+	
+    sets.Obi = {waist="Hachirin-no-Obi"}
+	
+	sets.Reraise = {head="Twilight Helm",body="Twilight Mail"}
 	
 	
 end
 
 
 -------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for standard casting events.
+-- Job-specific Functions
 -------------------------------------------------------------------------------------------------------------------
 
--- Set eventArgs.handled to true if we don't want any automatic target handling to be done.
-function job_pretarget(spell, action, spellMap, eventArgs)
-    if spell.type == 'WeaponSkill' then
-        -- Change any GK weaponskills to polearm weaponskill if we're using a polearm.
-        if player.equipment.main=='Quint Spear' or player.equipment.main=='Quint Spear' then
-            if spell.english:startswith("Tachi:") then
-                send_command('@input /ws "Penta Thrust" '..spell.target.raw)
-                eventArgs.cancel = true
-            end
-        end
-    end
-end
-
--- Run after the default precast() is done.
--- eventArgs is the same one used in job_precast, in case information needs to be persisted.
 function job_post_precast(spell, action, spellMap, eventArgs)
-    equip(sets[state.WeaponSet.current])
-	equip(sets[state.GripSet.current])	
+
+		--Handles Job Ability Gearsets
     if spell.type:lower() == 'weaponskill' then
         if state.Buff.Sekkanoki then
             equip(sets.buff.Sekkanoki)
@@ -489,73 +504,112 @@ function job_post_precast(spell, action, spellMap, eventArgs)
     end
 end
 
-function customize_melee_set(meleeSet)
-    if state.TreasureMode.value == 'Fulltime' then
-        meleeSet = set_combine(meleeSet, sets.TreasureHunter)
+function job_precast(spell, action, spellMap, eventArgs)
+
+		--Will stop utsusemi from being cast if 2 shadows or more
+	if spellMap == 'Utsusemi' then
+        if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
+            cancel_spell()
+            add_to_chat(123, '**!! '..spell.english..' Canceled: [3+ IMAGES] !!**')
+            eventArgs.handled = true
+            return
+        elseif buffactive['Copy Image'] or buffactive['Copy Image (2)'] then
+            send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
+        end
     end
 
-    return meleeSet
+	    -- Equip obi if weather/day matches for WS.	
+	if spell.type == 'WeaponSkill' then
+        if spell.english == 'Tachi: Jinpu' and world.weather_element == 'Wind' or world.day_element == 'Wind' then
+                equip(sets.Obi)
+        end
+    end
 end
 
+	--Allows an uncapped attack and a capped attack Weaponskill Set
+function get_custom_wsmode(spell, action, spellMap)
+    if spell.type == 'WeaponSkill' and state.AttackMode.value == 'Uncapped' then
+        return "Uncapped"
+    end
+end
 
--- Run after the default midcast() is done.
--- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
-function job_post_midcast(spell, action, spellMap, eventArgs)
-    -- Effectively lock these items in place.
-    if state.HybridMode.value == 'Reraise' or
-        (state.DefenseMode.value == 'Physical' and state.PhysicalDefenseMode.value == 'Reraise') then
+function job_buff_change(buff,gain)
+
+		--Auto equips Cursna Recieved doom set when doom debuff is on
+    if buff == "doom" then
+        if gain then
+            equip(sets.buff.Doom)
+            send_command('@input /p Doomed.')
+            disable('neck','waist')
+        else
+            enable('neck','waist')
+            handle_equipping_gear(player.status)
+        end
+    end
+	
+end
+
+	--Handles Weapon set changes and Reraise set
+function job_state_change(field, new_value, old_value)
+ 
+    equip(sets[state.WeaponSet.current])
+	
+	if state.Reraise.current == 'on' then
         equip(sets.Reraise)
+        disable('head', 'body')
+    else
+        enable('head', 'body')
     end
+	
 end
 
 -------------------------------------------------------------------------------------------------------------------
--- User code that supplements standard library decisions.
+-- Code for Melee sets
 -------------------------------------------------------------------------------------------------------------------
 
--- Called by the 'update' self-command, for common needs.
--- Set eventArgs.handled to true if we don't want automatic equipping of gear.
-function job_update(cmdParams, eventArgs)
-    update_combat_form()
-	equip(sets[state.WeaponSet.current])
-	equip(sets[state.GripSet.current])
+	--Handles Weapon set changes and Reraise set
+function job_state_change(field, new_value, old_value)
+ 
+    equip(sets[state.WeaponSet.current])
+	
+	if state.Reraise.current == 'on' then
+        equip(sets.Reraise)
+        disable('head', 'body')
+    else
+        enable('head', 'body')
+    end
+	
 end
 
--- Set eventArgs.handled to true if we don't want the automatic display to be run.
-function display_current_job_state(eventArgs)
-
+function customize_idle_set(idleSet)
+		--Allows CP back to stay on if toggled on
+    if state.CP.current == 'on' then
+        equip(sets.CP)
+        disable('back')
+    else
+        enable('back')
+    end
+    
+    return idleSet
 end
-
--- Check for various actions that we've specified in user code as being used with TH gear.
--- This will only ever be called if TreasureMode is not 'None'.
--- Category and Param are as specified in the action event packet.
-
 
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
-function update_combat_form()
-    if areas.Adoulin:contains(world.area) and buffactive.ionis then
-        state.CombatForm:set('Adoulin')
-    else
-        state.CombatForm:reset()
+function check_moving()
+    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
+        if state.Auto_Kite.value == false and moving then
+            state.Auto_Kite:set(true)
+        elseif state.Auto_Kite.value == true and moving == false then
+            state.Auto_Kite:set(false)
+        end
     end
 end
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
-    -- Default macro set/book
-    if player.sub_job == 'WAR' then
         set_macro_page(1, 11)
-    elseif player.sub_job == 'DNC' then
-        set_macro_page(2, 11)
-    elseif player.sub_job == 'THF' then
-        set_macro_page(3, 11)
-    elseif player.sub_job == 'NIN' then
-        set_macro_page(4, 11)
-    else
-        set_macro_page(1, 11)
-    end
 end
 
 function set_lockstyle()

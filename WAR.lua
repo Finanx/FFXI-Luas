@@ -43,11 +43,11 @@
 --  Job Specific Keybinds (Bard Binds)
 -------------------------------------------------------------------------------------------------------------------
 --
---	Weapons:		[ Windows: + 1 ]		Great Axe Weapon Set
---					[ Windows: + 2 ]		Sword Weapon Set
---					[ Windows: + 3 ]		Polearm Weapon Set
---					[ Windows: + 4 ]		Club Weapon Set
---					[ Windows: + 5 ]		Axe Weapon Set
+--	Weapons:		[ Windows: + 1 ]		Chango Weapon Set
+--					[ Windows: + 2 ]		Naegling Weapon Set
+--					[ Windows: + 3 ]		Shining_One Weapon Set
+--					[ Windows: + 4 ]		Loxotic_Mace Weapon Set
+--					[ Windows: + 5 ]		Dolichenus Weapon Set
 --
 --	Weaponskills:	[ CTRL + Numpad1 ]		Upheaval
 --					[ CTRL + Numpad2 ]		Ukko's Furry
@@ -80,16 +80,9 @@ end
 
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
-    -- QuickDraw Selector
 	
-	
-	no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
-					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring",
-					"Dev. Bul. Pouch", "Chr. Bul. Pouch", "Liv. Bul. Pouch"}
-	
-	state.WeaponSet = M{['description']='Weapon Set', 'Great_Axe', 'Polearm', 'Sword', 'Club', 'Axe'}
-
-    -- For th_action_check():
+    no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring"}
 
 	include('Mote-TreasureHunter')
 
@@ -117,12 +110,13 @@ function user_setup()
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
 	state.AttackMode = M{['description']='Attack', 'Uncapped', 'Capped'}
+	
+	state.WeaponSet = M{['description']='Weapon Set', 'Chango', 'Shining_One', 'Naegling', 'Loxotic_Mace', 'Dolichenus'}
 
     state.CP = M(false, "Capacity Points Mode")
 
 	--Load Gearinfo/Dressup Lua
 	
-    send_command('wait 3; lua l gearinfo')
 	send_command('wait 10; lua l Dressup')
 
 	--Global Warrior binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -130,11 +124,14 @@ function user_setup()
 	send_command('bind @a gs c cycle AttackMode')
 	send_command('bind @t gs c cycle TreasureMode')
 	send_command('bind @c gs c toggle CP')
-	send_command('bind @1 gs c set WeaponSet Great_Axe')
-	send_command('bind @2 gs c set WeaponSet Sword')
-	send_command('bind @3 gs c set WeaponSet Polearm')
-	send_command('bind @4 gs c set WeaponSet Club')
-	send_command('bind @5 gs c set WeaponSet Axe')
+	
+	--Weapon set Binds
+
+	send_command('bind @1 gs c set WeaponSet Chango')
+	send_command('bind @2 gs c set WeaponSet Naegling')
+	send_command('bind @3 gs c set WeaponSet Shining_One')
+	send_command('bind @4 gs c set WeaponSet Loxotic_Mace')
+	send_command('bind @5 gs c set WeaponSet Dolichenus')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -226,9 +223,21 @@ function user_unload()
 
 	--Remove Dual Box Binds
 	
+	--send_command('unbind @1')
+	--send_command('unbind @2')
+	--send_command('unbind @q')
+	
+	--Remove Weapon Set binds
+	
 	send_command('unbind @1')
 	send_command('unbind @2')
-	send_command('unbind @q')
+	send_command('unbind @3')
+	send_command('unbind @4')
+	send_command('unbind @5')
+	send_command('unbind @6')
+	send_command('unbind @7')
+	send_command('unbind @8')
+	send_command('unbind @9')
 	
 	--Remove Weaponskill Binds
     
@@ -627,8 +636,6 @@ function init_gear_sets()
 
     -- Variations for TP weapon and (optional) offense/defense modes.  Code will fall back on previous
     -- sets if more refined versions aren't defined.
-    -- If you create a set with both offense and defense modes, the offense mode should be first.
-    -- EG: sets.engaged.Dagger.Accuracy.Evasion
 
     sets.engaged = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
@@ -759,11 +766,11 @@ function init_gear_sets()
 
 	--Weaponsets
 
-    sets.Great_Axe = {main="Kaja Chopper", sub="Utu Grip"}
-	sets.Polearm = {main="Shining One", sub="Utu Grip"}
-	sets.Sword = {main="Naegling", sub="Blurred Shield +1",}
-	sets.Club = {main={ name="Loxotic Mace +1", augments={'Path: A',}},sub="Blurred Shield +1",}
-	sets.Axe = {}
+    sets.Chango = {main="Kaja Chopper", sub="Utu Grip"}
+	sets.Shining_One = {main="Shining One", sub="Utu Grip"}
+	sets.Naegling = {main="Naegling", sub="Blurred Shield +1",}
+	sets.Loxotic_Mace = {main={ name="Loxotic Mace +1", augments={'Path: A',}},sub="Blurred Shield +1",}
+	sets.Dolichenus = {}
 	
 	
 
@@ -771,10 +778,12 @@ end
 
 
 -------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for standard casting events.
+-- Job-specific Functions
 -------------------------------------------------------------------------------------------------------------------
 
 function job_precast(spell, action, spellMap, eventArgs)
+
+		--Will stop utsusemi from being cast if 2 shadows or more
     if spellMap == 'Utsusemi' then
         if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
             cancel_spell()
@@ -785,6 +794,8 @@ function job_precast(spell, action, spellMap, eventArgs)
             send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
         end
     end
+	
+	    -- Equip obi if weather/day matches for WS.
 	if spell.type == 'WeaponSkill' then
         if spell.english == 'Sanguine Blade' and world.weather_element == 'Dark' or world.day_element == 'Dark' then
                 equip(sets.Obi)
@@ -798,28 +809,36 @@ function job_precast(spell, action, spellMap, eventArgs)
     end
 end
 
+	--Allows an uncapped attack and a capped attack Weaponskill Set
 function get_custom_wsmode(spell, action, spellMap)
     if spell.type == 'WeaponSkill' and state.AttackMode.value == 'Uncapped' then
         return "Uncapped"
     end
 end
 
+	--Handles Weapon Set changes
+function job_state_change(field, new_value, old_value)
+    equip(sets[state.WeaponSet.current])
+end
 
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for non-casting events.
 -------------------------------------------------------------------------------------------------------------------
 
 function job_buff_change(buff,gain)
+
+		--Auto equips Cursna Recieved doom set when doom debuff is on
     if buff == "doom" then
         if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-             disable('waist')
+            disable('neck','waist')
         else
-            enable('waist')
+            enable('neck','waist')
             handle_equipping_gear(player.status)
         end
     end
+	
 end
 
 
@@ -827,6 +846,7 @@ end
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
 
+-- Handles Gearinfo / Melee / Weapon / Range Sets
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
@@ -838,6 +858,7 @@ function job_update(cmdParams, eventArgs)
 	equip(sets[state.WeaponSet.current])
 end
 
+	--Determines Dual Wield melee set
 function update_combat_form()
     if DW == true then
         state.CombatForm:set('DW')
@@ -846,8 +867,9 @@ function update_combat_form()
     end
 end
 
--- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
+
+		--Allows CP back to stay on if toggled on
     if state.CP.current == 'on' then
         equip(sets.CP)
         disable('back')
@@ -859,7 +881,6 @@ function customize_idle_set(idleSet)
 end
 
 -- Function to display the current relevant user state when doing an update.
--- Set eventArgs.handled to true if display was handled, and you don't want the default info shown.
 function display_current_job_state(eventArgs)
     local cf_msg = ''
     if state.CombatForm.has_value then
@@ -904,6 +925,7 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
+	--Determines Haste Group / Melee set for Gear Info
 function determine_haste_group()
     classes.CustomMeleeGroups:clear()
     if DW == true then
@@ -921,6 +943,7 @@ function determine_haste_group()
     end
 end
 
+	--Gear Info Functions
 function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
 end
@@ -940,6 +963,7 @@ function gearinfo(cmdParams, eventArgs)
     end
 end
 
+	--Auto_Kite function
 function check_moving()
     if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
         if state.Auto_Kite.value == false and moving then
@@ -950,6 +974,7 @@ function check_moving()
     end
 end
 
+	--Allows equipping of warp/exp rings without auto swapping back to current set
 function check_gear()
     if no_swap_gear:contains(player.equipment.left_ring) then
         disable("ring1")
@@ -978,12 +1003,7 @@ windower.register_event('zone change',
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
-    -- Default macro set/book: (set, book)
-    --if player.sub_job == 'SAM' then
         set_macro_page(1, 10)
-    --else
-        --set_macro_page(2, 8)
-    --end
 end
 
 function set_lockstyle()
