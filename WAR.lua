@@ -110,6 +110,7 @@ function user_setup()
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
 	state.AttackMode = M{['description']='Attack', 'Uncapped', 'Capped'}
+	state.Reraise = M(false, "Reraise Mode")
 	
 	state.WeaponSet = M{['description']='Weapon Set', 'Chango', 'Shining_One', 'Naegling', 'Loxotic_Mace', 'Dolichenus'}
 
@@ -124,6 +125,7 @@ function user_setup()
 	send_command('bind @a gs c cycle AttackMode')
 	send_command('bind @t gs c cycle TreasureMode')
 	send_command('bind @c gs c toggle CP')
+	send_command('bind @r gs c toggle Reraise')
 	
 	--Weapon set Binds
 
@@ -762,6 +764,7 @@ function init_gear_sets()
 	sets.Warp = {left_ring="Warp Ring"}
     sets.CP = {back={ name="Mecisto. Mantle", augments={'Cap. Point+48%','CHR+3','Accuracy+2','DEF+10',}},}
     sets.Obi = {waist="Hachirin-no-Obi"}
+	sets.Reraise = {head="Twilight Helm",body="Twilight Mail"}
 
 
 	--Weaponsets
@@ -816,14 +819,18 @@ function get_custom_wsmode(spell, action, spellMap)
     end
 end
 
-	--Handles Weapon Set changes
 function job_state_change(field, new_value, old_value)
+ 
     equip(sets[state.WeaponSet.current])
+	
+	if state.Reraise.current == 'on' then
+        equip(sets.Reraise)
+        disable('head', 'body')
+    else
+        enable('head', 'body')
+    end
+	
 end
-
--------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for non-casting events.
--------------------------------------------------------------------------------------------------------------------
 
 function job_buff_change(buff,gain)
 
@@ -843,7 +850,7 @@ end
 
 
 -------------------------------------------------------------------------------------------------------------------
--- User code that supplements standard library decisions.
+-- Code for Melee sets
 -------------------------------------------------------------------------------------------------------------------
 
 -- Handles Gearinfo / Melee / Weapon / Range Sets
@@ -855,7 +862,6 @@ end
 function job_update(cmdParams, eventArgs)
 	check_gear()
     handle_equipping_gear(player.status)
-	equip(sets[state.WeaponSet.current])
 end
 
 	--Determines Dual Wield melee set

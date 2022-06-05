@@ -104,8 +104,6 @@ function user_setup()
 
     state.CP = M(false, "Capacity Points Mode")
 	state.WeaponSet = M{['description']='Weapon Set', 'Godhands', 'Spharai', 'Verethranga', 'Xoanan', 'Karambit' }
-    update_combat_form()
-    update_melee_groups()
 	
 	--Load Dressup Lua
 
@@ -269,19 +267,11 @@ function user_unload()
 	send_command('lua u Dressup')
 	
 	--Gear Removal Commands
-
-	send_command('wait 5; input //put Kaja Knuckles Case')
-	send_command('wait 5; input //put Segomo\'s Mantle Sack all')
 	
 end
 
 -- Define sets and vars used by this job file.
 function init_gear_sets()
-    --------------------------------------
-    -- Start defining the sets
-    --------------------------------------
-    
-    -- Precast Sets
     
     -- Precast sets to enhance JAs on use
     sets.precast.JA['Hundred Fists'] = {legs="Hesychast's Hose +1"}
@@ -571,11 +561,6 @@ function init_gear_sets()
  
 
     -- Engaged sets
-
-    -- Variations for TP weapon and (optional) offense/defense modes.  Code will fall back on previous
-    -- sets if more refined versions aren't defined.
-    -- If you create a set with both offense and defense modes, the offense mode should be first.
-    -- EG: sets.engaged.Dagger.Accuracy.Evasion
     
     -- Normal melee sets
     sets.engaged = {
@@ -710,14 +695,12 @@ function init_gear_sets()
 end
 
 -------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for standard casting events.
+-- Job-specific Functions
 -------------------------------------------------------------------------------------------------------------------
 
--- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
--- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
-
--- Run after the general precast() is done.
 function job_post_precast(spell, action, spellMap, eventArgs)
+
+		--Handles Impetus/Footwork Weaponskills
     if spell.type == 'WeaponSkill' and state.DefenseMode.current ~= 'None' then
         if state.Buff.Impetus and (spell.english == "Ascetic's Fury" or spell.english == "Victory Smite") then
             -- Need 6 hits at capped dDex, or 9 hits if dDex is uncapped, for Tantra to tie or win.
@@ -727,26 +710,21 @@ function job_post_precast(spell, action, spellMap, eventArgs)
         elseif state.Buff.Footwork and (spell.english == "Dragon's Kick" or spell.english == "Tornado Kick") then
             equip(sets.footwork_kick_feet)
         end
-        
-        -- Replace Moonshade Earring if we're at cap TP
     end
+	
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
+
     if spell.type == 'WeaponSkill' and not spell.interrupted and state.FootworkWS and state.Buff.Footwork then
         send_command('cancel Footwork')
     end
+	
 end
 
--------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for non-casting events.
--------------------------------------------------------------------------------------------------------------------
-
--- Called when a player gains or loses a buff.
--- buff == buff gained or lost
--- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff, gain)
-    -- Set Footwork as combat form any time it's active and Hundred Fists is not.
+
+		--Set Footwork as combat form any time it's active and Hundred Fists is not.
     if buff == 'Footwork' and gain and not buffactive['hundred fists'] then
         state.CombatForm:set('Footwork')
     elseif buff == "Hundred Fists" and not gain and buffactive.footwork then
@@ -755,7 +733,7 @@ function job_buff_change(buff, gain)
         state.CombatForm:reset()
     end
     
-    -- Hundred Fists and Impetus modify the custom melee groups
+		-- Hundred Fists and Impetus modify the custom melee groups
     if buff == "Hundred Fists" or buff == "Impetus" then
         classes.CustomMeleeGroups:clear()
         
@@ -768,54 +746,77 @@ function job_buff_change(buff, gain)
         end
     end
 
-    -- Update gear if any of the above changed
+		-- Update gear if any of the above changed
     if buff == "Hundred Fists" or buff == "Impetus" or buff == "Footwork" then
         handle_equipping_gear(player.status)
     end
+	
+		--Auto equips Cursna Recieved doom set when doom debuff is on
+    if buff == "doom" then
+        if gain then
+            equip(sets.buff.Doom)
+            send_command('@input /p Doomed.')
+            disable('neck','waist')
+        else
+            enable('neck','waist')
+            handle_equipping_gear(player.status)
+        end
+    end
+	
 end
 
-function job_update(cmdParams, eventArgs)
-	check_gear()
-    handle_equipping_gear(player.status)
-	equip(sets[state.WeaponSet.current])
+	--Handles Weapon set changes and Reraise set
+function job_state_change(field, new_value, old_value)
+ 
+    equip(sets[state.WeaponSet.current])
+	
 end
-
-
--------------------------------------------------------------------------------------------------------------------
--- User code that supplements standard library decisions.
--------------------------------------------------------------------------------------------------------------------
 
 function customize_idle_set(idleSet)
-    if player.hpp < 75 then
-        idleSet = set_combine(idleSet, sets.ExtraRegen)
-    end
+
+		--Allows CP back to stay on if toggled on
     if state.CP.current == 'on' then
         equip(sets.CP)
         disable('back')
     else
         enable('back')
     end
+    
     return idleSet
+	
 end
-
--- Called by the 'update' self-command.
-function job_update(cmdParams, eventArgs)
-    update_combat_form()
-    update_melee_groups()
-end
-
 
 -------------------------------------------------------------------------------------------------------------------
--- Utility functions specific to this job.
+-- Code for Melee sets
 -------------------------------------------------------------------------------------------------------------------
 
 function update_combat_form()
+
     if buffactive.footwork and not buffactive['hundred fists'] then
         state.CombatForm:set('Footwork')
     else
         state.CombatForm:reset()
     end
-	equip(sets[state.WeaponSet.current])
+
+	if state.WeaponSet.value == 'Godhands' then
+		equip(sets.Godhands)
+	end
+	
+	if state.WeaponSet.value == 'Spharai' then
+		equip(sets.Spharai) 
+	end
+
+	if state.WeaponSet.value == 'Verethranga' then
+		equip(sets.Verethranga)
+	end
+
+	if state.WeaponSet.value == 'Xoanan' then
+		equip(sets.Xoanan) 
+	end
+	
+	if state.WeaponSet.value == 'Karambit' then
+		equip(sets.Karambit) 
+	end
 	
 end
 
@@ -830,51 +831,6 @@ function update_melee_groups()
         classes.CustomMeleeGroups:append('Impetus')
     end
 end
-
-function job_self_command(cmdParams, eventArgs)
-    gearinfo(cmdParams, eventArgs)
-end
-
-function gearinfo(cmdParams, eventArgs)
-    if cmdParams[1] == 'gearinfo' then
-        if type(cmdParams[4]) == 'string' then
-            if cmdParams[4] == 'true' then
-                moving = true
-            elseif cmdParams[4] == 'false' then
-                moving = false
-            end
-        end
-        if not midaction() then
-            job_update()
-        end
-    end
-end
-
-function check_gear()
-    if no_swap_gear:contains(player.equipment.left_ring) then
-        disable("ring1")
-    else
-        enable("ring1")
-    end
-    if no_swap_gear:contains(player.equipment.right_ring) then
-        disable("ring2")
-    else
-        enable("ring2")
-    end
-end
-
-windower.register_event('zone change',
-    function()
-        if no_swap_gear:contains(player.equipment.left_ring) then
-            enable("ring1")
-            equip(sets.idle)
-        end
-        if no_swap_gear:contains(player.equipment.right_ring) then
-            enable("ring2")
-            equip(sets.idle)
-        end
-    end
-)
 
 function display_current_job_state(eventArgs)
     local cf_msg = ''
@@ -916,18 +872,8 @@ end
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
-    -- Default macro set/book
-    if player.sub_job == 'DNC' then
         set_macro_page(1, 1)
-    elseif player.sub_job == 'NIN' then
-        set_macro_page(1, 1)
-    elseif player.sub_job == 'THF' then
-        set_macro_page(1, 1)
-    elseif player.sub_job == 'RUN' then
-        set_macro_page(1, 1)
-    else
-        set_macro_page(1, 1)
-    end
+
 end
 
 

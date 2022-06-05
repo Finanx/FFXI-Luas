@@ -201,6 +201,7 @@ function user_setup()
 	send_command('wait 10; input //get Devastating Bullet satchel all')
 	send_command('wait 10; input //get Living Bullet satchel all')
 	send_command('wait 10; input //get Trump Card satchel all')
+	send_command('wait 10; input //get Shihei satchel all')
 		
 	--Job Settings
 	
@@ -314,6 +315,7 @@ function user_unload()
 	send_command('wait 5; input //put Devastating Bullet satchel all')
 	send_command('wait 5; input //put Living Bullet satchel all')
 	send_command('wait 5; input //put Trump Card satchel all')
+	send_command('wait 5; input //put Shihei satchel all')
 
 	--Unload Gearinfo/Dressup Lua
 
@@ -1038,9 +1040,6 @@ function init_gear_sets()
 	sets.Warp = {left_ring="Warp Ring"}
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
-    --sets.Reive = {neck="Ygnas's Resolve +1"}
-
-
 
 	--Weaponsets
 
@@ -1228,11 +1227,8 @@ end
 		
 
 -------------------------------------------------------------------------------------------------------------------
--- User code that supplements standard library decisions.
+-- Code for Melee sets
 -------------------------------------------------------------------------------------------------------------------
-
--- Called by the 'update' self-command, for common needs.
--- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 
 -- Handles Gearinfo / Melee / Weapon / Range Sets
 function job_handle_equipping_gear(playerStatus, eventArgs)

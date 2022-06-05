@@ -293,12 +293,6 @@ function user_unload()
 	
 	--Gear Removal Commands
 	
-	send_command('wait 5; input //put Levante Dagger Case')	
-	send_command('wait 5; input //put Ternion Dagger +1 Case')	
-	send_command('wait 5; input //put Sandung Case')	
-	send_command('wait 5; input //put Tauret Case')	
-	send_command('wait 5; input //put Toutatis\'s Cape Sack all')
-	
 end
 
 
@@ -440,6 +434,8 @@ function init_gear_sets()
 		right_ring="Epaminondas's Ring",
 		back={ name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},}
 		
+	sets.precast.WS.RudraSATA = set_combine(sets.precast.WS['Rudra\'s Storm'], {})
+		
 	sets.precast.WS['Mandalic Stab'] = {
 		ammo="Yetshila +1",
 		head="Pill. Bonnet +3",
@@ -454,6 +450,8 @@ function init_gear_sets()
 		left_ring="Ilabrat Ring",
 		right_ring="Epaminondas's Ring",
 		back={ name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},}
+		
+	sets.precast.WS.MandalicSATA = set_combine(sets.precast.WS['Mandalic Stab'], {})
 		
 	sets.precast.WS['Shark Bite'] = {
 		ammo="Yetshila +1",
@@ -514,6 +512,8 @@ function init_gear_sets()
 		left_ring="Epaminondas's Ring",
 		right_ring="Ilabrat Ring",
 		back={ name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
+		
+	sets.precast.WS.SavageSATA = set_combine(sets.precast.WS['Savage Blade'], {})
 		
 	
 
@@ -857,11 +857,12 @@ end
 
 
 -------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for standard casting events.
+-- Job-specific Functions
 -------------------------------------------------------------------------------------------------------------------
 
--- Run after the general precast() is done.
 function job_post_precast(spell, action, spellMap, eventArgs)
+
+		--Will stop utsusemi from being cast if 2 shadows or more
     if spellMap == 'Utsusemi' then
         if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
             cancel_spell()
@@ -872,18 +873,32 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
         end
     end
+	
+		--Turns Aeolian Edge into AoE Treasure Hunter
     if spell.english == 'Aeolian Edge' and state.TreasureMode.value ~= 'None' then
         equip(sets.TreasureHunter)
+		
     elseif spell.english=='Sneak Attack' or spell.english=='Trick Attack' then
         if state.TreasureMode.value == 'SATA' or state.TreasureMode.value == 'Fulltime' then
             equip(sets.TreasureHunter)
         end
     end
+
+		--Handles Sneak Attack / Trick Attack Weapon skills
     if spell.type == "WeaponSkill" then
         if state.Buff['Sneak Attack'] == true or state.Buff['Trick Attack'] == true then
-            equip(sets.precast.WS.Critical)
+			if spell.english == 'Rudra\'s Storm' then
+				equip(sets.precast.WS.RudraSATA)
+			end
+			if spell.english == 'Mandalic Stab' then
+				equip(sets.precast.WS.MandalicSATA)
+			end
+			if spell.english == 'Savage Blade' then
+				equip(sets.precast.WS.SavageSATA)
+			end
         end
     end
+
 end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
@@ -896,23 +911,15 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     end
 end
 
--- Called after the default aftercast handling is complete.
 function job_post_aftercast(spell, action, spellMap, eventArgs)
     -- If Feint is active, put that gear set on on top of regular gear.
     -- This includes overlaying SATA gear.
     check_buff('Feint', eventArgs)
 end
 
--------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for non-casting events.
--------------------------------------------------------------------------------------------------------------------
-
--- Called when a player gains or loses a buff.
--- buff == buff gained or lost
--- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff,gain)
 
-
+		--Auto equips Cursna Recieved doom set when doom debuff is on
     if buff == "doom" then
         if gain then
             equip(sets.buff.Doom)
@@ -929,19 +936,18 @@ function job_buff_change(buff,gain)
     end
 end
 
+	--Handles Weapon set changes
 function job_state_change(stateField, newValue, oldValue)
-	if state.WeaponLock.value == true then
-		disable('main','sub')
-    else
-        enable('main','sub')
-    end
+
+    equip(sets[state.WeaponSet.current])
+
 end
+
 -------------------------------------------------------------------------------------------------------------------
--- User code that supplements standard library decisions.
+-- Code for Melee sets
 -------------------------------------------------------------------------------------------------------------------
 
--- Called by the 'update' self-command, for common needs.
--- Set eventArgs.handled to true if we don't want automatic equipping of gear.
+	--Gearinfo related function
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
@@ -953,50 +959,20 @@ function job_update(cmdParams, eventArgs)
     th_update(cmdParams, eventArgs)
 end
 
+	--Adjusts Melee/Weapon sets for Dual Wield or Single Wield
 function update_combat_form()
-    if DW == true then
+
+	if DW == true then
         state.CombatForm:set('DW')
     elseif DW == false then
         state.CombatForm:reset()
     end
-
-	if state.WeaponSet.value == 'Gletis_Knife' then
-		equip(sets.Gletis_Knife)
-	end
-
-	if state.WeaponSet.value == 'Tauret' then
-		equip(sets.Tauret)
-	end
-
-	if state.WeaponSet.value == 'Twashtar' then
-		equip(sets.Twashtar)
-	end
-
-	if state.WeaponSet.value == 'Naegling' then
-		equip(sets.Naegling)
-	end
-
-	if state.WeaponSet.value == 'Karambit' then
-		equip(sets.Karambit)
-	end
-
 					
 end
 
-function get_custom_wsmode(spell, spellMap, defaut_wsmode)
-    local wsmode
-
-    if state.Buff['Sneak Attack'] then
-        wsmode = 'SA'
-    end
-    if state.Buff['Trick Attack'] then
-        wsmode = (wsmode or '') .. 'TA'
-    end
-
-    return wsmode
-end
-
 function customize_idle_set(idleSet)
+
+		--Allows CP back to stay on if toggled on
     if state.CP.current == 'on' then
         equip(sets.CP)
         disable('back')
@@ -1007,6 +983,7 @@ function customize_idle_set(idleSet)
     return idleSet
 end
 
+	--Handles Full Time Treasure Hunter Set
 function customize_melee_set(meleeSet)
     if state.TreasureMode.value == 'Fulltime' then
         meleeSet = set_combine(meleeSet, sets.TreasureHunter)
@@ -1016,7 +993,6 @@ function customize_melee_set(meleeSet)
 end
 
 -- Function to display the current relevant user state when doing an update.
--- Return true if display was handled, and you don't want the default info shown.
 function display_current_job_state(eventArgs)
     local cf_msg = ''
     if state.CombatForm.has_value then
@@ -1059,6 +1035,7 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
+	--Determines Haste Group / Melee set for Gear Info
 function determine_haste_group()
     classes.CustomMeleeGroups:clear()
     if DW == true then
@@ -1076,6 +1053,7 @@ function determine_haste_group()
     end
 end
 
+	--Gear Info Functions
 function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
 end
@@ -1111,9 +1089,6 @@ function gearinfo(cmdParams, eventArgs)
     end
 end
 
-
--- Automatically use Presto for steps when it's available and we have less than 3 finishing moves
-
 -- State buff checks that will equip buff gear and mark the event as handled.
 function check_buff(buff_name, eventArgs)
     if state.Buff[buff_name] then
@@ -1139,7 +1114,7 @@ function th_action_check(category, param)
     end
 end
 
-
+	--Allows equipping of warp/exp rings without auto swapping back to current set
 function check_gear()
     if no_swap_gear:contains(player.equipment.left_ring) then
         disable("ring1")
@@ -1166,6 +1141,7 @@ windower.register_event('zone change',
     end
 )
 
+	--Auto Adjusts gear constantly if DW/Gearinfo is active
 windower.register_event('zone change', 
     function()
         send_command('gi ugs true')
@@ -1174,16 +1150,8 @@ windower.register_event('zone change',
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
-    -- Default macro set/book
-    if player.sub_job == 'DNC' then
+
         set_macro_page(1, 8)
-    elseif player.sub_job == 'WAR' then
-        set_macro_page(1, 8)
-    elseif player.sub_job == 'NIN' then
-        set_macro_page(1, 8)
-    else
-        set_macro_page(1, 8)
-    end
 end
 
 function set_lockstyle()

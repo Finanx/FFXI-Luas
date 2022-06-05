@@ -284,7 +284,6 @@ function user_unload()
 	send_command('unbind !numpad+')
 	
 	--Gear Removal Commands
-	
 
 	--Unload Dressup Lua
 	
@@ -1112,6 +1111,7 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
+
 		--Allows CP back to stay on if toggled on
     if state.CP.current == 'on' then
         equip(sets.CP)

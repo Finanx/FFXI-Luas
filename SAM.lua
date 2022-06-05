@@ -118,7 +118,7 @@ function user_setup()
     --Global Samurai binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('bind @t gs c cycle TreasureMode')
-	send_command('bind @r gs c cycle Reraise')
+	send_command('bind @r gs c toggle Reraise')
     send_command('bind ^` input /ja "Hasso" <me>')
 	
 	--Weapon set Binds
@@ -263,13 +263,6 @@ function user_unload()
 	send_command('unbind !numpad+')
 	
 	--Gear Removal Commands
-
-	send_command('wait 5; input //put Dojikiri Yasutsuna Case')
-	send_command('wait 5; input //put Norifusa Case')
-	send_command('wait 5; input //put Soboro Sukehiro Case')
-	send_command('wait 5; input //put Utu Grip Case')
-	send_command('wait 5; input //put Smertrios\'s Mantle Case all')
-	send_command('wait 5; input //put Takaha Mantle Case all')
 	
 	--Unload Dressup Lua
 	
@@ -582,6 +575,7 @@ function job_state_change(field, new_value, old_value)
 end
 
 function customize_idle_set(idleSet)
+
 		--Allows CP back to stay on if toggled on
     if state.CP.current == 'on' then
         equip(sets.CP)
@@ -591,6 +585,7 @@ function customize_idle_set(idleSet)
     end
     
     return idleSet
+	
 end
 
 -------------------------------------------------------------------------------------------------------------------

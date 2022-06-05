@@ -1,5 +1,4 @@
 -- Original: Finanx
--- Haste/DW Detection Requires Gearinfo Addon
 -- Dressup is setup to auto load with this Lua
 -- Itemizer addon is required for auto gear sorting / Warp Scripts / Range Scripts
 --
@@ -46,12 +45,12 @@
 --					[ Windows + 2 ]			Sets Weapon to Shining_One
 --					[ Windows + 3 ]			Sets Weapon to Naegling
 --
---  WS:         	[ CTRL + Numpad1 ]    	Evisceration
---					[ CTRL + Numpad2 ]    	Rudra's Storm
---					[ CTRL + Numpad3 ]    	Mandalic Stab
---					[ CTRL + Numpad4 ]    	Aeolian Edge
---					[ CTRL + Numpad5 ]    	Exenterator
---					[ CTRL + Numpad6 ]    	Shark Bite
+--  WS:         	[ CTRL + Numpad1 ]    	Impulse Drive
+--					[ CTRL + Numpad2 ]    	Stardiver
+--					[ CTRL + Numpad3 ]    	Drakesbane
+--					[ CTRL + Numpad4 ]    	Sonic Thrust
+--					[ CTRL + Numpad5 ]    	Camlann's Torment
+--					[ CTRL + Numpad6 ]    	Raident Thrust
 --				
 --					[ ALT + Numpad1 ]     	Savage Blade
 --					[ ALT + Numpad2 ]     	Sanguine Blade
@@ -81,7 +80,7 @@ function job_setup()
 	
 	include('Mote-TreasureHunter')
 
-    lockstyleset = 4
+    lockstyleset = 18
 
 end
 
@@ -99,6 +98,7 @@ function user_setup()
 
     state.AttackMode = M{['description']='Attack', 'Capped', 'Uncapped'}
     state.CP = M(false, "Capacity Points Mode")
+	state.Reraise = M(false, "Reraise Mode")
 
     send_command('bind ^` input /ja "Call Wyvern" <me>')
     send_command('bind !` input /ja "Spirit Link" <me>')
@@ -114,6 +114,7 @@ function user_setup()
 
 	send_command('bind @t gs c cycle TreasureMode')
 	send_command('bind @w gs c cycle WeaponSet')
+	send_command('bind @r gs c toggle Reraise')
 	send_command('bind @a gs c cycle AttackMode')
 
 	--Weapon set Binds
@@ -125,6 +126,14 @@ function user_setup()
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('bind ^numpad1 input /ws "Impulse Drive" <t>')
+	send_command('bind ^numpad2 input /ws "Stardiver" <t>')
+	send_command('bind ^numpad3 input /ws "Drakesbane" <t>')
+	send_command('bind ^numpad4 input /ws "Sonic Thrust" <t>')
+	send_command('bind ^numpad5 input /ws "Camlann\'s Torment" <t>')
+	send_command('bind ^numpad6 input /ws "Raident Thrust" <t>')
+	
+	send_command('bind !numpad4 input /ws "Savage Blade" <t>')
+	send_command('bind !numpad5 input /ws "Sanguine Blade" <t>')
 	
 	--Dual Box binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -156,6 +165,8 @@ function user_setup()
 
 	send_command('bind ^numpad+ input //get Warp Ring satchel; wait 1; input /equip Ring1 "Warp Ring"; wait 12; input /item "Warp Ring" <me>; wait 60; input //put Warp Ring satchel')
 	send_command('bind !numpad+ input //get Dim. Ring (Dem) satchel; wait 1; input /equip Ring1 "Dim. Ring (Dem)"; wait 12; input /item "Dim. Ring (Dem)" <me>; wait 60; input //put Dim. Ring (Dem) satchel')
+
+	--Gear Retrieval Commands
 
 	--Job Settings
 
@@ -250,6 +261,9 @@ function user_unload()
 	--Unload Dressup Lua
 	
     send_command('lua u Dressup')
+	
+	--Gear Removal Commands
+
 end
 
 -- Define sets and vars used by this job file.
@@ -297,10 +311,6 @@ function init_gear_sets()
     sets.precast.WS['Drakesbane'] = {}
 	
     sets.precast.WS['Drakesbane'].Uncapped = {}
-
-    sets.precast.WS['Geirskogul'] = {}
-	
-    sets.precast.WS['Geirskogul'].Uncapped = {}
 
     sets.precast.WS['Impulse Drive'] = {}
 	
@@ -375,11 +385,16 @@ function init_gear_sets()
 		body="Volte Jupon",		--TH2
 		waist="Chaac Belt",} --TH+1
 
-    -- sets.CP = {back="Mecisto. Mantle"}
-    --sets.Reive = {neck="Ygnas's Resolve +1"}
+    sets.CP = {back="Mecisto. Mantle"}
+	sets.Warp = {left_ring="Warp Ring"}
+    sets.Obi = {waist="Hachirin-no-Obi"}
+	
+	sets.Kiting = {}
 
-	sets.Trishula = {main="Trishula", sub="Utu Grip"}
-	sets.Polearm = {main="Shining One", sub="Utu Grip"}
+	--Weaponsets
+
+	sets.Trishula = {main="Shining One", sub="Utu Grip"}
+	sets.Shining_One = {main="Shining One", sub="Utu Grip"}
 	sets.Naegling = {main="Naegling"}
 
 end
@@ -389,66 +404,51 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function job_precast(spell, action, spellMap, eventArgs)
-    -- Wyvern Commands
+
+		-- Wyvern Commands
     if spell.name == 'Dismiss' and pet.hpp < 100 then
         eventArgs.cancel = true
         add_to_chat(50, 'Cancelling Dismiss! ' ..pet.name.. ' is below full HP! [ ' ..pet.hpp.. '% ]')
     elseif wyv_breath_spells:contains(spell.english) or (spell.skill == 'Ninjutsu' and player.hpp < 33) then
         equip(sets.precast.HealingBreath)
     end
-    -- Jump Overrides
-    --if pet.isvalid and player.main_job_level >= 77 and spell.name == "Jump" then
-    --    eventArgs.cancel = true
-    --    send_command('@input /ja "Spirit Jump" <t>')
-    --end
-
-    --if pet.isvalid and player.main_job_level >= 85 and spell.name == "High Jump" then
-    --    eventArgs.cancel = true
-    --    send_command('@input /ja "Soul Jump" <t>')
-    --end
+	
 end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
+
     if spell.type == 'WeaponSkill' then
         if spell.english == 'Stardiver' and state.WeaponskillMode.current == 'Normal' then
             if world.day_element == 'Earth' or world.day_element == 'Light' or world.day_element == 'Dark' then
                 equip(sets.WSDayBonus)
            end
-        elseif spell.english == 'Impulse Drive' and player.tp > 2000 then
-           equip(sets.precast.WS['Impulse Drive'].HighTP)
+        --elseif spell.english == 'Impulse Drive' and player.tp > 2000 then
+           --equip(sets.precast.WS['Impulse Drive'].HighTP)
         end
     end
 end
 
 function job_pet_midcast(spell, action, spellMap, eventArgs)
+		
+		--handles wyvern breath sets
     if spell.name:startswith('Healing Breath') or spell.name == 'Restoring Breath' then
         equip(sets.midcast.HealingBreath)
     elseif wyv_elem_breath:contains(spell.english) then
         equip(sets.midcast.ElementalBreath)
     end
+
 end
 
+	--Allows an uncapped attack and a capped attack Weaponskill Set
 function get_custom_wsmode(spell, action, spellMap)
     if spell.type == 'WeaponSkill' and state.AttackMode.value == 'Uncapped' then
         return "Uncapped"
     end
 end
 
--------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for non-casting events.
--------------------------------------------------------------------------------------------------------------------
-
 function job_buff_change(buff,gain)
-    -- If we gain or lose any haste buffs, adjust which gear set we target.
---    if buffactive['Reive Mark'] then
---        if gain then
---            equip(sets.Reive)
---            disable('neck')
---        else
---            enable('neck')
---        end
---    end
 
+		--Auto equips Cursna Recieved doom set when doom debuff is on
     if buff == "doom" then
         if gain then
             equip(sets.buff.Doom)
@@ -466,38 +466,34 @@ function job_buff_change(buff,gain)
 
 end
 
-
--------------------------------------------------------------------------------------------------------------------
--- User code that supplements standard library decisions.
--------------------------------------------------------------------------------------------------------------------
-
-function job_handle_equipping_gear(playerStatus, eventArgs)
-    check_gear()
-    check_moving()
-end
-
-function job_update(cmdParams, eventArgs)
-    handle_equipping_gear(player.status)
-	equip(sets[state.WeaponSet.current])
-end
-
-function get_custom_wsmode(spell, action, spellMap)
-    local wsmode
-    if state.OffenseMode.value == 'MidAcc' or state.OffenseMode.value == 'HighAcc' then
-        wsmode = 'Acc'
+function job_state_change(field, new_value, old_value)
+ 
+    equip(sets[state.WeaponSet.current])
+	
+	if state.Reraise.current == 'on' then
+        equip(sets.Reraise)
+        disable('head', 'body')
+    else
+        enable('head', 'body')
     end
-
-    return wsmode
+	
 end
+
+-------------------------------------------------------------------------------------------------------------------
+-- Code for Melee sets
+-------------------------------------------------------------------------------------------------------------------
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
-    -- if state.CP.current == 'on' then
-    --     equip(sets.CP)
-    --     disable('back')
-    -- else
-    --     enable('back')
-    -- end
+
+		--Allows CP back to stay on if toggled on
+    if state.CP.current == 'on' then
+        equip(sets.CP)
+        disable('back')
+    else
+        enable('back')
+    end
+	
     if state.Auto_Kite.value == true then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
@@ -506,7 +502,6 @@ function customize_idle_set(idleSet)
 end
 
 -- Function to display the current relevant user state when doing an update.
--- Set eventArgs.handled to true if display was handled, and you don't want the default info shown.
 function display_current_job_state(eventArgs)
     local cf_msg = ''
     if state.CombatForm.has_value then
@@ -547,35 +542,6 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
-function update_combat_form()
-    if buffactive.footwork and not buffactive['hundred fists'] then
-        state.CombatForm:set('Footwork')
-    else
-        state.CombatForm:reset()
-    end
-	equip(sets[state.WeaponSet.current])
-	
-end
-
-function job_self_command(cmdParams, eventArgs)
-    gearinfo(cmdParams, eventArgs)
-end
-
-function gearinfo(cmdParams, eventArgs)
-    if cmdParams[1] == 'gearinfo' then
-        if type(cmdParams[4]) == 'string' then
-            if cmdParams[4] == 'true' then
-                moving = true
-            elseif cmdParams[4] == 'false' then
-                moving = false
-            end
-        end
-        if not midaction() then
-            job_update()
-        end
-    end
-end
-
 function check_moving()
     if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
         if state.Auto_Kite.value == false and moving then
@@ -585,32 +551,6 @@ function check_moving()
         end
     end
 end
-
-function check_gear()
-    if no_swap_gear:contains(player.equipment.left_ring) then
-        disable("ring1")
-    else
-        enable("ring1")
-    end
-    if no_swap_gear:contains(player.equipment.right_ring) then
-        disable("ring2")
-    else
-        enable("ring2")
-    end
-end
-
-windower.register_event('zone change',
-    function()
-        if no_swap_gear:contains(player.equipment.left_ring) then
-            enable("ring1")
-            equip(sets.idle)
-        end
-        if no_swap_gear:contains(player.equipment.right_ring) then
-            enable("ring2")
-            equip(sets.idle)
-        end
-    end
-)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

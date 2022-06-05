@@ -112,7 +112,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'Physical_Katana', 'Magic_Katana', 'Naegling', 'Dagger'}
+	state.WeaponSet = M{['description']='Weapon Set', 'Physical_Katana', 'Magic_Katana', 'Naegling', 'Gletis_Knife'}
     state.WeaponLock = M(false, 'Weapon Lock')
 	state.MagicBurst = M(false, 'Magic_Burst')
 
@@ -136,7 +136,7 @@ function user_setup()
 	send_command('bind @1 input /equip sub; gs c set WeaponSet Physical_Katana')
 	send_command('bind @2 input /equip sub; gs c set WeaponSet Magic_Katana')
 	send_command('bind @3 input /equip sub; gs c set WeaponSet Naegling')
-	send_command('bind @4 input /equip sub; gs c set WeaponSet Dagger')
+	send_command('bind @4 input /equip sub; gs c set WeaponSet Gletis_Knife')
 	send_command('bind @w gs c toggle WeaponLock')
 
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -193,12 +193,6 @@ function user_setup()
 	send_command('bind !numpad. input //get Toolbag (Cho) satchel; wait 1; input /item "Toolbag (Cho)" <me>; wait 5; input //put Chonofuda satchel all')
 	
 	--Gear Retrieval Commands
-	
-	send_command('wait 10; input //get Ochu Case all')
-	send_command('wait 10; input //get Ternion Dagger +1 Case')
-	send_command('wait 10; input //get Levante Dagger Case')
-	send_command('wait 10; input //get Naegling Case')
-	send_command('wait 10; input //get Andartia\'s Mantle Sack all')
 		
 	--Abyssea Weapons 
 	
@@ -333,12 +327,6 @@ function user_unload()
 	send_command('unbind !numpad0')
 	
 	--Gear Removal Commands
-
-	send_command('wait 5; input //put Ochu Case all')
-	send_command('wait 5; input //put Ternion Dagger +1 Case')
-	send_command('wait 5; input //put Levante Dagger Case')
-	send_command('wait 5; input //put Naegling Case')
-	send_command('wait 5; input //put Andartia\'s Mantle Sack all')
 	
 	--Abyssea Weapons
 	
@@ -897,7 +885,7 @@ function init_gear_sets()
 	sets.Physical_Katana = {main="Kunimitsu",sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	sets.Magic_Katana = {main="Kunimitsu",sub={ name="Ochu", augments={'STR+8','DEX+8','Ninjutsu skill +10','DMG:+14',}},}
 	sets.Naegling = {main="Naegling",sub="Kunimitsu",}
-	sets.Dagger = {main={ name="Gleti's Knife", augments={'Path: A',}},sub="Kunimitsu",}
+	sets.Gletis_Knife = {main={ name="Gleti's Knife", augments={'Path: A',}},sub="Kunimitsu",}
 
 
     sets.buff.Doom = {
@@ -916,33 +904,65 @@ function init_gear_sets()
 end
 
 -------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for standard casting events.
+-- Job-specific Functions
 -------------------------------------------------------------------------------------------------------------------
 
 function job_precast(spell, action, spellMap, eventArgs)
+
+		--Will stop utsusemi from being cast if 2 shadows or more
+    if spellMap == 'Utsusemi' then
+        if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
+            cancel_spell()
+            add_to_chat(123, '**!! '..spell.english..' Canceled: [3+ IMAGES] !!**')
+            eventArgs.handled = true
+            return
+        elseif buffactive['Copy Image'] or buffactive['Copy Image (2)'] then
+            send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
+        end
+    end
+	
 end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
+
+		--handles Weaponskill events
     if spell.type == 'WeaponSkill' then
+	
         if lugra_ws:contains(spell.english) and (world.time >= (17*60) or world.time <= (7*60)) then
             equip(sets.Lugra)
         end
+		
         if spell.english == 'Blade: Yu' and (world.weather_element == 'Water' or world.day_element == 'Water') then
             equip(sets.Obi)
         end
+
+		if spell.english == 'Blade: Ei' and (world.weather_element == 'Dark' or world.day_element == 'Dark') then
+            equip(sets.Obi)
+        end
+
+		if spell.english == 'Blade: To' and (world.weather_element == 'Ice' or world.day_element == 'Ice') then
+            equip(sets.Obi)
+        end
+
+		if spell.english == 'Blade: Chi' and (world.weather_element == 'Earth' or world.day_element == 'Earth') then
+            equip(sets.Obi)
+        end
+		
     end
 end
 
--- Run after the general midcast() is done.
--- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
+
+		--Handles Elemental Ninjutsu Events
     if spellMap == 'ElementalNinjutsu' then
         if (spell.element == world.day_element or spell.element == world.weather_element) then
             equip(sets.Obi)
         end
+		
         if state.Buff.Futae then
             equip(sets.precast.JA['Futae'])
         end
+
 		if state.MagicBurst.value == true then
 			equip(sets.midcast.ElementalNinjutsu_MagicBurst)
 				if state.Buff.Futae then
@@ -950,37 +970,24 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 				end
 		end
     end
+	
 end
 
-
--- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_aftercast(spell, action, spellMap, eventArgs)
+
     if not spell.interrupted and spell.english == "Migawari: Ichi" then
         state.Buff.Migawari = true
     end
+
 end
 
--------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for non-casting events.
--------------------------------------------------------------------------------------------------------------------
-
--- Called when a player gains or loses a buff.
--- buff == buff gained or lost
--- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff, gain)
---    if buffactive['Reive Mark'] then
---        if gain then
---            equip(sets.Reive)
---            disable('neck')
---        else
---            enable('neck')
---        end
---    end
 
     if buff == "Migawari" and not gain then
         add_to_chat(61, "*** MIGAWARI DOWN ***")
     end
 
+		--Auto equips Cursna Recieved doom set when doom debuff is on
     if buff == "doom" then
         if gain then
             equip(sets.buff.Doom)
@@ -995,12 +1002,10 @@ function job_buff_change(buff, gain)
 end
 
 -------------------------------------------------------------------------------------------------------------------
--- User code that supplements standard library decisions.
+-- Code for Melee sets
 -------------------------------------------------------------------------------------------------------------------
 
-
--- Called by the 'update' self-command, for common needs.
--- Set eventArgs.handled to true if we don't want automatic equipping of gear.
+	--Gearinfo related function
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
     update_combat_form()
@@ -1039,31 +1044,28 @@ function update_combat_form()
 		equip(sets.Naegling) 
 	end
 	
-	if state.WeaponSet.value == 'Dagger' then
-		equip(sets.Dagger) 
+	if state.WeaponSet.value == 'Gletis_Knife' then
+		equip(sets.Gletis_Knife) 
 	end
-end
-
-function get_custom_wsmode(spell, action, spellMap)
-    local wsmode
-    if state.OffenseMode.value == 'MidAcc' or state.OffenseMode.value == 'HighAcc' then
-        wsmode = 'Acc'
-    end
-
-    return wsmode
+	
 end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
+
+
     if state.Buff.Migawari then
        idleSet = set_combine(idleSet, sets.buff.Migawari)
     end
+
+		--Allows CP back to stay on if toggled on
     if state.CP.current == 'on' then
         equip(sets.CP)
         disable('back')
     else
         enable('back')
     end
+	
     if state.Auto_Kite.value == true then
         if world.time >= (17*60) or world.time <= (7*60) then
             idleSet = set_combine(idleSet, sets.NightMovement)
@@ -1078,6 +1080,7 @@ end
 
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
+
     if state.Buff.Migawari then
         meleeSet = set_combine(meleeSet, sets.buff.Migawari)
     end
@@ -1148,6 +1151,7 @@ function check_moving()
     end
 end
 
+	--Determines Haste Group / Melee set for Gear Info
 function determine_haste_group()
     classes.CustomMeleeGroups:clear()
     if DW == true then
@@ -1165,6 +1169,7 @@ function determine_haste_group()
     end
 end
 
+	--Gear Info Functions
 function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
 end
@@ -1199,6 +1204,7 @@ function gearinfo(cmdParams, eventArgs)
         end
     end
 end
+
 -- Check for various actions that we've specified in user code as being used with TH gear.
 -- This will only ever be called if TreasureMode is not 'None'.
 -- Category and Param are as specified in the action event packet.
@@ -1212,6 +1218,7 @@ function th_action_check(category, param)
     end
 end
 
+	--Allows equipping of warp/exp rings without auto swapping back to current set
 function check_gear()
     if no_swap_gear:contains(player.equipment.left_ring) then
         disable("ring1")
@@ -1240,14 +1247,8 @@ windower.register_event('zone change',
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
-    -- Default macro set/book
-    if player.sub_job == 'DNC' then
         set_macro_page(1, 5)
-    elseif player.sub_job == 'THF' then
-        set_macro_page(1, 5)
-    else
-        set_macro_page(1, 5)
-    end
+
 end
 
 function set_lockstyle()
