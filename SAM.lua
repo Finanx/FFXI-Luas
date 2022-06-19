@@ -73,7 +73,7 @@ end
 function job_setup()
 
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
-					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring"}
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox's Ring"}
 
 	include('Mote-TreasureHunter')
 	
@@ -182,6 +182,8 @@ end
 
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
+
+	enable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
 
 	--Remove Global Samurai Binds
 	
@@ -298,48 +300,48 @@ function init_gear_sets()
 
     sets.precast.WS = {
 		ammo="Knobkierrie",
-		head={ name="Valorous Mask", augments={'Accuracy+13','Weapon skill damage +5%','STR+5',}},
-		body="Flamma Korazin +2",
-		hands={ name="Valorous Mitts", augments={'Weapon skill damage +4%','STR+8','Accuracy+15 Attack+15','Mag. Acc.+17 "Mag.Atk.Bns."+17',}},
-		legs="Hiza. Hizayoroi +2",
-		feet={ name="Valorous Greaves", augments={'Attack+30','Weapon skill damage +4%','DEX+3','Accuracy+15',}},
+		head={ name="Mpaca's Cap", augments={'Path: A',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Fotia Gorget",
-		waist="Fotia Belt",
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Ishvara Earring",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Thrud Earring",
+		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		left_ring="Epaminondas's Ring",
-		right_ring="Regal Ring",
+		right_ring="Niqmaddu Ring",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 		
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
 
     sets.precast.WS['Tachi: Ageha'] = {
-		ammo="Knobkierrie",
-		head="Flam. Zucchetto +2",
-		body="Flamma Korazin +2",
-		hands="Flam. Manopolas +2",
-		legs="Hiza. Hizayoroi +2",
-		feet="Flam. Gambieras +2",
-		neck="Fotia Gorget",
-		waist="Fotia Belt",
-		left_ear="Telos Earring",
+		ammo="Pemphredo Tathlum",
+		head={ name="Mpaca's Cap", augments={'Path: A',}},
+		body="Mpaca's Doublet",
+		hands="Mpaca's Gloves",
+		legs="Mpaca's Hose",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck="Sanctity Necklace",
+		waist="Eschan Stone",
+		left_ear="Crep. Earring",
 		right_ear="Digni. Earring",
-		left_ring="Rufescent Ring",
-		right_ring="Flamma Ring",
+		left_ring="Stikini Ring +1",
+		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 
     sets.precast.WS['Tachi: Jinpu'] = {
 		ammo="Knobkierrie",
-		head={ name="Valorous Mask", augments={'Accuracy+13','Weapon skill damage +5%','STR+5',}},
-		body={ name="Found. Breastplate", augments={'Accuracy+9','Mag. Acc.+8','"Mag.Atk.Bns."+12',}},
-		hands={ name="Founder's Gauntlets", augments={'STR+10','Attack+15','"Mag.Atk.Bns."+15','Phys. dmg. taken -5%',}},
-		legs="Hiza. Hizayoroi +2",
-		feet={ name="Founder's Greaves", augments={'VIT+10','Accuracy+15','"Mag.Atk.Bns."+15','Mag. Evasion+15',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Fotia Gorget",
-		waist="Fotia Belt",
+		waist="Orpheus's Sash",
 		left_ear="Friomisi Earring",
 		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		left_ring="Regal Ring",
+		left_ring="Epaminondas's Ring",
 		right_ring="Niqmaddu Ring",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 
@@ -356,17 +358,17 @@ function init_gear_sets()
     sets.idle = {
 		sub="Utu Grip",
 		ammo="Staunch Tathlum +1",
-		head="Flam. Zucchetto +2",
-		body="Ken. Samue",
-		hands="Kurys Gloves",
-		legs="Ken. Hakama",
-		feet={ name="Founder's Greaves", augments={'VIT+10','Accuracy+15','"Mag.Atk.Bns."+15','Mag. Evasion+15',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
 		waist="Flume Belt +1",
 		left_ear="Genmei Earring",
-		right_ear="Etiolation Earring",
+		right_ear="Sanare Earring",
 		left_ring="Defending Ring",
-		right_ring="Vocane Ring",
+		right_ring="Archon Ring",
 		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},}
     
 
@@ -381,67 +383,67 @@ function init_gear_sets()
     -- Delay 450 GK, 25 Save TP => 65 Store TP for a 5-hit (25 Store TP in gear)
 
     sets.engaged = {
-		ammo="Ginsen",
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head="Flam. Zucchetto +2",
-		body="Ken. Samue",
+		body={ name="Tatena. Harama. +1", augments={'Path: A',}},
 		hands="Wakido Kote +3",
-		legs="Ken. Hakama",
-		feet="Flam. Gambieras +2",
-		neck="Moonbeam Nodowa",
-		waist="Ioskeha Belt",
-		left_ear="Telos Earring",
-		right_ear="Dedition Earring",
-		left_ring="Flamma Ring",
-		right_ring="Niqmaddu Ring",
+		legs={ name="Tatena. Haidate +1", augments={'Path: A',}},
+		feet={ name="Tatena. Sune. +1", augments={'Path: A',}},
+		neck={ name="Vim Torque +1", augments={'Path: A',}},
+		waist="Ioskeha Belt +1",
+		left_ear={ name="Schere Earring", augments={'Path: A',}},
+		right_ear="Telos Earring",
+		left_ring="Niqmaddu Ring",
+		right_ring="Chirich Ring +1",
 		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},}
 
 	sets.engaged.Acc = {
-		ammo="Ginsen",
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head="Flam. Zucchetto +2",
-		body="Ken. Samue",
+		body={ name="Tatena. Harama. +1", augments={'Path: A',}},
 		hands="Wakido Kote +3",
-		legs="Ken. Hakama",
-		feet="Flam. Gambieras +2",
-		neck="Moonbeam Nodowa",
-		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
-		left_ear="Telos Earring",
-		right_ear="Mache Earring +1",
-		left_ring="Flamma Ring",
-		right_ring="Regal Ring",
+		legs={ name="Tatena. Haidate +1", augments={'Path: A',}},
+		feet={ name="Tatena. Sune. +1", augments={'Path: A',}},
+		neck={ name="Vim Torque +1", augments={'Path: A',}},
+		waist="Ioskeha Belt +1",
+		left_ear={ name="Schere Earring", augments={'Path: A',}},
+		right_ear="Telos Earring",
+		left_ring="Niqmaddu Ring",
+		right_ring="Chirich Ring +1",
 		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},}
 		
 	sets.engaged.Crit = {
-		ammo="Ginsen",
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head="Flam. Zucchetto +2",
-		body="Ken. Samue",
+		body={ name="Tatena. Harama. +1", augments={'Path: A',}},
 		hands="Wakido Kote +3",
-		legs="Ken. Hakama",
-		feet="Flam. Gambieras +2",
-		neck="Moonbeam Nodowa",
-		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
-		left_ear="Telos Earring",
-		right_ear="Mache Earring +1",
-		left_ring="Flamma Ring",
-		right_ring="Regal Ring",
+		legs={ name="Tatena. Haidate +1", augments={'Path: A',}},
+		feet={ name="Tatena. Sune. +1", augments={'Path: A',}},
+		neck={ name="Vim Torque +1", augments={'Path: A',}},
+		waist="Ioskeha Belt +1",
+		left_ear={ name="Schere Earring", augments={'Path: A',}},
+		right_ear="Telos Earring",
+		left_ring="Niqmaddu Ring",
+		right_ring="Chirich Ring +1",
 		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},}
 		
 		
    
 	sets.engaged.Hybrid = {
-		ammo="Staunch Tathlum +1",																											--3%
-		head="Flam. Zucchetto +2",
-		body="Ken. Samue",
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},																					--7%
+		body={ name="Nyame Mail", augments={'Path: B',}},																					--9%
 		hands="Wakido Kote +3",
-		legs="Ken. Hakama",
-		feet="Flam. Gambieras +2",
-		neck={ name="Loricate Torque +1", augments={'Path: A',}},																											--6%
-		waist="Flume Belt +1",																												--4%PDT
-		left_ear="Telos Earring",
-		right_ear="Genmei Earring",																											--2%PDT
-		left_ring="Defending Ring",																											--10%
-		right_ring="Vocane Ring",																											--7%
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},																				--8%
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},																				--7%
+		neck={ name="Vim Torque +1", augments={'Path: A',}},
+		waist="Ioskeha Belt +1",
+		left_ear={ name="Schere Earring", augments={'Path: A',}},
+		right_ear="Telos Earring",
+		left_ring="Niqmaddu Ring",
+		right_ring="Defending Ring",																										--10%
 		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},}	--5%
-		--31% DT + 6% PDT
+		--46% DT + 6% PDT
 	
 	sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)	
 	

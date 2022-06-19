@@ -72,7 +72,7 @@ end
 function job_setup()
 
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
-					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring"}
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox's Ring"}
 
     wyv_breath_spells = S{'Dia', 'Poison', 'Blaze Spikes', 'Protect', 'Sprout Smack', 'Head Butt', 'Cocoon',
         'Barfira', 'Barblizzara', 'Baraera', 'Barstonra', 'Barthundra', 'Barwatera'}
@@ -178,6 +178,8 @@ function user_setup()
 end
 
 function user_unload()
+
+	enable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
 
 	--Remove Global Dragoon Binds
 	
@@ -329,6 +331,14 @@ function init_gear_sets()
     sets.precast.WS['Thunder Thrust'] = {}
 
     sets.precast.WS['Leg Sweep'] = {}
+	
+	    sets.precast.WS['Stardiver'] = {}
+	
+    sets.precast.WS['Stardiver'].Uncapped = {}
+	
+	    sets.precast.WS['Stardiver'] = {}
+	
+    sets.precast.WS['Stardiver'].Uncapped = {}
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
@@ -377,8 +387,7 @@ function init_gear_sets()
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
-        waist="Gishdubar Sash", --10
-        }
+        waist="Gishdubar Sash",} --10
 
     sets.TreasureHunter = {
 		ammo="Per. Lucky Egg", --TH1

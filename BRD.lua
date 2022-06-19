@@ -90,7 +90,7 @@ function job_setup()
     state.Buff['Pianissimo'] = buffactive['pianissimo'] or false
 
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
-					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring"}
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox's Ring"}
 
     lockstyleset = 15
 end
@@ -231,6 +231,8 @@ end
 
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
+
+	enable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
 
 	--Remove Global Bard Binds
 
@@ -819,7 +821,7 @@ function init_gear_sets()
 		main="Naegling",
 		sub="Genmei Shield",
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head={ name="Bunzi's Hat", augments={'Path: A',}},
+		head="Aya. Zucchetto +2",
 		body="Ayanmo Corazza +2",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
@@ -836,7 +838,7 @@ function init_gear_sets()
 		main="Naegling",
 		sub="Genmei Shield",
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head={ name="Bunzi's Hat", augments={'Path: A',}},
+		head="Aya. Zucchetto +2",
 		body="Ayanmo Corazza +2",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
@@ -857,7 +859,7 @@ function init_gear_sets()
 		main="Naegling",
 		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head={ name="Bunzi's Hat", augments={'Path: A',}},
+		head="Aya. Zucchetto +2",
 		body="Ayanmo Corazza +2",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
@@ -875,7 +877,7 @@ function init_gear_sets()
 		main="Naegling",
 		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head={ name="Bunzi's Hat", augments={'Path: A',}},
+		head="Aya. Zucchetto +2",
 		body="Ayanmo Corazza +2",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
@@ -906,7 +908,7 @@ function init_gear_sets()
 		main="Naegling",
 		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head={ name="Bunzi's Hat", augments={'Path: A',}},
+		head="Aya. Zucchetto +2",
 		body="Ayanmo Corazza +2",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
@@ -924,7 +926,7 @@ function init_gear_sets()
 		main="Naegling",
 		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head={ name="Bunzi's Hat", augments={'Path: A',}},
+		head="Aya. Zucchetto +2",
 		body="Ayanmo Corazza +2",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
@@ -982,9 +984,9 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.TreasureHunter = {
-		head="Wh. Rarab Cap +1", --TH1
+		hands={ name="Chironic Gloves", augments={'MND+4','Phys. dmg. taken -2%','"Treasure Hunter"+1','Accuracy+5 Attack+5',}},	--TH1
 		body="Volte Jupon",		--TH2
-		waist="Chaac Belt",} --TH+1
+		waist="Chaac Belt",} --TH1
 
 
     sets.SongDWDuration = {main="Carnwenhan", sub="Kali"}

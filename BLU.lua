@@ -186,7 +186,7 @@ function job_setup()
         'Polar Roar','Pyric Bulwark','Tearing Gust','Thunderbolt','Tourbillion','Uproot'}
 		
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
-					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring"}
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox's Ring"}
 
     include('Mote-TreasureHunter')
 
@@ -212,7 +212,7 @@ function user_setup()
     state.CastingMode:options('Normal')
     state.IdleMode:options('Normal', 'Refresh')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Maxentius'}
+	state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Maxentius', 'Magic_Accuracy'}
 	state.EvasiveMode = M(false, 'EvasiveMode')
 
     state.CP = M(false, "Capacity Points Mode")
@@ -233,6 +233,7 @@ function user_setup()
 	
 	send_command('bind @1 gs c set WeaponSet Naegling')
 	send_command('bind @2 gs c set WeaponSet Maxentius')
+	send_command('bind @3 gs c set WeaponSet Magic_Accuracy')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
@@ -301,6 +302,8 @@ end
 
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
+
+	enable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
 
 	--Remove Global Blue Mage binds
 
@@ -800,15 +803,15 @@ function init_gear_sets()
 
     sets.midcast['Blue Magic'].MagicAccuracy = {
 		ammo="Pemphredo Tathlum",
-		head={ name="Amalric Coif +1", augments={'INT+12','Mag. Acc.+25','Enmity-6',}},
+		head="Assim. Keffiyeh +3",
 		body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		hands="Malignance Gloves",
-		legs="Malignance Tights",
+		legs="Assim. Shalwar +3",
 		feet="Malignance Boots",
 		neck="Erra Pendant",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
-		left_ear="Gwati Earring",
-		right_ear="Digni. Earring",
+		left_ear="Regal Earring",
+		right_ear="Crep. Earring",
 		left_ring="Stikini Ring +1",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Rosmerta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},}
@@ -1352,6 +1355,7 @@ function init_gear_sets()
 
 	sets.Naegling = {main="Naegling", sub="Zantetsuken"}
 	sets.Maxentius = {main="Kaja Rod", sub="Bunzi's Rod"}
+	sets.Magic_Accuracy = {main="Bunzi's Rod", sub="Naegling"}
     
 
 end
@@ -1453,6 +1457,9 @@ function check_weaponset()
 		end
 		if state.WeaponSet.value == 'Maxentius' then
 			equip(sets.Maxentius)
+		end
+		if state.WeaponSet.value == 'Magic_Accuracy' then
+			equip(sets.Magic_Accuracy)
 		end
 end
 

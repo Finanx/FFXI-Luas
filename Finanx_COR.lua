@@ -79,7 +79,7 @@ end
 function job_setup()
 	
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
-					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring",
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox's Ring",
 					"Dev. Bul. Pouch", "Chr. Bul. Pouch", "Liv. Bul. Pouch"}
 
     -- Whether to use Luzaf's Ring
@@ -121,7 +121,7 @@ function user_setup()
 	gear.RAbullet = "Chrono Bullet"
 	gear.WSbullet = "Chrono Bullet"
 	gear.WSAccbullet = "Devastating Bullet"
-    gear.MAbullet = "Devastating Bullet"
+    gear.MAbullet = "Living Bullet"
     gear.QDbullet = "Devastating Bullet"
     options.ammo_warning_limit = 10
 	
@@ -221,6 +221,8 @@ end
 
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
+
+	enable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
 
 	--Remove Global Corsair Binds
 	
@@ -400,52 +402,52 @@ function init_gear_sets()
 		
 	sets.precast.RA = {
 		ammo=gear.RAbullet,
-		head={ name="Taeon Chapeau", augments={'"Snapshot"+5','"Snapshot"+5',}},										--10% SS
-		body={ name="Taeon Tabard", augments={'"Snapshot"+5','"Snapshot"+5',}},											--10% SS
-		hands={ name="Carmine Fin. Ga. +1", augments={'Rng.Atk.+20','"Mag.Atk.Bns."+12','"Store TP"+6',}},				--8%  SS / 11% RS
-		legs={ name="Adhemar Kecks +1", augments={'AGI+12','"Rapid Shot"+13','Enmity-6',}},								--10% SS / 13% RS
-		feet="Meg. Jam. +2",																							--10% SS
-		neck={ name="Comm. Charm +2", augments={'Path: A',}},															--4%  SS
-		waist="Yemaya Belt",																							--0%  SS / 5%  RS
+		head="Chass. Tricorne +1",
+		body="Oshosi Vest +1",
+		hands={ name="Carmine Fin. Ga. +1", augments={'Rng.Atk.+20','"Mag.Atk.Bns."+12','"Store TP"+6',}},
+		legs={ name="Adhemar Kecks +1", augments={'AGI+12','"Rapid Shot"+13','Enmity-6',}},
+		feet="Meg. Jam. +2",
+		neck={ name="Comm. Charm +2", augments={'Path: A',}},
+		waist="Impulse Belt",
 		left_ear="Genmei Earring",
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
 		left_ring="Defending Ring",
-		right_ring="Vocane Ring",
-		back={ name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10',}}, 					--10% SS
+		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		back={ name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10',}},
 		}		--10% JP + 62% Gear SS / 30% Job Trait + 29% Gear RS
 		--72% SS 59% RS
 
 	sets.precast.RA.Flurry1 = {
 		ammo=gear.RAbullet,
-		head="Chass. Tricorne +1",																						--0%  SS / 14% RS
-		body="Laksa. Frac +3",																							--0%  SS / 20% RS
-		hands={ name="Carmine Fin. Ga. +1", augments={'Rng.Atk.+20','"Mag.Atk.Bns."+12','"Store TP"+6',}},				--8%  SS / 11% RS
-		legs={ name="Adhemar Kecks +1", augments={'AGI+12','"Rapid Shot"+13','Enmity-6',}},								--10% SS / 13% RS
-		feet="Meg. Jam. +2",																							--10% SS
-		neck={ name="Comm. Charm +2", augments={'Path: A',}},															--4%  SS
-		waist="Impulse Belt",																							--3%  SS
+		head="Chass. Tricorne +1",
+		body="Laksa. Frac +3",
+		hands={ name="Carmine Fin. Ga. +1", augments={'Rng.Atk.+20','"Mag.Atk.Bns."+12','"Store TP"+6',}},
+		legs={ name="Adhemar Kecks +1", augments={'AGI+12','"Rapid Shot"+13','Enmity-6',}},
+		feet="Meg. Jam. +2",
+		neck={ name="Comm. Charm +2", augments={'Path: A',}},
+		waist="Impulse Belt",
 		left_ear="Genmei Earring",
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
 		left_ring="Defending Ring",
-		right_ring="Vocane Ring",
-		back={ name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10',}}, 					--10% SS
+		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		back={ name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10',}},
 		}		--10% JP + 15% Flurry1 + 45% Gear SS / 30% Job Trait + 58% Gear RS
 		--70% SS 88% RS
 
 	sets.precast.RA.Flurry2 = {
 		ammo=gear.RAbullet,
-		head="Chass. Tricorne +1",																						--0%  SS / 14% RS
-		body="Laksa. Frac +3",																							--0%  SS / 20% RS
-		hands={ name="Carmine Fin. Ga. +1", augments={'Rng.Atk.+20','"Mag.Atk.Bns."+12','"Store TP"+6',}},				--8%  SS / 11% RS
-		legs={ name="Adhemar Kecks +1", augments={'AGI+12','"Rapid Shot"+13','Enmity-6',}},								--10% SS / 13% RS
-		feet={ name="Pursuer's Gaiters", augments={'Rng.Acc.+10','"Rapid Shot"+10','"Recycle"+15',}},					--0%  SS / 10% RS
-		neck={ name="Comm. Charm +2", augments={'Path: A',}},															--4%  SS
-		waist="Yemaya Belt",																							--0%  SS / 5%  RS
+		head="Chass. Tricorne +1",
+		body="Laksa. Frac +3",
+		hands={ name="Carmine Fin. Ga. +1", augments={'Rng.Atk.+20','"Mag.Atk.Bns."+12','"Store TP"+6',}},
+		legs={ name="Adhemar Kecks +1", augments={'AGI+12','"Rapid Shot"+13','Enmity-6',}},
+		feet={ name="Pursuer's Gaiters", augments={'Rng.Acc.+10','"Rapid Shot"+10','"Recycle"+15',}},
+		neck={ name="Comm. Charm +2", augments={'Path: A',}},
+		waist="Yemaya Belt",
 		left_ear="Genmei Earring",
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
 		left_ring="Defending Ring",
-		right_ring="Vocane Ring",
-		back={ name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10',}}, 					--10% SS
+		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		back={ name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10',}},
 		}		--10% JP + 30% Flurry2 + 32% Gear SS / 30% Job Trait + 73% Gear RS
 		--72% SS 103% RS	
 			
@@ -594,13 +596,13 @@ function init_gear_sets()
 		
 	sets.precast.WS['Cyclone'] = {
 		ammo=gear.MAbullet,
-		head="Wh. Rarab Cap +1",
-		body={ name="Lanun Frac +3", augments={'Enhances "Loaded Deck" effect',}},
+		head={ name="Herculean Helm", augments={'Pet: Accuracy+21 Pet: Rng. Acc.+21','"Subtle Blow"+3','Weapon skill damage +7%','Mag. Acc.+10 "Mag.Atk.Bns."+10',}},
+		body="Volte Jupon",
 		hands={ name="Herculean Gloves", augments={'Weapon skill damage +1%','Magic dmg. taken -2%','"Treasure Hunter"+2','Accuracy+12 Attack+12',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Lanun Bottes +3", augments={'Enhances "Wild Card" effect',}},
 		neck="Sanctity Necklace",
-		waist="Chaac Belt",
+		waist="Eschan Stone",
 		left_ear="Friomisi Earring",
 		right_ear="Hecate's Earring",
 		left_ring="Dingir Ring",
@@ -1028,9 +1030,8 @@ function init_gear_sets()
 
 
     sets.TreasureHunter = {
-		head="Wh. Rarab Cap +1", --TH1
 		body="Volte Jupon",		--TH2
-		waist="Chaac Belt",} --TH+1
+		hands={ name="Herculean Gloves", augments={'Weapon skill damage +1%','Magic dmg. taken -2%','"Treasure Hunter"+2','Accuracy+12 Attack+12',}},}	--TH2
 
     sets.buff.Doom = {
 		neck="Nicander's Necklace",

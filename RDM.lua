@@ -42,7 +42,7 @@
 --  Job Specific Keybinds (Red Mage Binds)
 -------------------------------------------------------------------------------------------------------------------
 --
---	Modes:			[ ALT + ` ]				Toggles Magic Burst Mode
+--	Modes:			[ Windows + M ]			Toggles Magic Burst Mode
 --					[ Windows + 1 ]			Sets Weapon to Naegling then locks Main/Sub Slots
 --					[ Windows + 2 ]			Sets Weapon to Crocea Mors then locks Main/Sub Slots
 --					[ Windows + 3 ]			Sets Weapon to Levante then locks Main/Sub Slots
@@ -89,7 +89,7 @@ function job_setup()
     state.Buff.Stymie = buffactive.Stymie or false
 
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
-					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring"}
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox's Ring",}
 
     skill_spells = S{
         'Temper', 'Temper II', 'Enfire', 'Enfire II', 'Enblizzard', 'Enblizzard II', 'Enaero', 'Enaero II',
@@ -124,7 +124,7 @@ function user_setup()
 	
     --Global Red Mage binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)	
 
-    send_command('bind !` gs c toggle MagicBurst')
+    send_command('bind @m gs c toggle MagicBurst')
 	send_command('bind @r gs c toggle RangeLock')
 	send_command('bind @t gs c cycle TreasureMode')
     send_command('bind ^` input /ja "Composure" <me>')
@@ -220,6 +220,8 @@ end
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
 
+	enable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
+
 	--Remove Global Red Mage Binds
 
 	send_command('unbind !`')	
@@ -229,6 +231,7 @@ function user_unload()
 	send_command('unbind ^`')
 	send_command('unbind ^-')
 	send_command('unbind ^=')
+    send_command('unbind @m')
 	
 	--Remove Weapon Set binds
 	
@@ -444,22 +447,6 @@ function init_gear_sets()
 		
 	sets.precast.WS['Death Blossom'] = sets.precast.WS['Savage Blade']
 		
-	sets.precast.WS['Circle Blade'] = {
-		ammo="Regal Gem",
-		head="Wh. Rarab Cap +1",
-		body="Volte Jupon",
-		hands={ name="Chironic Gloves", augments={'MND+4','Phys. dmg. taken -2%','"Treasure Hunter"+1','Accuracy+5 Attack+5',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Chironic Slippers", augments={'Enmity-3','STR+8','Weapon skill damage +6%','Accuracy+10 Attack+10','Mag. Acc.+3 "Mag.Atk.Bns."+3',}},
-		neck="Fotia Gorget",
-		waist="Chaac Belt",
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Regal Earring",
-		left_ring="Epaminondas's Ring",
-		right_ring="Rufescent Ring",
-		back={ name="Sucellos's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-
-
 	sets.precast.WS['Black Halo'] = {
 		ammo="Regal Gem",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
@@ -727,6 +714,23 @@ function init_gear_sets()
 		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring +1",
 		back={ name="Ghostfyre Cape", augments={'Enfb.mag. skill +1','Enha.mag. skill +10','Mag. Acc.+5','Enh. Mag. eff. dur. +18',}},}
+		
+	sets.midcast['Aquaveil'] = {
+		main="Crocea Mors",
+		sub="Ammurapi Shield",
+		ammo="Sapience Orb",
+		head={ name="Amalric Coif +1", augments={'INT+12','Mag. Acc.+25','Enmity-6',}},
+		body={ name="Viti. Tabard +3", augments={'Enhances "Chainspell" effect',}},
+		hands="Atrophy Gloves +3",
+		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
+		feet="Leth. Houseaux +1",
+		neck="Dls. Torque +2",
+		waist="Embla Sash",
+		left_ear="Malignance Earring",
+		right_ear="Loquac. Earring",
+		left_ring="Kishar Ring",
+		right_ring="Prolix Ring",
+		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
 
     sets.midcast.EnhancingSkill = {
 		main={ name="Crocea Mors", augments={'Path: C',}},
@@ -916,10 +920,10 @@ function init_gear_sets()
 	sets.midcast['Dia III'] = {
 		main="Crocea Mors",
 		sub="Ammurapi Shield",
-		ammo="Per. Lucky Egg",
+		ammo="Regal Gem",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 		body="Volte Jupon",	
-		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		hands={ name="Chironic Gloves", augments={'MND+4','Phys. dmg. taken -2%','"Treasure Hunter"+1','Accuracy+5 Attack+5',}},
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
@@ -933,10 +937,10 @@ function init_gear_sets()
 	sets.midcast['Diaga'] = {
 		main="Crocea Mors",
 		sub="Ammurapi Shield",
-		ammo="Per. Lucky Egg",
+		ammo="Regal Gem",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 		body="Volte Jupon",	
-		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		hands={ name="Chironic Gloves", augments={'MND+4','Phys. dmg. taken -2%','"Treasure Hunter"+1','Accuracy+5 Attack+5',}},
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
@@ -1338,7 +1342,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
 	sets.TreasureHunter = {
-		head="Wh. Rarab Cap +1", 	--TH1
+		hands={ name="Chironic Gloves", augments={'MND+4','Phys. dmg. taken -2%','"Treasure Hunter"+1','Accuracy+5 Attack+5',}}, 	--TH1
 		body="Volte Jupon",			--TH2
 		waist="Chaac Belt",} 	 	--TH1
 

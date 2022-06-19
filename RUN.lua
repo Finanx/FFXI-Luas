@@ -81,7 +81,7 @@ end
 function job_setup()
 
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
-					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring"}
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox's Ring"}
 
 	include('Mote-TreasureHunter')
 
@@ -197,6 +197,8 @@ function user_setup()
 end
 
 function user_unload()
+
+	enable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
     
 	--Remove Global Rune Fencer Binds
 	
@@ -960,7 +962,7 @@ function init_gear_sets()
     sets.Epeolatry = {main={ name="Epeolatry", augments={'Path: A',}},}
     sets.Aettir = {main="Aettir"}
 	sets.Lycurgos = {main="Kaja Chopper"}
-	sets.Hepatizon_Axe = {main="Hepatizon Axe"}
+	sets.Hepatizon_Axe = {main="Hepatizon Axe +1"}
 	
 	--Grip Sets
 	

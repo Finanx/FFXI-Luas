@@ -82,7 +82,7 @@ end
 function job_setup()
 	
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
-					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring"}
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox's Ring"}
 
 	include('Mote-TreasureHunter')
 
@@ -208,6 +208,8 @@ end
 
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
+
+	enable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
 
 	--Remove Global Warrior Binds
 	
@@ -496,11 +498,11 @@ function init_gear_sets()
 	
 	sets.precast.WS['Savage Blade'] = {
 		ammo="Knobkierrie",
-		head="Nyame Helm",
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Nyame Gauntlets",
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Nyame Sollerets",
+		head="Sakpata's Helm",
+		body={ name="Sakpata's Plate", augments={'Path: A',}},
+		hands="Sakpata's Gauntlets",
+		legs="Sakpata's Cuisses",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Caro Necklace",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear="Thrud Earring",
@@ -549,12 +551,11 @@ function init_gear_sets()
 	
 	--Club Weapon Skills
 	
-	sets.precast.WS['Black Halo'] = sets.precast.WS['Savage Blade']
-	
+	sets.precast.WS['Black Halo'] = sets.precast.WS['Savage Blade']	
 	sets.precast.WS['Black Halo'].Uncapped = sets.precast.WS['Savage Blade'].Uncapped
 	
-	sets.precast.WS['Judgment'] = sets.precast.WS['Black Halo']	
-	sets.precast.WS['Judgment'].Uncapped = sets.precast.WS['Black Halo'].Uncapped
+	sets.precast.WS['Judgment'] = sets.precast.WS['Savage Blade']	
+	sets.precast.WS['Judgment'].Uncapped = sets.precast.WS['Savage Blade'].Uncapped
 		
 	--Axe Weapon Skills
 	

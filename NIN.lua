@@ -42,7 +42,8 @@
 --  Job Specific Keybinds (Ninja Binds)
 -------------------------------------------------------------------------------------------------------------------
 --
---	Modes:			[ Windows + 1 ]			Sets Weapon to Physical_Katana
+--	Modes:			[ Windows + m ]			Toggles Magic Burst Mode
+--					[ Windows + 1 ]			Sets Weapon to Physical_Katana
 --					[ Windows + 2 ]			Sets Weapon to Magical_Katana
 --					[ Windows + 3 ]			Sets Weapon to Naegling
 --					[ Windows + 4 ]			Sets Weapon to Gleti's_Knife
@@ -85,7 +86,7 @@ function job_setup()
     state.Buff.Sange = buffactive.Sange or false
 
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
-					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox/'s Ring"}
+					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox's Ring"}
 
     include('Mote-TreasureHunter')
 
@@ -129,7 +130,7 @@ function user_setup()
     send_command('bind @c gs c toggle CP')
 	send_command('bind ^` input /ja "Yonin" <me>')
 	send_command('bind !` input /ja "Innin" <me>')
-	send_command('bind @` gs c toggle MagicBurst')
+	send_command('bind @m gs c toggle MagicBurst')
 	
 	--Weapon set Binds
 
@@ -229,15 +230,9 @@ end
 
 function user_unload()
 
-	--Remove Global Ninja Binds
+	enable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
 	
-	send_command('bind @t gs c cycle TreasureMode')
-	send_command('bind @w gs c toggle WeaponLock')
-    send_command('bind @c gs c toggle CP')
-	send_command('bind ^` input /ja "Yonin" <me>')
-	send_command('bind !` input /ja "Innin" <me>')
-	send_command('bind @` gs c toggle MagicBurst')
-	
+	--Remove Global Ninja Binds	
 	
     send_command('unbind @t')
     send_command('unbind @w')
@@ -245,7 +240,7 @@ function user_unload()
 	send_command('unbind ^`')
 	send_command('unbind !`')
 	send_command('unbind @`')
-	
+    send_command('unbind @m')
 	
 	--Remove Dual Box Binds
 	
