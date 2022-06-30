@@ -151,7 +151,7 @@ function user_setup()
 	send_command('bind ^numpad7 input /ws "Herculean Slash" <t>')
 	
 	send_command('bind !numpad1 input /ws "Upheaval" <t>')
-	send_command('bind !numpad2 input /ws "Steel Cyclone" <t>')
+	send_command('bind !numpad2 input /ws "Steel Cyclone" <t>; wait 1; input /p Steel Cyclone just used it')
 	send_command('bind !numpad3 input /ws "Armor Break" <t>')
 	send_command('bind !numpad4 input /ws "Fell Cleave" <t>')
 	send_command('bind !numpad5 input /ws "Weapon Break" <t>')
@@ -429,7 +429,7 @@ function init_gear_sets()
     sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
 	
     sets.precast.JA['Gambit'] = {hands="Runeist's Mitons +3"}
-    sets.precast.JA['Rayke'] = {feet="Futhark Boots"}
+    sets.precast.JA['Rayke'] = {feet="Futhark Boots +3"}
     
 	sets.precast.JA['Elemental Sforzo'] = {
 		ammo="Staunch Tathlum +1",

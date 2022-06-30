@@ -108,7 +108,7 @@ function user_setup()
     state.IdleMode:options('Normal', 'Refresh')
 	state.TreasureMode:options('Tag', 'None')
 	state.SongMode = M{['description']='Song Mode', 'None', 'Placeholder'}
-	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Carnwenhan', 'Twashtar', 'Tauret'}
+	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Carnwenhan', 'Twashtar', 'Tauret', 'Xoanon'}
 
     state.CP = M(false, "Capacity Points Mode")
 	
@@ -161,6 +161,7 @@ function user_setup()
 	send_command('bind @2 gs c set WeaponSet Carnwenhan')
 	send_command('bind @3 gs c set WeaponSet Tauret')
 	--send_command('bind @4 gs c set WeaponSet Twashtar')
+	send_command('bind @5 gs c set WeaponSet Xoanon')
 	send_command('bind @w input /equip sub; gs c set WeaponSet None')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -171,6 +172,9 @@ function user_setup()
 	send_command('bind ^numpad4 input /ws "Savage Blade" <t>')
 	send_command('bind ^numpad5 input /ws "Aeolian Edge" <t>')
     send_command('bind ^numpad6 input /ws "Extenterator" <t>')
+	send_command('bind ^numpad7 input /ws "Retribution" <t>')
+	send_command('bind ^numpad9 input /ws "Shell Crusher" <t>')
+	
 	
 	--Song Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -399,12 +403,25 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = {}
+    sets.precast.WS = {
+		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Bihu Jstcorps. +3", augments={'Enhances "Troubadour" effect',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck="Caro Necklace",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Ishvara Earring",
+		left_ring="Epaminondas's Ring",
+		right_ring="Rufescent Ring",
+		back={ name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     
 	sets.precast.WS['Evisceration'] = {
-		range={ name="Linos", augments={'Mag. Evasion+15','Phys. dmg. taken -4%','HP+20',}},
+		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
 		body="Ayanmo Corazza +2",
 		hands="Nyame Gauntlets",
@@ -419,7 +436,7 @@ function init_gear_sets()
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+4','Crit.hit rate+10',}},}
 
     sets.precast.WS['Exenterator'] = {
-		range={ name="Linos", augments={'Mag. Evasion+15','Phys. dmg. taken -4%','HP+20',}},
+		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
 		body="Ayanmo Corazza +2",
 		hands="Nyame Gauntlets",
@@ -434,7 +451,7 @@ function init_gear_sets()
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+4','Crit.hit rate+10',}},}
 
     sets.precast.WS['Mordant Rime'] = {
-		range={ name="Linos", augments={'Mag. Evasion+15','Phys. dmg. taken -4%','HP+20',}},
+		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
 		body="Ayanmo Corazza +2",
 		hands="Nyame Gauntlets",
@@ -449,7 +466,7 @@ function init_gear_sets()
 		back={ name="Intarabus's Cape", augments={'CHR+20','Accuracy+20 Attack+20','CHR+10','Weapon skill damage +10%',}},}
 
     sets.precast.WS['Rudra\'s Storm'] = {
-		range={ name="Linos", augments={'Mag. Evasion+15','Phys. dmg. taken -4%','HP+20',}},
+		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
 		body="Ayanmo Corazza +2",
 		hands="Nyame Gauntlets",
@@ -462,6 +479,21 @@ function init_gear_sets()
 		left_ring="Epaminondas's Ring",
 		right_ring="Ilabrat Ring",
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+4','Crit.hit rate+10',}},}
+		
+    sets.precast.WS['Aeolian Edge'] = {
+		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck="Baetyl Pendant",
+		waist="Orpheus's Sash",
+		left_ear="Regal Earring",
+		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		left_ring="Epaminondas's Ring",
+		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		back={ name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 
     sets.precast.WS['Savage Blade'] = {
 		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
@@ -477,6 +509,38 @@ function init_gear_sets()
 		left_ring="Epaminondas's Ring",
 		right_ring="Rufescent Ring",
 		back={ name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		
+	sets.precast.WS['Shell Crusher'] = {
+		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
+		head="Aya. Zucchetto +2",
+		body="Ayanmo Corazza +2",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs="Aya. Cosciales +2",
+		feet="Aya. Gambieras +2",
+		neck="Sanctity Necklace",
+		waist={ name="Acuity Belt +1", augments={'Path: A',}},
+		left_ear="Digni. Earring",
+		right_ear="Crep. Earring",
+		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		right_ring="Rufescent Ring",
+		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}
+		
+	sets.precast.WS['Retribution'] = {
+		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Bihu Jstcorps. +3", augments={'Enhances "Troubadour" effect',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck="Caro Necklace",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Ishvara Earring",
+		left_ring="Epaminondas's Ring",
+		right_ring="Rufescent Ring",
+		back={ name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		
+	
 
 
     ------------------------------------------------------------------------------------------------
@@ -547,7 +611,7 @@ function init_gear_sets()
     sets.midcast.SongEnfeeble = {
 		main="Daybreak",
 		sub="Ammurapi Shield",
-		range={ name="Linos", augments={'All Songs+2',}},
+		range="Gjallarhorn",
 		head="Brioso Roundlet +2",
 		body="Brioso Justau. +2",
 		hands="Inyan. Dastanas +2",
@@ -565,7 +629,7 @@ function init_gear_sets()
     sets.midcast.SongEnfeebleAcc = {
 		main="Daybreak",
 		sub="Ammurapi Shield",
-		range={ name="Linos", augments={'All Songs+2',}},
+		range="Gjallarhorn",
 		head="Brioso Roundlet +2",
 		body="Brioso Justau. +2",
 		hands="Inyan. Dastanas +2",
@@ -585,7 +649,7 @@ function init_gear_sets()
 	sets.midcast.Foe = {
 		main="Daybreak",
 		sub="Ammurapi Shield",
-		range={ name="Linos", augments={'All Songs+2',}},
+		range="Gjallarhorn",
 		head="Brioso Roundlet +2",
 		body="Brioso Justau. +2",
 		hands="Brioso Cuffs +3",
@@ -602,7 +666,7 @@ function init_gear_sets()
 	sets.midcast.FoeResist	= {
 		main="Daybreak",
 		sub="Ammurapi Shield",
-		range={ name="Linos", augments={'All Songs+2',}},
+		range="Gjallarhorn",
 		head="Brioso Roundlet +2",
 		body="Brioso Justau. +2",
 		hands="Brioso Cuffs +3",
@@ -992,7 +1056,7 @@ function init_gear_sets()
     sets.SongDWDuration = {main="Carnwenhan", sub="Kali"}
 	sets.SongSWDuration = {main="Carnwenhan", sub="Ammurapi Shield"}
 	sets.Dummy = {range="Daurdabla",}
-	sets.Effect = {range={ name="Linos", augments={'All Songs+2',}},}
+	sets.Effect = {range="Gjallarhorn",}
 
 
     sets.buff.Doom = {
@@ -1014,6 +1078,8 @@ function init_gear_sets()
 	
 	sets.Tauret = {main="Tauret", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
 	sets.Tauret.SW = {main="Tauret", sub="Genmei Shield"}
+	
+	sets.Xoanon = {main="Kaja Staff", sub="Enki Strap"}
 
 end
 
@@ -1160,6 +1226,12 @@ function job_state_change(stateField, newValue, oldValue)
 			equip(sets.Tauret.SW)
 			disable('main','sub')
 		end
+	end
+	
+	if state.WeaponSet.value == 'Xoanon' then
+			enable('main','sub')
+			equip(sets.Xoanon)
+			disable('main','sub')
 	end
 	
 	if state.WeaponSet.value == 'None' then

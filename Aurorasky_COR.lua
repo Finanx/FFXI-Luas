@@ -121,7 +121,7 @@ function user_setup()
 	gear.RAbullet = "Eminent Bullet"
 	gear.WSbullet = "Eminent Bullet"
 	gear.WSAccbullet = "Eminent Bullet"
-    gear.MAbullet = "Devastating Bullet"
+    gear.MAbullet = "Orichalc. Bullet"
     gear.QDbullet = "Orichalc. Bullet"
     options.ammo_warning_limit = 10
 	

@@ -111,7 +111,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'MACC')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Crocea_Mors', 'Levante', 'Tauret', 'Maxentius'}
+	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Crocea_Mors', 'Levante', 'Tauret', 'Maxentius', 'Murgleis'}
 
 	state.RangeLock = M(false, 'Range Lock')
     state.MagicBurst = M(false, 'Magic Burst')
@@ -138,6 +138,7 @@ function user_setup()
 	send_command('bind @3 gs c set WeaponSet Levante')
 	send_command('bind @4 gs c set WeaponSet Tauret')
 	send_command('bind @5 gs c set WeaponSet Maxentius')
+	send_command('bind @6 gs c set WeaponSet Murgleis')
 	send_command('bind @w input /equip sub; gs c set WeaponSet None')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -432,9 +433,9 @@ function init_gear_sets()
 
     sets.precast.WS['Savage Blade'] = {
 		ammo="Aurgelmir Orb +1",
-		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Atrophy Gloves +3",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
@@ -496,10 +497,10 @@ function init_gear_sets()
     sets.precast.WS['Sanguine Blade'] = {
 		ammo="Pemphredo Tathlum",
 		head="Pixie Hairpin +1",
-		body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Jhakri Cuffs +2",
-		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		feet={ name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Baetyl Pendant",
 		waist="Orpheus's Sash",
 		left_ear="Malignance Earring",
@@ -510,11 +511,11 @@ function init_gear_sets()
 		
 	sets.precast.WS['Red Lotus Blade'] = {
 		ammo="Pemphredo Tathlum",
-		head="Jhakri Coronal +2",
-		body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Jhakri Cuffs +2",
-		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		feet={ name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Baetyl Pendant",
 		waist="Orpheus's Sash",
 		left_ear="Malignance Earring",
@@ -525,11 +526,11 @@ function init_gear_sets()
 		
 	sets.precast.WS['Seraph Blade'] = {
 		ammo="Pemphredo Tathlum",
-		head="Jhakri Coronal +2",
-		body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Jhakri Cuffs +2",
-		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		feet={ name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Baetyl Pendant",
 		waist="Orpheus's Sash",
 		left_ear="Malignance Earring",
@@ -552,8 +553,6 @@ function init_gear_sets()
 		left_ring="Ilabrat Ring",
 		right_ring="Rufescent Ring",
 		back={ name="Sucellos's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-	
-	
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
@@ -825,7 +824,7 @@ function init_gear_sets()
 	--Accuracy Based Enfeebling Frazzle 1-2, Dispel, Innundation
 		
 	sets.midcast['Enfeebling Magic'].MACC = {
-		main="Crocea Mors",
+		main={ name="Murgleis", augments={'Path: A',}},
 		sub="Ammurapi Shield",
 		ammo="Regal Gem",
 		head="Atrophy Chapeau +3",
@@ -834,12 +833,12 @@ function init_gear_sets()
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 		neck="Dls. Torque +2",
-		waist={ name="Acuity Belt +1", augments={'Path: A',}},
+		waist={ name="Obstin. Sash", augments={'Path: A',}},
 		left_ear="Snotra Earring",
 		right_ear="Regal Earring",
 		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring +1",
-		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
+		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
 		
 	sets.midcast['Frazzle'] = sets.midcast['Enfeebling Magic'].MACC
 	sets.midcast['Frazzle II'] = sets.midcast['Enfeebling Magic'].MACC
@@ -849,7 +848,7 @@ function init_gear_sets()
 	--Enfeebling Skill based spells Frazzle 3 (625 Skill Cap), Distract 1-3 (610 Skill Cap),
 	
 	sets.midcast['Enfeebling Magic'].Skill	= {
-		main="Crocea Mors",
+		main={ name="Murgleis", augments={'Path: A',}},
 		sub="Ammurapi Shield",
 		ammo="Regal Gem",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
@@ -858,10 +857,10 @@ function init_gear_sets()
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
-		waist="Luminary Sash",
+		waist={ name="Obstin. Sash", augments={'Path: A',}},
 		left_ear="Regal Earring",
 		right_ear="Snotra Earring",
-		left_ring="Kishar Ring",
+		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring +1",
 		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
 		
@@ -873,7 +872,7 @@ function init_gear_sets()
 	--Enfeebling Duration for spells that need to last long Sleeps,Break,Blind,Silence
 		
 	sets.midcast['Enfeebling Magic'].Duration = {
-		main="Crocea Mors",
+		main={ name="Murgleis", augments={'Path: A',}},
 		sub="Ammurapi Shield",
 		ammo="Regal Gem",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
@@ -882,7 +881,7 @@ function init_gear_sets()
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
-		waist="Luminary Sash",
+		waist={ name="Obstin. Sash", augments={'Path: A',}},
 		left_ear="Regal Earring",
 		right_ear="Snotra Earring",
 		left_ring="Kishar Ring",
@@ -918,7 +917,7 @@ function init_gear_sets()
 		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
 		
 	sets.midcast['Dia III'] = {
-		main="Crocea Mors",
+		main={ name="Murgleis", augments={'Path: A',}},
 		sub="Ammurapi Shield",
 		ammo="Regal Gem",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
@@ -935,7 +934,7 @@ function init_gear_sets()
 		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
 		
 	sets.midcast['Diaga'] = {
-		main="Crocea Mors",
+		main={ name="Murgleis", augments={'Path: A',}},
 		sub="Ammurapi Shield",
 		ammo="Regal Gem",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
@@ -952,7 +951,7 @@ function init_gear_sets()
 		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
 		
     sets.midcast['Dark Magic'] = {
-		main="Crocea Mors",
+		main={ name="Murgleis", augments={'Path: A',}},
 		sub="Ammurapi Shield",
 		ammo="Regal Gem",
 		head="Atrophy Chapeau +3",
@@ -969,7 +968,7 @@ function init_gear_sets()
 		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
 
     sets.midcast.Drain = {
-		main="Crocea Mors",
+		main={ name="Murgleis", augments={'Path: A',}},
 		sub="Ammurapi Shield",
 		ammo="Pemphredo Tathlum",
 		head="Pixie Hairpin +1",
@@ -1023,7 +1022,7 @@ function init_gear_sets()
 		--40 +35 = 75%
 
     sets.midcast.Impact = {
-		main="Crocea Mors",
+		main={ name="Murgleis", augments={'Path: A',}},
 		sub="Ammurapi Shield",
 		ammo="Regal Gem",
 		head=empty,
@@ -1316,7 +1315,7 @@ function init_gear_sets()
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},			--6%
 		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}}, --10%
 		}--41% DT + 10% PDT
-		
+
 		
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
@@ -1364,7 +1363,7 @@ function init_gear_sets()
 	sets.Crocea_Mors = {main={ name="Crocea Mors", augments={'Path: C',}}, sub="Daybreak"}
 	sets.Crocea_Mors.SW = {main={ name="Crocea Mors", augments={'Path: C',}}, sub="Ammurapi Shield"}
 	
-	sets.Levante = {main="Levante Dagger", sub="Daybreak"}
+	sets.Levante = {main="Levante Dagger",sub="Daybreak"}
 	sets.Levante.SW = {main="Levante Dagger", sub="Ammurapi Shield"}
 	
 	sets.Tauret = {main="Tauret", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
@@ -1372,6 +1371,9 @@ function init_gear_sets()
 	
 	sets.Maxentius = {main="Kaja Rod", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
 	sets.Maxentius.SW = {main="Kaja Rod", sub="Genmei Shield"}
+	
+	sets.Murgleis = {main={ name="Murgleis", augments={'Path: A',}},sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
+	sets.Murgleis.SW = {main={ name="Murgleis", augments={'Path: A',}},sub="Ammurapi Shield"}
 	
 	--Range Sets
 	
@@ -1590,6 +1592,18 @@ function update_combat_form()
 		else
 			enable('main','sub')
 			equip(sets.Maxentius.SW)
+			disable('main','sub')
+		end
+	end
+	
+	if state.WeaponSet.value == 'Murgleis' then
+		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+			enable('main','sub')
+			equip(sets.Murgleis)
+			disable('main','sub')
+		else
+			enable('main','sub')
+			equip(sets.Murgleis.SW)
 			disable('main','sub')
 		end
 	end
