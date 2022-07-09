@@ -140,7 +140,7 @@ function user_setup()
 	send_command('bind ^numpad1 input /ws "Upheaval" <t>')
     send_command('bind ^numpad2 input /ws "Ukko\'s Fury" <t>')
     send_command('bind ^numpad3 input /ws "Fell Cleave" <t>')
-	send_command('bind ^numpad4 input /ws "Full Break" <t>')
+	send_command('bind ^numpad4 input /ws "Armor Break" <t>')
     send_command('bind ^numpad5 input /ws "Steel Cyclone" <t>')
 	send_command('bind ^numpad6 input /ws "King\'s Justice" <t>')
 	send_command('bind ^numpad7 input /ws "Raging Rush" <t>')
@@ -331,7 +331,7 @@ function init_gear_sets()
 		body={ name="Emet Harness +1", augments={'Path: A',}},
 		hands="Sakpata's Gauntlets",
 		legs={ name="Zoar Subligar +1", augments={'Path: A',}},
-		feet="Nyame Sollerets",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Moonlight Necklace",
 		waist="Audumbla Sash",
 		left_ear="Cryptic Earring",
@@ -364,11 +364,11 @@ function init_gear_sets()
 
     sets.precast.WS.Uncapped = {
 		ammo="Knobkierrie",
-		head="Nyame Helm",
+		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Nyame Gauntlets",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Nyame Sollerets",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Caro Necklace",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear="Thrud Earring",
@@ -379,7 +379,7 @@ function init_gear_sets()
 		
 	sets.precast.WS = {
 		ammo="Knobkierrie",
-		head="Nyame Helm",
+		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Sakpata's Plate", augments={'Path: A',}},
 		hands="Sakpata's Gauntlets",
 		legs="Sakpata's Cuisses",
@@ -411,11 +411,11 @@ function init_gear_sets()
 
 	sets.precast.WS['Upheaval'].Uncapped = {
 		ammo="Knobkierrie",
-		head="Nyame Helm",
+		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Nyame Gauntlets",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Nyame Sollerets",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Combatant's Torque",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear="Thrud Earring",
@@ -430,7 +430,7 @@ function init_gear_sets()
 		body={ name="Sakpata's Plate", augments={'Path: A',}},
 		hands="Sakpata's Gauntlets",
 		legs="Sakpata's Cuisses",
-		feet="Nyame Sollerets",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Caro Necklace",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear="Thrud Earring",
@@ -441,11 +441,11 @@ function init_gear_sets()
 
 	sets.precast.WS['Steel Cyclone'] = {
 		ammo="Knobkierrie",
-		head="Nyame Helm",
+		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Nyame Gauntlets",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Nyame Sollerets",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Caro Necklace",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear="Thrud Earring",
@@ -456,11 +456,11 @@ function init_gear_sets()
 		
 	sets.precast.WS['Steel Cyclone'].Uncapped = {
 		ammo="Knobkierrie",
-		head="Nyame Helm",
+		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Nyame Gauntlets",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Nyame Sollerets",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Caro Necklace",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear="Thrud Earring",
@@ -513,11 +513,11 @@ function init_gear_sets()
 
 	sets.precast.WS['Savage Blade'].Uncapped = {
 		ammo="Knobkierrie",
-		head="Nyame Helm",
+		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Nyame Gauntlets",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Nyame Sollerets",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Caro Necklace",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear="Thrud Earring",
@@ -530,9 +530,9 @@ function init_gear_sets()
 		ammo="Knobkierrie",
 		head="Pixie Hairpin +1",
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Nyame Gauntlets",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Nyame Sollerets",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Baetyl Pendant",
 		waist="Orpheus's Sash",
 		left_ear="Friomisi Earring",
@@ -590,7 +590,7 @@ function init_gear_sets()
 		body={ name="Sakpata's Plate", augments={'Path: A',}},
 		hands="Sakpata's Gauntlets",
 		legs="Sakpata's Cuisses",
-		feet="Nyame Sollerets",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Sanctity Necklace",
 		waist="Audumbla Sash",
 		left_ear="Eabani Earring",
@@ -609,7 +609,7 @@ function init_gear_sets()
 		body={ name="Sakpata's Plate", augments={'Path: A',}},
 		hands="Sakpata's Gauntlets",
 		legs="Sakpata's Cuisses",
-		feet="Nyame Sollerets",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Sanctity Necklace",
 		waist="Audumbla Sash",
 		left_ear="Eabani Earring",
@@ -624,7 +624,7 @@ function init_gear_sets()
 		body={ name="Sakpata's Plate", augments={'Path: A',}},
 		hands="Sakpata's Gauntlets",
 		legs="Sakpata's Cuisses",
-		feet="Nyame Sollerets",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Sanctity Necklace",
 		waist="Audumbla Sash",
 		left_ear="Eabani Earring",

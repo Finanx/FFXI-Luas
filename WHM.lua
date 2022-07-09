@@ -118,7 +118,7 @@ function user_setup()
     send_command('wait 3; lua l gearinfo')
 	send_command('wait 10; lua l Dressup')
 	
-    --Global Red Mage binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)	
+    --Global White Mage binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)	
 
     send_command('bind ^m gs c toggle MagicBurst')
 	send_command('bind @t gs c cycle TreasureMode')

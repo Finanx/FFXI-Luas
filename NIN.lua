@@ -850,12 +850,19 @@ function init_gear_sets()
 	-- Hybrid Sets
 
     sets.engaged.Hybrid = {
-		head="Malignance Chapeau", --6%
-		body="Malignance Tabard",  --9%
-		hands="Malignance Gloves", --5%
-		legs="Malignance Tights", --7%
-		feet="Malignance Boots", --4%
-		right_ring="Defending Ring", --10
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head="Malignance Chapeau",
+		body="Malignance Tabard",
+		hands="Malignance Gloves",
+		legs="Malignance Tights",
+		feet="Malignance Boots",
+		neck="Combatant's Torque",
+		waist="Windbuffet Belt +1",
+		left_ear="Telos Earring",
+		right_ear="Crep. Earring",
+		left_ring="Chirich Ring +1",
+		right_ring="Chirich Ring +1",
+		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
         }
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)

@@ -575,7 +575,7 @@ function init_gear_sets()
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Ishvara Earring",
-		left_ring="Epaminondas's Ring",
+		left_ring="Regal Ring",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Camulus's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 		
@@ -707,11 +707,11 @@ function init_gear_sets()
 
     sets.idle = {
 		ammo=gear.RAbullet,
-		head="Nyame Helm",
+		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Nyame Gauntlets",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Nyame Sollerets",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Sanctity Necklace",
 		waist="Flume Belt +1",
 		left_ear="Tuisto Earring",
@@ -741,8 +741,7 @@ function init_gear_sets()
 		right_ear="Digni. Earring",
 		left_ring="Epona's Ring",
 		right_ring="Chirich Ring +1",
-		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},
-        }
+		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}
 
     sets.engaged.Acc = set_combine(sets.engaged, {
 		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
@@ -966,6 +965,7 @@ function init_gear_sets()
 		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}}, --10%
         } -- 51% DT
 		
+
 								--Crit Set
     sets.engaged.Hybrid.Crit = 	{
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},

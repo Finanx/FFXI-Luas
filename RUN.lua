@@ -321,7 +321,7 @@ function init_gear_sets()
 	sets.SiR_Enmity = {
 		ammo="Staunch Tathlum +1",
 		head="Agwu's Cap",
-		body="Nyame Mail",
+		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Rawhide Gloves", augments={'HP+50','Accuracy+15','Evasion+20',}},
 		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},
 		feet={ name="Taeon Boots", augments={'Evasion+23','Spell interruption rate down -10%','HP+50',}},
@@ -413,11 +413,11 @@ function init_gear_sets()
 
     sets.precast.JA['Lunge'] = {
 		ammo="Pemphredo Tathlum",
-		head="Nyame Helm",
-		body="Nyame Mail",
-		hands="Nyame Gauntlets",
-		legs="Nyame Flanchard",
-		feet="Nyame Sollerets",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Eschan Stone",
 		left_ear="Friomisi Earring",
@@ -464,11 +464,11 @@ function init_gear_sets()
 	
 	sets.precast.RA = {
 		range="Trollbane",
-		head="Nyame Helm",
-		body="Nyame Mail",
-		hands="Nyame Gauntlets",
-		legs="Nyame Flanchard",
-		feet="Nyame Sollerets",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
 		waist="Flume Belt +1",
 		left_ear="Sanare Earring",
@@ -566,7 +566,7 @@ function init_gear_sets()
 
     sets.precast.WS['Dimidiation'] = {
 		ammo="Knobkierrie",
-		head="Nyame Helm",
+		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Meg. Gloves +2",
 		legs={ name="Lustr. Subligar +1", augments={'Accuracy+20','DEX+8','Crit. hit rate+3%',}},
@@ -581,26 +581,26 @@ function init_gear_sets()
 
 	sets.precast.WS['Dimidiation'].Uncapped = {
 		ammo="Knobkierrie",
-		head="Nyame Helm",
+		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Meg. Gloves +2",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Nyame Sollerets",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Caro Necklace",
 		waist="Grunfeld Rope",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Sherida Earring",
 		left_ring="Ilabrat Ring",
-		right_ring="Niqmaddu Ring",
+		right_ring="Epaminondas's Ring",
 		back={ name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
 		
     sets.precast.WS['Herculean Slash'] = {
 		ammo="Pemphredo Tathlum",
-		head="Nyame Helm",
-		body="Nyame Mail",
-		hands="Nyame Gauntlets",
-		legs="Nyame Flanchard",
-		feet="Nyame Sollerets",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Sanctity Necklace",
 		waist="Eschan Stone",
 		left_ear="Friomisi Earring",
@@ -614,11 +614,11 @@ function init_gear_sets()
 	
     sets.precast.WS['Shockwave'] = {
 		ammo="Pemphredo Tathlum",
-		head="Nyame Helm",
+		head={ name="Nyame Helm", augments={'Path: B',}},
 		body="Volte Jupon",																																--TH+2
 		hands={ name="Herculean Gloves", augments={'Weapon skill damage +1%','Magic dmg. taken -2%','"Treasure Hunter"+2','Accuracy+12 Attack+12',}}, 	--TH+2
-		legs="Nyame Flanchard",
-		feet="Nyame Sollerets",
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Sanctity Necklace",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Gwati Earring",
@@ -629,11 +629,11 @@ function init_gear_sets()
 		
     sets.precast.WS['Fell Cleave'] = {
 		ammo="Knobkierrie",
-		head="Nyame Helm",
+		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Meg. Gloves +2",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Nyame Sollerets",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Caro Necklace",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -644,11 +644,11 @@ function init_gear_sets()
 	
 	sets.precast.WS['Armor Break'] = {
 		ammo="Yamarang",
-		head="Nyame Helm",
+		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Nyame Gauntlets",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Nyame Sollerets",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Sanctity Necklace",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Mache Earring +1",
@@ -669,11 +669,11 @@ function init_gear_sets()
 	
 	sets.midcast.RA = {
 		range="Trollbane",
-		head="Nyame Helm",
-		body="Nyame Mail",
-		hands="Nyame Gauntlets",
-		legs="Nyame Flanchard",
-		feet="Nyame Sollerets",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
 		waist="Flume Belt +1",
 		left_ear="Sanare Earring",
@@ -687,7 +687,7 @@ function init_gear_sets()
     sets.midcast['Enhancing Magic'] = {
 		ammo="Staunch Tathlum +1",
 		head="Erilaz Galea +1",
-		body="Nyame Mail",
+		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Runeist's Mitons +3",
 		legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},
 		feet={ name="Carmine Greaves +1", augments={'HP+80','MP+80','Phys. dmg. taken -4',}},
@@ -728,7 +728,7 @@ function init_gear_sets()
 		body="Manasa Chasuble",
 		hands="Runeist's Mitons +3",
 		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},
-		feet="Nyame Sollerets",
+		feet={ name="Taeon Boots", augments={'Evasion+23','Spell interruption rate down -10%','HP+50',}},
 		neck="Incanter's Torque",
 		waist="Flume Belt +1",
 		left_ear="Mimir Earring",
@@ -741,7 +741,7 @@ function init_gear_sets()
     sets.midcast['Regen'] = {
 		ammo="Staunch Tathlum +1",
 		head="Rune. Bandeau +3",
-		body="Nyame Mail",
+		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Rawhide Gloves", augments={'HP+50','Accuracy+15','Evasion+20',}},
 		legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},
 		feet={ name="Taeon Boots", augments={'Evasion+23','Spell interruption rate down -10%','HP+50',}},
@@ -756,7 +756,7 @@ function init_gear_sets()
     sets.midcast['Refresh'] = {
 		ammo="Staunch Tathlum +1",
 		head="Erilaz Galea +1",
-		body="Nyame Mail",
+		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Rawhide Gloves", augments={'HP+50','Accuracy+15','Evasion+20',}},
 		legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},
 		feet={ name="Taeon Boots", augments={'Evasion+23','Spell interruption rate down -10%','HP+50',}},
@@ -784,11 +784,11 @@ function init_gear_sets()
 
     sets.idle = {
 		ammo="Staunch Tathlum +1",
-		head="Nyame Helm",
-		body="Nyame Mail",
-		hands="Nyame Gauntlets",
-		legs="Nyame Flanchard",
-		feet="Nyame Sollerets",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
 		waist="Flume Belt +1",
 		left_ear="Tuisto Earring",
@@ -801,9 +801,9 @@ function init_gear_sets()
 		ammo="Homiliary",
 		head="Rawhide Mask",
 		body="Runeist's Coat +3",
-		hands="Nyame Gauntlets",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Rawhide Trousers", augments={'MP+50','"Fast Cast"+5','"Refresh"+1',}},
-		feet="Nyame Sollerets",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
 		waist="Fucho-no-Obi",
 		left_ear="Sanare Earring",
@@ -855,10 +855,10 @@ function init_gear_sets()
 		
 	sets.engaged.Tank =	{
 		ammo="Staunch Tathlum +1",																											--3%DT
-		head="Nyame Helm",																													--7%DT
-		body="Nyame Mail",																													--9%DT
+		head={ name="Nyame Helm", augments={'Path: B',}},																					--7%DT
+		body={ name="Nyame Mail", augments={'Path: B',}},																					--9%DT
 		hands="Turms Mittens +1",
-		legs="Nyame Flanchard",																												--8%DT
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},																				--8%DT
 		feet="Turms Leggings +1",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},																			--7%DT
 		waist="Engraved Belt",
@@ -909,11 +909,11 @@ function init_gear_sets()
 
     sets.engaged.Hybrid	= {
 		ammo="Coiste Bodhar",
-		head="Nyame Helm",
-		body="Nyame Mail",
-		hands="Nyame Gauntlets",
-		legs="Nyame Flanchard",
-		feet="Nyame Sollerets",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Anu Torque",
 		waist="Ioskeha Belt +1",
 		left_ear="Telos Earring",
@@ -925,11 +925,11 @@ function init_gear_sets()
 		
 	sets.engaged.Hybrid.Aftermath	= {
 		ammo="Yamarang",
-		head="Nyame Helm",
-		body="Nyame Mail",
-		hands="Nyame Gauntlets",
-		legs="Nyame Flanchard",
-		feet="Nyame Sollerets",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Anu Torque",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear="Telos Earring",
@@ -953,7 +953,7 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
         }
 		
-    sets.Embolden = set_combine(sets.midcast['Enhancing Magic'], {back="Evasionist's Cape"})
+    sets.Embolden = {back={ name="Evasionist's Cape", augments={'Enmity+2','"Embolden"+15','"Dbl.Atk."+3',}},}
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
 

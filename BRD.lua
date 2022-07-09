@@ -361,7 +361,7 @@ function init_gear_sets()
 		body="Inyanga Jubbah +2",
 		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
 		legs="Aya. Cosciales +2",
-		feet="Nyame Sollerets",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
 		left_ear="Loquac. Earring",
@@ -424,7 +424,7 @@ function init_gear_sets()
 		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
 		body="Ayanmo Corazza +2",
-		hands="Nyame Gauntlets",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Lustr. Subligar +1", augments={'Accuracy+20','DEX+8','Crit. hit rate+3%',}},
 		feet={ name="Lustra. Leggings +1", augments={'HP+65','STR+15','DEX+15',}},
 		neck="Fotia Gorget",
@@ -439,7 +439,7 @@ function init_gear_sets()
 		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
 		body="Ayanmo Corazza +2",
-		hands="Nyame Gauntlets",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Lustr. Subligar +1", augments={'Accuracy+20','DEX+8','Crit. hit rate+3%',}},
 		feet={ name="Lustra. Leggings +1", augments={'HP+65','STR+15','DEX+15',}},
 		neck="Caro Necklace",
@@ -452,26 +452,26 @@ function init_gear_sets()
 
     sets.precast.WS['Mordant Rime'] = {
 		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
-		head={ name="Blistering Sallet +1", augments={'Path: A',}},
-		body="Ayanmo Corazza +2",
-		hands="Nyame Gauntlets",
-		legs={ name="Lustr. Subligar +1", augments={'Accuracy+20','DEX+8','Crit. hit rate+3%',}},
-		feet={ name="Lustra. Leggings +1", augments={'HP+65','STR+15','DEX+15',}},
-		neck="Caro Necklace",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Bihu Jstcorps. +3", augments={'Enhances "Troubadour" effect',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck="Fotia Gorget",
 		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		left_ear="Regal Earring",
 		right_ear="Ishvara Earring",
 		left_ring="Epaminondas's Ring",
-		right_ring="Ilabrat Ring",
+		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Intarabus's Cape", augments={'CHR+20','Accuracy+20 Attack+20','CHR+10','Weapon skill damage +10%',}},}
 
     sets.precast.WS['Rudra\'s Storm'] = {
 		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
-		head={ name="Blistering Sallet +1", augments={'Path: A',}},
-		body="Ayanmo Corazza +2",
-		hands="Nyame Gauntlets",
-		legs={ name="Lustr. Subligar +1", augments={'Accuracy+20','DEX+8','Crit. hit rate+3%',}},
-		feet={ name="Lustra. Leggings +1", augments={'HP+65','STR+15','DEX+15',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Bihu Jstcorps. +3", augments={'Enhances "Troubadour" effect',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Caro Necklace",
 		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -851,11 +851,11 @@ function init_gear_sets()
 		main="Daybreak",
 		sub="Genmei Shield",
 		range={ name="Linos", augments={'Mag. Evasion+15','Phys. dmg. taken -4%','HP+20',}},
-		head="Nyame Helm",
+		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Kaykaus Bliaut +1", augments={'MP+80','"Cure" potency +6%','"Conserve MP"+7',}},
-		hands="Nyame Gauntlets",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Nyame Sollerets",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
 		waist="Flume Belt +1",
 		left_ear="Eabani Earring",
@@ -886,34 +886,34 @@ function init_gear_sets()
 		sub="Genmei Shield",
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
 		head="Aya. Zucchetto +2",
-		body="Ayanmo Corazza +2",
+		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet="Volte Spats",
 		neck="Combatant's Torque",
-		waist="Windbuffet Belt +1",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear="Telos Earring",
 		right_ear="Brutal Earring",
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
-		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 
     sets.engaged.Acc = {
 		main="Naegling",
 		sub="Genmei Shield",
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
 		head="Aya. Zucchetto +2",
-		body="Ayanmo Corazza +2",
+		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet="Volte Spats",
 		neck="Combatant's Torque",
-		waist="Windbuffet Belt +1",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear="Telos Earring",
 		right_ear="Brutal Earring",
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
-		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 
     -- * DNC Subjob DW Trait: +15%
     -- * NIN Subjob DW Trait: +25%
@@ -924,17 +924,17 @@ function init_gear_sets()
 		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
 		head="Aya. Zucchetto +2",
-		body="Ayanmo Corazza +2",
+		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet="Volte Spats",
 		neck="Combatant's Torque",
-		waist="Reiki Yotai",												--7%
-		left_ear="Telos Earring",
-		right_ear="Eabani Earring",											--4%
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Eabani Earring",											--4%
+		right_ear="Suppanomimi",											--5%
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
-		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}		
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}		
 		--11%GDW + 25%JADW = 36%
 
     sets.engaged.DW.Acc = {
@@ -942,17 +942,17 @@ function init_gear_sets()
 		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
 		head="Aya. Zucchetto +2",
-		body="Ayanmo Corazza +2",
+		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet="Volte Spats",
 		neck="Combatant's Torque",
-		waist="Reiki Yotai",												--7%
-		left_ear="Telos Earring",
-		right_ear="Eabani Earring",											--4%
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Eabani Earring",											--4%
+		right_ear="Suppanomimi",											--5%
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
-		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}	
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}	
 		--11%GDW + 25%JADW = 36%
 
     -- 15% Magic Haste (67% DW to cap)
@@ -973,17 +973,17 @@ function init_gear_sets()
 		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
 		head="Aya. Zucchetto +2",
-		body="Ayanmo Corazza +2",
+		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet="Volte Spats",
 		neck="Combatant's Torque",
-		waist="Reiki Yotai",												--7%
-		left_ear="Telos Earring",
-		right_ear="Eabani Earring",											--4%
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Eabani Earring",											--4%
+		right_ear="Suppanomimi",											--5%
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
-		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}	
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}	
 		--11%GDW + 25%JADW = 36%
 
     sets.engaged.DW.MaxHaste.Acc = {
@@ -991,18 +991,80 @@ function init_gear_sets()
 		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
 		head="Aya. Zucchetto +2",
-		body="Ayanmo Corazza +2",
+		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet="Volte Spats",
 		neck="Combatant's Torque",
-		waist="Reiki Yotai",												--7%
-		left_ear="Telos Earring",
-		right_ear="Eabani Earring",											--4%
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Eabani Earring",											--4%
+		right_ear="Suppanomimi",											--5%
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
-		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}	
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}	
 		--11%GDW + 25%JADW = 36%
+		
+	---------------------------------------- AFTERMATH ---------------------------------------------
+	
+	sets.engaged.Aftermath = {
+		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
+		head="Aya. Zucchetto +2",
+		body="Ashera Harness",
+		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet="Volte Spats",
+		neck="Combatant's Torque",
+		waist="Windbuffet Belt +1",
+		left_ear="Telos Earring",
+		right_ear="Brutal Earring",
+		left_ring="Chirich Ring +1",
+		right_ring="Chirich Ring +1",
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		
+	sets.engaged.Acc.Aftermath = {
+		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
+		head="Aya. Zucchetto +2",
+		body="Ashera Harness",
+		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet="Volte Spats",
+		neck="Combatant's Torque",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Telos Earring",
+		right_ear="Brutal Earring",
+		left_ring="Chirich Ring +1",
+		right_ring="Chirich Ring +1",
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		
+	sets.engaged.DW.Aftermath = {
+		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
+		head="Aya. Zucchetto +2",
+		body="Ashera Harness",
+		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet="Volte Spats",
+		neck="Combatant's Torque",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Eabani Earring",											--4%
+		right_ear="Suppanomimi",											--5%
+		left_ring="Chirich Ring +1",
+		right_ring="Chirich Ring +1",
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		
+	sets.engaged.DW.Acc.Aftermath = {
+		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
+		head="Aya. Zucchetto +2",
+		body="Ashera Harness",
+		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet="Volte Spats",
+		neck="Combatant's Torque",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Eabani Earring",											--4%
+		right_ear="Suppanomimi",											--5%
+		left_ring="Chirich Ring +1",
+		right_ring="Chirich Ring +1",
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Hybrid Sets -------------------------------------------
@@ -1011,37 +1073,52 @@ function init_gear_sets()
     sets.engaged.Hybrid = {
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
 		head={ name="Bunzi's Hat", augments={'Path: A',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
+		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Combatant's Torque",
-		waist="Reiki Yotai",
-		left_ear="Eabani Earring",
-		right_ear="Crep. Earring",
-		left_ring="Moonlight Ring",
-		right_ring="Chirich Ring +1",
-		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},}
+		
+	sets.engaged.HybridDW = {
+		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
+		body="Ashera Harness",
+		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		right_ear="Suppanomimi",
+		left_ring="Moonlight Ring",}
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
+	sets.engaged.Aftermath.DT = set_combine(sets.engaged.Aftermath, sets.engaged.Hybrid)
     sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
+	sets.engaged.Acc.Aftermath.DT = set_combine(sets.engaged.Acc.Aftermath, sets.engaged.Hybrid)
 
-    sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT = set_combine(sets.engaged.DW.Acc, sets.engaged.Hybrid)
+    sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.HybridDW)
+	sets.engaged.DW.Aftermath.DT = set_combine(sets.engaged.DW.Aftermath, sets.engaged.HybridDW)
+    sets.engaged.DW.Acc.DT = set_combine(sets.engaged.DW.Acc, sets.engaged.HybridDW)
+	sets.engaged.DW.Acc.Aftermath.DT = set_combine(sets.engaged.DW.Acc.Aftermath, sets.engaged.HybridDW)
 
-    sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.LowHaste = set_combine(sets.engaged.DW.Acc.LowHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.HybridDW)
+    sets.engaged.DW.Aftermath.DT.LowHaste = set_combine(sets.engaged.DW.Aftermath, sets.engaged.HybridDW)
+    sets.engaged.DW.Acc.DT.LowHaste = set_combine(sets.engaged.DW.Acc.LowHaste, sets.engaged.HybridDW)
+	sets.engaged.DW.Acc.Aftermath.DT.LowHaste = set_combine(sets.engaged.DW.Acc.Aftermath, sets.engaged.HybridDW)
 
-    sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.MidHaste = set_combine(sets.engaged.DW.Acc.MidHaste, sets.engaged.Hybrid)
-
-    sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.HighHaste = set_combine(sets.engaged.DW.Acc.HighHaste, sets.engaged.Hybrid)
-
-    sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.MaxHaste = set_combine(sets.engaged.DW.Acc.MaxHaste, sets.engaged.Hybrid)
-
-
+    sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.HybridDW)
+    sets.engaged.DW.Aftermath.DT.MidHaste = set_combine(sets.engaged.DW.Aftermath, sets.engaged.HybridDW)
+    sets.engaged.DW.Acc.DT.MidHaste = set_combine(sets.engaged.DW.Acc.MidHaste, sets.engaged.HybridDW)
+	sets.engaged.DW.Acc.Aftermath.DT.MidHaste = set_combine(sets.engaged.DW.Acc.Aftermath, sets.engaged.HybridDW)
+	
+    sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.HybridDW)
+    sets.engaged.DW.Aftermath.DT.HighHaste = set_combine(sets.engaged.DW.Aftermath, sets.engaged.HybridDW)
+    sets.engaged.DW.Acc.DT.HighHaste = set_combine(sets.engaged.DW.Acc.HighHaste, sets.engaged.HybridDW)
+	sets.engaged.DW.Acc.Aftermath.DT.HighHaste = set_combine(sets.engaged.DW.Acc.Aftermath, sets.engaged.HybridDW)
+	
+    sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.HybridDW)
+    sets.engaged.DW.Aftermath.DT.MaxHaste = set_combine(sets.engaged.DW.Aftermath, sets.engaged.HybridDW)
+    sets.engaged.DW.Acc.DT.MaxHaste = set_combine(sets.engaged.DW.Acc.MaxHaste, sets.engaged.HybridDW)
+	sets.engaged.DW.Acc.Aftermath.DT.MaxHaste = set_combine(sets.engaged.DW.Acc.Aftermath, sets.engaged.HybridDW)
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
@@ -1171,6 +1248,13 @@ function job_buff_change(buff,gain)
             handle_equipping_gear(player.status)
         end
     end
+	
+			--Changes Engaged set when Aftermath is up
+    if buff:startswith('Aftermath') then
+        state.Buff.Aftermath = gain
+        customize_melee_set()
+        handle_equipping_gear(player.status)
+    end
 
 end
 
@@ -1275,6 +1359,35 @@ function job_self_command(cmdParams, eventArgs)
 end
 
 function customize_melee_set(meleeSet)
+
+	if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+		if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Carnwenhan" and state.OffenseMode.value == 'Normal' and state.HybridMode.value == 'Normal' then
+			meleeSet = sets.engaged.DW.Aftermath
+		end
+		if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Carnwenhan" and state.OffenseMode.value == 'Acc' and state.HybridMode.value == 'Normal' then
+			meleeSet = sets.engaged.DW.Acc.Aftermath
+		end
+		if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Carnwenhan" and state.OffenseMode.value == 'Normal' and state.HybridMode.value == 'DT' then
+			meleeSet = sets.engaged.DW.Aftermath.DT
+		end
+			if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Carnwenhan" and state.OffenseMode.value == 'Acc' and state.HybridMode.value == 'DT' then
+			meleeSet = sets.engaged.DW.Acc.Aftermath.DT
+		end
+	else
+		if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Carnwenhan" and state.OffenseMode.value == 'Normal' and state.HybridMode.value == 'Normal' then
+			meleeSet = sets.engaged.Aftermath
+		end
+		if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Carnwenhan" and state.OffenseMode.value == 'Acc' and state.HybridMode.value == 'Normal' then
+			meleeSet = sets.engaged.Acc.Aftermath
+		end
+		if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Carnwenhan" and state.OffenseMode.value == 'Normal' and state.HybridMode.value == 'DT' then
+			meleeSet = sets.engaged.Hybrid.Aftermath
+		end
+			if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Carnwenhan" and state.OffenseMode.value == 'Acc' and state.HybridMode.value == 'DT' then
+			meleeSet = sets.engaged.Hybrid.Aftermath
+		end
+	end
+	
     return meleeSet
 end
 
