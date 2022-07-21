@@ -313,6 +313,21 @@ function init_gear_sets()
 		right_ring="Niqmaddu Ring",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 		
+	sets.precast.WS['Impulse Drive'] = {
+		ammo="Knobkierrie",
+		head={ name="Mpaca's Cap", augments={'Path: A',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck="Fotia Gorget",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Thrud Earring",
+		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		left_ring="Epaminondas's Ring",
+		right_ring="Niqmaddu Ring",
+		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
 
     sets.precast.WS['Tachi: Ageha'] = {
@@ -430,19 +445,19 @@ function init_gear_sets()
 		
    
 	sets.engaged.Hybrid = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Nyame Helm", augments={'Path: B',}},																					--7%
-		body={ name="Nyame Mail", augments={'Path: B',}},																					--9%
+		ammo="Aurgelmir Orb +1",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body="Mpaca's Doublet",
 		hands="Wakido Kote +3",
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},																				--8%
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},																				--7%
-		neck={ name="Vim Torque +1", augments={'Path: A',}},
+		legs="Mpaca's Hose",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck="Moonlight Nodowa",
 		waist="Ioskeha Belt +1",
-		left_ear={ name="Schere Earring", augments={'Path: A',}},
+		left_ear="Digni. Earring",
 		right_ear="Telos Earring",
-		left_ring="Niqmaddu Ring",
-		right_ring="Defending Ring",																										--10%
-		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},}	--5%
+		left_ring="Defending Ring",
+		right_ring="Niqmaddu Ring",
+		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},}
 		--46% DT + 6% PDT
 	
 	sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)	
@@ -515,7 +530,7 @@ function job_precast(spell, action, spellMap, eventArgs)
 
 	    -- Equip obi if weather/day matches for WS.	
 	if spell.type == 'WeaponSkill' then
-        if spell.english == 'Tachi: Jinpu' and world.weather_element == 'Wind' or world.day_element == 'Wind' then
+        if spell.english == 'Tachi: Jinpu' and (world.weather_element == 'Wind' or world.day_element == 'Wind') then
                 equip(sets.Obi)
         end
     end

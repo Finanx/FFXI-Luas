@@ -593,7 +593,7 @@ function init_gear_sets()
 	
 
 	sets.midcast.Paeon = set_combine(sets.midcast.SongEnhancing, {head="Brioso Roundlet +3"})
-	sets.midcast.Ballad = set_combine(sets.midcast.SongEnhancing, {legs="Fili Rhingrave +1"})
+	sets.midcast.Ballad = set_combine(sets.midcast.SongEnhancing, {})
 	sets.midcast.Minne = set_combine(sets.midcast.SongEnhancing, {})
 	sets.midcast.Minuet = set_combine(sets.midcast.SongEnhancing, {body="Fili Hongreline +1"})
 	sets.midcast.Madrigal = set_combine(sets.midcast.SongEnhancing, {head="Fili Calot +1"})

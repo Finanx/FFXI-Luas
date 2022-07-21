@@ -1109,7 +1109,7 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             if player.tp > 2900 then
                 equip(sets.precast.WS['Leaden Salute'].FullTP)
             end
-            if world.weather_element == 'Dark' or world.day_element == 'Dark' then
+            if (world.weather_element == 'Dark' or world.day_element == 'Dark') then
                 equip(sets.Obi)
             end
 			

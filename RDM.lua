@@ -1095,7 +1095,7 @@ function init_gear_sets()
 		left_ear="Telos Earring",
 		right_ear="Sherida Earring",
 		left_ring="Ilabrat Ring",
-		right_ring="Hetairoi Ring",
+		right_ring="Chirich Ring +1",
 		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     sets.engaged.Acc = {
@@ -1130,7 +1130,7 @@ function init_gear_sets()
 		left_ear="Eabani Earring",																											--4%
 		right_ear="Suppanomimi",																											--5%
 		left_ring="Ilabrat Ring",
-		right_ring="Hetairoi Ring",
+		right_ring="Chirich Ring +1",
 		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},} 	--10%
 		--41%GDW + 25%JADW = 66%
 
@@ -1167,7 +1167,7 @@ function init_gear_sets()
 		left_ear="Eabani Earring",																											--4%
 		right_ear="Suppanomimi",																											--5%
 		left_ring="Ilabrat Ring",
-		right_ring="Hetairoi Ring",
+		right_ring="Chirich Ring +1",
 		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},} 	--10%
 		--41%GDW + 25%JADW = 66%
 
@@ -1204,7 +1204,7 @@ function init_gear_sets()
 		left_ear="Eabani Earring",																											--4%
 		right_ear="Suppanomimi",																											--5%
 		left_ring="Ilabrat Ring",
-		right_ring="Hetairoi Ring",
+		right_ring="Chirich Ring +1",
 		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},} 	--10%
 		--32%GDW + 25%JADW = 57%
 
@@ -1241,7 +1241,7 @@ function init_gear_sets()
 		left_ear="Eabani Earring",																											--4%
 		right_ear="Suppanomimi",																											--5%
 		left_ring="Ilabrat Ring",
-		right_ring="Hetairoi Ring",
+		right_ring="Chirich Ring +1",
 		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},} 	--10%
 		--26%GDW + 25%JADW = 51%
 
@@ -1278,7 +1278,7 @@ function init_gear_sets()
 		left_ear="Eabani Earring",																											--4%
 		right_ear="Sherida Earring",
 		left_ring="Ilabrat Ring",
-		right_ring="Hetairoi Ring",
+		right_ring="Chirich Ring +1",
 		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 		--11%GDW + 25%JADW = 36%
 
@@ -1306,13 +1306,19 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged.Hybrid =  {
-		head="Malignance Chapeau",
+		ammo="Aurgelmir Orb +1",
+		head={ name="Nyame Helm", augments={'Path: B',}},
 		body="Malignance Tabard",
 		hands="Malignance Gloves",
 		legs="Malignance Tights",
-		feet="Malignance Boots",
-		neck={ name="Loricate Torque +1", augments={'Path: A',}},			--6%
-		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}}, --10%
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck={ name="Bathy Choker +1", augments={'Path: A',}},
+		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
+		left_ear="Digni. Earring",
+		right_ear="Sherida Earring",
+		left_ring="Chirich Ring +1",
+		right_ring="Chirich Ring +1",
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
 		}--41% DT + 10% PDT
 
 		
@@ -1474,18 +1480,17 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     end
 
 	    -- Equip obi if weather/day matches for WS.
-    if spell.type == 'WeaponSkill' then
-        if spell.english == 'Sanguine Blade' and world.weather_element == 'Dark' or world.day_element == 'Dark' then
+		if spell.type == 'WeaponSkill' then 
+			if spell.english == 'Sanguine Blade' and (world.weather_element == 'Dark' or world.day_element == 'Dark') then
                 equip(sets.Obi)
-        end
-        if spell.english == 'Red Lotus Blade' and (world.weather_element == 'Fire' or world.day_element == 'Fire') then
-            equip(sets.Obi)
-        end
-		if spell.english == 'Seraph Blade' and (world.weather_element == 'Light' or world.day_element == 'Light') then
-            equip(sets.Obi)
-        end
-    end
-	
+			end
+			if spell.english == 'Red Lotus Blade' and (world.weather_element == 'Fire' or world.day_element == 'Fire') then
+				equip(sets.Obi)
+			end
+			if spell.english == 'Seraph Blade' and (world.weather_element == 'Light' or world.day_element == 'Light') then
+				equip(sets.Obi)
+			end
+		end
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)

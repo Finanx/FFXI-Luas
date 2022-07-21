@@ -801,7 +801,7 @@ function job_precast(spell, action, spellMap, eventArgs)
 	
 	    -- Equip obi if weather/day matches for WS.
 	if spell.type == 'WeaponSkill' then
-        if spell.english == 'Sanguine Blade' and world.weather_element == 'Dark' or world.day_element == 'Dark' then
+        if spell.english == 'Sanguine Blade' and (world.weather_element == 'Dark' or world.day_element == 'Dark') then
                 equip(sets.Obi)
         end
         if spell.english == 'Red Lotus Blade' and (world.weather_element == 'Fire' or world.day_element == 'Fire') then
