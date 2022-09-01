@@ -74,7 +74,7 @@ function get_sets()
     -- Load and initialize the include file.
 	--include('Sel-Include.lua')
 	include('Mote-Include.lua')
-    res = require 'resources'
+
 end
 
 -- Setup vars that are user-independent.
@@ -197,8 +197,7 @@ function user_setup()
     set_lockstyle()
 
 	--gearinfo setup
-
-    state.Auto_Kite = M(false, 'Auto_Kite')	
+	
 	Haste = 0
     moving = false
     update_combat_form()
@@ -955,8 +954,6 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-	sets.Kiting = {legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},}
-
     sets.TreasureHunter = {
 		ammo="Per. Lucky Egg", --TH1
 		body="Volte Jupon",		--TH2
@@ -1118,7 +1115,6 @@ end
 	--Gearinfo related function
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
-	check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -1148,10 +1144,6 @@ function customize_idle_set(idleSet)
         enable('back')
     end
 
-    if state.Auto_Kite.value == true then
-       idleSet = set_combine(idleSet, sets.Kiting)
-    end
-	
     return idleSet
 end
 
@@ -1226,12 +1218,9 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
-	--Gear Info Functions 	--Handles the state.Runes which allows you to bind a key to cast a rune
+	--Gear Info Functions
 function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
-	if cmdParams[1]:lower() == 'rune' then
-        send_command('@input /ja '..state.Runes.value..' <me>')
-    end
 end
 
 function gearinfo(cmdParams, eventArgs)
@@ -1261,17 +1250,6 @@ function gearinfo(cmdParams, eventArgs)
         end
         if not midaction() then
             job_update()
-        end
-    end
-end
-
-	--Auto_Kite function
-function check_moving()
-    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
-        if state.Auto_Kite.value == false and moving then
-            state.Auto_Kite:set(true)
-        elseif state.Auto_Kite.value == true and moving == false then
-            state.Auto_Kite:set(false)
         end
     end
 end
@@ -1312,6 +1290,11 @@ windower.register_event('zone change',
 )
 
 	--Handles the state.Runes which allows you to bind a key to cast a rune
+function job_self_command(cmdParams, eventArgs)
+    if cmdParams[1]:lower() == 'rune' then
+        send_command('@input /ja '..state.Runes.value..' <me>')
+    end
+end
 
 	--Allows an uncapped attack and a capped attack Weaponskill Set
 function get_custom_wsmode(spell, action, spellMap)
@@ -1320,7 +1303,7 @@ function get_custom_wsmode(spell, action, spellMap)
     end
 end
 
-	-- Select default macro book on initial load or subjob change.
+-- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
     -- Default macro set/book: (set, book)
     if player.sub_job == 'BLU' then

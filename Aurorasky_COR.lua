@@ -477,7 +477,7 @@ function init_gear_sets()
     sets.precast.WS['Hot Shot'] = sets.precast.WS['Wildfire']
 
     sets.precast.WS['Leaden Salute'] = {
-		ammo="Orichalc. Bullet",
+		ammo="Eminent Bullet",
 		head="Herculean Helm",
 		body="Laksa. Frac +2",
 		hands={ name="Herculean Gloves", augments={'"Mag.Atk.Bns."+21','Weapon skill damage +3%',}},
@@ -1052,10 +1052,6 @@ end
 
 function job_precast(spell, action, spellMap, eventArgs)
 	
-		-- Check that proper ammo is available if we're using ranged attacks or similar.
-    if spell.action_type == 'Ranged Attack' or spell.type == 'WeaponSkill' or spell.type == 'CorsairShot' then
-        do_bullet_checks(spell, spellMap, eventArgs)
-    end
 
 		-- Handles Luzaf Ring if toggled on
     if state.LuzafRing.value == true then
@@ -1419,89 +1415,6 @@ function display_roll_info(spell)
     end
 end
 
-	-- Determine whether we have sufficient ammo for the action being attempted.
-function do_bullet_checks(spell, spellMap, eventArgs)
-    local bullet_name
-    local bullet_min_count = 1
-
-    if spell.type == 'WeaponSkill' then
-        if spell.skill == "Marksmanship" then
-            if spell.english == 'Wildfire' or spell.english == 'Leaden Salute' then
-                -- magical weaponskills
-                bullet_name = gear.MAbullet
-            else
-                -- physical weaponskills
-                bullet_name = gear.WSbullet
-            end
-        else
-            -- Ignore non-ranged weaponskills
-            return
-        end
-		
-    elseif spell.type == 'CorsairShot' then
-        bullet_name = gear.QDbullet
-		
-    elseif spell.action_type == 'Ranged Attack' then
-        bullet_name = gear.RAbullet
-		
-        if buffactive['Triple Shot'] then
-            bullet_min_count = 3
-        end
-		
-    end
-
-    local available_bullets = player.inventory[bullet_name] or player.wardrobe[bullet_name]
-
-		--If no ammo is available, give appropriate warning and end.
-    if not available_bullets then
-        if spell.type == 'CorsairShot' and player.equipment.ammo ~= 'empty' then
-            add_to_chat(104, 'No Quick Draw ammo left.  Using what\'s currently equipped ('..player.equipment.ammo..').')
-            return
-        elseif spell.type == 'WeaponSkill' and player.equipment.ammo == gear.RAbullet then
-            add_to_chat(104, 'No weaponskill ammo left.  Using what\'s currently equipped (standard ranged bullets: '..player.equipment.ammo..').')
-            return
-        else
-            add_to_chat(104, 'No ammo ('..tostring(bullet_name)..') available for that action.')
-            eventArgs.cancel = true
-            return
-        end
-    end
-
-		--Don't allow shooting or weaponskilling with ammo reserved for quick draw.
-    if spell.type ~= 'CorsairShot' and bullet_name == gear.QDbullet and available_bullets.count <= bullet_min_count then
-        add_to_chat(104, 'No ammo will be left for Quick Draw.  Cancelling.')
-        eventArgs.cancel = true
-        return
-    end
-
-		--Low ammo warning.
-    if spell.type ~= 'CorsairShot' and state.warned.value == false
-        and available_bullets.count > 1 and available_bullets.count <= options.ammo_warning_limit then
-        local msg = '*****  LOW AMMO WARNING: '..bullet_name..' *****'
-        --local border = string.repeat("*", #msg)
-        local border = ""
-        for i = 1, #msg do
-            border = border .. "*"
-        end
-
-        add_to_chat(104, border)
-        add_to_chat(104, msg)
-        add_to_chat(104, border)
-
-        state.warned:set()
-    elseif available_bullets.count > options.ammo_warning_limit and state.warned then
-        state.warned:reset()
-    end
-end
-
-function special_ammo_check()
-		--Stop if Animikii/Hauksbok equipped
-    if no_shoot_ammo:contains(player.equipment.ammo) then
-        cancel_spell()
-        add_to_chat(123, '** Action Canceled: [ '.. player.equipment.ammo .. ' equipped!! ] **')
-        return
-    end
-end
 
 	--Allows equipping of warp/exp rings and ammo belts without auto swapping back to current set
 function check_gear()

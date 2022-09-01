@@ -42,7 +42,6 @@
 --	Modes:			[ Windows + 1 ]			Sets Weapon to Dojikiri then locks Main/Sub Slots
 --					[ Windows + 2 ]			Sets Weapon to Shining_One then locks Main/Sub Slots
 --					[ Windows + 3 ]			Sets Weapon to Soboro then locks Main/Sub Slots
---					[ Windows + 4 ]			Sets Weapon to Norifusa then locks Main/Sub Slots
 --
 --  WS:         	[ CTRL + Numpad1 ]    	Tachi: Fudo
 --					[ CTRL + Numpad2 ]    	Tachi: Shoha
@@ -105,14 +104,15 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'Dojikiri', 'Shining_One', 'Norifusa', 'Soboro' }
+	state.WeaponSet = M{['description']='Weapon Set', 'Dojikiri', 'Shining_One', 'Soboro' }
 	state.AttackMode = M{['description']='Attack', 'Uncapped', 'Capped'}
 	state.Reraise = M(false, "Reraise Mode")
 	
 	state.CP = M(false, "Capacity Points Mode")
 	
-	--Load Dressup Lua
-
+	--Load Gearinfo/Dressup Lua
+	
+    send_command('wait 3; lua l gearinfo')
 	send_command('wait 10; lua l Dressup')
     
     --Global Samurai binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -126,7 +126,6 @@ function user_setup()
 	send_command('bind @1 gs c set WeaponSet Dojikiri')
 	send_command('bind @2 gs c set WeaponSet Shining_One')
 	send_command('bind @3 gs c set WeaponSet Soboro')
-	send_command('bind @4 gs c set WeaponSet Norifusa')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
@@ -137,8 +136,11 @@ function user_setup()
     send_command('bind ^numpad5 input /ws "Tachi: Jinpu" <t>')
     send_command('bind ^numpad6 input /ws "Tachi: Yukikaze" <t>')
 	send_command('bind ^numpad7 input /ws "Tachi: Rana" <t>')
-	
-	send_command('bind !numpad1 input /ws "Impulse Drive" <t>')
+
+	send_command('bind !numpad1 input /ws "Tachi: Kagero" <t>')
+	send_command('bind !numpad2 input /ws "Tachi: Goten" <t>')
+	send_command('bind !numpad3 input /ws "Tachi: Koki" <t>')
+	send_command('bind !numpad4 input /ws "Impulse Drive" <t>')
 	
 	--Dual Box binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -177,6 +179,11 @@ function user_setup()
 
     set_lockstyle()
     select_default_macro_book()
+	
+	--Gearinfo Functions
+
+    state.Auto_Kite = M(false, 'Auto_Kite')
+	
 end
 
 
@@ -266,9 +273,10 @@ function user_unload()
 	
 	--Gear Removal Commands
 	
-	--Unload Dressup Lua
-	
-    send_command('lua u Dressup')
+	--Unload Gearinfo/Dressup Lua
+
+    send_command('lua u gearinfo')
+	send_command('lua u Dressup')
 
 end
 
@@ -282,9 +290,9 @@ function init_gear_sets()
     -- Precast Sets
     -- Precast sets to enhance JAs
 
-    sets.precast.JA.Meditate = {head="Myochin Kabuto",hands="Sakonji Kote"}
-    sets.precast.JA['Warding Circle'] = {head="Myochin Kabuto"}
-    sets.precast.JA['Blade Bash'] = {hands="Sakonji Kote"}
+    sets.precast.JA.Meditate = {head="Wakido Kabuto +3",hands={ name="Sakonji Kote +3", augments={'Enhances "Blade Bash" effect',}},back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},}
+    sets.precast.JA['Warding Circle'] = {head="Wakido Kabuto +3"}
+    sets.precast.JA['Blade Bash'] = {hands={ name="Sakonji Kote +3", augments={'Enhances "Blade Bash" effect',}},}
 
     -- Waltz set (chr and vit)
 
@@ -359,7 +367,11 @@ function init_gear_sets()
 		left_ring="Epaminondas's Ring",
 		right_ring="Niqmaddu Ring",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-
+		
+	sets.precast.WS['Tachi: Goten'] = sets.precast.WS['Tachi: Jinpu']
+	sets.precast.WS['Tachi: Kagero'] = sets.precast.WS['Tachi: Jinpu']
+	sets.precast.WS['Tachi: Koki'] = sets.precast.WS['Tachi: Jinpu']
+	sets.precast.WS['Tachi: '] = sets.precast.WS['Tachi: Jinpu']
 
 
     -- Midcast Sets
@@ -405,7 +417,7 @@ function init_gear_sets()
 		legs={ name="Tatena. Haidate +1", augments={'Path: A',}},
 		feet={ name="Tatena. Sune. +1", augments={'Path: A',}},
 		neck={ name="Vim Torque +1", augments={'Path: A',}},
-		waist="Ioskeha Belt +1",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Schere Earring", augments={'Path: A',}},
 		right_ear="Telos Earring",
 		left_ring="Niqmaddu Ring",
@@ -420,7 +432,7 @@ function init_gear_sets()
 		legs={ name="Tatena. Haidate +1", augments={'Path: A',}},
 		feet={ name="Tatena. Sune. +1", augments={'Path: A',}},
 		neck={ name="Vim Torque +1", augments={'Path: A',}},
-		waist="Ioskeha Belt +1",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Schere Earring", augments={'Path: A',}},
 		right_ear="Telos Earring",
 		left_ring="Niqmaddu Ring",
@@ -435,7 +447,7 @@ function init_gear_sets()
 		legs={ name="Tatena. Haidate +1", augments={'Path: A',}},
 		feet={ name="Tatena. Sune. +1", augments={'Path: A',}},
 		neck={ name="Vim Torque +1", augments={'Path: A',}},
-		waist="Ioskeha Belt +1",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Schere Earring", augments={'Path: A',}},
 		right_ear="Telos Earring",
 		left_ring="Niqmaddu Ring",
@@ -445,18 +457,18 @@ function init_gear_sets()
 		
    
 	sets.engaged.Hybrid = {
-		ammo="Aurgelmir Orb +1",
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
-		body="Mpaca's Doublet",
+		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Wakido Kote +3",
-		legs="Mpaca's Hose",
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Moonlight Nodowa",
-		waist="Ioskeha Belt +1",
-		left_ear="Digni. Earring",
+		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Dedition Earring",
 		right_ear="Telos Earring",
-		left_ring="Defending Ring",
-		right_ring="Niqmaddu Ring",
+		left_ring="Niqmaddu Ring",
+		right_ring="Chirich Ring +1",
 		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},}
 		--46% DT + 6% PDT
 	
@@ -466,6 +478,8 @@ function init_gear_sets()
 	------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
+
+	sets.Kiting = {}
 
     sets.buff.Sekkanoki = {hands="Unkai Kote +2"}
     sets.buff.Sengikori = {feet="Unkai Sune-ate +2"}
@@ -484,7 +498,6 @@ function init_gear_sets()
 	sets.Dojikiri = {main={ name="Dojikiri Yasutsuna", augments={'Path: A',}},}
 	sets.Shining_One = {main='Shining One'}
 	sets.Soboro = {main= "Soboro Sukehiro"}
-	sets.Norifusa = {main= "Norifusa"}
 	
     sets.Obi = {waist="Hachirin-no-Obi"}
 	
@@ -577,6 +590,27 @@ end
 -- Code for Melee sets
 -------------------------------------------------------------------------------------------------------------------
 
+-- Handles Gearinfo / Melee / Weapon / Range Sets
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    update_combat_form()
+    determine_haste_group()
+	check_moving()
+end
+
+function job_update(cmdParams, eventArgs)
+	check_gear()
+    handle_equipping_gear(player.status)
+end
+
+	--Determines Dual Wield melee set
+function update_combat_form()
+    if DW == true then
+        state.CombatForm:set('DW')
+    elseif DW == false then
+        state.CombatForm:reset()
+    end
+end
+
 	--Handles Weapon set changes and Reraise set
 function job_state_change(field, new_value, old_value)
  
@@ -600,6 +634,10 @@ function customize_idle_set(idleSet)
     else
         enable('back')
     end
+	
+	if state.Auto_Kite.value == true then
+       idleSet = set_combine(idleSet, sets.Kiting)
+    end
     
     return idleSet
 	
@@ -609,6 +647,45 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
+	--Determines Haste Group / Melee set for Gear Info
+function determine_haste_group()
+    classes.CustomMeleeGroups:clear()
+    if DW == true then
+        if DW_needed <= 11 then
+            classes.CustomMeleeGroups:append('MaxHaste')
+        elseif DW_needed > 11 and DW_needed <= 26 then
+            classes.CustomMeleeGroups:append('HighHaste')
+        elseif DW_needed > 26 and DW_needed <= 31 then
+            classes.CustomMeleeGroups:append('MidHaste')
+        elseif DW_needed > 31 and DW_needed <= 42 then
+            classes.CustomMeleeGroups:append('LowHaste')
+        elseif DW_needed > 42 then
+            classes.CustomMeleeGroups:append('')
+        end
+    end
+end
+
+	--Gear Info Functions
+function job_self_command(cmdParams, eventArgs)
+    gearinfo(cmdParams, eventArgs)
+end
+
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
+    end
+end
+
+	--Auto_Kite function
 function check_moving()
     if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
         if state.Auto_Kite.value == false and moving then
@@ -618,6 +695,33 @@ function check_moving()
         end
     end
 end
+
+	--Allows equipping of warp/exp rings without auto swapping back to current set
+function check_gear()
+    if no_swap_gear:contains(player.equipment.left_ring) then
+        disable("ring1")
+    else
+        enable("ring1")
+    end
+    if no_swap_gear:contains(player.equipment.right_ring) then
+        disable("ring2")
+    else
+        enable("ring2")
+    end
+end
+
+windower.register_event('zone change',
+    function()
+        if no_swap_gear:contains(player.equipment.left_ring) then
+            enable("ring1")
+            equip(sets.idle)
+        end
+        if no_swap_gear:contains(player.equipment.right_ring) then
+            enable("ring2")
+            equip(sets.idle)
+        end
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

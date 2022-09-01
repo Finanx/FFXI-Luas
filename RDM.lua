@@ -210,6 +210,7 @@ function user_setup()
 
 	--Gearinfo Functions
 
+    state.Auto_Kite = M(false, 'Auto_Kite')
     Haste = 0
     DW_needed = 0
     DW = false
@@ -318,7 +319,7 @@ function user_unload()
 	--Unload Gearinfo/Dressup Lua
 	
     send_command('lua u gearinfo')
-	send_command('lua u Dressup')	
+	send_command('lua u Dressup')
 	
 end
 
@@ -400,11 +401,11 @@ function init_gear_sets()
 
     sets.precast.WS = {
 		ammo="Regal Gem",
-		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
-		body={ name="Viti. Tabard +3", augments={'Enhances "Chainspell" effect',}},
-		hands="Atrophy Gloves +3",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Chironic Slippers", augments={'Enmity-3','STR+8','Weapon skill damage +6%','Accuracy+10 Attack+10','Mag. Acc.+3 "Mag.Atk.Bns."+3',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear="Regal Earring",
@@ -416,8 +417,8 @@ function init_gear_sets()
     sets.precast.WS['Chant du Cygne'] = {
 		ammo="Yetshila +1",
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
-		body="Ayanmo Corazza +2",
-		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands="Malignance Gloves",
 		legs={ name="Zoar Subligar +1", augments={'Path: A',}},
 		feet="Thereoid Greaves",
 		neck="Fotia Gorget",
@@ -483,9 +484,9 @@ function init_gear_sets()
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Jhakri Cuffs +2",
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Baetyl Pendant",
+		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
+		feet="Leth. Houseaux +2",
+		neck="Sibyl Scarf",
 		waist="Orpheus's Sash",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Malignance Earring",
@@ -498,9 +499,9 @@ function init_gear_sets()
 		head="Pixie Hairpin +1",
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Jhakri Cuffs +2",
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Baetyl Pendant",
+		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
+		feet="Leth. Houseaux +2",
+		neck="Sibyl Scarf",
 		waist="Orpheus's Sash",
 		left_ear="Malignance Earring",
 		right_ear="Regal Earring",
@@ -513,9 +514,9 @@ function init_gear_sets()
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Jhakri Cuffs +2",
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Baetyl Pendant",
+		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
+		feet="Leth. Houseaux +2",
+		neck="Sibyl Scarf",
 		waist="Orpheus's Sash",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Malignance Earring",
@@ -528,8 +529,8 @@ function init_gear_sets()
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Jhakri Cuffs +2",
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
+		feet="Leth. Houseaux +2",
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
 		waist="Orpheus's Sash",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -687,17 +688,17 @@ function init_gear_sets()
 		body={ name="Viti. Tabard +3", augments={'Enhances "Chainspell" effect',}},
 		hands="Atrophy Gloves +3",
 		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
-		feet="Leth. Houseaux +1",
+		feet="Leth. Houseaux +2",
 		neck="Dls. Torque +2",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear="Loquac. Earring",
+		right_ear={ name="Lethargy Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+6','Mag. Acc.+6',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
 		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
 
     sets.midcast['Phalanx'] = {
-		main={ name="Crocea Mors", augments={'Path: C',}},
+		main="Sakpata's Sword",
 		sub="Ammurapi Shield",
 		ammo="Sapience Orb",
 		head={ name="Telchine Cap", augments={'"Fast Cast"+4','Enh. Mag. eff. dur. +10',}},
@@ -707,11 +708,11 @@ function init_gear_sets()
 		feet={ name="Taeon Boots", augments={'Phalanx +3',}},
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
 		waist="Embla Sash",
-		left_ear="Andoaa Earring",
-		right_ear="Mimir Earring",
+		left_ear="Mimir Earring",
+		right_ear={ name="Lethargy Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+6','Mag. Acc.+6',}},
 		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring +1",
-		back={ name="Ghostfyre Cape", augments={'Enfb.mag. skill +1','Enha.mag. skill +10','Mag. Acc.+5','Enh. Mag. eff. dur. +18',}},}
+		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
 		
 	sets.midcast['Aquaveil'] = {
 		main={ name="Crocea Mors", augments={'Path: C',}},
@@ -721,11 +722,11 @@ function init_gear_sets()
 		body={ name="Viti. Tabard +3", augments={'Enhances "Chainspell" effect',}},
 		hands="Atrophy Gloves +3",
 		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
-		feet="Leth. Houseaux +1",
+		feet="Leth. Houseaux +2",
 		neck="Dls. Torque +2",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear="Loquac. Earring",
+		right_ear={ name="Lethargy Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+6','Mag. Acc.+6',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
 		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
@@ -738,7 +739,7 @@ function init_gear_sets()
 		body={ name="Viti. Tabard +3", augments={'Enhances "Chainspell" effect',}},
 		hands={ name="Viti. Gloves +3", augments={'Enhancing Magic duration',}},
 		legs="Atrophy Tights +3",
-		feet="Leth. Houseaux +1",
+		feet="Leth. Houseaux +2",
 		neck="Incanter's Torque",
 		waist="Olympus Sash",
 		left_ear="Mimir Earring",
@@ -751,15 +752,15 @@ function init_gear_sets()
 		main={ name="Crocea Mors", augments={'Path: C',}},
 		sub="Ammurapi Shield",
 		ammo="Sapience Orb",
-		head="Leth. Chappel +1",
-		body="Lethargy Sayon +1",
+		head="Leth. Chappel +2",
+		body="Lethargy Sayon +2",
 		hands="Atrophy Gloves +3",
-		legs="Leth. Fuseau +1",
-		feet="Leth. Houseaux +1",
+		legs="Leth. Fuseau +2",
+		feet="Leth. Houseaux +2",
 		neck="Dls. Torque +2",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear="Loquac. Earring",
+		right_ear={ name="Lethargy Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+6','Mag. Acc.+6',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
 		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
@@ -780,12 +781,12 @@ function init_gear_sets()
 		head={ name="Amalric Coif +1", augments={'INT+12','Mag. Acc.+25','Enmity-6',}},
 		body="Atrophy Tabard +3",
 		hands="Atrophy Gloves +3",
-		legs="Leth. Fuseau +1",
-		feet="Leth. Houseaux +1",
+		legs="Leth. Fuseau +2",
+		feet="Leth. Houseaux +2",
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear="Loquac. Earring",
+		right_ear={ name="Lethargy Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+6','Mag. Acc.+6',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
 		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
@@ -799,16 +800,17 @@ function init_gear_sets()
 
     sets.midcast.Storm = sets.midcast['Enhancing Magic']
 
-     ------------------------------------ Enfeebling Spells --------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------
+    ------------------------------------- Enfeebling Spells ----------------------------------------
+    ------------------------------------------------------------------------------------------------
 	 
-	 --MND Potency Based Enfeebling Slow,Paralyze,Addle
-	 
+	 --MND Potency Based Enfeebling Slow,Paralyze,Addle	 
 	sets.midcast['Enfeebling Magic'] = {
 		main="Daybreak",
 		sub="Ammurapi Shield",
 		ammo="Regal Gem",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
-		body="Lethargy Sayon +1",
+		body="Lethargy Sayon +2",
 		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
@@ -821,14 +823,13 @@ function init_gear_sets()
 		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
 		
 	--Accuracy Based Enfeebling Frazzle 1-2, Dispel, Innundation
-		
 	sets.midcast['Enfeebling Magic'].MACC = {
 		main={ name="Murgleis", augments={'Path: A',}},
 		sub="Ammurapi Shield",
 		ammo="Regal Gem",
 		head="Atrophy Chapeau +3",
 		body="Atrophy Tabard +3",
-		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		hands="Leth. Ganth. +2",
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 		neck="Dls. Torque +2",
@@ -845,14 +846,13 @@ function init_gear_sets()
 	sets.midcast['Inundation'] = sets.midcast['Enfeebling Magic'].MACC
 
 	--Enfeebling Skill based spells Frazzle 3 (625 Skill Cap), Distract 1-3 (610 Skill Cap),
-	
 	sets.midcast['Enfeebling Magic'].Skill	= {
 		main={ name="Murgleis", augments={'Path: A',}},
 		sub="Ammurapi Shield",
 		ammo="Regal Gem",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 		body="Atrophy Tabard +3",
-		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		hands="Leth. Ganth. +2",
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
@@ -869,14 +869,13 @@ function init_gear_sets()
 	sets.midcast['Distract	III'] = sets.midcast['Enfeebling Magic'].Skill
 	
 	--Enfeebling Duration for spells that need to last long Sleeps,Break,Blind,Silence
-		
 	sets.midcast['Enfeebling Magic'].Duration = {
 		main={ name="Murgleis", augments={'Path: A',}},
 		sub="Ammurapi Shield",
 		ammo="Regal Gem",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 		body="Atrophy Tabard +3",
-		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		hands="Leth. Ganth. +2",
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
@@ -895,16 +894,13 @@ function init_gear_sets()
 	sets.midcast['Sleepga'] = sets.midcast['Enfeebling Magic'].Duration
 	
 	
-	-------------------------------------------------------------------------------------------------------------------------------
-	
-	
 	sets.midcast.Dispelga = {
 		main="Daybreak",
 		sub="Ammurapi Shield",
 		ammo="Regal Gem",
 		head="Atrophy Chapeau +3",
 		body="Atrophy Tabard +3",
-		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		hands="Leth. Ganth. +2",
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 		neck="Dls. Torque +2",
@@ -920,7 +916,7 @@ function init_gear_sets()
 		sub="Ammurapi Shield",
 		ammo="Regal Gem",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
-		body="Volte Jupon",	
+		body="Volte Jupon",
 		hands={ name="Chironic Gloves", augments={'MND+4','Phys. dmg. taken -2%','"Treasure Hunter"+1','Accuracy+5 Attack+5',}},
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
@@ -937,7 +933,7 @@ function init_gear_sets()
 		sub="Ammurapi Shield",
 		ammo="Regal Gem",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
-		body="Volte Jupon",	
+		body="Volte Jupon",
 		hands={ name="Chironic Gloves", augments={'MND+4','Phys. dmg. taken -2%','"Treasure Hunter"+1','Accuracy+5 Attack+5',}},
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
@@ -955,7 +951,7 @@ function init_gear_sets()
 		ammo="Regal Gem",
 		head="Atrophy Chapeau +3",
 		body="Atrophy Tabard +3",
-		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		hands="Leth. Ganth. +2",
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 		neck="Dls. Torque +2",
@@ -989,7 +985,7 @@ function init_gear_sets()
 		main="Daybreak",
 		sub="Ammurapi Shield",
 		ammo="Pemphredo Tathlum",
-		head="Jhakri Coronal +2",
+		head="Leth. Chappel +2",
 		body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
@@ -1026,7 +1022,7 @@ function init_gear_sets()
 		ammo="Regal Gem",
 		head=empty,
 		body="Twilight Cloak",
-		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		hands="Leth. Ganth. +2",
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 		neck="Dls. Torque +2",
@@ -1040,7 +1036,7 @@ function init_gear_sets()
     -- Initializes trusts at iLvl 119
     sets.midcast.Trust = sets.precast.FC
 
-    sets.buff.Saboteur = {hands="Leth. Gantherots +1"}
+    sets.buff.Saboteur = {hands="Leth. Ganth. +2"}
 
 
     ------------------------------------------------------------------------------------------------
@@ -1052,7 +1048,7 @@ function init_gear_sets()
 		sub="Genmei Shield",																												--10% PDT
 		ammo="Homiliary",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
-		body="Atrophy Tabard +3",
+		body="Lethargy Sayon +2",																											--13%DT
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},																				--7% DT
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},																				--8% DT
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},																				--7% DT
@@ -1060,7 +1056,7 @@ function init_gear_sets()
 		waist="Flume Belt +1",																												--4% PDT
 		left_ear="Mimir Earring",
 		right_ear="Meili Earring",
-		left_ring="Defending Ring",																											--10% DT
+		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring +1",
 		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},} --10% PDT
 		--38% DT + 24 PDT
@@ -1345,6 +1341,8 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
+	sets.Kiting = {legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},}
+
 	sets.TreasureHunter = {
 		hands={ name="Chironic Gloves", augments={'MND+4','Phys. dmg. taken -2%','"Treasure Hunter"+1','Accuracy+5 Attack+5',}}, 	--TH1
 		body="Volte Jupon",			--TH2
@@ -1372,10 +1370,10 @@ function init_gear_sets()
 	sets.Levante.SW = {main="Levante Dagger", sub="Ammurapi Shield"}
 	
 	sets.Tauret = {main="Tauret", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
-	sets.Tauret.SW = {main="Tauret", sub="Genmei Shield"}
+	sets.Tauret.SW = {main={ name="Gleti's Knife", augments={'Path: A',}}, sub="Genmei Shield"}
 	
-	sets.Maxentius = {main="Kaja Rod", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
-	sets.Maxentius.SW = {main="Kaja Rod", sub="Genmei Shield"}
+	sets.Maxentius = {main="Maxentius", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
+	sets.Maxentius.SW = {main="Maxentius", sub="Genmei Shield"}
 	
 	sets.Murgleis = {main={ name="Murgleis", augments={'Path: A',}},sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
 	sets.Murgleis.SW = {main={ name="Murgleis", augments={'Path: A',}},sub="Ammurapi Shield"}
@@ -1525,6 +1523,7 @@ end
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
+	check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -1623,6 +1622,16 @@ function update_combat_form()
 	else
 		enable('range','ammo')
 	end
+end
+
+-- Modify the default idle set after it was constructed.
+function customize_idle_set(idleSet)
+
+    if state.Auto_Kite.value == true then
+       idleSet = set_combine(idleSet, sets.Kiting)
+    end
+	
+    return idleSet
 end
 
 -- Custom spell mapping.
@@ -1744,6 +1753,17 @@ function gearinfo(cmdParams, eventArgs)
         end
         if not midaction() then
             job_update()
+        end
+    end
+end
+
+	--Auto_Kite function
+function check_moving()
+    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
+        if state.Auto_Kite.value == false and moving then
+            state.Auto_Kite:set(true)
+        elseif state.Auto_Kite.value == true and moving == false then
+            state.Auto_Kite:set(false)
         end
     end
 end

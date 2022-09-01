@@ -209,7 +209,8 @@ function user_setup()
     set_lockstyle()
 
 	--Gearinfo functions
-	
+
+    state.Auto_Kite = M(false, 'Auto_Kite')	
     Haste = 0
     DW_needed = 0
     DW = false
@@ -370,7 +371,7 @@ function init_gear_sets()
 		Right_ring="Luzaf's Ring",
 		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}
 
-    sets.precast.CorsairRoll["Tactician's Roll"] = set_combine(sets.precast.CorsairRoll, {body="Chasseur's Frac +1"})
+    sets.precast.CorsairRoll["Tactician's Roll"] = set_combine(sets.precast.CorsairRoll, {body="Chasseur's Frac +2"})
     sets.precast.CorsairRoll["Allies' Roll"] = set_combine(sets.precast.CorsairRoll, {hands="Chasseur's Gants +1"})
 
     sets.precast.FoldDoubleBust = {hands="Lanun Gants"}
@@ -402,7 +403,7 @@ function init_gear_sets()
 		
 	sets.precast.RA = {
 		ammo=gear.RAbullet,
-		head="Chass. Tricorne +1",
+		head="Chass. Tricorne +2",
 		body="Oshosi Vest +1",
 		hands={ name="Carmine Fin. Ga. +1", augments={'Rng.Atk.+20','"Mag.Atk.Bns."+12','"Store TP"+6',}},
 		legs={ name="Adhemar Kecks +1", augments={'AGI+12','"Rapid Shot"+13','Enmity-6',}},
@@ -419,7 +420,7 @@ function init_gear_sets()
 
 	sets.precast.RA.Flurry1 = {
 		ammo=gear.RAbullet,
-		head="Chass. Tricorne +1",
+		head="Chass. Tricorne +2",
 		body="Laksa. Frac +3",
 		hands={ name="Carmine Fin. Ga. +1", augments={'Rng.Atk.+20','"Mag.Atk.Bns."+12','"Store TP"+6',}},
 		legs={ name="Adhemar Kecks +1", augments={'AGI+12','"Rapid Shot"+13','Enmity-6',}},
@@ -436,7 +437,7 @@ function init_gear_sets()
 
 	sets.precast.RA.Flurry2 = {
 		ammo=gear.RAbullet,
-		head="Chass. Tricorne +1",
+		head="Chass. Tricorne +2",
 		body="Laksa. Frac +3",
 		hands={ name="Carmine Fin. Ga. +1", augments={'Rng.Atk.+20','"Mag.Atk.Bns."+12','"Store TP"+6',}},
 		legs={ name="Adhemar Kecks +1", augments={'AGI+12','"Rapid Shot"+13','Enmity-6',}},
@@ -698,6 +699,10 @@ function init_gear_sets()
 		left_ring="Regal Ring",
 		right_ring="Hajduk Ring +1",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10',}},}
+		
+	sets.TripleShot = {}
+	
+	sets.TripleShot_AM = {}
 
     ------------------------------------------------------------------------------------------------
     ----------------------------------------- Idle Sets --------------------------------------------
@@ -1028,6 +1033,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
+	sets.Kiting = {legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},}
 
     sets.TreasureHunter = {
 		body="Volte Jupon",		--TH2
@@ -1153,8 +1159,13 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             equip(sets.Obi)
         end
     elseif spell.action_type == 'Ranged Attack' then
+	        if buffactive['Triple Shot'] then
+				equip(sets.TripleShot)
+			end
+            if (buffactive['Aftermath: Lv.3'] or buffactive['Aftermath: Lv.3'] or buffactive['Aftermath: Lv.3']) and player.equipment.ranged == "Armageddon" then
+                equip(sets.TripleShot_AM)
+			end
     end
-	
 end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
@@ -1235,6 +1246,7 @@ end
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
+	check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -1253,7 +1265,7 @@ function update_combat_form()
     end
 end
 
-	
+	-- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
 
 		--Allows CP back to stay on if toggled on
@@ -1263,6 +1275,11 @@ function customize_idle_set(idleSet)
     else
         enable('back')
     end
+	
+	if state.Auto_Kite.value == true then
+       idleSet = set_combine(idleSet, sets.Kiting)
+    end
+	
     return idleSet
 end
 
@@ -1390,6 +1407,17 @@ function gearinfo(cmdParams, eventArgs)
         end
         if not midaction() then
             job_update()
+        end
+    end
+end
+
+	--Auto_Kite function
+function check_moving()
+    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
+        if state.Auto_Kite.value == false and moving then
+            state.Auto_Kite:set(true)
+        elseif state.Auto_Kite.value == true and moving == false then
+            state.Auto_Kite:set(false)
         end
     end
 end

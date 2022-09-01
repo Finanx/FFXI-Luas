@@ -292,6 +292,7 @@ function user_setup()
 
 	--Gearinfo functions
 
+    state.Auto_Kite = M(false, 'Auto_Kite')
     Haste = 0
     DW_needed = 0
     DW = false
@@ -425,7 +426,7 @@ function init_gear_sets()
     sets.precast.JA['Provoke'] = sets.Enmity
 
     sets.buff['Burst Affinity'] = {legs="Assim. Shalwar +3", feet="Hashi. Basmak +1"}
-    sets.buff['Diffusion'] = {feet="Luhlaza Charuqs +3"}
+    sets.buff['Diffusion'] = {feet="Luhlaza Charuqs +1"}
     sets.buff['Efflux'] = {legs="Hashishin Tayt +1"}
 
     sets.precast.JA['Azure Lore'] = {hands="Luh. Bazubands +1"}
@@ -686,7 +687,7 @@ function init_gear_sets()
         body="Assim. Jubbah +3",
         hands="Rawhide Gloves",
         legs="Hashishin Tayt +1",
-        feet="Luhlaza Charuqs +3",
+        feet="Luhlaza Charuqs +1",
         neck="Incanter's Torque",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
@@ -802,19 +803,21 @@ function init_gear_sets()
     sets.midcast['Blue Magic'].MagicalChr = set_combine(sets.midcast['Blue Magic'].Magical, {})
 
     sets.midcast['Blue Magic'].MagicAccuracy = {
+	    main="Bunzi's Rod",
+		sub="Maxentius",
 		ammo="Pemphredo Tathlum",
 		head="Assim. Keffiyeh +3",
 		body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		hands="Malignance Gloves",
 		legs="Assim. Shalwar +3",
 		feet="Malignance Boots",
-		neck="Erra Pendant",
+		neck={ name="Mirage Stole +2", augments={'Path: A',}},
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Regal Earring",
 		right_ear="Crep. Earring",
 		left_ring="Stikini Ring +1",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
-		back={ name="Rosmerta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},}
+		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
 
     sets.midcast['Subduction'] = {
 		ammo="Pemphredo Tathlum",
@@ -1315,7 +1318,7 @@ function init_gear_sets()
     sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid)
     sets.engaged.DW.Acc.DT = set_combine(sets.engaged.DW.Acc, sets.engaged.Hybrid)
 
-    sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.Lo66666666666wHaste, sets.engaged.Hybrid)
     sets.engaged.DW.Acc.DT.LowHaste = set_combine(sets.engaged.DW.Acc.LowHaste, sets.engaged.Hybrid)
 
     sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid)
@@ -1331,6 +1334,8 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
+
+	sets.Kiting = {legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},}
 
     --sets.Learning = {hands="Assim. Bazu. +1"}
     sets.latent_refresh = {waist="Fucho-no-obi"}
@@ -1354,7 +1359,7 @@ function init_gear_sets()
 		--Weaponsets
 
 	sets.Naegling = {main="Naegling", sub="Zantetsuken"}
-	sets.Maxentius = {main="Kaja Rod", sub="Bunzi's Rod"}
+	sets.Maxentius = {main="Maxentius", sub="Bunzi's Rod"}
 	sets.Magic_Accuracy = {main="Bunzi's Rod", sub="Naegling"}
     
 
@@ -1453,13 +1458,19 @@ end
 
 function check_weaponset()
 		if	state.WeaponSet.value == 'Naegling' then
+			enable('main','sub')
 			equip(sets.Naegling)
+			disable('main','sub')
 		end
 		if state.WeaponSet.value == 'Maxentius' then
+			enable('main','sub')
 			equip(sets.Maxentius)
+			disable('main','sub')
 		end
 		if state.WeaponSet.value == 'Magic_Accuracy' then
+			enable('main','sub')
 			equip(sets.Magic_Accuracy)
+			disable('main','sub')
 		end
 end
 
@@ -1472,6 +1483,7 @@ end
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
+	check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -1519,6 +1531,10 @@ function customize_idle_set(idleSet)
         disable('back')
     else
         enable('back')
+    end
+	
+	if state.Auto_Kite.value == true then
+       idleSet = set_combine(idleSet, sets.Kiting)
     end
 
     return idleSet
@@ -1620,6 +1636,17 @@ function gearinfo(cmdParams, eventArgs)
         end
         if not midaction() then
             job_update()
+        end
+    end
+end
+
+	--Auto_Kite function
+function check_moving()
+    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
+        if state.Auto_Kite.value == false and moving then
+            state.Auto_Kite:set(true)
+        elseif state.Auto_Kite.value == true and moving == false then
+            state.Auto_Kite:set(false)
         end
     end
 end

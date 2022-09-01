@@ -646,7 +646,7 @@ function init_gear_sets()
 
     -- Basic set for if no TP weapon is defined.
     sets.engaged = {
-		main="Kaja Rod",
+		main="Maxentius",
 		sub="Genmei Shield",
 		ammo="Amar Cluster",
 		head="Aya. Zucchetto +2",
@@ -663,7 +663,7 @@ function init_gear_sets()
 		back="Alaunus's Cape",}
 
     sets.engaged.Acc = {
-		main="Kaja Rod",
+		main="Maxentius",
 		sub="Genmei Shield",
 		ammo="Amar Cluster",
 		head="Aya. Zucchetto +2",
@@ -680,7 +680,7 @@ function init_gear_sets()
 		back="Alaunus's Cape",}
 
     sets.engaged.DW = {
-		main="Kaja Rod",
+		main="Maxentius",
 		sub="Bunzi's Rod",
 		ammo="Amar Cluster",
 		head="Aya. Zucchetto +2",
@@ -697,7 +697,7 @@ function init_gear_sets()
 		back="Alaunus's Cape",}
 
     sets.engaged.DW.Acc = {
-		main="Kaja Rod",
+		main="Maxentius",
 		sub="Bunzi's Rod",
 		ammo="Amar Cluster",
 		head="Aya. Zucchetto +2",
@@ -756,8 +756,8 @@ function init_gear_sets()
 	
 	--Weapon Sets
 
-	sets.Maxentius = {main="Kaja Rod", sub="Daybreak",}
-	sets.Maxentius.SW = {main="Kaja Rod", sub="Genmei Shield"}
+	sets.Maxentius = {main="Maxentius", sub="Daybreak",}
+	sets.Maxentius.SW = {main="Maxentius", sub="Genmei Shield"}
 	
 	sets.Xoanon = {main="Kaja Staff", sub="Enki Strap"}
 
