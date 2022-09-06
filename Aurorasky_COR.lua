@@ -477,8 +477,8 @@ function init_gear_sets()
     sets.precast.WS['Hot Shot'] = sets.precast.WS['Wildfire']
 
     sets.precast.WS['Leaden Salute'] = {
-		ammo="Eminent Bullet",
-		head="Herculean Helm",
+		ammo="Orichalc. Bullet",
+		head="Pixie Hairpin +1",
 		body="Laksa. Frac +2",
 		hands={ name="Herculean Gloves", augments={'"Mag.Atk.Bns."+21','Weapon skill damage +3%',}},
 		legs={ name="Herculean Trousers", augments={'Mag. Acc.+13 "Mag.Atk.Bns."+13','Weapon skill damage +4%','Mag. Acc.+3','"Mag.Atk.Bns."+5',}},

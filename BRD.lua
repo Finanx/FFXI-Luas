@@ -373,7 +373,7 @@ function init_gear_sets()
     sets.precast.FC.BardSong = {
 		main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
 		sub="Genmei Shield",
-		head="Fili Calot +1",
+		head="Fili Calot +2",
 		body="Inyanga Jubbah +2",
 		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
 		legs="Aya. Cosciales +2",
@@ -556,7 +556,7 @@ function init_gear_sets()
 	sets.midcast.SongEnhancing = {
 		main={ name="Carnwenhan", augments={'Path: A',}},
 		sub={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
-		head="Fili Calot +1",
+		head="Fili Calot +2",
 		body="Fili Hongreline +1",
 		hands="Fili Manchettes +2",
 		legs="Inyanga Shalwar +2",
@@ -572,7 +572,7 @@ function init_gear_sets()
 	sets.midcast.SongPlaceholder = {
 		main={ name="Carnwenhan", augments={'Path: A',}},
 		sub={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
-		head="Fili Calot +1",
+		head="Fili Calot +2",
 		body="Fili Hongreline +1",
 		hands="Fili Manchettes +2",
 		legs="Inyanga Shalwar +2",
@@ -596,7 +596,7 @@ function init_gear_sets()
 	sets.midcast.Ballad = set_combine(sets.midcast.SongEnhancing, {})
 	sets.midcast.Minne = set_combine(sets.midcast.SongEnhancing, {})
 	sets.midcast.Minuet = set_combine(sets.midcast.SongEnhancing, {body="Fili Hongreline +1"})
-	sets.midcast.Madrigal = set_combine(sets.midcast.SongEnhancing, {head="Fili Calot +1"})
+	sets.midcast.Madrigal = set_combine(sets.midcast.SongEnhancing, {head="Fili Calot +2"})
 	sets.midcast.HonorMarch = set_combine(sets.midcast.SongEnhancing, {range="Marsyas", hands="Fili Manchettes +1"})
 	sets.midcast.March = set_combine(sets.midcast.SongEnhancing, {hands="Fili Manchettes +1"})
 	sets.midcast.Etude = set_combine(sets.midcast.SongEnhancing, {head="Mousai Turban +1",})

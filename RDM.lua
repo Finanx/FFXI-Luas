@@ -1375,7 +1375,7 @@ function init_gear_sets()
 	sets.Maxentius = {main="Maxentius", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
 	sets.Maxentius.SW = {main="Maxentius", sub="Genmei Shield"}
 	
-	sets.Murgleis = {main={ name="Murgleis", augments={'Path: A',}},sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
+	sets.Murgleis = {main={ name="Murgleis", augments={'Path: A',}},sub="Bunzi's Rod",}
 	sets.Murgleis.SW = {main={ name="Murgleis", augments={'Path: A',}},sub="Ammurapi Shield"}
 	
 	--Range Sets

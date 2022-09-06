@@ -344,7 +344,7 @@ function init_gear_sets()
 		range="Compensator",
 		head={ name="Lanun Tricorne +3", augments={'Enhances "Winning Streak" effect',}},
 		body="Malignance Tabard",
-		hands="Chasseur's Gants +1",
+		hands="Chasseur's Gants +2",
 		legs="Malignance Tights",
 		feet="Malignance Boots",
 		neck="Regal Necklace",
@@ -360,7 +360,7 @@ function init_gear_sets()
 		range="Compensator",
 		head={ name="Lanun Tricorne +3", augments={'Enhances "Winning Streak" effect',}},
 		body="Malignance Tabard",
-		hands="Chasseur's Gants +1",
+		hands="Chasseur's Gants +2",
 		legs="Malignance Tights",
 		feet="Malignance Boots",
 		neck="Regal Necklace",
@@ -372,7 +372,7 @@ function init_gear_sets()
 		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}
 
     sets.precast.CorsairRoll["Tactician's Roll"] = set_combine(sets.precast.CorsairRoll, {body="Chasseur's Frac +2"})
-    sets.precast.CorsairRoll["Allies' Roll"] = set_combine(sets.precast.CorsairRoll, {hands="Chasseur's Gants +1"})
+    sets.precast.CorsairRoll["Allies' Roll"] = set_combine(sets.precast.CorsairRoll, {hands="Chasseur's Gants +2"})
 
     sets.precast.FoldDoubleBust = {hands="Lanun Gants"}
 
@@ -490,31 +490,31 @@ function init_gear_sets()
 
     sets.precast.WS['Last Stand'] = {
 		ammo=gear.WSbullet,
-		head={ name="Nyame Helm", augments={'Path: B',}},
-		body="Laksa. Frac +3",
-		hands="Meg. Gloves +2",
+		head={ name="Lanun Tricorne +3", augments={'Enhances "Winning Streak" effect',}},
+		body={ name="Ikenga's Vest", augments={'Path: A',}},
+		hands="Chasseur's Gants +2",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Lanun Bottes +3", augments={'Enhances "Wild Card" effect',}},
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
-		left_ear="Ishvara Earring",
-		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		left_ring="Epaminondas's Ring",
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Telos Earring",
+		left_ring="Dingir Ring",
 		right_ring="Regal Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},}
 
     sets.precast.WS['Last Stand'].Acc = {
-		ammo=gear.WSAccbullet,
-		head={ name="Nyame Helm", augments={'Path: B',}},
-		body="Laksa. Frac +3",
-		hands="Meg. Gloves +2",
+		ammo=gear.WSbullet,
+		head={ name="Lanun Tricorne +3", augments={'Enhances "Winning Streak" effect',}},
+		body={ name="Ikenga's Vest", augments={'Path: A',}},
+		hands="Chasseur's Gants +2",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Lanun Bottes +3", augments={'Enhances "Wild Card" effect',}},
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
-		left_ear="Ishvara Earring",
-		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		left_ring="Epaminondas's Ring",
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Telos Earring",
+		left_ring="Dingir Ring",
 		right_ring="Regal Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},}
 
@@ -672,10 +672,10 @@ function init_gear_sets()
     -- Ranged gear
     sets.midcast.RA = {
 		ammo=gear.RAbullet,
-		head="Malignance Chapeau",
-		body="Malignance Tabard",
+		head="Ikenga's Hat",
+		body={ name="Ikenga's Vest", augments={'Path: A',}},
 		hands="Malignance Gloves",
-		legs="Malignance Tights",
+		legs="Ikenga's Trousers",
 		feet="Malignance Boots",
 		neck="Iskur Gorget",
 		waist="Yemaya Belt",
@@ -700,9 +700,35 @@ function init_gear_sets()
 		right_ring="Hajduk Ring +1",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10',}},}
 		
-	sets.TripleShot = {}
+	sets.TripleShot = {
+		ammo=gear.RAbullet,
+		head="Meghanada Visor +2",
+		body="Chasseur's Frac +2",
+		hands={ name="Lanun Gants +3", augments={'Enhances "Fold" effect',}},
+		legs="Ikenga's Trousers",
+		feet="Osh. Leggings +1",
+		neck="Iskur Gorget",
+		waist="K. Kachina Belt +1",
+		left_ear="Odr Earring",
+		right_ear="Enervating Earring",
+		left_ring="Mummu Ring",
+		right_ring="Regal Ring",
+		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10',}},}
 	
-	sets.TripleShot_AM = {}
+	sets.TripleShot_AM = {
+		ammo=gear.RAbullet,
+		head="Meghanada Visor +2",
+		body="Chasseur's Frac +2",
+		hands={ name="Lanun Gants +3", augments={'Enhances "Fold" effect',}},
+		legs="Ikenga's Trousers",
+		feet="Osh. Leggings +1",
+		neck="Iskur Gorget",
+		waist="K. Kachina Belt +1",
+		left_ear="Odr Earring",
+		right_ear="Enervating Earring",
+		left_ring="Mummu Ring",
+		right_ring="Regal Ring",
+		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Crit.hit rate+10','Phys. dmg. taken-10%',}},}
 
     ------------------------------------------------------------------------------------------------
     ----------------------------------------- Idle Sets --------------------------------------------
