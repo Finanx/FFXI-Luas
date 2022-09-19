@@ -79,7 +79,7 @@ function job_setup()
         "Stone V", "Water V", "Aero V", "Fire V", "Blizzard V", "Thunder V"}
 
     state.Buff['Sublimation: Activated'] = buffactive['Sublimation: Activated'] or false
-    state.RegenMode = M{['description']='Regen Mode', 'Duration', 'Potency'}
+    state.RegenMode = M{['description']='Regen Mode', 'Potency', 'Duration'}
     state.CP = M(false, "Capacity Points Mode")
 
     update_active_strategems()
@@ -786,7 +786,7 @@ function init_gear_sets()
 		right_ring="Mallquis Ring",
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
 	
-	sets.midcast.Helix_MB = {
+	sets.midcast.Helix.MagicBurst = {
 		main="Bunzi's Rod",
 		sub="Ammurapi Shield",
 		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
@@ -804,10 +804,10 @@ function init_gear_sets()
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
 
     sets.midcast.DarkHelix = set_combine(sets.midcast.Helix, {head="Pixie Hairpin +1",left_ring="Archon Ring",})
-    sets.midcast.DarkHelix_MB = set_combine(sets.midcast.Helix_MB, {head="Pixie Hairpin +1",right_ring="Archon Ring",})
+    sets.midcast.DarkHelix.MagicBurst = set_combine(sets.midcast.Helix.MagicBurst, {head="Pixie Hairpin +1",right_ring="Archon Ring",})
 
     sets.midcast.LightHelix = set_combine(sets.midcast.Helix,{main="Daybreak",sub="Ammurapi Shield",})
-    sets.midcast.LightHelix_MB = set_combine(sets.midcast.Helix_MB,{main="Daybreak",sub="Ammurapi Shield",})
+    sets.midcast.LightHelix.MagicBurst = set_combine(sets.midcast.Helix.MagicBurst,{main="Daybreak",sub="Ammurapi Shield",})
 
     -- Initializes trusts at iLvl 119
     sets.midcast.Trust = sets.precast.FC
@@ -822,7 +822,7 @@ function init_gear_sets()
 		sub="Khonsu",
 		ammo="Homiliary",
 		head="Befouled Crown",
-		body="Jhakri Robe +2",
+		body="Arbatel Gown +2",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
@@ -929,25 +929,31 @@ end
 function job_post_midcast(spell, action, spellMap, eventArgs)
 
     if spell.skill == 'Elemental Magic' then
+
+		if state.MagicBurst.value == true and spell.skill == 'Elemental Magic' then
+			equip(sets.midcast['Elemental Magic'].MagicBurst)
+		end
+		
         if spellMap == "Helix" then
-            equip(sets.midcast.Helix)
-				if spell.english:startswith('Lumino') then
-					equip(sets.midcast.LightHelix)
-				elseif spell.english:startswith('Nocto') then
-					equip(sets.midcast.DarkHelix)
-				end
 			if state.MagicBurst.value == true then
-				equip(sets.midcast.Helix_MB)
+				equip(sets.midcast.Helix.MagicBurst)
 					if spell.english:startswith('Lumino') then
-						equip(sets.midcast.LightHelix_MB)
+						equip(sets.midcast.LightHelix.MagicBurst)
 					elseif spell.english:startswith('Nocto') then
-						equip(sets.midcast.DarkHelix_MB)
+						equip(sets.midcast.DarkHelix.MagicBurst)
+					end
+			else 
+				equip(sets.midcast.Helix)
+					if spell.english:startswith('Lumino') then
+						equip(sets.midcast.LightHelix)
+					elseif spell.english:startswith('Nocto') then
+						equip(sets.midcast.DarkHelix)
 					end
 			end
-        end
-		
-        if buffactive['Klimaform'] and spell.element == world.weather_element then
-            equip(sets.buff['Klimaform'])
+			
+			--if state.Buff.Klimaform and spell.element == world.weather_element then
+				--equip(sets.buff['Klimaform'])
+			--end
         end
 		
     end
@@ -964,10 +970,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
     end
 
-	if state.MagicBurst.value == true and spell.skill == 'Elemental Magic' then
-		equip(sets.midcast['Elemental Magic'].MagicBurst)
-	end
-	
     if spell.skill == 'Elemental Magic' then
 
 			--Equips gearset to cast Impact
