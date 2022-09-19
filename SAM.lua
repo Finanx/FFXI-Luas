@@ -104,7 +104,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'Dojikiri', 'Shining_One', 'Soboro' }
+	state.WeaponSet = M{['description']='Weapon Set', 'Dojikiri', 'Shining_One', 'Hachimonji', 'Soboro' }
 	state.AttackMode = M{['description']='Attack', 'Uncapped', 'Capped'}
 	state.Reraise = M(false, "Reraise Mode")
 	
@@ -125,7 +125,8 @@ function user_setup()
 
 	send_command('bind @1 gs c set WeaponSet Dojikiri')
 	send_command('bind @2 gs c set WeaponSet Shining_One')
-	send_command('bind @3 gs c set WeaponSet Soboro')
+	send_command('bind @3 gs c set WeaponSet Hachimonji')
+	send_command('bind @4 gs c set WeaponSet Soboro')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
@@ -228,6 +229,7 @@ function user_unload()
 	send_command('unbind ^numpad7')
 	send_command('unbind ^numpad8')
 	send_command('unbind ^numpad9')
+	send_command('unbind ^numpad.')
 	
 	send_command('unbind !numpad1')
     send_command('unbind !numpad2')
@@ -238,6 +240,7 @@ function user_unload()
 	send_command('unbind !numpad7')
 	send_command('unbind !numpad8')
 	send_command('unbind !numpad9')
+	send_command('unbind !numpad.')
 	
 	
 	--Remove Item Binds
@@ -479,7 +482,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-	sets.Kiting = {}
+	sets.Kiting = {feet="Danzo Sune-Ate"}
 
     sets.buff.Sekkanoki = {hands="Unkai Kote +2"}
     sets.buff.Sengikori = {feet="Unkai Sune-ate +2"}
@@ -497,7 +500,8 @@ function init_gear_sets()
 	
 	sets.Dojikiri = {main={ name="Dojikiri Yasutsuna", augments={'Path: A',}},}
 	sets.Shining_One = {main='Shining One'}
-	sets.Soboro = {main= "Soboro Sukehiro"}
+	sets.Hachimonji = {main="Hachimonji"}
+	sets.Soboro = {main="Soboro Sukehiro"}
 	
     sets.Obi = {waist="Hachirin-no-Obi"}
 	

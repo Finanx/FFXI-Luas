@@ -264,6 +264,7 @@ function user_unload()
 	send_command('unbind ^numpad7')
 	send_command('unbind ^numpad8')
 	send_command('unbind ^numpad9')
+	send_command('unbind ^numpad.')
 	
 	send_command('unbind !numpad1')
     send_command('unbind !numpad2')
@@ -274,6 +275,7 @@ function user_unload()
 	send_command('unbind !numpad7')
 	send_command('unbind !numpad8')
 	send_command('unbind !numpad9')
+	send_command('unbind !numpad.')
 	
 	
 	--Remove Item Binds
@@ -349,13 +351,10 @@ function init_gear_sets()
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear="Loquac. Earring",
+		right_ear={ name="Lethargy Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+6','Mag. Acc.+6',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
-		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},
-		}
-
-
+		back={ name="Fi Follet Cape +1", augments={'Path: A',}},}
 
     sets.precast.FC.Impact = {
 		main={ name="Crocea Mors", augments={'Path: C',}},
@@ -369,10 +368,10 @@ function init_gear_sets()
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear="Loquac. Earring",
+		right_ear={ name="Lethargy Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+6','Mag. Acc.+6',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
-		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
+		back={ name="Fi Follet Cape +1", augments={'Path: A',}},}
 		
 	sets.precast.FC.Dispelga = {
 		main="Daybreak",
@@ -386,14 +385,26 @@ function init_gear_sets()
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear="Loquac. Earring",
+		right_ear={ name="Lethargy Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+6','Mag. Acc.+6',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
-		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},
-		}
+		back={ name="Fi Follet Cape +1", augments={'Path: A',}},}
 
-
-
+	sets.precast.RA = {
+		range="Ullr",
+		ammo="Chapuli Arrow",
+		head={ name="Taeon Chapeau", augments={'"Snapshot"+5','"Snapshot"+5',}},
+		body={ name="Taeon Tabard", augments={'"Snapshot"+5','"Snapshot"+5',}},
+		hands={ name="Carmine Fin. Ga. +1", augments={'Rng.Atk.+20','"Mag.Atk.Bns."+12','"Store TP"+6',}},
+		legs={ name="Taeon Tights", augments={'"Snapshot"+4','"Snapshot"+5',}},
+		feet="Volte Spats",
+		neck={ name="Loricate Torque +1", augments={'Path: A',}},
+		waist="Yemaya Belt",
+		left_ear="Etiolation Earring",
+		right_ear="Genmei Earring",
+		left_ring="Defending Ring",
+		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     ------------------------------------------------------------------------------------------------
     ------------------------------------- Weapon Skill Sets ----------------------------------------
@@ -557,6 +568,22 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
+	
+	sets.midcast.ra = {
+		range="Ullr",
+		ammo="Chapuli Arrow",
+		head="Malignance Chapeau",
+		body="Malignance Tabard",
+		hands="Malignance Gloves",
+		legs="Malignance Tights",
+		feet="Malignance Boots",
+		neck="Combatant's Torque",
+		waist="Yemaya Belt",
+		left_ear="Telos Earring",
+		right_ear="Crep. Earring",
+		left_ring={ name="Cacoethic Ring +1", augments={'Path: A',}},
+		right_ring="Chirich Ring +1",
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
 	sets.Enmity = {
 		ammo="Sapience Orb",
@@ -1380,7 +1407,7 @@ function init_gear_sets()
 	
 	--Range Sets
 	
-	sets.Empyreal = {range="Kaja Bow", ammo="Chapuli Arrow"}
+	sets.Empyreal = {range="Ullr", ammo="Chapuli Arrow"}
 
 end
 

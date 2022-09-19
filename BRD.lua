@@ -290,6 +290,7 @@ function user_unload()
 	send_command('unbind ^numpad7')
 	send_command('unbind ^numpad8')
 	send_command('unbind ^numpad9')
+	send_command('unbind ^numpad.')
 	
 	send_command('unbind !numpad1')
     send_command('unbind !numpad2')
@@ -300,6 +301,7 @@ function user_unload()
 	send_command('unbind !numpad7')
 	send_command('unbind !numpad8')
 	send_command('unbind !numpad9')
+	send_command('unbind !numpad.')
 	
 	
 	--Remove Item Binds
@@ -361,7 +363,7 @@ function init_gear_sets()
 		body="Inyanga Jubbah +2",
 		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
 		legs="Aya. Cosciales +2",
-		feet={ name="Chironic Slippers", augments={'"Fast Cast"+7','MND+3',}},
+		feet="Fili Cothurnes +2",
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
 		left_ear="Loquac. Earring",
@@ -502,7 +504,7 @@ function init_gear_sets()
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Caro Necklace",
+		neck="Rep. Plat. Medal",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Ishvara Earring",
@@ -557,7 +559,7 @@ function init_gear_sets()
 		main={ name="Carnwenhan", augments={'Path: A',}},
 		sub={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
 		head="Fili Calot +2",
-		body="Fili Hongreline +1",
+		body="Fili Hongreline +2",
 		hands="Fili Manchettes +2",
 		legs="Inyanga Shalwar +2",
 		feet="Brioso Slippers +3",
@@ -573,7 +575,7 @@ function init_gear_sets()
 		main={ name="Carnwenhan", augments={'Path: A',}},
 		sub={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
 		head="Fili Calot +2",
-		body="Fili Hongreline +1",
+		body="Fili Hongreline +2",
 		hands="Fili Manchettes +2",
 		legs="Inyanga Shalwar +2",
 		feet="Brioso Slippers +3",
@@ -595,15 +597,15 @@ function init_gear_sets()
 	sets.midcast.Paeon = set_combine(sets.midcast.SongEnhancing, {head="Brioso Roundlet +3"})
 	sets.midcast.Ballad = set_combine(sets.midcast.SongEnhancing, {})
 	sets.midcast.Minne = set_combine(sets.midcast.SongEnhancing, {})
-	sets.midcast.Minuet = set_combine(sets.midcast.SongEnhancing, {body="Fili Hongreline +1"})
+	sets.midcast.Minuet = set_combine(sets.midcast.SongEnhancing, {body="Fili Hongreline +2"})
 	sets.midcast.Madrigal = set_combine(sets.midcast.SongEnhancing, {head="Fili Calot +2"})
-	sets.midcast.HonorMarch = set_combine(sets.midcast.SongEnhancing, {range="Marsyas", hands="Fili Manchettes +1"})
-	sets.midcast.March = set_combine(sets.midcast.SongEnhancing, {hands="Fili Manchettes +1"})
+	sets.midcast.HonorMarch = set_combine(sets.midcast.SongEnhancing, {range="Marsyas", hands="Fili Manchettes +2"})
+	sets.midcast.March = set_combine(sets.midcast.SongEnhancing, {hands="Fili Manchettes +2"})
 	sets.midcast.Etude = set_combine(sets.midcast.SongEnhancing, {head="Mousai Turban +1",})
 	sets.midcast.Carol = set_combine(sets.midcast.SongEnhancing, {hands="Mousai Gages +1",})
 	sets.midcast['Adventurer\'s Dirge'] = set_combine(sets.midcast.SongEnhancing, {range="Marsyas"})
 	sets.midcast['Foe Sirvente'] = set_combine(sets.midcast.SongEnhancing, {range="Marsyas"})
-	sets.midcast["Sentinel's Scherzo"] = set_combine(sets.midcast.SongEnhancing, {feet="Fili Cothurnes +1"})
+	sets.midcast["Sentinel's Scherzo"] = set_combine(sets.midcast.SongEnhancing, {feet="Fili Cothurnes +2"})
 	sets.midcast.Mazurka = set_combine(sets.midcast.SongEnhancing, {range="Marsyas"})
 	
 
@@ -651,7 +653,7 @@ function init_gear_sets()
 		sub="Ammurapi Shield",
 		range="Gjallarhorn",
 		head="Brioso Roundlet +3",
-		body="Fili Hongreline +1",
+		body="Fili Hongreline +2",
 		hands="Brioso Cuffs +3",
 		legs="Inyanga Shalwar +2",
 		feet="Brioso Slippers +3",
@@ -1122,7 +1124,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-	sets.Kiting = {feet="Fili Cothurnes +1"}
+	sets.Kiting = {feet="Fili Cothurnes +2"}
 
     sets.TreasureHunter = {
 		hands={ name="Chironic Gloves", augments={'MND+4','Phys. dmg. taken -2%','"Treasure Hunter"+1','Accuracy+5 Attack+5',}},	--TH1

@@ -256,6 +256,7 @@ function user_unload()
 	send_command('unbind ^numpad7')
 	send_command('unbind ^numpad8')
 	send_command('unbind ^numpad9')
+	send_command('unbind ^numpad.')
 	
 	send_command('unbind !numpad1')
     send_command('unbind !numpad2')
@@ -266,6 +267,7 @@ function user_unload()
 	send_command('unbind !numpad7')
 	send_command('unbind !numpad8')
 	send_command('unbind !numpad9')
+	send_command('unbind !numpad.')
 	
 	
 	--Remove Item Binds
@@ -317,19 +319,23 @@ function init_gear_sets()
     ---------------------------------------- Precast Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.precast.JA['Berserk'] = {body="Pumm. Lorica +3",feet={ name="Agoge Calligae +1", augments={'Enhances "Tomahawk" effect',}},back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+    sets.precast.JA['Berserk'] = {
+		body="Pumm. Lorica +3",
+		feet={ name="Agoge Calligae +3", augments={'Enhances "Tomahawk" effect',}},
+		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
     
 	sets.precast.JA['Warcry'] = {head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},}
     
-	sets.precast.JA['Agressor'] = {head="Pummeler's Mask +3",
-		body={ name="Agoge Lorica +1", augments={'Enhances "Aggressive Aim" effect',}},}
+	sets.precast.JA['Agressor'] = {
+		head="Pummeler's Mask +3",
+		body={ name="Agoge Lorica +3", augments={'Enhances "Aggressive Aim" effect',}},}
 		
 	sets.precast.JA['Retaliation'] = {}
 	sets.precast.JA['Warrior\'s Charge'] = {}
-	sets.precast.JA['Tomahawk'] = {}
+	sets.precast.JA['Tomahawk'] = {feet={ name="Agoge Calligae +3", augments={'Enhances "Tomahawk" effect',}},}
 	sets.precast.JA['Restraint'] = {}
-	sets.precast.JA['Blood Rage'] = {}
-	sets.precast.JA['Mighty Strikes'] = {}
+	sets.precast.JA['Blood Rage'] = {body="Boii Lorica +1",}
+	sets.precast.JA['Mighty Strikes'] = {hands={ name="Agoge Mufflers", augments={'Enhances "Mighty Strikes" effect',}},}
 
 	sets.precast.JA['Provoke'] = {
 	    ammo="Sapience Orb",
@@ -651,14 +657,14 @@ function init_gear_sets()
 		head="Flam. Zucchetto +2",
 		body={ name="Sakpata's Plate", augments={'Path: A',}},
 		hands={ name="Sakpata's Gauntlets", augments={'Path: A',}},
-		legs="Sakpata's Cuisses",
-		feet="Flam. Gambieras +2",
+		legs="Pumm. Cuisses +3",
+		feet="Pumm. Calligae +3",
 		neck={ name="War. Beads +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Schere Earring", augments={'Path: A',}},
 		right_ear="Telos Earring",
 		left_ring="Niqmaddu Ring",
-		right_ring="Petrov Ring",
+		right_ring="Chirich Ring +1",
 		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 
     sets.engaged.Acc = {
@@ -718,11 +724,19 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged.Hybrid = {    
-		head="Sakpata's Helm",
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head={ name="Sakpata's Helm", augments={'Path: A',}},
 		body={ name="Sakpata's Plate", augments={'Path: A',}},
-		hands="Sakpata's Gauntlets",
+		hands={ name="Sakpata's Gauntlets", augments={'Path: A',}},
 		legs="Sakpata's Cuisses",
-		feet="Sakpata's Leggings",}
+		feet={ name="Sakpata's Leggings", augments={'Path: A',}},
+		neck={ name="War. Beads +2", augments={'Path: A',}},
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear={ name="Schere Earring", augments={'Path: A',}},
+		right_ear="Telos Earring",
+		left_ring="Niqmaddu Ring",
+		right_ring="Petrov Ring",
+		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 		
 		
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)

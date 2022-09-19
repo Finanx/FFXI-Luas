@@ -107,7 +107,7 @@ function user_setup()
     state.HybridMode:options('Normal', 'DT')
     state.WeaponskillMode:options('Normal')
     state.CastingMode:options('Normal', 'MACC')
-    state.IdleMode:options('Normal', 'DT')
+    state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
 	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Maxentius', 'Xoanon', 'Musa'}
 
@@ -253,6 +253,7 @@ function user_unload()
 	send_command('unbind ^numpad7')
 	send_command('unbind ^numpad8')
 	send_command('unbind ^numpad9')
+	send_command('unbind ^numpad.')
 	
 	send_command('unbind !numpad1')
     send_command('unbind !numpad2')
@@ -263,6 +264,7 @@ function user_unload()
 	send_command('unbind !numpad7')
 	send_command('unbind !numpad8')
 	send_command('unbind !numpad9')
+	send_command('unbind !numpad.')
 	
 	
 	--Remove Item Binds
@@ -320,12 +322,17 @@ function init_gear_sets()
     sets.precast.JA['Tabula Rasa'] = {legs="Peda. Pants +3"}
     sets.precast.JA['Enlightenment'] = {body="Peda. Gown +3"}
 
-    sets.precast.JA['Sublimation'] = {}
+    sets.precast.JA['Sublimation'] = {
+       head="Acad. Mortar. +3", --4
+       body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}}, --5
+       --right_ear="Savant's Earring", --1
+       waist="Embla Sash", --5
+       }
 
     -- Fast cast sets for spells
     sets.precast.FC = {    
 		main={ name="Musa", augments={'Path: C',}},
-		sub="Kaja Grip",
+		sub="Khonsu",
 		ammo="Sapience Orb",
 		head="Acad. Mortar. +3",
 		body="Zendik Robe",
@@ -379,7 +386,7 @@ function init_gear_sets()
 		ammo="Hydrocera",
 		head={ name="Kaykaus Mitra +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		body={ name="Kaykaus Bliaut +1", augments={'MP+80','"Cure" potency +6%','"Conserve MP"+7',}},
-		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		hands={ name="Peda. Bracers +3", augments={'Enh. "Tranquility" and "Equanimity"',}},
 		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		feet={ name="Kaykaus Boots +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		neck="Incanter's Torque",
@@ -396,12 +403,12 @@ function init_gear_sets()
 		ammo="Hydrocera",
 		head={ name="Kaykaus Mitra +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		body={ name="Kaykaus Bliaut +1", augments={'MP+80','"Cure" potency +6%','"Conserve MP"+7',}},
-		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		hands={ name="Peda. Bracers +3", augments={'Enh. "Tranquility" and "Equanimity"',}},
 		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		feet={ name="Kaykaus Boots +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		neck="Incanter's Torque",
 		waist="Hachirin-no-Obi",
-		left_ear="Beatific Earring",
+		left_ear="Mendi. Earring",
 		right_ear="Meili Earring",
 		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring +1",
@@ -413,14 +420,14 @@ function init_gear_sets()
 		ammo="Hydrocera",
 		head={ name="Kaykaus Mitra +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		body={ name="Kaykaus Bliaut +1", augments={'MP+80','"Cure" potency +6%','"Conserve MP"+7',}},
-		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		hands={ name="Peda. Bracers +3", augments={'Enh. "Tranquility" and "Equanimity"',}},
 		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		feet={ name="Kaykaus Boots +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		neck="Incanter's Torque",
-		waist="Luminary Sash",
+		neck="Phalaina Locket",
+		waist="Gishdubar Sash",
 		left_ear="Beatific Earring",
 		right_ear="Meili Earring",
-		left_ring="Stikini Ring +1",
+		left_ring="Kunaji Ring",
 		right_ring="Stikini Ring +1",
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
 
@@ -430,7 +437,7 @@ function init_gear_sets()
 		ammo="Hydrocera",
 		head={ name="Kaykaus Mitra +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		body={ name="Kaykaus Bliaut +1", augments={'MP+80','"Cure" potency +6%','"Conserve MP"+7',}},
-		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		hands={ name="Peda. Bracers +3", augments={'Enh. "Tranquility" and "Equanimity"',}},
 		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		feet={ name="Kaykaus Boots +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		neck="Incanter's Torque",
@@ -461,26 +468,26 @@ function init_gear_sets()
     sets.midcast.Cursna = {    
 		main="Daybreak",
 		sub="Ammurapi Shield",
-		ammo="Hydrocera",
-		head={ name="Kaykaus Mitra +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		body={ name="Kaykaus Bliaut +1", augments={'MP+80','"Cure" potency +6%','"Conserve MP"+7',}},
-		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		feet={ name="Kaykaus Boots +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		neck="Incanter's Torque",
-		waist="Luminary Sash",
-		left_ear="Beatific Earring",
-		right_ear="Meili Earring",
-		left_ring="Stikini Ring +1",
-		right_ring="Stikini Ring +1",
-		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
+		ammo="Sapience Orb",
+		head={ name="Vanya Hood", augments={'MP+50','"Fast Cast"+10','Haste+2%',}},
+		body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
+		hands={ name="Peda. Bracers +3", augments={'Enh. "Tranquility" and "Equanimity"',}},
+		legs="Acad. Pants +3",
+		feet={ name="Vanya Clogs", augments={'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+		neck="Debilis Medallion",
+		waist="Embla Sash",
+		left_ear="Meili Earring",
+		right_ear="Beatific Earring",
+		left_ring="Haoma's Ring",
+		right_ring="Menelaus's Ring",
+		back="Oretan. Cape +1",}
 
     sets.midcast['Enhancing Magic'] = {
 		main={ name="Musa", augments={'Path: C',}},
 		sub="Enki Strap",
 		ammo="Sapience Orb",
 		head={ name="Telchine Cap", augments={'"Fast Cast"+4','Enh. Mag. eff. dur. +10',}},
-		body={ name="Telchine Chas.", augments={'Enh. Mag. eff. dur. +10',}},
+		body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
 		hands={ name="Telchine Gloves", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +9',}},
 		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
 		feet={ name="Telchine Pigaches", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +10',}},
@@ -490,14 +497,14 @@ function init_gear_sets()
 		right_ear="Loquac. Earring",
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
-		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
+		back={ name="Fi Follet Cape +1", augments={'Path: A',}},}
 
     sets.midcast.EnhancingDuration = {
 		main={ name="Musa", augments={'Path: C',}},
 		sub="Enki Strap",
 		ammo="Sapience Orb",
 		head={ name="Telchine Cap", augments={'"Fast Cast"+4','Enh. Mag. eff. dur. +10',}},
-		body={ name="Telchine Chas.", augments={'Enh. Mag. eff. dur. +10',}},
+		body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
 		hands={ name="Telchine Gloves", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +9',}},
 		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
 		feet={ name="Telchine Pigaches", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +10',}},
@@ -507,13 +514,13 @@ function init_gear_sets()
 		right_ear="Loquac. Earring",
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
-		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
+		back={ name="Fi Follet Cape +1", augments={'Path: A',}},}
 
     sets.midcast.Regen = {
 		main={ name="Musa", augments={'Path: C',}},
 		sub="Enki Strap",
 		ammo="Sapience Orb",
-		head={ name="Telchine Cap", augments={'"Fast Cast"+4','Enh. Mag. eff. dur. +10',}},
+		head="Arbatel Bonnet +2",
 		body={ name="Telchine Chas.", augments={'Enh. Mag. eff. dur. +10',}},
 		hands={ name="Telchine Gloves", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +9',}},
 		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
@@ -548,7 +555,7 @@ function init_gear_sets()
 		sub="Enki Strap",
 		ammo="Sapience Orb",
 		head={ name="Amalric Coif +1", augments={'INT+12','Mag. Acc.+25','Enmity-6',}},
-		body={ name="Telchine Chas.", augments={'Enh. Mag. eff. dur. +10',}},
+		body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
 		hands={ name="Telchine Gloves", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +9',}},
 		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
 		feet={ name="Telchine Pigaches", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +10',}},
@@ -582,7 +589,7 @@ function init_gear_sets()
 		sub="Enki Strap",
 		ammo="Sapience Orb",
 		head={ name="Telchine Cap", augments={'"Fast Cast"+4','Enh. Mag. eff. dur. +10',}},
-		body={ name="Telchine Chas.", augments={'Enh. Mag. eff. dur. +10',}},
+		body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
 		hands={ name="Telchine Gloves", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +9',}},
 		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
 		feet={ name="Telchine Pigaches", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +10',}},
@@ -598,8 +605,8 @@ function init_gear_sets()
 		main={ name="Musa", augments={'Path: C',}},
 		sub="Enki Strap",
 		ammo="Sapience Orb",
-		head={ name="Telchine Cap", augments={'"Fast Cast"+4','Enh. Mag. eff. dur. +10',}},
-		body={ name="Telchine Chas.", augments={'Enh. Mag. eff. dur. +10',}},
+		head={ name="Amalric Coif +1", augments={'INT+12','Mag. Acc.+25','Enmity-6',}},
+		body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
 		hands={ name="Telchine Gloves", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +9',}},
 		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
 		feet={ name="Telchine Pigaches", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +10',}},
@@ -622,8 +629,7 @@ function init_gear_sets()
 		main="Bunzi's Rod",
 		sub="Ammurapi Shield",
 		ammo="Pemphredo Tathlum",
-		head="Acad. Mortar. +3",
-		body="Acad. Gown +3",
+		body={ name="Cohort Cloak +1", augments={'Path: A',}},
 		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		legs="Acad. Pants +3",
 		feet="Acad. Loafers +3",
@@ -635,12 +641,13 @@ function init_gear_sets()
 		right_ring="Stikini Ring +1",
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
 	
+	sets.midcast['Dia II'] = set_combine(sets.midcast['Enfeebling Magic'], {ammo="Per. Lucky Egg",body="Volte Jupon",waist="Chaac Belt",})
     sets.LightArts = set_combine(sets.midcast['Enfeebling Magic'], {})
-    sets.DarkArts = set_combine(sets.midcast['Enfeebling Magic'], {waist={ name="Acuity Belt +1", augments={'Path: A',}},})
+    sets.DarkArts = set_combine(sets.midcast['Enfeebling Magic'], {head="Acad. Mortar. +3",body="Acad. Gown +3",})
 	
     sets.midcast['Dark Magic'] = {
 	    main={ name="Musa", augments={'Path: C',}},
-		sub="Kaja Grip",
+		sub="Khonsu",
 		ammo="Pemphredo Tathlum",
 		head="Acad. Mortar. +3",
 		body="Acad. Gown +3",
@@ -693,15 +700,15 @@ function init_gear_sets()
 
     -- Elemental Magic
     sets.midcast['Elemental Magic'] = {
-	    main="Bunzi's Rod",
+		main="Bunzi's Rod",
 		sub="Ammurapi Shield",
 		ammo="Pemphredo Tathlum",
-		head="Jhakri Coronal +2",
+		head={ name="Peda. M.Board +3", augments={'Enh. "Altruism" and "Focalization"',}},
 		body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		feet={ name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}},
-		neck="Baetyl Pendant",
+		neck={ name="Argute Stole +2", augments={'Path: A',}},
 		waist="Eschan Stone",
 		left_ear="Regal Earring",
 		right_ear="Malignance Earring",
@@ -712,30 +719,30 @@ function init_gear_sets()
 	sets.midcast['Elemental Magic'].MagicBurst = {
 		main="Bunzi's Rod",
 		sub="Ammurapi Shield",
-		ammo="Pemphredo Tathlum",
-		head="Agwu's Cap",
+		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
+		head={ name="Peda. M.Board +3", augments={'Enh. "Altruism" and "Focalization"',}},
 		body={ name="Agwu's Robe", augments={'Path: A',}},
 		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		legs="Agwu's Slops",
 		feet="Agwu's Pigaches",
-		neck="Mizu. Kubikazari",
+		neck={ name="Argute Stole +2", augments={'Path: A',}},
 		waist="Eschan Stone",
 		left_ear="Regal Earring",
 		right_ear="Malignance Earring",
-		left_ring="Dim. Ring (Dem)",
+		left_ring="Freke Ring",
 		right_ring="Mujin Band",
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
 
     sets.midcast['Elemental Magic'].Resistant = {
-	    main="Bunzi's Rod",
+		main="Bunzi's Rod",
 		sub="Ammurapi Shield",
 		ammo="Pemphredo Tathlum",
-		head="Jhakri Coronal +2",
+		head={ name="Peda. M.Board +3", augments={'Enh. "Altruism" and "Focalization"',}},
 		body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		feet={ name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}},
-		neck="Baetyl Pendant",
+		neck={ name="Argute Stole +2", augments={'Path: A',}},
 		waist="Eschan Stone",
 		left_ear="Regal Earring",
 		right_ear="Malignance Earring",
@@ -743,46 +750,61 @@ function init_gear_sets()
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
 
-    sets.midcast.Impact = {}
-	
-    sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})
-
-    sets.midcast.Helix = {
-	    main="Bunzi's Rod",
+    sets.midcast.Impact = {
+		main="Bunzi's Rod",
 		sub="Ammurapi Shield",
-		ammo="Pemphredo Tathlum",
-		head="Jhakri Coronal +2",
-		body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
+		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
+		head={ name="Peda. M.Board +3", augments={'Enh. "Altruism" and "Focalization"',}},
+		body={ name="Agwu's Robe", augments={'Path: A',}},
 		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		feet={ name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}},
-		neck="Baetyl Pendant",
+		legs="Agwu's Slops",
+		feet="Agwu's Pigaches",
+		neck={ name="Argute Stole +2", augments={'Path: A',}},
 		waist="Eschan Stone",
 		left_ear="Regal Earring",
 		right_ear="Malignance Earring",
 		left_ring="Freke Ring",
-		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		right_ring="Mujin Band",
+		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
+	
+    sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})
+
+    sets.midcast.Helix = {
+		main="Bunzi's Rod",
+		sub="Ammurapi Shield",
+		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
+		head="Agwu's Cap",
+		body={ name="Agwu's Robe", augments={'Path: A',}},
+		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
+		legs="Agwu's Slops",
+		feet={ name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}},
+		neck={ name="Argute Stole +2", augments={'Path: A',}},
+		waist={ name="Acuity Belt +1", augments={'Path: A',}},
+		left_ear="Regal Earring",
+		right_ear="Malignance Earring",
+		left_ring="Freke Ring",
+		right_ring="Mallquis Ring",
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
 	
 	sets.midcast.Helix_MB = {
 		main="Bunzi's Rod",
 		sub="Ammurapi Shield",
-		ammo="Pemphredo Tathlum",
+		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
 		head="Agwu's Cap",
 		body={ name="Agwu's Robe", augments={'Path: A',}},
 		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		legs="Agwu's Slops",
-		feet="Agwu's Pigaches",
-		neck="Mizu. Kubikazari",
-		waist="Eschan Stone",
+		feet={ name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}},
+		neck={ name="Argute Stole +2", augments={'Path: A',}},
+		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Regal Earring",
 		right_ear="Malignance Earring",
-		left_ring="Freke Ring",
-		right_ring="Mujin Band",
+		left_ring="Mujin Band",
+		right_ring="Mallquis Ring",
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
 
     sets.midcast.DarkHelix = set_combine(sets.midcast.Helix, {head="Pixie Hairpin +1",left_ring="Archon Ring",})
-    sets.midcast.DarkHelix_MB = set_combine(sets.midcast.Helix_MB, {head="Pixie Hairpin +1",left_ring="Archon Ring",})
+    sets.midcast.DarkHelix_MB = set_combine(sets.midcast.Helix_MB, {head="Pixie Hairpin +1",right_ring="Archon Ring",})
 
     sets.midcast.LightHelix = set_combine(sets.midcast.Helix,{main="Daybreak",sub="Ammurapi Shield",})
     sets.midcast.LightHelix_MB = set_combine(sets.midcast.Helix_MB,{main="Daybreak",sub="Ammurapi Shield",})
@@ -797,7 +819,7 @@ function init_gear_sets()
 
     sets.idle = {
 		main="Mpaca's Staff",
-		sub="Enki Strap",
+		sub="Khonsu",
 		ammo="Homiliary",
 		head="Befouled Crown",
 		body="Jhakri Robe +2",
@@ -812,23 +834,6 @@ function init_gear_sets()
 		right_ring="Stikini Ring +1",
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
 
-    sets.idle.DT = {
-	    main="Daybreak",
-		sub="Genmei Shield",
-		ammo="Homiliary",
-		head="Befouled Crown",
-		body="Jhakri Robe +2",
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="Loricate Torque +1", augments={'Path: A',}},
-		waist="Embla Sash",
-		left_ear="Eabani Earring",
-		right_ear="Genmei Earring",
-		left_ring="Stikini Ring +1",
-		right_ring="Stikini Ring +1",
-		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
-
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Defense Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
@@ -839,7 +844,20 @@ function init_gear_sets()
     ---------------------------------------- Engaged Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.engaged = {}
+    sets.engaged = {
+	    ammo="Homiliary",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck="Combatant's Torque",
+		waist="Eschan Stone",
+		left_ear="Crep. Earring",
+		right_ear="Mache Earring +1",
+		left_ring="Chirich Ring +1",
+		right_ring="Chirich Ring +1",
+		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
@@ -847,19 +865,19 @@ function init_gear_sets()
 
 	sets.Kiting = {feet="Herald's Gaiters"}
 
-    sets.buff['Ebullience'] = {head="Arbatel Bonnet +1"}
-    sets.buff['Rapture'] = {head="Arbatel Bonnet +1"}
+    sets.buff['Ebullience'] = {head="Arbatel Bonnet +2"}
+    sets.buff['Rapture'] = {head="Arbatel Bonnet +2"}
     sets.buff['Perpetuance'] = {hands="Arbatel Bracers +2"}
-    sets.buff['Immanence'] = {hands="Arbatel Bracers +2", "Lugh's Cape"}
+    sets.buff['Immanence'] = {hands="Arbatel Bracers +2"}
     sets.buff['Penury'] = {legs="Arbatel Pants +1"}
     sets.buff['Parsimony'] = {legs="Arbatel Pants +1"}
     sets.buff['Celerity'] = {feet="Peda. Loafers +3"}
     sets.buff['Alacrity'] = {feet="Peda. Loafers +3"}
-    sets.buff['Klimaform'] = {feet="Arbatel Loafers +1"}
+    sets.buff['Klimaform'] = {feet="Arbatel Loafers +2"}
 
     sets.buff.FullSublimation = {
        head="Acad. Mortar. +3", --4
-       body={ name="Peda. Gown +1", augments={'Enhances "Enlightenment" effect',}}, --5
+       body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}}, --5
        --right_ear="Savant's Earring", --1
        waist="Embla Sash", --5
        }
@@ -882,7 +900,7 @@ function init_gear_sets()
 	sets.Maxentius = {main="Maxentius", sub="Daybreak",}
 	sets.Maxentius.SW = {main="Maxentius", sub="Genmei Shield"}
 	
-	sets.Xoanon = {main="Kaja Staff", sub="Kaja Grip"}
+	sets.Xoanon = {main="Xoanon", sub="Khonsu"}
 	
 	sets.Musa = {main={ name="Musa", augments={'Path: C',}}, sub="Enki Strap"}
 

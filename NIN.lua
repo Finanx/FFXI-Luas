@@ -113,7 +113,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'Physical_Katana', 'Magic_Katana', 'Naegling', 'Gletis_Knife'}
+	state.WeaponSet = M{['description']='Weapon Set', 'Physical_Katana', 'Magic_Katana', 'Hachimonji', 'Naegling', 'Gletis_Knife'}
     state.WeaponLock = M(false, 'Weapon Lock')
 	state.MagicBurst = M(false, 'Magic_Burst')
 
@@ -136,8 +136,9 @@ function user_setup()
 
 	send_command('bind @1 input /equip sub; gs c set WeaponSet Physical_Katana')
 	send_command('bind @2 input /equip sub; gs c set WeaponSet Magic_Katana')
-	send_command('bind @3 input /equip sub; gs c set WeaponSet Naegling')
-	send_command('bind @4 input /equip sub; gs c set WeaponSet Gletis_Knife')
+	send_command('bind @3 input /equip sub; gs c set WeaponSet Hachimonji')
+	send_command('bind @4 input /equip sub; gs c set WeaponSet Naegling')
+	send_command('bind @5 input /equip sub; gs c set WeaponSet Gletis_Knife')
 	send_command('bind @w gs c toggle WeaponLock')
 
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -359,7 +360,7 @@ function init_gear_sets()
 
     sets.precast.JA['Provoke'] = sets.Enmity
     sets.precast.JA['Mijin Gakure'] = {}
-    sets.precast.JA['Futae'] = {}
+    sets.precast.JA['Futae'] = {hands="Hattori Tekko +1",}
     sets.precast.JA['Sange'] = {}
     sets.precast.JA['Innin'] = {}
     sets.precast.JA['Yonin'] = {}
@@ -572,7 +573,7 @@ function init_gear_sets()
 		body={ name="Adhemar Jacket +1", augments={'HP+105','"Fast Cast"+10','Magic dmg. taken -4',}},
 		hands={ name="Mochizuki Tekko +3", augments={'Enh. "Ninja Tool Expertise" effect',}},
 		legs={ name="Rawhide Trousers", augments={'MP+50','"Fast Cast"+5','"Refresh"+1',}},
-		feet="Iga Kyahan +2",
+		feet="Hattori Kyahan +1",
 		neck="Orunmila's Torque",
 		waist="Flume Belt +1",
 		left_ear="Loquac. Earring",
@@ -616,7 +617,7 @@ function init_gear_sets()
 		right_ring="Mujin Band",
 		back={ name="Andartia's Mantle", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}},}
 		
-	sets.midcast.ElementalNinjutsu_MagicBurst_Futae = set_combine(sets.midcast.ElementalNinjutsu_MagicBurst, {})
+	sets.midcast.ElementalNinjutsu_MagicBurst_Futae = set_combine(sets.midcast.ElementalNinjutsu_MagicBurst, {hands="Hattori Tekko +1",})
 
     sets.midcast.EnfeeblingNinjutsu = {
 		ammo="Yamarang",
@@ -735,7 +736,7 @@ function init_gear_sets()
     sets.engaged = {
 		ammo="Seki Shuriken",
 		head={ name="Ryuo Somen +1", augments={'HP+65','"Store TP"+5','"Subtle Blow"+8',}},																--9%
-		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},																	--6%
+		body={ name="Mochi. Chainmail +3", augments={'Enhances "Sange" effect',}},																		--9%
 		hands="Malignance Gloves",
 		legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
 		feet={ name="Tatena. Sune. +1", augments={'Path: A',}},
@@ -746,7 +747,7 @@ function init_gear_sets()
 		left_ring="Gere Ring",
 		right_ring="Chirich Ring +1",
 		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},			--10%
-        } --36%GDW + 35%JADW = 71%
+        } --39%GDW + 35%JADW = 74%
 
     -- 15% Magic Haste (67% DW to cap)
     sets.engaged.LowHaste = {
@@ -845,15 +846,16 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 	
 	sets.NightMovement = {feet="Hachiya Kyahan +3"}
-	sets.DayMovement = {}
+	sets.DayMovement = {feet="Danzo Sune-Ate"}
 
-    sets.buff.Migawari = {}
+    sets.buff.Migawari = {body="Hattori Ningi +1",}
     sets.buff.Yonin = {}
     sets.buff.Innin = {}
     sets.buff.Sange = {ammo="Hachiya Shuriken"}
 
 	sets.Physical_Katana = {main="Kunimitsu",sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	sets.Magic_Katana = {main="Kunimitsu",sub={ name="Ochu", augments={'STR+8','DEX+8','Ninjutsu skill +10','DMG:+14',}},}
+	sets.Hachimonji = {main="Hachimonji",}
 	sets.Naegling = {main="Naegling",sub="Kunimitsu",}
 	sets.Gletis_Knife = {main={ name="Gleti's Knife", augments={'Path: A',}},sub="Kunimitsu",}
 
@@ -1008,6 +1010,10 @@ function update_combat_form()
 
 	if state.WeaponSet.value == 'Magic_Katana' then
 		equip(sets.Magic_Katana)
+	end
+	
+	if state.WeaponSet.value == 'Hachimonji' then
+		equip(sets.Hachimonji)
 	end
 
 	if state.WeaponSet.value == 'Naegling' then

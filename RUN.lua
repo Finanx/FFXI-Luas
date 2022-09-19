@@ -251,6 +251,7 @@ function user_unload()
 	send_command('unbind ^numpad7')
 	send_command('unbind ^numpad8')
 	send_command('unbind ^numpad9')
+	send_command('unbind ^numpad.')
 	
 	send_command('unbind !numpad1')
     send_command('unbind !numpad2')
@@ -261,6 +262,7 @@ function user_unload()
 	send_command('unbind !numpad7')
 	send_command('unbind !numpad8')
 	send_command('unbind !numpad9')
+	send_command('unbind !numpad.')
 	
 	
 	--Remove Item Binds
@@ -316,8 +318,8 @@ function init_gear_sets()
 		head="Halitus Helm",
 		body="Emet Harness +1",
 		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +1",
-		feet="Erilaz Greaves +1",
+		legs="Eri. Leg Guards +2",
+		feet="Erilaz Greaves +2",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
 		left_ear="Cryptic Earring",
@@ -330,7 +332,7 @@ function init_gear_sets()
 		
 	sets.SiR_Enmity = {
 		ammo="Staunch Tathlum +1",
-		head="Agwu's Cap",
+		head="Erilaz Galea +2",
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Rawhide Gloves", augments={'HP+50','Accuracy+15','Evasion+20',}},
 		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},
@@ -348,8 +350,8 @@ function init_gear_sets()
 		head="Halitus Helm",
 		body="Emet Harness +1",
 		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +1",
-		feet="Erilaz Greaves +1",
+		legs="Eri. Leg Guards +2",
+		feet="Erilaz Greaves +2",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
 		left_ear="Cryptic Earring",
@@ -364,7 +366,7 @@ function init_gear_sets()
 		body="Runeist's Coat +3",
 		hands="Kurys Gloves",
 		legs="Futhark Trousers +3",
-		feet="Erilaz Greaves +1",
+		feet="Erilaz Greaves +2",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
 		left_ear="Cryptic Earring",
@@ -381,8 +383,8 @@ function init_gear_sets()
 		head="Halitus Helm",
 		body="Emet Harness +1",
 		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +1",
-		feet="Erilaz Greaves +1",
+		legs="Eri. Leg Guards +2",
+		feet="Erilaz Greaves +2",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
 		left_ear="Cryptic Earring",
@@ -396,8 +398,8 @@ function init_gear_sets()
 		head="Halitus Helm",
 		body="Emet Harness +1",
 		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +1",
-		feet="Erilaz Greaves +1",
+		legs="Eri. Leg Guards +2",
+		feet="Erilaz Greaves +2",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
 		left_ear="Cryptic Earring",
@@ -411,8 +413,8 @@ function init_gear_sets()
 		head="Halitus Helm",
 		body="Futhark Coat +3",
 		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +1",
-		feet="Erilaz Greaves +1",
+		legs="Eri. Leg Guards +2",
+		feet="Erilaz Greaves +2",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
 		left_ear="Cryptic Earring",
@@ -446,8 +448,8 @@ function init_gear_sets()
 		head="Halitus Helm",
 		body={ name="Futhark Coat +3", augments={'Enhances "Elemental Sforzo" effect',}},
 		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +1",
-		feet="Erilaz Greaves +1",
+		legs="Eri. Leg Guards +2",
+		feet="Erilaz Greaves +2",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
 		left_ear="Cryptic Earring",
@@ -461,8 +463,8 @@ function init_gear_sets()
 		head="Halitus Helm",
 		body="Emet Harness +1",
 		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +1",
-		feet="Erilaz Greaves +1",
+		legs="Eri. Leg Guards +2",
+		feet="Erilaz Greaves +2",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
 		left_ear="Cryptic Earring",
@@ -696,7 +698,7 @@ function init_gear_sets()
 
     sets.midcast['Enhancing Magic'] = {
 		ammo="Staunch Tathlum +1",
-		head="Erilaz Galea +1",
+		head="Erilaz Galea +2",
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Runeist's Mitons +3",
 		legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},
@@ -711,8 +713,6 @@ function init_gear_sets()
 
     
     sets.midcast['Phalanx'] = {
-		main="Deacon Sword",
-		sub="Sors Shield",
 		ammo="Staunch Tathlum +1",
 		head={ name="Fu. Bandeau +3", augments={'Enhances "Battuta" effect',}},
 		body={ name="Taeon Tabard", augments={'Phalanx +3',}},
@@ -767,7 +767,7 @@ function init_gear_sets()
 		
     sets.midcast['Refresh'] = {
 		ammo="Staunch Tathlum +1",
-		head="Erilaz Galea +1",
+		head="Erilaz Galea +2",
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Rawhide Gloves", augments={'HP+50','Accuracy+15','Evasion+20',}},
 		legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},

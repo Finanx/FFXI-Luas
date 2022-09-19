@@ -151,6 +151,7 @@ function user_setup()
     send_command('bind ^numpad5 input /ws "Requiescat" <t>')
 	send_command('bind ^numpad6 input /ws "Shining Blade" <t>')
 	send_command('bind ^numpad7 input /ws "Circle Blade" <t>')
+	send_command('bind ^numpad9 input /ws "Hot Shot" <t>')
 	
 	send_command('bind !numpad1 input /ws "Evisceration" <t>')
 	send_command('bind !numpad2 input /ws "Exenterator" <t>')
@@ -263,6 +264,7 @@ function user_unload()
 	send_command('unbind ^numpad7')
 	send_command('unbind ^numpad8')
 	send_command('unbind ^numpad9')
+	send_command('unbind ^numpad.')
 	
 	send_command('unbind !numpad1')
     send_command('unbind !numpad2')
@@ -273,6 +275,7 @@ function user_unload()
 	send_command('unbind !numpad7')
 	send_command('unbind !numpad8')
 	send_command('unbind !numpad9')
+	send_command('unbind !numpad.')
 	
 	
 	--Remove Item Binds
@@ -533,7 +536,20 @@ function init_gear_sets()
 		right_ring="Epaminondas's Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}},}
 
-    sets.precast.WS['Hot Shot'] = sets.precast.WS['Wildfire']
+    sets.precast.WS['Hot Shot'] = {
+		ammo=gear.WSbullet,
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck="Fotia Gorget",
+		waist="Fotia Belt",
+		left_ear="Friomisi Earring",
+		right_ear="Eabani Earring",
+		left_ring="Dingir Ring",
+		right_ring="Epaminondas's Ring",
+		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},}
 
     sets.precast.WS['Leaden Salute'] = {
 		ammo=gear.MAbullet,
@@ -645,7 +661,7 @@ function init_gear_sets()
 		body="Malignance Tabard",
 		hands="Malignance Gloves",
 		legs="Malignance Tights",
-		feet="Malignance Boots",
+		feet="Chass. Bottes +2",
 		neck={ name="Comm. Charm +2", augments={'Path: A',}},
 		waist="K. Kachina Belt +1",
 		left_ear="Gwati Earring",
@@ -990,7 +1006,7 @@ function init_gear_sets()
 		head="Malignance Chapeau", --6%
 		body="Malignance Tabard",  --9%
 		hands="Malignance Gloves", --5%
-		legs="Malignance Tights", --7%
+		legs="Chas. Culottes +2",  --11%
 		feet="Malignance Boots", --4%
 		right_ring="Defending Ring", --10
 		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}}, --10%
