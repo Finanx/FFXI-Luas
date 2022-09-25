@@ -514,11 +514,11 @@ function init_gear_sets()
 		
 	sets.precast.WS['Shell Crusher'] = {
 		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
-		head="Aya. Zucchetto +2",
-		body="Ayanmo Corazza +2",
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs="Aya. Cosciales +2",
-		feet="Aya. Gambieras +2",
+		head="Fili Calot +2",
+		body="Fili Hongreline +2",
+		hands="Fili Manchettes +2",
+		legs="Fili Rhingrave +2",
+		feet="Fili Cothurnes +2",
 		neck="Sanctity Necklace",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Digni. Earring",
@@ -534,7 +534,7 @@ function init_gear_sets()
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Caro Necklace",
+		neck="Rep. Plat. Medal",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Ishvara Earring",
@@ -1143,7 +1143,6 @@ function init_gear_sets()
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {neck={ name="Bard's Charm +2", augments={'Path: A',}},}
-    --sets.Reive = {neck="Ygnas's Resolve +1"}
 	sets.Naegling = {main="Naegling", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
 	sets.Naegling.SW = {main="Naegling", sub="Genmei Shield"}
 	
@@ -1156,7 +1155,7 @@ function init_gear_sets()
 	sets.Tauret = {main="Tauret", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
 	sets.Tauret.SW = {main="Tauret", sub="Genmei Shield"}
 	
-	sets.Xoanon = {main="Kaja Staff", sub="Enki Strap"}
+	sets.Xoanon = {main="Xoanon", sub="Enki Strap"}
 
 end
 
