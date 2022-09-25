@@ -1,4 +1,3 @@
--- Original: Finanx
 -- Haste/DW Detection Requires Gearinfo Addon
 -- Dressup is setup to auto load with this Lua
 -- Itemizer addon is required for auto gear sorting / Warp Scripts / Range Scripts
@@ -17,7 +16,6 @@
 --  				[ Windows + R ]         Toggles Range Lock
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
---              	[ Windows + A ]     	AttackMode: Capped/Uncapped WS Modifier
 --
 -- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
 --					[ Shift + Numpad2 ]		Holy Water
@@ -31,6 +29,7 @@
 --					[ Windows + Numpad3 ]	Tropical Crepe
 --					[ Windows + Numpad4 ]	Miso Ramen
 --					[ Windows + Numpad5 ]	Red Curry Bun
+--					[ Windows + Numpad6 ]	Rolanberry Daifuku
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
@@ -42,7 +41,7 @@
 --  Job Specific Keybinds (Thief Binds)
 -------------------------------------------------------------------------------------------------------------------
 --
---	Modes:			[ Windows + 1 ]			Sets Weapon to Gleti's_Knife
+--	Modes:			[ Windows + 1 ]			Sets Weapon to Twashtar
 --					[ Windows + 2 ]			Sets Weapon to Tauret
 --					[ Windows + 3 ]			Sets Weapon to Naegling
 --					[ Windows + 4 ]			Sets Weapon to Karambit
@@ -57,8 +56,12 @@
 --					[ ALT + Numpad1 ]     	Savage Blade
 --					[ ALT + Numpad2 ]     	Sanguine Blade
 --
---  Abilities:  	[ Alt + Numpad0 ]   	Sneak Attack
---					[ Alt + Numpad. ]   	Trick Attack
+--					[ ALT + Numpad4 ]     	H2H WS
+--					[ ALT + Numpad5 ]     	H2H WS
+--					[ ALT + Numpad6 ]     	H2H WS
+--
+--  Abilities:  	[ CTRL + ` ]   	Sneak Attack
+--					[ ALT + ` ]   	Trick Attack
 --
 -------------------------------------------------------------------------------------------------------------------
 --  Custom Commands (preface with /console to use these in macros)
@@ -119,7 +122,7 @@ function user_setup()
     state.WeaponskillMode:options('Normal', 'Acc')
     state.IdleMode:options('Normal', 'Refresh')
 
-	state.WeaponSet = M{['description']='Weapon Set', 'Gletis_Knife', 'Tauret', 'Naegling', 'Twashtar', 'Karambit'}
+	state.WeaponSet = M{['description']='Weapon Set', 'Twashtar', 'Tauret', 'Naegling', 'Karambit'}
 	state.WeaponLock = M(false, 'Weapon Lock')
 
 	--Load Gearinfo/Dressup Lua
@@ -131,17 +134,16 @@ function user_setup()
 
     send_command('bind @t gs c cycle TreasureMode')
     send_command('bind @c gs c toggle CP')
-	send_command('bind !numpad0 input /ja "Sneak Attack" <me>')
-    send_command('bind !numpad. input /ja "Trick Attack" <me>')
+	send_command('bind ^` input /ja "Sneak Attack" <me>')
+    send_command('bind !` input /ja "Trick Attack" <me>')
 	
 	--Weapon set Binds
 
-	send_command('bind @1 gs c set WeaponSet Gletis_Knife')
+	send_command('bind @1 gs c set WeaponSet Twashtar')
 	send_command('bind @2 gs c set WeaponSet Tauret')
 	send_command('bind @3 gs c set WeaponSet Naegling')
-	send_command('bind @4 gs c set WeaponSet Twashtar')
-	send_command('bind @5 gs c set WeaponSet Karambit')
-	send_command('bind @w gs c toggle WeaponLock')
+	send_command('bind @4 gs c set WeaponSet Karambit')
+	send_command('bind @w input /equip sub; gs c set WeaponSet None')
 
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
@@ -154,12 +156,6 @@ function user_setup()
 	
 	send_command('bind !numpad1 input /ws "Savage Blade" <t>')
 	send_command('bind !numpad2 input /ws "Sanguine Blade" <t>')
-	
-	--Dual Box binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	--send_command('bind @1 input //assist me; wait 0.5; input //send Aurorasky /attack')
-	--send_command('bind @2 input //assist me; wait 0.5; input //send Ardana /attack')
-	--send_command('bind @q input //assist me; wait 0.5; input //send Ardana /ma "Distract" <t>')
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -175,6 +171,7 @@ function user_setup()
 	send_command('bind @numpad3 input /item "Tropical Crepe" <me>')
 	send_command('bind @numpad4 input /item "Miso Ramen" <me>')
 	send_command('bind @numpad5 input /item "Red Curry Bun" <me>')
+	send_command('bind @numpad6 input /item "Rolanberry Daifuku" <me>')
 	send_command('bind @numpad7 input //get Toolbag (Shihe) satchel; wait 3; input /item "Toolbag (Shihei)" <me>')
 	
 	--Ranged Scripts  (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -213,14 +210,15 @@ function user_unload()
 
     send_command('unbind @t')
     send_command('unbind @c')
-    send_command('unbind !numpad0')
-    send_command('unbind !numpad.')
-
-	--Remove Dual Box Binds
-	
-	--send_command('unbind @1')
-	--send_command('unbind @2')
-	--send_command('unbind @q')
+	send_command('unbind ^`')
+	send_command('unbind ^-')
+	send_command('unbind ^=')
+	send_command('unbind !`')
+	send_command('unbind !-')
+	send_command('unbind !=')
+	send_command('unbind @`')
+	send_command('unbind @-')
+	send_command('unbind @=')
 	
 	--Remove Weapon Set binds
 	
@@ -233,6 +231,7 @@ function user_unload()
 	send_command('unbind @7')
 	send_command('unbind @8')
 	send_command('unbind @9')
+	send_command('unbind @0')
 	
 	--Remove Weaponskill Binds
     
@@ -245,6 +244,7 @@ function user_unload()
 	send_command('unbind ^numpad7')
 	send_command('unbind ^numpad8')
 	send_command('unbind ^numpad9')
+	send_command('unbind ^numpad.')
 	
 	send_command('unbind !numpad1')
     send_command('unbind !numpad2')
@@ -255,7 +255,7 @@ function user_unload()
 	send_command('unbind !numpad7')
 	send_command('unbind !numpad8')
 	send_command('unbind !numpad9')
-	
+	send_command('unbind !numpad.')
 	
 	--Remove Item Binds
 	
@@ -268,6 +268,7 @@ function user_unload()
 	send_command('unbind ~numpad7')
 	send_command('unbind ~numpad8')
 	send_command('unbind ~numpad9')
+	send_command('unbind ~numpad.')
 	
 	send_command('unbind @numpad1')
     send_command('unbind @numpad2')
@@ -278,6 +279,7 @@ function user_unload()
 	send_command('unbind @numpad7')
 	send_command('unbind @numpad8')
 	send_command('unbind @numpad9')
+	send_command('unbind @numpad.')
 	
 	--Remove Ranged Scripts
 	
@@ -849,9 +851,8 @@ function init_gear_sets()
 
     sets.CP = {back="Mecisto. Mantle"}
 	
-	sets.Gletis_Knife = {main={ name="Gleti's Knife", augments={'Path: A',}},sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
-	sets.Tauret = {main="Tauret", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
 	sets.Twashtar = {main={ name="Gleti's Knife", augments={'Path: A',}},sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
+	sets.Tauret = {main="Tauret", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
 	sets.Naegling = {main="Naegling", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
 	sets.Karambit = {main="Kaja Knuckles"}
 

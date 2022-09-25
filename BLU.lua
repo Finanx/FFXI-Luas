@@ -1,8 +1,7 @@
--- Original: Finanx
 -- Haste/DW Detection Requires Gearinfo Addon
 -- Dressup is setup to auto load with this Lua
--- Azuresets is setup to auto load with this Lua
 -- Itemizer addon is required for auto gear sorting / Warp Scripts / Range Scripts
+-- Azuresets is setup to auto load with this Lua
 --
 -------------------------------------------------------------------------------------------------------------------
 --  Keybinds (Global Binds for all Jobs)
@@ -18,7 +17,6 @@
 --  				[ Windows + R ]         Toggles Range Lock
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
---              	[ Windows + A ]     	AttackMode: Capped/Uncapped WS Modifier
 --
 -- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
 --					[ Shift + Numpad2 ]		Holy Water
@@ -32,6 +30,7 @@
 --					[ Windows + Numpad3 ]	Tropical Crepe
 --					[ Windows + Numpad4 ]	Miso Ramen
 --					[ Windows + Numpad5 ]	Red Curry Bun
+--					[ Windows + Numpad6 ]	Rolanberry Daifuku
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
@@ -45,6 +44,7 @@
 --
 --	Modes:			[ Windows + 1 ]			Naegling Weapon Set
 --					[ Windows + 2 ]			Maxentius Weapon Set
+--					[ Windows + 3 ]			Magic_Accuracy Weapon Set
 --
 --  WS:         	[ CTRL + Numpad1 ]    	Sanguine Blade
 --					[ CTRL + Numpad2 ]    	Flat Blade
@@ -250,12 +250,6 @@ function user_setup()
 	send_command('bind !numpad4 input /ws "Realm Razer" <t>')
 	send_command('bind !numpad5 input /ws "Moonlight" <t>')
 	
-	--Dual Box binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	--send_command('bind @1 input //assist me; wait 0.5; input //send Aurorasky /attack')
-	--send_command('bind @2 input //assist me; wait 0.5; input //send Ardana /attack')
-	--send_command('bind @q input //assist me; wait 0.5; input //send Ardana /ma "Distract" <t>')
-	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('bind ~numpad1 input /item "Echo Drops" <me>')
@@ -270,6 +264,7 @@ function user_setup()
 	send_command('bind @numpad3 input /item "Tropical Crepe" <me>')
 	send_command('bind @numpad4 input /item "Miso Ramen" <me>')
 	send_command('bind @numpad5 input /item "Red Curry Bun" <me>')
+	send_command('bind @numpad6 input /item "Rolanberry Daifuku" <me>')
 	send_command('bind @numpad7 input //get Toolbag (Shihe) satchel; wait 3; input /item "Toolbag (Shihei)" <me>')
 	
 	--Ranged Scripts  (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -310,15 +305,15 @@ function user_unload()
 
     send_command('unbind @c')
 	send_command('unbind @t ')
-	send_command('unbind @1 ')
-	send_command('unbind @2 ')
-
-	--Remove Dual Box Binds
-	
-	--send_command('unbind @1')
-	--send_command('unbind @2')
-	--send_command('unbind @q')
-	--send_command('unbind ^`')
+	send_command('unbind ^`')
+	send_command('unbind ^-')
+	send_command('unbind ^=')
+	send_command('unbind !`')
+	send_command('unbind !-')
+	send_command('unbind !=')
+	send_command('unbind @`')
+	send_command('unbind @-')
+	send_command('unbind @=')
 	
 	--Remove Weapon Set binds
 	
@@ -331,6 +326,7 @@ function user_unload()
 	send_command('unbind @7')
 	send_command('unbind @8')
 	send_command('unbind @9')
+	send_command('unbind @0')
 	
 	--Remove Weaponskill Binds
     
@@ -356,7 +352,6 @@ function user_unload()
 	send_command('unbind !numpad9')
 	send_command('unbind !numpad.')
 	
-	
 	--Remove Item Binds
 	
 	send_command('unbind ~numpad1')
@@ -368,6 +363,7 @@ function user_unload()
 	send_command('unbind ~numpad7')
 	send_command('unbind ~numpad8')
 	send_command('unbind ~numpad9')
+	send_command('unbind ~numpad.')
 	
 	send_command('unbind @numpad1')
     send_command('unbind @numpad2')
@@ -378,6 +374,7 @@ function user_unload()
 	send_command('unbind @numpad7')
 	send_command('unbind @numpad8')
 	send_command('unbind @numpad9')
+	send_command('unbind @numpad.')
 	
 	--Remove Ranged Scripts
 	
@@ -451,11 +448,8 @@ function init_gear_sets()
 		right_ring="Kishar Ring",
 		back={ name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
-    --sets.precast.FC['Blue Magic'] = set_combine(sets.precast.FC, {body="Hashishin Mintan +1"})
-    --sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
-    --sets.precast.FC.Cure = set_combine(sets.precast.FC, {ammo="Impatiens", ear2="Mendi. Earring"})
-	
-	
+    sets.precast.FC['Blue Magic'] = set_combine(sets.precast.FC, {body="Hashishin Mintan +1"})
+
 	sets.precast.RA = {    
 		range="Trollbane",
 		head={ name="Taeon Chapeau", augments={'"Snapshot"+5','"Snapshot"+5',}},

@@ -1,4 +1,3 @@
--- Original: Finanx
 -- Haste/DW Detection Requires Gearinfo Addon
 -- Dressup is setup to auto load with this Lua
 -- Itemizer addon is required for auto gear sorting / Warp Scripts / Range Scripts
@@ -17,7 +16,6 @@
 --  				[ Windows + R ]         Toggles Range Lock
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
---              	[ Windows + A ]     	AttackMode: Capped/Uncapped WS Modifier
 --
 -- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
 --					[ Shift + Numpad2 ]		Holy Water
@@ -31,6 +29,7 @@
 --					[ Windows + Numpad3 ]	Tropical Crepe
 --					[ Windows + Numpad4 ]	Miso Ramen
 --					[ Windows + Numpad5 ]	Red Curry Bun
+--					[ Windows + Numpad6 ]	Rolanberry Daifuku
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
@@ -42,7 +41,7 @@
 --  Job Specific Keybinds (Ninja Binds)
 -------------------------------------------------------------------------------------------------------------------
 --
---	Modes:			[ Windows + m ]			Toggles Magic Burst Mode
+--	Modes:			[ Windows + M ]			Toggles Magic Burst Mode
 --					[ Windows + 1 ]			Sets Weapon to Physical_Katana
 --					[ Windows + 2 ]			Sets Weapon to Magical_Katana
 --					[ Windows + 3 ]			Sets Weapon to Naegling
@@ -51,15 +50,23 @@
 --  WS:         	[ CTRL + Numpad1 ]		Blade: Shun
 --					[ CTRL + Numpad2 ]		Blade: Ten
 --					[ CTRL + Numpad3 ]		Blade: Hi
---					[ CTRL + Numpad4 ]		Blade: Kamu
---					[ CTRL + Numpad5 ]		Blade: Metsu
---					[ CTRL + Numpad6 ]		Blade: Yu
+--					[ CTRL + Numpad4 ]		Blade: To
+--					[ CTRL + Numpad5 ]		Blade: Chi
+--					[ CTRL + Numpad6 ]		Blade: Teki
 --					[ CTRL + Numpad7 ]		Blade: Ei
+--					[ CTRL + Numpad9 ]		Blade: Yu
+--					[ CTRL + Numpad. ]		Blade: Kamu
 --				
---					[ ALT + Numpad1 ]		Aeolian Edge
---					[ ALT + Numpad2 ]		Evisceration
+--					[ ALT + Numpad1 ]		Tachi: Jinpu
+--					[ ALT + Numpad2 ]		Tachi: Goten
+--					[ ALT + Numpad3 ]		Tachi: Kagero
+--					[ ALT + Numpad. ]		Tachi: Koki
+--
 --					[ ALT + Numpad4 ]		Savage Blade
 --					[ ALT + Numpad5 ]		Sanguine Blade
+--
+--					[ ALT + Numpad7 ]		Aeolian Edge
+--					[ ALT + Numpad9 ]		Evisceration
 --
 --  Abilities:  	[ CTRL + ` ]        	Yonin
 --					[ Alt + ` ]        		Innin
@@ -128,9 +135,9 @@ function user_setup()
 
 	send_command('bind @t gs c cycle TreasureMode')
     send_command('bind @c gs c toggle CP')
+	send_command('bind @m gs c toggle MagicBurst')
 	send_command('bind ^` input /ja "Yonin" <me>')
 	send_command('bind !` input /ja "Innin" <me>')
-	send_command('bind @m gs c toggle MagicBurst')
 	
 	--Weapon set Binds
 
@@ -164,13 +171,6 @@ function user_setup()
 	send_command('bind !numpad3 input /ws "Tachi: Kagero" <t>')
 	send_command('bind !numpad. input /ws "Tachi: Koki" <t>')
 	
-	
-	--Dual Box binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	--send_command('bind @1 input //assist me; wait 0.5; input //send Aurorasky /attack')
-	--send_command('bind @2 input //assist me; wait 0.5; input //send Ardana /attack')
-	--send_command('bind @q input //assist me; wait 0.5; input //send Ardana /ma "Distract" <t>')
-	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('bind ~numpad1 input /item "Echo Drops" <me>')
@@ -185,6 +185,7 @@ function user_setup()
 	send_command('bind @numpad3 input /item "Tropical Crepe" <me>')
 	send_command('bind @numpad4 input /item "Miso Ramen" <me>')
 	send_command('bind @numpad5 input /item "Red Curry Bun" <me>')
+	send_command('bind @numpad6 input /item "Rolanberry Daifuku" <me>')
 	send_command('bind @numpad7 input //get Toolbag (Shihe) satchel; wait 3; input /item "Toolbag (Shihei)" <me>')
 		
 	--Ranged Scripts  (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -230,18 +231,17 @@ function user_unload()
 	--Remove Global Ninja Binds	
 	
     send_command('unbind @t')
-    send_command('unbind @w')
 	send_command('unbind @c')
-	send_command('unbind ^`')
-	send_command('unbind !`')
-	send_command('unbind @`')
     send_command('unbind @m')
-	
-	--Remove Dual Box Binds
-	
-	--send_command('unbind @1')
-	--send_command('unbind @2')
-	--send_command('unbind @q')
+	send_command('unbind ^`')
+	send_command('unbind ^-')
+	send_command('unbind ^=')
+	send_command('unbind !`')
+	send_command('unbind !-')
+	send_command('unbind !=')
+	send_command('unbind @`')
+	send_command('unbind @-')
+	send_command('unbind @=')
 	
 	--Remove Weapon Set binds
 	
@@ -254,6 +254,7 @@ function user_unload()
 	send_command('unbind @7')
 	send_command('unbind @8')
 	send_command('unbind @9')
+	send_command('unbind @0')
 	
 	--Remove Weaponskill Binds
     
@@ -279,7 +280,6 @@ function user_unload()
 	send_command('unbind !numpad9')
 	send_command('unbind !numpad.')
 	
-	
 	--Remove Item Binds
 	
 	send_command('unbind ~numpad1')
@@ -291,6 +291,7 @@ function user_unload()
 	send_command('unbind ~numpad7')
 	send_command('unbind ~numpad8')
 	send_command('unbind ~numpad9')
+	send_command('unbind ~numpad.')
 	
 	send_command('unbind @numpad1')
     send_command('unbind @numpad2')
@@ -301,6 +302,7 @@ function user_unload()
 	send_command('unbind @numpad7')
 	send_command('unbind @numpad8')
 	send_command('unbind @numpad9')
+	send_command('unbind @numpad.')
 	
 	--Remove Ranged Scripts
 	

@@ -1,4 +1,3 @@
--- Original: Finanx
 -- Haste/DW Detection Requires Gearinfo Addon
 -- Dressup is setup to auto load with this Lua
 -- Itemizer addon is required for auto gear sorting / Warp Scripts / Range Scripts
@@ -17,7 +16,6 @@
 --  				[ Windows + R ]         Toggles Range Lock
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
---              	[ Windows + A ]     	AttackMode: Capped/Uncapped WS Modifier
 --
 -- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
 --					[ Shift + Numpad2 ]		Holy Water
@@ -31,6 +29,7 @@
 --					[ Windows + Numpad3 ]	Tropical Crepe
 --					[ Windows + Numpad4 ]	Miso Ramen
 --					[ Windows + Numpad5 ]	Red Curry Bun
+--					[ Windows + Numpad6 ]	Rolanberry Daifuku
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
@@ -42,16 +41,17 @@
 --  Job Specific Keybinds (White Mage Binds)
 -------------------------------------------------------------------------------------------------------------------
 --
---	Modes:			[ Windows + m ]			Toggles Magic Burst Mode
+--	Modes:			[ Windows + M ]			Toggles Magic Burst Mode
 --					[ Windows + 1 ]			Sets Weapon to Maxentius then locks Main/Sub Slots
 --					[ Windows + 2 ]			Sets Weapon to Xoanon then locks Main/Sub Slots
+--					[ Windows + 3 ]			Sets Weapon to Cataclysm then locks Main/Sub Slots
 --
 --  WS:         	[ CTRL + Numpad1 ]    	Retribution
 --					[ CTRL + Numpad2 ]    	Full Swing
 --					[ CTRL + Numpad3 ]    	Shell Crusher
 --					[ CTRL + Numpad4 ]    	Omniscience
 --					[ CTRL + Numpad5 ]    	Myrkr
---					[ CTRL + Numpad5 ]    	Rock Crusher
+--					[ CTRL + Numpad6 ]    	Cataclysm
 --				
 --					[ ALT + Numpad1 ]     	True Strike
 --					[ ALT + Numpad2 ]     	Black Halo
@@ -59,7 +59,8 @@
 --					[ ALT + Numpad4 ]     	Shining Strike
 --					[ ALT + Numpad5 ]     	Starlight
 --
---  Abilities:  	
+--  Abilities:  	[ CTRL + ` ]        	Light Arts
+--					[ ALT + ` ]        		Dark Arts
 --
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.
@@ -142,25 +143,13 @@ function user_setup()
 	send_command('bind ^numpad3 input /ws "Shell Crusher" <t>')
 	send_command('bind ^numpad4 input /ws "Omniscience" <t>')
 	send_command('bind ^numpad5 input /ws "Myrkr" <t>')	
-	send_command('bind ^numpad6 input /ws "Rock Crusher" <t>')
+	send_command('bind ^numpad6 input /ws "Cataclysm" <t>')
 
     send_command('bind !numpad1 input /ws "True Strike" <t>')
     send_command('bind !numpad2 input /ws "Black Halo" <t>')
 	send_command('bind !numpad3 input /ws "Realmrazer" <t>')
 	send_command('bind !numpad4 input /ws "Shining Strike" <t>')
     send_command('bind !numpad5 input /ws "Starlight" <t>')
-
-	--Dual Box binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	--send_command('bind @1 input //assist me; wait 0.5; input //send Aurorasky /attack')
-	--send_command('bind @2 input //assist me; wait 0.5; input //send Ardana /attack')
-	--send_command('bind @q input //assist me; wait 0.5; input //send Ardana /ma "Distract" <t>')
-	
-	--Aurorasky Weaponskills (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	--send_command('bind ~numpad1 input //send Aurorasky /ws "Leaden Salute" <t>')
-    --send_command('bind ~numpad2 input //send Aurorasky /ws "Wildfire" <t>')
-    --send_command('bind ~numpad3 input //send Aurorasky /ws "Last Stand" <t>')
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -176,6 +165,7 @@ function user_setup()
 	send_command('bind @numpad3 input /item "Tropical Crepe" <me>')
 	send_command('bind @numpad4 input /item "Miso Ramen" <me>')
 	send_command('bind @numpad5 input /item "Red Curry Bun" <me>')
+	send_command('bind @numpad6 input /item "Rolanberry Daifuku" <me>')
 	send_command('bind @numpad7 input //get Toolbag (Shihe) satchel; wait 3; input /item "Toolbag (Shihei)" <me>')
 		
 	--Ranged Scripts  (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -209,9 +199,7 @@ function user_unload()
 
 	--Remove Global Scholar Binds
 
-	send_command('unbind !`')	
 	send_command('unbind @w')
-	send_command('unbind @r')
 	send_command('unbind @t')
     send_command('unbind @m')
 	send_command('unbind ^`')
@@ -235,12 +223,7 @@ function user_unload()
 	send_command('unbind @7')
 	send_command('unbind @8')
 	send_command('unbind @9')
-	
-	--Remove Dual Box Binds
-	
-	--send_command('unbind @1')
-	--send_command('unbind @2')
-	--send_command('unbind @q')
+	send_command('unbind @0')
 	
 	--Remove Weaponskill Binds
     
@@ -266,7 +249,6 @@ function user_unload()
 	send_command('unbind !numpad9')
 	send_command('unbind !numpad.')
 	
-	
 	--Remove Item Binds
 	
 	send_command('unbind ~numpad1')
@@ -278,6 +260,7 @@ function user_unload()
 	send_command('unbind ~numpad7')
 	send_command('unbind ~numpad8')
 	send_command('unbind ~numpad9')
+	send_command('unbind ~numpad.')
 	
 	send_command('unbind @numpad1')
     send_command('unbind @numpad2')
@@ -288,6 +271,7 @@ function user_unload()
 	send_command('unbind @numpad7')
 	send_command('unbind @numpad8')
 	send_command('unbind @numpad9')
+	send_command('unbind @numpad.')
 	
 	--Remove Ranged Scripts
 	
@@ -298,10 +282,6 @@ function user_unload()
 	send_command('unbind ^numpad+')
 	send_command('unbind !numpad+')
 	
-	--Remove Ammo Scripts
-	
-	--Gear Removal Commands
-
 	--Unload Gearinfo/Dressup Lua
 	
     send_command('lua u gearinfo')
@@ -372,6 +352,8 @@ function init_gear_sets()
 	sets.precast.WS['Rock Crusher'] = {}
 	
 	sets.precast.WS['Shining Strike'] = {}
+	
+	sets.precast.WS['Cataclysm'] = {}
 
 
     ------------------------------------------------------------------------------------------------

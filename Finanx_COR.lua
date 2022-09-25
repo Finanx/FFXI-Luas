@@ -1,4 +1,3 @@
--- Original: Finanx
 -- Haste/DW Detection Requires Gearinfo Addon
 -- Dressup is setup to auto load with this Lua
 -- Itemizer addon is required for auto gear sorting / Warp Scripts / Range Scripts
@@ -17,7 +16,6 @@
 --  				[ Windows + R ]         Toggles Range Sets
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
---              	[ Windows + A ]     	AttackMode: Capped/Uncapped WS Modifier
 --
 -- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
 --					[ Shift + Numpad2 ]		Holy Water
@@ -31,6 +29,7 @@
 --					[ Windows + Numpad3 ]	Tropical Crepe
 --					[ Windows + Numpad4 ]	Miso Ramen
 --					[ Windows + Numpad5 ]	Red Curry Bun
+--					[ Windows + Numpad6 ]	Rolanberry Daifuku
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
@@ -44,14 +43,18 @@
 --
 --  Weapons:    	[ Windows + 1 ]			Naegling Weapon Set
 --					[ Windows + 2 ]			Rostam Weapon Set
---					[ Windows + R ]			Cycles Range Weapons
+--
+--	Range Weapons:	[ Windows + 7 ]			TP Gun Range Set
+--					[ Windows + 8 ]			Armageddon Range Set
+--					[ Windows + 9 ]			Fomalhaut Range Set
+--					[ Windows + 0 ]			Death Penalty Range Set
 --
 --	WS:				[ CTRL + Numpad1 ]		Leaden Salute
 --					[ CTRL + Numpad2 ]		Wildfire
 --					[ CTRL + Numpad3 ]		Last Stand
 --					[ CTRL + Numpad4 ]		Savage Blade
---					[ CTRL + Numpad5 ]		Requiescat
---					[ CTRL + Numpad6 ]		Shining Blade
+--					[ CTRL + Numpad5 ]		Hot Shot
+--					[ CTRL + Numpad6 ]		Requiescat
 --					[ CTRL + Numpad7 ]		Circle Blade
 --
 --					[ ALT + Numpad1 ]		Evisceration
@@ -62,6 +65,9 @@
 -- Luzaf Ring:     	[ CTRL + ` ]     		Toggle use of Luzaf Ring.
 --
 -- Item Binds:		[ Windows + Numpad9 ]	Trump Card Case
+--					[ CTRL + Numpad. ]		Chrono Bullet Pouch
+--					[ ALT + Numpad. ]		Devastating Bullet Pouch
+--					[ Windows + Numpad. ]	Living Bullet Pouch
 --
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -140,29 +146,25 @@ function user_setup()
 	send_command('bind @1 gs c set WeaponSet Naegling')
 	send_command('bind @2 gs c set WeaponSet Rostam')
 	
-	send_command('bind @r gs c cycle RangeSet')
-	
+	--send_command('bind @7 gs c set TP_Gun')
+	send_command('bind @8 gs c set Armageddon')
+	send_command('bind @9 gs c set Fomalhaut')
+	send_command('bind @0 gs c set DeathPenalty')
+		
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('bind ^numpad1 input /ws "Leaden Salute" <t>')
     send_command('bind ^numpad2 input /ws "Wildfire" <t>')
     send_command('bind ^numpad3 input /ws "Last Stand" <t>')
 	send_command('bind ^numpad4 input /ws "Savage Blade" <t>')
-    send_command('bind ^numpad5 input /ws "Requiescat" <t>')
-	send_command('bind ^numpad6 input /ws "Shining Blade" <t>')
+	send_command('bind ^numpad5 input /ws "Hot Shot" <t>')
+	send_command('bind ^numpad6 input /ws "Requiescat" <t>')
 	send_command('bind ^numpad7 input /ws "Circle Blade" <t>')
-	send_command('bind ^numpad9 input /ws "Hot Shot" <t>')
 	
 	send_command('bind !numpad1 input /ws "Evisceration" <t>')
 	send_command('bind !numpad2 input /ws "Exenterator" <t>')
 	send_command('bind !numpad3 input /ws "Cyclone" <t>')
 	send_command('bind !numpad4 input /ws "Aeolian Edge" <t>')
-	
-	--Dual Box binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	--send_command('bind @1 input //assist me; wait 0.5; input //send Aurorasky /attack')
-	--send_command('bind @2 input //assist me; wait 0.5; input //send Ardana /attack')
-	--send_command('bind @q input //assist me; wait 0.5; input //send Ardana /ma "Distract" <t>')
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -178,6 +180,7 @@ function user_setup()
 	send_command('bind @numpad3 input /item "Tropical Crepe" <me>')
 	send_command('bind @numpad4 input /item "Miso Ramen" <me>')
 	send_command('bind @numpad5 input /item "Red Curry Bun" <me>')
+	send_command('bind @numpad6 input /item "Rolanberry Daifuku" <me>')
 	send_command('bind @numpad7 input //get Toolbag (Shihe) satchel; wait 3; input /item "Toolbag (Shihei)" <me>')
 	send_command('bind @numpad9 input /item "Trump Card Case" <me>')
 		
@@ -230,17 +233,15 @@ function user_unload()
 	
     send_command('unbind @t')
     send_command('unbind ^`')
-	send_command('unbind @r')
-	send_command('unbind @h')
-	send_command('unbind @1')
-	send_command('unbind @2')
+	send_command('unbind ^-')
+	send_command('unbind ^=')
+	send_command('unbind !`')
+	send_command('unbind !-')
+	send_command('unbind !=')
+	send_command('unbind @`')
+	send_command('unbind @-')
+	send_command('unbind @=')
 
-	--Remove Dual Box Binds
-	
-	--send_command('unbind @1')
-	--send_command('unbind @2')
-	--send_command('unbind @q')
-	
 	--Remove Weapon Set binds
 	
 	send_command('unbind @1')
@@ -252,6 +253,7 @@ function user_unload()
 	send_command('unbind @7')
 	send_command('unbind @8')
 	send_command('unbind @9')
+	send_command('unbind @0')
 	
 	--Remove Weaponskill Binds
     
@@ -277,7 +279,6 @@ function user_unload()
 	send_command('unbind !numpad9')
 	send_command('unbind !numpad.')
 	
-	
 	--Remove Item Binds
 	
 	send_command('unbind ~numpad1')
@@ -289,6 +290,7 @@ function user_unload()
 	send_command('unbind ~numpad7')
 	send_command('unbind ~numpad8')
 	send_command('unbind ~numpad9')
+	send_command('unbind ~numpad.')
 	
 	send_command('unbind @numpad1')
     send_command('unbind @numpad2')
@@ -299,6 +301,7 @@ function user_unload()
 	send_command('unbind @numpad7')
 	send_command('unbind @numpad8')
 	send_command('unbind @numpad9')
+	send_command('unbind @numpad.')
 	
 	--Remove Ranged Scripts
 	

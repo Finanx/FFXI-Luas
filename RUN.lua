@@ -1,4 +1,4 @@
--- Original: Arislan / Modified: Finanx
+-- Haste/DW Detection Requires Gearinfo Addon
 -- Dressup is setup to auto load with this Lua
 -- Itemizer addon is required for auto gear sorting / Warp Scripts / Range Scripts
 --
@@ -15,7 +15,6 @@
 --			    	[ Windows + W ]			Toggle Weapon sets
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
---              	[ Windows + A ]     	AttackMode: Capped/Uncapped WS Modifier
 --
 -- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
 --					[ Shift + Numpad2 ]		Holy Water
@@ -29,6 +28,7 @@
 --					[ Windows + Numpad3 ]	Tropical Crepe
 --					[ Windows + Numpad4 ]	Miso Ramen
 --					[ Windows + Numpad5 ]	Red Curry Bun
+--					[ Windows + Numpad6 ]	Rolanberry Daifuku
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
@@ -59,6 +59,7 @@
 --					[ ALT + Numpad3 ]		Armor Break
 --					[ ALT + Numpad4 ]		Fell Cleave
 --					[ ALT + Numpad5 ]		Weapon Break
+--					[ ALT + Numpad6 ]		Full Break
 --
 --  Abilities:  	[ CTRL + ` ]        	Use current Rune
 --              	[ Alt + ` ]         	Rune element cycle forward.
@@ -113,7 +114,6 @@ function user_setup()
 
     state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Aettir', 'Lycurgos', 'Hepatizon_Axe'}
 	state.GripSet = M{['description']='Grip Set', 'Refined', 'Utu'}
-    state.AttackMode = M{['description']='Attack', 'Uncapped', 'Capped'}
     state.CP = M(false, "Capacity Points Mode")
 
     state.Runes = M{['description']='Runes', 'Tenebrae', 'Lux', 'Ignis', 'Gelus', 'Flabra', 'Tellus', 'Sulpor', 'Unda'}
@@ -125,12 +125,12 @@ function user_setup()
 
     --Global Rune Fencer binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
-    send_command('bind @a gs c cycle AttackMode')
     send_command('bind @c gs c toggle CP')
 	send_command('bind @t gs c cycle TreasureMode')
-	send_command('bind !` gs c cycle Runes')
-	send_command('bind ~` gs c cycleback Runes')
+	send_command('bind @e gs c cycle GripSet')
 	send_command('bind ^` input //gs c rune')
+	send_command('bind ^= gs c cycle Runes')
+	send_command('bind ^- gs c cycleback Runes')
 	
 	--Weapon set Binds
 
@@ -138,8 +138,6 @@ function user_setup()
 	send_command('bind @2 gs c set WeaponSet Aettir')
 	send_command('bind @3 gs c set WeaponSet Lycurgos')
 	send_command('bind @4 gs c set WeaponSet Hepatizon_Axe')
-	
-	send_command('bind @e gs c cycle GripSet')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
@@ -156,12 +154,7 @@ function user_setup()
 	send_command('bind !numpad3 input /ws "Armor Break" <t>')
 	send_command('bind !numpad4 input /ws "Fell Cleave" <t>')
 	send_command('bind !numpad5 input /ws "Weapon Break" <t>')
-	
-	--Dual Box binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	--send_command('bind @1 input //assist me; wait 0.5; input //send Aurorasky /attack')
-	--send_command('bind @2 input //assist me; wait 0.5; input //send Ardana /attack')
-	--send_command('bind @q input //assist me; wait 0.5; input //send Ardana /ma "Distract" <t>')
+	send_command('bind !numpad5 input /ws "Full Break" <t>')
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -177,6 +170,7 @@ function user_setup()
 	send_command('bind @numpad3 input /item "Tropical Crepe" <me>')
 	send_command('bind @numpad4 input /item "Miso Ramen" <me>')
 	send_command('bind @numpad5 input /item "Red Curry Bun" <me>')
+	send_command('bind @numpad6 input /item "Rolanberry Daifuku" <me>')
 	send_command('bind @numpad7 input //get Toolbag (Shihe) satchel; wait 3; input /item "Toolbag (Shihei)" <me>')
 	
 	--Ranged Scripts  (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -211,22 +205,18 @@ function user_unload()
     
 	--Remove Global Rune Fencer Binds
 	
-	send_command('unbind @a')
     send_command('unbind @c')
     send_command('unbind @e')
     send_command('unbind @t')
-	send_command('unbind !`')
 	send_command('unbind ^`')
-	send_command('unbind ~`')
-	send_command('unbind @1')
-	send_command('unbind @2')
-	send_command('unbind @3')
-	
-	--Remove Dual Box Binds
-	
-	--send_command('unbind @1')
-	--send_command('unbind @2')
-	--send_command('unbind @q')
+	send_command('unbind ^-')
+	send_command('unbind ^=')
+	send_command('unbind !`')
+	send_command('unbind !-')
+	send_command('unbind !=')
+	send_command('unbind @`')
+	send_command('unbind @-')
+	send_command('unbind @=')
 	
 	--Remove Weapon Set binds
 	
@@ -239,6 +229,7 @@ function user_unload()
 	send_command('unbind @7')
 	send_command('unbind @8')
 	send_command('unbind @9')
+	send_command('unbind @0')
 	
 	--Remove Weaponskill Binds
     
@@ -264,7 +255,6 @@ function user_unload()
 	send_command('unbind !numpad9')
 	send_command('unbind !numpad.')
 	
-	
 	--Remove Item Binds
 	
 	send_command('unbind ~numpad1')
@@ -276,6 +266,7 @@ function user_unload()
 	send_command('unbind ~numpad7')
 	send_command('unbind ~numpad8')
 	send_command('unbind ~numpad9')
+	send_command('unbind ~numpad.')
 	
 	send_command('unbind @numpad1')
     send_command('unbind @numpad2')
@@ -286,6 +277,7 @@ function user_unload()
 	send_command('unbind @numpad7')
 	send_command('unbind @numpad8')
 	send_command('unbind @numpad9')
+	send_command('unbind @numpad.')
 	
 	--Remove Ranged Scripts
 	
@@ -530,22 +522,7 @@ function init_gear_sets()
 		left_ring="Regal Ring",
 		right_ring="Niqmaddu Ring",
 		back={ name="Ogma's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-		
-	sets.precast.WS.Uncapped = {
-		ammo={ name="Seeth. Bomblet +1", augments={'Path: A',}},
-		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Fotia Gorget",
-		waist="Fotia Belt",
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Sherida Earring",
-		left_ring="Regal Ring",
-		right_ring="Niqmaddu Ring",
-		back={ name="Ogma's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-	
+
 	sets.precast.WS['Resolution'] = {
 		ammo={ name="Seeth. Bomblet +1", augments={'Path: A',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
@@ -561,37 +538,7 @@ function init_gear_sets()
 		right_ring="Niqmaddu Ring",
 		back={ name="Ogma's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 
-	sets.precast.WS['Resolution'].Uncapped = {
-		ammo={ name="Seeth. Bomblet +1", augments={'Path: A',}},
-		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Fotia Gorget",
-		waist="Fotia Belt",
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Sherida Earring",
-		left_ring="Regal Ring",
-		right_ring="Niqmaddu Ring",
-		back={ name="Ogma's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-
-    sets.precast.WS['Dimidiation'] = {
-		ammo="Knobkierrie",
-		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Fotia Gorget",
-		waist="Fotia Belt",
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Sherida Earring",
-		left_ring="Epaminondas's Ring",
-		right_ring="Ilabrat Ring",
-		back={ name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
-
-	sets.precast.WS['Dimidiation'].Uncapped = {
+	sets.precast.WS['Dimidiation'] = {
 		ammo="Knobkierrie",
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
@@ -670,6 +617,7 @@ function init_gear_sets()
 		back={ name="Ogma's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},}
 		
 	sets.precast.WS['Full Break'] = sets.precast.WS['Armor Break']
+	sets.precast.WS['Weapon Break'] = sets.precast.WS['Armor Break']
 	sets.precast.WS['Steel Cyclone'] = sets.precast.WS['Resolution']
     sets.precast.WS['Upheaval'] = sets.precast.WS['Resolution']
     
@@ -1176,8 +1124,6 @@ function display_current_job_state(eventArgs)
         m_msg = m_msg .. '/' ..state.HybridMode.value
     end
 
-    local am_msg = '(' ..string.sub(state.AttackMode.value,1,1).. ')'
-
     local ws_msg = state.WeaponskillMode.value
 
     local d_msg = 'None'
@@ -1308,15 +1254,6 @@ windower.register_event('zone change',
         send_command('gi ugs true')
     end
 )
-
-	--Handles the state.Runes which allows you to bind a key to cast a rune
-
-	--Allows an uncapped attack and a capped attack Weaponskill Set
-function get_custom_wsmode(spell, action, spellMap)
-    if spell.type == 'WeaponSkill' and state.AttackMode.value == 'Uncapped' then
-        return "Uncapped"
-    end
-end
 
 	-- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

@@ -1,4 +1,3 @@
--- Original: Finanx
 -- Haste/DW Detection Requires Gearinfo Addon
 -- Dressup is setup to auto load with this Lua
 -- Itemizer addon is required for auto gear sorting / Warp Scripts / Range Scripts
@@ -15,7 +14,8 @@
 --					[ ALT + F9 ]			Cycle Range Mode
 --              	[ Windows + F9 ]    	Cycle Hybrid Modes
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
---              	[ Windows + A ]     	AttackMode: Capped/Uncapped WS Modifier
+--              	[ Windows + C ]     	Toggle Capacity Points Mode
+--              	[ Windows + R ]     	Toggle Reraise Mode
 --
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
 --					[ ALT + Numpad+ ]		Dimensional Ring Dem
@@ -32,6 +32,7 @@
 --					[ Windows + Numpad3 ]	Tropical Crepe
 --					[ Windows + Numpad4 ]	Miso Ramen
 --					[ Windows + Numpad5 ]	Red Curry Bun
+--					[ Windows + Numpad6 ]	Rolanberry Daifuku
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
@@ -52,7 +53,7 @@
 --	Weaponskills:	[ CTRL + Numpad1 ]		Upheaval
 --					[ CTRL + Numpad2 ]		Ukko's Furry
 --					[ CTRL + Numpad3 ]		Fell Cleave
---					[ CTRL + Numpad4 ]		Full Break
+--					[ CTRL + Numpad4 ]		Armor Break
 --					[ CTRL + Numpad5 ]		Steel Cyclone
 --					[ CTRL + Numpad6 ]		King's Justice
 --					[ CTRL + Numpad7 ]		Raging Rush
@@ -109,7 +110,6 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
-	state.AttackMode = M{['description']='Attack', 'Uncapped', 'Capped'}
 	state.Reraise = M(false, "Reraise Mode")
 	
 	state.WeaponSet = M{['description']='Weapon Set', 'Chango', 'Shining_One', 'Naegling', 'Loxotic_Mace', 'Dolichenus'}
@@ -123,7 +123,6 @@ function user_setup()
 
 	--Global Warrior binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
-	send_command('bind @a gs c cycle AttackMode')
 	send_command('bind @t gs c cycle TreasureMode')
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @r gs c toggle Reraise')
@@ -155,13 +154,6 @@ function user_setup()
 	send_command('bind !numpad7 input /ws "Judgment" <t>')
 	send_command('bind !numpad9 input /ws "Black Halo" <t>')
 	
-	
-	--Dual Box binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	--send_command('bind @1 input //assist me; wait 0.5; input //send Aurorasky /attack')
-	--send_command('bind @2 input //assist me; wait 0.5; input //send Ardana /attack')
-	--send_command('bind @q input //assist me; wait 0.5; input //send Ardana /ma "Distract" <t>')
-	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('bind ~numpad1 input /item "Echo Drops" <me>')
@@ -176,6 +168,7 @@ function user_setup()
 	send_command('bind @numpad3 input /item "Tropical Crepe" <me>')
 	send_command('bind @numpad4 input /item "Miso Ramen" <me>')
 	send_command('bind @numpad5 input /item "Red Curry Bun" <me>')
+	send_command('bind @numpad6 input /item "Rolanberry Daifuku" <me>')
 	send_command('bind @numpad7 input //get Toolbag (Shihe) satchel; wait 3; input /item "Toolbag (Shihei)" <me>')
 		
 	--Ranged Scripts (Tags CTRL + Numpad0 as ranged attack) (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -215,23 +208,18 @@ function user_unload()
 
 	--Remove Global Warrior Binds
 	
-	send_command('unbind @a')
     send_command('unbind @t')
-    send_command('unbind ^`')
+    send_command('unbind @c')
 	send_command('unbind @r')
-	send_command('unbind @h')
-	send_command('unbind @1')
-	send_command('unbind @2')
-	send_command('unbind @3')
-	send_command('unbind @4')
-	send_command('unbind @5')
-	
-
-	--Remove Dual Box Binds
-	
-	--send_command('unbind @1')
-	--send_command('unbind @2')
-	--send_command('unbind @q')
+	send_command('unbind ^`')
+	send_command('unbind ^-')
+	send_command('unbind ^=')
+	send_command('unbind !`')
+	send_command('unbind !-')
+	send_command('unbind !=')
+	send_command('unbind @`')
+	send_command('unbind @-')
+	send_command('unbind @=')
 	
 	--Remove Weapon Set binds
 	
@@ -244,6 +232,7 @@ function user_unload()
 	send_command('unbind @7')
 	send_command('unbind @8')
 	send_command('unbind @9')
+	send_command('unbind @0')
 	
 	--Remove Weaponskill Binds
     
@@ -269,7 +258,6 @@ function user_unload()
 	send_command('unbind !numpad9')
 	send_command('unbind !numpad.')
 	
-	
 	--Remove Item Binds
 	
 	send_command('unbind ~numpad1')
@@ -281,6 +269,7 @@ function user_unload()
 	send_command('unbind ~numpad7')
 	send_command('unbind ~numpad8')
 	send_command('unbind ~numpad9')
+	send_command('unbind ~numpad.')
 	
 	send_command('unbind @numpad1')
     send_command('unbind @numpad2')
@@ -291,6 +280,7 @@ function user_unload()
 	send_command('unbind @numpad7')
 	send_command('unbind @numpad8')
 	send_command('unbind @numpad9')
+	send_command('unbind @numpad.')
 	
 	--Remove Ranged Scripts
 	
@@ -374,21 +364,6 @@ function init_gear_sets()
 
 	--Generic Weapon Skill
 
-    sets.precast.WS.Uncapped = {
-		ammo="Knobkierrie",
-		head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="War. Beads +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Thrud Earring",
-		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		left_ring="Epaminondas's Ring",
-		right_ring="Regal Ring",
-		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-		
 	sets.precast.WS = {
 		ammo="Knobkierrie",
 		head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},
@@ -407,21 +382,6 @@ function init_gear_sets()
 	--Great Axe Weapon Skills
 	
 	sets.precast.WS['Upheaval'] = {
-		ammo="Knobkierrie",
-		head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},
-		body={ name="Sakpata's Plate", augments={'Path: A',}},
-		hands="Sakpata's Gauntlets",
-		legs="Sakpata's Cuisses",
-		feet="Sakpata's Leggings",
-		neck={ name="War. Beads +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Thrud Earring",
-		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
-		right_ring="Niqmaddu Ring",
-		back={ name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%',}},}
-
-	sets.precast.WS['Upheaval'].Uncapped = {
 		ammo="Knobkierrie",
 		head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
@@ -465,24 +425,8 @@ function init_gear_sets()
 		left_ring="Epaminondas's Ring",
 		right_ring="Regal Ring",
 		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-		
-	sets.precast.WS['Steel Cyclone'].Uncapped = {
-		ammo="Knobkierrie",
-		head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="War. Beads +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Thrud Earring",
-		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		left_ring="Epaminondas's Ring",
-		right_ring="Regal Ring",
-		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 
 	sets.precast.WS['Fell Cleave'] = sets.precast.WS['Steel Cyclone']
-	sets.precast.WS['Fell Cleave'].Uncapped = sets.precast.WS['Steel Cyclone'].Uncapped
 
 	--Breaks
 	
@@ -507,23 +451,8 @@ function init_gear_sets()
 	
 	
 	--Sword Weapon Skills
-	
-	sets.precast.WS['Savage Blade'] = {
-		ammo="Knobkierrie",
-		head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},
-		body={ name="Sakpata's Plate", augments={'Path: A',}},
-		hands="Sakpata's Gauntlets",
-		legs="Sakpata's Cuisses",
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="War. Beads +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Thrud Earring",
-		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		left_ring="Epaminondas's Ring",
-		right_ring="Regal Ring",
-		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 
-	sets.precast.WS['Savage Blade'].Uncapped = {
+	sets.precast.WS['Savage Blade'] = {
 		ammo="Knobkierrie",
 		head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
@@ -556,18 +485,14 @@ function init_gear_sets()
 	--Polearm Weapon Skills
 
 	sets.precast.WS['Impulse Drive'] = sets.precast.WS['Savage Blade']	
-	sets.precast.WS['Impulse Drive'].Uncapped = sets.precast.WS['Savage Blade'].Uncapped
 	
 	sets.precast.WS['Stardiver'] = sets.precast.WS['Savage Blade']	
-	sets.precast.WS['Stardiver'].Uncapped = sets.precast.WS['Savage Blade'].Uncapped
 	
 	--Club Weapon Skills
 	
 	sets.precast.WS['Black Halo'] = sets.precast.WS['Savage Blade']	
-	sets.precast.WS['Black Halo'].Uncapped = sets.precast.WS['Savage Blade'].Uncapped
 	
 	sets.precast.WS['Judgment'] = sets.precast.WS['Savage Blade']	
-	sets.precast.WS['Judgment'].Uncapped = sets.precast.WS['Savage Blade'].Uncapped
 		
 	--Axe Weapon Skills
 	
@@ -834,13 +759,6 @@ function job_precast(spell, action, spellMap, eventArgs)
     end
 end
 
-	--Allows an uncapped attack and a capped attack Weaponskill Set
-function get_custom_wsmode(spell, action, spellMap)
-    if spell.type == 'WeaponSkill' and state.AttackMode.value == 'Uncapped' then
-        return "Uncapped"
-    end
-end
-
 function job_state_change(field, new_value, old_value)
  
     equip(sets[state.WeaponSet.current])
@@ -925,8 +843,6 @@ function display_current_job_state(eventArgs)
         m_msg = m_msg .. '/' ..state.HybridMode.value
     end
 
-    local am_msg = '(' ..string.sub(state.AttackMode.value,1,1).. ')'
-	
     local ws_msg = state.WeaponskillMode.value
 
     local d_msg = 'None'

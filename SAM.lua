@@ -1,4 +1,4 @@
--- Original: Finanx
+-- Haste/DW Detection Requires Gearinfo Addon
 -- Dressup is setup to auto load with this Lua
 -- Itemizer addon is required for auto gear sorting / Warp Scripts / Range Scripts
 --
@@ -14,7 +14,7 @@
 --              	[ Windows + F9 ]    	Cycle Hybrid Modes
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
---              	[ Windows + A ]     	AttackMode: Capped/Uncapped WS Modifier
+--              	[ Windows + R ]     	Toggle Reraise Mode
 --
 -- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
 --					[ Shift + Numpad2 ]		Holy Water
@@ -28,6 +28,7 @@
 --					[ Windows + Numpad3 ]	Tropical Crepe
 --					[ Windows + Numpad4 ]	Miso Ramen
 --					[ Windows + Numpad5 ]	Red Curry Bun
+--					[ Windows + Numpad6 ]	Rolanberry Daifuku
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
@@ -40,8 +41,10 @@
 -------------------------------------------------------------------------------------------------------------------
 --
 --	Modes:			[ Windows + 1 ]			Sets Weapon to Dojikiri then locks Main/Sub Slots
---					[ Windows + 2 ]			Sets Weapon to Shining_One then locks Main/Sub Slots
---					[ Windows + 3 ]			Sets Weapon to Soboro then locks Main/Sub Slots
+--					[ Windows + 2 ]			Sets Weapon to Masamune then locks Main/Sub Slots
+--					[ Windows + 3 ]			Sets Weapon to Shining_One then locks Main/Sub Slots
+--					[ Windows + 4 ]			Sets Weapon to Hachimonji then locks Main/Sub Slots
+--					[ Windows + 5 ]			Sets Weapon to Soboro then locks Main/Sub Slots
 --
 --  WS:         	[ CTRL + Numpad1 ]    	Tachi: Fudo
 --					[ CTRL + Numpad2 ]    	Tachi: Shoha
@@ -51,7 +54,10 @@
 --					[ CTRL + Numpad6 ]    	Tachi: Yukikaze
 --					[ CTRL + Numpad7 ]    	Tachi: Rana
 --				
---					[ ALT + Numpad1 ]		Impulse Drive
+--					[ ALT + Numpad1 ]		Tachi: Kagero
+--					[ ALT + Numpad2 ]		Tachi: Goten
+--					[ ALT + Numpad3 ]		Tachi: Koki
+--					[ ALT + Numpad4 ]		Impulse Drive
 --
 --  Abilities:  	[ CTRL + ` ]        	Hasso
 --
@@ -104,8 +110,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'Dojikiri', 'Shining_One', 'Hachimonji', 'Soboro' }
-	state.AttackMode = M{['description']='Attack', 'Uncapped', 'Capped'}
+	state.WeaponSet = M{['description']='Weapon Set', 'Dojikiri', 'Masamune', 'Shining_One', 'Hachimonji', 'Soboro' }
 	state.Reraise = M(false, "Reraise Mode")
 	
 	state.CP = M(false, "Capacity Points Mode")
@@ -118,15 +123,17 @@ function user_setup()
     --Global Samurai binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('bind @t gs c cycle TreasureMode')
+	send_command('bind @c gs c toggle CP')
 	send_command('bind @r gs c toggle Reraise')
     send_command('bind ^` input /ja "Hasso" <me>')
 	
 	--Weapon set Binds
 
 	send_command('bind @1 gs c set WeaponSet Dojikiri')
-	send_command('bind @2 gs c set WeaponSet Shining_One')
-	send_command('bind @3 gs c set WeaponSet Hachimonji')
-	send_command('bind @4 gs c set WeaponSet Soboro')
+	--send_command('bind @2 gs c set WeaponSet Masamune')
+	send_command('bind @3 gs c set WeaponSet Shining_One')
+	send_command('bind @4 gs c set WeaponSet Hachimonji')
+	send_command('bind @5 gs c set WeaponSet Soboro')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
@@ -143,12 +150,6 @@ function user_setup()
 	send_command('bind !numpad3 input /ws "Tachi: Koki" <t>')
 	send_command('bind !numpad4 input /ws "Impulse Drive" <t>')
 	
-	--Dual Box binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	--send_command('bind @1 input //assist me; wait 0.5; input //send Aurorasky /attack')
-	--send_command('bind @2 input //assist me; wait 0.5; input //send Ardana /attack')
-	--send_command('bind @q input //assist me; wait 0.5; input //send Ardana /ma "Distract" <t>')
-	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('bind ~numpad1 input /item "Echo Drops" <me>')
@@ -163,6 +164,7 @@ function user_setup()
 	send_command('bind @numpad3 input /item "Tropical Crepe" <me>')
 	send_command('bind @numpad4 input /item "Miso Ramen" <me>')
 	send_command('bind @numpad5 input /item "Red Curry Bun" <me>')
+	send_command('bind @numpad6 input /item "Rolanberry Daifuku" <me>')
 	send_command('bind @numpad7 input //get Toolbag (Shihe) satchel; wait 3; input /item "Toolbag (Shihei)" <me>')
 		
 	--Ranged Scripts  (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -196,15 +198,17 @@ function user_unload()
 	--Remove Global Samurai Binds
 	
     send_command('unbind @t')
-    send_command('unbind @w')
-    send_command('unbind @e')
+    send_command('unbind @c')
+    send_command('unbind @r')
 	send_command('unbind ^`')
-	
-	--Remove Dual Box Binds
-	
-	--send_command('unbind @1')
-	--send_command('unbind @2')
-	--send_command('unbind @q')
+	send_command('unbind ^-')
+	send_command('unbind ^=')
+	send_command('unbind !`')
+	send_command('unbind !-')
+	send_command('unbind !=')
+	send_command('unbind @`')
+	send_command('unbind @-')
+	send_command('unbind @=')
 	
 	--Remove Weapon Set binds
 	
@@ -217,6 +221,7 @@ function user_unload()
 	send_command('unbind @7')
 	send_command('unbind @8')
 	send_command('unbind @9')
+	send_command('unbind @0')
 	
 	--Remove Weaponskill Binds
     
@@ -242,7 +247,6 @@ function user_unload()
 	send_command('unbind !numpad9')
 	send_command('unbind !numpad.')
 	
-	
 	--Remove Item Binds
 	
 	send_command('unbind ~numpad1')
@@ -254,6 +258,7 @@ function user_unload()
 	send_command('unbind ~numpad7')
 	send_command('unbind ~numpad8')
 	send_command('unbind ~numpad9')
+	send_command('unbind ~numpad.')
 	
 	send_command('unbind @numpad1')
     send_command('unbind @numpad2')
@@ -264,6 +269,7 @@ function user_unload()
 	send_command('unbind @numpad7')
 	send_command('unbind @numpad8')
 	send_command('unbind @numpad9')
+	send_command('unbind @numpad.')
 	
 	--Remove Ranged Scripts
 	
@@ -499,6 +505,7 @@ function init_gear_sets()
         }
 	
 	sets.Dojikiri = {main={ name="Dojikiri Yasutsuna", augments={'Path: A',}},}
+	sets.Masamune = {main={ name="Dojikiri Yasutsuna", augments={'Path: A',}},}
 	sets.Shining_One = {main='Shining One'}
 	sets.Hachimonji = {main="Hachimonji"}
 	sets.Soboro = {main="Soboro Sukehiro"}
@@ -550,13 +557,6 @@ function job_precast(spell, action, spellMap, eventArgs)
         if spell.english == 'Tachi: Jinpu' and (world.weather_element == 'Wind' or world.day_element == 'Wind') then
                 equip(sets.Obi)
         end
-    end
-end
-
-	--Allows an uncapped attack and a capped attack Weaponskill Set
-function get_custom_wsmode(spell, action, spellMap)
-    if spell.type == 'WeaponSkill' and state.AttackMode.value == 'Uncapped' then
-        return "Uncapped"
     end
 end
 

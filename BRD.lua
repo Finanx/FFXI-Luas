@@ -1,4 +1,3 @@
--- Original: Finanx
 -- Haste/DW Detection Requires Gearinfo Addon
 -- Dressup is setup to auto load with this Lua
 -- Itemizer addon is required for auto gear sorting / Warp Scripts / Range Scripts
@@ -17,7 +16,6 @@
 --  				[ Windows + R ]         Toggles Range Lock
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
---              	[ Windows + A ]     	AttackMode: Capped/Uncapped WS Modifier
 --
 -- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
 --					[ Shift + Numpad2 ]		Holy Water
@@ -31,6 +29,7 @@
 --					[ Windows + Numpad3 ]	Tropical Crepe
 --					[ Windows + Numpad4 ]	Miso Ramen
 --					[ Windows + Numpad5 ]	Red Curry Bun
+--					[ Windows + Numpad6 ]	Rolanberry Daifuku
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
@@ -47,13 +46,16 @@
 --					[ Windows + 2 ]			Sets Weapon to Carnwenhan then locks Main/Sub Slots
 --					[ Windows + 3 ]			Sets Weapon to Tauret then locks Main/Sub Slots
 --					[ Windows + 4 ]			Sets Weapon to Twashtar then locks Main/Sub Slots
+--					[ Windows + 5 ]			Sets Weapon to Xoanon then locks Main/Sub Slots
 --
---  WS:         	[ CTRL + Numpad1 ]    	Rudra's Storm
---              	[ CTRL + Numpad2 ]    	Evisceration
+--  WS:         	[ CTRL + Numpad1 ]    	Evisceration
+--              	[ CTRL + Numpad2 ]    	Rudra's Storm
 --              	[ CTRL + Numpad3 ]    	Mordant Rime
 --              	[ CTRL + Numpad4 ]    	Savage Blade
 --              	[ CTRL + Numpad5 ]    	Aeolian Edge
 --					[ CTRL + Numpad6 ]    	Extenterator
+--					[ CTRL + Numpad7 ]    	Retribution
+--					[ CTRL + Numpad9 ]    	Shell Crusher
 --
 -- Song Binds:		[ ALT + Numpad1 ]		Cycle Carol	I
 --					[ ALT + Numpad2 ]		Cast Carol I
@@ -180,12 +182,6 @@ function user_setup()
 	
 	send_command('bind ^numpad1 input /ws "Evisceration" <t>')
 	
-	--Dual Box binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	--send_command('bind @1 input //assist me; wait 0.5; input //send Aurorasky /attack')
-	--send_command('bind @2 input //assist me; wait 0.5; input //send Ardana /attack')
-	--send_command('bind @q input //assist me; wait 0.5; input //send Ardana /ma "Distract" <t>')
-	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('bind ~numpad1 input /item "Echo Drops" <me>')
@@ -200,6 +196,7 @@ function user_setup()
 	send_command('bind @numpad3 input /item "Tropical Crepe" <me>')
 	send_command('bind @numpad4 input /item "Miso Ramen" <me>')
 	send_command('bind @numpad5 input /item "Red Curry Bun" <me>')
+	send_command('bind @numpad6 input /item "Rolanberry Daifuku" <me>')
 	send_command('bind @numpad7 input //get Toolbag (Shihe) satchel; wait 3; input /item "Toolbag (Shihei)" <me>')
 	
 	--Ranged Scripts  (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -244,11 +241,16 @@ function user_unload()
     send_command('unbind @w')
     send_command('unbind @c')
 	send_command('unbind @t')
-    
+	send_command('unbind ^`')
+	send_command('unbind ^-')
+	send_command('unbind ^=')
 	send_command('unbind !`')
-    send_command('unbind !-')
-    send_command('unbind !=')	
-	
+	send_command('unbind !-')
+	send_command('unbind !=')
+	send_command('unbind @`')
+	send_command('unbind @-')
+	send_command('unbind @=')
+    
 	send_command('unbind !numpad1')
 	send_command('unbind !numpad2')
     send_command('unbind !numpad3')	
@@ -261,12 +263,6 @@ function user_unload()
 	send_command('unbind !numpad8')
     send_command('unbind !numpad9')
 	
-	--Remove Dual Box Binds
-	
-	--send_command('unbind @1')
-	--send_command('unbind @2')
-	--send_command('unbind @q')
-	
 	--Remove Weapon Set binds
 	
 	send_command('unbind @1')
@@ -278,6 +274,7 @@ function user_unload()
 	send_command('unbind @7')
 	send_command('unbind @8')
 	send_command('unbind @9')
+	send_command('unbind @0')
 	
 	--Remove Weaponskill Binds
     
@@ -303,7 +300,6 @@ function user_unload()
 	send_command('unbind !numpad9')
 	send_command('unbind !numpad.')
 	
-	
 	--Remove Item Binds
 	
 	send_command('unbind ~numpad1')
@@ -315,6 +311,7 @@ function user_unload()
 	send_command('unbind ~numpad7')
 	send_command('unbind ~numpad8')
 	send_command('unbind ~numpad9')
+	send_command('unbind ~numpad.')
 	
 	send_command('unbind @numpad1')
     send_command('unbind @numpad2')
@@ -325,6 +322,7 @@ function user_unload()
 	send_command('unbind @numpad7')
 	send_command('unbind @numpad8')
 	send_command('unbind @numpad9')
+	send_command('unbind @numpad.')
 	
 	--Remove Ranged Scripts
 	

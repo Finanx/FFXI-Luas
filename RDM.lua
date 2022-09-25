@@ -1,4 +1,3 @@
--- Original: Finanx
 -- Haste/DW Detection Requires Gearinfo Addon
 -- Dressup is setup to auto load with this Lua
 -- Itemizer addon is required for auto gear sorting / Warp Scripts / Range Scripts
@@ -17,7 +16,6 @@
 --  				[ Windows + R ]         Toggles Range Lock
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
---              	[ Windows + A ]     	AttackMode: Capped/Uncapped WS Modifier
 --
 -- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
 --					[ Shift + Numpad2 ]		Holy Water
@@ -31,6 +29,7 @@
 --					[ Windows + Numpad3 ]	Tropical Crepe
 --					[ Windows + Numpad4 ]	Miso Ramen
 --					[ Windows + Numpad5 ]	Red Curry Bun
+--					[ Windows + Numpad6 ]	Rolanberry Daifuku
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
@@ -65,7 +64,9 @@
 --
 --  Abilities:  	[ CTRL + ` ]        	Composure
 --					[ CTRL + - ]        	Light Arts
---					[ CTRL + - ]        	Dark Arts
+--					[ CTRL + = ]        	Dark Arts
+--
+--	Items:			[ CTRL + Numpad. ]		Chapuli Quiver
 --
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.
@@ -157,18 +158,6 @@ function user_setup()
 	send_command('bind !numpad5 input /ws "Evisceration" <t>')
 	send_command('bind !numpad7 input /ws "Empyreal Arrow" <t>')
 
-	--Dual Box binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	--send_command('bind @1 input //assist me; wait 0.5; input //send Aurorasky /attack')
-	--send_command('bind @2 input //assist me; wait 0.5; input //send Ardana /attack')
-	--send_command('bind @q input //assist me; wait 0.5; input //send Ardana /ma "Distract" <t>')
-	
-	--Aurorasky Weaponskills (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	--send_command('bind ~numpad1 input //send Aurorasky /ws "Leaden Salute" <t>')
-    --send_command('bind ~numpad2 input //send Aurorasky /ws "Wildfire" <t>')
-    --send_command('bind ~numpad3 input //send Aurorasky /ws "Last Stand" <t>')
-	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('bind ~numpad1 input /item "Echo Drops" <me>')
@@ -183,6 +172,7 @@ function user_setup()
 	send_command('bind @numpad3 input /item "Tropical Crepe" <me>')
 	send_command('bind @numpad4 input /item "Miso Ramen" <me>')
 	send_command('bind @numpad5 input /item "Red Curry Bun" <me>')
+	send_command('bind @numpad6 input /item "Rolanberry Daifuku" <me>')
 	send_command('bind @numpad7 input //get Toolbag (Shihe) satchel; wait 3; input /item "Toolbag (Shihei)" <me>')
 		
 	--Ranged Scripts  (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -226,14 +216,19 @@ function user_unload()
 
 	--Remove Global Red Mage Binds
 
-	send_command('unbind !`')	
 	send_command('unbind @w')
 	send_command('unbind @r')
 	send_command('unbind @t')
+    send_command('unbind @m')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
 	send_command('unbind ^=')
-    send_command('unbind @m')
+	send_command('unbind !`')
+	send_command('unbind !-')
+	send_command('unbind !=')
+	send_command('unbind @`')
+	send_command('unbind @-')
+	send_command('unbind @=')
 	
 	--Remove Weapon Set binds
 	
@@ -246,12 +241,7 @@ function user_unload()
 	send_command('unbind @7')
 	send_command('unbind @8')
 	send_command('unbind @9')
-	
-	--Remove Dual Box Binds
-	
-	--send_command('unbind @1')
-	--send_command('unbind @2')
-	--send_command('unbind @q')
+	send_command('unbind @0')
 	
 	--Remove Weaponskill Binds
     
@@ -277,7 +267,6 @@ function user_unload()
 	send_command('unbind !numpad9')
 	send_command('unbind !numpad.')
 	
-	
 	--Remove Item Binds
 	
 	send_command('unbind ~numpad1')
@@ -289,6 +278,7 @@ function user_unload()
 	send_command('unbind ~numpad7')
 	send_command('unbind ~numpad8')
 	send_command('unbind ~numpad9')
+	send_command('unbind ~numpad.')
 	
 	send_command('unbind @numpad1')
     send_command('unbind @numpad2')
@@ -299,6 +289,7 @@ function user_unload()
 	send_command('unbind @numpad7')
 	send_command('unbind @numpad8')
 	send_command('unbind @numpad9')
+	send_command('unbind @numpad.')
 	
 	--Remove Ranged Scripts
 	
@@ -308,10 +299,6 @@ function user_unload()
 	
 	send_command('unbind ^numpad+')
 	send_command('unbind !numpad+')
-	
-	--Remove Ammo Scripts
-	
-	send_command('unbind ^numpad.')
 	
 	--Gear Removal Commands
 	
@@ -335,8 +322,6 @@ function init_gear_sets()
     -- Precast sets to enhance JAs
     sets.precast.JA['Chainspell'] = {body="Viti. Tabard +3"}
 	sets.precast.JA['Convert'] = {main="Murgleis"}
-
-    -- Fast cast sets for spells
 
     -- Fast cast sets for spells
     sets.precast.FC = {
@@ -458,21 +443,7 @@ function init_gear_sets()
 		back={ name="Sucellos's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 		
 	sets.precast.WS['Death Blossom'] = sets.precast.WS['Savage Blade']
-		
-	sets.precast.WS['Black Halo'] = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="Dls. Torque +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Regal Earring",
-		left_ring="Epaminondas's Ring",
-		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
-		back={ name="Sucellos's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+	sets.precast.WS['Black Halo'] = sets.precast.WS['Savage Blade']
 
 
     sets.precast.WS['Requiescat'] = {
@@ -589,9 +560,9 @@ function init_gear_sets()
 		ammo="Sapience Orb",
 		head="Halitus Helm",
 		body="Emet Harness +1",
-		hands="Malignance Gloves",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Zoar Subligar +1", augments={'Path: A',}},
-		feet="Malignance Boots",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
 		waist="Kasiri Belt",
 		left_ear="Friomisi Earring",
