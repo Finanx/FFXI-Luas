@@ -157,6 +157,61 @@ function user_setup()
 	send_command('bind !numpad8 input //gs c Etude')
     send_command('bind !numpad9 gs c cycle Etude')
 	
+	--Command to show global binds in game[ CTRL + numpad- ]
+	send_command([[bind ^numpad- 
+		input /echo -----Item_Binds-----;
+		input /echo [ Shift + Numpad1 ]	Echo Drop;
+		input /echo [ Shift + Numpad2 ]	Holy Water;
+		input /echo [ Shift + Numpad3 ]	Remedy;
+		input /echo [ Shift + Numpad4 ]	Panacea;
+		input /echo [ Shift + Numpad7 ]	Silent Oil;
+		input /echo [ Shift + Numpad9 ]	Prism Powder;
+		input /echo -----Food_Binds-----;
+		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
+		input /echo [ Windows + Numpad2 ]	Grape Daifuku;
+		input /echo [ Windows + Numpad3 ]	Tropical Crepe;
+		input /echo [ Windows + Numpad4 ]	Miso Ramen;
+		input /echo [ Windows + Numpad5 ]	Red Curry Bun;
+		input /echo [ Windows + Numpad6 ]	Rolanberry Daifuku;
+		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
+		input /echo -----Modes-----;
+		input /echo [ CTRL + ` ]	Cycles Song Mode;
+		input /echo [ Windows + W ]	Sets Weapon to None;
+		input /echo [ Windows + 1 ]	Sets Weapon to Naegling;
+		input /echo [ Windows + 2 ]	Sets Weapon to Carnwenhan;
+		input /echo [ Windows + 3 ]	Sets Weapon to Tauret;
+		input /echo [ Windows + 4 ]	Sets Weapon to Twashtar;
+		input /echo [ Windows + 5 ]	Sets Weapon to Xoanon;
+		]])
+		
+	--Command to show Bard binds in game[ ALT + numpad- ]
+	send_command([[bind !numpad- 
+		input /echo -----Abilities-----;
+		input /echo [ ALT + ` ] Uses Assigned Threnody;
+		input /echo [ ALT + - ] Cycleback Threnody's;
+		input /echo [ ALT + = ] Cycle Threnody's;
+		input /echo [ ALT + Numpad2 ] Uses Assigned Carol 1;
+		input /echo [ ALT + Numpad1 ] Cycleback Carol 1;
+		input /echo [ ALT + Numpad3 ] Cycle Carol 1;
+		input /echo [ ALT + Numpad5 ] Uses Assigned Carol 2;
+		input /echo [ ALT + Numpad4 ] Cycleback Carol 2;
+		input /echo [ ALT + Numpad6 ] Cycle Carol 2;
+		input /echo [ ALT + Numpad8 ] Uses Assigned Etude;
+		input /echo [ ALT + Numpad7 ] Cycleback Etudes;
+		input /echo [ ALT + Numpad9 ] Cycle Etudes;
+		input /echo -----Dagger-----;
+		input /echo [ CTRL + Numpad1 ] Evisceration;
+		input /echo [ CTRL + Numpad2 ] Rudra's Storm;
+		input /echo [ CTRL + Numpad3 ] Mordant Rime;
+		input /echo [ CTRL + Numpad5 ] Aeolian Edge;
+		input /echo [ CTRL + Numpad6 ] Exenterator;
+		input /echo -----Sword-----;
+		input /echo [ CTRL + Numpad4 ] Savage Blade;
+		input /echo -----Staff-----;
+		input /echo [ CTRL + Numpad7 ] Retribution;
+		input /echo [ CTRL + Numpad9 ] Shell Crusher;
+		]])	
+	
 	--Weapon set Binds
 
 	send_command('bind @1 gs c set WeaponSet Naegling')
@@ -1446,6 +1501,9 @@ function display_current_job_state(eventArgs)
     local i_msg = state.IdleMode.value
 
     local msg = ''
+	if state.TreasureMode.value == 'Tag' then
+        msg = msg .. ' TH: Tag |'
+    end
     if state.Kiting.value then
         msg = msg .. ' Kiting: On |'
     end
@@ -1453,7 +1511,6 @@ function display_current_job_state(eventArgs)
     add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
         ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
         ..string.char(31,060).. ' Magic: ' ..string.char(31,001)..c_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
         ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
         ..string.char(31,002)..msg)
 

@@ -309,8 +309,7 @@ function init_gear_sets()
 
     sets.TreasureHunter = {
 		ammo="Per. Lucky Egg", --TH1
-        hands={ name="Plun. Armlets +1", augments={'Enhances "Perfect Dodge" effect',}}, --3
-        waist="Chaac Belt", --1
+		feet="Skulk. Poulaines +2", --TH4
         }
 
     sets.buff['Sneak Attack'] = {}
@@ -1026,7 +1025,6 @@ function display_current_job_state(eventArgs)
 
     add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
         ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
         ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
         ..string.char(31,002)..msg)
 

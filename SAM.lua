@@ -126,6 +126,53 @@ function user_setup()
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @r gs c toggle Reraise')
     send_command('bind ^` input /ja "Hasso" <me>')
+	send_command('bind !` input /ja "Seigan" <me>')
+	
+	--Command to show global binds in game[ CTRL + numpad- ]
+	send_command([[bind ^numpad- 
+		input /echo -----Item_Binds-----;
+		input /echo [ Shift + Numpad1 ]	Echo Drop;
+		input /echo [ Shift + Numpad2 ]	Holy Water;
+		input /echo [ Shift + Numpad3 ]	Remedy;
+		input /echo [ Shift + Numpad4 ]	Panacea;
+		input /echo [ Shift + Numpad7 ]	Silent Oil;
+		input /echo [ Shift + Numpad9 ]	Prism Powder;
+		input /echo -----Food_Binds-----;
+		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
+		input /echo [ Windows + Numpad2 ]	Grape Daifuku;
+		input /echo [ Windows + Numpad3 ]	Tropical Crepe;
+		input /echo [ Windows + Numpad4 ]	Miso Ramen;
+		input /echo [ Windows + Numpad5 ]	Red Curry Bun;
+		input /echo [ Windows + Numpad6 ]	Rolanberry Daifuku;
+		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
+		input /echo -----Modes-----;
+		input /echo [ Windows + R ]	Puts Reraise Set on;
+		input /echo [ Windows + 1 ]	Sets Weapon to Dojikiri;
+		input /echo [ Windows + 2 ]	Sets Weapon to Masamune;
+		input /echo [ Windows + 3 ]	Sets Weapon to Shining One;
+		input /echo [ Windows + 4 ]	Sets Weapon to Hachimonji;
+		input /echo [ Windows + 4 ]	Sets Weapon to Soboro;
+		]])
+		
+	--Command to show Rune Fencer binds in game[ ALT + numpad- ]
+	send_command([[bind !numpad- 
+		input /echo -----Abilities-----;
+		input /echo [ CTRL + ` ] Uses Hasso;
+		input /echo [ ALT + ` ] Seigan;
+		input /echo -----Great_Katana-----;
+		input /echo [ CTRL + Numpad1 ] Tachi: Fudo;
+		input /echo [ CTRL + Numpad2 ] Tachi: Shoha;
+		input /echo [ CTRL + Numpad3 ] Tachi: Kasha;
+		input /echo [ CTRL + Numpad4 ] Tachi: Ageha;
+		input /echo [ CTRL + Numpad5 ] Tachi: Jinpu;
+		input /echo [ CTRL + Numpad6 ] Tachi: Yukikaze;
+		input /echo [ CTRL + Numpad7 ] Tachi: Rana;
+		input /echo [ ALT  + Numpad1 ] Tachi: Kagero;
+		input /echo [ ALT  + Numpad2 ] Tachi: Goten;
+		input /echo [ ALT  + Numpad3 ] Tachi: Koki;
+		input /echo -----Polearm-----;
+		input /echo [ ALT + Numpad4 ] Impulse Drive;
+		]])
 	
 	--Weapon set Binds
 
@@ -421,14 +468,14 @@ function init_gear_sets()
     sets.engaged = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head="Flam. Zucchetto +2",
-		body={ name="Tatena. Harama. +1", augments={'Path: A',}},
-		hands="Wakido Kote +3",
-		legs={ name="Tatena. Haidate +1", augments={'Path: A',}},
+		body="Kasuga Domaru +2",
+		hands={ name="Tatena. Gote +1", augments={'Path: A',}},
+		legs="Kasuga Haidate +2",
 		feet={ name="Tatena. Sune. +1", augments={'Path: A',}},
-		neck={ name="Vim Torque +1", augments={'Path: A',}},
+		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Schere Earring", augments={'Path: A',}},
-		right_ear="Telos Earring",
+		left_ear="Dedition Earring",
+		right_ear={ name="Kasuga Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+8','Mag. Acc.+8',}},
 		left_ring="Niqmaddu Ring",
 		right_ring="Chirich Ring +1",
 		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},}
@@ -469,13 +516,13 @@ function init_gear_sets()
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Wakido Kote +3",
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs="Kasuga Haidate +2",
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear="Dedition Earring",
-		right_ear="Telos Earring",
+		right_ear={ name="Kasuga Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+8','Mag. Acc.+8',}},
 		left_ring="Niqmaddu Ring",
 		right_ring="Chirich Ring +1",
 		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},}
@@ -645,6 +692,44 @@ function customize_idle_set(idleSet)
     
     return idleSet
 	
+end
+
+function display_current_job_state(eventArgs)
+    local cf_msg = ''
+    if state.CombatForm.has_value then
+        cf_msg = ' (' ..state.CombatForm.value.. ')'
+    end
+
+    local m_msg = state.OffenseMode.value
+    if state.HybridMode.value ~= 'Normal' then
+        m_msg = m_msg .. '/' ..state.HybridMode.value
+    end
+
+    local ws_msg = state.WeaponskillMode.value
+
+    local c_msg = state.CastingMode.value
+
+    local d_msg = 'None'
+    if state.DefenseMode.value ~= 'None' then
+        d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
+    end
+
+    local i_msg = state.IdleMode.value
+
+    local msg = ''
+	if state.TreasureMode.value == 'Tag' then
+        msg = msg .. ' TH: Tag |'
+    end
+    if state.Kiting.value then
+        msg = msg .. ' Kiting: On |'
+    end
+
+    add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,002)..msg)
+
+    eventArgs.handled = true
 end
 
 -------------------------------------------------------------------------------------------------------------------

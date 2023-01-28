@@ -44,7 +44,7 @@
 --	Modes:			[ Windows + M ]			Toggles Magic Burst Mode
 --					[ Windows + 1 ]			Sets Weapon to Maxentius then locks Main/Sub Slots
 --					[ Windows + 2 ]			Sets Weapon to Xoanon then locks Main/Sub Slots
---					[ Windows + 3 ]			Sets Weapon to Cataclysm then locks Main/Sub Slots
+--					[ Windows + 3 ]			Sets Weapon to Musa then locks Main/Sub Slots
 --
 --  WS:         	[ CTRL + Numpad1 ]    	Retribution
 --					[ CTRL + Numpad2 ]    	Full Swing
@@ -53,14 +53,14 @@
 --					[ CTRL + Numpad5 ]    	Myrkr
 --					[ CTRL + Numpad6 ]    	Cataclysm
 --				
---					[ ALT + Numpad1 ]     	True Strike
---					[ ALT + Numpad2 ]     	Black Halo
+--					[ ALT + Numpad1 ]     	Black Halo
+--					[ ALT + Numpad2 ]     	True Strike
 --					[ ALT + Numpad3 ]     	Realmrazer
 --					[ ALT + Numpad4 ]     	Shining Strike
 --					[ ALT + Numpad5 ]     	Starlight
 --
---  Abilities:  	[ CTRL + ` ]        	Light Arts
---					[ ALT + ` ]        		Dark Arts
+--  Abilities:  	[ CTRL + - ]        	Light Arts
+--					[ CTRL + = ]        	Dark Arts
 --
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.
@@ -126,8 +126,53 @@ function user_setup()
     send_command('bind @m gs c toggle MagicBurst')
 	send_command('bind @t gs c cycle TreasureMode')
 	send_command('bind @c gs c toggle CP')
-	send_command('bind ^` input /ja "Light Arts" <me>')
-	send_command('bind !` input /ja "Dark Arts" <me>')
+	send_command('bind ^- input /ja "Light Arts" <me>')
+	send_command('bind ^= input /ja "Dark Arts" <me>')
+	
+	--Command to show global binds in game[ CTRL + numpad- ]
+	send_command([[bind ^numpad- 
+		input /echo -----Item_Binds-----;
+		input /echo [ Shift + Numpad1 ]	Echo Drop;
+		input /echo [ Shift + Numpad2 ]	Holy Water;
+		input /echo [ Shift + Numpad3 ]	Remedy;
+		input /echo [ Shift + Numpad4 ]	Panacea;
+		input /echo [ Shift + Numpad7 ]	Silent Oil;
+		input /echo [ Shift + Numpad9 ]	Prism Powder;
+		input /echo -----Food_Binds-----;
+		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
+		input /echo [ Windows + Numpad2 ]	Grape Daifuku;
+		input /echo [ Windows + Numpad3 ]	Tropical Crepe;
+		input /echo [ Windows + Numpad4 ]	Miso Ramen;
+		input /echo [ Windows + Numpad5 ]	Red Curry Bun;
+		input /echo [ Windows + Numpad6 ]	Rolanberry Daifuku;
+		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
+		input /echo -----Modes-----;
+		input /echo [ Windows + M ]	Toggles Magic Burst Mode;
+		input /echo [ Windows + W ]	Sets Weapon to None;
+		input /echo [ Windows + 1 ]	Sets Weapon to Maxentius;
+		input /echo [ Windows + 2 ]	Sets Weapon to Xoanon;
+		input /echo [ Windows + 3 ]	Sets Weapon to Musa;
+		]])
+		
+	--Command to show Red Mage binds in game[ ALT + numpad- ]
+	send_command([[bind !numpad- 
+		input /echo -----Abilities-----;
+		input /echo [ CTRL + - ] Light Arts;
+		input /echo [ CTRL + = ] Dark Arts;
+		input /echo -----Staff-----;
+		input /echo [ CTRL + Numpad1 ] Retribution;
+		input /echo [ CTRL + Numpad2 ] Full Swing;
+		input /echo [ CTRL + Numpad3 ] Shell Crusher;
+		input /echo [ CTRL + Numpad4 ] Omniscience;
+		input /echo [ CTRL + Numpad5 ] Myrkr;
+		input /echo [ CTRL + Numpad6 ] Cataclysm;
+		input /echo -----Club-----;
+		input /echo [ ALT + Numpad1 ] Black Halo;
+		input /echo [ ALT + Numpad2 ] True Strike;
+		input /echo [ ALT + Numpad2 ] Realmrazer;
+		input /echo [ ALT + Numpad2 ] Shining Strike;
+		input /echo [ ALT + Numpad2 ] Starlight;
+		]])
 	
 	--Weapon set Binds
 
@@ -145,8 +190,8 @@ function user_setup()
 	send_command('bind ^numpad5 input /ws "Myrkr" <t>')	
 	send_command('bind ^numpad6 input /ws "Cataclysm" <t>')
 
-    send_command('bind !numpad1 input /ws "True Strike" <t>')
-    send_command('bind !numpad2 input /ws "Black Halo" <t>')
+    send_command('bind !numpad1 input /ws "Black Halo" <t>')
+    send_command('bind !numpad2 input /ws "True Strike" <t>')
 	send_command('bind !numpad3 input /ws "Realmrazer" <t>')
 	send_command('bind !numpad4 input /ws "Shining Strike" <t>')
     send_command('bind !numpad5 input /ws "Starlight" <t>')
@@ -1139,8 +1184,12 @@ function display_current_job_state(eventArgs)
     local i_msg = state.IdleMode.value
 
     local msg = ''
-    if state.MagicBurst.value then
-        msg = ' Burst: On |'
+    if state.MagicBurst.value == true and state.TreasureMode.value == 'Tag' then
+		msg = ' TH: Tag | Burst: On |'
+	elseif 		state.TreasureMode.value == 'Tag' then
+		msg = msg .. ' TH: Tag |'
+	elseif state.MagicBurst.value == true then
+		msg = ' Burst: On |'
     end
     if state.Kiting.value then
         msg = msg .. ' Kiting: On |'
@@ -1148,7 +1197,6 @@ function display_current_job_state(eventArgs)
 
     add_to_chat(060, '| Magic: ' ..string.char(31,001)..c_msg.. string.char(31,002)..  ' |'
         ..string.char(31,060).. ' Regen: ' ..string.char(31,001)..r_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
         ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
         ..string.char(31,002)..msg)
 

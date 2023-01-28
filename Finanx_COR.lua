@@ -55,12 +55,12 @@
 --					[ CTRL + Numpad4 ]		Savage Blade
 --					[ CTRL + Numpad5 ]		Hot Shot
 --					[ CTRL + Numpad6 ]		Requiescat
---					[ CTRL + Numpad7 ]		Circle Blade
 --
 --					[ ALT + Numpad1 ]		Evisceration
 --					[ ALT + Numpad2 ]		Exenterator
 --					[ ALT + Numpad3 ]		Cyclone
 --					[ ALT + Numpad4 ]		Aeolian Edge
+--					[ ALT + Numpad5 ]		Viper Bite
 --
 -- Luzaf Ring:     	[ CTRL + ` ]     		Toggle use of Luzaf Ring.
 --
@@ -141,15 +141,62 @@ function user_setup()
     send_command ('bind ^` gs c toggle LuzafRing')
 	send_command('bind @t gs c cycle TreasureMode')
 	
+	--Command to show global binds in game[ CTRL + numpad- ]
+	send_command([[bind ^numpad- 
+		input /echo -----Item_Binds-----;
+		input /echo [ Shift + Numpad1 ]	Echo Drop;
+		input /echo [ Shift + Numpad2 ]	Holy Water;
+		input /echo [ Shift + Numpad3 ]	Remedy;
+		input /echo [ Shift + Numpad4 ]	Panacea;
+		input /echo [ Shift + Numpad7 ]	Silent Oil;
+		input /echo [ Shift + Numpad9 ]	Prism Powder;
+		input /echo [ CTRL  + Numpad. ] Uses Chrono Bullet Pouch;
+		input /echo [ Windows  + Numpad. ] Uses Living Bullet Pouch;
+		input /echo [ Alt  + Numpad. ] Uses Devastating Bullet Pouch;
+		input /echo -----Food_Binds-----;
+		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
+		input /echo [ Windows + Numpad2 ]	Grape Daifuku;
+		input /echo [ Windows + Numpad3 ]	Tropical Crepe;
+		input /echo [ Windows + Numpad4 ]	Miso Ramen;
+		input /echo [ Windows + Numpad5 ]	Red Curry Bun;
+		input /echo [ Windows + Numpad6 ]	Rolanberry Daifuku;
+		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
+		input /echo -----Modes-----;
+		input /echo [ CTRL + ` ]	Toggles Luzaf Ring;
+		input /echo [ Windows + 1 ]	Sets Weapon to Naegling;
+		input /echo [ Windows + 2 ]	Sets Weapon to Rostam;
+		input /echo [ Windows + 8 ]	Sets Weapon to Armageddon;
+		input /echo [ Windows + 9 ]	Sets Weapon to Fomalhaut;
+		input /echo [ Windows + 0 ]	Sets Weapon to Death Penalty;
+		]])
+		
+	--Command to show Corsair binds in game[ ALT + numpad- ]
+	send_command([[bind !numpad- 
+		input /echo -----Gun-----;
+		input /echo [ CTRL + Numpad1 ] Leaden Salute;
+		input /echo [ CTRL + Numpad2 ] Wildfire;
+		input /echo [ CTRL + Numpad3 ] Last Stand;
+		input /echo [ CTRL + Numpad5 ] Hot Shot;
+		input /echo -----Sword-----;
+		input /echo [ CTRL + Numpad4 ] Savage Blade;
+		input /echo [ CTRL + Numpad6 ] Requiescat;
+		input /echo -----Dagger-----;
+		input /echo [ ALT + Numpad1 ] Evisceration;
+		input /echo [ ALT + Numpad2 ] Exenterator;
+		input /echo [ ALT + Numpad3 ] Cyclone;
+		input /echo [ ALT + Numpad4 ] Aeolian Edge;
+		input /echo [ ALT + Numpad5 ] Viper Bite;
+		]])
+	
 	--Weapon set Binds
 	
 	send_command('bind @1 gs c set WeaponSet Naegling')
 	send_command('bind @2 gs c set WeaponSet Rostam')
 	
-	--send_command('bind @7 gs c set TP_Gun')
-	send_command('bind @8 gs c set Armageddon')
-	send_command('bind @9 gs c set Fomalhaut')
-	send_command('bind @0 gs c set DeathPenalty')
+	--send_command('bind @7 gs c set RangeSet TP_Gun')
+	send_command('bind @8 gs c set RangeSet Armageddon')
+	send_command('bind @9 gs c set RangeSet Fomalhaut')
+	send_command('bind @0 gs c set RangeSet DeathPenalty')
 		
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -159,12 +206,12 @@ function user_setup()
 	send_command('bind ^numpad4 input /ws "Savage Blade" <t>')
 	send_command('bind ^numpad5 input /ws "Hot Shot" <t>')
 	send_command('bind ^numpad6 input /ws "Requiescat" <t>')
-	send_command('bind ^numpad7 input /ws "Circle Blade" <t>')
 	
 	send_command('bind !numpad1 input /ws "Evisceration" <t>')
 	send_command('bind !numpad2 input /ws "Exenterator" <t>')
 	send_command('bind !numpad3 input /ws "Cyclone" <t>')
 	send_command('bind !numpad4 input /ws "Aeolian Edge" <t>')
+	send_command('bind !numpad5 input /ws "Viper Bite" <t>')
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -1298,26 +1345,42 @@ end
 
 	--Function to display the current relevant user state when doing an update.
 function display_current_job_state(eventArgs)
-    local msg = ''
+    local cf_msg = ''
+    if state.CombatForm.has_value then
+        cf_msg = ' (' ..state.CombatForm.value.. ')'
+    end
 
-    msg = msg .. '[ Offense/Ranged: '..state.OffenseMode.current
+    local r_msg = state.RangedMode.value 
 
+    local m_msg = state.OffenseMode.value
     if state.HybridMode.value ~= 'Normal' then
-        msg = msg .. '/' .. state.HybridMode.value
+        m_msg = m_msg .. '/' ..state.HybridMode.value
     end
 
-    msg = msg .. '/' ..state.RangedMode.current
+    local ws_msg = state.WeaponskillMode.value
 
-    if state.WeaponskillMode.value ~= 'Normal' then
-        msg = msg .. '[ WS: '..state.WeaponskillMode.current .. ' ]'
+    local c_msg = state.CastingMode.value
+
+    local d_msg = 'None'
+    if state.DefenseMode.value ~= 'None' then
+        d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
     end
-	
-	if state.TreasureMode.value == 'Tag' then
+
+    local i_msg = state.IdleMode.value
+
+    local msg = ''
+    if state.TreasureMode.value == 'Tag' then
         msg = msg .. ' TH: Tag |'
     end
+    if state.Kiting.value then
+        msg = msg .. ' Kiting: On |'
+    end
 
-
-    add_to_chat(060, msg)
+    add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
+		..string.char(31,060).. ' Range: ' ..string.char(31,001)..r_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,002)..msg)
 
     eventArgs.handled = true
 end

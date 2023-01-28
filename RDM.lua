@@ -132,6 +132,66 @@ function user_setup()
 	send_command('bind ^- input /ja "Light Arts" <me>')
 	send_command('bind ^= input /ja "Dark Arts" <me>')
 	
+	--Command to show global binds in game[ CTRL + numpad- ]
+	send_command([[bind ^numpad- 
+		input /echo -----Item_Binds-----;
+		input /echo [ Shift + Numpad1 ]	Echo Drop;
+		input /echo [ Shift + Numpad2 ]	Holy Water;
+		input /echo [ Shift + Numpad3 ]	Remedy;
+		input /echo [ Shift + Numpad4 ]	Panacea;
+		input /echo [ Shift + Numpad7 ]	Silent Oil;
+		input /echo [ Shift + Numpad9 ]	Prism Powder;
+		input /echo [ CTRL  + Numpad. ] Chapuli Quiver;
+		input /echo -----Food_Binds-----;
+		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
+		input /echo [ Windows + Numpad2 ]	Grape Daifuku;
+		input /echo [ Windows + Numpad3 ]	Tropical Crepe;
+		input /echo [ Windows + Numpad4 ]	Miso Ramen;
+		input /echo [ Windows + Numpad5 ]	Red Curry Bun;
+		input /echo [ Windows + Numpad6 ]	Rolanberry Daifuku;
+		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
+		input /echo -----Modes-----;
+		input /echo [ Windows + M ]	Toggles Magic Burst Mode;
+		input /echo [ Windows + R ]	Toggles Range Lock Mode;
+		input /echo [ Windows + W ]	Sets Weapon to None;
+		input /echo [ Windows + 1 ]	Sets Weapon to Naegling;
+		input /echo [ Windows + 2 ]	Sets Weapon to Crocea_Mors;
+		input /echo [ Windows + 3 ]	Sets Weapon to Levante;
+		input /echo [ Windows + 4 ]	Sets Weapon to Tauret;
+		input /echo [ Windows + 5 ]	Sets Weapon to Maxentius;
+		input /echo [ Windows + 6 ]	Sets Weapon to Murgleis;
+		]])
+		
+	--Command to show Red Mage binds in game[ ALT + numpad- ]
+	send_command([[bind !numpad- 
+		input /echo -----Abilities-----;
+		input /echo [ CTRL + ` ] Composure;
+		input /echo [ CTRL + - ] Light Arts;
+		input /echo [ CTRL + = ] Dark Arts;
+		input /echo -----Sword-----;
+		input /echo [ CTRL + Numpad1 ] Sanguine Blade;
+		input /echo [ CTRL + Numpad2 ] Seraph Blade;
+		input /echo [ CTRL + Numpad3 ] Requiescat;
+		input /echo [ CTRL + Numpad4 ] Savage Blade;
+		input /echo [ CTRL + Numpad5 ] Chant Du Cygne;
+		input /echo [ CTRL + Numpad6 ] Death Blossom;
+		input /echo [ CTRL + Numpad7 ] Red Lotus Blade;
+		input /echo -----Club-----;
+		input /echo [ ALT + Numpad1 ] Black Halo;
+		input /echo [ ALT + Numpad2 ] True Strike;
+		input /echo -----Dagger-----;
+		input /echo [ ALT + Numpad4 ] Aeolian Edge;
+		input /echo [ ALT + Numpad5 ] Evisceration;
+		input /echo -----Bow-----;
+		input /echo [ ALT + Numpad7 ] Empyreal Arrow;
+		]])
+		
+	send_command('bind !numpad1 input /ws "Black Halo" <t>')
+    send_command('bind !numpad2 input /ws "True Strike" <t>')
+	send_command('bind !numpad4 input /ws "Aeolian Edge" <t>')
+	send_command('bind !numpad5 input /ws "Evisceration" <t>')
+	send_command('bind !numpad7 input /ws "Empyreal Arrow" <t>')
+	
 	--Weapon set Binds
 
 	send_command('bind @1 gs c set WeaponSet Naegling')
@@ -150,8 +210,8 @@ function user_setup()
 	send_command('bind ^numpad4 input /ws "Savage Blade" <t>')
     send_command('bind ^numpad5 input /ws "Chant du Cygne" <t>')
     send_command('bind ^numpad6 input /ws "Death Blossom" <t>')
-	send_command('bind ^numpad7 input /ws "Circle Blade" <t>')
-	
+	send_command('bind ^numpad7 input /ws "Red Lotus Blade" <t>')
+		
 	send_command('bind !numpad1 input /ws "Black Halo" <t>')
     send_command('bind !numpad2 input /ws "True Strike" <t>')
 	send_command('bind !numpad4 input /ws "Aeolian Edge" <t>')
@@ -467,7 +527,7 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Jhakri Cuffs +2",
 		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		feet="Leth. Houseaux +2",
+		feet="Leth. Houseaux +3",
 		neck="Sibyl Scarf",
 		waist="Orpheus's Sash",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -482,7 +542,7 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Jhakri Cuffs +2",
 		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		feet="Leth. Houseaux +2",
+		feet="Leth. Houseaux +3",
 		neck="Sibyl Scarf",
 		waist="Orpheus's Sash",
 		left_ear="Malignance Earring",
@@ -497,7 +557,7 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Jhakri Cuffs +2",
 		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		feet="Leth. Houseaux +2",
+		feet="Leth. Houseaux +3",
 		neck="Sibyl Scarf",
 		waist="Orpheus's Sash",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -512,7 +572,7 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Jhakri Cuffs +2",
 		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		feet="Leth. Houseaux +2",
+		feet="Leth. Houseaux +3",
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
 		waist="Orpheus's Sash",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -686,7 +746,7 @@ function init_gear_sets()
 		body={ name="Viti. Tabard +3", augments={'Enhances "Chainspell" effect',}},
 		hands="Atrophy Gloves +3",
 		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
-		feet="Leth. Houseaux +2",
+		feet="Leth. Houseaux +3",
 		neck="Dls. Torque +2",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
@@ -720,7 +780,7 @@ function init_gear_sets()
 		body={ name="Viti. Tabard +3", augments={'Enhances "Chainspell" effect',}},
 		hands="Atrophy Gloves +3",
 		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
-		feet="Leth. Houseaux +2",
+		feet="Leth. Houseaux +3",
 		neck="Dls. Torque +2",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
@@ -737,7 +797,7 @@ function init_gear_sets()
 		body={ name="Viti. Tabard +3", augments={'Enhances "Chainspell" effect',}},
 		hands={ name="Viti. Gloves +3", augments={'Enhancing Magic duration',}},
 		legs="Atrophy Tights +3",
-		feet="Leth. Houseaux +2",
+		feet="Leth. Houseaux +3",
 		neck="Incanter's Torque",
 		waist="Olympus Sash",
 		left_ear="Mimir Earring",
@@ -751,10 +811,10 @@ function init_gear_sets()
 		sub="Ammurapi Shield",
 		ammo="Sapience Orb",
 		head="Leth. Chappel +2",
-		body="Lethargy Sayon +2",
+		body="Lethargy Sayon +3",
 		hands="Atrophy Gloves +3",
 		legs="Leth. Fuseau +2",
-		feet="Leth. Houseaux +2",
+		feet="Leth. Houseaux +3",
 		neck="Dls. Torque +2",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
@@ -780,7 +840,7 @@ function init_gear_sets()
 		body="Atrophy Tabard +3",
 		hands="Atrophy Gloves +3",
 		legs="Leth. Fuseau +2",
-		feet="Leth. Houseaux +2",
+		feet="Leth. Houseaux +3",
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
@@ -808,7 +868,7 @@ function init_gear_sets()
 		sub="Ammurapi Shield",
 		ammo="Regal Gem",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
-		body="Lethargy Sayon +2",
+		body="Lethargy Sayon +3",
 		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
@@ -1046,7 +1106,7 @@ function init_gear_sets()
 		sub="Genmei Shield",																												--10% PDT
 		ammo="Homiliary",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
-		body="Lethargy Sayon +2",																											--13%DT
+		body="Lethargy Sayon +3",																											--13%DT
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},																				--7% DT
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},																				--8% DT
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},																				--7% DT
@@ -1682,7 +1742,6 @@ function display_current_job_state(eventArgs)
     add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
         ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
         ..string.char(31,060).. ' Magic: ' ..string.char(31,001)..c_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
         ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
         ..string.char(31,002)..msg)
 

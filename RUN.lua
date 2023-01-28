@@ -50,9 +50,8 @@
 --              	[ CTRL + Numpad2 ]    	Dimidiation
 --              	[ CTRL + Numpad3 ]    	Ground strike
 --              	[ CTRL + Numpad4 ]    	Shockwave
---              	[ CTRL + Numpad5 ]    	Swipe
---              	[ CTRL + Numpad6 ]    	Lunge
---              	[ CTRL + Numpad7 ]    	Herculean Slash
+--              	[ CTRL + Numpad5 ]    	Herculean Slash
+--              	[ CTRL + Numpad. ]    	Swipe
 --
 --					[ ALT + Numpad1 ]		Upheaval
 --					[ ALT + Numpad2 ]		Steel Cyclone
@@ -60,6 +59,7 @@
 --					[ ALT + Numpad4 ]		Fell Cleave
 --					[ ALT + Numpad5 ]		Weapon Break
 --					[ ALT + Numpad6 ]		Full Break
+--					[ ALT + Numpad. ]		Lunge
 --
 --  Abilities:  	[ CTRL + ` ]        	Use current Rune
 --              	[ Alt + ` ]         	Rune element cycle forward.
@@ -132,6 +132,54 @@ function user_setup()
 	send_command('bind ^= gs c cycle Runes')
 	send_command('bind ^- gs c cycleback Runes')
 	
+	--Command to show global binds in game[ CTRL + numpad- ]
+	send_command([[bind ^numpad- 
+		input /echo -----Item_Binds-----;
+		input /echo [ Shift + Numpad1 ]	Echo Drop;
+		input /echo [ Shift + Numpad2 ]	Holy Water;
+		input /echo [ Shift + Numpad3 ]	Remedy;
+		input /echo [ Shift + Numpad4 ]	Panacea;
+		input /echo [ Shift + Numpad7 ]	Silent Oil;
+		input /echo [ Shift + Numpad9 ]	Prism Powder;
+		input /echo -----Food_Binds-----;
+		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
+		input /echo [ Windows + Numpad2 ]	Grape Daifuku;
+		input /echo [ Windows + Numpad3 ]	Tropical Crepe;
+		input /echo [ Windows + Numpad4 ]	Miso Ramen;
+		input /echo [ Windows + Numpad5 ]	Red Curry Bun;
+		input /echo [ Windows + Numpad6 ]	Rolanberry Daifuku;
+		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
+		input /echo -----Modes-----;
+		input /echo [ Windows + E ]	Toggles GripSet;
+		input /echo [ Windows + 1 ]	Sets Weapon to Epeolatry;
+		input /echo [ Windows + 2 ]	Sets Weapon to Aettir;
+		input /echo [ Windows + 3 ]	Sets Weapon to Lycurgos;
+		input /echo [ Windows + 4 ]	Sets Weapon to Hepatizon Axe;
+		]])
+		
+	--Command to show Rune Fencer binds in game[ ALT + numpad- ]
+	send_command([[bind !numpad- 
+		input /echo -----Abilities-----;
+		input /echo [ CTRL + ` ] Uses Assigned Rune;
+		input /echo [ CTRL + - ] Cycleback Runes;
+		input /echo [ CTRL + = ] Cycle Runes;
+		input /echo [ CTRL + Numpad. ] Swipe;
+		input /echo [ ALT  + Numpad. ] Lunge;
+		input /echo -----Great_Sword-----;
+		input /echo [ CTRL + Numpad1 ] Resolution;
+		input /echo [ CTRL + Numpad2 ] Dimidiation;
+		input /echo [ CTRL + Numpad3 ] Ground Strike;
+		input /echo [ CTRL + Numpad4 ] Shockwave;
+		input /echo [ CTRL + Numpad5 ] Herculean Slash;
+		input /echo -----Great_Axe-----;
+		input /echo [ ALT + Numpad1 ] Upheaval;
+		input /echo [ ALT + Numpad2 ] Steel Cyclone;
+		input /echo [ ALT + Numpad3 ] Armor Break;
+		input /echo [ ALT + Numpad4 ] Fell Cleave;
+		input /echo [ ALT + Numpad5 ] Weapon Break;
+		input /echo [ ALT + Numpad5 ] Full Break;
+		]])
+	
 	--Weapon set Binds
 
 	send_command('bind @1 gs c set WeaponSet Epeolatry')
@@ -145,16 +193,16 @@ function user_setup()
     send_command('bind ^numpad2 input /ws "Dimidiation" <t>')
     send_command('bind ^numpad3 input /ws "Ground Strike" <t>')
 	send_command('bind ^numpad4 input /ws "Shockwave" <t>')
-	send_command('bind ^numpad5 input /ja "Swipe" <t>')
-    send_command('bind ^numpad6 input /ja "Lunge" <t>')
-	send_command('bind ^numpad7 input /ws "Herculean Slash" <t>')
+	send_command('bind ^numpad5 input /ws "Herculean Slash" <t>')
+	send_command('bind ^numpad. input /ja "Swipe" <t>')
 	
 	send_command('bind !numpad1 input /ws "Upheaval" <t>')
-	send_command('bind !numpad2 input /ws "Steel Cyclone" <t>; wait 1; input /p Steel Cyclone just used it')
+	send_command('bind !numpad2 input /ws "Steel Cyclone" <t>;')
 	send_command('bind !numpad3 input /ws "Armor Break" <t>')
 	send_command('bind !numpad4 input /ws "Fell Cleave" <t>')
 	send_command('bind !numpad5 input /ws "Weapon Break" <t>')
-	send_command('bind !numpad5 input /ws "Full Break" <t>')
+	send_command('bind !numpad6 input /ws "Full Break" <t>')
+    send_command('bind !numpad. input /ja "Lunge" <t>')
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -1142,12 +1190,10 @@ function display_current_job_state(eventArgs)
         msg = msg .. ' TH: Tag |'
     end
 
-    add_to_chat(r_color, string.char(129,121).. '  ' ..string.upper(r_msg).. '  ' ..string.char(129,122)
-        ..string.char(31,210).. ' Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002).. ' |'
-        ..string.char(31,207).. ' WS' ..am_msg.. ': ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,060)
-        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002).. ' |'
-        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002).. ' |'
+    add_to_chat(r_color, string.char(129,121).. '  ' ..string.upper(r_msg).. '  ' ..string.char(129,122) ..string.char(31,002)..  ' | '
+		..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
         ..string.char(31,002)..msg)
 
     eventArgs.handled = true

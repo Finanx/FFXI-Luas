@@ -17,7 +17,7 @@
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
 --
--- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
+-- Item Binds:		[ Shift + Numpad1 ]		/echo Drop
 --					[ Shift + Numpad2 ]		Holy Water
 --					[ Shift + Numpad3 ]		Remedy
 --					[ Shift + Numpad4 ]		Panacea
@@ -120,7 +120,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'Physical_Katana', 'Magic_Katana', 'Hachimonji', 'Naegling', 'Gletis_Knife'}
+	state.WeaponSet = M{['description']='Weapon Set', 'Katana', 'Kaja_Tachi', 'Hachimonji', 'Naegling', 'Gletis_Knife'}
     state.WeaponLock = M(false, 'Weapon Lock')
 	state.MagicBurst = M(false, 'Magic_Burst')
 
@@ -138,11 +138,66 @@ function user_setup()
 	send_command('bind @m gs c toggle MagicBurst')
 	send_command('bind ^` input /ja "Yonin" <me>')
 	send_command('bind !` input /ja "Innin" <me>')
+			
+	--Command to show global binds in game[ CTRL + numpad- ]
+	send_command([[bind ^numpad- 
+		input /echo -----Item_Binds-----;
+		input /echo [ Shift + Numpad1 ]	Echo Drop;
+		input /echo [ Shift + Numpad2 ]	Holy Water;
+		input /echo [ Shift + Numpad3 ]	Remedy;
+		input /echo [ Shift + Numpad4 ]	Panacea;
+		input /echo [ Shift + Numpad7 ]	Silent Oil;
+		input /echo [ Shift + Numpad9 ]	Prism Powder;
+		input /echo -----Food_Binds-----;
+		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
+		input /echo [ Windows + Numpad2 ]	Grape Daifuku;
+		input /echo [ Windows + Numpad3 ]	Tropical Crepe;
+		input /echo [ Windows + Numpad4 ]	Miso Ramen;
+		input /echo [ Windows + Numpad5 ]	Red Curry Bun;
+		input /echo [ Windows + Numpad6 ]	Rolanberry Daifuku;
+		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
+		input /echo -----Modes-----;
+		input /echo [ Windows + M ]	Toggles Magic Burst Mode;
+		input /echo [ Windows + 1 ]	Sets Weapon to Katana;
+		input /echo [ Windows + 2 ]	Sets Weapon to Kaja_Tachi;
+		input /echo [ Windows + 3 ]	Sets Weapon to Hachimonji;
+		input /echo [ Windows + 4 ]	Sets Weapon to Naegling;
+		input /echo [ Windows + 5 ]	Sets Weapon to Gleti's_Knife;
+		]])
+
+	--Command to show Ninja binds in game[ ALT + numpad- ]
+	send_command([[bind !numpad- 
+
+		input /echo -----Abilities-----;
+		input /echo [ CTRL + ` ] Yonin;
+		input /echo [ ALT + ` ] Innin;
+		input /echo -----Katana-----;
+		input /echo [ CTRL + Numpad1 ] Blade: Shun;
+		input /echo [ CTRL + Numpad2 ] Blade: Ten;
+		input /echo [ CTRL + Numpad3 ] Blade: Hi;
+		input /echo [ CTRL + Numpad4 ] Blade: To;
+		input /echo [ CTRL + Numpad5 ] Blade: Chi;
+		input /echo [ CTRL + Numpad6 ] Blade: Teki;
+		input /echo [ CTRL + Numpad7 ] Blade: Ei;
+		input /echo [ CTRL + Numpad9 ] Blade: Yu;
+		input /echo [ CTRL + Numpad. ] Blade: Kamu;
+		input /echo -----Great_Katana-----;
+		input /echo [ ALT + Numpad1 ] Tachi: Jinpu;
+		input /echo [ ALT + Numpad2 ] Tachi: Goten;
+		input /echo [ ALT + Numpad3 ] Tachi: Kagero;
+		input /echo [ ALT + Numpad. ] Tachi: Koki;
+		input /echo -----Sword-----;
+		input /echo [ ALT + Numpad4 ] Savage Blade;
+		input /echo [ ALT + Numpad5 ] Sanguine Blade;
+		input /echo -----Dagger-----;
+		input /echo [ ALT + Numpad7 ] Aeolian Edge;
+		input /echo [ ALT + Numpad9 ] Evisceration;
+		]])
 	
 	--Weapon set Binds
 
-	send_command('bind @1 input /equip sub; gs c set WeaponSet Physical_Katana')
-	send_command('bind @2 input /equip sub; gs c set WeaponSet Magic_Katana')
+	send_command('bind @1 input /equip sub; gs c set WeaponSet Katana')
+	send_command('bind @2 input /equip sub; gs c set WeaponSet Kaja_Tachi')
 	send_command('bind @3 input /equip sub; gs c set WeaponSet Hachimonji')
 	send_command('bind @4 input /equip sub; gs c set WeaponSet Naegling')
 	send_command('bind @5 input /equip sub; gs c set WeaponSet Gletis_Knife')
@@ -173,7 +228,7 @@ function user_setup()
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
-	send_command('bind ~numpad1 input /item "Echo Drops" <me>')
+	send_command('bind ~numpad1 input /item "/echo Drops" <me>')
 	send_command('bind ~numpad2 input /item "Holy Water" <me>')
     send_command('bind ~numpad3 input /item "Remedy" <me>')
     send_command('bind ~numpad4 input /item "Panacea" <me>')
@@ -362,7 +417,7 @@ function init_gear_sets()
 
     sets.precast.JA['Provoke'] = sets.Enmity
     sets.precast.JA['Mijin Gakure'] = {}
-    sets.precast.JA['Futae'] = {hands="Hattori Tekko +1",}
+    sets.precast.JA['Futae'] = {hands="Hattori Tekko +2",}
     sets.precast.JA['Sange'] = {}
     sets.precast.JA['Innin'] = {}
     sets.precast.JA['Yonin'] = {}
@@ -575,7 +630,7 @@ function init_gear_sets()
 		body={ name="Adhemar Jacket +1", augments={'HP+105','"Fast Cast"+10','Magic dmg. taken -4',}},
 		hands={ name="Mochizuki Tekko +3", augments={'Enh. "Ninja Tool Expertise" effect',}},
 		legs={ name="Rawhide Trousers", augments={'MP+50','"Fast Cast"+5','"Refresh"+1',}},
-		feet="Hattori Kyahan +1",
+		feet="Hattori Kyahan +2",
 		neck="Orunmila's Torque",
 		waist="Flume Belt +1",
 		left_ear="Loquac. Earring",
@@ -619,7 +674,7 @@ function init_gear_sets()
 		right_ring="Mujin Band",
 		back={ name="Andartia's Mantle", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}},}
 		
-	sets.midcast.ElementalNinjutsu_MagicBurst_Futae = set_combine(sets.midcast.ElementalNinjutsu_MagicBurst, {hands="Hattori Tekko +1",})
+	sets.midcast.ElementalNinjutsu_MagicBurst_Futae = set_combine(sets.midcast.ElementalNinjutsu_MagicBurst, {hands="Hattori Tekko +2",})
 
     sets.midcast.EnfeeblingNinjutsu = {
 		ammo="Yamarang",
@@ -850,14 +905,14 @@ function init_gear_sets()
 	sets.NightMovement = {feet="Hachiya Kyahan +3"}
 	sets.DayMovement = {feet="Danzo Sune-Ate"}
 
-    sets.buff.Migawari = {body="Hattori Ningi +1",}
+    sets.buff.Migawari = {body="Hattori Ningi +2",}
     sets.buff.Yonin = {}
     sets.buff.Innin = {}
     sets.buff.Sange = {ammo="Hachiya Shuriken"}
 
-	sets.Physical_Katana = {main="Kunimitsu",sub={ name="Gleti's Knife", augments={'Path: A',}},}
-	sets.Magic_Katana = {main="Kunimitsu",sub={ name="Ochu", augments={'STR+8','DEX+8','Ninjutsu skill +10','DMG:+14',}},}
-	sets.Hachimonji = {main="Hachimonji",}
+	sets.Katana = {main="Kunimitsu",sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Hachimonji = {main="Hachimonji",sub={ name="Rigorous Grip +1", augments={'Path: A',}},}
+	sets.Kaja_Tachi = {main="Kaja Tachi",sub={ name="Rigorous Grip +1", augments={'Path: A',}},}
 	sets.Naegling = {main="Naegling",sub="Kunimitsu",}
 	sets.Gletis_Knife = {main={ name="Gleti's Knife", augments={'Path: A',}},sub="Kunimitsu",}
 
@@ -1006,12 +1061,12 @@ function update_combat_form()
         enable('main','sub')
     end
 
-	if state.WeaponSet.value == 'Physical_Katana' then
-		equip(sets.Physical_Katana)
+	if state.WeaponSet.value == 'Katana' then
+		equip(sets.Katana)
 	end
 
-	if state.WeaponSet.value == 'Magic_Katana' then
-		equip(sets.Magic_Katana)
+	if state.WeaponSet.value == 'Kaja_Tachi' then
+		equip(sets.Kaja_Tachi)
 	end
 	
 	if state.WeaponSet.value == 'Hachimonji' then
@@ -1091,16 +1146,20 @@ function display_current_job_state(eventArgs)
     local c_msg = state.CastingMode.value
 
     local d_msg = 'None'
-    if state.DefenseMode.value ~= 'None' then
-        d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
-    end
 
     local i_msg = state.IdleMode.value
 
-    local msg = ''
-    if state.TreasureMode.value == 'Tag' then
-        msg = msg .. ' TH: Tag |'
+	local th_msg = state.TreasureMode.value
+	
+    local mb_msg = ''
+	if state.MagicBurst.value == true then
+        mb_msg = mb_msg .. 'On'
+	else
+		mb_msg = mb_msg .. 'Off'
     end
+
+    local msg = ''
+	
     if state.Kiting.value then
         msg = msg .. ' Kiting: On |'
     end
@@ -1108,12 +1167,15 @@ function display_current_job_state(eventArgs)
     add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
         ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
         ..string.char(31,060).. ' Magic: ' ..string.char(31,001)..c_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
         ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,002)..msg)
+        ..string.char(31,85).. ' TH: ' ..string.char(31,85)..th_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,85).. ' Burst: ' ..string.char(31,85)..mb_msg.. string.char(31,002)..  ' |'		
+		..string.char(31,002)..msg)
+
 
     eventArgs.handled = true
 end
+
 
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.

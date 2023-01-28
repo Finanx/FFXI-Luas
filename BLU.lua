@@ -1356,7 +1356,7 @@ function init_gear_sets()
 
 	sets.Naegling = {main="Naegling", sub="Zantetsuken"}
 	sets.Maxentius = {main="Maxentius", sub="Bunzi's Rod"}
-	sets.Magic_Accuracy = {main="Bunzi's Rod", sub="Naegling"}
+	sets.Magic_Accuracy = {main="Bunzi's Rod", sub="Maxentius"}
     
 
 end
@@ -1570,7 +1570,6 @@ function display_current_job_state(eventArgs)
     add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
         ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
         ..string.char(31,060).. ' Magic: ' ..string.char(31,001)..c_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
         ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
         ..string.char(31,002)..msg)
 

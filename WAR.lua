@@ -52,8 +52,8 @@
 --
 --	Weaponskills:	[ CTRL + Numpad1 ]		Upheaval
 --					[ CTRL + Numpad2 ]		Ukko's Furry
---					[ CTRL + Numpad3 ]		Fell Cleave
---					[ CTRL + Numpad4 ]		Armor Break
+--					[ CTRL + Numpad3 ]		Armor Break
+--					[ CTRL + Numpad4 ]		Fell Cleave
 --					[ CTRL + Numpad5 ]		Steel Cyclone
 --					[ CTRL + Numpad6 ]		King's Justice
 --					[ CTRL + Numpad7 ]		Raging Rush
@@ -127,6 +127,58 @@ function user_setup()
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @r gs c toggle Reraise')
 	
+	--Command to show global binds in game[ CTRL + numpad- ]
+	send_command([[bind ^numpad- 
+		input /echo -----Item_Binds-----;
+		input /echo [ Shift + Numpad1 ]	Echo Drop;
+		input /echo [ Shift + Numpad2 ]	Holy Water;
+		input /echo [ Shift + Numpad3 ]	Remedy;
+		input /echo [ Shift + Numpad4 ]	Panacea;
+		input /echo [ Shift + Numpad7 ]	Silent Oil;
+		input /echo [ Shift + Numpad9 ]	Prism Powder;
+		input /echo -----Food_Binds-----;
+		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
+		input /echo [ Windows + Numpad2 ]	Grape Daifuku;
+		input /echo [ Windows + Numpad3 ]	Tropical Crepe;
+		input /echo [ Windows + Numpad4 ]	Miso Ramen;
+		input /echo [ Windows + Numpad5 ]	Red Curry Bun;
+		input /echo [ Windows + Numpad6 ]	Rolanberry Daifuku;
+		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
+		input /echo -----Modes-----;
+		input /echo [ Windows + R ]	Puts Reraise Set on;
+		input /echo [ Windows + 1 ]	Sets Weapon to Chango;
+		input /echo [ Windows + 2 ]	Sets Weapon to Naegling;
+		input /echo [ Windows + 3 ]	Sets Weapon to Shining One;
+		input /echo [ Windows + 4 ]	Sets Weapon to Loxotic Mace;
+		input /echo [ Windows + 4 ]	Sets Weapon to Dolichenus;
+		]])
+		
+	--Command to show Rune Fencer binds in game[ ALT + numpad- ]
+	send_command([[bind !numpad- 
+		input /echo -----Abilities-----;
+		input /echo  
+		input /echo -----Great_Axe-----;
+		input /echo [ CTRL + Numpad1 ] Upheaval;
+		input /echo [ CTRL + Numpad2 ] Ukko's Fury;
+		input /echo [ CTRL + Numpad3 ] Armor Break;
+		input /echo [ CTRL + Numpad4 ] Fell Cleave;
+		input /echo [ CTRL + Numpad5 ] Steel Cyclone;
+		input /echo [ CTRL + Numpad6 ] King's Justice;
+		input /echo [ CTRL + Numpad7 ] Raging Rush;
+		input /echo -----Polearm-----;
+		input /echo [ ALT + Numpad1 ] Impulse Drive;
+		input /echo [ ALT + Numpad2 ] Stardiver;
+		input /echo [ ALT + Numpad3 ] Sonic Thrust;
+		input /echo -----Sword-----;
+		input /echo [ ALT + Numpad4 ] Savage Blade;
+		input /echo [ ALT + Numpad5 ] Sanguine Blade;
+		input /echo -----Axe-----;
+		input /echo [ ALT + Numpad6 ] Decimation;
+		input /echo -----Club-----;
+		input /echo [ ALT + Numpad7 ] Judgment;
+		input /echo [ ALT + Numpad9 ] Black Halo;
+		]])
+	
 	--Weapon set Binds
 
 	send_command('bind @1 gs c set WeaponSet Chango')
@@ -139,9 +191,9 @@ function user_setup()
 	
 	send_command('bind ^numpad1 input /ws "Upheaval" <t>')
     send_command('bind ^numpad2 input /ws "Ukko\'s Fury" <t>')
-    send_command('bind ^numpad3 input /ws "Fell Cleave" <t>')
-	send_command('bind ^numpad4 input /ws "Armor Break" <t>')
-    send_command('bind ^numpad5 input /ws "Steel Cyclone" <t>')
+	send_command('bind ^numpad3 input /ws "Armor Break" <t>')
+    send_command('bind ^numpad4 input /ws "Fell Cleave" <t>')
+	send_command('bind ^numpad5 input /ws "Steel Cyclone" <t>')
 	send_command('bind ^numpad6 input /ws "King\'s Justice" <t>')
 	send_command('bind ^numpad7 input /ws "Raging Rush" <t>')
 	
@@ -324,7 +376,7 @@ function init_gear_sets()
 	sets.precast.JA['Warrior\'s Charge'] = {}
 	sets.precast.JA['Tomahawk'] = {feet={ name="Agoge Calligae +3", augments={'Enhances "Tomahawk" effect',}},}
 	sets.precast.JA['Restraint'] = {}
-	sets.precast.JA['Blood Rage'] = {body="Boii Lorica +1",}
+	sets.precast.JA['Blood Rage'] = {body="Boii Lorica +2",}
 	sets.precast.JA['Mighty Strikes'] = {hands={ name="Agoge Mufflers", augments={'Enhances "Mighty Strikes" effect',}},}
 
 	sets.precast.JA['Provoke'] = {
@@ -845,6 +897,8 @@ function display_current_job_state(eventArgs)
 
     local ws_msg = state.WeaponskillMode.value
 
+    local c_msg = state.CastingMode.value
+
     local d_msg = 'None'
     if state.DefenseMode.value ~= 'None' then
         d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
@@ -853,17 +907,15 @@ function display_current_job_state(eventArgs)
     local i_msg = state.IdleMode.value
 
     local msg = ''
+    if state.TreasureMode.value == 'Tag' then
+        msg = msg .. ' TH: Tag |'
+    end
     if state.Kiting.value then
         msg = msg .. ' Kiting: On |'
     end
-	
-	if state.TreasureMode.value == 'Tag' then
-        msg = msg .. ' TH: Tag |'
-    end
 
     add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,207).. ' WS' ..am_msg.. ': ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
         ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
         ..string.char(31,002)..msg)
 
