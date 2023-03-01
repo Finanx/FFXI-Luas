@@ -30,7 +30,7 @@
 --					[ Windows + Numpad3 ]	Tropical Crepe
 --					[ Windows + Numpad4 ]	Miso Ramen
 --					[ Windows + Numpad5 ]	Red Curry Bun
---					[ Windows + Numpad6 ]	Rolanberry Daifuku
+--					[ Windows + Numpad6 ]	Rolan. Daifuku
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
@@ -44,7 +44,7 @@
 --
 --	Modes:			[ Windows + 1 ]			Naegling Weapon Set
 --					[ Windows + 2 ]			Maxentius Weapon Set
---					[ Windows + 3 ]			Magic_Accuracy Weapon Set
+--					[ Windows + 3 ]			Mboze Weapon Set
 --
 --  WS:         	[ CTRL + Numpad1 ]    	Sanguine Blade
 --					[ CTRL + Numpad2 ]    	Flat Blade
@@ -151,10 +151,12 @@ function job_setup()
     blue_magic_maps.MagicAccuracy = S{'1000 Needles','Absolute Terror','Actinic Burst','Atra. Libations',
         'Auroral Drape','Awful Eye', 'Blank Gaze','Blistering Roar','Blood Saber','Chaotic Eye',
         'Cimicine Discharge','Cold Wave','Corrosive Ooze','Demoralizing Roar','Digest','Dream Flower',
-        'Enervation','Feather Tickle','Filamented Hold','Frightful Roar','Geist Wall','Hecatomb Wave',
+        'Enervation','Filamented Hold','Frightful Roar','Geist Wall','Hecatomb Wave',
         'Infrasonics','Jettatura','Light of Penance','Lowing','Mind Blast','Mortal Ray','MP Drainkiss',
-        'Osmosis','Reaving Wind','Sandspin','Sandspray','Sheep Song','Soporific','Sound Blast',
+        'Osmosis','Sandspin','Sandspray','Sheep Song','Soporific','Sound Blast',
         'Stinking Gas','Sub-zero Smash','Venom Shell','Voracious Trunk','Yawn','Silent Storm'}
+		
+	blue_magic_maps.TPDrain = S{'Feather Tickle','Reaving Wind'}
 
     -- Breath-based spells
     blue_magic_maps.Breath = S{'Bad Breath','Flying Hip Press','Frost Breath','Heat Breath','Hecatomb Wave',
@@ -212,7 +214,7 @@ function user_setup()
     state.CastingMode:options('Normal')
     state.IdleMode:options('Normal', 'Refresh')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Maxentius', 'Magic_Accuracy'}
+	state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Maxentius', 'Mboze'}
 	state.EvasiveMode = M(false, 'EvasiveMode')
 
     state.CP = M(false, "Capacity Points Mode")
@@ -233,7 +235,7 @@ function user_setup()
 	
 	send_command('bind @1 gs c set WeaponSet Naegling')
 	send_command('bind @2 gs c set WeaponSet Maxentius')
-	send_command('bind @3 gs c set WeaponSet Magic_Accuracy')
+	send_command('bind @3 gs c set WeaponSet Mboze')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
@@ -264,7 +266,7 @@ function user_setup()
 	send_command('bind @numpad3 input /item "Tropical Crepe" <me>')
 	send_command('bind @numpad4 input /item "Miso Ramen" <me>')
 	send_command('bind @numpad5 input /item "Red Curry Bun" <me>')
-	send_command('bind @numpad6 input /item "Rolanberry Daifuku" <me>')
+	send_command('bind @numpad6 input /item "Rolan. Daifuku" <me>')
 	send_command('bind @numpad7 input //get Toolbag (Shihe) satchel; wait 3; input /item "Toolbag (Shihei)" <me>')
 	
 	--Ranged Scripts  (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -803,13 +805,28 @@ function init_gear_sets()
 		sub="Maxentius",
 		ammo="Pemphredo Tathlum",
 		head="Assim. Keffiyeh +3",
-		body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		hands="Malignance Gloves",
-		legs="Assim. Shalwar +3",
-		feet="Malignance Boots",
+		body="Hashishin Mintan +2",
+		hands="Hashi. Bazu. +2",
+		legs="Hashishin Tayt +2",
+		feet="Hashi. Basmak +2",
 		neck={ name="Mirage Stole +2", augments={'Path: A',}},
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Regal Earring",
+		right_ear="Crep. Earring",
+		left_ring="Stikini Ring +1",
+		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
+		
+	sets.midcast['Blue Magic'].TPDrain = {
+		ammo="Pemphredo Tathlum",
+		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
+		body="Hashishin Mintan +2",
+		hands="Hashi. Bazu. +2",
+		legs="Hashishin Tayt +2",
+		feet="Hashi. Basmak +2",
+		neck={ name="Mirage Stole +2", augments={'Path: A',}},
+		waist={ name="Acuity Belt +1", augments={'Path: A',}},
+		left_ear={ name="Hashishin Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+7','Mag. Acc.+7',}},
 		right_ear="Crep. Earring",
 		left_ring="Stikini Ring +1",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
@@ -1356,7 +1373,7 @@ function init_gear_sets()
 
 	sets.Naegling = {main="Naegling", sub="Zantetsuken"}
 	sets.Maxentius = {main="Maxentius", sub="Bunzi's Rod"}
-	sets.Magic_Accuracy = {main="Bunzi's Rod", sub="Maxentius"}
+	sets.Mboze = {main="Naegling", sub="Sakpata's Sword"}
     
 
 end
@@ -1463,9 +1480,9 @@ function check_weaponset()
 			equip(sets.Maxentius)
 			disable('main','sub')
 		end
-		if state.WeaponSet.value == 'Magic_Accuracy' then
+		if state.WeaponSet.value == 'Mboze' then
 			enable('main','sub')
-			equip(sets.Magic_Accuracy)
+			equip(sets.Mboze)
 			disable('main','sub')
 		end
 end

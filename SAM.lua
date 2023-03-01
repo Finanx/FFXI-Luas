@@ -28,7 +28,7 @@
 --					[ Windows + Numpad3 ]	Tropical Crepe
 --					[ Windows + Numpad4 ]	Miso Ramen
 --					[ Windows + Numpad5 ]	Red Curry Bun
---					[ Windows + Numpad6 ]	Rolanberry Daifuku
+--					[ Windows + Numpad6 ]	Rolan. Daifuku
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
@@ -143,7 +143,7 @@ function user_setup()
 		input /echo [ Windows + Numpad3 ]	Tropical Crepe;
 		input /echo [ Windows + Numpad4 ]	Miso Ramen;
 		input /echo [ Windows + Numpad5 ]	Red Curry Bun;
-		input /echo [ Windows + Numpad6 ]	Rolanberry Daifuku;
+		input /echo [ Windows + Numpad6 ]	Rolan. Daifuku;
 		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
 		input /echo -----Modes-----;
 		input /echo [ Windows + R ]	Puts Reraise Set on;
@@ -211,7 +211,7 @@ function user_setup()
 	send_command('bind @numpad3 input /item "Tropical Crepe" <me>')
 	send_command('bind @numpad4 input /item "Miso Ramen" <me>')
 	send_command('bind @numpad5 input /item "Red Curry Bun" <me>')
-	send_command('bind @numpad6 input /item "Rolanberry Daifuku" <me>')
+	send_command('bind @numpad6 input /item "Rolan. Daifuku" <me>')
 	send_command('bind @numpad7 input //get Toolbag (Shihe) satchel; wait 3; input /item "Toolbag (Shihei)" <me>')
 		
 	--Ranged Scripts  (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -535,6 +535,8 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
+	sets.CP = {neck={ name="Sam. Nodowa +2", augments={'Path: A',}}}
+
 	sets.Kiting = {feet="Danzo Sune-Ate"}
 
     sets.buff.Sekkanoki = {hands="Unkai Kote +2"}
@@ -681,9 +683,9 @@ function customize_idle_set(idleSet)
 		--Allows CP back to stay on if toggled on
     if state.CP.current == 'on' then
         equip(sets.CP)
-        disable('back')
+        disable('Neck')
     else
-        enable('back')
+        enable('Neck')
     end
 	
 	if state.Auto_Kite.value == true then

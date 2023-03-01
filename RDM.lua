@@ -29,7 +29,7 @@
 --					[ Windows + Numpad3 ]	Tropical Crepe
 --					[ Windows + Numpad4 ]	Miso Ramen
 --					[ Windows + Numpad5 ]	Red Curry Bun
---					[ Windows + Numpad6 ]	Rolanberry Daifuku
+--					[ Windows + Numpad6 ]	Rolan. Daifuku
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
@@ -148,7 +148,7 @@ function user_setup()
 		input /echo [ Windows + Numpad3 ]	Tropical Crepe;
 		input /echo [ Windows + Numpad4 ]	Miso Ramen;
 		input /echo [ Windows + Numpad5 ]	Red Curry Bun;
-		input /echo [ Windows + Numpad6 ]	Rolanberry Daifuku;
+		input /echo [ Windows + Numpad6 ]	Rolan. Daifuku;
 		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
 		input /echo -----Modes-----;
 		input /echo [ Windows + M ]	Toggles Magic Burst Mode;
@@ -232,7 +232,7 @@ function user_setup()
 	send_command('bind @numpad3 input /item "Tropical Crepe" <me>')
 	send_command('bind @numpad4 input /item "Miso Ramen" <me>')
 	send_command('bind @numpad5 input /item "Red Curry Bun" <me>')
-	send_command('bind @numpad6 input /item "Rolanberry Daifuku" <me>')
+	send_command('bind @numpad6 input /item "Rolan. Daifuku" <me>')
 	send_command('bind @numpad7 input //get Toolbag (Shihe) satchel; wait 3; input /item "Toolbag (Shihei)" <me>')
 		
 	--Ranged Scripts  (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -396,7 +396,7 @@ function init_gear_sets()
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Lethargy Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+6','Mag. Acc.+6',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Dbl.Atk."+3',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
 		back={ name="Fi Follet Cape +1", augments={'Path: A',}},}
@@ -413,7 +413,7 @@ function init_gear_sets()
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Lethargy Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+6','Mag. Acc.+6',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Dbl.Atk."+3',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
 		back={ name="Fi Follet Cape +1", augments={'Path: A',}},}
@@ -430,7 +430,7 @@ function init_gear_sets()
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Lethargy Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+6','Mag. Acc.+6',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Dbl.Atk."+3',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
 		back={ name="Fi Follet Cape +1", augments={'Path: A',}},}
@@ -750,7 +750,7 @@ function init_gear_sets()
 		neck="Dls. Torque +2",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Lethargy Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+6','Mag. Acc.+6',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Dbl.Atk."+3',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
 		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
@@ -767,7 +767,7 @@ function init_gear_sets()
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
 		waist="Embla Sash",
 		left_ear="Mimir Earring",
-		right_ear={ name="Lethargy Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+6','Mag. Acc.+6',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Dbl.Atk."+3',}},
 		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring +1",
 		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
@@ -784,7 +784,7 @@ function init_gear_sets()
 		neck="Dls. Torque +2",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Lethargy Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+6','Mag. Acc.+6',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Dbl.Atk."+3',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
 		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
@@ -810,15 +810,15 @@ function init_gear_sets()
 		main={ name="Crocea Mors", augments={'Path: C',}},
 		sub="Ammurapi Shield",
 		ammo="Sapience Orb",
-		head="Leth. Chappel +2",
+		head="Leth. Chappel +3",
 		body="Lethargy Sayon +3",
 		hands="Atrophy Gloves +3",
-		legs="Leth. Fuseau +2",
+		legs="Leth. Fuseau +3",
 		feet="Leth. Houseaux +3",
 		neck="Dls. Torque +2",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Lethargy Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+6','Mag. Acc.+6',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Dbl.Atk."+3',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
 		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
@@ -839,12 +839,12 @@ function init_gear_sets()
 		head={ name="Amalric Coif +1", augments={'INT+12','Mag. Acc.+25','Enmity-6',}},
 		body="Atrophy Tabard +3",
 		hands="Atrophy Gloves +3",
-		legs="Leth. Fuseau +2",
+		legs="Leth. Fuseau +3",
 		feet="Leth. Houseaux +3",
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Lethargy Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+6','Mag. Acc.+6',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Dbl.Atk."+3',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
 		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
@@ -887,7 +887,7 @@ function init_gear_sets()
 		ammo="Regal Gem",
 		head="Atrophy Chapeau +3",
 		body="Atrophy Tabard +3",
-		hands="Leth. Ganth. +2",
+		hands="Leth. Ganth. +3",
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 		neck="Dls. Torque +2",
@@ -910,7 +910,7 @@ function init_gear_sets()
 		ammo="Regal Gem",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 		body="Atrophy Tabard +3",
-		hands="Leth. Ganth. +2",
+		hands="Leth. Ganth. +3",
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
@@ -933,7 +933,7 @@ function init_gear_sets()
 		ammo="Regal Gem",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 		body="Atrophy Tabard +3",
-		hands="Leth. Ganth. +2",
+		hands="Leth. Ganth. +3",
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
@@ -958,7 +958,7 @@ function init_gear_sets()
 		ammo="Regal Gem",
 		head="Atrophy Chapeau +3",
 		body="Atrophy Tabard +3",
-		hands="Leth. Ganth. +2",
+		hands="Leth. Ganth. +3",
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 		neck="Dls. Torque +2",
@@ -1009,7 +1009,7 @@ function init_gear_sets()
 		ammo="Regal Gem",
 		head="Atrophy Chapeau +3",
 		body="Atrophy Tabard +3",
-		hands="Leth. Ganth. +2",
+		hands="Leth. Ganth. +3",
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 		neck="Dls. Torque +2",
@@ -1043,7 +1043,7 @@ function init_gear_sets()
 		main="Daybreak",
 		sub="Ammurapi Shield",
 		ammo="Pemphredo Tathlum",
-		head="Leth. Chappel +2",
+		head="Leth. Chappel +3",
 		body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
@@ -1080,7 +1080,7 @@ function init_gear_sets()
 		ammo="Regal Gem",
 		head=empty,
 		body="Twilight Cloak",
-		hands="Leth. Ganth. +2",
+		hands="Leth. Ganth. +3",
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 		neck="Dls. Torque +2",
@@ -1094,7 +1094,7 @@ function init_gear_sets()
     -- Initializes trusts at iLvl 119
     sets.midcast.Trust = sets.precast.FC
 
-    sets.buff.Saboteur = {hands="Leth. Ganth. +2"}
+    sets.buff.Saboteur = {hands="Leth. Ganth. +3"}
 
 
     ------------------------------------------------------------------------------------------------
@@ -1428,7 +1428,7 @@ function init_gear_sets()
 	sets.Levante.SW = {main="Levante Dagger", sub="Ammurapi Shield"}
 	
 	sets.Tauret = {main="Tauret", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
-	sets.Tauret.SW = {main={ name="Gleti's Knife", augments={'Path: A',}}, sub="Genmei Shield"}
+	sets.Tauret.SW = {main="Tauret", sub="Genmei Shield"}
 	
 	sets.Maxentius = {main="Maxentius", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
 	sets.Maxentius.SW = {main="Maxentius", sub="Genmei Shield"}

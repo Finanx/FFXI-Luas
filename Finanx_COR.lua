@@ -29,7 +29,7 @@
 --					[ Windows + Numpad3 ]	Tropical Crepe
 --					[ Windows + Numpad4 ]	Miso Ramen
 --					[ Windows + Numpad5 ]	Red Curry Bun
---					[ Windows + Numpad6 ]	Rolanberry Daifuku
+--					[ Windows + Numpad6 ]	Rolan. Daifuku
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
@@ -113,7 +113,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     state.OffenseMode:options('Normal', 'Acc')
-    state.HybridMode:options('Normal', 'DT', 'Crit')
+    state.HybridMode:options('Normal', 'DT', 'Defense')
     state.RangedMode:options('Normal', 'Acc')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.CastingMode:options('Normal', 'Resistant')
@@ -159,7 +159,7 @@ function user_setup()
 		input /echo [ Windows + Numpad3 ]	Tropical Crepe;
 		input /echo [ Windows + Numpad4 ]	Miso Ramen;
 		input /echo [ Windows + Numpad5 ]	Red Curry Bun;
-		input /echo [ Windows + Numpad6 ]	Rolanberry Daifuku;
+		input /echo [ Windows + Numpad6 ]	Rolan. Daifuku;
 		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
 		input /echo -----Modes-----;
 		input /echo [ CTRL + ` ]	Toggles Luzaf Ring;
@@ -227,7 +227,7 @@ function user_setup()
 	send_command('bind @numpad3 input /item "Tropical Crepe" <me>')
 	send_command('bind @numpad4 input /item "Miso Ramen" <me>')
 	send_command('bind @numpad5 input /item "Red Curry Bun" <me>')
-	send_command('bind @numpad6 input /item "Rolanberry Daifuku" <me>')
+	send_command('bind @numpad6 input /item "Rolan. Daifuku" <me>')
 	send_command('bind @numpad7 input //get Toolbag (Shihe) satchel; wait 3; input /item "Toolbag (Shihei)" <me>')
 	send_command('bind @numpad9 input /item "Trump Card Case" <me>')
 		
@@ -840,10 +840,10 @@ function init_gear_sets()
 		neck="Iskur Gorget",
 		waist="Windbuffet Belt +1",
 		left_ear="Telos Earring",
-		right_ear="Digni. Earring",
+		right_ear="Crep. Earring",
 		left_ring="Epona's Ring",
 		right_ring="Chirich Ring +1",
-		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}
+		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     sets.engaged.Acc = set_combine(sets.engaged, {
 		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
@@ -857,7 +857,7 @@ function init_gear_sets()
 		right_ear="Odr Earring",
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
-		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},
+		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
         })
 
     -- * DNC Subjob DW Trait: +15%
@@ -1063,31 +1063,55 @@ function init_gear_sets()
 		legs="Chas. Culottes +2",  --11%
 		feet="Malignance Boots", --4%
 		right_ring="Defending Ring", --10
-		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}}, --10%
         } -- 51% DT
+		
+	sets.engaged.Hybrid.Defense = {
+		head={ name="Nyame Helm", augments={'Path: B',}},																						--7%
+		body={ name="Nyame Mail", augments={'Path: B',}},																						--9%
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},																					--7%
+		legs="Chas. Culottes +2",																												--11%
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},																					--7%
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+        } -- 51% DT
+		
+		
 		
 
 		
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
+	sets.engaged.Defense = set_combine(sets.engaged, sets.engaged.Hybrid.Defense)
+    sets.engaged.Acc.Defense = set_combine(sets.engaged.Acc, sets.engaged.Hybrid.Defense)
 
     sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid)
     sets.engaged.DW.Acc.DT = set_combine(sets.engaged.DW.Acc, sets.engaged.Hybrid)
+    sets.engaged.DW.Defense = set_combine(sets.engaged.DW, sets.engaged.Hybrid.Defense)
+    sets.engaged.DW.Acc.Defense = set_combine(sets.engaged.DW.Acc, sets.engaged.Hybrid.Defense)
 
     sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.Hybrid)
     sets.engaged.DW.Acc.DT.LowHaste = set_combine(sets.engaged.DW.Acc.LowHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.Defense.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.Hybrid.Defense)
+    sets.engaged.DW.Acc.Defense.LowHaste = set_combine(sets.engaged.DW.Acc.LowHaste, sets.engaged.Hybrid.Defense)
 
     sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid)
     sets.engaged.DW.Acc.DT.MidHaste = set_combine(sets.engaged.DW.Acc.MidHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.Defense.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid.Defense)
+    sets.engaged.DW.Acc.Defense.MidHaste = set_combine(sets.engaged.DW.Acc.MidHaste, sets.engaged.Hybrid.Defense)
 
     sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
     sets.engaged.DW.Acc.DT.HighHaste = set_combine(sets.engaged.DW.Acc.HighHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.Defense.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid.Defense)
+    sets.engaged.DW.Acc.Defense.HighHaste = set_combine(sets.engaged.DW.Acc.HighHaste, sets.engaged.Hybrid.Defense)
 
     sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.DW.Acc.DT.MaxHaste = set_combine(sets.engaged.DW.Acc.MaxHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.Defense.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid.Defense)
+    sets.engaged.DW.Acc.Defense.MaxHaste = set_combine(sets.engaged.DW.Acc.MaxHaste, sets.engaged.Hybrid.Defense)
 
 	sets.engaged.DW.DT.MaxHastePlus = set_combine(sets.engaged.DW.MaxHastePlus, sets.engaged.Hybrid)
     sets.engaged.DW.Acc.DT.MaxHastePlus = set_combine(sets.engaged.DW.Acc.MaxHastePlus, sets.engaged.Hybrid)
+	sets.engaged.DW.Defense.MaxHastePlus = set_combine(sets.engaged.DW.MaxHastePlus, sets.engaged.Hybrid.Defense)
+    sets.engaged.DW.Acc.Defense.MaxHastePlus = set_combine(sets.engaged.DW.Acc.MaxHastePlus, sets.engaged.Hybrid.Defense)
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------

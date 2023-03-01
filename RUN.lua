@@ -28,7 +28,7 @@
 --					[ Windows + Numpad3 ]	Tropical Crepe
 --					[ Windows + Numpad4 ]	Miso Ramen
 --					[ Windows + Numpad5 ]	Red Curry Bun
---					[ Windows + Numpad6 ]	Rolanberry Daifuku
+--					[ Windows + Numpad6 ]	Rolan. Daifuku
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
@@ -104,7 +104,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function user_setup()
-    state.OffenseMode:options('Tank', 'Normal', 'Acc')
+    state.OffenseMode:options('AoETank', 'T3Tank', 'Normal', 'Acc')
     state.WeaponskillMode:options('Normal')
     state.HybridMode:options('Normal', 'DT')
     state.CastingMode:options('Normal', 'Resistant')
@@ -147,7 +147,7 @@ function user_setup()
 		input /echo [ Windows + Numpad3 ]	Tropical Crepe;
 		input /echo [ Windows + Numpad4 ]	Miso Ramen;
 		input /echo [ Windows + Numpad5 ]	Red Curry Bun;
-		input /echo [ Windows + Numpad6 ]	Rolanberry Daifuku;
+		input /echo [ Windows + Numpad6 ]	Rolan. Daifuku;
 		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
 		input /echo -----Modes-----;
 		input /echo [ Windows + E ]	Toggles GripSet;
@@ -218,7 +218,7 @@ function user_setup()
 	send_command('bind @numpad3 input /item "Tropical Crepe" <me>')
 	send_command('bind @numpad4 input /item "Miso Ramen" <me>')
 	send_command('bind @numpad5 input /item "Red Curry Bun" <me>')
-	send_command('bind @numpad6 input /item "Rolanberry Daifuku" <me>')
+	send_command('bind @numpad6 input /item "Rolan. Daifuku" <me>')
 	send_command('bind @numpad7 input //get Toolbag (Shihe) satchel; wait 3; input /item "Toolbag (Shihei)" <me>')
 	
 	--Ranged Scripts  (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -358,7 +358,7 @@ function init_gear_sets()
 		head="Halitus Helm",
 		body="Emet Harness +1",
 		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +2",
+		legs="Eri. Leg Guards +3",
 		feet="Erilaz Greaves +2",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
@@ -388,7 +388,7 @@ function init_gear_sets()
 		head="Halitus Helm",
 		body="Emet Harness +1",
 		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +2",
+		legs="Eri. Leg Guards +3",
 		feet="Erilaz Greaves +2",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
@@ -401,7 +401,7 @@ function init_gear_sets()
     sets.precast.JA['Vallation'] = {
 		ammo="Staunch Tathlum +1",
 		head="Halitus Helm",
-		body="Runeist's Coat +3",
+		body="Runeist Coat +3",
 		hands="Kurys Gloves",
 		legs="Futhark Trousers +3",
 		feet="Erilaz Greaves +2",
@@ -421,7 +421,7 @@ function init_gear_sets()
 		head="Halitus Helm",
 		body="Emet Harness +1",
 		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +2",
+		legs="Eri. Leg Guards +3",
 		feet="Erilaz Greaves +2",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
@@ -436,7 +436,7 @@ function init_gear_sets()
 		head="Halitus Helm",
 		body="Emet Harness +1",
 		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +2",
+		legs="Eri. Leg Guards +3",
 		feet="Erilaz Greaves +2",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
@@ -451,7 +451,7 @@ function init_gear_sets()
 		head="Halitus Helm",
 		body="Futhark Coat +3",
 		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +2",
+		legs="Eri. Leg Guards +3",
 		feet="Erilaz Greaves +2",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
@@ -478,7 +478,7 @@ function init_gear_sets()
 
     sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
 	
-    sets.precast.JA['Gambit'] = {hands="Runeist's Mitons +3"}
+    sets.precast.JA['Gambit'] = {hands="Runeist Mitons +3"}
     sets.precast.JA['Rayke'] = {feet="Futhark Boots +3"}
     
 	sets.precast.JA['Elemental Sforzo'] = {
@@ -486,7 +486,7 @@ function init_gear_sets()
 		head="Halitus Helm",
 		body={ name="Futhark Coat +3", augments={'Enhances "Elemental Sforzo" effect',}},
 		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +2",
+		legs="Eri. Leg Guards +3",
 		feet="Erilaz Greaves +2",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
@@ -501,7 +501,7 @@ function init_gear_sets()
 		head="Halitus Helm",
 		body="Emet Harness +1",
 		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +2",
+		legs="Eri. Leg Guards +3",
 		feet="Erilaz Greaves +2",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
@@ -622,9 +622,9 @@ function init_gear_sets()
     sets.precast.WS['Shockwave'] = {
 		ammo="Yamarang",
 		head="Erilaz Galea +2",
-		body="Erilaz Surcoat +2",
+		body="Erilaz Surcoat +3",
 		hands="Agwu's Gages",
-		legs="Eri. Leg Guards +2",
+		legs="Eri. Leg Guards +3",
 		feet="Erilaz Greaves +2",
 		neck="Erra Pendant",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
@@ -652,9 +652,9 @@ function init_gear_sets()
 	sets.precast.WS['Armor Break'] = {
 		ammo="Yamarang",
 		head="Erilaz Galea +2",
-		body="Erilaz Surcoat +2",
+		body="Erilaz Surcoat +3",
 		hands="Agwu's Gages",
-		legs="Eri. Leg Guards +2",
+		legs="Eri. Leg Guards +3",
 		feet="Erilaz Greaves +2",
 		neck="Erra Pendant",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
@@ -694,7 +694,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum +1",
 		head="Erilaz Galea +2",
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Runeist's Mitons +3",
+		hands="Runeist Mitons +3",
 		legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Moonlight Necklace",
@@ -732,7 +732,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum +1",
 		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
 		body="Manasa Chasuble",
-		hands="Runeist's Mitons +3",
+		hands="Runeist Mitons +3",
 		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},
 		feet={ name="Taeon Boots", augments={'Evasion+23','Spell interruption rate down -10%','HP+50',}},
 		neck="Incanter's Torque",
@@ -754,7 +754,7 @@ function init_gear_sets()
 		neck="Moonlight Necklace",
 		waist="Audumbla Sash",
 		left_ear="Tuisto Earring",
-		right_ear={ name="Erilaz Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+6','Mag. Acc.+6',}},
+		right_ear={ name="Erilaz Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+8','Mag. Acc.+8',}},
 		left_ring="Moonlight Ring",
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},}
@@ -806,7 +806,7 @@ function init_gear_sets()
 	sets.idle.Refresh = {
 		ammo="Homiliary",
 		head="Rawhide Mask",
-		body="Runeist's Coat +3",
+		body="Runeist Coat +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Rawhide Trousers", augments={'MP+50','"Fast Cast"+5','"Refresh"+1',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
@@ -859,12 +859,12 @@ function init_gear_sets()
 		right_ring="Niqmaddu Ring",
 		back={ name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 		
-	sets.engaged.Tank =	{
+	sets.engaged.AoETank =	{
 		ammo="Staunch Tathlum +1",																											--3%DT
 		head={ name="Nyame Helm", augments={'Path: B',}},																					--7%DT
-		body="Erilaz Surcoat +2",
+		body="Erilaz Surcoat +3",
 		hands="Turms Mittens +1",
-		legs="Eri. Leg Guards +2",																											--12%DT
+		legs="Eri. Leg Guards +3",																											--12%DT
 		feet="Turms Leggings +1",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},																			--7%DT
 		waist="Engraved Belt",
@@ -872,8 +872,24 @@ function init_gear_sets()
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},																		--3%DT
 		left_ring="Defending Ring",																											--10%DT
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},																		--7%PDT
+		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Parrying rate+5%',}},}					
+		--42% DT + 3%(Strap) 7% PDT
+
+	sets.engaged.T3Tank =	{
+		ammo="Staunch Tathlum +1",																											--3%DT
+		head={ name="Nyame Helm", augments={'Path: B',}},																					--7%DT
+		body="Erilaz Surcoat +3",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},																				--7%DT
+		legs="Eri. Leg Guards +3",																											--13%DT
+		feet="Erilaz Greaves +2",																											--10%DT
+		neck={ name="Warder's Charm +1", augments={'Path: A',}},
+		waist="Flume Belt +1",																												--4%PDT
+		left_ear="Tuisto Earring",
+		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},																		--3%DT
+		left_ring="Shadow Ring",
+		right_ring="Moonlight Ring",																										--5%DT
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Parrying rate+5%',}},}		
-			--42% DT + 3%(Strap) 7% PDT 
+			--42% DT + 3%(Strap) 7% PDT		
 	
 
     sets.engaged.Aftermath = {
