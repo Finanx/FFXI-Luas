@@ -364,7 +364,7 @@ function init_gear_sets()
     sets.precast.JA['Berserk'] = {
 		body="Pumm. Lorica +3",
 		feet={ name="Agoge Calligae +3", augments={'Enhances "Tomahawk" effect',}},
-		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
     
 	sets.precast.JA['Warcry'] = {head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},}
     
@@ -392,7 +392,7 @@ function init_gear_sets()
 		right_ear="Friomisi Earring",
 		left_ring="Eihwaz Ring",
 		right_ring="Begrudging Ring",
-		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 
     sets.precast.Waltz = {
         ring1="Asklepian Ring",
@@ -605,7 +605,7 @@ function init_gear_sets()
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
-		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 
     sets.idle = {    
 		ammo="Staunch Tathlum +1",
@@ -620,7 +620,7 @@ function init_gear_sets()
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
-		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Engaged Sets ------------------------------------------

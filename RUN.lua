@@ -104,7 +104,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function user_setup()
-    state.OffenseMode:options('AoETank', 'T3Tank', 'Normal', 'Acc')
+    state.OffenseMode:options('InquartataTank', 'T3Tank', 'Normal', 'Acc')
     state.WeaponskillMode:options('Normal')
     state.HybridMode:options('Normal', 'DT')
     state.CastingMode:options('Normal', 'Resistant')
@@ -359,8 +359,8 @@ function init_gear_sets()
 		body="Emet Harness +1",
 		hands="Kurys Gloves",
 		legs="Eri. Leg Guards +3",
-		feet="Erilaz Greaves +2",
-		neck={ name="Futhark Torque +2", augments={'Path: A',}},
+		feet="Erilaz Greaves +3",
+		neck={ name="Unmoving Collar +1", augments={'Path: A',}},
 		waist="Kasiri Belt",
 		left_ear="Cryptic Earring",
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
@@ -370,11 +370,11 @@ function init_gear_sets()
 		
 	sets.SiR_Enmity = {
 		ammo="Staunch Tathlum +1",
-		head="Erilaz Galea +2",
+		head="Erilaz Galea +3",
 		body={ name="Emet Harness +1", augments={'Path: A',}},
 		hands={ name="Rawhide Gloves", augments={'HP+50','Accuracy+15','Evasion+20',}},
 		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},
-		feet="Erilaz Greaves +2",
+		feet="Erilaz Greaves +3",
 		neck="Moonlight Necklace",
 		waist="Audumbla Sash",
 		left_ear="Cryptic Earring",
@@ -389,7 +389,7 @@ function init_gear_sets()
 		body="Emet Harness +1",
 		hands="Kurys Gloves",
 		legs="Eri. Leg Guards +3",
-		feet="Erilaz Greaves +2",
+		feet="Erilaz Greaves +3",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
 		left_ear="Cryptic Earring",
@@ -404,7 +404,7 @@ function init_gear_sets()
 		body="Runeist Coat +3",
 		hands="Kurys Gloves",
 		legs="Futhark Trousers +3",
-		feet="Erilaz Greaves +2",
+		feet="Erilaz Greaves +3",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
 		left_ear="Cryptic Earring",
@@ -422,7 +422,7 @@ function init_gear_sets()
 		body="Emet Harness +1",
 		hands="Kurys Gloves",
 		legs="Eri. Leg Guards +3",
-		feet="Erilaz Greaves +2",
+		feet="Erilaz Greaves +3",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
 		left_ear="Cryptic Earring",
@@ -437,7 +437,7 @@ function init_gear_sets()
 		body="Emet Harness +1",
 		hands="Kurys Gloves",
 		legs="Eri. Leg Guards +3",
-		feet="Erilaz Greaves +2",
+		feet="Erilaz Greaves +3",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
 		left_ear="Cryptic Earring",
@@ -452,7 +452,7 @@ function init_gear_sets()
 		body="Futhark Coat +3",
 		hands="Kurys Gloves",
 		legs="Eri. Leg Guards +3",
-		feet="Erilaz Greaves +2",
+		feet="Erilaz Greaves +3",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
 		left_ear="Cryptic Earring",
@@ -487,7 +487,7 @@ function init_gear_sets()
 		body={ name="Futhark Coat +3", augments={'Enhances "Elemental Sforzo" effect',}},
 		hands="Kurys Gloves",
 		legs="Eri. Leg Guards +3",
-		feet="Erilaz Greaves +2",
+		feet="Erilaz Greaves +3",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
 		left_ear="Cryptic Earring",
@@ -502,7 +502,7 @@ function init_gear_sets()
 		body="Emet Harness +1",
 		hands="Kurys Gloves",
 		legs="Eri. Leg Guards +3",
-		feet="Erilaz Greaves +2",
+		feet="Erilaz Greaves +3",
 		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Kasiri Belt",
 		left_ear="Cryptic Earring",
@@ -511,7 +511,7 @@ function init_gear_sets()
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Phys. dmg. taken-10%',}},}
 		
-	sets.precast.JA['Vivacious Pulse'] = {head="Erilaz Galea +2",} 
+	sets.precast.JA['Vivacious Pulse'] = {head="Erilaz Galea +3",} 
 	
 	
 	sets.precast.RA = {
@@ -532,25 +532,27 @@ function init_gear_sets()
 
     -- Fast cast sets for spells
 
-    sets.precast.FC = {
+	sets.precast.FC = {
 		ammo="Sapience Orb",
 		head="Rune. Bandeau +3",
-		body={ name="Adhemar Jacket +1", augments={'HP+105','"Fast Cast"+10','Magic dmg. taken -4',}},
+		body="Erilaz Surcoat +3",
 		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
-		legs="Aya. Cosciales +2",
+		legs="Agwu's Slops",
 		feet={ name="Carmine Greaves +1", augments={'HP+80','MP+80','Phys. dmg. taken -4',}},
 		neck="Orunmila's Torque",
 		waist="Kasiri Belt",
 		left_ear="Etiolation Earring",
-		right_ear="Loquac. Earring",
+		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
 		left_ring="Kishar Ring",
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},}
-
 		
-
-    
-
+	sets.precast.FC.Enhancing = set_combine(sets.precast.FC, {legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},})
+		
+	sets.precast.FC.Val = set_combine(sets.precast.FC,{left_ear="Tuisto Earring",})
+	
+	sets.precast.FC.ValEnhancing = set_combine(sets.precast.FC.Val, {legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},})
+	
 
     ------------------------------------------------------------------------------------------------
     ------------------------------------- Weapon Skill Sets ----------------------------------------
@@ -572,7 +574,7 @@ function init_gear_sets()
 		back={ name="Ogma's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 
 	sets.precast.WS['Resolution'] = {
-		ammo={ name="Seeth. Bomblet +1", augments={'Path: A',}},
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
@@ -582,23 +584,23 @@ function init_gear_sets()
 		waist="Fotia Belt",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Sherida Earring",
-		left_ring="Regal Ring",
+		left_ring="Epona's Ring",
 		right_ring="Niqmaddu Ring",
 		back={ name="Ogma's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 
 	sets.precast.WS['Dimidiation'] = {
-		ammo="Knobkierrie",
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Fotia Gorget",
-		waist="Fotia Belt",
+		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Sherida Earring",
-		left_ring="Epaminondas's Ring",
-		right_ring="Ilabrat Ring",
+		left_ring="Regal Ring",
+		right_ring="Niqmaddu Ring",
 		back={ name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
 		
     sets.precast.WS['Herculean Slash'] = {
@@ -621,11 +623,11 @@ function init_gear_sets()
 	
     sets.precast.WS['Shockwave'] = {
 		ammo="Yamarang",
-		head="Erilaz Galea +2",
+		head="Erilaz Galea +3",
 		body="Erilaz Surcoat +3",
-		hands="Agwu's Gages",
+		hands="Erilaz Gauntlets +2",
 		legs="Eri. Leg Guards +3",
-		feet="Erilaz Greaves +2",
+		feet="Erilaz Greaves +3",
 		neck="Erra Pendant",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Crep. Earring",
@@ -651,11 +653,11 @@ function init_gear_sets()
 	
 	sets.precast.WS['Armor Break'] = {
 		ammo="Yamarang",
-		head="Erilaz Galea +2",
+		head="Erilaz Galea +3",
 		body="Erilaz Surcoat +3",
-		hands="Agwu's Gages",
+		hands="Erilaz Gauntlets +2",
 		legs="Eri. Leg Guards +3",
-		feet="Erilaz Greaves +2",
+		feet="Erilaz Greaves +3",
 		neck="Erra Pendant",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Crep. Earring",
@@ -692,7 +694,7 @@ function init_gear_sets()
 
     sets.midcast['Enhancing Magic'] = {
 		ammo="Staunch Tathlum +1",
-		head="Erilaz Galea +2",
+		head="Erilaz Galea +3",
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Runeist Mitons +3",
 		legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},
@@ -743,7 +745,6 @@ function init_gear_sets()
 		right_ring="Stikini Ring +1",
 		back="Merciful Cape",}
 
-
     sets.midcast['Regen'] = {
 		ammo="Staunch Tathlum +1",
 		head="Rune. Bandeau +3",
@@ -752,16 +753,18 @@ function init_gear_sets()
 		legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Moonlight Necklace",
-		waist="Audumbla Sash",
+		waist="Sroda Belt",
 		left_ear="Tuisto Earring",
 		right_ear={ name="Erilaz Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+8','Mag. Acc.+8',}},
 		left_ring="Moonlight Ring",
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},}
 		
+	sets.RegenRecieved = {right_ear={ name="Erilaz Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+8','Mag. Acc.+8',}}}
+		
     sets.midcast['Refresh'] = {
 		ammo="Staunch Tathlum +1",
-		head="Rune. Bandeau +3",
+		head="Erilaz Galea +3",
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Rawhide Gloves", augments={'HP+50','Accuracy+15','Evasion+20',}},
 		legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},
@@ -773,6 +776,8 @@ function init_gear_sets()
 		left_ring="Moonlight Ring",
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},}
+		
+	sets.RefreshRecieved = {waist="Gishdubar Sash"}
 		
     --sets.midcast['Divine Magic'] = {}
 
@@ -791,7 +796,7 @@ function init_gear_sets()
     sets.idle = {
 		ammo="Staunch Tathlum +1",
 		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
+		body="Erilaz Surcoat +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
@@ -859,7 +864,7 @@ function init_gear_sets()
 		right_ring="Niqmaddu Ring",
 		back={ name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 		
-	sets.engaged.AoETank =	{
+	sets.engaged.InquartataTank =	{
 		ammo="Staunch Tathlum +1",																											--3%DT
 		head={ name="Nyame Helm", augments={'Path: B',}},																					--7%DT
 		body="Erilaz Surcoat +3",
@@ -877,11 +882,11 @@ function init_gear_sets()
 
 	sets.engaged.T3Tank =	{
 		ammo="Staunch Tathlum +1",																											--3%DT
-		head={ name="Nyame Helm", augments={'Path: B',}},																					--7%DT
+		head="Erilaz Galea +3",
 		body="Erilaz Surcoat +3",
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},																				--7%DT
+		hands="Erilaz Gauntlets +2",																										--11%DT
 		legs="Eri. Leg Guards +3",																											--13%DT
-		feet="Erilaz Greaves +2",																											--10%DT
+		feet="Erilaz Greaves +3",																											--11%DT
 		neck={ name="Warder's Charm +1", augments={'Path: A',}},
 		waist="Flume Belt +1",																												--4%PDT
 		left_ear="Tuisto Earring",
@@ -1033,8 +1038,25 @@ function job_precast(spell, action, spellMap, eventArgs)
         end
     end
 	
+    if spell.action_type == 'Magic' then
+        if buffactive['Vallation'] or buffactive ['Valiance'] then
+            if spell.skill == 'Enhancing Magic' then
+                equip(sets.precast.FC.ValEnhancing)
+            else
+                equip(sets.precast.FC.Val)
+            end
+        else
+            if spell.skill == 'Enhancing Magic' then
+                equip(sets.precast.FC.Enhancing)
+            else
+                equip(sets.precast.FC)
+            end
+        end
+    end
+	
 	
 end
+
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
 

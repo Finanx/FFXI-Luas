@@ -110,6 +110,7 @@ function user_setup()
     state.IdleMode:options('Normal', 'Refresh')
 	state.TreasureMode:options('Tag', 'None')
 	state.SongMode = M{['description']='Song Mode', 'None', 'Placeholder'}
+	state.SongEnmity = M{['description']='Song Enmity', 'None', 'Enmity'}
 	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Carnwenhan', 'Twashtar', 'Tauret', 'Xoanon'}
 	
     state.CP = M(false, "Capacity Points Mode")
@@ -138,6 +139,7 @@ function user_setup()
 	--Global Bard binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
 	send_command('bind ^` gs c cycle SongMode')
+	send_command('bind @e gs c cycle SongEnmity')
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @t gs c cycle TreasureMode')
 	
@@ -604,6 +606,40 @@ function init_gear_sets()
 
     -- General set for recast times.
     sets.midcast.FastRecast = sets.precast.FC
+	
+	sets.Enmity = {
+		main="Daybreak",
+		sub="Genmei Shield",
+		range={ name="Linos", augments={'Mag. Evasion+15','Phys. dmg. taken -4%','HP+20',}},
+		head="Halitus Helm",
+		body={ name="Emet Harness +1", augments={'Path: A',}},
+		hands="Fili Manchettes +2",
+		legs={ name="Zoar Subligar +1", augments={'Path: A',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck={ name="Unmoving Collar +1", augments={'Path: A',}},
+		waist="Kasiri Belt",
+		left_ear="Friomisi Earring",
+		right_ear="Cryptic Earring",
+		left_ring="Eihwaz Ring",
+		right_ring="Begrudging Ring",
+		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}
+		
+	sets.midcast.Enmity = {
+		main="Daybreak",
+		sub="Genmei Shield",
+		range={ name="Linos", augments={'Mag. Evasion+15','Phys. dmg. taken -4%','HP+20',}},
+		head="Halitus Helm",
+		body={ name="Emet Harness +1", augments={'Path: A',}},
+		hands="Fili Manchettes +2",
+		legs={ name="Zoar Subligar +1", augments={'Path: A',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck={ name="Unmoving Collar +1", augments={'Path: A',}},
+		waist="Kasiri Belt",
+		left_ear="Friomisi Earring",
+		right_ear="Cryptic Earring",
+		left_ring="Eihwaz Ring",
+		right_ring="Begrudging Ring",
+		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}
 
 
     -- For song buffs (duration and AF3 set bonus)
@@ -1185,7 +1221,7 @@ function init_gear_sets()
 		waist="Chaac Belt",} --TH1
 
     sets.SongDWDuration = {main="Carnwenhan", sub="Kali"}
-	sets.SongSWDuration = {main="Carnwenhan", sub="Ammurapi Shield"}
+	sets.SongSWDuration = {main="Carnwenhan", sub="Genmei Shield"}
 	sets.Dummy = {range="Daurdabla",}
 	sets.Effect = {range="Gjallarhorn",}
 
@@ -1254,16 +1290,24 @@ function job_midcast(spell, action, spellMap, eventArgs)
         end
 
 			--Handles Lullaby accuracy sets
-		if spell.name == "Horde Lullaby" or spell.name == "Horde Lullaby II" and state.CastingMode.value == 'Normal' then 
+		if spell.name == "Horde Lullaby" or spell.name == "Horde Lullaby II" and state.CastingMode.value == 'Normal' and state.SongEnmity.value == 'None' then 
 			equip(sets.midcast.Horde)
-		elseif spell.name == "Horde Lullaby" or spell.name == "Horde Lullaby II" and state.CastingMode.value == 'Resistant' then
-			equip(sets.midcast.HordeResist)
+		elseif spell.name == "Horde Lullaby" or spell.name == "Horde Lullaby II" and state.CastingMode.value == 'Normal' and state.SongEnmity.value == 'Enmity' then 
+			equip(sets.midcast.Enmity)
+		elseif spell.name == "Horde Lullaby" or spell.name == "Horde Lullaby II" and state.CastingMode.value == 'Resistant' and state.SongEnmity.value == 'None' then 
+			equip(sets.midcast.HordeResist)		
+		elseif spell.name == "Horde Lullaby" or spell.name == "Horde Lullaby II" and state.CastingMode.value == 'Resistant' and state.SongEnmity.value == 'Enmity' then 
+			equip(sets.midcast.Enmity)
 		end
 		
-		if spell.name == "Foe Lullaby" or spell.name == "Foe Lullaby II" and state.CastingMode.value == 'Normal' then 
+		if spell.name == "Foe Lullaby" or spell.name == "Foe Lullaby II" and state.CastingMode.value == 'Normal' and state.SongEnmity.value == 'None' then 
 			equip(sets.midcast.Foe)
-		elseif spell.name == "Foe Lullaby" or spell.name == "Foe Lullaby II" and state.CastingMode.value == 'Resistant' then
-			equip(sets.midcast.FoeResist)
+		elseif spell.name == "Foe Lullaby" or spell.name == "Foe Lullaby II" and state.CastingMode.value == 'Normal' and state.SongEnmity.value == 'Enmity' then 
+			equip(sets.midcast.Enmity)
+		elseif spell.name == "Foe Lullaby" or spell.name == "Foe Lullaby II" and state.CastingMode.value == 'Resistant' and state.SongEnmity.value == 'None' then 
+			equip(sets.midcast.FoeResist)			
+		elseif spell.name == "Foe Lullaby" or spell.name == "Foe Lullaby II" and state.CastingMode.value == 'Resistant' and state.SongEnmity.value == 'Enmity' then
+			equip(sets.midcast.Enmity)
 		end
 		
     end
@@ -1398,11 +1442,11 @@ end
 	--Handles Carol 1 / Carol 2 / Etude / Threnody keybinds
 function job_self_command(cmdParams, eventArgs)
     if cmdParams[1]:lower() == 'carol1' then
-        send_command('@input /ma '..state.Carol1.value..' <t>')
+        send_command('@input /ma '..state.Carol1.value..' <stpc>')
 	elseif cmdParams[1]:lower() == 'carol2' then
-        send_command('@input /ma '..state.Carol2.value..' <t>')
+        send_command('@input /ma '..state.Carol2.value..' <stpc>')
 	elseif cmdParams[1]:lower() == 'etude' then
-        send_command('@input /ma '..state.Etude.value..' <t>')
+        send_command('@input /ma '..state.Etude.value..' <stpc>')
     elseif cmdParams[1]:lower() == 'threnody' then
         send_command('@input /ma '..state.Threnody.value..' <t>')
     end
@@ -1433,10 +1477,10 @@ function customize_melee_set(meleeSet)
 			meleeSet = sets.engaged.Acc.Aftermath
 		end
 		if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Carnwenhan" and state.OffenseMode.value == 'Normal' and state.HybridMode.value == 'DT' then
-			meleeSet = sets.engaged.Hybrid.Aftermath
+			meleeSet = sets.engaged.Aftermath.DT
 		end
 			if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Carnwenhan" and state.OffenseMode.value == 'Acc' and state.HybridMode.value == 'DT' then
-			meleeSet = sets.engaged.Hybrid.Aftermath
+			meleeSet = sets.engaged.Acc.Aftermath.DT
 		end
 	end
 	
@@ -1540,6 +1584,7 @@ function get_song_class(spell)
 	else
 		equip(sets.Effect)
 	end
+	 	
 
 end
 

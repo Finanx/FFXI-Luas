@@ -402,8 +402,8 @@ function init_gear_sets()
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Regal Necklace",
 		waist="Flume Belt +1",
-		left_ear="Tuisto Earring",
-		right_ear="Eabani Earring",
+		left_ear="Genmei Earring",
+		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
 		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		right_ring="Defending Ring",
 		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}
@@ -418,8 +418,8 @@ function init_gear_sets()
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Regal Necklace",
 		waist="Flume Belt +1",
-		left_ear="Tuisto Earring",
-		right_ear="Eabani Earring",
+		left_ear="Genmei Earring",
+		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
 		left_ring="Luzaf's Ring",
 		right_ring="Defending Ring",
 		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}
@@ -488,8 +488,8 @@ function init_gear_sets()
 		left_ring="Defending Ring",
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10',}},
-		}		--10% JP + 15% Flurry1 + 47% Gear SS / 30% Job Trait + 54% Gear RS
-		--72% SS 84% RS
+		}		--10% JP + 15% Flurry1 + 47% Gear SS / 30% Job Trait + 56% Gear RS
+		--72% SS 86% RS
 
 	sets.precast.RA.Flurry2 = {
 		ammo=gear.RAbullet,
@@ -505,8 +505,8 @@ function init_gear_sets()
 		left_ring="Defending Ring",
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10',}},
-		}		--10% JP + 30% Flurry2 + 32% Gear SS / 30% Job Trait + 73% Gear RS
-		--72% SS 103% RS	
+		}		--10% JP + 30% Flurry2 + 32% Gear SS / 30% Job Trait + 75% Gear RS
+		--72% SS 105% RS	
 			
 
 
@@ -526,50 +526,20 @@ function init_gear_sets()
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Ishvara Earring",
 		left_ring="Regal Ring",
-		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
-		back={ name="Camulus's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-
-    sets.precast.WS.Acc = {
-		ammo=gear.WSbullet,
-		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="Comm. Charm +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Ishvara Earring",
-		left_ring="Regal Ring",
-		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		right_ring="Epaminondas's Ring",
 		back={ name="Camulus's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 
     sets.precast.WS['Last Stand'] = {
 		ammo=gear.WSbullet,
-		head={ name="Lanun Tricorne +3", augments={'Enhances "Winning Streak" effect',}},
-		body={ name="Ikenga's Vest", augments={'Path: A',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Chasseur's Gants +2",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Lanun Bottes +3", augments={'Enhances "Wild Card" effect',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Telos Earring",
-		left_ring="Dingir Ring",
-		right_ring="Regal Ring",
-		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},}
-
-    sets.precast.WS['Last Stand'].Acc = {
-		ammo=gear.WSbullet,
-		head={ name="Lanun Tricorne +3", augments={'Enhances "Winning Streak" effect',}},
-		body={ name="Ikenga's Vest", augments={'Path: A',}},
-		hands="Chasseur's Gants +2",
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Lanun Bottes +3", augments={'Enhances "Wild Card" effect',}},
-		neck="Fotia Gorget",
-		waist="Fotia Belt",
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Telos Earring",
+		right_ear={ name="Chas. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','Crit.hit rate+3',}},
 		left_ring="Dingir Ring",
 		right_ring="Regal Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},}
@@ -595,11 +565,11 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		feet={ name="Lanun Bottes +3", augments={'Enhances "Wild Card" effect',}},
 		neck="Fotia Gorget",
-		waist="Fotia Belt",
+		waist="Orpheus's Sash",
 		left_ear="Friomisi Earring",
-		right_ear="Eabani Earring",
+		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		left_ring="Dingir Ring",
 		right_ring="Epaminondas's Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},}
@@ -643,16 +613,16 @@ function init_gear_sets()
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="Comm. Charm +2", augments={'Path: A',}},
+		neck="Rep. Plat. Medal",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Ishvara Earring",
 		left_ring="Regal Ring",
-		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		right_ring="Epaminondas's Ring",
 		back={ name="Camulus's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 		
 	sets.precast.WS['Aeolian Edge'] = {
-		ammo=gear.MAbullet,
+		ammo=gear.MAullet,
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Lanun Frac +3", augments={'Enhances "Loaded Deck" effect',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
@@ -661,22 +631,7 @@ function init_gear_sets()
 		neck={ name="Comm. Charm +2", augments={'Path: A',}},
 		waist="Orpheus's Sash",
 		left_ear="Friomisi Earring",
-		right_ear="Ishvara Earring",
-		left_ring="Dingir Ring",
-		right_ring="Epaminondas's Ring",
-		back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}},}
-		
-	sets.precast.WS['Cyclone'] = {
-		ammo=gear.MAbullet,
-		head={ name="Nyame Helm", augments={'Path: B',}},
-		body="Volte Jupon",
-		hands={ name="Herculean Gloves", augments={'Weapon skill damage +1%','Magic dmg. taken -2%','"Treasure Hunter"+2','Accuracy+12 Attack+12',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Lanun Bottes +3", augments={'Enhances "Wild Card" effect',}},
-		neck={ name="Comm. Charm +2", augments={'Path: A',}},
-		waist="Orpheus's Sash",
-		left_ear="Friomisi Earring",
-		right_ear="Ishvara Earring",
+		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		left_ring="Dingir Ring",
 		right_ring="Epaminondas's Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}},}
@@ -751,7 +706,7 @@ function init_gear_sets()
 		neck="Iskur Gorget",
 		waist="Yemaya Belt",
 		left_ear="Telos Earring",
-		right_ear="Enervating Earring",
+		right_ear="Crep. Earring",
 		left_ring="Ilabrat Ring",
 		right_ring="Dingir Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10',}},}
@@ -766,9 +721,9 @@ function init_gear_sets()
 		neck={ name="Comm. Charm +2", augments={'Path: A',}},
 		waist="K. Kachina Belt +1",
 		left_ear="Telos Earring",
-		right_ear="Enervating Earring",
+		right_ear="Crep. Earring",
 		left_ring="Regal Ring",
-		right_ring="Hajduk Ring +1",
+		right_ring={ name="Cacoethic Ring +1", augments={'Path: A',}},
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10',}},}
 		
 	sets.TripleShot = {
