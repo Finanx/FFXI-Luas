@@ -37,6 +37,9 @@
 --
 -- Range Script:	[ CTRL + Numpad0 ]
 --
+-- Toggles:			[ Windows + U ]			Stops Gear Swap from constantly updating gear
+--					[ Windows + D ]			Unloads Dressup then reloads to change lockstyle
+--
 -------------------------------------------------------------------------------------------------------------------
 --  Job Specific Keybinds (Corsair Binds)
 -------------------------------------------------------------------------------------------------------------------
@@ -138,6 +141,8 @@ function user_setup()
 
 	--Global Corsair binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
+	send_command('bind @u input //gi ugs')
+	send_command('bind @d input //lua u dressup; wait 10; input //lua l dressup')	
     send_command ('bind ^` gs c toggle LuzafRing')
 	send_command('bind @t gs c cycle TreasureMode')
 	
@@ -168,6 +173,9 @@ function user_setup()
 		input /echo [ Windows + 8 ]	Sets Weapon to Armageddon;
 		input /echo [ Windows + 9 ]	Sets Weapon to Fomalhaut;
 		input /echo [ Windows + 0 ]	Sets Weapon to Death Penalty;
+		input /echo -----Toggles-----;
+		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
+		input /echo [ Windows + D ]	Unloads then reloads dressup;
 		]])
 		
 	--Command to show Corsair binds in game[ ALT + numpad- ]
@@ -277,7 +285,9 @@ function user_unload()
 	enable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
 
 	--Remove Global Corsair Binds
-	
+
+	send_command('unbind @u')
+	send_command('unbind @d')	
     send_command('unbind @t')
     send_command('unbind ^`')
 	send_command('unbind ^-')
@@ -396,9 +406,9 @@ function init_gear_sets()
 		main={ name="Rostam", augments={'Path: C',}},
 		range="Compensator",
 		head={ name="Lanun Tricorne +3", augments={'Enhances "Winning Streak" effect',}},
-		body="Chasseur's Frac +2",
-		hands="Chasseur's Gants +2",
-		legs="Chas. Culottes +2",
+		body="Chasseur's Frac +3",
+		hands="Chasseur's Gants +3",
+		legs="Chas. Culottes +3",
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Regal Necklace",
 		waist="Flume Belt +1",
@@ -412,9 +422,9 @@ function init_gear_sets()
 		main={ name="Rostam", augments={'Path: C',}},
 		range="Compensator",
 		head={ name="Lanun Tricorne +3", augments={'Enhances "Winning Streak" effect',}},
-		body="Chasseur's Frac +2",
-		hands="Chasseur's Gants +2",
-		legs="Chas. Culottes +2",
+		body="Chasseur's Frac +3",
+		hands="Chasseur's Gants +3",
+		legs="Chas. Culottes +3",
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Regal Necklace",
 		waist="Flume Belt +1",
@@ -424,11 +434,11 @@ function init_gear_sets()
 		right_ring="Defending Ring",
 		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}
 
-	sets.precast.CorsairRoll["Blitzer's Roll"] = set_combine(sets.precast.CorsairRoll, {head="Chass. Tricorne +2",})
-    sets.precast.CorsairRoll["Tactician's Roll"] = set_combine(sets.precast.CorsairRoll, {body="Chasseur's Frac +2"})
-    sets.precast.CorsairRoll["Allies' Roll"] = set_combine(sets.precast.CorsairRoll, {hands="Chasseur's Gants +2"})
-	sets.precast.CorsairRoll["Caster's Roll"] = set_combine(sets.precast.CorsairRoll, {legs="Chas. Culottes +2",})
-	sets.precast.CorsairRoll["Courser's Roll"] = set_combine(sets.precast.CorsairRoll, {feet="Chass. Bottes +2",})
+	sets.precast.CorsairRoll["Blitzer's Roll"] = set_combine(sets.precast.CorsairRoll, {head="Chass. Tricorne +3",})
+    sets.precast.CorsairRoll["Tactician's Roll"] = set_combine(sets.precast.CorsairRoll, {body="Chasseur's Frac +3"})
+    sets.precast.CorsairRoll["Allies' Roll"] = set_combine(sets.precast.CorsairRoll, {hands="Chasseur's Gants +3"})
+	sets.precast.CorsairRoll["Caster's Roll"] = set_combine(sets.precast.CorsairRoll, {legs="Chas. Culottes +3",})
+	sets.precast.CorsairRoll["Courser's Roll"] = set_combine(sets.precast.CorsairRoll, {feet="Chass. Bottes +3",})
 
     sets.precast.FoldDoubleBust = {hands="Lanun Gants +3"}
 
@@ -459,7 +469,7 @@ function init_gear_sets()
 		
 	sets.precast.RA = {
 		ammo=gear.RAbullet,
-		head="Chass. Tricorne +2",
+		head="Chass. Tricorne +3",
 		body="Oshosi Vest +1",
 		hands={ name="Lanun Gants +3", augments={'Enhances "Fold" effect',}},
 		legs={ name="Adhemar Kecks +1", augments={'AGI+12','"Rapid Shot"+13','Enmity-6',}},
@@ -476,7 +486,7 @@ function init_gear_sets()
 
 	sets.precast.RA.Flurry1 = {
 		ammo=gear.RAbullet,
-		head="Chass. Tricorne +2",
+		head="Chass. Tricorne +3",
 		body="Laksa. Frac +3",
 		hands={ name="Lanun Gants +3", augments={'Enhances "Fold" effect',}},
 		legs={ name="Adhemar Kecks +1", augments={'AGI+12','"Rapid Shot"+13','Enmity-6',}},
@@ -493,7 +503,7 @@ function init_gear_sets()
 
 	sets.precast.RA.Flurry2 = {
 		ammo=gear.RAbullet,
-		head="Chass. Tricorne +2",
+		head="Chass. Tricorne +3",
 		body="Laksa. Frac +3",
 		hands={ name="Carmine Fin. Ga. +1", augments={'Rng.Atk.+20','"Mag.Atk.Bns."+12','"Store TP"+6',}},
 		legs={ name="Adhemar Kecks +1", augments={'AGI+12','"Rapid Shot"+13','Enmity-6',}},
@@ -533,7 +543,7 @@ function init_gear_sets()
 		ammo=gear.WSbullet,
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Chasseur's Gants +2",
+		hands="Chasseur's Gants +3",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Fotia Gorget",
@@ -595,7 +605,7 @@ function init_gear_sets()
 		ammo=gear.WSbullet,
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
 		body="Mummu Jacket +2",
-		hands="Chasseur's Gants +2",
+		hands="Chasseur's Gants +3",
 		legs={ name="Zoar Subligar +1", augments={'Path: A',}},
 		feet="Mummu Gamash. +2",
 		neck="Fotia Gorget",
@@ -656,7 +666,7 @@ function init_gear_sets()
 		body={ name="Lanun Frac +3", augments={'Enhances "Loaded Deck" effect',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Chass. Bottes +2",
+		feet="Chass. Bottes +3",
 		neck="Baetyl Pendant",
 		waist="Orpheus's Sash",
 		left_ear="Friomisi Earring",
@@ -667,11 +677,11 @@ function init_gear_sets()
 
     sets.midcast.CorsairShot['Light Shot'] = {
 		ammo=gear.QDbullet,
-		head="Chass. Tricorne +2",
-		body="Chasseur's Frac +2",
-		hands="Chasseur's Gants +2",
-		legs="Chas. Culottes +2",
-		feet="Chass. Bottes +2",
+		head="Chass. Tricorne +3",
+		body="Chasseur's Frac +3",
+		hands="Chasseur's Gants +3",
+		legs="Chas. Culottes +3",
+		feet="Chass. Bottes +3",
 		neck={ name="Comm. Charm +2", augments={'Path: A',}},
 		waist="K. Kachina Belt +1",
 		left_ear="Crep. Earring",
@@ -682,11 +692,11 @@ function init_gear_sets()
     
 	sets.midcast.CorsairShot['Dark Shot'] = {
 		ammo=gear.QDbullet,
-		head="Chass. Tricorne +2",
-		body="Chasseur's Frac +2",
-		hands="Chasseur's Gants +2",
-		legs="Chas. Culottes +2",
-		feet="Chass. Bottes +2",
+		head="Chass. Tricorne +3",
+		body="Chasseur's Frac +3",
+		hands="Chasseur's Gants +3",
+		legs="Chas. Culottes +3",
+		feet="Chass. Bottes +3",
 		neck={ name="Comm. Charm +2", augments={'Path: A',}},
 		waist="K. Kachina Belt +1",
 		left_ear="Crep. Earring",
@@ -728,30 +738,30 @@ function init_gear_sets()
 		
 	sets.TripleShot = {
 		ammo=gear.RAbullet,
-		head="Meghanada Visor +2",
-		body="Chasseur's Frac +2",
-		hands={ name="Lanun Gants +3", augments={'Enhances "Fold" effect',}},
+		head={ name="Blistering Sallet +1", augments={'Path: A',}},
+		body="Chasseur's Frac +3",
+		hands="Chasseur's Gants +3",
 		legs="Ikenga's Trousers",
 		feet="Osh. Leggings +1",
 		neck="Iskur Gorget",
 		waist="K. Kachina Belt +1",
 		left_ear="Odr Earring",
-		right_ear="Enervating Earring",
+		right_ear={ name="Chas. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','Crit.hit rate+3',}},
 		left_ring="Mummu Ring",
 		right_ring="Regal Ring",
-		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10',}},}
+		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Crit.hit rate+10','Phys. dmg. taken-10%',}},}
 	
 	sets.TripleShot_AM = {
 		ammo=gear.RAbullet,
-		head="Meghanada Visor +2",
-		body="Chasseur's Frac +2",
-		hands={ name="Lanun Gants +3", augments={'Enhances "Fold" effect',}},
+		head={ name="Blistering Sallet +1", augments={'Path: A',}},
+		body="Chasseur's Frac +3",
+		hands="Chasseur's Gants +3",
 		legs="Ikenga's Trousers",
 		feet="Osh. Leggings +1",
 		neck="Iskur Gorget",
 		waist="K. Kachina Belt +1",
 		left_ear="Odr Earring",
-		right_ear="Enervating Earring",
+		right_ear={ name="Chas. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','Crit.hit rate+3',}},
 		left_ring="Mummu Ring",
 		right_ring="Regal Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Crit.hit rate+10','Phys. dmg. taken-10%',}},}
@@ -1015,7 +1025,7 @@ function init_gear_sets()
 		head="Malignance Chapeau", --6%
 		body="Malignance Tabard",  --9%
 		hands="Malignance Gloves", --5%
-		legs="Chas. Culottes +2",  --11%
+		legs="Chas. Culottes +3",  --11%
 		feet="Malignance Boots", --4%
 		right_ring="Defending Ring", --10
         } -- 51% DT
@@ -1024,7 +1034,7 @@ function init_gear_sets()
 		head={ name="Nyame Helm", augments={'Path: B',}},																						--7%
 		body={ name="Nyame Mail", augments={'Path: B',}},																						--9%
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},																					--7%
-		legs="Chas. Culottes +2",																												--11%
+		legs="Chas. Culottes +3",																												--11%
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},																					--7%
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
         } -- 51% DT
@@ -1179,11 +1189,13 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             if player.tp > 2900 then
                 equip(sets.precast.WS['Leaden Salute'].FullTP)
             end
-            if world.weather_element == 'Dark' or world.day_element == 'Dark' then
+            if (world.weather_element == 'Dark' or world.day_element == 'Dark') and spell.target.distance > (8 + spell.target.model_size) then
                 equip(sets.Obi)
             end
 			
-        elseif spell.english == 'Wildfire' and (world.weather_element == 'Fire' or world.day_element == 'Fire') then
+        elseif spell.english == 'Wildfire' and (world.weather_element == 'Fire' or world.day_element == 'Fire') and spell.target.distance > (8 + spell.target.model_size) then
+            equip(sets.Obi)
+		elseif spell.english == 'Hot Shot' and (world.weather_element == 'Fire' or world.day_element == 'Fire') and spell.target.distance > (8 + spell.target.model_size) then
             equip(sets.Obi)
         end
     end
@@ -1193,15 +1205,15 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
 		--Equip obi if weather/day matches for Quick Draw.
     if spell.type == 'CorsairShot' then
-        if (spell.element == world.day_element or spell.element == world.weather_element) and
-        (spell.english ~= 'Light Shot' and spell.english ~= 'Dark Shot') then
-            equip(sets.Obi)
+        if (spell.element == world.day_element or spell.element == world.weather_element) and spell.target.distance > (8 + spell.target.model_size) and (spell.english ~= 'Light Shot' and spell.english ~= 'Dark Shot') then
+				equip(sets.Obi)
         end
-    elseif spell.action_type == 'Ranged Attack' then
+	end
+	if spell.action_type == 'Ranged Attack' then
 	        if buffactive['Triple Shot'] then
 				equip(sets.TripleShot)
 			end
-            if (buffactive['Aftermath: Lv.3'] or buffactive['Aftermath: Lv.3'] or buffactive['Aftermath: Lv.3']) and player.equipment.ranged == "Armageddon" then
+            if buffactive['Triple Shot'] and (buffactive['Aftermath: Lv.1'] or buffactive['Aftermath: Lv.2'] or buffactive['Aftermath: Lv.3']) and player.equipment.ranged == "Armageddon" then
                 equip(sets.TripleShot_AM)
 			end
     end

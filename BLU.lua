@@ -38,6 +38,9 @@
 --
 -- Range Script:	[ CTRL + Numpad0 ] 		Ranged Attack
 --
+-- Toggles:			[ Windows + U ]			Stops Gear Swap from constantly updating gear
+--					[ Windows + D ]			Unloads Dressup then reloads to change lockstyle
+--
 -------------------------------------------------------------------------------------------------------------------
 --  Job Specific Keybinds (Blue Mage Binds)
 -------------------------------------------------------------------------------------------------------------------
@@ -226,7 +229,9 @@ function user_setup()
 	send_command('wait 10; lua l Dressup')
 
     --Global Blue Mage binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-
+	
+	send_command('bind @u input //gi ugs')
+	send_command('bind @d input //lua u dressup; wait 10; input //lua l dressup')
     send_command('bind @c gs c toggle CP')
 	send_command('bind @t gs c cycle TreasureMode')
 	send_command('bind ^` gs c toggle EvasiveMode')
@@ -305,6 +310,8 @@ function user_unload()
 
 	--Remove Global Blue Mage binds
 
+	send_command('unbind @u')
+	send_command('unbind @d')
     send_command('unbind @c')
 	send_command('unbind @t ')
 	send_command('unbind ^`')
@@ -1074,16 +1081,16 @@ function init_gear_sets()
     sets.idle = {
 		ammo="Staunch Tathlum +1",
 		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
+		body="Hashishin Mintan +2",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="Bathy Choker +1", augments={'Path: A',}},
-		waist="Kasiri Belt",
+		neck="Sibyl Scarf",
+		waist="Fucho-no-Obi",
 		left_ear="Eabani Earring",
 		right_ear="Infused Earring",
-		left_ring="Ilabrat Ring",
-		right_ring="Vengeful Ring",
+		left_ring="Stikini Ring +1",
+		right_ring="Stikini Ring +1",
 		back={ name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     sets.idle.Refresh = {

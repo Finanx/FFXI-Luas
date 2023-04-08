@@ -37,6 +37,9 @@
 --
 -- Range Script:	[ CTRL + Numpad0 ] 		Ranged Attack
 --
+-- Toggles:			[ Windows + U ]			Stops Gear Swap from constantly updating gear
+--					[ Windows + D ]			Unloads Dressup then reloads to change lockstyle
+--
 -------------------------------------------------------------------------------------------------------------------
 --  Job Specific Keybinds (Bard Binds)
 -------------------------------------------------------------------------------------------------------------------
@@ -137,7 +140,9 @@ function user_setup()
 	send_command('wait 10; lua l Dressup')
 
 	--Global Bard binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-
+	
+	send_command('bind @u input //gi ugs')
+	send_command('bind @d input //lua u dressup; wait 10; input //lua l dressup')
 	send_command('bind ^` gs c cycle SongMode')
 	send_command('bind @e gs c cycle SongEnmity')
 	send_command('bind @c gs c toggle CP')
@@ -184,6 +189,9 @@ function user_setup()
 		input /echo [ Windows + 3 ]	Sets Weapon to Tauret;
 		input /echo [ Windows + 4 ]	Sets Weapon to Twashtar;
 		input /echo [ Windows + 5 ]	Sets Weapon to Xoanon;
+		input /echo -----Toggles-----;
+		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
+		input /echo [ Windows + D ]	Unloads then reloads dressup;
 		]])
 		
 	--Command to show Bard binds in game[ ALT + numpad- ]
@@ -293,7 +301,9 @@ function user_unload()
 	enable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
 
 	--Remove Global Bard Binds
-	
+
+	send_command('unbind @u')
+	send_command('unbind @d')	
 	send_command('unbind ^`')
     send_command('unbind @w')
     send_command('unbind @c')
@@ -564,7 +574,7 @@ function init_gear_sets()
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Ishvara Earring",
 		left_ring="Epaminondas's Ring",
-		right_ring="Rufescent Ring",
+		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 		
 	sets.precast.WS['Shell Crusher'] = {
@@ -933,10 +943,10 @@ function init_gear_sets()
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
 		waist="Flume Belt +1",
-		left_ear="Eabani Earring",
-		right_ear="Sanare Earring",
-		left_ring="Stikini Ring +1",
-		right_ring="Stikini Ring +1",
+		left_ear="Tuisto Earring",
+		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		right_ring="Ilabrat Ring",
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 		
 	sets.idle.Refresh = {
@@ -977,10 +987,10 @@ function init_gear_sets()
 		main="Naegling",
 		sub="Genmei Shield",
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head="Aya. Zucchetto +2",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		legs="Volte Tights",
 		feet="Volte Spats",
 		neck={ name="Bard's Charm +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
@@ -994,7 +1004,7 @@ function init_gear_sets()
 		main="Naegling",
 		sub="Genmei Shield",
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head="Aya. Zucchetto +2",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs="Volte Tights",
@@ -1015,7 +1025,7 @@ function init_gear_sets()
 		main="Naegling",
 		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head="Aya. Zucchetto +2",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs="Volte Tights",
@@ -1033,7 +1043,7 @@ function init_gear_sets()
 		main="Naegling",
 		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head="Aya. Zucchetto +2",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs="Volte Tights",
@@ -1064,7 +1074,7 @@ function init_gear_sets()
 		main="Naegling",
 		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head="Aya. Zucchetto +2",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs="Volte Tights",
@@ -1082,7 +1092,7 @@ function init_gear_sets()
 		main="Naegling",
 		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head="Aya. Zucchetto +2",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs="Volte Tights",
@@ -1100,7 +1110,7 @@ function init_gear_sets()
 	
 	sets.engaged.Aftermath = {
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head="Aya. Zucchetto +2",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs="Volte Tights",
@@ -1115,7 +1125,7 @@ function init_gear_sets()
 		
 	sets.engaged.Acc.Aftermath = {
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head="Aya. Zucchetto +2",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs="Volte Tights",
@@ -1130,7 +1140,7 @@ function init_gear_sets()
 		
 	sets.engaged.DW.Aftermath = {
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head="Aya. Zucchetto +2",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs="Volte Tights",
@@ -1145,7 +1155,7 @@ function init_gear_sets()
 		
 	sets.engaged.DW.Acc.Aftermath = {
 		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
-		head="Aya. Zucchetto +2",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs="Volte Tights",
@@ -1289,24 +1299,24 @@ function job_midcast(spell, action, spellMap, eventArgs)
             equip(sets.midcast.HonorMarch)
         end
 
-			--Handles Lullaby accuracy sets
-		if spell.name == "Horde Lullaby" or spell.name == "Horde Lullaby II" and state.CastingMode.value == 'Normal' and state.SongEnmity.value == 'None' then 
+			--Handles Lullaby sets
+		if (spell.name == "Horde Lullaby" or spell.name == "Horde Lullaby II") and state.CastingMode.value == 'Normal' and state.SongEnmity.value == 'None' then 
 			equip(sets.midcast.Horde)
-		elseif spell.name == "Horde Lullaby" or spell.name == "Horde Lullaby II" and state.CastingMode.value == 'Normal' and state.SongEnmity.value == 'Enmity' then 
+		elseif (spell.name == "Horde Lullaby" or spell.name == "Horde Lullaby II") and state.CastingMode.value == 'Normal' and state.SongEnmity.value == 'Enmity' then 
 			equip(sets.midcast.Enmity)
-		elseif spell.name == "Horde Lullaby" or spell.name == "Horde Lullaby II" and state.CastingMode.value == 'Resistant' and state.SongEnmity.value == 'None' then 
+		elseif (spell.name == "Horde Lullaby" or spell.name == "Horde Lullaby II") and state.CastingMode.value == 'Resistant' and state.SongEnmity.value == 'None' then 
 			equip(sets.midcast.HordeResist)		
-		elseif spell.name == "Horde Lullaby" or spell.name == "Horde Lullaby II" and state.CastingMode.value == 'Resistant' and state.SongEnmity.value == 'Enmity' then 
+		elseif (spell.name == "Horde Lullaby" or spell.name == "Horde Lullaby II") and state.CastingMode.value == 'Resistant' and state.SongEnmity.value == 'Enmity' then 
 			equip(sets.midcast.Enmity)
 		end
 		
-		if spell.name == "Foe Lullaby" or spell.name == "Foe Lullaby II" and state.CastingMode.value == 'Normal' and state.SongEnmity.value == 'None' then 
+		if (spell.name == "Foe Lullaby" or spell.name == "Foe Lullaby II") and state.CastingMode.value == 'Normal' and state.SongEnmity.value == 'None' then 
 			equip(sets.midcast.Foe)
-		elseif spell.name == "Foe Lullaby" or spell.name == "Foe Lullaby II" and state.CastingMode.value == 'Normal' and state.SongEnmity.value == 'Enmity' then 
+		elseif (spell.name == "Foe Lullaby" or spell.name == "Foe Lullaby II") and state.CastingMode.value == 'Normal' and state.SongEnmity.value == 'Enmity' then 
 			equip(sets.midcast.Enmity)
-		elseif spell.name == "Foe Lullaby" or spell.name == "Foe Lullaby II" and state.CastingMode.value == 'Resistant' and state.SongEnmity.value == 'None' then 
+		elseif (spell.name == "Foe Lullaby" or spell.name == "Foe Lullaby II") and state.CastingMode.value == 'Resistant' and state.SongEnmity.value == 'None' then 
 			equip(sets.midcast.FoeResist)			
-		elseif spell.name == "Foe Lullaby" or spell.name == "Foe Lullaby II" and state.CastingMode.value == 'Resistant' and state.SongEnmity.value == 'Enmity' then
+		elseif (spell.name == "Foe Lullaby" or spell.name == "Foe Lullaby II") and state.CastingMode.value == 'Resistant' and state.SongEnmity.value == 'Enmity' then
 			equip(sets.midcast.Enmity)
 		end
 		

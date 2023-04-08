@@ -36,6 +36,9 @@
 --
 -- Range Script:	[ CTRL + Numpad0 ] 		Ranged Attack
 --
+-- Toggles:			[ Windows + U ]			Stops Gear Swap from constantly updating gear
+--					[ Windows + D ]			Unloads Dressup then reloads to change lockstyle
+--
 -------------------------------------------------------------------------------------------------------------------
 --  Job Specific Keybinds (Rune Fencer Binds)
 -------------------------------------------------------------------------------------------------------------------
@@ -64,6 +67,10 @@
 --  Abilities:  	[ CTRL + ` ]        	Use current Rune
 --              	[ Alt + ` ]         	Rune element cycle forward.
 --              	[ Shift + ` ]       	Rune element cycle backward.
+--
+-- Spell Binds:		[ ALT + ` ]				Cycle Barspells
+--					[ ALT + - ]				Cast Barspell
+--					[ ALT + = ]				Cycle Back Barspells
 --
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.
@@ -117,6 +124,7 @@ function user_setup()
     state.CP = M(false, "Capacity Points Mode")
 
     state.Runes = M{['description']='Runes', 'Tenebrae', 'Lux', 'Ignis', 'Gelus', 'Flabra', 'Tellus', 'Sulpor', 'Unda'}
+	state.Barspell = M{['description']='Barspell', '"Barfire"', '"Barblizzard"', '"Baraero"', '"Barstone"','"Barthunder"', '"Barwater"',}
 
 	--Load Gearinfo/Dressup Lua
 	
@@ -125,12 +133,18 @@ function user_setup()
 
     --Global Rune Fencer binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
+	send_command('bind @u input //gi ugs')
+	send_command('bind @d input //lua u dressup; wait 10; input //lua l dressup')
     send_command('bind @c gs c toggle CP')
 	send_command('bind @t gs c cycle TreasureMode')
 	send_command('bind @e gs c cycle GripSet')
 	send_command('bind ^` input //gs c rune')
 	send_command('bind ^= gs c cycle Runes')
 	send_command('bind ^- gs c cycleback Runes')
+	
+	send_command('bind !` input //gs c barspell')
+    send_command('bind !- gs c cycleback Barspell')
+    send_command('bind != gs c cycle Barspell')
 	
 	--Command to show global binds in game[ CTRL + numpad- ]
 	send_command([[bind ^numpad- 
@@ -155,6 +169,9 @@ function user_setup()
 		input /echo [ Windows + 2 ]	Sets Weapon to Aettir;
 		input /echo [ Windows + 3 ]	Sets Weapon to Lycurgos;
 		input /echo [ Windows + 4 ]	Sets Weapon to Hepatizon Axe;
+		input /echo -----Toggles-----;
+		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
+		input /echo [ Windows + D ]	Unloads then reloads dressup;
 		]])
 		
 	--Command to show Rune Fencer binds in game[ ALT + numpad- ]
@@ -163,6 +180,9 @@ function user_setup()
 		input /echo [ CTRL + ` ] Uses Assigned Rune;
 		input /echo [ CTRL + - ] Cycleback Runes;
 		input /echo [ CTRL + = ] Cycle Runes;
+		input /echo [ ALT + ` ] Uses Assigned Barspell;
+		input /echo [ ALT + - ] Cycleback Barspells;
+		input /echo [ ALT + = ] Cycle Barspells;
 		input /echo [ CTRL + Numpad. ] Swipe;
 		input /echo [ ALT  + Numpad. ] Lunge;
 		input /echo -----Great_Sword-----;
@@ -177,7 +197,7 @@ function user_setup()
 		input /echo [ ALT + Numpad3 ] Armor Break;
 		input /echo [ ALT + Numpad4 ] Fell Cleave;
 		input /echo [ ALT + Numpad5 ] Weapon Break;
-		input /echo [ ALT + Numpad5 ] Full Break;
+		input /echo [ ALT + Numpad6 ] Full Break;
 		]])
 	
 	--Weapon set Binds
@@ -203,6 +223,8 @@ function user_setup()
 	send_command('bind !numpad5 input /ws "Weapon Break" <t>')
 	send_command('bind !numpad6 input /ws "Full Break" <t>')
     send_command('bind !numpad. input /ja "Lunge" <t>')
+	
+	
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -252,7 +274,9 @@ function user_unload()
 	enable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
     
 	--Remove Global Rune Fencer Binds
-	
+
+	send_command('unbind @u')
+	send_command('unbind @d')
     send_command('unbind @c')
     send_command('unbind @e')
     send_command('unbind @t')
@@ -265,6 +289,9 @@ function user_unload()
 	send_command('unbind @`')
 	send_command('unbind @-')
 	send_command('unbind @=')
+	send_command('unbind !`')
+    send_command('unbind !-')
+    send_command('unbind !=')
 	
 	--Remove Weapon Set binds
 	
@@ -511,7 +538,7 @@ function init_gear_sets()
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Phys. dmg. taken-10%',}},}
 		
-	sets.precast.JA['Vivacious Pulse'] = {head="Erilaz Galea +3",} 
+	sets.precast.JA['Vivacious Pulse'] = {main={ name="Morgelai", augments={'Path: C',}},head="Erilaz Galea +3",} 
 	
 	
 	sets.precast.RA = {
@@ -625,7 +652,7 @@ function init_gear_sets()
 		ammo="Yamarang",
 		head="Erilaz Galea +3",
 		body="Erilaz Surcoat +3",
-		hands="Erilaz Gauntlets +2",
+		hands="Erilaz Gauntlets +3",
 		legs="Eri. Leg Guards +3",
 		feet="Erilaz Greaves +3",
 		neck="Erra Pendant",
@@ -655,7 +682,7 @@ function init_gear_sets()
 		ammo="Yamarang",
 		head="Erilaz Galea +3",
 		body="Erilaz Surcoat +3",
-		hands="Erilaz Gauntlets +2",
+		hands="Erilaz Gauntlets +3",
 		legs="Eri. Leg Guards +3",
 		feet="Erilaz Greaves +3",
 		neck="Erra Pendant",
@@ -706,9 +733,11 @@ function init_gear_sets()
 		left_ring="Stikini Ring +1",
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},}
-
+		
+	sets.midcast['Aquaveil'] = set_combine(sets.midcast['Enhancing Magic'], {hands="Regal Cuffs",})
     
     sets.midcast['Phalanx'] = {
+		main="Deacon Sword",
 		ammo="Staunch Tathlum +1",
 		head={ name="Fu. Bandeau +3", augments={'Enhances "Battuta" effect',}},
 		body={ name="Taeon Tabard", augments={'Phalanx +3',}},
@@ -746,21 +775,22 @@ function init_gear_sets()
 		back="Merciful Cape",}
 
     sets.midcast['Regen'] = {
+		main={ name="Morgelai", augments={'Path: C',}},
 		ammo="Staunch Tathlum +1",
 		head="Rune. Bandeau +3",
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Rawhide Gloves", augments={'HP+50','Accuracy+15','Evasion+20',}},
 		legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Moonlight Necklace",
+		neck="Sacro Gorget",
 		waist="Sroda Belt",
 		left_ear="Tuisto Earring",
-		right_ear={ name="Erilaz Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+8','Mag. Acc.+8',}},
+		right_ear={ name="Erilaz Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+9','Mag. Acc.+9',}},
 		left_ring="Moonlight Ring",
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},}
 		
-	sets.RegenRecieved = {right_ear={ name="Erilaz Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+8','Mag. Acc.+8',}}}
+	sets.RegenRecieved = {right_ear={ name="Erilaz Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+9','Mag. Acc.+9',}}}
 		
     sets.midcast['Refresh'] = {
 		ammo="Staunch Tathlum +1",
@@ -884,7 +914,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum +1",																											--3%DT
 		head="Erilaz Galea +3",
 		body="Erilaz Surcoat +3",
-		hands="Erilaz Gauntlets +2",																										--11%DT
+		hands="Erilaz Gauntlets +3",																										--11%DT
 		legs="Eri. Leg Guards +3",																											--13%DT
 		feet="Erilaz Greaves +3",																											--11%DT
 		neck={ name="Warder's Charm +1", augments={'Path: A',}},
@@ -1055,17 +1085,6 @@ function job_precast(spell, action, spellMap, eventArgs)
     end
 	
 	
-end
-
-
-function job_post_midcast(spell, action, spellMap, eventArgs)
-
-		--Equips Obi set if the correct day or weather matches on lunge/swipe
-    if spell.english == 'Lunge' or spell.english == 'Swipe' then
-        if (spell.element == world.day_element or spell.element == world.weather_element) then
-            equip(sets.Obi)
-        end
-    end
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
@@ -1259,6 +1278,8 @@ function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
 	if cmdParams[1]:lower() == 'rune' then
         send_command('@input /ja '..state.Runes.value..' <me>')
+	elseif cmdParams[1]:lower() == 'barspell' then
+        send_command('@input /ma '..state.Barspell.value..' <me>')
     end
 end
 

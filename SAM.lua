@@ -36,6 +36,9 @@
 --
 -- Range Script:	[ CTRL + Numpad0 ] 		Ranged Attack
 --
+-- Toggles:			[ Windows + U ]			Stops Gear Swap from constantly updating gear
+--					[ Windows + D ]			Unloads Dressup then reloads to change lockstyle
+--
 -------------------------------------------------------------------------------------------------------------------
 --  Job Specific Keybinds (Samurai Binds)
 -------------------------------------------------------------------------------------------------------------------
@@ -45,6 +48,7 @@
 --					[ Windows + 3 ]			Sets Weapon to Shining_One then locks Main/Sub Slots
 --					[ Windows + 4 ]			Sets Weapon to Hachimonji then locks Main/Sub Slots
 --					[ Windows + 5 ]			Sets Weapon to Soboro then locks Main/Sub Slots
+--					[ Windows + 6 ]			Sets Weapon to Malevolence then locks Main/Sub Slots
 --
 --  WS:         	[ CTRL + Numpad1 ]    	Tachi: Fudo
 --					[ CTRL + Numpad2 ]    	Tachi: Shoha
@@ -110,7 +114,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'Dojikiri', 'Masamune', 'Shining_One', 'Hachimonji', 'Soboro' }
+	state.WeaponSet = M{['description']='Weapon Set', 'Dojikiri', 'Masamune', 'Shining_One', 'Hachimonji', 'Soboro', 'Dagger' }
 	state.Reraise = M(false, "Reraise Mode")
 	
 	state.CP = M(false, "Capacity Points Mode")
@@ -122,6 +126,8 @@ function user_setup()
     
     --Global Samurai binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
+	send_command('bind @u input //gi ugs')
+	send_command('bind @d input //lua u dressup; wait 10; input //lua l dressup')	
 	send_command('bind @t gs c cycle TreasureMode')
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @r gs c toggle Reraise')
@@ -151,7 +157,11 @@ function user_setup()
 		input /echo [ Windows + 2 ]	Sets Weapon to Masamune;
 		input /echo [ Windows + 3 ]	Sets Weapon to Shining One;
 		input /echo [ Windows + 4 ]	Sets Weapon to Hachimonji;
-		input /echo [ Windows + 4 ]	Sets Weapon to Soboro;
+		input /echo [ Windows + 5 ]	Sets Weapon to Soboro;
+		input /echo [ Windows + 6 ]	Sets Weapon to Malevolence;
+		input /echo -----Toggles-----;
+		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
+		input /echo [ Windows + D ]	Unloads then reloads dressup;
 		]])
 		
 	--Command to show Rune Fencer binds in game[ ALT + numpad- ]
@@ -181,6 +191,7 @@ function user_setup()
 	send_command('bind @3 gs c set WeaponSet Shining_One')
 	send_command('bind @4 gs c set WeaponSet Hachimonji')
 	send_command('bind @5 gs c set WeaponSet Soboro')
+	send_command('bind @6 gs c set WeaponSet Dagger')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
@@ -243,7 +254,9 @@ function user_unload()
 	enable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
 
 	--Remove Global Samurai Binds
-	
+
+	send_command('unbind @u')
+	send_command('unbind @d')	
     send_command('unbind @t')
     send_command('unbind @c')
     send_command('unbind @r')
@@ -346,7 +359,7 @@ function init_gear_sets()
     -- Precast Sets
     -- Precast sets to enhance JAs
 
-    sets.precast.JA.Meditate = {head="Wakido Kabuto +3",hands={ name="Sakonji Kote +3", augments={'Enhances "Blade Bash" effect',}},back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},}
+    sets.precast.JA.Meditate = {head="Wakido Kabuto +3",hands={ name="Sakonji Kote +3", augments={'Enhances "Blade Bash" effect',}},back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
     sets.precast.JA['Warding Circle'] = {head="Wakido Kabuto +3"}
     sets.precast.JA['Blade Bash'] = {hands={ name="Sakonji Kote +3", augments={'Enhances "Blade Bash" effect',}},}
 
@@ -369,10 +382,25 @@ function init_gear_sets()
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Fotia Gorget",
+		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Thrud Earring",
-		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Thrud Earring",
+		left_ring="Epaminondas's Ring",
+		right_ring="Niqmaddu Ring",
+		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		
+	sets.precast.WS['Tachi: Shoha'] = {
+		ammo="Knobkierrie",
+		head={ name="Mpaca's Cap", augments={'Path: A',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Thrud Earring",
 		left_ring="Epaminondas's Ring",
 		right_ring="Niqmaddu Ring",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
@@ -416,7 +444,7 @@ function init_gear_sets()
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Fotia Gorget",
+		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
 		waist="Orpheus's Sash",
 		left_ear="Friomisi Earring",
 		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -428,7 +456,21 @@ function init_gear_sets()
 	sets.precast.WS['Tachi: Kagero'] = sets.precast.WS['Tachi: Jinpu']
 	sets.precast.WS['Tachi: Koki'] = sets.precast.WS['Tachi: Jinpu']
 	sets.precast.WS['Tachi: '] = sets.precast.WS['Tachi: Jinpu']
-
+	
+    sets.precast.WS['Aeolian Edge'] = {
+		ammo="Knobkierrie",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck="Sibyl Scarf",
+		waist="Orpheus's Sash",
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Friomisi Earring",
+		left_ring="Epaminondas's Ring",
+		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}	
 
     -- Midcast Sets
  
@@ -452,7 +494,7 @@ function init_gear_sets()
 		right_ear="Sanare Earring",
 		left_ring="Defending Ring",
 		right_ring="Archon Ring",
-		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},}
+		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
     
 
     -- Engaged sets
@@ -466,69 +508,45 @@ function init_gear_sets()
     -- Delay 450 GK, 25 Save TP => 65 Store TP for a 5-hit (25 Store TP in gear)
 
     sets.engaged = {
+		ammo="Aurgelmir Orb +1",
+		head="Kasuga Kabuto +2",
+		body="Kasuga Domaru +2",
+		hands={ name="Tatena. Gote +1", augments={'Path: A',}},
+		legs="Kasuga Haidate +2",
+		feet={ name="Ryuo Sune-Ate +1", augments={'HP+65','"Store TP"+5','"Subtle Blow"+8',}},
+		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
+		waist="Sweordfaetels +1",
+		left_ear={ name="Schere Earring", augments={'Path: A',}},
+		right_ear={ name="Kasuga Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Weapon skill damage +2%',}},
+		left_ring="Niqmaddu Ring",
+		right_ring="Chirich Ring +1",
+		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+
+	sets.engaged.Acc = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Flam. Zucchetto +2",
+		head="Kasuga Kabuto +2",
 		body="Kasuga Domaru +2",
 		hands={ name="Tatena. Gote +1", augments={'Path: A',}},
 		legs="Kasuga Haidate +2",
 		feet={ name="Tatena. Sune. +1", augments={'Path: A',}},
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Dedition Earring",
-		right_ear={ name="Kasuga Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+8','Mag. Acc.+8',}},
-		left_ring="Niqmaddu Ring",
-		right_ring="Chirich Ring +1",
-		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},}
-
-	sets.engaged.Acc = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Flam. Zucchetto +2",
-		body={ name="Tatena. Harama. +1", augments={'Path: A',}},
-		hands="Wakido Kote +3",
-		legs={ name="Tatena. Haidate +1", augments={'Path: A',}},
-		feet={ name="Tatena. Sune. +1", augments={'Path: A',}},
-		neck={ name="Vim Torque +1", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		waist="Ioskeha Belt +1",
 		left_ear={ name="Schere Earring", augments={'Path: A',}},
-		right_ear="Telos Earring",
+		right_ear={ name="Kasuga Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Weapon skill damage +2%',}},
 		left_ring="Niqmaddu Ring",
 		right_ring="Chirich Ring +1",
-		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},}
-		
-	sets.engaged.Crit = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Flam. Zucchetto +2",
-		body={ name="Tatena. Harama. +1", augments={'Path: A',}},
-		hands="Wakido Kote +3",
-		legs={ name="Tatena. Haidate +1", augments={'Path: A',}},
-		feet={ name="Tatena. Sune. +1", augments={'Path: A',}},
-		neck={ name="Vim Torque +1", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Schere Earring", augments={'Path: A',}},
-		right_ear="Telos Earring",
-		left_ring="Niqmaddu Ring",
-		right_ring="Chirich Ring +1",
-		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},}
-		
-		
-   
+		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		   
 	sets.engaged.Hybrid = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
+		head="Kasuga Kabuto +2",
+		body="Kasuga Domaru +2",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs="Kasuga Haidate +2",
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Dedition Earring",
-		right_ear={ name="Kasuga Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+8','Mag. Acc.+8',}},
-		left_ring="Niqmaddu Ring",
-		right_ring="Chirich Ring +1",
-		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},}
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},}
 		--46% DT + 6% PDT
 	
-	sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)	
+	sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
+	sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
 	
 	
 	------------------------------------------------------------------------------------------------
@@ -539,8 +557,8 @@ function init_gear_sets()
 
 	sets.Kiting = {feet="Danzo Sune-Ate"}
 
-    sets.buff.Sekkanoki = {hands="Unkai Kote +2"}
-    sets.buff.Sengikori = {feet="Unkai Sune-ate +2"}
+    sets.buff.Sekkanoki = {hands="Kusaga Kote +2"}
+    sets.buff.Sengikori = {feet="Kusaga Sune-ate +2"}
     sets.buff['Meikyo Shisui'] = {feet="Sakonji Sune-ate"}
 
     sets.TreasureHunter = {
@@ -553,11 +571,12 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
         }
 	
-	sets.Dojikiri = {main={ name="Dojikiri Yasutsuna", augments={'Path: A',}},}
-	sets.Masamune = {main={ name="Dojikiri Yasutsuna", augments={'Path: A',}},}
-	sets.Shining_One = {main='Shining One'}
-	sets.Hachimonji = {main="Hachimonji"}
-	sets.Soboro = {main="Soboro Sukehiro"}
+	sets.Dojikiri = {main={ name="Dojikiri Yasutsuna", augments={'Path: A',}},sub="Utu Grip"}
+	sets.Masamune = {main={ name="Masamune", augments={'Path: A',}},sub="Utu Grip"}
+	sets.Shining_One = {main='Shining One',sub="Utu Grip"}
+	sets.Hachimonji = {main="Hachimonji",sub="Utu Grip"}
+	sets.Soboro = {main="Soboro Sukehiro",sub="Utu Grip"}
+	sets.Dagger = {main={ name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},sub="Levante Dagger"}
 	
     sets.Obi = {waist="Hachirin-no-Obi"}
 	
@@ -598,13 +617,6 @@ function job_precast(spell, action, spellMap, eventArgs)
             return
         elseif buffactive['Copy Image'] or buffactive['Copy Image (2)'] then
             send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
-        end
-    end
-
-	    -- Equip obi if weather/day matches for WS.	
-	if spell.type == 'WeaponSkill' then
-        if spell.english == 'Tachi: Jinpu' and (world.weather_element == 'Wind' or world.day_element == 'Wind') then
-                equip(sets.Obi)
         end
     end
 end

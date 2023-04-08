@@ -40,6 +40,9 @@
 --
 -- Range Script:	[ CTRL + Numpad0 ]
 --
+-- Toggles:			[ Windows + U ]			Stops Gear Swap from constantly updating gear
+--					[ Windows + D ]			Unloads Dressup then reloads to change lockstyle
+--
 -------------------------------------------------------------------------------------------------------------------
 --  Job Specific Keybinds (Bard Binds)
 -------------------------------------------------------------------------------------------------------------------
@@ -123,6 +126,8 @@ function user_setup()
 
 	--Global Warrior binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
+	send_command('bind @u input //gi ugs')
+	send_command('bind @d input //lua u dressup; wait 10; input //lua l dressup')	
 	send_command('bind @t gs c cycle TreasureMode')
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @r gs c toggle Reraise')
@@ -151,6 +156,9 @@ function user_setup()
 		input /echo [ Windows + 3 ]	Sets Weapon to Shining One;
 		input /echo [ Windows + 4 ]	Sets Weapon to Loxotic Mace;
 		input /echo [ Windows + 4 ]	Sets Weapon to Dolichenus;
+		input /echo -----Toggles-----;
+		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
+		input /echo [ Windows + D ]	Unloads then reloads dressup;
 		]])
 		
 	--Command to show Rune Fencer binds in game[ ALT + numpad- ]
@@ -259,7 +267,9 @@ function user_unload()
 	enable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
 
 	--Remove Global Warrior Binds
-	
+
+	send_command('unbind @u')
+	send_command('unbind @d')
     send_command('unbind @t')
     send_command('unbind @c')
 	send_command('unbind @r')
@@ -794,19 +804,6 @@ function job_precast(spell, action, spellMap, eventArgs)
             return
         elseif buffactive['Copy Image'] or buffactive['Copy Image (2)'] then
             send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
-        end
-    end
-	
-	    -- Equip obi if weather/day matches for WS.
-	if spell.type == 'WeaponSkill' then
-        if spell.english == 'Sanguine Blade' and (world.weather_element == 'Dark' or world.day_element == 'Dark') then
-                equip(sets.Obi)
-        end
-        if spell.english == 'Red Lotus Blade' and (world.weather_element == 'Fire' or world.day_element == 'Fire') then
-            equip(sets.Obi)
-        end
-		if spell.english == 'Seraph Blade' and (world.weather_element == 'Light' or world.day_element == 'Light') then
-            equip(sets.Obi)
         end
     end
 end

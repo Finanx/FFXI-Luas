@@ -37,6 +37,9 @@
 --
 -- Range Script:	[ CTRL + Numpad0 ] 		Ranged Attack
 --
+-- Toggles:			[ Windows + U ]			Stops Gear Swap from constantly updating gear
+--					[ Windows + D ]			Unloads Dressup then reloads to change lockstyle
+--
 -------------------------------------------------------------------------------------------------------------------
 --  Job Specific Keybinds (Ninja Binds)
 -------------------------------------------------------------------------------------------------------------------
@@ -132,7 +135,9 @@ function user_setup()
 	send_command('wait 10; lua l Dressup')
 
     --Global Ninja binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-
+	
+	send_command('bind @u input //gi ugs')
+	send_command('bind @d input //lua u dressup; wait 10; input //lua l dressup')
 	send_command('bind @t gs c cycle TreasureMode')
     send_command('bind @c gs c toggle CP')
 	send_command('bind @m gs c toggle MagicBurst')
@@ -192,6 +197,9 @@ function user_setup()
 		input /echo -----Dagger-----;
 		input /echo [ ALT + Numpad7 ] Aeolian Edge;
 		input /echo [ ALT + Numpad9 ] Evisceration;
+		input /echo -----Toggles-----;
+		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
+		input /echo [ Windows + D ]	Unloads then reloads dressup;
 		]])
 	
 	--Weapon set Binds
@@ -284,7 +292,9 @@ function user_unload()
 	enable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
 	
 	--Remove Global Ninja Binds	
-	
+
+	send_command('unbind @u')
+	send_command('unbind @d')	
     send_command('unbind @t')
 	send_command('unbind @c')
     send_command('unbind @m')
@@ -961,22 +971,6 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             equip(sets.Lugra)
         end
 		
-        if spell.english == 'Blade: Yu' and (world.weather_element == 'Water' or world.day_element == 'Water') then
-            equip(sets.Obi)
-        end
-
-		if spell.english == 'Blade: Ei' and (world.weather_element == 'Dark' or world.day_element == 'Dark') then
-            equip(sets.Obi)
-        end
-
-		if spell.english == 'Blade: To' and (world.weather_element == 'Ice' or world.day_element == 'Ice') then
-            equip(sets.Obi)
-        end
-
-		if spell.english == 'Blade: Chi' and (world.weather_element == 'Earth' or world.day_element == 'Earth') then
-            equip(sets.Obi)
-        end
-		
     end
 end
 
@@ -984,7 +978,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
 		--Handles Elemental Ninjutsu Events
     if spellMap == 'ElementalNinjutsu' then
-        if (spell.element == world.day_element or spell.element == world.weather_element) then
+        if (spell.element == world.day_element or spell.element == world.weather_element) and spell.target.distance > (8 + spell.target.model_size) then
             equip(sets.Obi)
         end
 		

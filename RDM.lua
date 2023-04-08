@@ -37,6 +37,9 @@
 --
 -- Range Script:	[ CTRL + Numpad0 ] 		Ranged Attack
 --
+-- Toggles:			[ Windows + U ]			Stops Gear Swap from constantly updating gear
+--					[ Windows + D ]			Unloads Dressup then reloads to change lockstyle
+--
 -------------------------------------------------------------------------------------------------------------------
 --  Job Specific Keybinds (Red Mage Binds)
 -------------------------------------------------------------------------------------------------------------------
@@ -44,7 +47,7 @@
 --	Modes:			[ Windows + M ]			Toggles Magic Burst Mode
 --					[ Windows + 1 ]			Sets Weapon to Naegling then locks Main/Sub Slots
 --					[ Windows + 2 ]			Sets Weapon to Crocea Mors then locks Main/Sub Slots
---					[ Windows + 3 ]			Sets Weapon to Levante then locks Main/Sub Slots
+--					[ Windows + 3 ]			Sets Weapon to Malevolence then locks Main/Sub Slots
 --					[ Windows + 4 ]			Sets Weapon to Tauret then locks Main/Sub Slots
 --					[ Windows + 5 ]			Sets Weapon to Maxentius then locks Main/Sub Slots
 --
@@ -112,7 +115,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'MACC')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Crocea_Mors', 'Levante', 'Tauret', 'Maxentius', 'Murgleis'}
+	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Crocea_Mors', 'Malevolence', 'Tauret', 'Maxentius', 'Murgleis'}
 
 	state.RangeLock = M(false, 'Range Lock')
     state.MagicBurst = M(false, 'Magic Burst')
@@ -124,7 +127,9 @@ function user_setup()
 	send_command('wait 10; lua l Dressup')
 	
     --Global Red Mage binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)	
-
+	
+	send_command('bind @u input //gi ugs')
+	send_command('bind @d input //lua u dressup; wait 10; input //lua l dressup')
     send_command('bind @m gs c toggle MagicBurst')
 	send_command('bind @r gs c toggle RangeLock')
 	send_command('bind @t gs c cycle TreasureMode')
@@ -156,10 +161,13 @@ function user_setup()
 		input /echo [ Windows + W ]	Sets Weapon to None;
 		input /echo [ Windows + 1 ]	Sets Weapon to Naegling;
 		input /echo [ Windows + 2 ]	Sets Weapon to Crocea_Mors;
-		input /echo [ Windows + 3 ]	Sets Weapon to Levante;
+		input /echo [ Windows + 3 ]	Sets Weapon to Malevolence;
 		input /echo [ Windows + 4 ]	Sets Weapon to Tauret;
 		input /echo [ Windows + 5 ]	Sets Weapon to Maxentius;
 		input /echo [ Windows + 6 ]	Sets Weapon to Murgleis;
+		input /echo -----Toggles-----;
+		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
+		input /echo [ Windows + D ]	Unloads then reloads dressup;
 		]])
 		
 	--Command to show Red Mage binds in game[ ALT + numpad- ]
@@ -196,7 +204,7 @@ function user_setup()
 
 	send_command('bind @1 gs c set WeaponSet Naegling')
 	send_command('bind @2 gs c set WeaponSet Crocea_Mors')
-	send_command('bind @3 gs c set WeaponSet Levante')
+	send_command('bind @3 gs c set WeaponSet Malevolence')
 	send_command('bind @4 gs c set WeaponSet Tauret')
 	send_command('bind @5 gs c set WeaponSet Maxentius')
 	send_command('bind @6 gs c set WeaponSet Murgleis')
@@ -276,6 +284,8 @@ function user_unload()
 
 	--Remove Global Red Mage Binds
 
+	send_command('unbind @u')
+	send_command('unbind @d')
 	send_command('unbind @w')
 	send_command('unbind @r')
 	send_command('unbind @t')
@@ -406,7 +416,7 @@ function init_gear_sets()
 		sub="Genmei Shield",
 		ammo="Sapience Orb",
 		head=empty,
-		body="Twilight Cloak",
+		body="Crepuscular Cloak",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Carmine Greaves +1", augments={'HP+80','MP+80','Phys. dmg. taken -4',}},
@@ -792,7 +802,7 @@ function init_gear_sets()
 		ammo="Sapience Orb",
 		head={ name="Amalric Coif +1", augments={'INT+12','Mag. Acc.+25','Enmity-6',}},
 		body={ name="Viti. Tabard +3", augments={'Enhances "Chainspell" effect',}},
-		hands="Atrophy Gloves +3",
+		hands="Regal Cuffs",
 		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
 		feet="Leth. Houseaux +3",
 		neck="Dls. Torque +2",
@@ -848,7 +858,7 @@ function init_gear_sets()
 	
     sets.midcast.Refresh = {
 		main={ name="Crocea Mors", augments={'Path: C',}},
-		sub="Genmei Shield",
+		sub="Ammurapi Shield",
 		ammo="Sapience Orb",
 		head={ name="Amalric Coif +1", augments={'INT+12','Mag. Acc.+25','Enmity-6',}},
 		body="Atrophy Tabard +3",
@@ -947,7 +957,7 @@ function init_gear_sets()
 		ammo="Regal Gem",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 		body="Atrophy Tabard +3",
-		hands="Leth. Ganth. +3",
+		hands="Regal Cuffs",
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
@@ -1109,12 +1119,12 @@ function init_gear_sets()
     sets.midcast.Impact = {
 		main={ name="Murgleis", augments={'Path: A',}},
 		sub="Ammurapi Shield",
-		ammo="Regal Gem",
+		range="Ullr"
 		head=empty,
-		body="Twilight Cloak",
+		body="Crepuscular Cloak",
 		hands="Leth. Ganth. +3",
-		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
-		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
+		legs="Leth. Fuseau +3",
+		feet="Leth. Houseaux +3",
 		neck="Dls. Torque +2",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Snotra Earring",
@@ -1456,8 +1466,8 @@ function init_gear_sets()
 	sets.Crocea_Mors = {main={ name="Crocea Mors", augments={'Path: C',}}, sub="Daybreak"}
 	sets.Crocea_Mors.SW = {main={ name="Crocea Mors", augments={'Path: C',}}, sub="Ammurapi Shield"}
 	
-	sets.Levante = {main="Levante Dagger",sub="Daybreak"}
-	sets.Levante.SW = {main="Levante Dagger", sub="Ammurapi Shield"}
+	sets.Malevolence = {main={ name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},sub={ name="Bunzi's Rod", augments={'Path: A',}}}
+	sets.Malevolence.SW = {main={ name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}}, sub="Ammurapi Shield"}
 	
 	sets.Tauret = {main="Tauret", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
 	sets.Tauret.SW = {main="Tauret", sub="Genmei Shield"}
@@ -1565,24 +1575,11 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
                 equip(sets.midcast.Dispelga)
         end
 		
-			--Equips Obi set if the correct day or weather matches Elemental Magic
-        if (spell.element == world.day_element or spell.element == world.weather_element) then
+			--Equips Obi set if the correct day or weather matches Elemental Magic and if correct distance
+        if (spell.element == world.day_element or spell.element == world.weather_element) and spell.target.distance > (8 + spell.target.model_size)then
             equip(sets.Obi)
         end
     end
-
-	    -- Equip obi if weather/day matches for WS.
-		if spell.type == 'WeaponSkill' then 
-			if spell.english == 'Sanguine Blade' and (world.weather_element == 'Dark' or world.day_element == 'Dark') then
-                equip(sets.Obi)
-			end
-			if spell.english == 'Red Lotus Blade' and (world.weather_element == 'Fire' or world.day_element == 'Fire') then
-				equip(sets.Obi)
-			end
-			if spell.english == 'Seraph Blade' and (world.weather_element == 'Light' or world.day_element == 'Light') then
-				equip(sets.Obi)
-			end
-		end
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
@@ -1657,14 +1654,14 @@ function update_combat_form()
 		end
 	end
 	
-	if state.WeaponSet.value == 'Levante' then
+	if state.WeaponSet.value == 'Malevolence' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
 			enable('main','sub')
-			equip(sets.Levante)
+			equip(sets.Malevolence)
 			disable('main','sub')
 		else
 			enable('main','sub')
-			equip(sets.Levante.SW)
+			equip(sets.Malevolence.SW)
 			disable('main','sub')
 		end
 	end
