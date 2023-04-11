@@ -758,8 +758,8 @@ function init_gear_sets()
 		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
 		head={ name="Agwu's Cap", augments={'Path: A',}},
 		body="Arbatel Gown +3",
-		hands="Arbatel Bracers +2",
-		legs="Arbatel Pants +2",
+		hands="Arbatel Bracers +3",
+		legs="Arbatel Pants +3",
 		feet="Arbatel Loafers +3",
 		neck={ name="Argute Stole +2", augments={'Path: A',}},
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
@@ -827,7 +827,7 @@ function init_gear_sets()
 		head=empty, 
 		body="Crepuscular Cloak",
 		hands="Acad. Bracers +3",
-		legs="Arbatel Pants +2",
+		legs="Arbatel Pants +3",
 		feet="Arbatel Loafers +3",
 		neck={ name="Argute Stole +2", augments={'Path: A',}},
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
@@ -955,10 +955,10 @@ function init_gear_sets()
 	sets.Kiting = {feet="Herald's Gaiters"}
 
     sets.buff['Rapture'] = {head="Arbatel Bonnet +3"}
-    sets.buff['Perpetuance'] = {hands="Arbatel Bracers +2"}
-    sets.buff['Immanence'] = {hands="Arbatel Bracers +2"}
-    sets.buff['Penury'] = {legs="Arbatel Pants +2"}
-    sets.buff['Parsimony'] = {legs="Arbatel Pants +2"}
+    sets.buff['Perpetuance'] = {hands="Arbatel Bracers +3"}
+    sets.buff['Immanence'] = {hands="Arbatel Bracers +3"}
+    sets.buff['Penury'] = {legs="Arbatel Pants +3"}
+    sets.buff['Parsimony'] = {legs="Arbatel Pants +3"}
     sets.buff['Celerity'] = {feet="Peda. Loafers +3"}
     sets.buff['Alacrity'] = {feet="Peda. Loafers +3"}
     sets.buff['Klimaform'] = {feet="Arbatel Loafers +3"}
@@ -1021,8 +1021,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 		if state.MagicBurst.value == true and spell.skill == 'Elemental Magic' then
 			if state.Buff.Ebullience then
 				equip(sets.midcast['Elemental Magic'].MagicBurstEbullience)
+			else
+				equip(sets.midcast['Elemental Magic'].MagicBurst)
 			end
-			equip(sets.midcast['Elemental Magic'].MagicBurst)
 		end
 		
         if spellMap == "Helix" then

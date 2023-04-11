@@ -1119,7 +1119,7 @@ function init_gear_sets()
     sets.midcast.Impact = {
 		main={ name="Murgleis", augments={'Path: A',}},
 		sub="Ammurapi Shield",
-		range="Ullr"
+		range="Ullr",
 		head=empty,
 		body="Crepuscular Cloak",
 		hands="Leth. Ganth. +3",
