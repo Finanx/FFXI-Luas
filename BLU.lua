@@ -435,7 +435,7 @@ function init_gear_sets()
 
     sets.buff['Burst Affinity'] = {legs="Assim. Shalwar +3", feet="Hashi. Basmak +1"}
     sets.buff['Diffusion'] = {feet="Luhlaza Charuqs +1"}
-    sets.buff['Efflux'] = {legs="Hashishin Tayt +1"}
+    sets.buff['Efflux'] = {legs="Hashishin Tayt +2"}
 
     sets.precast.JA['Azure Lore'] = {hands="Luh. Bazubands +1"}
     sets.precast.JA['Chain Affinity'] = {feet="Assim. Charuqs +1"}
@@ -457,7 +457,7 @@ function init_gear_sets()
 		right_ring="Kishar Ring",
 		back={ name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
-    sets.precast.FC['Blue Magic'] = set_combine(sets.precast.FC, {body="Hashishin Mintan +1"})
+    sets.precast.FC['Blue Magic'] = set_combine(sets.precast.FC, {body="Hashishin Mintan +3"})
 
 	sets.precast.RA = {    
 		range="Trollbane",
@@ -691,7 +691,7 @@ function init_gear_sets()
         head="Luh. Keffiyeh +3",
         body="Assim. Jubbah +3",
         hands="Rawhide Gloves",
-        legs="Hashishin Tayt +1",
+        legs="Hashishin Tayt +2",
         feet="Luhlaza Charuqs +1",
         neck="Incanter's Torque",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
@@ -812,8 +812,8 @@ function init_gear_sets()
 		sub="Maxentius",
 		ammo="Pemphredo Tathlum",
 		head="Assim. Keffiyeh +3",
-		body="Hashishin Mintan +2",
-		hands="Hashi. Bazu. +2",
+		body="Hashishin Mintan +3",
+		hands="Hashi. Bazu. +3",
 		legs="Hashishin Tayt +2",
 		feet="Hashi. Basmak +2",
 		neck={ name="Mirage Stole +2", augments={'Path: A',}},
@@ -827,8 +827,8 @@ function init_gear_sets()
 	sets.midcast['Blue Magic'].TPDrain = {
 		ammo="Pemphredo Tathlum",
 		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
-		body="Hashishin Mintan +2",
-		hands="Hashi. Bazu. +2",
+		body="Hashishin Mintan +3",
+		hands="Hashi. Bazu. +3",
 		legs="Hashishin Tayt +2",
 		feet="Hashi. Basmak +2",
 		neck={ name="Mirage Stole +2", augments={'Path: A',}},
@@ -1081,7 +1081,7 @@ function init_gear_sets()
     sets.idle = {
 		ammo="Staunch Tathlum +1",
 		head={ name="Nyame Helm", augments={'Path: B',}},
-		body="Hashishin Mintan +2",
+		body="Hashishin Mintan +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
