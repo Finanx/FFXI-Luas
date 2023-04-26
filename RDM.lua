@@ -201,12 +201,6 @@ function user_setup()
 		input /echo [ ALT + Numpad7 ] Empyreal Arrow;
 		]])
 		
-	send_command('bind !numpad1 input /ws "Black Halo" <t>')
-    send_command('bind !numpad2 input /ws "True Strike" <t>')
-	send_command('bind !numpad4 input /ws "Aeolian Edge" <t>')
-	send_command('bind !numpad5 input /ws "Evisceration" <t>')
-	send_command('bind !numpad7 input /ws "Empyreal Arrow" <t>')
-	
 	--Weapon set Binds
 
 	send_command('bind @1 gs c set WeaponSet Naegling')

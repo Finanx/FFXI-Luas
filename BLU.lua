@@ -221,6 +221,7 @@ function user_setup()
 	state.EvasiveMode = M(false, 'EvasiveMode')
 
     state.CP = M(false, "Capacity Points Mode")
+	state.TPBonus = M(true, 'TP Bonus')
 
 	--Load Gearinfo/Azuresets/Dressup Lua
 	
@@ -233,9 +234,60 @@ function user_setup()
 	send_command('bind @u input //gi ugs')
 	send_command('bind @d input //lua u dressup; wait 10; input //lua l dressup')
     send_command('bind @c gs c toggle CP')
+	send_command('bind @b gs c toggle TPBonus')
 	send_command('bind @t gs c cycle TreasureMode')
-	send_command('bind ^` gs c toggle EvasiveMode')
+	send_command('bind ^e gs c toggle EvasiveMode')
+	send_command('bind ^- input /ja "Chain Affinity" <me>')
+	send_command('bind ^= input /ja "Burst Affinity" <me>')
 	
+	--Command to show global binds in game[ CTRL + numpad- ]
+	send_command([[bind ^numpad- 
+		input /echo -----Item_Binds-----;
+		input /echo [ Shift + Numpad1 ]	Echo Drop;
+		input /echo [ Shift + Numpad2 ]	Holy Water;
+		input /echo [ Shift + Numpad3 ]	Remedy;
+		input /echo [ Shift + Numpad4 ]	Panacea;
+		input /echo [ Shift + Numpad7 ]	Silent Oil;
+		input /echo [ Shift + Numpad9 ]	Prism Powder;
+		input /echo -----Food_Binds-----;
+		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
+		input /echo [ Windows + Numpad2 ]	Grape Daifuku;
+		input /echo [ Windows + Numpad3 ]	Tropical Crepe;
+		input /echo [ Windows + Numpad4 ]	Miso Ramen;
+		input /echo [ Windows + Numpad5 ]	Red Curry Bun;
+		input /echo [ Windows + Numpad6 ]	Rolan. Daifuku;
+		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
+		input /echo -----Modes-----;
+		input /echo [ Windows + E ]	Toggles Evasion Mode;
+		input /echo [ Windows + B ]	Toggles TP Bonus Mode;
+		input /echo [ Windows + 1 ]	Sets Weapon to Naegling;
+		input /echo [ Windows + 2 ]	Sets Weapon to Maxentius;
+		input /echo [ Windows + 3 ]	Sets Weapon to Mboze;
+		input /echo -----Toggles-----;
+		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
+		input /echo [ Windows + D ]	Unloads then reloads dressup;
+		]])
+		
+	--Command to show Blue Mage binds in game[ ALT + numpad- ]
+	send_command([[bind !numpad- 
+		input /echo -----Abilities-----;
+		input /echo [ CTRL + - ] Chain Affinity;
+		input /echo [ CTRL + = ] Burst Affinity;
+		input /echo -----Sword-----;
+		input /echo [ CTRL + Numpad1 ] Sanguine Blade;
+		input /echo [ CTRL + Numpad2 ] Flat Blade;
+		input /echo [ CTRL + Numpad3 ] Requiescat;
+		input /echo [ CTRL + Numpad4 ] Savage Blade;
+		input /echo [ CTRL + Numpad5 ] Chant Du Cygne;
+		input /echo [ CTRL + Numpad6 ] Expiacion;
+		input /echo -----Club-----;
+		input /echo [ ALT + Numpad1 ] Black Halo;
+		input /echo [ ALT + Numpad2 ] True Strike;
+		input /echo [ ALT + Numpad3 ] Judgment;
+		input /echo [ ALT + Numpad4 ] Realm Razer;
+		input /echo [ ALT + Numpad5 ] Moonlight;
+		]])
+
 	--Weapon set Binds
 	
 	send_command('bind @1 gs c set WeaponSet Naegling')
@@ -314,6 +366,8 @@ function user_unload()
 	send_command('unbind @d')
     send_command('unbind @c')
 	send_command('unbind @t ')
+	send_command('unbind @e')
+	send_command('unbind @b')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
 	send_command('unbind ^=')
@@ -1379,7 +1433,9 @@ function init_gear_sets()
 		--Weaponsets
 
 	sets.Naegling = {main="Naegling", sub="Zantetsuken"}
-	sets.Maxentius = {main="Maxentius", sub="Bunzi's Rod"}
+	sets.Naegling_Thibron = {main="Naegling", sub="Thibron"}
+	sets.Maxentius = {main="Maxentius", sub="Zantetsuken"}
+	sets.Maxentius_Thibron = {main="Maxentius", sub="Thibron"}
 	sets.Mboze = {main="Naegling", sub="Sakpata's Sword"}
     
 
@@ -1478,14 +1534,26 @@ end
 
 function check_weaponset()
 		if	state.WeaponSet.value == 'Naegling' then
-			enable('main','sub')
-			equip(sets.Naegling)
-			disable('main','sub')
+			if state.TPBonus.value == true then
+				enable('main','sub')
+				equip(sets.Naegling_Thibron)
+				disable('main','sub')
+			else
+				enable('main','sub')
+				equip(sets.Naegling)
+				disable('main','sub')
+			end	
 		end
 		if state.WeaponSet.value == 'Maxentius' then
-			enable('main','sub')
-			equip(sets.Maxentius)
-			disable('main','sub')
+			if state.TPBonus.value == true then
+				enable('main','sub')
+				equip(sets.Maxentius_Thibron)
+				disable('main','sub')
+			else
+				enable('main','sub')
+				equip(sets.Maxentius)
+				disable('main','sub')
+			end	
 		end
 		if state.WeaponSet.value == 'Mboze' then
 			enable('main','sub')
