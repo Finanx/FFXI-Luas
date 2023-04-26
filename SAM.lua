@@ -182,6 +182,7 @@ function user_setup()
 		input /echo [ ALT  + Numpad3 ] Tachi: Koki;
 		input /echo -----Polearm-----;
 		input /echo [ ALT + Numpad4 ] Impulse Drive;
+		input /echo [ ALT + Numpad5 ] Sonic Thrust;
 		]])
 	
 	--Weapon set Binds
@@ -207,6 +208,7 @@ function user_setup()
 	send_command('bind !numpad2 input /ws "Tachi: Goten" <t>')
 	send_command('bind !numpad3 input /ws "Tachi: Koki" <t>')
 	send_command('bind !numpad4 input /ws "Impulse Drive" <t>')
+	send_command('bind !numpad5 input /ws "Sonic Thrust" <t>')
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -420,6 +422,8 @@ function init_gear_sets()
 		right_ring="Niqmaddu Ring",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 		
+	sets.precast.WS['Sonic Thrust'] = sets.precast.WS['Impulse Drive']
+		
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
 
     sets.precast.WS['Tachi: Ageha'] = {
@@ -580,7 +584,7 @@ function init_gear_sets()
 	
     sets.Obi = {waist="Hachirin-no-Obi"}
 	
-	sets.Reraise = {head="Twilight Helm",body="Twilight Mail"}
+	sets.Reraise = {head="Crepuscular Helm",body="Twilight Mail"}
 	
 	
 end

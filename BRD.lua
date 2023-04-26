@@ -1242,16 +1242,16 @@ function init_gear_sets()
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {neck={ name="Bard's Charm +2", augments={'Path: A',}},}
-	sets.Naegling = {main="Naegling", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
+	sets.Naegling = {main="Naegling", sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	sets.Naegling.SW = {main="Naegling", sub="Genmei Shield"}
 	
-	sets.Carnwenhan = {main="Carnwenhan", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
+	sets.Carnwenhan = {main="Carnwenhan", sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	sets.Carnwenhan.SW = {main="Carnwenhan", sub="Genmei Shield"}
 	
-	sets.Twashtar = {main="Twashtar", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
+	sets.Twashtar = {main="Twashtar", sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	sets.Twashtar.SW = {main="Twashtar", sub="Genmei Shield"}
 	
-	sets.Tauret = {main="Tauret", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
+	sets.Tauret = {main="Tauret", sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	sets.Tauret.SW = {main="Tauret", sub="Genmei Shield"}
 	
 	sets.Xoanon = {main="Xoanon", sub="Enki Strap"}

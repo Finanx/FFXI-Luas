@@ -45,11 +45,14 @@
 -------------------------------------------------------------------------------------------------------------------
 --
 --	Modes:			[ Windows + M ]			Toggles Magic Burst Mode
+--					[ Windows + B ]			Toggles TP Bonus Mode
 --					[ Windows + 1 ]			Sets Weapon to Naegling then locks Main/Sub Slots
 --					[ Windows + 2 ]			Sets Weapon to Crocea Mors then locks Main/Sub Slots
---					[ Windows + 3 ]			Sets Weapon to Malevolence then locks Main/Sub Slots
+--					[ Windows + 3 ]			Sets Weapon to Murgleis then locks Main/Sub Slots
 --					[ Windows + 4 ]			Sets Weapon to Tauret then locks Main/Sub Slots
---					[ Windows + 5 ]			Sets Weapon to Maxentius then locks Main/Sub Slots
+--					[ Windows + 5 ]			Sets Weapon to Mandau then locks Main/Sub Slots
+--					[ Windows + 6 ]			Sets Weapon to Malevolence then locks Main/Sub Slots
+--					[ Windows + 7 ]			Sets Weapon to Maxentius then locks Main/Sub Slots
 --
 --  WS:         	[ CTRL + Numpad1 ]    	Sanguine Blade
 --					[ CTRL + Numpad2 ]    	Seraph Blade
@@ -115,10 +118,11 @@ function user_setup()
     state.CastingMode:options('Normal', 'MACC')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Crocea_Mors', 'Malevolence', 'Tauret', 'Maxentius', 'Murgleis'}
+	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Crocea_Mors', 'Murgleis', 'Tauret', 'Mandau', 'Malevolence', 'Maxentius'}
 
 	state.RangeLock = M(false, 'Range Lock')
     state.MagicBurst = M(false, 'Magic Burst')
+	state.TPBonus = M(true, 'TP Bonus')
     state.NM = M(false, 'NM')
 
 	--Load Gearinfo/Dressup Lua
@@ -132,6 +136,7 @@ function user_setup()
 	send_command('bind @d input //lua u dressup; wait 10; input //lua l dressup')
     send_command('bind @m gs c toggle MagicBurst')
 	send_command('bind @r gs c toggle RangeLock')
+	send_command('bind @b gs c toggle TPBonus')
 	send_command('bind @t gs c cycle TreasureMode')
     send_command('bind ^` input /ja "Composure" <me>')
 	send_command('bind ^- input /ja "Light Arts" <me>')
@@ -158,13 +163,15 @@ function user_setup()
 		input /echo -----Modes-----;
 		input /echo [ Windows + M ]	Toggles Magic Burst Mode;
 		input /echo [ Windows + R ]	Toggles Range Lock Mode;
+		input /echo [ Windows + B ]	Toggles TP Bonus Mode;
 		input /echo [ Windows + W ]	Sets Weapon to None;
 		input /echo [ Windows + 1 ]	Sets Weapon to Naegling;
 		input /echo [ Windows + 2 ]	Sets Weapon to Crocea_Mors;
-		input /echo [ Windows + 3 ]	Sets Weapon to Malevolence;
+		input /echo [ Windows + 3 ]	Sets Weapon to Murgleis;
 		input /echo [ Windows + 4 ]	Sets Weapon to Tauret;
-		input /echo [ Windows + 5 ]	Sets Weapon to Maxentius;
-		input /echo [ Windows + 6 ]	Sets Weapon to Murgleis;
+		input /echo [ Windows + 5 ]	Sets Weapon to Mandau;
+		input /echo [ Windows + 6 ]	Sets Weapon to Malevolence;
+		input /echo [ Windows + 7 ]	Sets Weapon to Maxentius;
 		input /echo -----Toggles-----;
 		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
 		input /echo [ Windows + D ]	Unloads then reloads dressup;
@@ -204,10 +211,12 @@ function user_setup()
 
 	send_command('bind @1 gs c set WeaponSet Naegling')
 	send_command('bind @2 gs c set WeaponSet Crocea_Mors')
-	send_command('bind @3 gs c set WeaponSet Malevolence')
+	send_command('bind @3 gs c set WeaponSet Murgleis')
 	send_command('bind @4 gs c set WeaponSet Tauret')
-	send_command('bind @5 gs c set WeaponSet Maxentius')
-	send_command('bind @6 gs c set WeaponSet Murgleis')
+	send_command('bind @5 gs c set WeaponSet Mandau')
+	send_command('bind @6 gs c set WeaponSet Malevolence')
+	send_command('bind @7 gs c set WeaponSet Maxentius')
+
 	send_command('bind @w input /equip sub; gs c set WeaponSet None')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -290,6 +299,7 @@ function user_unload()
 	send_command('unbind @r')
 	send_command('unbind @t')
     send_command('unbind @m')
+	send_command('unbind @b')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
 	send_command('unbind ^=')
@@ -479,6 +489,9 @@ function init_gear_sets()
 		left_ring="Epaminondas's Ring",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Sucellos's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		
+	sets.precast.WS.FullTPPhysical = {left_ear="Sherida Earring",}
+	sets.precast.WS.FullTPMagical = {left_ear="Regal Earring",}
 
     sets.precast.WS['Chant du Cygne'] = {
 		ammo="Yetshila +1",
@@ -526,7 +539,7 @@ function init_gear_sets()
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Regal Earring",
 		left_ring="Epaminondas's Ring",
-		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		right_ring="Sroda Ring",
 		back={ name="Sucellos's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 
 
@@ -569,8 +582,8 @@ function init_gear_sets()
 		feet="Leth. Houseaux +3",
 		neck="Sibyl Scarf",
 		waist="Orpheus's Sash",
-		left_ear="Malignance Earring",
-		right_ear="Regal Earring",
+		left_ear="Regal Earring",
+		right_ear="Malignance Earring",
 		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		right_ring="Archon Ring",
 		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Weapon skill damage +10%',}},}
@@ -1073,7 +1086,24 @@ function init_gear_sets()
 		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		feet={ name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}},
 		neck="Sanctity Necklace",
-		waist="Eschan Stone",
+		waist="Skrymir Cord +1",
+		left_ear="Malignance Earring",
+		right_ear="Regal Earring",
+		left_ring="Freke Ring",
+		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},}
+		
+    sets.midcast['Elemental Magic'].MACC = {
+		main="Bunzi's Rod",
+		sub="Ammurapi Shield",
+		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
+		head="Leth. Chappel +3",
+		body="Lethargy Sayon +3",
+		hands="Leth. Ganth. +3",
+		legs="Leth. Fuseau +3",
+		feet="Leth. Houseaux +3",
+		neck="Sibyl Scarf",
+		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Malignance Earring",
 		right_ear="Regal Earring",
 		left_ring="Freke Ring",
@@ -1088,9 +1118,9 @@ function init_gear_sets()
 		body="Ea Houppe. +1",																							--9 +9
 		hands="Ea Cuffs +1",																							--6 +6
 		legs="Ea Slops +1",																								--8 +8
-		feet="Bunzi's Sabots",																							--0 +6
+		feet="Leth. Houseaux +3",
 		neck="Sibyl Scarf",
-		waist="Eschan Stone",
+		waist="Skrymir Cord +1",
 		left_ear="Malignance Earring",
 		right_ear="Regal Earring",
 		left_ring="Mujin Band",																							--0 +5
@@ -1106,9 +1136,9 @@ function init_gear_sets()
 		body="Ea Houppe. +1",																							--9 +9
 		hands="Ea Cuffs +1",																							--6 +6
 		legs="Ea Slops +1",																								--8 +8
-		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
+		feet="Leth. Houseaux +3",
 		neck="Mizu. Kubikazari",																						--10
-		waist="Eschan Stone",
+		waist="Skrymir Cord +1",
 		left_ear="Malignance Earring",
 		right_ear="Regal Earring",
 		left_ring="Mujin Band",																							--0 +5
@@ -1119,7 +1149,7 @@ function init_gear_sets()
     sets.midcast.Impact = {
 		main={ name="Murgleis", augments={'Path: A',}},
 		sub="Ammurapi Shield",
-		range="Ullr",
+		ammo="Regal Gem",
 		head=empty,
 		body="Crepuscular Cloak",
 		hands="Leth. Ganth. +3",
@@ -1402,18 +1432,12 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged.Hybrid =  {
-		ammo="Aurgelmir Orb +1",
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body="Malignance Tabard",
 		hands="Malignance Gloves",
 		legs="Malignance Tights",
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="Bathy Choker +1", augments={'Path: A',}},
-		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
-		left_ear="Digni. Earring",
-		right_ear="Sherida Earring",
-		left_ring="Chirich Ring +1",
-		right_ring="Chirich Ring +1",
+		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
 		}--41% DT + 10% PDT
 
@@ -1460,23 +1484,33 @@ function init_gear_sets()
 	
 	--Weapon Sets
 
-	sets.Naegling = {main="Naegling", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
-	sets.Naegling.SW = {main="Naegling", sub="Genmei Shield"}
+	sets.Naegling = {main="Naegling", sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Naegling_Thibron = {main="Naegling", sub="Thibron",}
+	sets.Naegling.SW = {main="Naegling", sub="Genmei Shield",}
 	
-	sets.Crocea_Mors = {main={ name="Crocea Mors", augments={'Path: C',}}, sub="Daybreak"}
-	sets.Crocea_Mors.SW = {main={ name="Crocea Mors", augments={'Path: C',}}, sub="Ammurapi Shield"}
+	sets.Crocea_Mors = {main={ name="Crocea Mors", augments={'Path: C',}}, sub="Daybreak",}
+	sets.Crocea_Mors_Thibron = {main={ name="Crocea Mors", augments={'Path: C',}}, sub="Thibron",}
+	sets.Crocea_Mors.SW = {main={ name="Crocea Mors", augments={'Path: C',}}, sub="Ammurapi Shield",}
+
+	sets.Murgleis = {main={ name="Murgleis", augments={'Path: A',}},sub="Bunzi's Rod",}
+	sets.Murgleis_Thibron = {main={ name="Murgleis", augments={'Path: A',}}, sub="Thibron",}
+	sets.Murgleis.SW = {main={ name="Murgleis", augments={'Path: A',}},sub="Ammurapi Shield"}
 	
 	sets.Malevolence = {main={ name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},sub={ name="Bunzi's Rod", augments={'Path: A',}}}
+	sets.Malevolence_Thibron = {main="Malevolence", sub="Thibron",}
 	sets.Malevolence.SW = {main={ name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}}, sub="Ammurapi Shield"}
 	
-	sets.Tauret = {main="Tauret", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
+	sets.Tauret = {main="Tauret", sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Tauret_Thibron = {main="Tauret", sub="Thibron",}
 	sets.Tauret.SW = {main="Tauret", sub="Genmei Shield"}
 	
-	sets.Maxentius = {main="Maxentius", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
-	sets.Maxentius.SW = {main="Maxentius", sub="Genmei Shield"}
+	sets.Mandau = {main={ name="Mandau", augments={'Path: A',}}, sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Mandau_Thibron = {main={ name="Mandau", augments={'Path: A',}}, sub="Thibron",}
+	sets.Mandau.SW = {main={ name="Mandau", augments={'Path: A',}}, sub="Genmei Shield",}
 	
-	sets.Murgleis = {main={ name="Murgleis", augments={'Path: A',}},sub="Bunzi's Rod",}
-	sets.Murgleis.SW = {main={ name="Murgleis", augments={'Path: A',}},sub="Ammurapi Shield"}
+	sets.Maxentius = {main="Maxentius", sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Maxentius_Thibron = {main="Maxentius", sub="Thibron",}
+	sets.Maxentius.SW = {main="Maxentius", sub="Genmei Shield",}
 	
 	--Range Sets
 	
@@ -1529,6 +1563,42 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 		equip(sets.midcast['Enfeebling Magic'].MACC)
 	end
 	
+	if state.WeaponSet.value == 'None' and state.CastingMode.value == 'MACC' and spell.skill == 'Enfeebling Magic' then
+		equip(sets.Empyreal)
+	end
+	if state.WeaponSet.value == 'None' and spell.skill == 'Enfeebling Magic' then
+		if (spell.name == 'Frazzle' or spell.name == 'Frazzle' or spell.name == 'Dispel' or spell.name == 'Inundation')then
+			equip(sets.Empyreal)
+		end
+	end
+	
+		--Handles TP Overflow
+	if spell.type == 'WeaponSkill' then
+		if spell.english ~= "Chant du Cygne" or spell.english ~= "Evisceration" or spell.english ~= "Empyreal Arrow" or spell.english ~= "Sanguine Blade" then
+			if spell.english == 'Seraph Blade' or spell.english == 'Red Lotus Blade' or spell.english == 'Aeolian Edge' then
+				if state.TPBonus.value == true then
+					if player.tp > 1900 then
+						equip(sets.precast.WS.FullTPMagical)
+					end
+				else
+					if player.tp > 2900 then
+						equip(sets.precast.WS.FullTPMagical)
+					end
+				end
+			else
+				if state.TPBonus.value == true then
+					if player.tp > 1900 then
+						equip(sets.precast.WS.FullTPPhysical)
+					end
+				else
+					if player.tp > 2900 then
+						equip(sets.precast.WS.FullTPPhysical)
+					end
+				end	
+			end
+		end
+	end
+	
 		--Handles Magic Burst Toggle
 	if state.MagicBurst.value == true and spell.skill == 'Elemental Magic' then
 		if state.WeaponSet.value == 'None' then
@@ -1567,12 +1637,15 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
 			--Equips gearset to cast Impact
 		if spell.english == "Impact" then
-                equip(sets.midcast.Impact)
+            equip(sets.midcast.Impact)
+				if state.WeaponSet.value == 'None' then
+					equip(sets.Empyreal)
+				end
         end
 		
 			--Equips gearset to cast Impact
 		if spell.english == "Dispelga" then
-                equip(sets.midcast.Dispelga)
+            equip(sets.midcast.Dispelga)
         end
 		
 			--Equips Obi set if the correct day or weather matches Elemental Magic and if correct distance
@@ -1632,9 +1705,15 @@ function update_combat_form()
 	
 	if state.WeaponSet.value == 'Naegling' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			enable('main','sub')
-			equip(sets.Naegling)
-			disable('main','sub')
+			if state.TPBonus.value == true then
+				enable('main','sub')
+				equip(sets.Naegling_Thibron)
+				disable('main','sub')
+			else
+				enable('main','sub')
+				equip(sets.Naegling)
+				disable('main','sub')
+			end			
 		else
 			enable('main','sub')
 			equip(sets.Naegling.SW)
@@ -1644,45 +1723,106 @@ function update_combat_form()
 	
 	if state.WeaponSet.value == 'Crocea_Mors' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			enable('main','sub')
-			equip(sets.Crocea_Mors)
-			disable('main','sub')
+			if state.TPBonus.value == true then
+				enable('main','sub')
+				equip(sets.Crocea_Mors_Thibron)
+				disable('main','sub')
+			else
+				enable('main','sub')
+				equip(sets.Crocea_Mors)
+				disable('main','sub')
+			end	
 		else
 			enable('main','sub')
 			equip(sets.Crocea_Mors.SW)
 			disable('main','sub')
 		end
 	end
-	
-	if state.WeaponSet.value == 'Malevolence' then
+
+	if state.WeaponSet.value == 'Murgleis' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			enable('main','sub')
-			equip(sets.Malevolence)
-			disable('main','sub')
+			if state.TPBonus.value == true then
+				enable('main','sub')
+				equip(sets.Murgleis_Thibron)
+				disable('main','sub')
+			else
+				enable('main','sub')
+				equip(sets.Murgleis)
+				disable('main','sub')
+			end
 		else
 			enable('main','sub')
-			equip(sets.Malevolence.SW)
+			equip(sets.Murgleis.SW)
 			disable('main','sub')
 		end
 	end
-	
+
 	if state.WeaponSet.value == 'Tauret' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			enable('main','sub')
-			equip(sets.Tauret)
-			disable('main','sub')
+			if state.TPBonus.value == true then
+				enable('main','sub')
+				equip(sets.Tauret_Thibron)
+				disable('main','sub')
+			else
+				enable('main','sub')
+				equip(sets.Tauret)
+				disable('main','sub')
+			end	
 		else
 			enable('main','sub')
 			equip(sets.Tauret.SW)
 			disable('main','sub')
 		end
 	end
+
 	
+	if state.WeaponSet.value == 'Malevolence' then
+		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+			if state.TPBonus.value == true then
+				enable('main','sub')
+				equip(sets.Malevolence_Thibron)
+				disable('main','sub')
+			else
+				enable('main','sub')
+				equip(sets.Malevolence)
+				disable('main','sub')
+			end	
+		else
+			enable('main','sub')
+			equip(sets.Malevolence.SW)
+			disable('main','sub')
+		end
+	end
+
+	if state.WeaponSet.value == 'Mandau' then
+		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+			if state.TPBonus.value == true then
+				enable('main','sub')
+				equip(sets.Mandau_Thibron)
+				disable('main','sub')
+			else
+				enable('main','sub')
+				equip(sets.Madnau)
+				disable('main','sub')
+			end
+		else
+			enable('main','sub')
+			equip(sets.Mandau.SW)
+			disable('main','sub')
+		end
+	end
+
 	if state.WeaponSet.value == 'Maxentius' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			enable('main','sub')
-			equip(sets.Maxentius)
-			disable('main','sub')
+			if state.TPBonus.value == true then
+				enable('main','sub')
+				equip(sets.Maxentius_Thibron)
+				disable('main','sub')
+			else
+				enable('main','sub')
+				equip(sets.Maxentius)
+				disable('main','sub')
+			end	
 		else
 			enable('main','sub')
 			equip(sets.Maxentius.SW)
@@ -1690,21 +1830,10 @@ function update_combat_form()
 		end
 	end
 	
-	if state.WeaponSet.value == 'Murgleis' then
-		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			enable('main','sub')
-			equip(sets.Murgleis)
-			disable('main','sub')
-		else
-			enable('main','sub')
-			equip(sets.Murgleis.SW)
-			disable('main','sub')
-		end
-	end
-	
 	if state.WeaponSet.value == 'None' then
 		enable('main','sub')
 	end
+	
 
 		--Locks Ranged/ammo slots and equips Empyreal bow set
 	if state.RangeLock.value == true then
