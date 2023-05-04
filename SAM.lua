@@ -476,9 +476,41 @@ function init_gear_sets()
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}	
 
+	-- Ranged Set
+		
+	sets.precast.RA = {
+		range="Trollbane",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs="Volte Tights",
+		feet="Volte Spats",
+		neck={ name="Loricate Torque +1", augments={'Path: A',}},
+		waist="Yemaya Belt",
+		left_ear="Genmei Earring",
+		right_ear="Sanare Earring",
+		left_ring="Defending Ring",
+		right_ring="Archon Ring",
+		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+
     -- Midcast Sets
  
 	sets.midcast.FastRecast = {}
+	
+	sets.midcast.RA = {
+		range="Trollbane",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs="Volte Tights",
+		feet="Volte Spats",
+		neck={ name="Loricate Torque +1", augments={'Path: A',}},
+		waist="Yemaya Belt",
+		left_ear="Genmei Earring",
+		right_ear="Sanare Earring",
+		left_ring="Defending Ring",
+		right_ring="Archon Ring",
+		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     
 

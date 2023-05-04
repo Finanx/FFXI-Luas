@@ -538,7 +538,7 @@ function init_gear_sets()
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Ishvara Earring",
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Crit.hit rate+7','STR+11 AGI+11',}},
 		left_ring="Dingir Ring",
 		right_ring="Regal Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},}
@@ -604,7 +604,7 @@ function init_gear_sets()
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear="Odr Earring",
-		right_ear={ name="Chas. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','Crit.hit rate+3',}},
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Crit.hit rate+7','STR+11 AGI+11',}},
 		left_ring="Begrudging Ring",
 		right_ring="Mummu Ring",
 		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}
@@ -684,7 +684,7 @@ function init_gear_sets()
 		neck={ name="Comm. Charm +2", augments={'Path: A',}},
 		waist="K. Kachina Belt +1",
 		left_ear="Crep. Earring",
-		right_ear={ name="Chas. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','Crit.hit rate+3',}},
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Crit.hit rate+7','STR+11 AGI+11',}},
 		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		right_ring="Stikini Ring +1",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}},}
@@ -699,7 +699,7 @@ function init_gear_sets()
 		neck={ name="Comm. Charm +2", augments={'Path: A',}},
 		waist="K. Kachina Belt +1",
 		left_ear="Crep. Earring",
-		right_ear={ name="Chas. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','Crit.hit rate+3',}},
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Crit.hit rate+7','STR+11 AGI+11',}},
 		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		right_ring="Stikini Ring +1",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}},}
@@ -745,7 +745,7 @@ function init_gear_sets()
 		neck="Iskur Gorget",
 		waist="K. Kachina Belt +1",
 		left_ear="Odr Earring",
-		right_ear={ name="Chas. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','Crit.hit rate+3',}},
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Crit.hit rate+7','STR+11 AGI+11',}},
 		left_ring="Mummu Ring",
 		right_ring="Regal Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Crit.hit rate+10','Phys. dmg. taken-10%',}},}
@@ -775,7 +775,7 @@ function init_gear_sets()
 		neck="Iskur Gorget",
 		waist="K. Kachina Belt +1",
 		left_ear="Odr Earring",
-		right_ear={ name="Chas. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','Crit.hit rate+3',}},
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Crit.hit rate+7','STR+11 AGI+11',}},
 		left_ring="Mummu Ring",
 		right_ring="Regal Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Crit.hit rate+10','Phys. dmg. taken-10%',}},}
@@ -1129,7 +1129,7 @@ function init_gear_sets()
 
 	--Weaponsets
 
-    sets.Rostam = {main={ name="Rostam", augments={'Path: A',}}, sub={ name="Gleti's Knife", augments={'Path: A',}},}
+    sets.Rostam = {main="Bone Knife",sub="Bone Knife",}
     sets.Rostam.Acc = {main={ name="Rostam", augments={'Path: A',}}, sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	sets.Rostam.RAcc = {main={ name="Rostam", augments={'Path: A',}}, sub={ name="Kustawi +1", augments={'Path: A',}},}
 	sets.Naegling = {main="Naegling", sub={ name="Gleti's Knife", augments={'Path: A',}},}
@@ -1144,7 +1144,7 @@ function init_gear_sets()
 	sets.Naegling.SW.RAcc = {main="Naegling", sub="Nusku Shield"}
 	
 	--Rangesets
-	sets.TP_Gun = {range="Fomalhaut",}
+	sets.TP_Gun = {range="Anarchy",}
 	sets.Fomalhaut = {range="Fomalhaut",}
 	sets.DeathPenalty = {range="Death Penalty",}
 	sets.Armageddon = {range="Armageddon",}
@@ -1377,7 +1377,6 @@ function check_weaponset()
 		end
 	end
 end
-
 --handles equiping ranged weapon sets
 
 function check_rangeset()
@@ -1397,7 +1396,7 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 end
 
 function job_update(cmdParams, eventArgs)
-	check_weaponset()
+	check_weaponset()				  
 	check_rangeset()
 	check_gear()
     handle_equipping_gear(player.status)

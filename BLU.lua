@@ -236,7 +236,7 @@ function user_setup()
     send_command('bind @c gs c toggle CP')
 	send_command('bind @b gs c toggle TPBonus')
 	send_command('bind @t gs c cycle TreasureMode')
-	send_command('bind ^e gs c toggle EvasiveMode')
+	send_command('bind @e gs c toggle EvasiveMode')
 	send_command('bind ^- input /ja "Chain Affinity" <me>')
 	send_command('bind ^= input /ja "Burst Affinity" <me>')
 	
@@ -489,7 +489,7 @@ function init_gear_sets()
 
     sets.buff['Burst Affinity'] = {legs="Assim. Shalwar +3", feet="Hashi. Basmak +1"}
     sets.buff['Diffusion'] = {feet="Luhlaza Charuqs +1"}
-    sets.buff['Efflux'] = {legs="Hashishin Tayt +2"}
+    sets.buff['Efflux'] = {legs="Hashishin Tayt +3"}
 
     sets.precast.JA['Azure Lore'] = {hands="Luh. Bazubands +1"}
     sets.precast.JA['Chain Affinity'] = {feet="Assim. Charuqs +1"}
@@ -745,7 +745,7 @@ function init_gear_sets()
         head="Luh. Keffiyeh +3",
         body="Assim. Jubbah +3",
         hands="Rawhide Gloves",
-        legs="Hashishin Tayt +2",
+        legs="Hashishin Tayt +3",
         feet="Luhlaza Charuqs +1",
         neck="Incanter's Torque",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
@@ -865,15 +865,15 @@ function init_gear_sets()
 	    main="Bunzi's Rod",
 		sub="Maxentius",
 		ammo="Pemphredo Tathlum",
-		head="Assim. Keffiyeh +3",
+		head="Hashishin Kavuk +3",
 		body="Hashishin Mintan +3",
 		hands="Hashi. Bazu. +3",
-		legs="Hashishin Tayt +2",
-		feet="Hashi. Basmak +2",
+		legs="Hashishin Tayt +3",
+		feet="Hashi. Basmak +3",
 		neck={ name="Mirage Stole +2", augments={'Path: A',}},
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
-		left_ear="Regal Earring",
-		right_ear="Crep. Earring",
+		left_ear="Crep. Earring",
+		right_ear={ name="Hashi. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Dbl.Atk."+4',}},
 		left_ring="Stikini Ring +1",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
@@ -883,12 +883,12 @@ function init_gear_sets()
 		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
 		body="Hashishin Mintan +3",
 		hands="Hashi. Bazu. +3",
-		legs="Hashishin Tayt +2",
-		feet="Hashi. Basmak +2",
+		legs="Hashishin Tayt +3",
+		feet="Hashi. Basmak +3",
 		neck={ name="Mirage Stole +2", augments={'Path: A',}},
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
-		left_ear={ name="Hashishin Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+7','Mag. Acc.+7',}},
-		right_ear="Crep. Earring",
+		left_ear="Crep. Earring",
+		right_ear={ name="Hashi. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Dbl.Atk."+4',}},
 		left_ring="Stikini Ring +1",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Aurist's Cape +1", augments={'Path: A',}},}

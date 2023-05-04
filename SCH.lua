@@ -388,6 +388,23 @@ function init_gear_sets()
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Crepuscular Cloak"})
     sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield"})
+	
+	sets.precast.RA = {
+		main="Mpaca's Staff",
+		sub="Khonsu",
+		range="Trollbane",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body="Arbatel Gown +3",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck={ name="Loricate Torque +1", augments={'Path: A',}},
+		waist="Cornelia's Belt",
+		left_ear="Eabani Earring",
+		right_ear="Mimir Earring",
+		left_ring="Stikini Ring +1",
+		right_ring="Stikini Ring +1",
+		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
 
     ------------------------------------------------------------------------------------------------
     ------------------------------------- Weapon Skill Sets ----------------------------------------
@@ -855,6 +872,23 @@ function init_gear_sets()
 		left_ring="Freke Ring",
 		right_ring="Mallquis Ring",
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
+		
+	sets.midcast.Subtle_Blow = {
+		main="Mpaca's Staff",
+		sub="Khonsu",
+		ammo="Homiliary",
+		head={ name="Amalric Coif +1", augments={'INT+12','Mag. Acc.+25','Enmity-6',}},
+		body="Zendik Robe",
+		hands="Acad. Bracers +3",
+		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		feet={ name="Chironic Slippers", augments={'"Fast Cast"+7','MND+3',}},
+		neck={ name="Bathy Choker +1", augments={'Path: A',}},
+		waist="Embla Sash",
+		left_ear="Digni. Earring",
+		right_ear="Mimir Earring",
+		left_ring="Chirich Ring +1",
+		right_ring="Chirich Ring +1",
+		back={ name="Fi Follet Cape +1", augments={'Path: A',}},}
 	
 	sets.midcast.Helix.MagicBurst = {
 		main={ name="Bunzi's Rod", augments={'Path: A',}},
@@ -897,7 +931,24 @@ function init_gear_sets()
     sets.midcast.LightHelix = set_combine(sets.midcast.Helix,{main="Daybreak",sub="Ammurapi Shield",})
     sets.midcast.LightHelix.MagicBurst = set_combine(sets.midcast.Helix.MagicBurst,{main="Daybreak",sub="Ammurapi Shield",})
 	sets.midcast.LightHelix.MagicBurstEbullience = set_combine(sets.midcast.Helix.MagicBurst,{main="Daybreak",sub="Ammurapi Shield",head="Arbatel Bonnet +3",})
-
+	
+	sets.midcast.RA = {
+		main="Mpaca's Staff",
+		sub="Khonsu",
+		range="Trollbane",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body="Arbatel Gown +3",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck={ name="Loricate Torque +1", augments={'Path: A',}},
+		waist="Cornelia's Belt",
+		left_ear="Eabani Earring",
+		right_ear="Mimir Earring",
+		left_ring="Stikini Ring +1",
+		right_ring="Stikini Ring +1",
+		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
+	
     -- Initializes trusts at iLvl 119
     sets.midcast.Trust = sets.precast.FC
 
@@ -916,7 +967,7 @@ function init_gear_sets()
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
-		waist="Embla Sash",
+		waist="Cornelia's Belt",
 		left_ear="Eabani Earring",
 		right_ear="Mimir Earring",
 		left_ring="Stikini Ring +1",
@@ -956,7 +1007,7 @@ function init_gear_sets()
 
     sets.buff['Rapture'] = {head="Arbatel Bonnet +3"}
     sets.buff['Perpetuance'] = {hands="Arbatel Bracers +3"}
-    sets.buff['Immanence'] = {hands="Arbatel Bracers +3"}
+    sets.buff['Immanence'] = {}
     sets.buff['Penury'] = {legs="Arbatel Pants +3"}
     sets.buff['Parsimony'] = {legs="Arbatel Pants +3"}
     sets.buff['Celerity'] = {feet="Peda. Loafers +3"}
@@ -1017,7 +1068,6 @@ end
 function job_post_midcast(spell, action, spellMap, eventArgs)
 
     if spell.skill == 'Elemental Magic' then
-
 		if state.MagicBurst.value == true and spell.skill == 'Elemental Magic' then
 			if state.Buff.Ebullience then
 				equip(sets.midcast['Elemental Magic'].MagicBurstEbullience)
@@ -1027,30 +1077,34 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 		end
 		
         if spellMap == "Helix" then
-			if state.MagicBurst.value == true then
-				if state.Buff.Ebullience then
-					equip(sets.midcast.Helix.MagicBurstEbullience)
-				else
-					equip(sets.midcast.Helix.MagicBurst)
-				end
+			if state.Buff.Immanence then
+				equip(sets.midcast.Subtle_Blow)
+			else
+				if state.MagicBurst.value == true then
+					if state.Buff.Ebullience then
+						equip(sets.midcast.Helix.MagicBurstEbullience)
+					else
+						equip(sets.midcast.Helix.MagicBurst)
+					end
 
-				if spell.english:startswith('Lumino') then
-					equip(sets.midcast.LightHelix.MagicBurst)
-				elseif spell.english:startswith('Nocto') then
-					equip(sets.midcast.DarkHelix.MagicBurst)
-					if state.Buff.Ebullience and spell.english:startswith('Lumino') then
-						equip(sets.midcast.LightHelix.MagicBurstEbullience)
-					elseif state.Buff.Ebullience and spell.english:startswith('Nocto') then
-						equip(sets.midcast.DarkHelix.MagicBurstEbullience)
-					end
-				end
-			else 
-				equip(sets.midcast.Helix)
 					if spell.english:startswith('Lumino') then
-						equip(sets.midcast.LightHelix)
+						equip(sets.midcast.LightHelix.MagicBurst)
 					elseif spell.english:startswith('Nocto') then
-						equip(sets.midcast.DarkHelix)
+						equip(sets.midcast.DarkHelix.MagicBurst)
+						if state.Buff.Ebullience and spell.english:startswith('Lumino') then
+							equip(sets.midcast.LightHelix.MagicBurstEbullience)
+						elseif state.Buff.Ebullience and spell.english:startswith('Nocto') then
+							equip(sets.midcast.DarkHelix.MagicBurstEbullience)
+						end
 					end
+				else 
+					equip(sets.midcast.Helix)
+						if spell.english:startswith('Lumino') then
+							equip(sets.midcast.LightHelix)
+						elseif spell.english:startswith('Nocto') then
+							equip(sets.midcast.DarkHelix)
+						end
+				end
 			end
 			
 			--if state.Buff.Klimaform and spell.element == world.weather_element then
@@ -1344,7 +1398,7 @@ function apply_grimoire_bonuses(spell, action, spellMap)
             equip(sets.buff['Ebullience'])
         end
         if state.Buff.Immanence then
-            equip(sets.buff['Immanence'])
+            equip(sets.midcast.Subtle_Blow)
         end
         if state.Buff.Klimaform and spell.element == world.weather_element then
             equip(sets.buff['Klimaform'])

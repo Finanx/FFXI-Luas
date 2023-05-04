@@ -117,6 +117,7 @@ function user_setup()
 	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Carnwenhan', 'Twashtar', 'Tauret', 'Xoanon'}
 	
     state.CP = M(false, "Capacity Points Mode")
+	state.TPBonus = M(true, 'TP Bonus')
 	
 	state.Threnody = M{['description']='Threnody',
         '"Fire Threnody II"', '"Ice Threnody II"', '"Wind Threnody II"', '"Earth Threnody II"',
@@ -147,6 +148,7 @@ function user_setup()
 	send_command('bind @e gs c cycle SongEnmity')
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @t gs c cycle TreasureMode')
+	send_command('bind @b gs c toggle TPBonus')
 	
 	send_command('bind !` input //gs c Threnody')
     send_command('bind !- gs c cycleback Threnody')
@@ -227,7 +229,7 @@ function user_setup()
 	send_command('bind @1 gs c set WeaponSet Naegling')
 	send_command('bind @2 gs c set WeaponSet Carnwenhan')
 	send_command('bind @3 gs c set WeaponSet Tauret')
-	--send_command('bind @4 gs c set WeaponSet Twashtar')
+	send_command('bind @4 gs c set WeaponSet Twashtar')
 	send_command('bind @5 gs c set WeaponSet Xoanon')
 	send_command('bind @w input /equip sub; gs c set WeaponSet None')
 	
@@ -241,11 +243,6 @@ function user_setup()
     send_command('bind ^numpad6 input /ws "Extenterator" <t>')
 	send_command('bind ^numpad7 input /ws "Retribution" <t>')
 	send_command('bind ^numpad9 input /ws "Shell Crusher" <t>')
-	
-	
-	--Song Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	send_command('bind ^numpad1 input /ws "Evisceration" <t>')
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -308,6 +305,7 @@ function user_unload()
     send_command('unbind @w')
     send_command('unbind @c')
 	send_command('unbind @t')
+	send_command('unbind @b')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
 	send_command('unbind ^=')
@@ -469,20 +467,23 @@ function init_gear_sets()
     ------------------------------------- Weapon Skill Sets ----------------------------------------
     ------------------------------------------------------------------------------------------------
 
+	sets.precast.WS.FullTPPhysical = {left_ear="Telos Earring",}
+	sets.precast.WS.FullTPMagical = {left_ear="Regal Earring",}
+
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
 		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Bihu Jstcorps. +3", augments={'Enhances "Troubadour" effect',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Caro Necklace",
+		neck={ name="Bard's Charm +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Ishvara Earring",
+		right_ear="Regal Earring",
 		left_ring="Epaminondas's Ring",
-		right_ring="Rufescent Ring",
+		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
@@ -490,9 +491,9 @@ function init_gear_sets()
 	sets.precast.WS['Evisceration'] = {
 		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
-		body="Ayanmo Corazza +2",
+		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		legs={ name="Zoar Subligar +1", augments={'Path: A',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
@@ -500,7 +501,7 @@ function init_gear_sets()
 		right_ear="Balder Earring +1",
 		left_ring="Hetairoi Ring",
 		right_ring="Begrudging Ring",
-		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+4','Crit.hit rate+10',}},}
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}
 
     sets.precast.WS['Exenterator'] = {
 		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
@@ -525,7 +526,7 @@ function init_gear_sets()
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Fotia Gorget",
-		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear="Regal Earring",
 		right_ear="Ishvara Earring",
 		left_ring="Epaminondas's Ring",
@@ -565,16 +566,16 @@ function init_gear_sets()
     sets.precast.WS['Savage Blade'] = {
 		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Bihu Jstcorps. +3", augments={'Enhances "Troubadour" effect',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Rep. Plat. Medal",
+		neck={ name="Bard's Charm +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Ishvara Earring",
+		right_ear="Regal Earring",
 		left_ring="Epaminondas's Ring",
-		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		right_ring="Sroda Ring",
 		back={ name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 		
 	sets.precast.WS['Shell Crusher'] = {
@@ -607,7 +608,20 @@ function init_gear_sets()
 		right_ring="Rufescent Ring",
 		back={ name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 		
-	
+	sets.precast.RA = {
+		range="Trollbane",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs="Volte Tights",
+		feet="Volte Spats",
+		neck={ name="Loricate Torque +1", augments={'Path: A',}},
+		waist="Yemaya Belt",
+		left_ear="Tuisto Earring",
+		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		right_ring="Ilabrat Ring",
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
 
     ------------------------------------------------------------------------------------------------
@@ -927,6 +941,21 @@ function init_gear_sets()
     sets.midcast['Enfeebling Magic'] = {}
 
     sets.midcast.Dispelga = set_combine(sets.midcast['Enfeebling Magic'], {main="Daybreak", sub="Ammurapi Shield"})
+	
+	sets.midcast.RA = {
+		range="Trollbane",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs="Volte Tights",
+		feet="Volte Spats",
+		neck={ name="Loricate Torque +1", augments={'Path: A',}},
+		waist="Yemaya Belt",
+		left_ear="Tuisto Earring",
+		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		right_ring="Ilabrat Ring",
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     ------------------------------------------------------------------------------------------------
     ----------------------------------------- Idle Sets --------------------------------------------
@@ -1242,16 +1271,21 @@ function init_gear_sets()
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {neck={ name="Bard's Charm +2", augments={'Path: A',}},}
+	
+	
 	sets.Naegling = {main="Naegling", sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Naegling_Centovente = {main="Naegling", sub="Fusetto +2",}
 	sets.Naegling.SW = {main="Naegling", sub="Genmei Shield"}
 	
 	sets.Carnwenhan = {main="Carnwenhan", sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	sets.Carnwenhan.SW = {main="Carnwenhan", sub="Genmei Shield"}
 	
 	sets.Twashtar = {main="Twashtar", sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Twashtar_Centovente = {main="Twashtar", sub="Fusetto +2",}
 	sets.Twashtar.SW = {main="Twashtar", sub="Genmei Shield"}
 	
 	sets.Tauret = {main="Tauret", sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Tauret_Centovente = {main="Tauret", sub="Fusetto +2",}
 	sets.Tauret.SW = {main="Tauret", sub="Genmei Shield"}
 	
 	sets.Xoanon = {main="Xoanon", sub="Enki Strap"}
@@ -1338,6 +1372,33 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	if spellMap == 'Cure' and spell.target.type == 'SELF' then
         equip(sets.midcast.CureSelf)
     end
+	
+		--Handles TP Overflow
+	if spell.type == 'WeaponSkill' then
+		if spell.english ~= "Evisceration" or spell.english ~= "Shell Crusher" or spell.english ~= "Mordant Rime" then
+			if spell.english == 'Aeolian Edge' then
+				if state.TPBonus.value == true then
+					if player.tp > 1900 then
+						equip(sets.precast.WS.FullTPMagical)
+					end
+				else
+					if player.tp > 2900 then
+						equip(sets.precast.WS.FullTPMagical)
+					end
+				end
+			else
+				if state.TPBonus.value == true then
+					if player.tp > 1900 then
+						equip(sets.precast.WS.FullTPPhysical)
+					end
+				else
+					if player.tp > 2900 then
+						equip(sets.precast.WS.FullTPPhysical)
+					end
+				end	
+			end
+		end
+	end
 end
 
 
@@ -1370,11 +1431,17 @@ end
 
 	--Adjusts Weapon sets for Dual Wield or Single Wield
 function job_state_change(stateField, newValue, oldValue)
- 	if state.WeaponSet.value == 'Naegling' then
+	if state.WeaponSet.value == 'Naegling' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			enable('main','sub')
-			equip(sets.Naegling)
-			disable('main','sub')
+			if state.TPBonus.value == true then
+				enable('main','sub')
+				equip(sets.Naegling_Centovente)
+				disable('main','sub')
+			else
+				enable('main','sub')
+				equip(sets.Naegling)
+				disable('main','sub')
+			end			
 		else
 			enable('main','sub')
 			equip(sets.Naegling.SW)
@@ -1396,9 +1463,15 @@ function job_state_change(stateField, newValue, oldValue)
 	
 	if state.WeaponSet.value == 'Twashtar' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			enable('main','sub')
-			equip(sets.Twashtar)
-			disable('main','sub')
+			if state.TPBonus.value == true then
+				enable('main','sub')
+				equip(sets.Twashtar_Centovente)
+				disable('main','sub')
+			else
+				enable('main','sub')
+				equip(sets.Twashtar)
+				disable('main','sub')
+			end	
 		else
 			enable('main','sub')
 			equip(sets.Twashtar.SW)
@@ -1408,9 +1481,15 @@ function job_state_change(stateField, newValue, oldValue)
 	
 	if state.WeaponSet.value == 'Tauret' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			enable('main','sub')
-			equip(sets.Tauret)
-			disable('main','sub')
+			if state.TPBonus.value == true then
+				enable('main','sub')
+				equip(sets.Tauret_Centovente)
+				disable('main','sub')
+			else
+				enable('main','sub')
+				equip(sets.Tauret)
+				disable('main','sub')
+			end
 		else
 			enable('main','sub')
 			equip(sets.Tauret.SW)

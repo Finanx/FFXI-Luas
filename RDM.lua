@@ -410,7 +410,7 @@ function init_gear_sets()
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Dbl.Atk."+3',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Dbl.Atk."+5',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
 		back={ name="Fi Follet Cape +1", augments={'Path: A',}},}
@@ -427,7 +427,7 @@ function init_gear_sets()
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Dbl.Atk."+3',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Dbl.Atk."+5',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
 		back={ name="Fi Follet Cape +1", augments={'Path: A',}},}
@@ -444,7 +444,7 @@ function init_gear_sets()
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Dbl.Atk."+3',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Dbl.Atk."+5',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
 		back={ name="Fi Follet Cape +1", augments={'Path: A',}},}
@@ -781,7 +781,7 @@ function init_gear_sets()
 		neck="Dls. Torque +2",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Dbl.Atk."+3',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Dbl.Atk."+5',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
 		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
@@ -798,7 +798,7 @@ function init_gear_sets()
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
 		waist="Embla Sash",
 		left_ear="Mimir Earring",
-		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Dbl.Atk."+3',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Dbl.Atk."+5',}},
 		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring +1",
 		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
@@ -815,7 +815,7 @@ function init_gear_sets()
 		neck="Dls. Torque +2",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Dbl.Atk."+3',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Dbl.Atk."+5',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
 		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
@@ -849,7 +849,7 @@ function init_gear_sets()
 		neck="Dls. Torque +2",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Dbl.Atk."+3',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Dbl.Atk."+5',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
 		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
@@ -875,7 +875,7 @@ function init_gear_sets()
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Dbl.Atk."+3',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Dbl.Atk."+5',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
 		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
@@ -1479,31 +1479,29 @@ function init_gear_sets()
 	--Weapon Sets
 
 	sets.Naegling = {main="Naegling", sub={ name="Gleti's Knife", augments={'Path: A',}},}
-	sets.Naegling_Thibron = {main="Naegling", sub="Thibron",}
+	sets.Naegling_Thibron = {main="Naegling", sub={ name="Machaera +2", augments={'TP Bonus +1000',}},}
 	sets.Naegling.SW = {main="Naegling", sub="Genmei Shield",}
 	
 	sets.Crocea_Mors = {main={ name="Crocea Mors", augments={'Path: C',}}, sub="Daybreak",}
-	sets.Crocea_Mors_Thibron = {main={ name="Crocea Mors", augments={'Path: C',}}, sub="Thibron",}
 	sets.Crocea_Mors.SW = {main={ name="Crocea Mors", augments={'Path: C',}}, sub="Ammurapi Shield",}
 
 	sets.Murgleis = {main={ name="Murgleis", augments={'Path: A',}},sub="Bunzi's Rod",}
-	sets.Murgleis_Thibron = {main={ name="Murgleis", augments={'Path: A',}}, sub="Thibron",}
+	sets.Murgleis_Thibron = {main={ name="Murgleis", augments={'Path: A',}}, sub={ name="Machaera +2", augments={'TP Bonus +1000',}},}
 	sets.Murgleis.SW = {main={ name="Murgleis", augments={'Path: A',}},sub="Ammurapi Shield"}
 	
 	sets.Malevolence = {main={ name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},sub={ name="Bunzi's Rod", augments={'Path: A',}}}
-	sets.Malevolence_Thibron = {main="Malevolence", sub="Thibron",}
+	sets.Malevolence_Thibron = {main="Malevolence", sub={ name="Machaera +2", augments={'TP Bonus +1000',}},}
 	sets.Malevolence.SW = {main={ name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}}, sub="Ammurapi Shield"}
 	
 	sets.Tauret = {main="Tauret", sub={ name="Gleti's Knife", augments={'Path: A',}},}
-	sets.Tauret_Thibron = {main="Tauret", sub="Thibron",}
 	sets.Tauret.SW = {main="Tauret", sub="Genmei Shield"}
 	
 	sets.Mandau = {main={ name="Mandau", augments={'Path: A',}}, sub={ name="Gleti's Knife", augments={'Path: A',}},}
-	sets.Mandau_Thibron = {main={ name="Mandau", augments={'Path: A',}}, sub="Thibron",}
+	sets.Mandau_Thibron = {main={ name="Mandau", augments={'Path: A',}}, sub={ name="Machaera +2", augments={'TP Bonus +1000',}},}
 	sets.Mandau.SW = {main={ name="Mandau", augments={'Path: A',}}, sub="Genmei Shield",}
 	
 	sets.Maxentius = {main="Maxentius", sub={ name="Gleti's Knife", augments={'Path: A',}},}
-	sets.Maxentius_Thibron = {main="Maxentius", sub="Thibron",}
+	sets.Maxentius_Thibron = {main="Maxentius", sub={ name="Machaera +2", augments={'TP Bonus +1000',}},}
 	sets.Maxentius.SW = {main="Maxentius", sub="Genmei Shield",}
 	
 	--Range Sets
@@ -1717,15 +1715,9 @@ function update_combat_form()
 	
 	if state.WeaponSet.value == 'Crocea_Mors' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			if state.TPBonus.value == true then
-				enable('main','sub')
-				equip(sets.Crocea_Mors_Thibron)
-				disable('main','sub')
-			else
-				enable('main','sub')
-				equip(sets.Crocea_Mors)
-				disable('main','sub')
-			end	
+			enable('main','sub')
+			equip(sets.Crocea_Mors)
+			disable('main','sub')
 		else
 			enable('main','sub')
 			equip(sets.Crocea_Mors.SW)
@@ -1753,15 +1745,9 @@ function update_combat_form()
 
 	if state.WeaponSet.value == 'Tauret' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			if state.TPBonus.value == true then
-				enable('main','sub')
-				equip(sets.Tauret_Thibron)
-				disable('main','sub')
-			else
-				enable('main','sub')
-				equip(sets.Tauret)
-				disable('main','sub')
-			end	
+			enable('main','sub')
+			equip(sets.Tauret)
+			disable('main','sub')
 		else
 			enable('main','sub')
 			equip(sets.Tauret.SW)

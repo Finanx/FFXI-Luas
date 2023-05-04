@@ -143,6 +143,7 @@ function user_setup()
 	send_command('bind @b gs c toggle TPBonus')
 	send_command('bind ^` input /ja "Sneak Attack" <me>')
     send_command('bind !` input /ja "Trick Attack" <me>')
+	send_command('bind ~` input /ja "Flee" <me>')
 	
 	--Command to show global binds in game[ CTRL + numpad- ]
 	send_command([[bind ^numpad- 
@@ -248,6 +249,7 @@ function user_setup()
 
 	--Gearinfo functions
 	
+	state.Auto_Kite = M(false, 'Auto_Kite')
     Haste = 0
     DW_needed = 0
     DW = false
@@ -278,6 +280,7 @@ function user_unload()
 	send_command('unbind @`')
 	send_command('unbind @-')
 	send_command('unbind @=')
+	send_command('unbind ~`')
 	
 	--Remove Weapon Set binds
 	
@@ -907,15 +910,19 @@ function init_gear_sets()
 		neck="Nicander's Necklace",
         waist="Gishdubar Sash", --10
         }
+		
+	sets.Kiting = {feet="Pill. Poulaines +3",}
 
     sets.CP = {neck={ name="Asn. Gorget +2", augments={'Path: A',}},}
 	
 	sets.Twashtar = {main={ name="Gleti's Knife", augments={'Path: A',}},sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
-	sets.Twashtar_Centovente = {main={ name="Gleti's Knife", augments={'Path: A',}},sub="Centovente",}
+	sets.Twashtar_Centovente = {main={ name="Gleti's Knife", augments={'Path: A',}},sub="Fusetto +2",}
+	sets.Mandau = {main={ name="Mandau", augments={'Path: A',}}, sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Mandau_Centovente = {main={ name="Mandau", augments={'Path: A',}}, sub="Fusetto +2",}
 	sets.Tauret = {main="Tauret", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
-	sets.Tauret_Centovente = {main="Tauret", sub="Centovente",}
+	sets.Tauret_Centovente = {main="Tauret", sub="Fusetto +2",}
 	sets.Naegling = {main="Naegling", sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
-	sets.Naegling_Centovente = {main="Naegling", sub="Centovente",}
+	sets.Naegling_Centovente = {main="Naegling", sub="Fusetto +2",}
 	sets.Karambit = {main="Karambit"}
 
 end
@@ -1016,6 +1023,7 @@ end
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
+	check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -1085,6 +1093,10 @@ function customize_idle_set(idleSet)
         disable('neck')
     else
         enable('neck')
+    end
+	
+    if state.Auto_Kite.value == true then
+       idleSet = set_combine(idleSet, sets.Kiting)
     end
 
     return idleSet
@@ -1217,6 +1229,17 @@ function th_action_check(category, param)
         (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
         (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
         then return true
+    end
+end
+
+	--Auto_Kite function
+function check_moving()
+    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
+        if state.Auto_Kite.value == false and moving then
+            state.Auto_Kite:set(true)
+        elseif state.Auto_Kite.value == true and moving == false then
+            state.Auto_Kite:set(false)
+        end
     end
 end
 

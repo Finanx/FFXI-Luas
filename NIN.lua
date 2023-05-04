@@ -456,7 +456,20 @@ function init_gear_sets()
 		right_ring="Kishar Ring",
 		back={ name="Andartia's Mantle", augments={'HP+60','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}},}
 
-    sets.precast.RA = {}
+    sets.precast.RA = {
+	    range="Trollbane",
+		head={ name="Taeon Chapeau", augments={'"Snapshot"+5','"Snapshot"+5',}},
+		body={ name="Taeon Tabard", augments={'"Snapshot"+5','"Snapshot"+5',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Taeon Tights", augments={'"Snapshot"+4','"Snapshot"+5',}},
+		feet={ name="Pursuer's Gaiters", augments={'Rng.Acc.+10','"Rapid Shot"+10','"Recycle"+15',}},
+		neck={ name="Loricate Torque +1", augments={'Path: A',}},
+		waist="Yemaya Belt",
+		left_ear="Genmei Earring",
+		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		right_ring="Defending Ring",
+		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     ------------------------------------------------------------------------------------------------
     ------------------------------------- Weapon Skill Sets ----------------------------------------
@@ -743,19 +756,19 @@ function init_gear_sets()
     sets.midcast.Stun = sets.midcast.EnfeeblingNinjutsu
 
     sets.midcast.RA = {
-		ammo=empty,
-        head="Malignance Chapeau",
-        body="Malignance Tabard",
-        hands="Malignance Gloves",
-        legs="Malignance Tights",
-        feet="Malignance Boots",
-        neck="Iskur Gorget",
-        ear1="Enervating Earring",
-        ear2="Telos Earring",
-        ring1="Dingir Ring",
-        ring2="Hajduk Ring +1",
-        waist="Yemaya Belt",
-		back={ name="Andartia's Mantle", augments={'AGI+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},}
+		range="Trollbane",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck={ name="Bathy Choker +1", augments={'Path: A',}},
+		waist="Engraved Belt",
+		left_ear="Infused Earring",
+		right_ear="Eabani Earring",
+		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		right_ring="Vengeful Ring",
+		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     ------------------------------------------------------------------------------------------------
     ----------------------------------------- Idle Sets --------------------------------------------
