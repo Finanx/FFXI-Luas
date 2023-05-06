@@ -240,7 +240,7 @@ function user_setup()
     send_command('bind ^numpad3 input /ws "Mordant Rime" <t>')
 	send_command('bind ^numpad4 input /ws "Savage Blade" <t>')
 	send_command('bind ^numpad5 input /ws "Aeolian Edge" <t>')
-    send_command('bind ^numpad6 input /ws "Extenterator" <t>')
+    send_command('bind ^numpad6 input /ws "Exenterator" <t>')
 	send_command('bind ^numpad7 input /ws "Retribution" <t>')
 	send_command('bind ^numpad9 input /ws "Shell Crusher" <t>')
 	
@@ -422,10 +422,10 @@ function init_gear_sets()
 		main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
 		sub="Genmei Shield",
 		range={ name="Linos", augments={'Mag. Evasion+15','Phys. dmg. taken -4%','HP+20',}},
-		head={ name="Vanya Hood", augments={'MP+50','"Fast Cast"+10','Haste+2%',}},
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Inyanga Jubbah +2",
 		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
-		legs="Aya. Cosciales +2",
+		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		feet="Fili Cothurnes +2",
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
@@ -441,13 +441,13 @@ function init_gear_sets()
 		head="Fili Calot +2",
 		body="Inyanga Jubbah +2",
 		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
-		legs="Aya. Cosciales +2",
+		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		feet={ name="Bihu Slippers +3", augments={'Enhances "Nightingale" effect',}},
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
 		left_ear="Loquac. Earring",
-		right_ear="Etiolation Earring",
-		left_ring="Prolix Ring",
+		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+		left_ring="Defending Ring",
 		right_ring="Kishar Ring",
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}
 		
@@ -467,12 +467,9 @@ function init_gear_sets()
     ------------------------------------- Weapon Skill Sets ----------------------------------------
     ------------------------------------------------------------------------------------------------
 
-	sets.precast.WS.FullTPPhysical = {left_ear="Telos Earring",}
-	sets.precast.WS.FullTPMagical = {left_ear="Regal Earring",}
-
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
-		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
+		range={ name="Linos", augments={'Accuracy+12 Attack+12','Weapon skill damage +3%','STR+8',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
@@ -486,10 +483,14 @@ function init_gear_sets()
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 
+	sets.precast.WS.FullTPPhysical = {left_ear="Telos Earring",}
+	sets.precast.WS.FullTPRudra = {left_ear="Ishvara Earring",}
+	sets.precast.WS.FullTPMagical = {left_ear="Regal Earring",}
+
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     
 	sets.precast.WS['Evisceration'] = {
-		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
+		ange={ name="Linos", augments={'Accuracy+12 Attack+12','Crit.hit rate+3','DEX+8',}},
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
@@ -504,22 +505,22 @@ function init_gear_sets()
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}
 
     sets.precast.WS['Exenterator'] = {
-		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
+		range={ name="Linos", augments={'Accuracy+12 Attack+12','Weapon skill damage +3%','STR+8',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Bihu Jstcorps. +3", augments={'Enhances "Troubadour" effect',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Caro Necklace",
-		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		neck="Fotia Gorget",
+		waist="Fotia Belt",
+		left_ear="Brutal Earring",
 		right_ear="Ishvara Earring",
 		left_ring="Epaminondas's Ring",
 		right_ring="Ilabrat Ring",
-		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+4','Crit.hit rate+10',}},}
+		back={ name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 
     sets.precast.WS['Mordant Rime'] = {
-		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
+		range={ name="Linos", augments={'Accuracy+12 Attack+12','Weapon skill damage +3%','STR+8',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Bihu Jstcorps. +3", augments={'Enhances "Troubadour" effect',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
@@ -534,22 +535,22 @@ function init_gear_sets()
 		back={ name="Intarabus's Cape", augments={'CHR+20','Accuracy+20 Attack+20','CHR+10','Weapon skill damage +10%',}},}
 
     sets.precast.WS['Rudra\'s Storm'] = {
-		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
+		range={ name="Linos", augments={'Accuracy+12 Attack+12','Weapon skill damage +3%','DEX+8',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Bihu Jstcorps. +3", augments={'Enhances "Troubadour" effect',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Caro Necklace",
+		neck={ name="Bard's Charm +2", augments={'Path: A',}},
 		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Ishvara Earring",
+		right_ear="Mache Earring +1",
 		left_ring="Epaminondas's Ring",
 		right_ring="Ilabrat Ring",
-		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+4','Crit.hit rate+10',}},}
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
 		
     sets.precast.WS['Aeolian Edge'] = {
-		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
+		range={ name="Linos", augments={'Accuracy+12 Attack+12','Weapon skill damage +3%','DEX+8',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
@@ -557,14 +558,14 @@ function init_gear_sets()
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Baetyl Pendant",
 		waist="Orpheus's Sash",
-		left_ear="Regal Earring",
-		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Friomisi Earring",
 		left_ring="Epaminondas's Ring",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
-		back={ name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
 
     sets.precast.WS['Savage Blade'] = {
-		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
+		range={ name="Linos", augments={'Accuracy+12 Attack+12','Weapon skill damage +3%','STR+8',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
@@ -573,13 +574,13 @@ function init_gear_sets()
 		neck={ name="Bard's Charm +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Regal Earring",
+		right_ear="Ishvara Earring",
 		left_ring="Epaminondas's Ring",
 		right_ring="Sroda Ring",
 		back={ name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 		
 	sets.precast.WS['Shell Crusher'] = {
-		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
+		range={ name="Linos", augments={'Accuracy+12 Attack+12','Weapon skill damage +3%','DEX+8',}},
 		head="Fili Calot +2",
 		body="Fili Hongreline +2",
 		hands="Fili Manchettes +2",
@@ -594,7 +595,7 @@ function init_gear_sets()
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}
 		
 	sets.precast.WS['Retribution'] = {
-		range={ name="Linos", augments={'Accuracy+15','Weapon skill damage +3%','DEX+8',}},
+		range={ name="Linos", augments={'Accuracy+12 Attack+12','Weapon skill damage +3%','STR+8',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Bihu Jstcorps. +3", augments={'Enhances "Troubadour" effect',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
@@ -716,8 +717,6 @@ function init_gear_sets()
 	sets.midcast.March = set_combine(sets.midcast.SongEnhancing, {hands="Fili Manchettes +2"})
 	sets.midcast.Etude = set_combine(sets.midcast.SongEnhancing, {head="Mousai Turban +1",})
 	sets.midcast.Carol = set_combine(sets.midcast.SongEnhancing, {hands="Mousai Gages +1",})
-	sets.midcast['Adventurer\'s Dirge'] = set_combine(sets.midcast.SongEnhancing, {range="Marsyas"})
-	sets.midcast['Foe Sirvente'] = set_combine(sets.midcast.SongEnhancing, {range="Marsyas"})
 	sets.midcast["Sentinel's Scherzo"] = set_combine(sets.midcast.SongEnhancing, {feet="Fili Cothurnes +2"})
 	sets.midcast.Mazurka = set_combine(sets.midcast.SongEnhancing, {range="Marsyas"})
 	
@@ -728,16 +727,16 @@ function init_gear_sets()
 		sub="Ammurapi Shield",
 		range="Gjallarhorn",
 		head="Brioso Roundlet +3",
-		body="Brioso Justau. +3",
+		body="Fili Hongreline +2",
 		hands="Fili Manchettes +2",
-		legs="Brioso Cannions +3",
+		legs="Fili Rhingrave +2",
 		feet="Brioso Slippers +3",
 		neck="Mnbw. Whistle +1",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Regal Earring",
-		right_ear="Digni. Earring",
+		right_ear={ name="Fili Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+9','Mag. Acc.+9',}},
 		left_ring="Stikini Ring +1",
-		right_ring="Stikini Ring +1",
+		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}
 
     -- For song defbuffs (accuracy primary, duration secondary)
@@ -753,9 +752,9 @@ function init_gear_sets()
 		neck="Mnbw. Whistle +1",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Regal Earring",
-		right_ear="Digni. Earring",
+		right_ear={ name="Fili Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+9','Mag. Acc.+9',}},
 		left_ring="Stikini Ring +1",
-		right_ring="Stikini Ring +1",
+		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}
 
 	sets.midcast.Threnody = set_combine(sets.midcast.SongEnfeeble, {body="Mou. Manteel +1",})
@@ -764,16 +763,16 @@ function init_gear_sets()
 	sets.midcast.Foe = {
 		main={ name="Carnwenhan", augments={'Path: A',}},
 		sub="Ammurapi Shield",
-		range="Gjallarhorn",
+		range="Marsyas",
 		head="Brioso Roundlet +3",
 		body="Fili Hongreline +2",
 		hands="Brioso Cuffs +3",
 		legs="Inyanga Shalwar +2",
 		feet="Brioso Slippers +3",
 		neck="Mnbw. Whistle +1",
-		waist={ name="Obstin. Sash", augments={'Path: A',}},
-		left_ear="Crep. Earring",
-		right_ear="Regal Earring",
+		waist={ name="Acuity Belt +1", augments={'Path: A',}},
+		left_ear="Regal Earring",
+		right_ear={ name="Fili Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+9','Mag. Acc.+9',}},
 		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring +1",
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}	
@@ -781,16 +780,16 @@ function init_gear_sets()
 	sets.midcast.FoeResist	= {
 		main={ name="Carnwenhan", augments={'Path: A',}},
 		sub="Ammurapi Shield",
-		range="Gjallarhorn",
+		range="Marsyas",
 		head="Brioso Roundlet +3",
 		body="Brioso Justau. +3",
 		hands="Brioso Cuffs +3",
-		legs="Inyanga Shalwar +2",
+		legs="Fili Rhingrave +2",
 		feet="Brioso Slippers +3",
 		neck="Mnbw. Whistle +1",
-		waist={ name="Obstin. Sash", augments={'Path: A',}},
-		left_ear="Crep. Earring",
-		right_ear="Regal Earring",
+		waist={ name="Acuity Belt +1", augments={'Path: A',}},
+		left_ear="Regal Earring",
+		right_ear={ name="Fili Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+9','Mag. Acc.+9',}},
 		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring +1",
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}
@@ -804,7 +803,7 @@ function init_gear_sets()
 		body="Brioso Justau. +3",
 		hands="Inyan. Dastanas +2",
 		legs="Inyanga Shalwar +2",
-		feet="Brioso Slippers +3",
+		feet={ name="Bihu Slippers +3", augments={'Enhances "Nightingale" effect',}},
 		neck="Mnbw. Whistle +1",
 		waist="Harfner's Sash",
 		left_ear="Gersemi Earring",
@@ -819,12 +818,12 @@ function init_gear_sets()
 		range="Daurdabla",
 		head="Brioso Roundlet +3",
 		body="Brioso Justau. +3",
-		hands="Brioso Cuffs +3",
+		hands="Inyan. Dastanas +2",
 		legs="Inyanga Shalwar +2",
 		feet="Brioso Slippers +3",
 		neck="Mnbw. Whistle +1",
-		waist={ name="Obstin. Sash", augments={'Path: A',}},
-		left_ear="Crep. Earring",
+		waist={ name="Acuity Belt +1", augments={'Path: A',}},
+		left_ear="Gersemi Earring",
 		right_ear="Regal Earring",
 		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring +1",
@@ -938,7 +937,22 @@ function init_gear_sets()
 	sets.midcast.Haste = sets.midcast['Enhancing Magic']
 
 
-    sets.midcast['Enfeebling Magic'] = {}
+    sets.midcast['Enfeebling Magic'] = {
+		main={ name="Carnwenhan", augments={'Path: A',}},
+		sub="Ammurapi Shield",
+		range="Gjallarhorn",
+		head="Brioso Roundlet +3",
+		body="Fili Hongreline +2",
+		hands="Fili Manchettes +2",
+		legs="Fili Rhingrave +2",
+		feet="Brioso Slippers +3",
+		neck="Mnbw. Whistle +1",
+		waist={ name="Acuity Belt +1", augments={'Path: A',}},
+		left_ear="Regal Earring",
+		right_ear={ name="Fili Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+9','Mag. Acc.+9',}},
+		left_ring="Stikini Ring +1",
+		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}
 
     sets.midcast.Dispelga = set_combine(sets.midcast['Enfeebling Magic'], {main="Daybreak", sub="Ammurapi Shield"})
 	
@@ -1015,7 +1029,7 @@ function init_gear_sets()
     sets.engaged = {
 		main="Naegling",
 		sub="Genmei Shield",
-		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
+		range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
 		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
@@ -1025,14 +1039,14 @@ function init_gear_sets()
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear="Telos Earring",
 		right_ear="Balder Earring +1",
-		left_ring="Chirich Ring +1",
-		right_ring="Chirich Ring +1",
+		left_ring="Moonlight Ring",
+		right_ring="Moonlight Ring",
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     sets.engaged.Acc = {
 		main="Naegling",
 		sub="Genmei Shield",
-		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
+		range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
 		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
@@ -1042,8 +1056,8 @@ function init_gear_sets()
 		waist="Windbuffet Belt +1",
 		left_ear="Telos Earring",
 		right_ear="Balder Earring +1",
-		left_ring="Chirich Ring +1",
-		right_ring="Chirich Ring +1",
+		left_ring="Moonlight Ring",
+		right_ring="Moonlight Ring",
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     -- * DNC Subjob DW Trait: +15%
@@ -1052,8 +1066,8 @@ function init_gear_sets()
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
 		main="Naegling",
-		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
-		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
+		sub={ name="Gleti's Knife", augments={'Path: A',}},
+		range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
 		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
@@ -1063,15 +1077,15 @@ function init_gear_sets()
 		waist="Reiki Yotai",
 		left_ear="Suppanomimi",
 		right_ear="Eabani Earring",
-		left_ring="Chirich Ring +1",
-		right_ring="Chirich Ring +1",
+		left_ring="Moonlight Ring",
+		right_ring="Moonlight Ring",
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}		
 		--26%GDW + 25%JADW = 51%
 
     sets.engaged.DW.Acc = {
 		main="Naegling",
-		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
-		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
+		sub={ name="Gleti's Knife", augments={'Path: A',}},
+		range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
 		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
@@ -1081,8 +1095,8 @@ function init_gear_sets()
 		waist="Reiki Yotai",
 		left_ear="Suppanomimi",
 		right_ear="Eabani Earring",
-		left_ring="Chirich Ring +1",
-		right_ring="Chirich Ring +1",
+		left_ring="Moonlight Ring",
+		right_ring="Moonlight Ring",
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}
 		--26%GDW + 25%JADW = 51%
 
@@ -1101,8 +1115,8 @@ function init_gear_sets()
     -- 45% Magic Haste (36% DW to cap)
     sets.engaged.DW.MaxHaste = {
 		main="Naegling",
-		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
-		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
+		sub={ name="Gleti's Knife", augments={'Path: A',}},
+		range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
 		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
@@ -1112,15 +1126,15 @@ function init_gear_sets()
 		waist="Windbuffet Belt +1",
 		left_ear="Telos Earring",
 		right_ear="Balder Earring +1",
-		left_ring="Chirich Ring +1",
-		right_ring="Chirich Ring +1",
+		left_ring="Moonlight Ring",
+		right_ring="Moonlight Ring",
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}
 		--11%GDW + 25%JADW = 36%
 
     sets.engaged.DW.MaxHaste.Acc = {
 		main="Naegling",
-		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
-		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
+		sub={ name="Gleti's Knife", augments={'Path: A',}},
+		range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
 		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
@@ -1130,15 +1144,15 @@ function init_gear_sets()
 		waist="Windbuffet Belt +1",
 		left_ear="Telos Earring",
 		right_ear="Balder Earring +1",
-		left_ring="Chirich Ring +1",
-		right_ring="Chirich Ring +1",
+		left_ring="Moonlight Ring",
+		right_ring="Moonlight Ring",
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}		
 		--11%GDW + 25%JADW = 36%
 		
 	---------------------------------------- AFTERMATH ---------------------------------------------
 	
 	sets.engaged.Aftermath = {
-		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
+		range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
 		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
@@ -1148,12 +1162,12 @@ function init_gear_sets()
 		waist="Windbuffet Belt +1",
 		left_ear="Telos Earring",
 		right_ear="Balder Earring +1",
-		left_ring="Chirich Ring +1",
-		right_ring="Chirich Ring +1",
+		left_ring="Moonlight Ring",
+		right_ring="Moonlight Ring",
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 		
 	sets.engaged.Acc.Aftermath = {
-		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
+		range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
 		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
@@ -1163,56 +1177,47 @@ function init_gear_sets()
 		waist="Windbuffet Belt +1",
 		left_ear="Telos Earring",
 		right_ear="Balder Earring +1",
-		left_ring="Chirich Ring +1",
-		right_ring="Chirich Ring +1",
+		left_ring="Moonlight Ring",
+		right_ring="Moonlight Ring",
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 		
 	sets.engaged.DW.Aftermath = {
-		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
+		range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
 		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs="Volte Tights",
 		feet="Volte Spats",
 		neck={ name="Bard's Charm +2", augments={'Path: A',}},
-		waist="Reiki Yotai",
-		left_ear="Eabani Earring",
+		waist="Windbuffet Belt +1",
+		left_ear="Telos Earring",
 		right_ear="Balder Earring +1",
-		left_ring="Chirich Ring +1",
-		right_ring="Chirich Ring +1",
-		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}	
+		left_ring="Moonlight Ring",
+		right_ring="Moonlight Ring",
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}	
 		
 	sets.engaged.DW.Acc.Aftermath = {
-		range={ name="Linos", augments={'Accuracy+15','"Dbl.Atk."+2','Quadruple Attack +3',}},
+		range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
 		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs="Volte Tights",
 		feet="Volte Spats",
 		neck={ name="Bard's Charm +2", augments={'Path: A',}},
-		waist="Reiki Yotai",
-		left_ear="Eabani Earring",
+		waist="Windbuffet Belt +1",
+		left_ear="Telos Earring",
 		right_ear="Balder Earring +1",
-		left_ring="Chirich Ring +1",
-		right_ring="Chirich Ring +1",
-		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}	
+		left_ring="Moonlight Ring",
+		right_ring="Moonlight Ring",
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Hybrid Sets -------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.engaged.Hybrid = {
-		head={ name="Bunzi's Hat", augments={'Path: A',}},
-		body="Ashera Harness",
-		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},}
+    sets.engaged.Hybrid = {}
 		
 	sets.engaged.HybridDW = {
-		head={ name="Bunzi's Hat", augments={'Path: A',}},
-		body="Ashera Harness",
-		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
@@ -1278,6 +1283,7 @@ function init_gear_sets()
 	sets.Naegling.SW = {main="Naegling", sub="Genmei Shield"}
 	
 	sets.Carnwenhan = {main="Carnwenhan", sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Carnwenhan_Centovente = {main="Carnwenhan", sub="Fusetto +2",}
 	sets.Carnwenhan.SW = {main="Carnwenhan", sub="Genmei Shield"}
 	
 	sets.Twashtar = {main="Twashtar", sub={ name="Gleti's Knife", augments={'Path: A',}},}
@@ -1317,6 +1323,9 @@ function job_precast(spell, action, spellMap, eventArgs)
             send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
         end
     end
+	
+
+	
 end
 
 function job_midcast(spell, action, spellMap, eventArgs)
@@ -1375,9 +1384,19 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	
 		--Handles TP Overflow
 	if spell.type == 'WeaponSkill' then
-		if spell.english ~= "Evisceration" or spell.english ~= "Shell Crusher" or spell.english ~= "Mordant Rime" then
+		if spell.english == "Mordant Rime" or spell.english == "Evisceration" or spell.english == "Shell Crusher" then
+		else
+			if state.TPBonus.value == true and (player.sub_job == 'DNC' or player.sub_job == 'NIN') then
+				if player.tp > 1900 then
+					equip(sets.precast.WS.FullTPPhysical)
+				end
+			else
+				if player.tp > 2900 then
+					equip(sets.precast.WS.FullTPPhysical)
+				end
+			end
 			if spell.english == 'Aeolian Edge' then
-				if state.TPBonus.value == true then
+				if state.TPBonus.value == true and (player.sub_job == 'DNC' or player.sub_job == 'NIN') then
 					if player.tp > 1900 then
 						equip(sets.precast.WS.FullTPMagical)
 					end
@@ -1386,19 +1405,27 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 						equip(sets.precast.WS.FullTPMagical)
 					end
 				end
-			else
-				if state.TPBonus.value == true then
+			end
+			if spell.english == 'Rudra\'s Storm' then
+				if state.TPBonus.value == true and (player.sub_job == 'DNC' or player.sub_job == 'NIN') then
 					if player.tp > 1900 then
-						equip(sets.precast.WS.FullTPPhysical)
+						equip(sets.precast.WS.FullTPRudra)
 					end
 				else
 					if player.tp > 2900 then
-						equip(sets.precast.WS.FullTPPhysical)
+						equip(sets.precast.WS.FullTPRudra)
 					end
-				end	
+				end
+			end
+			if spell.english == 'Retribution' then
+				if player.tp > 2900 then
+					equip(sets.precast.WS.FullTPRudra)
+				end
 			end
 		end
-	end
+	end	
+	
+
 end
 
 
@@ -1451,9 +1478,15 @@ function job_state_change(stateField, newValue, oldValue)
 	
 	if state.WeaponSet.value == 'Carnwenhan' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			enable('main','sub')
-			equip(sets.Carnwenhan)
-			disable('main','sub')
+			if state.TPBonus.value == true then
+				enable('main','sub')
+				equip(sets.Carnwenhan_Centovente)
+				disable('main','sub')
+			else
+				enable('main','sub')
+				equip(sets.Carnwenhan)
+				disable('main','sub')
+			end	
 		else
 			enable('main','sub')
 			equip(sets.Carnwenhan.SW)

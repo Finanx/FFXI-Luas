@@ -1129,7 +1129,7 @@ function init_gear_sets()
 
 	--Weaponsets
 
-    sets.Rostam = {main="Bone Knife",sub="Bone Knife",}
+    sets.Rostam = {main={ name="Rostam", augments={'Path: A',}}, sub={ name="Gleti's Knife", augments={'Path: A',}},}--{main="Bone Knife",sub="Bone Knife",}
     sets.Rostam.Acc = {main={ name="Rostam", augments={'Path: A',}}, sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	sets.Rostam.RAcc = {main={ name="Rostam", augments={'Path: A',}}, sub={ name="Kustawi +1", augments={'Path: A',}},}
 	sets.Naegling = {main="Naegling", sub={ name="Gleti's Knife", augments={'Path: A',}},}

@@ -1568,7 +1568,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	if spell.type == 'WeaponSkill' then
 		if spell.english ~= "Chant du Cygne" or spell.english ~= "Evisceration" or spell.english ~= "Empyreal Arrow" or spell.english ~= "Sanguine Blade" then
 			if spell.english == 'Seraph Blade' or spell.english == 'Red Lotus Blade' or spell.english == 'Aeolian Edge' then
-				if state.TPBonus.value == true then
+				if state.TPBonus.value == true and (player.sub_job == 'DNC' or player.sub_job == 'NIN') then
 					if player.tp > 1900 then
 						equip(sets.precast.WS.FullTPMagical)
 					end
@@ -1578,7 +1578,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 					end
 				end
 			else
-				if state.TPBonus.value == true then
+				if state.TPBonus.value == true and (player.sub_job == 'DNC' or player.sub_job == 'NIN') then
 					if player.tp > 1900 then
 						equip(sets.precast.WS.FullTPPhysical)
 					end
