@@ -46,7 +46,6 @@
 --	Modes:			[ Windows + 1 ]			Epeolatry Weapon set
 --					[ Windows + 2 ]			Aettir Weapon set
 --					[ Windows + 3 ]			Lycurgos Weapon set
---					[ Windows + 4 ]			Hepatizon_Axe Weapon set
 --					[ Windows + E]			Toggle Grip Sets
 --
 --  WS:         	[ CTRL + Numpad1 ]    	Resolution
@@ -61,7 +60,6 @@
 --					[ ALT + Numpad3 ]		Armor Break
 --					[ ALT + Numpad4 ]		Fell Cleave
 --					[ ALT + Numpad5 ]		Weapon Break
---					[ ALT + Numpad6 ]		Full Break
 --					[ ALT + Numpad. ]		Lunge
 --
 --  Abilities:  	[ CTRL + ` ]        	Use current Rune
@@ -119,7 +117,7 @@ function user_setup()
 	state.TreasureMode:options('Tag', 'None')
 
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Aettir', 'Lycurgos', 'Hepatizon_Axe'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Aettir', 'Lycurgos'}
 	state.GripSet = M{['description']='Grip Set', 'Refined', 'Utu'}
     state.CP = M(false, "Capacity Points Mode")
 
@@ -168,7 +166,6 @@ function user_setup()
 		input /echo [ Windows + 1 ]	Sets Weapon to Epeolatry;
 		input /echo [ Windows + 2 ]	Sets Weapon to Aettir;
 		input /echo [ Windows + 3 ]	Sets Weapon to Lycurgos;
-		input /echo [ Windows + 4 ]	Sets Weapon to Hepatizon Axe;
 		input /echo -----Toggles-----;
 		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
 		input /echo [ Windows + D ]	Unloads then reloads dressup;
@@ -197,7 +194,6 @@ function user_setup()
 		input /echo [ ALT + Numpad3 ] Armor Break;
 		input /echo [ ALT + Numpad4 ] Fell Cleave;
 		input /echo [ ALT + Numpad5 ] Weapon Break;
-		input /echo [ ALT + Numpad6 ] Full Break;
 		]])
 	
 	--Weapon set Binds
@@ -205,7 +201,6 @@ function user_setup()
 	send_command('bind @1 gs c set WeaponSet Epeolatry')
 	send_command('bind @2 gs c set WeaponSet Aettir')
 	send_command('bind @3 gs c set WeaponSet Lycurgos')
-	send_command('bind @4 gs c set WeaponSet Hepatizon_Axe')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
@@ -221,7 +216,6 @@ function user_setup()
 	send_command('bind !numpad3 input /ws "Armor Break" <t>')
 	send_command('bind !numpad4 input /ws "Fell Cleave" <t>')
 	send_command('bind !numpad5 input /ws "Weapon Break" <t>')
-	send_command('bind !numpad6 input /ws "Full Break" <t>')
     send_command('bind !numpad. input /ja "Lunge" <t>')
 	
 	
@@ -732,7 +726,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum +1",
 		head="Erilaz Galea +3",
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Runeist Mitons +3",
+		hands="Regal Gauntlets",
 		legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},
 		feet="Erilaz Greaves +3",
 		neck="Moonlight Necklace",
@@ -743,10 +737,26 @@ function init_gear_sets()
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},}
 		
+	sets.midcast.BarElement = {
+	    ammo="Staunch Tathlum +1",
+		head="Erilaz Galea +3",
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands="Regal Gauntlets",
+		legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},
+		feet="Erilaz Greaves +3",
+		neck="Incanter's Torque",
+		waist="Audumbla Sash",
+		left_ear="Mimir Earring",
+		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+		left_ring="Stikini Ring +1",
+		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},}
+		
 	sets.midcast['Aquaveil'] = set_combine(sets.midcast['Enhancing Magic'], {hands="Regal Cuffs",})
     
     sets.midcast['Phalanx'] = {
 		main="Deacon Sword",
+		sub="Sors Shield",
 		ammo="Staunch Tathlum +1",
 		head={ name="Fu. Bandeau +3", augments={'Enhances "Battuta" effect',}},
 		body={ name="Taeon Tabard", augments={'Phalanx +3',}},
@@ -762,6 +772,8 @@ function init_gear_sets()
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},}
 		
 	sets.PhalanxRecieved =    { 
+		main="Deacon Sword",
+		sub="Sors Shield",
 		head={ name="Fu. Bandeau +3", augments={'Enhances "Battuta" effect',}},
 		body={ name="Taeon Tabard", augments={'Phalanx +3',}},
 		hands={ name="Taeon Gloves", augments={'"Recycle"+7','Phalanx +3',}},
@@ -788,7 +800,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum +1",
 		head="Rune. Bandeau +3",
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Rawhide Gloves", augments={'HP+50','Accuracy+15','Evasion+20',}},
+		hands="Regal Gauntlets",
 		legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Sacro Gorget",
@@ -805,7 +817,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum +1",
 		head="Erilaz Galea +3",
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Rawhide Gloves", augments={'HP+50','Accuracy+15','Evasion+20',}},
+		hands="Regal Gauntlets",
 		legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},
 		feet={ name="Taeon Boots", augments={'Evasion+23','Spell interruption rate down -10%','HP+50',}},
 		neck="Moonlight Necklace",
@@ -836,7 +848,7 @@ function init_gear_sets()
 		feet="Erilaz Greaves +3",
 		neck="Sacro Gorget",
 		waist="Sroda Belt",
-		left_ear="Roundel Earring",
+		left_ear="Mendi. Earring",
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
 		left_ring="Moonlight Ring",
 		right_ring="Eihwaz Ring",

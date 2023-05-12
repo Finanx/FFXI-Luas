@@ -45,6 +45,7 @@
 -------------------------------------------------------------------------------------------------------------------
 --
 --	Modes:			[ Windows + M ]			Toggles Magic Burst Mode
+--					[ Windows + S ]			Toggles Subtle Blow Mode
 --					[ Windows + 1 ]			Sets Weapon to Maxentius then locks Main/Sub Slots
 --					[ Windows + 2 ]			Sets Weapon to Xoanon then locks Main/Sub Slots
 --					[ Windows + 3 ]			Sets Weapon to Musa then locks Main/Sub Slots
@@ -116,6 +117,7 @@ function user_setup()
 	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Maxentius', 'Xoanon', 'Musa'}
 
     state.MagicBurst = M(false, 'Magic Burst')
+	state.Subtle_Blow = M(false, 'Subtle Blow')
 
 	--Load Gearinfo/Dressup Lua
 	
@@ -128,6 +130,7 @@ function user_setup()
 	send_command('bind @d input //lua u dressup; wait 10; input //lua l dressup')	
     send_command('bind @r gs c cycle RegenMode')
     send_command('bind @m gs c toggle MagicBurst')
+	send_command('bind @s gs c toggle Subtle_Blow')
 	send_command('bind @t gs c cycle TreasureMode')
 	send_command('bind @c gs c toggle CP')
 	send_command('bind ^- input /ja "Light Arts" <me>')
@@ -152,6 +155,7 @@ function user_setup()
 		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
 		input /echo -----Modes-----;
 		input /echo [ Windows + M ]	Toggles Magic Burst Mode;
+		input /echo [ Windows + S ]	Toggles Subtle Blow Mode;
 		input /echo [ Windows + W ]	Sets Weapon to None;
 		input /echo [ Windows + 1 ]	Sets Weapon to Maxentius;
 		input /echo [ Windows + 2 ]	Sets Weapon to Xoanon;
@@ -256,6 +260,7 @@ function user_unload()
 	send_command('unbind @w')
 	send_command('unbind @t')
     send_command('unbind @m')
+	send_command('unbind @s')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
 	send_command('unbind ^=')
@@ -872,20 +877,20 @@ function init_gear_sets()
 		left_ring="Freke Ring",
 		right_ring="Mallquis Ring",
 		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
-		
+
 	sets.midcast.Subtle_Blow = {
-		main="Mpaca's Staff",
-		sub="Khonsu",
+		main=empty,
+		sub=empty,
 		ammo="Homiliary",
-		head={ name="Amalric Coif +1", augments={'INT+12','Mag. Acc.+25','Enmity-6',}},
-		body="Zendik Robe",
-		hands="Acad. Bracers +3",
-		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		feet={ name="Chironic Slippers", augments={'"Fast Cast"+7','MND+3',}},
+		head=empty,
+		body=empty,
+		hands=empty,
+		legs=empty,
+		feet=empty,
 		neck={ name="Bathy Choker +1", augments={'Path: A',}},
-		waist="Embla Sash",
-		left_ear="Digni. Earring",
-		right_ear="Mimir Earring",
+		waist="Luminary Sash",
+		left_ear="Etiolation Earring",
+		right_ear="Magnetic Earring",
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
 		back={ name="Fi Follet Cape +1", augments={'Path: A',}},}
@@ -1077,7 +1082,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 		end
 		
         if spellMap == "Helix" then
-			if state.Buff.Immanence then
+			if state.Subtle_Blow.value == true and state.Buff.Immanence then
 				equip(sets.midcast.Subtle_Blow)
 			else
 				if state.MagicBurst.value == true then
@@ -1107,9 +1112,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 				end
 			end
 			
-			--if state.Buff.Klimaform and spell.element == world.weather_element then
-				--equip(sets.buff['Klimaform'])
-			--end
+			--[[if state.Buff.Klimaform and spell.element == world.weather_element then
+				equip(sets.buff['Klimaform'])
+			end]]
         end
 		
     end
@@ -1397,7 +1402,7 @@ function apply_grimoire_bonuses(spell, action, spellMap)
         if state.Buff.Ebullience and spell.english ~= 'Impact' then
             equip(sets.buff['Ebullience'])
         end
-        if state.Buff.Immanence then
+        if state.Subtle_Blow.value == true and state.Buff.Immanence then
             equip(sets.midcast.Subtle_Blow)
         end
         if state.Buff.Klimaform and spell.element == world.weather_element then

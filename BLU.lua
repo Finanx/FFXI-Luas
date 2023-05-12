@@ -805,18 +805,18 @@ function init_gear_sets()
     sets.midcast['Blue Magic'].PhysicalChr = set_combine(sets.midcast['Blue Magic'].Physical, {left_ear="Regal Earring",})
 
     sets.midcast['Blue Magic'].Magical = {
-		ammo="Pemphredo Tathlum",
-		head="Jhakri Coronal +2",
-		body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		feet={ name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}},
-		neck="Baetyl Pendant",
-		waist="Skrymir Cord +1",
-		left_ear="Malignance Earring",
+		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
+		head="Hashishin Kavuk +3",
+		body="Hashishin Mintan +3",
+		hands="Hashi. Bazu. +3",
+		legs="Hashishin Tayt +3",
+		feet="Hashi. Basmak +3",
+		neck="Sibyl Scarf",
+		waist="Orpheus's Sash",
+		left_ear="Friomisi Earring",
 		right_ear="Regal Earring",
 		left_ring="Shiva Ring +1",
-		right_ring="Stikini Ring +1",
+		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Rosmerta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},}
 
     sets.midcast['Blue Magic'].MagicalDark = set_combine(sets.midcast['Blue Magic'].Magical, {
@@ -825,33 +825,33 @@ function init_gear_sets()
         })
 
     sets.midcast['Blue Magic'].MagicalLight = {
-		ammo="Pemphredo Tathlum",
-		head="Jhakri Coronal +2",
-		body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		feet={ name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}},
-		neck="Baetyl Pendant",
-		waist="Skrymir Cord +1",
-		left_ear="Malignance Earring",
+		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
+		head="Hashishin Kavuk +3",
+		body="Hashishin Mintan +3",
+		hands="Hashi. Bazu. +3",
+		legs="Hashishin Tayt +3",
+		feet="Hashi. Basmak +3",
+		neck="Sibyl Scarf",
+		waist="Orpheus's Sash",
+		left_ear="Friomisi Earring",
 		right_ear="Regal Earring",
 		left_ring="Shiva Ring +1",
-		right_ring="Stikini Ring +1",
+		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Rosmerta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},}
 
     sets.midcast['Blue Magic'].MagicalMnd = {
-		ammo="Pemphredo Tathlum",
-		head="Jhakri Coronal +2",
-		body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		feet={ name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}},
-		neck="Baetyl Pendant",
-		waist="Skrymir Cord +1",
-		left_ear="Malignance Earring",
+		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
+		head="Hashishin Kavuk +3",
+		body="Hashishin Mintan +3",
+		hands="Hashi. Bazu. +3",
+		legs="Hashishin Tayt +3",
+		feet="Hashi. Basmak +3",
+		neck="Sibyl Scarf",
+		waist="Orpheus's Sash",
+		left_ear="Friomisi Earring",
 		right_ear="Regal Earring",
 		left_ring="Shiva Ring +1",
-		right_ring="Stikini Ring +1",
+		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Rosmerta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},}
 
     sets.midcast['Blue Magic'].MagicalDex = set_combine(sets.midcast['Blue Magic'].Magical, {
@@ -892,21 +892,6 @@ function init_gear_sets()
 		left_ring="Stikini Ring +1",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
-
-    sets.midcast['Subduction'] = {
-		ammo="Pemphredo Tathlum",
-		head="Jhakri Coronal +2",
-		body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		feet={ name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}},
-		neck="Baetyl Pendant",
-		waist="Skrymir Cord +1",
-		left_ear="Malignance Earring",
-		right_ear="Regal Earring",
-		left_ring="Shiva Ring +1",
-		right_ring="Stikini Ring +1",
-		back={ name="Rosmerta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},}
 
     sets.midcast['Yawn'] = set_combine(sets.midcast['Blue Magic'].MagicAccuracy, {
 		ammo="Per. Lucky Egg",
@@ -1117,11 +1102,11 @@ function init_gear_sets()
     sets.resting = {
 		ammo="Staunch Tathlum +1",
 		head="Rawhide Mask",
-		body="Jhakri Robe +2",
+		body="Hashishin Mintan +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Rawhide Trousers", augments={'MP+50','"Fast Cast"+5','"Refresh"+1',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="Loricate Torque +1", augments={'Path: A',}},
+		neck="Sibyl Scarf",
 		waist="Flume Belt +1",
 		left_ear="Genmei Earring",
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
@@ -1150,11 +1135,11 @@ function init_gear_sets()
     sets.idle.Refresh = {
 		ammo="Staunch Tathlum +1",
 		head="Rawhide Mask",
-		body="Jhakri Robe +2",
+		body="Hashishin Mintan +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Rawhide Trousers", augments={'MP+50','"Fast Cast"+5','"Refresh"+1',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="Loricate Torque +1", augments={'Path: A',}},
+		neck="Sibyl Scarf",
 		waist="Flume Belt +1",
 		left_ear="Genmei Earring",
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},

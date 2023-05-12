@@ -1643,6 +1643,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 			--Equips Obi set if the correct day or weather matches Elemental Magic and if correct distance
         if (spell.element == world.day_element or spell.element == world.weather_element) and spell.target.distance > (8 + spell.target.model_size)then
             equip(sets.Obi)
+		elseif spell.target.distance < (8 + spell.target.model_size) then
+            equip({waist="Orpheus's Sash"})
         end
     end
 end

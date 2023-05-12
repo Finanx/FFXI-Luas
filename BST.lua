@@ -44,16 +44,14 @@
 --					[ Windows + D ]			Unloads Dressup then reloads to change lockstyle
 --
 -------------------------------------------------------------------------------------------------------------------
---  Job Specific Keybinds (Warrior Binds)
+--  Job Specific Keybinds (Beast Master Binds)
 -------------------------------------------------------------------------------------------------------------------
 --
---	Weapons:		[ Windows: + 1 ]		Chango Weapon Set
---					[ Windows: + 2 ]		Lycurgos Weapon Set
+--	Weapons:		[ Windows: + 1 ]		Agwu Weapon Set
+--					[ Windows: + 2 ]		Dolichenus Weapon Set
+--					[ Windows: + 4 ]		Ikenga_Axe Weapon Set
 --					[ Windows: + 3 ]		Naegling Weapon Set
---					[ Windows: + 4 ]		Loxotic_Mace Weapon Set
---					[ Windows: + 5 ]		Shining_One Weapon Set
---					[ Windows: + 6 ]		Ikenga_axe Weapon Set
---					[ Windows: + 7 ]		Dolichenus Weapon Set
+--					[ Windows: + 5 ]		Malevolence Weapon Set
 --
 --	Weaponskills:	[ CTRL + Numpad1 ]		Upheaval
 --					[ CTRL + Numpad2 ]		Ukko's Furry
@@ -87,9 +85,22 @@ end
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
 
-	state.Buff['Mighty Strikes'] = buffactive['mighty strikes']  or false
-	state.Buff['Warcry'] = buffactive['warcry']  or false
-	state.Buff['Berserk'] = buffactive['berserk']  or false
+-- INPUT PREFERRED JUG PETS HERE
+	state.JugPet = M{['description']='Current Jug Pet', 
+		'Dire Broth',				--slugman
+		'Bubbly Broth', 			--cricket
+		'C. Plasma Broth',			--leech
+		'Lyrical Broth',			--sheep
+		'Fizzy Broth',				--pig
+		--'Salubrious Broth',		--pink bird
+		--'Meaty Broth',			--tiger
+		--'Rancid Broth',			--crab
+		--'Poisonous Broth',		--acuex
+		--'Livid Broth',			--lizard
+		--'Blackwater Broth',		--fly
+		--'Turpid Broth',			--hippo
+		--'Decaying Broth',			--slime
+	}	
 	
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
 					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox's Ring"}
@@ -103,25 +114,58 @@ function job_setup()
 
 
 
-    lockstyleset = 17
+    lockstyleset = 18
 end
 
 -------------------------------------------------------------------------------------------------------------------
 -- User setup functions for this job.  Recommend that these be overridden in a sidecar file.
 -------------------------------------------------------------------------------------------------------------------
 
+-- Complete list of Ready moves to use with Sic & Ready Recast -5 Desultor Tassets.
+
+ready_moves_to_check = S{'Sic','Whirl Claws','Dust Cloud','Foot Kick','Sheep Song','Sheep Charge','Lamb Chop',
+	'Rage','Head Butt','Scream','Dream Flower','Wild Oats','Leaf Dagger','Claw Cyclone','Razor Fang',
+	'Roar','Gloeosuccus','Palsy Pollen','Soporific','Cursed Sphere','Venom','Geist Wall','Toxic Spit',
+	'Numbing Noise','Nimble Snap','Cyclotail','Spoil','Rhino Guard','Rhino Attack','Power Attack',
+	'Hi-Freq Field','Sandpit','Sandblast','Venom Spray','Mandibular Bite','Metallic Body','Bubble Shower',
+	'Bubble Curtain','Scissor Guard','Big Scissors','Grapple','Spinning Top','Double Claw','Filamented Hold',
+	'Frog Kick','Queasyshroom','Silence Gas','Numbshroom','Spore','Dark Spore','Shakeshroom','Blockhead',
+	'Secretion','Fireball','Tail Blow','Plague Breath','Brain Crush','Infrasonics','??? Needles',
+	'Needleshot','Chaotic Eye','Blaster','Scythe Tail','Ripper Fang','Chomp Rush','Intimidate','Recoil Dive',
+	'Water Wall','Snow Cloud','Wild Carrot','Sudden Lunge','Spiral Spin','Noisome Powder','Wing Slap',
+	'Beak Lunge','Suction','Drainkiss','Acid Mist','TP Drainkiss','Back Heel','Jettatura','Choke Breath',
+	'Fantod','Charged Whisker','Purulent Ooze','Corrosive Ooze','Tortoise Stomp','Harden Shell','Aqua Breath',
+	'Sensilla Blades','Tegmina Buffet','Molting Plumage','Swooping Frenzy','Pentapeck','Sweeping Gouge',
+	'Zealous Snort','Somersault ','Tickling Tendrils','Stink Bomb','Nectarous Deluge','Nepenthic Plunge',
+    'Pecking Flurry','Pestilent Plume','Foul Waters','Spider Web','Sickle Slash','Frogkick','Ripper Fang','Scythe Tail','Chomp Rush'}
+
+		
+mab_ready_moves = S{'Cursed Sphere','Venom','Toxic Spit',
+	 'Venom Spray','Bubble Shower',
+	 'Fireball','Plague Breath',
+	 'Snow Cloud','Acid Spray','Silence Gas','Dark Spore',
+	 'Charged Whisker','Purulent Ooze','Aqua Breath','Stink Bomb',
+	 'Nectarous Deluge','Nepenthic Plunge','Foul Waters','Dust Cloud','Sheep Song','Scream','Dream Flower','Roar','Gloeosuccus','Palsy Pollen',
+	 'Soporific','Geist Wall','Numbing Noise','Spoil','Hi-Freq Field',
+	 'Sandpit','Sandblast','Filamented Hold',
+	 'Spore','Infrasonics','Chaotic Eye',
+	 'Blaster','Intimidate','Noisome Powder','TP Drainkiss','Jettatura','Spider Web',
+	 'Corrosive Ooze','Molting Plumage','Swooping Frenzy',
+	 'Pestilent Plume',}
+
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    state.OffenseMode:options('Normal', 'Acc', 'SB')
+    state.OffenseMode:options('Normal', 'Pet')
     state.HybridMode:options('Normal', 'DT')
     state.RangedMode:options('Normal', 'Acc')
     state.WeaponskillMode:options('Normal', 'ATKCAP')
+	state.CorrelationMode = M{['description']='Correlation Mode', 'Neutral', 'HighAcc', 'MaxAcc',}
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
 	state.Reraise = M(false, "Reraise Mode")
 	
-	state.WeaponSet = M{['description']='Weapon Set', 'Chango', 'Lycurgos', 'Shining_One', 'Naegling', 'Loxotic_Mace', 'Ikenga_axe', 'Dolichenus'}
+	state.WeaponSet = M{['description']='Weapon Set', 'Agwu', 'Dolichenus', 'Ikenga_Axe', 'Naegling', 'Malevolence'}
 
     state.CP = M(false, "Capacity Points Mode")
 
@@ -157,13 +201,11 @@ function user_setup()
 		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
 		input /echo -----Modes-----;
 		input /echo [ Windows + R ]	Puts Reraise Set on;
-		input /echo [ Windows + 1 ]	Sets Weapon to Chango;
-		input /echo [ Windows + 2 ]	Sets Weapon to Lycurgos;
-		input /echo [ Windows + 3 ]	Sets Weapon to Naegling;
-		input /echo [ Windows + 4 ]	Sets Weapon to Loxotic Mace;
-		input /echo [ Windows + 5 ]	Sets Weapon to Shining One;
-		input /echo [ Windows + 6 ]	Sets Weapon to Ikenga Axe;
-		input /echo [ Windows + 7 ]	Sets Weapon to Dolichenus;
+		input /echo [ Windows + 1 ]	Sets Weapon to Agwu;
+		input /echo [ Windows + 2 ]	Sets Weapon to Dolichenus;
+		input /echo [ Windows + 3 ]	Sets Weapon to Ikenga_Axe;
+		input /echo [ Windows + 4 ]	Sets Weapon to Naegling;
+		input /echo [ Windows + 5 ]	Sets Weapon to Malevolence;
 		input /echo -----Toggles-----;
 		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
 		input /echo [ Windows + D ]	Unloads then reloads dressup;
@@ -197,13 +239,11 @@ function user_setup()
 	
 	--Weapon set Binds
 
-	send_command('bind @1 gs c set WeaponSet Chango')
-	send_command('bind @2 gs c set WeaponSet Lycurgos')
-	send_command('bind @3 input /equip main; gs c set WeaponSet Naegling')
-	send_command('bind @4 input /equip main; gs c set WeaponSet Loxotic_Mace')
-	send_command('bind @5 gs c set WeaponSet Shining_One')
-	send_command('bind @6 input /equip main; gs c set WeaponSet Ikenga_axe')
-	send_command('bind @7 input /equip main; gs c set WeaponSet Dolichenus')
+	send_command('bind @1 input /equip main; gs c set WeaponSet Agwu')
+	send_command('bind @2 input /equip main; gs c set WeaponSet Dolichenus')
+	send_command('bind @3 input /equip main; gs c set WeaponSet Ikenga_Axe')
+	send_command('bind @4 input /equip main; gs c set WeaponSet Naegling')
+	send_command('bind @5 input /equip main; gs c set WeaponSet Malevolence')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -448,19 +488,19 @@ function init_gear_sets()
 	--Generic Weapon Skill
 
 	sets.precast.WS = {
-		ammo="Knobkierrie",
-		head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Boii Mufflers +3",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="War. Beads +2", augments={'Path: A',}},
+		neck="Rep. Plat. Medal",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Thrud Earring",
+		left_ear="Thrud Earring",
+		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		left_ring="Epaminondas's Ring",
-		right_ring="Regal Ring",
-		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		right_ring="Sroda Ring",
+		back="Shadow Mantle",}
 		
 	sets.precast.WS.ATKCAP = {
 		ammo="Knobkierrie",
@@ -517,7 +557,7 @@ function init_gear_sets()
 		
 	sets.precast.WS['Ukko\'s Fury'] = {
 		ammo="Yetshila +1",
-		head="Boii Mask +3",
+		head="Boii Mask +2",
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Boii Mufflers +3",
 		legs="Boii Cuisses +3",
@@ -532,7 +572,7 @@ function init_gear_sets()
 		
 	sets.precast.WS['Ukko\'s Fury'].ATKCAP = {
 		ammo="Yetshila +1",
-		head="Boii Mask +3",
+		head="Boii Mask +2",
 		body={ name="Sakpata's Plate", augments={'Path: A',}},
 		hands="Boii Mufflers +3",
 		legs="Boii Cuisses +3",
@@ -584,7 +624,7 @@ function init_gear_sets()
 	
 	sets.precast.WS['Full Break'] = {
 		ammo="Pemphredo Tathlum",
-		head="Boii Mask +3",
+		head="Boii Mask +2",
 		body="Boii Lorica +3",
 		hands="Boii Mufflers +3",
 		legs="Boii Cuisses +3",
@@ -741,19 +781,19 @@ function init_gear_sets()
     -- sets if more refined versions aren't defined.
 
     sets.engaged = {
-		ammo="Aurgelmir Orb +1",
-		head={ name="Sakpata's Helm", augments={'Path: A',}},
-		body="Boii Lorica +3",
-		hands={ name="Sakpata's Gauntlets", augments={'Path: A',}},
-		legs="Pumm. Cuisses +3",
-		feet="Pumm. Calligae +3",
-		neck={ name="War. Beads +2", augments={'Path: A',}},
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head="Malignance Chapeau",
+		body={ name="Gleti's Cuirass", augments={'Path: A',}},
+		hands="Malignance Gloves",
+		legs="Malignance Tights",
+		feet="Malignance Boots",
+		neck="Anu Torque",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Schere Earring", augments={'Path: A',}},
-		right_ear={ name="Boii Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Crit.hit rate+5',}},
-		left_ring="Niqmaddu Ring",
-		right_ring="Moonlight Ring",
-		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+		left_ear="Telos Earring",
+		right_ear="Sherida Earring",
+		left_ring="Epona's Ring",
+		right_ring="Gere Ring",
+		back="Shadow Mantle",}
 
     sets.engaged.Acc = {
 		ammo="Aurgelmir Orb +1",
@@ -883,7 +923,7 @@ function init_gear_sets()
 
     sets.buff.Doom = {
 		neck="Nicander's Necklace",
-        waist="Gishdubar Sash", --10
+        waist="Gishdub48ar Sash", --10
         }
 
 	sets.Warp = {left_ring="Warp Ring"}
@@ -894,18 +934,17 @@ function init_gear_sets()
 
 	--Weaponsets
 
-    sets.Chango = {main={ name="Chango", augments={'Path: A',}}, sub="Utu Grip"}
-	sets.Lycurgos = {main="Lycurgos", sub="Utu Grip"}
-	sets.Shining_One = {main="Shining One", sub="Utu Grip"}
-	sets.Naegling = {main="Naegling", sub="Blurred Shield +1",}
-	sets.Naegling.DW = {main="Naegling", sub="Ikenga's Axe",}
-	sets.Loxotic_Mace = {main={ name="Loxotic Mace +1", augments={'Path: A',}},sub="Blurred Shield +1",}
-	sets.Loxotic_Mace.DW = {main={ name="Loxotic Mace +1", augments={'Path: A',}},sub="Ikenga's Axe",}
-	sets.Ikenga_axe = {main="Ikenga's Axe", sub="Blurred Shield +1",}
-	sets.Ikenga_axe.DW = {main="Ikenga's Axe", sub="Kaja Axe",}
-	sets.Dolichenus = {main="Kaja Axe", sub="Blurred Shield +1",}
+	sets.Agwu = {main="Agwu's Axe", sub="Adapa Shield",}
+	sets.Agwu.DW = {main="Agwu's Axe", sub="Ikenga's Axe",}	
+	sets.Dolichenus = {main="Kaja Axe", sub="Adapa Shield",}
 	sets.Dolichenus.DW = {main="Kaja Axe", sub="Ikenga's Axe",}
-	
+	sets.Ikenga_Axe = {main="Ikenga's Axe", sub="Adapa Shield",}
+	sets.Ikenga_Axe.DW = {main="Ikenga's Axe", sub="Kaja Axe",}	
+	sets.Naegling = {main="Naegling", sub="Adapa Shield",}
+	sets.Naegling.DW = {main="Naegling", sub="Ikenga's Axe",}
+	sets.Malevolence = {main={ name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}}, sub="Adapa Shield",}
+	sets.Malevolence.DW = {main={ name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}}, sub="Ikenga's Axe",}
+
 
 end
 
@@ -928,112 +967,39 @@ function job_precast(spell, action, spellMap, eventArgs)
         end
     end
 
+	cancel_conflicting_buffs(spell, action, spellMap, eventArgs)
+
+	if spell.english == 'Bestial Loyalty' or spell.english == 'Call Beast' then					
+		equip({ammo=state.JugPet.value})
+	end    	
+
+-- Define class for Sic and Ready moves.
+    if ready_moves_to_check:contains(spell.name) and pet.status == 'Engaged' then
+		equip(sets.midcast.Pet.ReadyRecast)
+    end
+
+end
+
+-- Return true if we handled the aftercast work.  Otherwise it will fall back
+-- to the general aftercast() code in Mote-Include.
+function job_aftercast(spell, action, spellMap, eventArgs)
+	if spell.type == "Monster" and not spell.interrupted then
+		equip(set_combine(sets.midcast.Pet.WS, sets.midcast.Pet[state.CorrelationMode.value]))
+		if mab_ready_moves:contains(spell.english) and pet.status == 'Engaged' then
+			equip(sets.midcast.Pet.MabReady)
+		end
+ 
+		if buffactive['Unleash'] then
+            hands="Gleti's Gauntlets"
+        end
+		
+		eventArgs.handled = true
+	end
 end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
 
-		--Handles Mighty Strikes on Weapon skills
-    if spell.type == "WeaponSkill" then
-        if state.Buff['Mighty Strikes'] then
-			if spell.english == "Sanguine Blade" then
-			else
-			equip(sets.Mighty)
-			end
-        end
-		
-		if spell.english == "Ukko\'s Fury" or spell.english == "Sanguine Blade" or spell.english == "Full Break" or spell.english == "Shield Break" or spell.english == "Armor Break" or spell.english == "Weapon Break" then
-		else
-			if state.Buff['Warcry'] then
-				if state.WeaponSet.value == "Chango" then
-					if state.WeaponskillMode.value == "Normal" then
-						if player.tp > 1700 then
-							equip(sets.precast.WS.FullTP)
-						end
-					elseif state.WeaponskillMode.value == "ATKCAP" then
-						if player.tp > 1600 then
-							equip(sets.precast.WS.FullTP)
-						end
-					end					
-				elseif state.WeaponSet.value == "Lycurgos" or state.WeaponSet.value == "Shining_One" then
-					if state.WeaponskillMode.value == "Normal" then
-						if player.tp > 2200 then
-							equip(sets.precast.WS.FullTP)
-						end
-					elseif state.WeaponskillMode.value == "ATKCAP" then
-						if player.tp > 2100 then
-							equip(sets.precast.WS.FullTP)
-						end
-					end
-				elseif state.WeaponSet.value == "Naegling" or state.WeaponSet.value == "Loxotic_Mace" or state.WeaponSet.value == "Dolichenus" or state.WeaponSet.value == "Ikenga_axe" then
-					if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-						if state.WeaponskillMode.value == "Normal" then
-							if player.tp > 1700 then
-								equip(sets.precast.WS.FullTP)
-							end
-						elseif state.WeaponskillMode.value == "ATKCAP" then
-							if player.tp > 1600 then
-								equip(sets.precast.WS.FullTP)
-							end
-						end						
-					else
-						if state.WeaponskillMode.value == "Normal" then
-							if player.tp > 1600 then
-								equip(sets.precast.WS.FullTP)
-							end
-						elseif state.WeaponskillMode.value == "ATKCAP" then
-							if player.tp > 1470 then
-								equip(sets.precast.WS.FullTP)
-							end
-						end
-					end
-				end
-			else
-				if state.WeaponSet.value == "Chango" then
-					if state.WeaponskillMode.value == "Normal" then
-						if player.tp > 2400 then
-							equip(sets.precast.WS.FullTP)
-						end
-					elseif state.WeaponskillMode.value == "ATKCAP" then
-						if player.tp > 2300 then
-							equip(sets.precast.WS.FullTP)
-						end
-					end
-				elseif state.WeaponSet.value == "Lycurgos" or state.WeaponSet.value == "Shining_One" then
-					if state.WeaponskillMode.value == "Normal" then
-						if player.tp > 2900 then
-							equip(sets.precast.WS.FullTP)
-						end
-					elseif state.WeaponskillMode.value == "ATKCAP" then
-						if player.tp > 2800 then
-							equip(sets.precast.WS.FullTP)
-						end
-					end
-				elseif state.WeaponSet.value == "Naegling" or state.WeaponSet.value == "Loxotic_Mace" or state.WeaponSet.value == "Dolichenus" or state.WeaponSet.value == "Ikenga_axe" then
-					if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-						if state.WeaponskillMode.value == "Normal" then
-							if player.tp > 2400 then
-								equip(sets.precast.WS.FullTP)
-							end
-						elseif state.WeaponskillMode.value == "ATKCAP" then
-							if player.tp > 2300 then
-								equip(sets.precast.WS.FullTP)
-							end
-						end						
-					else
-						if state.WeaponskillMode.value == "Normal" then
-							if player.tp > 2300 then
-								equip(sets.precast.WS.FullTP)
-							end
-						elseif state.WeaponskillMode.value == "ATKCAP" then
-							if player.tp > 2170 then
-								equip(sets.precast.WS.FullTP)
-							end
-						end
-					end
-				end
-			end
-		end
-    end
+
 
 end
 
@@ -1089,17 +1055,29 @@ function update_combat_form()
         state.CombatForm:reset()
     end
 
-	if state.WeaponSet.value == 'Chango' then
-		equip(sets.Chango)
-	end	
-	
-	if state.WeaponSet.value == 'Lycurgos' then
-		equip(sets.Lycurgos)
-	end	
+	if state.WeaponSet.value == 'Agwu' then
+		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+			equip(sets.Agwu.DW)
+		else
+			equip(sets.Agwu)
+		end
+	end
 
-	if state.WeaponSet.value == 'Shining_One' then
-		equip(sets.Shining_One)
-	end		
+	if state.WeaponSet.value == 'Dolichenus' then
+		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+			equip(sets.Dolichenus.DW)
+		else
+			equip(sets.Dolichenus)
+		end
+	end
+	
+	if state.WeaponSet.value == 'Ikenga_Axe' then
+		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+			equip(sets.Ikenga_Axe.DW)
+		else
+			equip(sets.Ikenga_Axe)
+		end
+	end
 	
 	if state.WeaponSet.value == 'Naegling' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
@@ -1108,28 +1086,12 @@ function update_combat_form()
 			equip(sets.Naegling)
 		end
 	end
-
-	if state.WeaponSet.value == 'Loxotic_Mace' then
-		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			equip(sets.Loxotic_Mace.DW)
-		else
-			equip(sets.Loxotic_Mace)
-		end
-	end
-
-	if state.WeaponSet.value == 'Ikenga_axe' then
-		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			equip(sets.Ikenga_axe.DW)
-		else
-			equip(sets.Ikenga_axe)
-		end
-	end
 	
-	if state.WeaponSet.value == 'Dolichenus' then
+	if state.WeaponSet.value == 'Malevolence' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			equip(sets.Dolichenus.DW)
+			equip(sets.Malevolence.DW)
 		else
-			equip(sets.Dolichenus)
+			equip(sets.Malevolence)
 		end
 	end
 	
@@ -1220,6 +1182,22 @@ end
 
 function gearinfo(cmdParams, eventArgs)
     if cmdParams[1] == 'gearinfo' then
+        if type(tonumber(cmdParams[2])) == 'number' then
+            if tonumber(cmdParams[2]) ~= DW_needed then
+            DW_needed = tonumber(cmdParams[2])
+            DW = true
+            end
+        elseif type(cmdParams[2]) == 'string' then
+            if cmdParams[2] == 'false' then
+                DW_needed = 0
+                DW = false
+              end
+        end
+        if type(tonumber(cmdParams[3])) == 'number' then
+              if tonumber(cmdParams[3]) ~= Haste then
+                  Haste = tonumber(cmdParams[3])
+            end
+        end
         if type(cmdParams[4]) == 'string' then
             if cmdParams[4] == 'true' then
                 moving = true

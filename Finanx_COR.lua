@@ -58,6 +58,7 @@
 --					[ CTRL + Numpad4 ]		Savage Blade
 --					[ CTRL + Numpad5 ]		Hot Shot
 --					[ CTRL + Numpad6 ]		Requiescat
+--					[ CTRL + Numpad7 ]		Detonator
 --
 --					[ ALT + Numpad1 ]		Evisceration
 --					[ ALT + Numpad2 ]		Exenterator
@@ -186,6 +187,7 @@ function user_setup()
 		input /echo [ CTRL + Numpad2 ] Wildfire;
 		input /echo [ CTRL + Numpad3 ] Last Stand;
 		input /echo [ CTRL + Numpad5 ] Hot Shot;
+		input /echo [ CTRL + Numpad7 ] Detonator;
 		input /echo -----Sword-----;
 		input /echo [ CTRL + Numpad4 ] Savage Blade;
 		input /echo [ CTRL + Numpad6 ] Requiescat;
@@ -215,6 +217,7 @@ function user_setup()
 	send_command('bind ^numpad4 input /ws "Savage Blade" <t>')
 	send_command('bind ^numpad5 input /ws "Hot Shot" <t>')
 	send_command('bind ^numpad6 input /ws "Requiescat" <t>')
+	send_command('bind ^numpad6 input /ws "Detonator" <t>')
 	
 	send_command('bind !numpad1 input /ws "Evisceration" <t>')
 	send_command('bind !numpad2 input /ws "Exenterator" <t>')
@@ -544,6 +547,8 @@ function init_gear_sets()
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},}
 		
 	sets.precast.WS['Last Stand'].FullTP = {left_ear="Odr Earring",}
+	sets.precast.WS['Detonator'] = sets.precast.WS['Last Stand']
+	sets.precast.WS['Detonator'].FullTP = sets.precast.WS['Last Stand'].FullTP
 
     sets.precast.WS['Wildfire'] = {
 		ammo=gear.MAbullet,
@@ -1220,15 +1225,25 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 			if player.tp > 1900 then
 				equip(sets.precast.WS.FullTP)
 			end
-		else
+		elseif state.RangeSet.value == 'Fomalhaut' then
+			if player.tp > 2400 then
+				equip(sets.precast.WS.FullTP)
+			end
+		elseif state.RangeSet.value == 'DeathPenalty' or state.RangeSet.value == 'Armageddon' then
 			if player.tp > 2900 then
 				equip(sets.precast.WS.FullTP)
 			end
 		end
 		if spell.english == 'Leaden Salute' then
-            if player.tp > 2900 then
-                equip(sets.precast.WS['Leaden Salute'].FullTP)
-            end
+			if state.RangeSet.value == 'Fomalhaut' then
+				if player.tp > 2400 then
+					equip(sets.precast.WS['Leaden Salute'].FullTP)
+				end
+			else
+				if player.tp > 2900 then
+					equip(sets.precast.WS['Leaden Salute'].FullTP)
+				end
+			end
 			if spell.target.distance > (8 + spell.target.model_size) then
 				if (world.weather_element == 'Dark' or world.day_element == 'Dark') then
 					equip(sets.Obi)
@@ -1248,9 +1263,15 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 				equip(sets.Orpheus)
 			end
 		elseif spell.english == 'Hot Shot' then
-			if player.tp > 2900 then
-                equip(sets.precast.WS['Hot Shot'].FullTP)
-            end		
+			if state.RangeSet.value == 'Fomalhaut' then
+				if player.tp > 2400 then
+					equip(sets.precast.WS['Hot Shot'].FullTP)
+				end
+			else
+				if player.tp > 2900 then
+					equip(sets.precast.WS['Hot Shot'].FullTP)
+				end
+			end
 			if spell.target.distance > (8 + spell.target.model_size) then
 				if (world.weather_element == 'Fire' or world.day_element == 'Fire') then
 					equip(sets.Obi)
@@ -1259,23 +1280,53 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 				equip(sets.Orpheus)
 			end
 		elseif spell.english == 'Aeolian Edge' or spell.english == 'Cyclone' then
-			if player.tp > 2900 then
-                equip(sets.precast.WS['Aeolian Edge'].FullTP)
-            end
+			if state.RangeSet.value == 'TP_Gun' then
+				if player.tp > 1900 then
+					equip(sets.precast.WS['Aeolian Edge'].FullTP)
+				end
+			elseif state.RangeSet.value == 'Fomalhaut' then
+				if player.tp > 2400 then
+					equip(sets.precast.WS['Aeolian Edge'].FullTP)
+				end
+			elseif state.RangeSet.value == 'DeathPenalty' or state.RangeSet.value == 'Armageddon' then
+				if player.tp > 2900 then
+					equip(sets.precast.WS['Aeolian Edge'].FullTP)
+				end
+			end
 		elseif spell.english == 'Savage Blade' then
 			if state.RangeSet.value == 'TP_Gun' then
 				if player.tp > 1900 then
 					equip(sets.precast.WS['Savage Blade'].FullTP)
 				end
-			else
+			elseif state.RangeSet.value == 'Fomalhaut' then
+				if player.tp > 2400 then
+					equip(sets.precast.WS['Savage Blade'].FullTP)
+				end
+			elseif state.RangeSet.value == 'DeathPenalty' or state.RangeSet.value == 'Armageddon' then
 				if player.tp > 2900 then
 					equip(sets.precast.WS['Savage Blade'].FullTP)
 				end
 			end
 		elseif spell.english == 'Last Stand' then
+			if state.RangeSet.value == 'Fomalhaut' then
+				if player.tp > 2400 then
+					equip(sets.precast.WS['Last Stand'].FullTP)
+				end
+			else
 				if player.tp > 2900 then
 					equip(sets.precast.WS['Last Stand'].FullTP)
 				end
+			end
+		elseif spell.english == 'Detonator' then
+			if state.RangeSet.value == 'Fomalhaut' then
+				if player.tp > 2400 then
+					equip(sets.precast.WS['Detonator'].FullTP)
+				end
+			else
+				if player.tp > 2900 then
+					equip(sets.precast.WS['Detonator'].FullTP)
+				end
+			end
 		elseif spell.english == 'Evisceration' then
 			if player.tp > 2900 then
 				equip(sets.precast.WS['Evisceration'])

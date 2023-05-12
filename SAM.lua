@@ -91,11 +91,12 @@ function job_setup()
     -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
     info.default_u_ja_ids = S{201, 202, 203, 205, 207}
 
-    state.Buff.Hasso = buffactive.Hasso or false
-    state.Buff.Seigan = buffactive.Seigan or false
-    state.Buff.Sekkanoki = buffactive.Sekkanoki or false
-    state.Buff.Sengikori = buffactive.Sengikori or false
+    state.Buff['Hasso'] = buffactive['Hasso'] or false
+    state.Buff['Seigan'] = buffactive['Seigan'] or false
+    state.Buff['Sekkanoki'] = buffactive['Sekkanoki'] or false
+    state.Buff['Sengikori'] = buffactive['Sengikori'] or false
     state.Buff['Meikyo Shisui'] = buffactive['Meikyo Shisui'] or false
+	state.Buff['Berserk'] = buffactive['berserk']  or false
 	
 	lockstyleset = 13
 	
@@ -109,8 +110,8 @@ end
 function user_setup()
     state.OffenseMode:options('Normal', 'Acc')
     state.HybridMode:options('Normal', 'DT')
-    state.RangedMode:options('Normal', 'Acc')
-    state.WeaponskillMode:options('Normal', 'Acc')
+    state.RangedMode:options('Normal', 'Acc', 'Subtle_Blow')
+    state.WeaponskillMode:options('Normal', 'ATKCAP')
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
@@ -246,6 +247,12 @@ function user_setup()
 	--Gearinfo Functions
 
     state.Auto_Kite = M(false, 'Auto_Kite')
+	Haste = 0
+    DW_needed = 0
+    DW = false
+    moving = false
+    update_combat_form()
+    determine_haste_group()
 	
 end
 
@@ -381,7 +388,7 @@ function init_gear_sets()
 		ammo="Knobkierrie",
 		head={ name="Mpaca's Cap", augments={'Path: A',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		hands="Kasuga Kote +2",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
@@ -389,8 +396,26 @@ function init_gear_sets()
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Thrud Earring",
 		left_ring="Epaminondas's Ring",
-		right_ring="Niqmaddu Ring",
+		right_ring="Sroda Ring",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		
+	sets.precast.WS.ATKCAP = {
+		ammo="Crepuscular Pebble",
+		head={ name="Mpaca's Cap", augments={'Path: A',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands="Kasuga Kote +2",
+		legs={ name="Mpaca's Hose", augments={'Path: A',}},
+		feet="Kas. Sune-Ate +2",
+		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Thrud Earring",
+		left_ring="Epaminondas's Ring",
+		right_ring="Sroda Ring",
+		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		
+	sets.precast.WS.FullTPMagical = {left_ear="Hecate's Earring"}
+	sets.precast.WS.FullTPPhysical = {left_ear={ name="Lugra Earring +1", augments={'Path: A',}},}
 		
 	sets.precast.WS['Tachi: Shoha'] = {
 		ammo="Knobkierrie",
@@ -407,36 +432,126 @@ function init_gear_sets()
 		right_ring="Niqmaddu Ring",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 		
+	sets.precast.WS['Tachi: Shoha'].ATKCAP = {
+		ammo="Crepuscular Pebble",
+		head={ name="Mpaca's Cap", augments={'Path: A',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Mpaca's Hose", augments={'Path: A',}},
+		feet="Kas. Sune-Ate +2",
+		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Thrud Earring",
+		left_ring="Epaminondas's Ring",
+		right_ring="Sroda Ring",
+		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		
+	sets.precast.WS['Tachi: Rana'] = {
+		ammo="Knobkierrie",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands="Kasuga Kote +2",
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear={ name="Lugra Earring +1", augments={'Path: A',}},
+		right_ear="Thrud Earring",
+		left_ring="Epaminondas's Ring",
+		right_ring="Sroda Ring",
+		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		
+	sets.precast.WS['Tachi: Rana'].ATKCAP = {
+		ammo="Crepuscular Pebble",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands="Kasuga Kote +2",
+		legs={ name="Mpaca's Hose", augments={'Path: A',}},
+		feet="Kas. Sune-Ate +2",
+		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear={ name="Lugra Earring +1", augments={'Path: A',}},
+		right_ear="Thrud Earring",
+		left_ring="Epaminondas's Ring",
+		right_ring="Sroda Ring",
+		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		
 	sets.precast.WS['Impulse Drive'] = {
 		ammo="Knobkierrie",
 		head={ name="Mpaca's Cap", augments={'Path: A',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		hands="Kasuga Kote +2",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Fotia Gorget",
+		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Thrud Earring",
-		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},"Thrud Earring",
+		right_ear="Thrud Earring",
 		left_ring="Epaminondas's Ring",
-		right_ring="Niqmaddu Ring",
+		right_ring="Sroda Ring",
+		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		
+	sets.precast.WS['Impulse Drive'].ATKCAP = {
+		ammo="Crepuscular Pebble",
+		head={ name="Mpaca's Cap", augments={'Path: A',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands="Kasuga Kote +2",
+		legs={ name="Mpaca's Hose", augments={'Path: A',}},
+		feet="Kas. Sune-Ate +2",
+		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},"Thrud Earring",
+		right_ear="Thrud Earring",
+		left_ring="Epaminondas's Ring",
+		right_ring="Sroda Ring",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 		
 	sets.precast.WS['Sonic Thrust'] = sets.precast.WS['Impulse Drive']
+	
+	sets.precast.WS['Stardiver'] = {
+	    ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head={ name="Mpaca's Cap", augments={'Path: A',}},
+		body="Mpaca's Doublet",
+		hands="Mpaca's Gloves",
+		legs={ name="Mpaca's Hose", augments={'Path: A',}},
+		feet="Mpaca's Boots",
+		neck="Fotia Gorget",
+		waist="Fotia Belt",
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear={ name="Schere Earring", augments={'Path: A',}},
+		left_ring="Niqmaddu Ring",
+		right_ring="Regal Ring",
+		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		
+	sets.precast.WS['Stardiver'].ATKCAP = {
+	    ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head={ name="Mpaca's Cap", augments={'Path: A',}},
+		body="Mpaca's Doublet",
+		hands="Mpaca's Gloves",
+		legs={ name="Mpaca's Hose", augments={'Path: A',}},
+		feet="Kas. Sune-Ate +2",
+		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
+		waist="Fotia Belt",
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear={ name="Schere Earring", augments={'Path: A',}},
+		left_ring="Niqmaddu Ring",
+		right_ring="Sroda Ring",
+		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 		
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
 
     sets.precast.WS['Tachi: Ageha'] = {
 		ammo="Pemphredo Tathlum",
-		head={ name="Mpaca's Cap", augments={'Path: A',}},
-		body="Mpaca's Doublet",
-		hands="Mpaca's Gloves",
-		legs="Mpaca's Hose",
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		head="Kasuga Kabuto +2",
+		body="Kasuga Domaru +2",
+		hands="Kasuga Kote +2",
+		legs="Kasuga Haidate +2",
+		feet="Kas. Sune-Ate +2",
 		neck="Sanctity Necklace",
 		waist="Eschan Stone",
 		left_ear="Crep. Earring",
-		right_ear="Digni. Earring",
+		right_ear={ name="Kasuga Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Weapon skill damage +2%',}},
 		left_ring="Stikini Ring +1",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
@@ -450,8 +565,8 @@ function init_gear_sets()
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
 		waist="Orpheus's Sash",
-		left_ear="Friomisi Earring",
-		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},"Friomisi Earring",
+		right_ear="Friomisi Earring",
 		left_ring="Epaminondas's Ring",
 		right_ring="Niqmaddu Ring",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
@@ -459,7 +574,6 @@ function init_gear_sets()
 	sets.precast.WS['Tachi: Goten'] = sets.precast.WS['Tachi: Jinpu']
 	sets.precast.WS['Tachi: Kagero'] = sets.precast.WS['Tachi: Jinpu']
 	sets.precast.WS['Tachi: Koki'] = sets.precast.WS['Tachi: Jinpu']
-	sets.precast.WS['Tachi: '] = sets.precast.WS['Tachi: Jinpu']
 	
     sets.precast.WS['Aeolian Edge'] = {
 		ammo="Knobkierrie",
@@ -552,7 +666,7 @@ function init_gear_sets()
 		feet={ name="Ryuo Sune-Ate +1", augments={'HP+65','"Store TP"+5','"Subtle Blow"+8',}},
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
 		waist="Sweordfaetels +1",
-		left_ear={ name="Schere Earring", augments={'Path: A',}},
+		left_ear="Dedition Earring",
 		right_ear={ name="Kasuga Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Weapon skill damage +2%',}},
 		left_ring="Niqmaddu Ring",
 		right_ring="Chirich Ring +1",
@@ -572,7 +686,22 @@ function init_gear_sets()
 		left_ring="Niqmaddu Ring",
 		right_ring="Chirich Ring +1",
 		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-		   
+		
+	sets.engaged.Subtle_Blow = {
+		ammo="Aurgelmir Orb +1",
+		head="Kasuga Kabuto +2",
+		body="Dagon Breast.",
+		hands="Wakido Kote +3",
+		legs={ name="Mpaca's Hose", augments={'Path: A',}},
+		feet={ name="Ryuo Sune-Ate +1", augments={'HP+65','"Store TP"+5','"Subtle Blow"+8',}},
+		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
+		waist="Sweordfaetels +1",
+		left_ear={ name="Schere Earring", augments={'Path: A',}},
+		right_ear={ name="Kasuga Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Weapon skill damage +2%',}},
+		left_ring="Niqmaddu Ring",
+		right_ring="Chirich Ring +1",
+		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		
 	sets.engaged.Hybrid = {
 		head="Kasuga Kabuto +2",
 		body="Kasuga Domaru +2",
@@ -593,9 +722,9 @@ function init_gear_sets()
 
 	sets.Kiting = {feet="Danzo Sune-Ate"}
 
-    sets.buff.Sekkanoki = {hands="Kusaga Kote +2"}
-    sets.buff.Sengikori = {feet="Kusaga Sune-ate +2"}
-    sets.buff['Meikyo Shisui'] = {feet="Sakonji Sune-ate"}
+    sets.Sekkanoki = {hands="Kasuga Kote +2",}
+    sets.Sengikori = {feet="Kasuga Sune-ate +2"}
+    sets.Meikyo = {feet="Sakonji Sune-ate"}
 
     sets.TreasureHunter = {
 		ammo="Per. Lucky Egg", --TH1
@@ -612,11 +741,11 @@ function init_gear_sets()
 	sets.Shining_One = {main='Shining One',sub="Utu Grip"}
 	sets.Hachimonji = {main="Hachimonji",sub="Utu Grip"}
 	sets.Soboro = {main="Soboro Sukehiro",sub="Utu Grip"}
-	sets.Dagger = {main={ name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},sub="Levante Dagger"}
+	sets.Dagger = {main={ name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
 	
     sets.Obi = {waist="Hachirin-no-Obi"}
 	
-	sets.Reraise = {head="Crepuscular Helm",body="Twilight Mail"}
+	sets.Reraise = {head="Crepuscular Helm",body="Crepuscular Mail",}
 	
 	
 end
@@ -625,22 +754,6 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific Functions
 -------------------------------------------------------------------------------------------------------------------
-
-function job_post_precast(spell, action, spellMap, eventArgs)
-
-		--Handles Job Ability Gearsets
-    if spell.type:lower() == 'weaponskill' then
-        if state.Buff.Sekkanoki then
-            equip(sets.buff.Sekkanoki)
-        end
-        if state.Buff.Sengikori then
-            equip(sets.buff.Sengikori)
-        end
-        if state.Buff['Meikyo Shisui'] then
-            equip(sets.buff['Meikyo Shisui'])
-        end
-    end
-end
 
 function job_precast(spell, action, spellMap, eventArgs)
 
@@ -655,6 +768,46 @@ function job_precast(spell, action, spellMap, eventArgs)
             send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
         end
     end
+end
+
+function job_post_midcast(spell, action, spellMap, eventArgs)
+
+		--Handles TP Overflow
+	if spell.type == 'WeaponSkill' then
+		if spell.english == "Tachi: Ageha" or spell.english == "Tachi: Rana" then
+		else
+			if spell.english == 'Tachi: Jinpu' or spell.english == 'Aeolian Edge' then
+				if state.WeaponSet.value == "Dojikiri" then
+					if player.tp > 2400 then
+						equip(sets.precast.WS.FullTPMagical)
+					end
+				else
+					if player.tp > 2900 then
+						equip(sets.precast.WS.FullTPMagical)
+					end
+				end
+			else
+				if state.WeaponSet.value == "Dojikiri" then
+					if player.tp > 2200 then
+						equip(sets.precast.WS.FullTPPhysical)
+					end
+				else
+					if player.tp > 2700 then
+						equip(sets.precast.WS.FullTPPhysical)
+					end
+				end
+			end
+		end
+		if state.Buff['Sekkanoki'] then
+			equip(sets.Sekkanoki)
+		end
+		if state.Buff['Sengikori'] then
+			equip(sets.Sengikori)
+		end
+		if state.Buff['Meikyo Shisui'] then
+			equip(sets.Meikyo)
+		end
+	end
 end
 
 function job_buff_change(buff,gain)
@@ -673,19 +826,7 @@ function job_buff_change(buff,gain)
 	
 end
 
-	--Handles Weapon set changes and Reraise set
-function job_state_change(field, new_value, old_value)
- 
-    equip(sets[state.WeaponSet.current])
-	
-	if state.Reraise.current == 'on' then
-        equip(sets.Reraise)
-        disable('head', 'body')
-    else
-        enable('head', 'body')
-    end
-	
-end
+
 
 -------------------------------------------------------------------------------------------------------------------
 -- Code for Melee sets
@@ -723,7 +864,7 @@ function job_state_change(field, new_value, old_value)
     else
         enable('head', 'body')
     end
-	
+
 end
 
 function customize_idle_set(idleSet)
@@ -811,6 +952,22 @@ end
 
 function gearinfo(cmdParams, eventArgs)
     if cmdParams[1] == 'gearinfo' then
+        if type(tonumber(cmdParams[2])) == 'number' then
+            if tonumber(cmdParams[2]) ~= DW_needed then
+            DW_needed = tonumber(cmdParams[2])
+            DW = true
+            end
+        elseif type(cmdParams[2]) == 'string' then
+            if cmdParams[2] == 'false' then
+                DW_needed = 0
+                DW = false
+              end
+        end
+        if type(tonumber(cmdParams[3])) == 'number' then
+              if tonumber(cmdParams[3]) ~= Haste then
+                  Haste = tonumber(cmdParams[3])
+            end
+        end
         if type(cmdParams[4]) == 'string' then
             if cmdParams[4] == 'true' then
                 moving = true

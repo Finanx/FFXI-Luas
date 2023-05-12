@@ -685,21 +685,8 @@ function init_gear_sets()
 		right_ring="Prolix Ring",
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}
 		
-	sets.midcast.SongPlaceholder = {
-		main={ name="Carnwenhan", augments={'Path: A',}},
-		sub={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
-		head="Fili Calot +2",
-		body="Fili Hongreline +2",
-		hands="Fili Manchettes +2",
-		legs="Inyanga Shalwar +2",
-		feet="Brioso Slippers +3",
-		neck="Mnbw. Whistle +1",
-		waist="Embla Sash",
-		left_ear="Loquac. Earring",
-		right_ear="Etiolation Earring",
-		left_ring="Kishar Ring",
-		right_ring="Prolix Ring",
-		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}
+	sets.midcast['Adventurer\'s Dirge'] = sets.midcast.SongEnhancing
+	sets.midcast['Foe Sirvente'] = sets.midcast.SongEnhancing
 		
 	sets.midcast['Herb Pastoral'] = set_combine(sets.precast.FC, {range="Daurdabla"})
 	sets.midcast['Shining Fantasia'] = set_combine(sets.precast.FC, {range="Daurdabla"})
@@ -1215,13 +1202,18 @@ function init_gear_sets()
     ---------------------------------------- Hybrid Sets -------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.engaged.Hybrid = {}
+    sets.engaged.Hybrid = {
+	    left_ear="Digni. Earring",
+		left_ring="Chirich Ring +1",
+		right_ring="Chirich Ring +1",
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},}
 		
 	sets.engaged.HybridDW = {
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ring="Moonlight Ring",}
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},}
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
 	sets.engaged.Aftermath.DT = set_combine(sets.engaged.Aftermath, sets.engaged.Hybrid)
