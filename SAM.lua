@@ -388,7 +388,7 @@ function init_gear_sets()
 		ammo="Knobkierrie",
 		head={ name="Mpaca's Cap", augments={'Path: A',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Kasuga Kote +2",
+		hands="Kasuga Kote +3",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
@@ -403,7 +403,7 @@ function init_gear_sets()
 		ammo="Crepuscular Pebble",
 		head={ name="Mpaca's Cap", augments={'Path: A',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Kasuga Kote +2",
+		hands="Kasuga Kote +3",
 		legs={ name="Mpaca's Hose", augments={'Path: A',}},
 		feet="Kas. Sune-Ate +2",
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
@@ -451,7 +451,7 @@ function init_gear_sets()
 		ammo="Knobkierrie",
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Kasuga Kote +2",
+		hands="Kasuga Kote +3",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
@@ -466,7 +466,7 @@ function init_gear_sets()
 		ammo="Crepuscular Pebble",
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Kasuga Kote +2",
+		hands="Kasuga Kote +3",
 		legs={ name="Mpaca's Hose", augments={'Path: A',}},
 		feet="Kas. Sune-Ate +2",
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
@@ -481,7 +481,7 @@ function init_gear_sets()
 		ammo="Knobkierrie",
 		head={ name="Mpaca's Cap", augments={'Path: A',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Kasuga Kote +2",
+		hands="Kasuga Kote +3",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
@@ -496,7 +496,7 @@ function init_gear_sets()
 		ammo="Crepuscular Pebble",
 		head={ name="Mpaca's Cap", augments={'Path: A',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Kasuga Kote +2",
+		hands="Kasuga Kote +3",
 		legs={ name="Mpaca's Hose", augments={'Path: A',}},
 		feet="Kas. Sune-Ate +2",
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
@@ -545,7 +545,7 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		head="Kasuga Kabuto +2",
 		body="Kasuga Domaru +2",
-		hands="Kasuga Kote +2",
+		hands="Kasuga Kote +3",
 		legs="Kasuga Haidate +2",
 		feet="Kas. Sune-Ate +2",
 		neck="Sanctity Necklace",
@@ -722,7 +722,7 @@ function init_gear_sets()
 
 	sets.Kiting = {feet="Danzo Sune-Ate"}
 
-    sets.Sekkanoki = {hands="Kasuga Kote +2",}
+    sets.Sekkanoki = {hands="Kasuga Kote +3",}
     sets.Sengikori = {feet="Kasuga Sune-ate +2"}
     sets.Meikyo = {feet="Sakonji Sune-ate"}
 

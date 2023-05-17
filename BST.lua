@@ -47,7 +47,7 @@
 --  Job Specific Keybinds (Beast Master Binds)
 -------------------------------------------------------------------------------------------------------------------
 --
---	Weapons:		[ Windows: + 1 ]		Agwu Weapon Set
+--	Weapons:		[ Windows: + 1 ]		MACC_Axe Weapon Set
 --					[ Windows: + 2 ]		Dolichenus Weapon Set
 --					[ Windows: + 4 ]		Ikenga_Axe Weapon Set
 --					[ Windows: + 3 ]		Naegling Weapon Set
@@ -163,9 +163,10 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
+	state.WeaponSet = M{['description']='Weapon Set', 'MACC_Axe', 'Dolichenus', 'Ikenga_Axe', 'Naegling', 'Malevolence'}
 	state.Reraise = M(false, "Reraise Mode")
 	
-	state.WeaponSet = M{['description']='Weapon Set', 'Agwu', 'Dolichenus', 'Ikenga_Axe', 'Naegling', 'Malevolence'}
+
 
     state.CP = M(false, "Capacity Points Mode")
 
@@ -201,7 +202,7 @@ function user_setup()
 		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
 		input /echo -----Modes-----;
 		input /echo [ Windows + R ]	Puts Reraise Set on;
-		input /echo [ Windows + 1 ]	Sets Weapon to Agwu;
+		input /echo [ Windows + 1 ]	Sets Weapon to MACC_Axe;
 		input /echo [ Windows + 2 ]	Sets Weapon to Dolichenus;
 		input /echo [ Windows + 3 ]	Sets Weapon to Ikenga_Axe;
 		input /echo [ Windows + 4 ]	Sets Weapon to Naegling;
@@ -239,7 +240,7 @@ function user_setup()
 	
 	--Weapon set Binds
 
-	send_command('bind @1 input /equip main; gs c set WeaponSet Agwu')
+	send_command('bind @1 input /equip main; gs c set WeaponSet MACC_Axe')
 	send_command('bind @2 input /equip main; gs c set WeaponSet Dolichenus')
 	send_command('bind @3 input /equip main; gs c set WeaponSet Ikenga_Axe')
 	send_command('bind @4 input /equip main; gs c set WeaponSet Naegling')
@@ -645,37 +646,37 @@ function init_gear_sets()
 	--Sword Weapon Skills
 
 	sets.precast.WS['Savage Blade'] = {
-		ammo="Knobkierrie",
-		head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Boii Mufflers +3",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="War. Beads +2", augments={'Path: A',}},
+		neck="Rep. Plat. Medal",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Thrud Earring",
+		left_ear="Thrud Earring",
+		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		left_ring="Epaminondas's Ring",
 		right_ring="Sroda Ring",
-		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		back="Shadow Mantle",}
 		
 	sets.precast.WS['Savage Blade'].ATKCAP = {
-		ammo="Knobkierrie",
-		head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},
-		body={ name="Sakpata's Plate", augments={'Path: A',}},
-		hands="Boii Mufflers +3",
-		legs="Boii Cuisses +3",
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="War. Beads +2", augments={'Path: A',}},
+		neck="Rep. Plat. Medal",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Thrud Earring",
+		left_ear="Thrud Earring",
+		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		left_ring="Epaminondas's Ring",
 		right_ring="Sroda Ring",
-		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		back="Shadow Mantle",}
 	
-	sets.precast.WS['Seraph Blade'] = {
-		ammo="Knobkierrie",
+	sets.precast.WS['Aeolian Edge'] = {
+		ammo="Staunch Tathlum +1",
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
@@ -687,7 +688,7 @@ function init_gear_sets()
 		right_ear="Friomisi Earring",
 		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		right_ring="Epaminondas's Ring",
-		back={ name="Cichol's Mantle", augments={'STR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','Weapon skill damage +10%',}},}
+		back="Shadow Mantle",}
 		
 	sets.precast.WS['Red Lotus Blade'] = sets.precast.WS['Seraph Blade']
 
@@ -829,34 +830,112 @@ function init_gear_sets()
     -- * NIN Subjob DW Trait: +25%
 
     -- No Magic Haste (74% DW to cap)
-    sets.engaged.DW = {}
+    sets.engaged.DW = {
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head="Malignance Chapeau",
+		body={ name="Gleti's Cuirass", augments={'Path: A',}},
+		hands="Malignance Gloves",
+		legs="Malignance Tights",
+		feet="Malignance Boots",
+		neck="Anu Torque",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Telos Earring",
+		right_ear="Sherida Earring",
+		left_ring="Epona's Ring",
+		right_ring="Gere Ring",
+		back="Shadow Mantle",}
 
     sets.engaged.DW.Acc = {}
 
     -- 15% Magic Haste (67% DW to cap)
-    sets.engaged.DW.LowHaste = {}
+    sets.engaged.DW.LowHaste = {
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head="Malignance Chapeau",
+		body={ name="Gleti's Cuirass", augments={'Path: A',}},
+		hands="Malignance Gloves",
+		legs="Malignance Tights",
+		feet="Malignance Boots",
+		neck="Anu Torque",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Telos Earring",
+		right_ear="Sherida Earring",
+		left_ring="Epona's Ring",
+		right_ring="Gere Ring",
+		back="Shadow Mantle",}
 
     sets.engaged.DW.Acc.LowHaste = {}
 
     -- 30% Magic Haste (56% DW to cap)
-    sets.engaged.DW.MidHaste = {}
+    sets.engaged.DW.MidHaste = {
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head="Malignance Chapeau",
+		body={ name="Gleti's Cuirass", augments={'Path: A',}},
+		hands="Malignance Gloves",
+		legs="Malignance Tights",
+		feet="Malignance Boots",
+		neck="Anu Torque",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Telos Earring",
+		right_ear="Sherida Earring",
+		left_ring="Epona's Ring",
+		right_ring="Gere Ring",
+		back="Shadow Mantle",}
 
     sets.engaged.DW.Acc.MidHaste = {}
 
     -- 35% Magic Haste (51% DW to cap)
-    sets.engaged.DW.HighHaste = {}
+    sets.engaged.DW.HighHaste = {
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head="Malignance Chapeau",
+		body={ name="Gleti's Cuirass", augments={'Path: A',}},
+		hands="Malignance Gloves",
+		legs="Malignance Tights",
+		feet="Malignance Boots",
+		neck="Anu Torque",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Telos Earring",
+		right_ear="Sherida Earring",
+		left_ring="Epona's Ring",
+		right_ring="Gere Ring",
+		back="Shadow Mantle",}
 
     sets.engaged.DW.Acc.HighHaste = {}
 
 
     -- 45% Magic Haste (36% DW to cap) for /Nin
-    sets.engaged.DW.MaxHaste = {}
+    sets.engaged.DW.MaxHaste = {
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head="Malignance Chapeau",
+		body={ name="Gleti's Cuirass", augments={'Path: A',}},
+		hands="Malignance Gloves",
+		legs="Malignance Tights",
+		feet="Malignance Boots",
+		neck="Anu Torque",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Telos Earring",
+		right_ear="Sherida Earring",
+		left_ring="Epona's Ring",
+		right_ring="Gere Ring",
+		back="Shadow Mantle",}
     
 	sets.engaged.DW.Acc.MaxHaste = {}
 		
 	-- 45% Magic Haste (36% DW to cap) for /DNC
 	
-	sets.engaged.DW.MaxHastePlus = {}
+	sets.engaged.DW.MaxHastePlus = {
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head="Malignance Chapeau",
+		body={ name="Gleti's Cuirass", augments={'Path: A',}},
+		hands="Malignance Gloves",
+		legs="Malignance Tights",
+		feet="Malignance Boots",
+		neck="Anu Torque",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Telos Earring",
+		right_ear="Sherida Earring",
+		left_ring="Epona's Ring",
+		right_ring="Gere Ring",
+		back="Shadow Mantle",}
     
 	sets.engaged.DW.Acc.MaxHastePlus = {}
 	
@@ -934,8 +1013,8 @@ function init_gear_sets()
 
 	--Weaponsets
 
-	sets.Agwu = {main="Agwu's Axe", sub="Adapa Shield",}
-	sets.Agwu.DW = {main="Agwu's Axe", sub="Ikenga's Axe",}	
+	sets.MACC_Axe = {main="Agwu's Axe", sub="Adapa Shield",}
+	sets.MACC_Axe.DW = {main="Agwu's Axe", sub="Ikenga's Axe",}	
 	sets.Dolichenus = {main="Kaja Axe", sub="Adapa Shield",}
 	sets.Dolichenus.DW = {main="Kaja Axe", sub="Ikenga's Axe",}
 	sets.Ikenga_Axe = {main="Ikenga's Axe", sub="Adapa Shield",}
@@ -1030,39 +1109,16 @@ function job_buff_change(buff,gain)
 
 end
 
+function Weapon_Change(field, new_value, old_value)
 
--------------------------------------------------------------------------------------------------------------------
--- Code for Melee sets
--------------------------------------------------------------------------------------------------------------------
-
--- Handles Gearinfo / Melee / Weapon / Range Sets
-function job_handle_equipping_gear(playerStatus, eventArgs)
-    update_combat_form()
-    determine_haste_group()
-	check_moving()
-end
-
-function job_update(cmdParams, eventArgs)
-	check_gear()
-    handle_equipping_gear(player.status)
-end
-
-	--Determines Dual Wield melee set
-function update_combat_form()
-    if DW == true then
-        state.CombatForm:set('DW')
-    elseif DW == false then
-        state.CombatForm:reset()
-    end
-
-	if state.WeaponSet.value == 'Agwu' then
+	if state.WeaponSet.value == 'MACC_Axe' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			equip(sets.Agwu.DW)
+			equip(sets.MACC_Axe.DW)
 		else
-			equip(sets.Agwu)
+			equip(sets.MACC_Axe)
 		end
 	end
-
+	
 	if state.WeaponSet.value == 'Dolichenus' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
 			equip(sets.Dolichenus.DW)
@@ -1070,7 +1126,7 @@ function update_combat_form()
 			equip(sets.Dolichenus)
 		end
 	end
-	
+
 	if state.WeaponSet.value == 'Ikenga_Axe' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
 			equip(sets.Ikenga_Axe.DW)
@@ -1095,6 +1151,36 @@ function update_combat_form()
 		end
 	end
 	
+end
+
+
+-------------------------------------------------------------------------------------------------------------------
+-- Code for Melee sets
+-------------------------------------------------------------------------------------------------------------------
+
+-- Handles Gearinfo / Melee / Weapon / Range Sets
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    update_combat_form()
+    determine_haste_group()
+	check_moving()
+	Weapon_Change()
+end
+
+function job_update(cmdParams, eventArgs)
+	check_gear()
+    handle_equipping_gear(player.status)
+end
+
+	--Determines Dual Wield melee set
+function update_combat_form()
+
+    if DW == true then
+        state.CombatForm:set('DW')
+    elseif DW == false then
+        state.CombatForm:reset()
+    end
+
+
 end
 
 function customize_idle_set(idleSet)
