@@ -616,6 +616,7 @@ function init_gear_sets()
 	sets.precast.WS['Steel Cyclone'] = sets.precast.WS['Resolution']
     sets.precast.WS['Upheaval'] = sets.precast.WS['Resolution']
 
+	--[[
 	sets.precast.WS['Dimidiation'] = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
@@ -629,6 +630,22 @@ function init_gear_sets()
 		right_ear="Sherida Earring",
 		left_ring="Regal Ring",
 		right_ring="Niqmaddu Ring",
+		back={ name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
+		]]
+		
+	sets.precast.WS['Dimidiation'] = {
+		ammo="Yamarang",
+		head="Erilaz Galea +3",
+		body="Erilaz Surcoat +3",
+		hands="Erilaz Gauntlets +3",
+		legs="Eri. Leg Guards +3",
+		feet="Erilaz Greaves +3",
+		neck="Combatant's Torque",
+		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
+		left_ear="Odr Earring",
+		right_ear="Mache Earring +1",
+		left_ring="Chirich Ring +1",
+		right_ring="Chirich Ring +1",
 		back={ name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
 		
 	sets.precast.WS['Dimidiation'].FullTP = {left_ear="Odr Earring",}

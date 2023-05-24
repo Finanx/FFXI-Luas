@@ -47,9 +47,10 @@
 --  Modes:      	[ CTRL + ` ]			Toggles Song Mode (Regular, Dummy)
 --					[ Windows + 1 ]			Sets Weapon to Naegling then locks Main/Sub Slots
 --					[ Windows + 2 ]			Sets Weapon to Carnwenhan then locks Main/Sub Slots
---					[ Windows + 3 ]			Sets Weapon to Tauret then locks Main/Sub Slots
---					[ Windows + 4 ]			Sets Weapon to Twashtar then locks Main/Sub Slots
---					[ Windows + 5 ]			Sets Weapon to Xoanon then locks Main/Sub Slots
+--					[ Windows + 3 ]			Sets Weapon to Twashtar then locks Main/Sub Slots
+--					[ Windows + 4 ]			Sets Weapon to Mandau then locks Main/Sub Slots
+--					[ Windows + 5 ]			Sets Weapon to Tauret then locks Main/Sub Slots
+--					[ Windows + 6 ]			Sets Weapon to Xoanon then locks Main/Sub Slots
 --
 --  WS:         	[ CTRL + Numpad1 ]    	Evisceration
 --              	[ CTRL + Numpad2 ]    	Rudra's Storm
@@ -114,7 +115,7 @@ function user_setup()
 	state.TreasureMode:options('Tag', 'None')
 	state.SongMode = M{['description']='Song Mode', 'None', 'Placeholder'}
 	state.SongEnmity = M{['description']='Song Enmity', 'None', 'Enmity'}
-	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Carnwenhan', 'Twashtar', 'Tauret', 'Xoanon'}
+	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Carnwenhan', 'Twashtar', 'Mandau', 'Tauret', 'Xoanon'}
 	
     state.CP = M(false, "Capacity Points Mode")
 	state.TPBonus = M(true, 'TP Bonus')
@@ -149,6 +150,7 @@ function user_setup()
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @t gs c cycle TreasureMode')
 	send_command('bind @b gs c toggle TPBonus')
+	send_command('bind ^space tc nearest')
 	
 	send_command('bind !` input //gs c Threnody')
     send_command('bind !- gs c cycleback Threnody')
@@ -188,9 +190,10 @@ function user_setup()
 		input /echo [ Windows + W ]	Sets Weapon to None;
 		input /echo [ Windows + 1 ]	Sets Weapon to Naegling;
 		input /echo [ Windows + 2 ]	Sets Weapon to Carnwenhan;
-		input /echo [ Windows + 3 ]	Sets Weapon to Tauret;
-		input /echo [ Windows + 4 ]	Sets Weapon to Twashtar;
-		input /echo [ Windows + 5 ]	Sets Weapon to Xoanon;
+		input /echo [ Windows + 3 ]	Sets Weapon to Twashtar;
+		input /echo [ Windows + 4 ]	Sets Weapon to Mandau;
+		input /echo [ Windows + 5 ]	Sets Weapon to Tauret;
+		input /echo [ Windows + 6 ]	Sets Weapon to Xoanon;
 		input /echo -----Toggles-----;
 		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
 		input /echo [ Windows + D ]	Unloads then reloads dressup;
@@ -228,9 +231,10 @@ function user_setup()
 
 	send_command('bind @1 gs c set WeaponSet Naegling')
 	send_command('bind @2 gs c set WeaponSet Carnwenhan')
-	send_command('bind @3 gs c set WeaponSet Tauret')
-	send_command('bind @4 gs c set WeaponSet Twashtar')
-	send_command('bind @5 gs c set WeaponSet Xoanon')
+	send_command('bind @3 gs c set WeaponSet Twashtar')
+	send_command('bind @4 gs c set WeaponSet Mandau')
+	send_command('bind @5 gs c set WeaponSet Tauret')
+	send_command('bind @6 gs c set WeaponSet Xoanon')
 	send_command('bind @w input /equip sub; gs c set WeaponSet None')
 	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -306,6 +310,7 @@ function user_unload()
     send_command('unbind @c')
 	send_command('unbind @t')
 	send_command('unbind @b')
+	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
 	send_command('unbind ^=')
@@ -438,7 +443,7 @@ function init_gear_sets()
     sets.precast.FC.BardSong = {
 		main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
 		sub="Genmei Shield",
-		head="Fili Calot +2",
+		head="Fili Calot +3",
 		body="Inyanga Jubbah +2",
 		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
 		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
@@ -581,8 +586,8 @@ function init_gear_sets()
 		
 	sets.precast.WS['Shell Crusher'] = {
 		range={ name="Linos", augments={'Accuracy+12 Attack+12','Weapon skill damage +3%','DEX+8',}},
-		head="Fili Calot +2",
-		body="Fili Hongreline +2",
+		head="Fili Calot +3",
+		body="Fili Hongreline +3",
 		hands="Fili Manchettes +2",
 		legs="Fili Rhingrave +2",
 		feet="Fili Cothurnes +2",
@@ -672,8 +677,8 @@ function init_gear_sets()
 	sets.midcast.SongEnhancing = {
 		main={ name="Carnwenhan", augments={'Path: A',}},
 		sub={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
-		head="Fili Calot +2",
-		body="Fili Hongreline +2",
+		head="Fili Calot +3",
+		body="Fili Hongreline +3",
 		hands="Fili Manchettes +2",
 		legs="Inyanga Shalwar +2",
 		feet="Brioso Slippers +3",
@@ -698,8 +703,8 @@ function init_gear_sets()
 	sets.midcast.Paeon = set_combine(sets.midcast.SongEnhancing, {head="Brioso Roundlet +3"})
 	sets.midcast.Ballad = set_combine(sets.midcast.SongEnhancing, {})
 	sets.midcast.Minne = set_combine(sets.midcast.SongEnhancing, {})
-	sets.midcast.Minuet = set_combine(sets.midcast.SongEnhancing, {body="Fili Hongreline +2"})
-	sets.midcast.Madrigal = set_combine(sets.midcast.SongEnhancing, {head="Fili Calot +2"})
+	sets.midcast.Minuet = set_combine(sets.midcast.SongEnhancing, {body="Fili Hongreline +3"})
+	sets.midcast.Madrigal = set_combine(sets.midcast.SongEnhancing, {head="Fili Calot +3"})
 	sets.midcast.HonorMarch = set_combine(sets.midcast.SongEnhancing, {range="Marsyas", hands="Fili Manchettes +2"})
 	sets.midcast.March = set_combine(sets.midcast.SongEnhancing, {hands="Fili Manchettes +2"})
 	sets.midcast.Etude = set_combine(sets.midcast.SongEnhancing, {head="Mousai Turban +1",})
@@ -714,7 +719,7 @@ function init_gear_sets()
 		sub="Ammurapi Shield",
 		range="Gjallarhorn",
 		head="Brioso Roundlet +3",
-		body="Fili Hongreline +2",
+		body="Fili Hongreline +3",
 		hands="Fili Manchettes +2",
 		legs="Fili Rhingrave +2",
 		feet="Brioso Slippers +3",
@@ -752,7 +757,7 @@ function init_gear_sets()
 		sub="Ammurapi Shield",
 		range="Marsyas",
 		head="Brioso Roundlet +3",
-		body="Fili Hongreline +2",
+		body="Fili Hongreline +3",
 		hands="Brioso Cuffs +3",
 		legs="Inyanga Shalwar +2",
 		feet="Brioso Slippers +3",
@@ -929,7 +934,7 @@ function init_gear_sets()
 		sub="Ammurapi Shield",
 		range="Gjallarhorn",
 		head="Brioso Roundlet +3",
-		body="Fili Hongreline +2",
+		body="Fili Hongreline +3",
 		hands="Fili Manchettes +2",
 		legs="Fili Rhingrave +2",
 		feet="Brioso Slippers +3",
@@ -1274,13 +1279,17 @@ function init_gear_sets()
 	sets.Naegling_Centovente = {main="Naegling", sub="Fusetto +2",}
 	sets.Naegling.SW = {main="Naegling", sub="Genmei Shield"}
 	
-	sets.Carnwenhan = {main="Carnwenhan", sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Carnwenhan = {main="Carnwenhan", sub="Crepuscular Knife",}
 	sets.Carnwenhan_Centovente = {main="Carnwenhan", sub="Fusetto +2",}
 	sets.Carnwenhan.SW = {main="Carnwenhan", sub="Genmei Shield"}
 	
 	sets.Twashtar = {main="Twashtar", sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	sets.Twashtar_Centovente = {main="Twashtar", sub="Fusetto +2",}
 	sets.Twashtar.SW = {main="Twashtar", sub="Genmei Shield"}
+	
+	sets.Mandau = {main="Mandau", sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Mandau_Centovente = {main="Mandau", sub="Fusetto +2",}
+	sets.Mandau.SW = {main="Mandau", sub="Genmei Shield"}
 	
 	sets.Tauret = {main="Tauret", sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	sets.Tauret_Centovente = {main="Tauret", sub="Fusetto +2",}
@@ -1500,6 +1509,24 @@ function job_state_change(stateField, newValue, oldValue)
 		else
 			enable('main','sub')
 			equip(sets.Twashtar.SW)
+			disable('main','sub')
+		end
+	end
+	
+	if state.WeaponSet.value == 'Mandau' then
+		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+			if state.TPBonus.value == true then
+				enable('main','sub')
+				equip(sets.Mandau_Centovente)
+				disable('main','sub')
+			else
+				enable('main','sub')
+				equip(sets.Mandau)
+				disable('main','sub')
+			end	
+		else
+			enable('main','sub')
+			equip(sets.Mandau.SW)
 			disable('main','sub')
 		end
 	end

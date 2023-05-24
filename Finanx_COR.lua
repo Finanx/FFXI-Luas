@@ -35,7 +35,7 @@
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
 --					[ ALT + Numpad+ ]		Dimensional Ring Dem
 --
--- Range Script:	[ CTRL + Numpad0 ]
+-- Range Script:	[ CTRL + Numpad0 ] 		Ranged Attack
 --
 -- Toggles:			[ Windows + U ]			Stops Gear Swap from constantly updating gear
 --					[ Windows + D ]			Unloads Dressup then reloads to change lockstyle
@@ -544,7 +544,22 @@ function init_gear_sets()
 		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Crit.hit rate+7','STR+11 AGI+11',}},
 		left_ring="Dingir Ring",
 		right_ring="Regal Ring",
-		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},}
+		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},}		
+		
+	sets.precast.WS['Last Stand'].Acc = {
+		ammo=gear.RAbullet,
+		head="Malignance Chapeau",
+		body="Laksa. Frac +3",
+		hands="Malignance Gloves",
+		legs="Chas. Culottes +3",
+		feet="Malignance Boots",
+		neck={ name="Comm. Charm +2", augments={'Path: A',}},
+		waist="K. Kachina Belt +1",
+		left_ear="Telos Earring",
+		right_ear="Crep. Earring",
+		left_ring="Regal Ring",
+		right_ring={ name="Cacoethic Ring +1", augments={'Path: A',}},
+		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10',}},}
 		
 	sets.precast.WS['Last Stand'].FullTP = {left_ear="Odr Earring",}
 	sets.precast.WS['Detonator'] = sets.precast.WS['Last Stand']
@@ -613,6 +628,21 @@ function init_gear_sets()
 		left_ring="Begrudging Ring",
 		right_ring="Mummu Ring",
 		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}
+		
+    sets.precast.WS['Exenterator'] = {
+		ammo=gear.WSbullet,
+		head="Chass. Tricorne +3",
+		body="Chasseur's Frac +3",
+		hands="Chasseur's Gants +3",
+		legs="Chas. Culottes +3",
+		feet="Chass. Bottes +3",
+		neck="Combatant's Torque",
+		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
+		left_ear="Odr Earring",
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Crit.hit rate+7','STR+11 AGI+11',}},
+		left_ring="Chirich Ring +1",
+		right_ring="Chirich Ring +1",
+		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}
 
     sets.precast.WS['Savage Blade'] = {
 		ammo=gear.WSbullet,

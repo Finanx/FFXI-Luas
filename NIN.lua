@@ -17,7 +17,7 @@
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
 --
--- Item Binds:		[ Shift + Numpad1 ]		/echo Drop
+-- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
 --					[ Shift + Numpad2 ]		Holy Water
 --					[ Shift + Numpad3 ]		Remedy
 --					[ Shift + Numpad4 ]		Panacea
@@ -45,6 +45,7 @@
 -------------------------------------------------------------------------------------------------------------------
 --
 --	Modes:			[ Windows + M ]			Toggles Magic Burst Mode
+--					[ Windows + B ]			Toggles TP Bonus Mode
 --					[ Windows + 1 ]			Sets Weapon to Heishi
 --					[ Windows + 2 ]			Sets Weapon to Gokotai
 --					[ Windows + 3 ]			Sets Weapon to Naegling
@@ -142,6 +143,7 @@ function user_setup()
 	send_command('bind @d input //lua u dressup; wait 10; input //lua l dressup')
 	send_command('bind @t gs c cycle TreasureMode')
     send_command('bind @c gs c toggle CP')
+	send_command('bind @b gs c toggle TPBonus')
 	send_command('bind @m gs c toggle MagicBurst')
 	send_command('bind ^` input /ja "Yonin" <me>')
 	send_command('bind !` input /ja "Innin" <me>')
@@ -165,6 +167,7 @@ function user_setup()
 		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
 		input /echo -----Modes-----;
 		input /echo [ Windows + M ]	Toggles Magic Burst Mode;
+		input /echo [ Windows + B ]	Toggles TP Bonus Mode;
 		input /echo [ Windows + 1 ]	Sets Weapon to Heishi;
 		input /echo [ Windows + 2 ]	Sets Weapon to Gokotai;
 		input /echo [ Windows + 3 ]	Sets Weapon to Naegling;
@@ -302,6 +305,8 @@ function user_unload()
     send_command('unbind @t')
 	send_command('unbind @c')
     send_command('unbind @m')
+	send_command('unbind @w')
+	send_command('unbind @b')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
 	send_command('unbind ^=')
@@ -508,6 +513,9 @@ function init_gear_sets()
 		left_ring="Sroda Ring",
 		right_ring="Epaminondas's Ring",
 		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		
+	sets.precast.WS.FullTPPhysical = {left_ear={ name="Lugra Earring +1", augments={'Path: A',}},right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Store TP"+4',}},}
+	sets.precast.WS.FullTPMagical = {left_ear={ name="Lugra Earring +1", augments={'Path: A',}},right_ear="Friomisi Earring",}
 
     sets.precast.WS['Blade: Hi'] = {
 		ammo="Yetshila +1",
@@ -598,7 +606,7 @@ function init_gear_sets()
 		left_ring="Sroda Ring",
 		right_ring="Epaminondas's Ring",
 		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-
+		
     sets.precast.WS['Blade: Shun'] = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Mpaca's Cap", augments={'Path: A',}},
@@ -661,7 +669,7 @@ function init_gear_sets()
 
     sets.precast.WS['Blade: Kamu'] = {
 		ammo={ name="Seeth. Bomblet +1", augments={'Path: A',}},
-		head={ name="Nyame Helm", augments={'Path: B',}},
+		head={ name="Mpaca's Cap", augments={'Path: A',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
@@ -758,7 +766,7 @@ function init_gear_sets()
 		right_ear={ name="Lugra Earring +1", augments={'Path: A',}},
 		left_ring="Gere Ring",
 		right_ring="Regal Ring",
-		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10',}},}
+		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}
 		
 	sets.precast.WS['Evisceration'].ATKCAP = {
 		ammo="Yetshila +1",
@@ -773,7 +781,7 @@ function init_gear_sets()
 		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Store TP"+4',}},
 		left_ring="Gere Ring",
 		right_ring="Begrudging Ring",
-		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10',}},}
+		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}
 		
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
@@ -1054,8 +1062,8 @@ function init_gear_sets()
 
 	sets.Heishi = {main="Kunimitsu",sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	sets.Heishi_Hitaki = {main="Kunimitsu",sub={ name="Gleti's Knife", augments={'Path: A',}},}
-	sets.Gokotai = {main="Kunimitsu",sub={ name="Gleti's Knife", augments={'Path: A',}},}
-	sets.Gokotai_Hitaki = {main="Kunimitsu",sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Gokotai = {main="Gokotai",sub={ name="Kunimitsu", augments={'Path: A',}},}
+	sets.Gokotai_Hitaki = {main="Gokotai",sub={ name="Kunimitsu", augments={'Path: A',}},}
 	sets.Naegling = {main="Naegling",sub="Kunimitsu",}
 	sets.Naegling_Hitaki = {main="Naegling",sub="Kunimitsu",}
 	sets.Gletis_Knife = {main={ name="Gleti's Knife", augments={'Path: A',}},sub="Kunimitsu",}
@@ -1102,11 +1110,63 @@ end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
 
-		--handles Weaponskill events
-    if spell.type == 'WeaponSkill' then
-	
-		
-    end
+    if spell.type == "WeaponSkill" then
+		if spell.english == "Blade: Hi" or spell.english == "Blade: Ku" or spell.english == "Blade: Kamu" or spell.english == "Sanguine Blade" or spell.english == "Evisceration" then
+		else
+			if state.WeaponSet.value == "Heishi" then
+				if state.TPBonus.value == true then
+					if player.tp > 1400 then
+						if spell.english == "Blade: Chi" or spell.english == "Blade: Teki" or spell.english == "Blade: To" or spell.english == "Blade: Ei" or spell.english == "Blade: Yu" or 
+							spell.english == "Tachi: Jinpu" or spell.english == "Tachi: Kagero" or spell.english == "Tachi: Goten" or spell.english == "Tachi: Koki" or spell.english == "Aeolian Edge" then
+								equip(sets.precast.WS.FullTPMagical)
+						else
+							equip(sets.precast.WS.FullTPPhysical)
+						end
+					end
+				else
+					if player.tp > 2400 then
+						if spell.english == "Blade: Chi" or spell.english == "Blade: Teki" or spell.english == "Blade: To" or spell.english == "Blade: Ei" or spell.english == "Blade: Yu" or 
+							spell.english == "Tachi: Jinpu" or spell.english == "Tachi: Kagero" or spell.english == "Tachi: Goten" or spell.english == "Tachi: Koki" or spell.english == "Aeolian Edge" then
+								equip(sets.precast.WS.FullTPMagical)
+						else
+							equip(sets.precast.WS.FullTPPhysical)
+						end
+					end
+				end
+			end
+			if state.WeaponSet.value == "Gokotai" or state.WeaponSet.value == "Naegling" or state.WeaponSet.value == "Gletis_Knife" then
+				if state.TPBonus.value == true then
+					if player.tp > 1900 then
+						if spell.english == "Blade: Chi" or spell.english == "Blade: Teki" or spell.english == "Blade: To" or spell.english == "Blade: Ei" or spell.english == "Blade: Yu" or 
+							spell.english == "Tachi: Jinpu" or spell.english == "Tachi: Kagero" or spell.english == "Tachi: Goten" or spell.english == "Tachi: Koki" or spell.english == "Aeolian Edge" then
+								equip(sets.precast.WS.FullTPMagical)
+						else
+							equip(sets.precast.WS.FullTPPhysical)
+						end
+					end
+				else
+					if player.tp > 2900 then
+						if spell.english == "Blade: Chi" or spell.english == "Blade: Teki" or spell.english == "Blade: To" or spell.english == "Blade: Ei" or spell.english == "Blade: Yu" or 
+							spell.english == "Tachi: Jinpu" or spell.english == "Tachi: Kagero" or spell.english == "Tachi: Goten" or spell.english == "Tachi: Koki" or spell.english == "Aeolian Edge" then
+								equip(sets.precast.WS.FullTPMagical)
+						else
+							equip(sets.precast.WS.FullTPPhysical)
+						end
+					end
+				end
+			end
+			if state.WeaponSet.value == "Kaja_Tachi" or state.WeaponSet.value == "Hachimonji" then
+				if player.tp > 2900 then
+					if spell.english == "Blade: Chi" or spell.english == "Blade: Teki" or spell.english == "Blade: To" or spell.english == "Blade: Ei" or spell.english == "Blade: Yu" or 
+						spell.english == "Tachi: Jinpu" or spell.english == "Tachi: Kagero" or spell.english == "Tachi: Goten" or spell.english == "Tachi: Koki" or spell.english == "Aeolian Edge" then
+							equip(sets.precast.WS.FullTPMagical)
+					else
+						equip(sets.precast.WS.FullTPPhysical)
+					end
+				end
+			end
+		end
+	end
 end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)

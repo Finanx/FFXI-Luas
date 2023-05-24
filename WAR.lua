@@ -423,8 +423,6 @@ function init_gear_sets()
     sets.precast.FC = {
         }
 
-    -- (10% Snapshot from JP Gifts)
-		
 		
 	sets.precast.RA = {
 		range="Trollbane",

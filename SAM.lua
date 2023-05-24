@@ -543,10 +543,10 @@ function init_gear_sets()
 
     sets.precast.WS['Tachi: Ageha'] = {
 		ammo="Pemphredo Tathlum",
-		head="Kasuga Kabuto +2",
-		body="Kasuga Domaru +2",
+		head="Kasuga Kabuto +3",
+		body="Kasuga Domaru +3",
 		hands="Kasuga Kote +3",
-		legs="Kasuga Haidate +2",
+		legs="Kasuga Haidate +3",
 		feet="Kas. Sune-Ate +2",
 		neck="Sanctity Necklace",
 		waist="Eschan Stone",
@@ -659,10 +659,10 @@ function init_gear_sets()
 
     sets.engaged = {
 		ammo="Aurgelmir Orb +1",
-		head="Kasuga Kabuto +2",
-		body="Kasuga Domaru +2",
+		head="Kasuga Kabuto +3",
+		body="Kasuga Domaru +3",
 		hands={ name="Tatena. Gote +1", augments={'Path: A',}},
-		legs="Kasuga Haidate +2",
+		legs="Kasuga Haidate +3",
 		feet={ name="Ryuo Sune-Ate +1", augments={'HP+65','"Store TP"+5','"Subtle Blow"+8',}},
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
 		waist="Sweordfaetels +1",
@@ -674,10 +674,10 @@ function init_gear_sets()
 
 	sets.engaged.Acc = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Kasuga Kabuto +2",
-		body="Kasuga Domaru +2",
+		head="Kasuga Kabuto +3",
+		body="Kasuga Domaru +3",
 		hands={ name="Tatena. Gote +1", augments={'Path: A',}},
-		legs="Kasuga Haidate +2",
+		legs="Kasuga Haidate +3",
 		feet={ name="Tatena. Sune. +1", augments={'Path: A',}},
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
 		waist="Ioskeha Belt +1",
@@ -689,7 +689,7 @@ function init_gear_sets()
 		
 	sets.engaged.Subtle_Blow = {
 		ammo="Aurgelmir Orb +1",
-		head="Kasuga Kabuto +2",
+		head="Kasuga Kabuto +3",
 		body="Dagon Breast.",
 		hands="Wakido Kote +3",
 		legs={ name="Mpaca's Hose", augments={'Path: A',}},
@@ -703,10 +703,10 @@ function init_gear_sets()
 		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 		
 	sets.engaged.Hybrid = {
-		head="Kasuga Kabuto +2",
-		body="Kasuga Domaru +2",
+		head="Kasuga Kabuto +3",
+		body="Kasuga Domaru +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs="Kasuga Haidate +2",
+		legs="Kasuga Haidate +3",
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},}
 		--46% DT + 6% PDT
 	

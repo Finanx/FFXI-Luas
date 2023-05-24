@@ -49,8 +49,8 @@
 --
 --	Weapons:		[ Windows: + 1 ]		MACC_Axe Weapon Set
 --					[ Windows: + 2 ]		Dolichenus Weapon Set
---					[ Windows: + 4 ]		Ikenga_Axe Weapon Set
---					[ Windows: + 3 ]		Naegling Weapon Set
+--					[ Windows: + 3 ]		Ikenga_Axe Weapon Set
+--					[ Windows: + 4 ]		Naegling Weapon Set
 --					[ Windows: + 5 ]		Malevolence Weapon Set
 --
 --	Weaponskills:	[ CTRL + Numpad1 ]		Upheaval
@@ -87,20 +87,20 @@ function job_setup()
 
 -- INPUT PREFERRED JUG PETS HERE
 	state.JugPet = M{['description']='Current Jug Pet', 
-		'Dire Broth',				--slugman
-		'Bubbly Broth', 			--cricket
-		'C. Plasma Broth',			--leech
-		'Lyrical Broth',			--sheep
-		'Fizzy Broth',				--pig
-		--'Salubrious Broth',		--pink bird
-		--'Meaty Broth',			--tiger
-		--'Rancid Broth',			--crab
-		--'Poisonous Broth',		--acuex
-		--'Livid Broth',			--lizard
-		--'Blackwater Broth',		--fly
-		--'Turpid Broth',			--hippo
-		--'Decaying Broth',			--slime
-	}	
+		'Slug', 
+		'Cricket', 
+		'Leech', 
+		--'Sheep', 
+		--'Pig', 
+		--'Pink Bird', 
+		--'Tiger',
+		--'Crab',
+		--'Acuex',
+		--'Lizard',
+		--'Fly',
+		--'Hippo',
+		--'Slime',
+		}	
 	
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
 					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox's Ring"}
@@ -114,7 +114,7 @@ function job_setup()
 
 
 
-    lockstyleset = 18
+    lockstyleset = 4
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -140,30 +140,26 @@ ready_moves_to_check = S{'Sic','Whirl Claws','Dust Cloud','Foot Kick','Sheep Son
     'Pecking Flurry','Pestilent Plume','Foul Waters','Spider Web','Sickle Slash','Frogkick','Ripper Fang','Scythe Tail','Chomp Rush'}
 
 		
-mab_ready_moves = S{'Cursed Sphere','Venom','Toxic Spit',
-	 'Venom Spray','Bubble Shower',
-	 'Fireball','Plague Breath',
-	 'Snow Cloud','Acid Spray','Silence Gas','Dark Spore',
-	 'Charged Whisker','Purulent Ooze','Aqua Breath','Stink Bomb',
-	 'Nectarous Deluge','Nepenthic Plunge','Foul Waters','Dust Cloud','Sheep Song','Scream','Dream Flower','Roar','Gloeosuccus','Palsy Pollen',
-	 'Soporific','Geist Wall','Numbing Noise','Spoil','Hi-Freq Field',
-	 'Sandpit','Sandblast','Filamented Hold',
-	 'Spore','Infrasonics','Chaotic Eye',
-	 'Blaster','Intimidate','Noisome Powder','TP Drainkiss','Jettatura','Spider Web',
-	 'Corrosive Ooze','Molting Plumage','Swooping Frenzy',
-	 'Pestilent Plume',}
+mab_ready_moves = S{'Cursed Sphere','Venom','Toxic Spit','Venom Spray','Bubble Shower','Fireball','Plague Breath',
+	'Snow Cloud','Acid Spray','Silence Gas','Dark Spore','Charged Whisker','Aqua Breath','Stink Bomb','Nectarous Deluge',
+	'Nepenthic Plunge','Foul Waters','Dust Cloud','Sheep Song','Scream','Dream Flower','Roar','Gloeosuccus','Palsy Pollen',
+	'Soporific','Geist Wall','Numbing Noise','Spoil','Hi-Freq Field','Sandpit','Sandblast','Filamented Hold','Spore',
+	'Infrasonics','Chaotic Eye', 'Blaster','Intimidate','Noisome Powder','TP Drainkiss','Jettatura','Spider Web',
+	'Corrosive Ooze','Molting Plumage','Swooping Frenzy','Pestilent Plume',}
+	
+macc_ready_moves = S{'Purulent Ooze',}
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    state.OffenseMode:options('Normal', 'Pet')
+    state.OffenseMode:options('Normal')
     state.HybridMode:options('Normal', 'DT')
     state.RangedMode:options('Normal', 'Acc')
     state.WeaponskillMode:options('Normal', 'ATKCAP')
 	state.CorrelationMode = M{['description']='Correlation Mode', 'Neutral', 'HighAcc', 'MaxAcc',}
     state.CastingMode:options('Normal', 'Resistant')
-    state.IdleMode:options('Normal')
+    state.IdleMode:options('Normal', 'Pet', 'Killer')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'MACC_Axe', 'Dolichenus', 'Ikenga_Axe', 'Naegling', 'Malevolence'}
+	state.WeaponSet = M{['description']='Weapon Set', 'None', 'MACC_Axe', 'Dolichenus', 'Ikenga_Axe', 'Naegling', 'Malevolence'}
 	state.Reraise = M(false, "Reraise Mode")
 	
 
@@ -182,6 +178,8 @@ function user_setup()
 	send_command('bind @t gs c cycle TreasureMode')
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @r gs c toggle Reraise')
+	send_command('bind ^- gs c cycleback JugPet')
+    send_command('bind ^= gs c cycle JugPet')	
 	
 	--Command to show global binds in game[ CTRL + numpad- ]
 	send_command([[bind ^numpad- 
@@ -202,6 +200,7 @@ function user_setup()
 		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
 		input /echo -----Modes-----;
 		input /echo [ Windows + R ]	Puts Reraise Set on;
+		input /echo [ Windows + W ]	Sets Weapon to None;
 		input /echo [ Windows + 1 ]	Sets Weapon to MACC_Axe;
 		input /echo [ Windows + 2 ]	Sets Weapon to Dolichenus;
 		input /echo [ Windows + 3 ]	Sets Weapon to Ikenga_Axe;
@@ -216,14 +215,14 @@ function user_setup()
 	send_command([[bind !numpad- 
 		input /echo -----Abilities-----;
 		input /echo  
-		input /echo -----Great_Axe-----;
-		input /echo [ CTRL + Numpad1 ] Upheaval;
-		input /echo [ CTRL + Numpad2 ] Ukko's Fury;
-		input /echo [ CTRL + Numpad3 ] Armor Break;
-		input /echo [ CTRL + Numpad4 ] Fell Cleave;
-		input /echo [ CTRL + Numpad5 ] Steel Cyclone;
-		input /echo [ CTRL + Numpad6 ] King's Justice;
-		input /echo [ CTRL + Numpad7 ] Raging Rush;
+		input /echo -----Axe-----;
+		input /echo [ CTRL + Numpad1 ] Decimation;
+		input /echo [ CTRL + Numpad2 ] Ruinator;
+		input /echo [ CTRL + Numpad3 ] ;
+		input /echo [ CTRL + Numpad4 ] ;
+		input /echo [ CTRL + Numpad5 ] ;
+		input /echo [ CTRL + Numpad6 ] ;
+		input /echo [ CTRL + Numpad7 ] ;
 		input /echo -----Polearm-----;
 		input /echo [ ALT + Numpad1 ] Impulse Drive;
 		input /echo [ ALT + Numpad2 ] Stardiver;
@@ -246,24 +245,26 @@ function user_setup()
 	send_command('bind @4 input /equip main; gs c set WeaponSet Naegling')
 	send_command('bind @5 input /equip main; gs c set WeaponSet Malevolence')
 	
+	send_command('bind @w input /equip sub; gs c set WeaponSet None')
+	
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
-	send_command('bind ^numpad1 input /ws "Upheaval" <t>')
-    send_command('bind ^numpad2 input /ws "Ukko\'s Fury" <t>')
-	send_command('bind ^numpad3 input /ws "Armor Break" <t>')
-    send_command('bind ^numpad4 input /ws "Fell Cleave" <t>')
-	send_command('bind ^numpad5 input /ws "Steel Cyclone" <t>')
-	send_command('bind ^numpad6 input /ws "King\'s Justice" <t>')
-	send_command('bind ^numpad7 input /ws "Raging Rush" <t>')
+	send_command('bind ^numpad1 input /ws "Decimation" <t>')
+	send_command('bind ^numpad2 input /ws "Ruinator" <t>')
+	send_command('bind ^numpad3 input /ws "Primal Rend" <t>')
+	send_command('bind ^numpad4 input /ws "Cloudsplitter" <t>')
+	send_command('bind ^numpad5 input /ws "Calamity" <t>')
+	send_command('bind ^numpad6 input /ws "Mistral Axe" <t>')
+	send_command('bind ^numpad7 input /ws "Rampage" <t>')
+	send_command('bind ^numpad9 input /ws "Onslaught" <t>')
+
 	
-	send_command('bind !numpad1 input /ws "Impulse Drive" <t>')
-	send_command('bind !numpad2 input /ws "Stardiver" <t>')
-	send_command('bind !numpad3 input /ws "Sonic Thrust" <t>')
-	send_command('bind !numpad4 input /ws "Savage Blade" <t>')
-	send_command('bind !numpad5 input /ws "Sanguine Blade" <t>')
-	send_command('bind !numpad6 input /ws "Decimation" <t>')
-	send_command('bind !numpad7 input /ws "Judgment" <t>')
-	send_command('bind !numpad9 input /ws "Black Halo" <t>')
+	send_command('bind !numpad1 input /ws "Savage Blade" <t>')
+	send_command('bind !numpad4 input /ws "Aeolian Edge" <t>')
+	send_command('bind !numpad5 input /ws "Evisceration" <t>')
+	send_command('bind !numpad6 input /ws "Exenterator" <t>')
+	
+
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -421,66 +422,72 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Precast Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
-
-    sets.precast.JA['Berserk'] = {
-		body="Pumm. Lorica +3",
-		feet={ name="Agoge Calligae +3", augments={'Enhances "Tomahawk" effect',}},
-		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
-    
-	sets.precast.JA['Warcry'] = {head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},}
-    
-	sets.precast.JA['Agressor'] = {
-		head="Pummeler's Mask +3",
-		body={ name="Agoge Lorica +3", augments={'Enhances "Aggressive Aim" effect',}},}
 		
-	sets.precast.JA['Warrior\'s Charge'] = {}
-	sets.precast.JA['Tomahawk'] = {ammo="Thr. Tomahawk", feet={ name="Agoge Calligae +3", augments={'Enhances "Tomahawk" effect',}},}
-	sets.precast.JA['Restraint'] = {hands="Boii Mufflers +3",}
-	sets.precast.JA['Blood Rage'] = {body="Boii Lorica +3",}
-	sets.precast.JA['Mighty Strikes'] = {hands={ name="Agoge Mufflers", augments={'Enhances "Mighty Strikes" effect',}},}
+	sets.precast.JA['Familiar'] = {legs={ name="Ankusa Trousers +2", augments={'Enhances "Familiar" effect',}},}
 
-	sets.precast.JA['Provoke'] = {
-	    ammo="Sapience Orb",
-		head="Halitus Helm",
-		body={ name="Emet Harness +1", augments={'Path: A',}},
-		hands="Sakpata's Gauntlets",
-		legs={ name="Zoar Subligar +1", augments={'Path: A',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Moonlight Necklace",
-		waist="Audumbla Sash",
-		left_ear="Cryptic Earring",
-		right_ear="Friomisi Earring",
-		left_ring="Eihwaz Ring",
-		right_ring="Begrudging Ring",
-		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+	sets.precast.JA['Killer Instinct'] = {
+		main={ name="Arktoi", augments={'Accuracy+50','Pet: Accuracy+50','Pet: Attack+30',}},
+		sub="Kaidate",
+		range="Killer Shortbow",
+		head={ name="Ankusa Helm +2", augments={'Enhances "Killer Instinct" effect',}},}
+
+	sets.precast.JA['Call Beast'] = {
+		hands={ name="Ankusa Gloves +2", augments={'Enhances "Beast Affinity" effect',}},
+		feet="Gleti's Boots",
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},}
+	
+	sets.precast.JA['Beastial Loyalty'] = {
+		hands={ name="Ankusa Gloves +2", augments={'Enhances "Beast Affinity" effect',}},
+		feet="Gleti's Boots",
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},}	
+
+	sets.precast.JA['Charm'] = {
+	    main="Agwu's Axe",
+		sub="Adapa Shield",
+		ammo="Staunch Tathlum +1",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="An. Jackcoat +2", augments={'Enhances "Feral Howl" effect',}},
+		hands={ name="Ankusa Gloves +2", augments={'Enhances "Beast Affinity" effect',}},
+		legs={ name="Ankusa Trousers +2", augments={'Enhances "Familiar" effect',}},
+		feet={ name="Ankusa Gaiters +2", augments={'Enhances "Beast Healer" effect',}},
+		neck={ name="Unmoving Collar +1", augments={'Path: A',}},
+		waist="Chaac Belt",
+		left_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+		right_ear="Genmei Earring",
+		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		right_ring="Defending Ring",
+		back={ name="Artio's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+	
+	sets.precast.JA['Tame'] = {}
+	
+	sets.precast.JA['Reward'] = {
+	    main="Agwu's Axe",
+		sub="Adapa Shield",
+		ammo="Pet Food Theta",
+		head="Crepuscular Helm",
+		body={ name="An. Jackcoat +2", augments={'Enhances "Feral Howl" effect',}},
+		hands="Malignance Gloves",
+		legs={ name="Ankusa Trousers +2", augments={'Enhances "Familiar" effect',}},
+		feet={ name="Ankusa Gaiters +2", augments={'Enhances "Beast Healer" effect',}},
+		neck="Phalaina Locket",
+		waist="Engraved Belt",
+		left_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+		right_ear="Genmei Earring",
+		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		right_ring="Stikini Ring +1",
+		back={ name="Artio's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     sets.precast.Waltz = {
-        ring1="Asklepian Ring",
+        left_ring="Asklepian Ring",
         waist="Gishdubar Sash",
         }
 
     sets.precast.Waltz['Healing Waltz'] = {}
 
-    sets.precast.FC = {
-        }
-
-    -- (10% Snapshot from JP Gifts)
+    sets.precast.FC = {}
+	
 		
-		
-	sets.precast.RA = {
-		range="Trollbane",
-	    head={ name="Sakpata's Helm", augments={'Path: A',}},
-		body={ name="Sakpata's Plate", augments={'Path: A',}},
-		hands={ name="Sakpata's Gauntlets", augments={'Path: A',}},
-		legs="Volte Tights",
-		feet="Volte Spats",
-		neck={ name="Loricate Torque +1", augments={'Path: A',}},
-		waist="Audumbla Sash",
-		left_ear="Tuisto Earring",
-		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
-		right_ring="Defending Ring",
-		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+	sets.precast.RA = {}
 
     ------------------------------------------------------------------------------------------------
     ------------------------------------- Weapon Skill Sets ----------------------------------------
@@ -504,144 +511,53 @@ function init_gear_sets()
 		back="Shadow Mantle",}
 		
 	sets.precast.WS.ATKCAP = {
-		ammo="Knobkierrie",
-		head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},
-		body={ name="Sakpata's Plate", augments={'Path: A',}},
-		hands="Boii Mufflers +3",
-		legs="Boii Cuisses +3",
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="War. Beads +2", augments={'Path: A',}},
+		neck="Rep. Plat. Medal",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Thrud Earring",
+		left_ear="Thrud Earring",
+		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		left_ring="Epaminondas's Ring",
 		right_ring="Sroda Ring",
-		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-		
-	--Mighty Strikes Set
-	sets.Mighty = {ammo="Yetshila +1",feet="Boii Calligae +3"}
-	
+		back="Shadow Mantle",}
+
 	--TP Overflow set
+
 	sets.precast.WS.FullTP = {left_ear={ name="Lugra Earring +1", augments={'Path: A',}},}
-
-	--Great Axe Weapon Skills
+		
+	--Axe Weapon Skills
 	
-	sets.precast.WS['Upheaval'] = {
-		ammo="Knobkierrie",
-		head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Boii Mufflers +3",
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="War. Beads +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Thrud Earring",
-		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
-		right_ring="Niqmaddu Ring",
-		back={ name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%',}},}
-		
-	sets.precast.WS['Upheaval'].ATKCAP = {
-		ammo="Knobkierrie",
-		head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},
-		body={ name="Sakpata's Plate", augments={'Path: A',}},
-		hands="Boii Mufflers +3",
-		legs="Boii Cuisses +3",
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="War. Beads +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Thrud Earring",
-		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
-		right_ring="Niqmaddu Ring",
-		back={ name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%',}},}
-		
-	sets.precast.WS['Ukko\'s Fury'] = {
-		ammo="Yetshila +1",
-		head="Boii Mask +2",
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Boii Mufflers +3",
-		legs="Boii Cuisses +3",
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="War. Beads +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Schere Earring", augments={'Path: A',}},
-		right_ear={ name="Boii Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Crit.hit rate+5',}},
-		left_ring="Begrudging Ring",
-		right_ring="Niqmaddu Ring",
-		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-		
-	sets.precast.WS['Ukko\'s Fury'].ATKCAP = {
-		ammo="Yetshila +1",
-		head="Boii Mask +2",
-		body={ name="Sakpata's Plate", augments={'Path: A',}},
-		hands="Boii Mufflers +3",
-		legs="Boii Cuisses +3",
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="War. Beads +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Schere Earring", augments={'Path: A',}},
-		right_ear={ name="Boii Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Crit.hit rate+5',}},
-		left_ring="Begrudging Ring",
-		right_ring="Niqmaddu Ring",
-		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-
-	sets.precast.WS['Steel Cyclone'] = {
-		ammo="Knobkierrie",
-		head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Boii Mufflers +3",
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="War. Beads +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Thrud Earring",
-		left_ring="Epaminondas's Ring",
-		right_ring="Sroda Ring",
-		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-		
-	sets.precast.WS['Steel Cyclone'].ATKCAP = {
-		ammo="Knobkierrie",
-		head={ name="Agoge Mask +3", augments={'Enhances "Savagery" effect',}},
-		body={ name="Sakpata's Plate", augments={'Path: A',}},
-		hands="Boii Mufflers +3",
-		legs="Boii Cuisses +3",
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="War. Beads +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Thrud Earring",
-		left_ring="Epaminondas's Ring",
-		right_ring="Sroda Ring",
-		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-		
-	sets.precast.WS['King\'s Justice'] = sets.precast.WS['Steel Cyclone']
-	sets.precast.WS['King\'s Justice'].ATKCAP = sets.precast.WS['Steel Cyclone'].ATKCAP
-
-	sets.precast.WS['Fell Cleave'] = sets.precast.WS['Steel Cyclone']
-
-	--Breaks
+	sets.precast.WS['Decimation'] = {}
 	
-	sets.precast.WS['Full Break'] = {
-		ammo="Pemphredo Tathlum",
-		head="Boii Mask +2",
-		body="Boii Lorica +3",
-		hands="Boii Mufflers +3",
-		legs="Boii Cuisses +3",
-		feet="Boii Calligae +3",
-		neck="Moonlight Necklace",
-		waist="Eschan Stone",
-		left_ear="Digni. Earring",
-		right_ear={ name="Boii Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Crit.hit rate+5',}},
-		left_ring="Stikini Ring +1",
-		right_ring="Stikini Ring +1",
-		back={ name="Cichol's Mantle", augments={'STR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','Weapon skill damage +10%',}},}
+	sets.precast.WS['Decimation'].ATKCAP = {}
 	
-	sets.precast.WS['Shield Break'] = sets.precast.WS['Full Break']
-	sets.precast.WS['Armor Break'] = sets.precast.WS['Full Break']
-	sets.precast.WS['Weapon Break'] = sets.precast.WS['Full Break']
+	sets.precast.WS['Ruinator'] = {}
 	
+	sets.precast.WS['Ruinator'].ATKCAP = {}
+	
+	sets.precast.WS['Calamity'] = {}
+	
+	sets.precast.WS['Calamity'].ATKCAP = {}
+	
+	sets.precast.WS['Rampage'] = {}
+	
+	sets.precast.WS['Rampage'].ATKCAP = {}
+	
+	sets.precast.WS['Onslaught'] = {}
+	
+	sets.precast.WS['Onslaught'].ATKCAP = {}
+	
+	sets.precast.WS['Mistral Axe'] = {}
+	
+	sets.precast.WS['Mistral Axe'].ATKCAP = {}
+	
+	sets.precast.WS['Primal Rend'] = {}
+	
+	sets.precast.WS['Cloudsplitter'] = {}
 	
 	--Sword Weapon Skills
 
@@ -658,7 +574,7 @@ function init_gear_sets()
 		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		left_ring="Epaminondas's Ring",
 		right_ring="Sroda Ring",
-		back="Shadow Mantle",}
+		back={ name="Artio's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 		
 	sets.precast.WS['Savage Blade'].ATKCAP = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
@@ -673,16 +589,18 @@ function init_gear_sets()
 		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		left_ring="Epaminondas's Ring",
 		right_ring="Sroda Ring",
-		back="Shadow Mantle",}
+		back={ name="Artio's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		
+	--Dagger Weapon Skills
 	
 	sets.precast.WS['Aeolian Edge'] = {
-		ammo="Staunch Tathlum +1",
+		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Baetyl Pendant",
+		neck="Sibyl Scarf",
 		waist="Orpheus's Sash",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Friomisi Earring",
@@ -690,31 +608,10 @@ function init_gear_sets()
 		right_ring="Epaminondas's Ring",
 		back="Shadow Mantle",}
 		
-	sets.precast.WS['Red Lotus Blade'] = sets.precast.WS['Seraph Blade']
-
-    sets.precast.WS['Sanguine Blade'] = set_combine(sets.precast.WS['Seraph Blade'], {head="Pixie Hairpin +1",left_ring="Archon Ring",left_ear="Thrud Earring",})
+	sets.precast.WS['Evisceration'] = {}
 		
-	--Polearm Weapon Skills
-
-	sets.precast.WS['Impulse Drive'] = sets.precast.WS['Savage Blade']
-	sets.precast.WS['Impulse Drive'].ATKCAP = sets.precast.WS['Savage Blade'].ATKCAP
-	
-	sets.precast.WS['Stardiver'] = sets.precast.WS['Savage Blade']
-	sets.precast.WS['Stardiver'].ATKCAP = sets.precast.WS['Savage Blade'].ATKCAP	
-	
-	--Club Weapon Skills
-	
-	sets.precast.WS['Black Halo'] = sets.precast.WS['Savage Blade']
-	sets.precast.WS['Black Halo'].ATKCAP = sets.precast.WS['Savage Blade'].ATKCAP
-	
-	sets.precast.WS['Judgment'] = sets.precast.WS['Savage Blade']
-	sets.precast.WS['Judgment'].ATKCAP = sets.precast.WS['Savage Blade'].ATKCAP	
+	sets.precast.WS['Exenterator'] = {}
 		
-	--Axe Weapon Skills
-	
-	sets.precast.WS['Decimation'] = sets.precast.WS['Savage Blade']
-	sets.precast.WS['Decimation'].ATKCAP = sets.precast.WS['Savage Blade'].ATKCAP
-
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
@@ -739,40 +636,142 @@ function init_gear_sets()
 		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		right_ring="Defending Ring",
 		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+		
+    ------------------------------------------------------------------------------------------------
+    ---------------------------------------- PET READY Sets ------------------------------------------
+    ------------------------------------------------------------------------------------------------
+
+	sets.midcast.Pet.WS = {}
+		
+	sets.midcast.Pet.Neutral = {
+	    ammo="Hesperiidae",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs="Gleti's Breeches",
+		feet="Gleti's Boots",
+		neck={ name="Bst. Collar +2", augments={'Path: A',}},
+		waist="Incarnation Sash",
+		left_ear="Enmerkar Earring",
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},
+		left_ring="Tali'ah Ring",
+		right_ring="Defending Ring",
+		back={ name="Artio's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Accuracy+20 Attack+20','Pet: Mag. Acc.+10','Pet: "Regen"+10','Pet: Damage taken -5%',}},}
+	
+	sets.midcast.Pet.HighAcc = {
+	    ammo="Hesperiidae",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs="Gleti's Breeches",
+		feet="Gleti's Boots",
+		neck={ name="Bst. Collar +2", augments={'Path: A',}},
+		waist="Incarnation Sash",
+		left_ear="Enmerkar Earring",
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},
+		left_ring="Tali'ah Ring",
+		right_ring="Defending Ring",
+		back={ name="Artio's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Accuracy+20 Attack+20','Pet: Mag. Acc.+10','Pet: "Regen"+10','Pet: Damage taken -5%',}},}
+	
+	sets.midcast.Pet.MaxAcc = {
+	    ammo="Hesperiidae",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs="Gleti's Breeches",
+		feet="Gleti's Boots",
+		neck={ name="Bst. Collar +2", augments={'Path: A',}},
+		waist="Incarnation Sash",
+		left_ear="Enmerkar Earring",
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},
+		left_ring="Tali'ah Ring",
+		right_ring="Defending Ring",
+		back={ name="Artio's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Accuracy+20 Attack+20','Pet: Mag. Acc.+10','Pet: "Regen"+10','Pet: Damage taken -5%',}},}
+	
+	sets.midcast.Pet.MaccReady = {
+	    ammo="Hesperiidae",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs="Gleti's Breeches",
+		feet="Gleti's Boots",
+		neck={ name="Bst. Collar +2", augments={'Path: A',}},
+		waist="Incarnation Sash",
+		left_ear="Enmerkar Earring",
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},
+		left_ring="Tali'ah Ring",
+		right_ring="C. Palug Ring",
+		back={ name="Artio's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Accuracy+20 Attack+20','Pet: Mag. Acc.+10','Pet: "Regen"+10','Pet: Damage taken -5%',}},}
+	
+	sets.midcast.Pet.MabReady = {
+	    ammo="Hesperiidae",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs="Gleti's Breeches",
+		feet="Gleti's Boots",
+		neck={ name="Bst. Collar +2", augments={'Path: A',}},
+		waist="Incarnation Sash",
+		left_ear="Enmerkar Earring",
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},
+		left_ring="Tali'ah Ring",
+		right_ring="Defending Ring",
+		back={ name="Artio's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Accuracy+20 Attack+20','Pet: Mag. Acc.+10','Pet: "Regen"+10','Pet: Damage taken -5%',}},}
 
     ------------------------------------------------------------------------------------------------
     ----------------------------------------- Idle Sets --------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.resting = {    
+    sets.idle = {
+	    main="Izizoeksi",
+		sub="Adapa Shield",
 		ammo="Staunch Tathlum +1",
-		head={ name="Sakpata's Helm", augments={'Path: A',}},
-		body={ name="Sakpata's Plate", augments={'Path: A',}},
-		hands={ name="Sakpata's Gauntlets", augments={'Path: A',}},
-		legs={ name="Sakpata's Cuisses", augments={'Path: A',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
-		waist="Flume Belt +1",
-		left_ear="Eabani Earring",
-		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-		left_ring="Chirich Ring +1",
-		right_ring="Chirich Ring +1",
-		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
-
-    sets.idle = {    
+		waist="Fotia Belt",
+		left_ear="Tuisto Earring",
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},
+		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		right_ring="Defending Ring",
+		back={ name="Artio's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+	
+	sets.idle.Pet = {
+	    main="Izizoeksi",
+		sub="Adapa Shield",
 		ammo="Staunch Tathlum +1",
-		head={ name="Sakpata's Helm", augments={'Path: A',}},
-		body={ name="Sakpata's Plate", augments={'Path: A',}},
-		hands={ name="Sakpata's Gauntlets", augments={'Path: A',}},
-		legs={ name="Sakpata's Cuisses", augments={'Path: A',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands="Gleti's Gauntlets",
+		legs="Tali'ah Sera. +2",
+		feet={ name="Ankusa Gaiters +2", augments={'Enhances "Beast Healer" effect',}},
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
-		waist="Flume Belt +1",
-		left_ear="Eabani Earring",
-		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-		left_ring="Chirich Ring +1",
-		right_ring="Chirich Ring +1",
-		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+		waist="Isa Belt",
+		left_ear="Enmerkar Earring",
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},
+		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		right_ring="Defending Ring",
+		back={ name="Artio's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Accuracy+20 Attack+20','Pet: Mag. Acc.+10','Pet: "Regen"+10','Pet: Damage taken -5%',}},}
+		
+	sets.idle.Killer = {
+	    main={ name="Arktoi", augments={'Accuracy+50','Pet: Accuracy+50','Pet: Attack+30',}},
+		sub="Kaidate",
+		range="Killer Shortbow",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands="Gleti's Gauntlets",
+		legs="Tali'ah Sera. +2",
+		feet={ name="Ankusa Gaiters +2", augments={'Enhances "Beast Healer" effect',}},
+		neck={ name="Loricate Torque +1", augments={'Path: A',}},
+		waist="Isa Belt",
+		left_ear="Enmerkar Earring",
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},
+		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		right_ring="Defending Ring",
+		back={ name="Artio's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Accuracy+20 Attack+20','Pet: Mag. Acc.+10','Pet: "Regen"+10','Pet: Damage taken -5%',}},}
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Engaged Sets ------------------------------------------
@@ -783,121 +782,106 @@ function init_gear_sets()
 
     sets.engaged = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Malignance Chapeau",
-		body={ name="Gleti's Cuirass", augments={'Path: A',}},
+		head="Crepuscular Helm",
+		body="Tali'ah Manteel +2",
 		hands="Malignance Gloves",
-		legs="Malignance Tights",
-		feet="Malignance Boots",
+		legs="Gleti's Breeches",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Anu Torque",
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Telos Earring",
-		right_ear="Sherida Earring",
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back="Shadow Mantle",}
+		waist="Windbuffet Belt +1",
+		left_ear="Suppanomimi",
+		right_ear="Dedition Earring",
+		left_ring="Gere Ring",
+		right_ring="Epona's Ring",
+		back={ name="Artio's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     sets.engaged.Acc = {
-		ammo="Aurgelmir Orb +1",
-		head={ name="Sakpata's Helm", augments={'Path: A',}},
-		body="Boii Lorica +3",
-		hands={ name="Sakpata's Gauntlets", augments={'Path: A',}},
-		legs="Pumm. Cuisses +3",
-		feet="Pumm. Calligae +3",
-		neck={ name="War. Beads +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Schere Earring", augments={'Path: A',}},
-		right_ear={ name="Boii Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Crit.hit rate+5',}},
-		left_ring="Niqmaddu Ring",
-		right_ring="Moonlight Ring",
-		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head="Crepuscular Helm",
+		body="Tali'ah Manteel +2",
+		hands="Malignance Gloves",
+		legs="Gleti's Breeches",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck="Anu Torque",
+		waist="Windbuffet Belt +1",
+		left_ear="Suppanomimi",
+		right_ear="Dedition Earring",
+		left_ring="Gere Ring",
+		right_ring="Epona's Ring",
+		back={ name="Artio's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 		
-	sets.engaged.SB = {
-	    ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Sakpata's Helm", augments={'Path: A',}},
-		body="Dagon Breast.",
-		hands={ name="Sakpata's Gauntlets", augments={'Path: A',}},
-		legs={ name="Sakpata's Cuisses", augments={'Path: A',}},
-		feet={ name="Sakpata's Leggings", augments={'Path: A',}},
-		neck={ name="War. Beads +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Schere Earring", augments={'Path: A',}},
-		right_ear={ name="Boii Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Crit.hit rate+5',}},
-		left_ring="Niqmaddu Ring",
-		right_ring="Moonlight Ring",
-		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
-
     -- * DNC Subjob DW Trait: +15%
     -- * NIN Subjob DW Trait: +25%
 
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Malignance Chapeau",
-		body={ name="Gleti's Cuirass", augments={'Path: A',}},
+		head="Crepuscular Helm",
+		body="Tali'ah Manteel +2",
 		hands="Malignance Gloves",
-		legs="Malignance Tights",
-		feet="Malignance Boots",
+		legs="Gleti's Breeches",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Anu Torque",
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Telos Earring",
-		right_ear="Sherida Earring",
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back="Shadow Mantle",}
+		waist="Windbuffet Belt +1",
+		left_ear="Suppanomimi",
+		right_ear="Dedition Earring",
+		left_ring="Gere Ring",
+		right_ring="Epona's Ring",
+		back={ name="Artio's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     sets.engaged.DW.Acc = {}
 
     -- 15% Magic Haste (67% DW to cap)
     sets.engaged.DW.LowHaste = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Malignance Chapeau",
-		body={ name="Gleti's Cuirass", augments={'Path: A',}},
+		head="Crepuscular Helm",
+		body="Tali'ah Manteel +2",
 		hands="Malignance Gloves",
-		legs="Malignance Tights",
-		feet="Malignance Boots",
+		legs="Gleti's Breeches",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Anu Torque",
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Telos Earring",
-		right_ear="Sherida Earring",
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back="Shadow Mantle",}
+		waist="Windbuffet Belt +1",
+		left_ear="Suppanomimi",
+		right_ear="Dedition Earring",
+		left_ring="Gere Ring",
+		right_ring="Epona's Ring",
+		back={ name="Artio's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     sets.engaged.DW.Acc.LowHaste = {}
 
     -- 30% Magic Haste (56% DW to cap)
     sets.engaged.DW.MidHaste = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Malignance Chapeau",
-		body={ name="Gleti's Cuirass", augments={'Path: A',}},
+		head="Crepuscular Helm",
+		body="Tali'ah Manteel +2",
 		hands="Malignance Gloves",
-		legs="Malignance Tights",
-		feet="Malignance Boots",
+		legs="Gleti's Breeches",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Anu Torque",
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Telos Earring",
-		right_ear="Sherida Earring",
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back="Shadow Mantle",}
+		waist="Windbuffet Belt +1",
+		left_ear="Suppanomimi",
+		right_ear="Dedition Earring",
+		left_ring="Gere Ring",
+		right_ring="Epona's Ring",
+		back={ name="Artio's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     sets.engaged.DW.Acc.MidHaste = {}
 
     -- 35% Magic Haste (51% DW to cap)
     sets.engaged.DW.HighHaste = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Malignance Chapeau",
-		body={ name="Gleti's Cuirass", augments={'Path: A',}},
+		head="Crepuscular Helm",
+		body="Tali'ah Manteel +2",
 		hands="Malignance Gloves",
-		legs="Malignance Tights",
-		feet="Malignance Boots",
+		legs="Gleti's Breeches",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Anu Torque",
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Telos Earring",
-		right_ear="Sherida Earring",
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back="Shadow Mantle",}
+		waist="Windbuffet Belt +1",
+		left_ear="Suppanomimi",
+		right_ear="Dedition Earring",
+		left_ring="Gere Ring",
+		right_ring="Epona's Ring",
+		back={ name="Artio's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     sets.engaged.DW.Acc.HighHaste = {}
 
@@ -905,18 +889,18 @@ function init_gear_sets()
     -- 45% Magic Haste (36% DW to cap) for /Nin
     sets.engaged.DW.MaxHaste = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Malignance Chapeau",
-		body={ name="Gleti's Cuirass", augments={'Path: A',}},
+		head="Crepuscular Helm",
+		body="Tali'ah Manteel +2",
 		hands="Malignance Gloves",
-		legs="Malignance Tights",
-		feet="Malignance Boots",
+		legs="Gleti's Breeches",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Anu Torque",
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Telos Earring",
-		right_ear="Sherida Earring",
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back="Shadow Mantle",}
+		waist="Windbuffet Belt +1",
+		left_ear="Suppanomimi",
+		right_ear="Dedition Earring",
+		left_ring="Gere Ring",
+		right_ring="Epona's Ring",
+		back={ name="Artio's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
     
 	sets.engaged.DW.Acc.MaxHaste = {}
 		
@@ -924,18 +908,18 @@ function init_gear_sets()
 	
 	sets.engaged.DW.MaxHastePlus = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Malignance Chapeau",
-		body={ name="Gleti's Cuirass", augments={'Path: A',}},
+		head="Crepuscular Helm",
+		body="Tali'ah Manteel +2",
 		hands="Malignance Gloves",
-		legs="Malignance Tights",
-		feet="Malignance Boots",
+		legs="Gleti's Breeches",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Anu Torque",
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Telos Earring",
-		right_ear="Sherida Earring",
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back="Shadow Mantle",}
+		waist="Windbuffet Belt +1",
+		left_ear="Suppanomimi",
+		right_ear="Dedition Earring",
+		left_ring="Gere Ring",
+		right_ring="Epona's Ring",
+		back={ name="Artio's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
     
 	sets.engaged.DW.Acc.MaxHastePlus = {}
 	
@@ -945,20 +929,7 @@ function init_gear_sets()
     ---------------------------------------- Hybrid Sets -------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.engaged.Hybrid = {    
-		ammo="Aurgelmir Orb +1",
-		head={ name="Sakpata's Helm", augments={'Path: A',}},
-		body={ name="Sakpata's Plate", augments={'Path: A',}},
-		hands={ name="Sakpata's Gauntlets", augments={'Path: A',}},
-		legs={ name="Sakpata's Cuisses", augments={'Path: A',}},
-		feet={ name="Sakpata's Leggings", augments={'Path: A',}},
-		neck={ name="War. Beads +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Schere Earring", augments={'Path: A',}},
-		right_ear={ name="Boii Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Crit.hit rate+5',}},
-		left_ring="Niqmaddu Ring",
-		right_ring="Moonlight Ring",
-		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+    sets.engaged.Hybrid = {}
 		
 		
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
@@ -1004,6 +975,8 @@ function init_gear_sets()
 		neck="Nicander's Necklace",
         waist="Gishdub48ar Sash", --10
         }
+		
+	sets.Killer = {}
 
 	sets.Warp = {left_ring="Warp Ring"}
     sets.CP = {back={ name="Mecisto. Mantle", augments={'Cap. Point+48%','CHR+3','Accuracy+2','DEF+10',}},}
@@ -1048,8 +1021,34 @@ function job_precast(spell, action, spellMap, eventArgs)
 
 	cancel_conflicting_buffs(spell, action, spellMap, eventArgs)
 
-	if spell.english == 'Bestial Loyalty' or spell.english == 'Call Beast' then					
-		equip({ammo=state.JugPet.value})
+	if spell.english == 'Bestial Loyalty' or spell.english == 'Call Beast' then	
+		if state.JugPet.value == 'Slug' then
+			equip({ammo='Dire Broth'})
+		elseif state.JugPet.value == 'Cricket' then
+			equip({ammo='Bubbly Broth'})		
+		elseif state.JugPet.value == 'Leech' then
+			equip({ammo='C. Plasma Broth'})
+		elseif state.JugPet.value == 'Sheep' then
+			equip({ammo='Lyrical Broth'})
+		elseif state.JugPet.value == 'Pig' then
+			equip({ammo='Fizzy Broth'})
+		elseif state.JugPet.value == 'Pink Bird' then
+			equip({ammo='Salubrious Broth'})
+		elseif state.JugPet.value == 'Tiger' then
+			equip({ammo='Meaty Broth'})
+		elseif state.JugPet.value == 'Crab' then
+			equip({ammo='Rancid Broth'})
+		elseif state.JugPet.value == 'Acuex' then
+			equip({ammo='Poisonous Broth'})
+		elseif state.JugPet.value == 'Lizard' then
+			equip({ammo='Livid Broth'})
+		elseif state.JugPet.value == 'Fly' then
+			equip({ammo='Blackwater Broth'})
+		elseif state.JugPet.value == 'Hippo' then
+			equip({ammo='Turpid Broth'})
+		elseif state.JugPet.value == 'Slime' then
+			equip({ammo='Decaying Broth'})
+		end
 	end    	
 
 -- Define class for Sic and Ready moves.
@@ -1063,9 +1062,12 @@ end
 -- to the general aftercast() code in Mote-Include.
 function job_aftercast(spell, action, spellMap, eventArgs)
 	if spell.type == "Monster" and not spell.interrupted then
-		equip(set_combine(sets.midcast.Pet.WS, sets.midcast.Pet[state.CorrelationMode.value]))
+		equip(sets.midcast.Pet[state.CorrelationMode.value])
 		if mab_ready_moves:contains(spell.english) and pet.status == 'Engaged' then
 			equip(sets.midcast.Pet.MabReady)
+		end
+		if macc_ready_moves:contains(spell.english) and pet.status == 'Engaged' then
+			equip(sets.midcast.Pet.MaccReady)
 		end
  
 		if buffactive['Unleash'] then
@@ -1074,12 +1076,6 @@ function job_aftercast(spell, action, spellMap, eventArgs)
 		
 		eventArgs.handled = true
 	end
-end
-
-function job_post_precast(spell, action, spellMap, eventArgs)
-
-
-
 end
 
 function job_state_change(field, new_value, old_value)
@@ -1109,50 +1105,6 @@ function job_buff_change(buff,gain)
 
 end
 
-function Weapon_Change(field, new_value, old_value)
-
-	if state.WeaponSet.value == 'MACC_Axe' then
-		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			equip(sets.MACC_Axe.DW)
-		else
-			equip(sets.MACC_Axe)
-		end
-	end
-	
-	if state.WeaponSet.value == 'Dolichenus' then
-		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			equip(sets.Dolichenus.DW)
-		else
-			equip(sets.Dolichenus)
-		end
-	end
-
-	if state.WeaponSet.value == 'Ikenga_Axe' then
-		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			equip(sets.Ikenga_Axe.DW)
-		else
-			equip(sets.Ikenga_Axe)
-		end
-	end
-	
-	if state.WeaponSet.value == 'Naegling' then
-		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			equip(sets.Naegling.DW)
-		else
-			equip(sets.Naegling)
-		end
-	end
-	
-	if state.WeaponSet.value == 'Malevolence' then
-		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			equip(sets.Malevolence.DW)
-		else
-			equip(sets.Malevolence)
-		end
-	end
-	
-end
-
 
 -------------------------------------------------------------------------------------------------------------------
 -- Code for Melee sets
@@ -1163,7 +1115,6 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
 	check_moving()
-	Weapon_Change()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -1180,6 +1131,69 @@ function update_combat_form()
         state.CombatForm:reset()
     end
 
+	if state.WeaponSet.value == 'None' then
+		enable('main','sub')
+	end
+
+	if state.WeaponSet.value == 'MACC_Axe' then
+		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+			enable('main','sub')		
+			equip(sets.MACC_Axe.DW)
+			disable('main','sub')			
+		else
+			enable('main','sub')
+			equip(sets.MACC_Axe)
+			disable('main','sub')
+		end
+	end
+	
+	if state.WeaponSet.value == 'Dolichenus' then
+		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+			enable('main','sub')
+			equip(sets.Dolichenus.DW)
+			disable('main','sub')
+		else
+			enable('main','sub')
+			equip(sets.Dolichenus)
+			disable('main','sub')
+		end
+	end
+
+	if state.WeaponSet.value == 'Ikenga_Axe' then
+		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+			enable('main','sub')
+			equip(sets.Ikenga_Axe.DW)
+			disable('main','sub')
+		else
+			enable('main','sub')
+			equip(sets.Ikenga_Axe)
+			disable('main','sub')
+		end
+	end
+	
+	if state.WeaponSet.value == 'Naegling' then
+		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+			enable('main','sub')
+			equip(sets.Naegling.DW)
+			disable('main','sub')
+		else
+			enable('main','sub')
+			equip(sets.Naegling)
+			disable('main','sub')
+		end
+	end
+	
+	if state.WeaponSet.value == 'Malevolence' then
+		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+			enable('main','sub')
+			equip(sets.Malevolence.DW)
+			disable('main','sub')
+		else
+			enable('main','sub')
+			equip(sets.Malevolence)
+			disable('main','sub')
+		end
+	end
 
 end
 
@@ -1337,7 +1351,7 @@ windower.register_event('zone change',
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
-        set_macro_page(1, 10)
+        set_macro_page(1, 14)
 end
 
 function set_lockstyle()
