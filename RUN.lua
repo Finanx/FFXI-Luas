@@ -855,6 +855,8 @@ function init_gear_sets()
     sets.midcast['Blue Magic'] = sets.SiR_Enmity
     sets.midcast['Blue Magic'].Enmity = sets.SiR_Enmity
     sets.midcast['Blue Magic'].Buff = sets.SiR_Enmity
+	sets.midcast['Banishga'] = sets.SiR_Enmity
+	sets.midcast['Banishga II'] = sets.SiR_Enmity
 	
 	sets.midcast['Blue Magic'].Cure = {
 		ammo="Staunch Tathlum +1",

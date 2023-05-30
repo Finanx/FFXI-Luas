@@ -126,7 +126,7 @@ function user_setup()
 
 	state.WeaponSet = M{['description']='Weapon Set', 'Twashtar', 'Mandau', 'Tauret', 'Naegling', 'Karambit'}
 	state.WeaponLock = M(false, 'Weapon Lock')
-	state.TPBonus = M(true, 'TP Bonus')
+	state.TPBonus = M(false, 'TP Bonus')
 
 	--Load Gearinfo/Dressup Lua
 	
@@ -484,9 +484,9 @@ function init_gear_sets()
 		ammo="Yetshila +1",
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
 		body={ name="Gleti's Cuirass", augments={'Path: A',}},
-		hands="Gleti's Gauntlets",
+		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
 		legs="Skulk. Culottes +2",
-		feet="Gleti's Boots",
+		feet={ name="Gleti's Boots", augments={'Path: A',}},
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear="Sherida Earring",
@@ -593,9 +593,9 @@ function init_gear_sets()
 		ammo="Yetshila +1",
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
 		body={ name="Gleti's Cuirass", augments={'Path: A',}},
-		hands="Gleti's Gauntlets",
+		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
 		legs="Skulk. Culottes +2",
-		feet="Gleti's Boots",
+		feet={ name="Gleti's Boots", augments={'Path: A',}},
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear="Sherida Earring",
@@ -674,7 +674,7 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Skulk. Armlets +2",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Gleti's Boots",
+		feet={ name="Gleti's Boots", augments={'Path: A',}},
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
@@ -687,9 +687,9 @@ function init_gear_sets()
 		ammo="Crepuscular Pebble",
 		head="Skulker's Bonnet +2",
 		body={ name="Gleti's Cuirass", augments={'Path: A',}},
-		hands="Gleti's Gauntlets",
-		legs="Gleti's Breeches",
-		feet="Gleti's Boots",
+		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
+		legs={ name="Gleti's Breeches", augments={'Path: A',}},
+		feet={ name="Gleti's Boots", augments={'Path: A',}},
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
@@ -761,8 +761,8 @@ function init_gear_sets()
 		ammo="Aurgelmir Orb +1",
 		head="Skulker's Bonnet +2",
 		body="Pillager's Vest +3",
-		hands="Gleti's Gauntlets",
-		legs="Gleti's Breeches",
+		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
+		legs={ name="Gleti's Breeches", augments={'Path: A',}},
 		feet={ name="Plun. Poulaines +3", augments={'Enhances "Assassin\'s Charge" effect',}},
 		neck={ name="Asn. Gorget +2", augments={'Path: A',}},
 		waist="Reiki Yotai",
@@ -776,8 +776,8 @@ function init_gear_sets()
 		ammo="Aurgelmir Orb +1",
 		head="Skulker's Bonnet +2",
 		body="Pillager's Vest +3",
-		hands="Gleti's Gauntlets",
-		legs="Gleti's Breeches",
+		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
+		legs={ name="Gleti's Breeches", augments={'Path: A',}},
 		feet={ name="Plun. Poulaines +3", augments={'Enhances "Assassin\'s Charge" effect',}},
 		neck={ name="Asn. Gorget +2", augments={'Path: A',}},
 		waist="Reiki Yotai",
@@ -796,7 +796,7 @@ function init_gear_sets()
 		head="Skulker's Bonnet +2",
 		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},											--6%
 		hands={ name="Floral Gauntlets", augments={'Rng.Acc.+15','Accuracy+15','"Triple Atk."+3','Magic dmg. taken -4%',}},		--5%
-		legs="Gleti's Breeches",
+		legs={ name="Gleti's Breeches", augments={'Path: A',}},
 		feet={ name="Plun. Poulaines +3", augments={'Enhances "Assassin\'s Charge" effect',}},
 		neck={ name="Asn. Gorget +2", augments={'Path: A',}},
 		waist="Reiki Yotai", 																									--7%
@@ -812,7 +812,7 @@ function init_gear_sets()
 		head="Skulker's Bonnet +2",
 		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},											--6%
 		hands={ name="Floral Gauntlets", augments={'Rng.Acc.+15','Accuracy+15','"Triple Atk."+3','Magic dmg. taken -4%',}},		--5%
-		legs="Gleti's Breeches",
+		legs={ name="Gleti's Breeches", augments={'Path: A',}},
 		feet={ name="Plun. Poulaines +3", augments={'Enhances "Assassin\'s Charge" effect',}},
 		neck={ name="Asn. Gorget +2", augments={'Path: A',}},
 		waist="Reiki Yotai", 																									--7%
@@ -829,7 +829,7 @@ function init_gear_sets()
 		head="Skulker's Bonnet +2",
 		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},											--6%
 		hands={ name="Floral Gauntlets", augments={'Rng.Acc.+15','Accuracy+15','"Triple Atk."+3','Magic dmg. taken -4%',}},		--5%
-		legs="Gleti's Breeches",
+		legs={ name="Gleti's Breeches", augments={'Path: A',}},
 		feet={ name="Plun. Poulaines +3", augments={'Enhances "Assassin\'s Charge" effect',}},
 		neck={ name="Asn. Gorget +2", augments={'Path: A',}},
 		waist="Reiki Yotai", 																									--7%
@@ -846,7 +846,7 @@ function init_gear_sets()
 		head="Skulker's Bonnet +2",
 		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},											--6%
 		hands={ name="Floral Gauntlets", augments={'Rng.Acc.+15','Accuracy+15','"Triple Atk."+3','Magic dmg. taken -4%',}},		--5%
-		legs="Gleti's Breeches",
+		legs={ name="Gleti's Breeches", augments={'Path: A',}},
 		feet={ name="Plun. Poulaines +3", augments={'Enhances "Assassin\'s Charge" effect',}},
 		neck={ name="Asn. Gorget +2", augments={'Path: A',}},
 		waist="Reiki Yotai", 																									--7%
@@ -864,7 +864,7 @@ function init_gear_sets()
 		head="Skulker's Bonnet +2",
 		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},											--6%
 		hands={ name="Floral Gauntlets", augments={'Rng.Acc.+15','Accuracy+15','"Triple Atk."+3','Magic dmg. taken -4%',}},		--5%
-		legs="Gleti's Breeches",
+		legs={ name="Gleti's Breeches", augments={'Path: A',}},
 		feet={ name="Plun. Poulaines +3", augments={'Enhances "Assassin\'s Charge" effect',}},
 		neck={ name="Asn. Gorget +2", augments={'Path: A',}},
 		waist="Reiki Yotai", 																									--7%
@@ -880,7 +880,7 @@ function init_gear_sets()
 		head="Skulker's Bonnet +2",
 		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},											--6%
 		hands={ name="Floral Gauntlets", augments={'Rng.Acc.+15','Accuracy+15','"Triple Atk."+3','Magic dmg. taken -4%',}},		--5%
-		legs="Gleti's Breeches",
+		legs={ name="Gleti's Breeches", augments={'Path: A',}},
 		feet={ name="Plun. Poulaines +3", augments={'Enhances "Assassin\'s Charge" effect',}},
 		neck={ name="Asn. Gorget +2", augments={'Path: A',}},
 		waist="Reiki Yotai", 																									--7%
@@ -897,7 +897,7 @@ function init_gear_sets()
 		head="Skulker's Bonnet +2",
 		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},											--6%
 		hands={ name="Floral Gauntlets", augments={'Rng.Acc.+15','Accuracy+15','"Triple Atk."+3','Magic dmg. taken -4%',}},		--5%
-		legs="Gleti's Breeches",
+		legs={ name="Gleti's Breeches", augments={'Path: A',}},
 		feet={ name="Plun. Poulaines +3", augments={'Enhances "Assassin\'s Charge" effect',}},
 		neck={ name="Asn. Gorget +2", augments={'Path: A',}},
 		waist="Reiki Yotai", 																									--7%
@@ -913,7 +913,7 @@ function init_gear_sets()
 		head="Skulker's Bonnet +2",
 		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},											--6%
 		hands={ name="Floral Gauntlets", augments={'Rng.Acc.+15','Accuracy+15','"Triple Atk."+3','Magic dmg. taken -4%',}},		--5%
-		legs="Gleti's Breeches",
+		legs={ name="Gleti's Breeches", augments={'Path: A',}},
 		feet={ name="Plun. Poulaines +3", augments={'Enhances "Assassin\'s Charge" effect',}},
 		neck={ name="Asn. Gorget +2", augments={'Path: A',}},
 		waist="Reiki Yotai", 																									--7%
@@ -929,8 +929,8 @@ function init_gear_sets()
 		ammo="Aurgelmir Orb +1",
 		head="Skulker's Bonnet +2",
 		body="Pillager's Vest +3",
-		hands="Gleti's Gauntlets",
-		legs="Gleti's Breeches",
+		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
+		legs={ name="Gleti's Breeches", augments={'Path: A',}},
 		feet={ name="Plun. Poulaines +3", augments={'Enhances "Assassin\'s Charge" effect',}},
 		neck={ name="Asn. Gorget +2", augments={'Path: A',}},
 		waist="Reiki Yotai",																									--7%
@@ -945,8 +945,8 @@ function init_gear_sets()
 		ammo="Aurgelmir Orb +1",
 		head="Skulker's Bonnet +2",
 		body="Pillager's Vest +3",
-		hands="Gleti's Gauntlets",
-		legs="Gleti's Breeches",
+		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
+		legs={ name="Gleti's Breeches", augments={'Path: A',}},
 		feet={ name="Plun. Poulaines +3", augments={'Enhances "Assassin\'s Charge" effect',}},
 		neck={ name="Asn. Gorget +2", augments={'Path: A',}},
 		waist="Reiki Yotai",																									--7%

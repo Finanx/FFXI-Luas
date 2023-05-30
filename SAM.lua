@@ -183,7 +183,8 @@ function user_setup()
 		input /echo [ ALT  + Numpad3 ] Tachi: Koki;
 		input /echo -----Polearm-----;
 		input /echo [ ALT + Numpad4 ] Impulse Drive;
-		input /echo [ ALT + Numpad5 ] Sonic Thrust;
+		input /echo [ ALT + Numpad5 ] Stardiver;
+		input /echo [ ALT + Numpad6 ] Sonic Thrust;
 		]])
 	
 	--Weapon set Binds
@@ -209,7 +210,8 @@ function user_setup()
 	send_command('bind !numpad2 input /ws "Tachi: Goten" <t>')
 	send_command('bind !numpad3 input /ws "Tachi: Koki" <t>')
 	send_command('bind !numpad4 input /ws "Impulse Drive" <t>')
-	send_command('bind !numpad5 input /ws "Sonic Thrust" <t>')
+	send_command('bind !numpad5 input /ws "Stardiver" <t>')
+	send_command('bind !numpad6 input /ws "Sonic Thrust" <t>')
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -551,7 +553,7 @@ function init_gear_sets()
 		neck="Sanctity Necklace",
 		waist="Eschan Stone",
 		left_ear="Crep. Earring",
-		right_ear={ name="Kasuga Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Weapon skill damage +2%',}},
+		right_ear={ name="Kasuga Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Weapon skill damage +3%',}},
 		left_ring="Stikini Ring +1",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
@@ -667,7 +669,7 @@ function init_gear_sets()
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
 		waist="Sweordfaetels +1",
 		left_ear="Dedition Earring",
-		right_ear={ name="Kasuga Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Weapon skill damage +2%',}},
+		right_ear={ name="Kasuga Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Weapon skill damage +3%',}},
 		left_ring="Niqmaddu Ring",
 		right_ring="Chirich Ring +1",
 		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
@@ -682,7 +684,7 @@ function init_gear_sets()
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
 		waist="Ioskeha Belt +1",
 		left_ear={ name="Schere Earring", augments={'Path: A',}},
-		right_ear={ name="Kasuga Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Weapon skill damage +2%',}},
+		right_ear={ name="Kasuga Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Weapon skill damage +3%',}},
 		left_ring="Niqmaddu Ring",
 		right_ring="Chirich Ring +1",
 		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
@@ -697,7 +699,7 @@ function init_gear_sets()
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
 		waist="Sweordfaetels +1",
 		left_ear={ name="Schere Earring", augments={'Path: A',}},
-		right_ear={ name="Kasuga Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Weapon skill damage +2%',}},
+		right_ear={ name="Kasuga Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Weapon skill damage +3%',}},
 		left_ring="Niqmaddu Ring",
 		right_ring="Chirich Ring +1",
 		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}

@@ -217,7 +217,7 @@ function user_setup()
 	send_command('bind ^numpad4 input /ws "Savage Blade" <t>')
 	send_command('bind ^numpad5 input /ws "Hot Shot" <t>')
 	send_command('bind ^numpad6 input /ws "Requiescat" <t>')
-	send_command('bind ^numpad6 input /ws "Detonator" <t>')
+	send_command('bind ^numpad7 input /ws "Detonator" <t>')
 	
 	send_command('bind !numpad1 input /ws "Evisceration" <t>')
 	send_command('bind !numpad2 input /ws "Exenterator" <t>')
@@ -563,6 +563,7 @@ function init_gear_sets()
 		
 	sets.precast.WS['Last Stand'].FullTP = {left_ear="Odr Earring",}
 	sets.precast.WS['Detonator'] = sets.precast.WS['Last Stand']
+	sets.precast.WS['Detonator'].Acc = sets.precast.WS['Last Stand'].Acc
 	sets.precast.WS['Detonator'].FullTP = sets.precast.WS['Last Stand'].FullTP
 
     sets.precast.WS['Wildfire'] = {
@@ -1179,7 +1180,7 @@ function init_gear_sets()
 	sets.Naegling.SW.RAcc = {main="Naegling", sub="Nusku Shield"}
 	
 	--Rangesets
-	sets.TP_Gun = {range="Anarchy",}
+	sets.TP_Gun = {range="Anarchy +2",}
 	sets.Fomalhaut = {range="Fomalhaut",}
 	sets.DeathPenalty = {range="Death Penalty",}
 	sets.Armageddon = {range="Armageddon",}

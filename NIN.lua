@@ -276,6 +276,7 @@ function user_setup()
 	send_command('wait 10; input //get Chonofuda satchel all')
 	send_command('wait 10; input //get Shikanofuda satchel all')
 	send_command('wait 10; input //get Inoshishinofuda satchel all')
+	send_command('wait 10; input //get Seki Shuriken satchel all')
 	
 	--Job Settings
 
@@ -402,6 +403,7 @@ function user_unload()
 	send_command('wait 5; input //put Chonofuda satchel all')
 	send_command('wait 5; input //put Shikanofuda satchel all')
 	send_command('wait 5; input //put Inoshishinofuda satchel all')
+	send_command('wait 5; input //put Seki Shuriken satchel all')
 
 	--Unload Gearinfo/Dressup Lua
 	
