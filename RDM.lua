@@ -66,6 +66,7 @@
 --					[ ALT + Numpad2 ]     	True Strike
 --					[ ALT + Numpad4 ]     	Aeolian Edge
 --					[ ALT + Numpad5 ]     	Evisceration
+--					[ ALT + Numpad6 ]     	Mercy Stroke
 --					[ ALT + Numpad7 ]     	Empyreal Arrow
 --
 --  Abilities:  	[ CTRL + ` ]        	Composure
@@ -197,6 +198,7 @@ function user_setup()
 		input /echo -----Dagger-----;
 		input /echo [ ALT + Numpad4 ] Aeolian Edge;
 		input /echo [ ALT + Numpad5 ] Evisceration;
+		input /echo [ ALT + Numpad6 ] Mercy Stroke;
 		input /echo -----Bow-----;
 		input /echo [ ALT + Numpad7 ] Empyreal Arrow;
 		]])
@@ -227,6 +229,7 @@ function user_setup()
     send_command('bind !numpad2 input /ws "True Strike" <t>')
 	send_command('bind !numpad4 input /ws "Aeolian Edge" <t>')
 	send_command('bind !numpad5 input /ws "Evisceration" <t>')
+	send_command('bind !numpad6 input /ws "Mercy Stroke" <t>')
 	send_command('bind !numpad7 input /ws "Empyreal Arrow" <t>')
 
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
@@ -1496,9 +1499,9 @@ function init_gear_sets()
 	sets.Tauret = {main="Tauret", sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	sets.Tauret.SW = {main="Tauret", sub="Genmei Shield"}
 	
-	sets.Mandau = {main={ name="Mandau", augments={'Path: A',}}, sub={ name="Gleti's Knife", augments={'Path: A',}},}
-	sets.Mandau_Thibron = {main={ name="Mandau", augments={'Path: A',}}, sub={ name="Machaera +2", augments={'TP Bonus +1000',}},}
-	sets.Mandau.SW = {main={ name="Mandau", augments={'Path: A',}}, sub="Genmei Shield",}
+	sets.Mandau = {main="Mandau", sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Mandau_Thibron = {main="Mandau", sub={ name="Machaera +2", augments={'TP Bonus +1000',}},}
+	sets.Mandau.SW = {main="Mandau", sub="Genmei Shield",}
 	
 	sets.Maxentius = {main="Maxentius", sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	sets.Maxentius_Thibron = {main="Maxentius", sub={ name="Machaera +2", augments={'TP Bonus +1000',}},}
@@ -1784,7 +1787,7 @@ function update_combat_form()
 				disable('main','sub')
 			else
 				enable('main','sub')
-				equip(sets.Madnau)
+				equip(sets.Mandau)
 				disable('main','sub')
 			end
 		else

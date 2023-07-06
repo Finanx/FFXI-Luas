@@ -1559,6 +1559,11 @@ function check_weaponset()
 				disable('main','sub')
 			end	
 		end
+		if state.WeaponSet.value == 'Bunzi' then
+			enable('main','sub')
+			equip(sets.Bunzi)
+			disable('main','sub')
+		end
 		if state.WeaponSet.value == 'Mboze' then
 			enable('main','sub')
 			equip(sets.Mboze)

@@ -358,7 +358,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     -- Precast sets to enhance JAs
-    sets.precast.JA['Tabula Rasa'] = {legs="Peda. Pants +3"}
+    sets.precast.JA['Tabula Rasa'] = {legs="Peda. Pants +1"}
     sets.precast.JA['Enlightenment'] = {body="Peda. Gown +3"}
 
     sets.precast.JA['Sublimation'] = {

@@ -411,7 +411,10 @@ function user_unload()
 	
 	--Gear Removal Commands
 	
-	--send_command('wait 5; input //put Living Bullet satchel all')
+	send_command('wait 5; input //put Pet Food Theta satchel all')
+	send_command('wait 5; input //put Bubbly Broth satchel all')
+	send_command('wait 5; input //put Dire Broth satchel all')
+	send_command('wait 5; input //put C. Plasma Broth satchel all')
 
 	--Unload Gearinfo/Dressup Lua
 
@@ -433,7 +436,7 @@ function init_gear_sets()
 		main={ name="Arktoi", augments={'Accuracy+50','Pet: Accuracy+50','Pet: Attack+30',}},
 		sub="Kaidate",
 		range="Killer Shortbow",
-		head={ name="Ankusa Helm +1", augments={'Enhances "Killer Instinct" effect',}},}
+		head={ name="Ankusa Helm +3", augments={'Enhances "Killer Instinct" effect',}},}
 
 	sets.precast.JA['Call Beast'] = {
 		hands={ name="Ankusa Gloves +3", augments={'Enhances "Beast Affinity" effect',}},
@@ -449,8 +452,8 @@ function init_gear_sets()
 	    main="Agwu's Axe",
 		sub="Adapa Shield",
 		ammo="Staunch Tathlum +1",
-		head={ name="Ankusa Helm +1", augments={'Enhances "Killer Instinct" effect',}},
-		body={ name="An. Jackcoat +2", augments={'Enhances "Feral Howl" effect',}},
+		head={ name="Ankusa Helm +3", augments={'Enhances "Killer Instinct" effect',}},
+		body={ name="An. Jackcoat +3", augments={'Enhances "Feral Howl" effect',}},
 		hands={ name="Ankusa Gloves +3", augments={'Enhances "Beast Affinity" effect',}},
 		legs={ name="Ankusa Trousers +3", augments={'Enhances "Familiar" effect',}},
 		feet={ name="Ankusa Gaiters +3", augments={'Enhances "Beast Healer" effect',}},
@@ -600,7 +603,7 @@ function init_gear_sets()
 	
 	sets.precast.WS['Calamity'] = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Ankusa Helm +1", augments={'Enhances "Killer Instinct" effect',}},
+		head={ name="Ankusa Helm +3", augments={'Enhances "Killer Instinct" effect',}},
 		body="Nukumi Gausape +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
@@ -615,7 +618,7 @@ function init_gear_sets()
 	
 	sets.precast.WS['Calamity'].ATKCAP = {
 		ammo="Crepuscular Pebble",
-		head={ name="Ankusa Helm +1", augments={'Enhances "Killer Instinct" effect',}},
+		head={ name="Ankusa Helm +3", augments={'Enhances "Killer Instinct" effect',}},
 		body="Nukumi Gausape +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
@@ -667,7 +670,7 @@ function init_gear_sets()
 
 	sets.precast.WS['Savage Blade'] = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Ankusa Helm +1", augments={'Enhances "Killer Instinct" effect',}},
+		head={ name="Ankusa Helm +3", augments={'Enhances "Killer Instinct" effect',}},
 		body="Nukumi Gausape +2",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
@@ -682,7 +685,7 @@ function init_gear_sets()
 		
 	sets.precast.WS['Savage Blade'].ATKCAP = {
 		ammo="Crepuscular Pebble",
-		head={ name="Ankusa Helm +1", augments={'Enhances "Killer Instinct" effect',}},
+		head={ name="Ankusa Helm +3", augments={'Enhances "Killer Instinct" effect',}},
 		body="Nukumi Gausape +2",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
@@ -771,7 +774,7 @@ function init_gear_sets()
 		sub="Adapa Shield",
 		ammo="Hesperiidae",
 		head={ name="Emicho Coronet +1", augments={'Pet: Accuracy+20','Pet: Attack+20','Pet: "Dbl. Atk."+4',}},
-		body={ name="An. Jackcoat +2", augments={'Enhances "Feral Howl" effect',}},
+		body={ name="An. Jackcoat +3", augments={'Enhances "Feral Howl" effect',}},
 		hands="Nukumi Manoplas +3",
 		legs={ name="Emicho Hose +1", augments={'Pet: Accuracy+20','Pet: Attack+20','Pet: "Dbl. Atk."+4',}},
 		feet={ name="Gleti's Boots", augments={'Path: A',}},
@@ -816,6 +819,23 @@ function init_gear_sets()
 		left_ring="Tali'ah Ring",
 		right_ring="Defending Ring",
 		back={ name="Artio's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Accuracy+20 Attack+20','Pet: Mag. Acc.+10','Pet: "Regen"+10','Pet: Damage taken -5%',}},}
+		
+	sets.midcast.Pet.ReadyRecast = {
+		main="Agwu's Axe",
+		sub="Adapa Shield",
+	    ammo="Hesperiidae",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Gleti's Breeches", augments={'Path: A',}},
+		feet={ name="Gleti's Boots", augments={'Path: A',}},
+		neck={ name="Bst. Collar +2", augments={'Path: A',}},
+		waist="Incarnation Sash",
+		left_ear="Enmerkar Earring",
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},
+		left_ring="Tali'ah Ring",
+		right_ring="C. Palug Ring",
+		back={ name="Artio's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Accuracy+20 Attack+20','Pet: Mag. Acc.+10','Pet: "Regen"+10','Pet: Damage taken -5%',}},}
 
     ------------------------------------------------------------------------------------------------
     ----------------------------------------- Idle Sets --------------------------------------------
@@ -859,7 +879,7 @@ function init_gear_sets()
 	    main={ name="Arktoi", augments={'Accuracy+50','Pet: Accuracy+50','Pet: Attack+30',}},
 		sub="Kaidate",
 		range="Killer Shortbow",
-		head={ name="Ankusa Helm +1", augments={'Enhances "Killer Instinct" effect',}},}
+		head={ name="Ankusa Helm +3", augments={'Enhances "Killer Instinct" effect',}},
 		body="Totemic Jackcoat +3",
 		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
 		legs="Totemic Trousers +3",
@@ -877,7 +897,7 @@ function init_gear_sets()
 		sub="Adapa Shield",
 		ammo="Hesperiidae",
 		head="Tali'ah Turban +2",
-		body={ name="An. Jackcoat +2", augments={'Enhances "Feral Howl" effect',}},
+		body={ name="An. Jackcoat +3", augments={'Enhances "Feral Howl" effect',}},
 		hands={ name="Emi. Gauntlets +1", augments={'Pet: Accuracy+20','Pet: Attack+20','Pet: "Dbl. Atk."+4',}},
 		legs={ name="Ankusa Trousers +3", augments={'Enhances "Familiar" effect',}},
 		feet={ name="Gleti's Boots", augments={'Path: A',}},
@@ -1176,7 +1196,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-	sets.Kiting = {feet="Hermes' Sandals"}
+	sets.Kiting = {legs={ name="Desultor Tassets", augments={'"Phantom Roll" ability delay -5','Movement speed +8%+2',}},}
 
     sets.TreasureHunter = {
 		ammo="Per. Lucky Egg", --TH1
@@ -1265,6 +1285,7 @@ function job_precast(spell, action, spellMap, eventArgs)
 
 -- Define class for Sic and Ready moves.
     if ready_moves_to_check:contains(spell.name) and pet.status == 'Engaged' then
+        classes.CustomClass = "WS"
 		equip(sets.midcast.Pet.ReadyRecast)
     end
 
@@ -1284,10 +1305,6 @@ function job_aftercast(spell, action, spellMap, eventArgs)
 		if macc_ready_moves:contains(spell.english) and pet.status == 'Engaged' then
 			equip(sets.midcast.Pet.MaccReady)
 		end
- 
-		if buffactive['Unleash'] then
-            hands="Gleti's Gauntlets"
-        end
 		
 		eventArgs.handled = true
 	end

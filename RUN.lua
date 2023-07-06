@@ -110,7 +110,7 @@ end
 
 function user_setup()
     state.OffenseMode:options('InquartataTank', 'T3Tank', 'Normal', 'Acc')
-    state.WeaponskillMode:options('Normal')
+    state.WeaponskillMode:options('Normal', 'Acc')
     state.HybridMode:options('Normal', 'DT')
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'Refresh')
@@ -616,7 +616,6 @@ function init_gear_sets()
 	sets.precast.WS['Steel Cyclone'] = sets.precast.WS['Resolution']
     sets.precast.WS['Upheaval'] = sets.precast.WS['Resolution']
 
-	--[[
 	sets.precast.WS['Dimidiation'] = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
@@ -631,9 +630,8 @@ function init_gear_sets()
 		left_ring="Regal Ring",
 		right_ring="Niqmaddu Ring",
 		back={ name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
-		]]
 		
-	sets.precast.WS['Dimidiation'] = {
+	sets.precast.WS['Dimidiation'].Acc = {
 		ammo="Yamarang",
 		head="Erilaz Galea +3",
 		body="Erilaz Surcoat +3",
@@ -787,6 +785,22 @@ function init_gear_sets()
 		left_ring="Defending Ring",
 		right_ring="Stikini Ring +1",
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},}
+	--[[{
+		ammo="Staunch Tathlum +1",																											--3%DT
+		head="Erilaz Galea +3",
+		body="Erilaz Surcoat +3",
+		hands="Erilaz Gauntlets +3",																										--11%DT
+		legs="Eri. Leg Guards +3",																											--13%DT
+		feet="Erilaz Greaves +3",																											--11%DT
+		neck={ name="Warder's Charm +1", augments={'Path: A',}},
+		waist="Flume Belt +1",																												--4%PDT
+		left_ear="Tuisto Earring",
+		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},																		--3%DT
+		left_ring="Shadow Ring",
+		right_ring="Moonlight Ring",																										--5%DT
+		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Parrying rate+5%',}},}		
+			--42% DT + 3%(Strap) 7% PDT	]]	
+	
 		
 	sets.PhalanxRecieved =    { 
 		main="Deacon Sword",
