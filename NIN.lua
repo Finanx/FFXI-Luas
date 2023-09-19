@@ -147,6 +147,7 @@ function user_setup()
 	send_command('bind @m gs c toggle MagicBurst')
 	send_command('bind ^` input /ja "Yonin" <me>')
 	send_command('bind !` input /ja "Innin" <me>')
+	send_command('bind ^space tc nearest')
 			
 	--Command to show global binds in game[ CTRL + numpad- ]
 	send_command([[bind ^numpad- 
@@ -302,12 +303,15 @@ function user_unload()
 	--Remove Global Ninja Binds	
 
 	send_command('unbind @u')
-	send_command('unbind @d')	
-    send_command('unbind @t')
-	send_command('unbind @c')
-    send_command('unbind @m')
-	send_command('unbind @w')
+	send_command('unbind @d')
+	send_command('unbind @e')	
+    send_command('unbind @w')
+	send_command('unbind @r')
+    send_command('unbind @c')
+	send_command('unbind @t')
 	send_command('unbind @b')
+	send_command('unbind @m')
+	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
 	send_command('unbind ^=')
@@ -492,7 +496,7 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Hattori Kyahan +2",
+		feet="Hattori Kyahan +3",
 		neck="Rep. Plat. Medal",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -507,7 +511,7 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Mpaca's Hose", augments={'Path: A',}},
-		feet="Hattori Kyahan +2",
+		feet="Hattori Kyahan +3",
 		neck="Rep. Plat. Medal",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -522,10 +526,10 @@ function init_gear_sets()
     sets.precast.WS['Blade: Hi'] = {
 		ammo="Yetshila +1",
 		head="Hachiya Hatsu. +3",
-		body="Hattori Ningi +2",
+		body="Hattori Ningi +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Hattori Kyahan +2",
+		feet="Hattori Kyahan +3",
 		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
 		waist="Gerdr Belt +1",
 		left_ear="Odr Earring",
@@ -540,7 +544,7 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Mpaca's Hose", augments={'Path: A',}},
-		feet="Hattori Kyahan +2",
+		feet="Hattori Kyahan +3",
 		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
 		waist="Gerdr Belt +1",
 		left_ear="Odr Earring",
@@ -555,7 +559,7 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Hattori Kyahan +2",
+		feet="Hattori Kyahan +3",
 		neck="Rep. Plat. Medal",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -570,7 +574,7 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Hattori Kyahan +2",
+		feet="Hattori Kyahan +3",
 		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -585,7 +589,7 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Hattori Kyahan +2",
+		feet="Hattori Kyahan +3",
 		neck="Rep. Plat. Medal",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -600,7 +604,7 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Hattori Kyahan +2",
+		feet="Hattori Kyahan +3",
 		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -612,10 +616,10 @@ function init_gear_sets()
     sets.precast.WS['Blade: Shun'] = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Mpaca's Cap", augments={'Path: A',}},
-		body="Hattori Ningi +2",
-		hands="Hattori Tekko +2",
+		body="Hattori Ningi +3",
+		hands="Hattori Tekko +3",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Hattori Kyahan +2",
+		feet="Hattori Kyahan +3",
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -630,7 +634,7 @@ function init_gear_sets()
 		body="Malignance Tabard",
 		hands="Malignance Gloves",
 		legs={ name="Mpaca's Hose", augments={'Path: A',}},
-		feet="Hattori Kyahan +2",
+		feet="Hattori Kyahan +3",
 		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
 		waist="Fotia Belt",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -645,7 +649,7 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Mochizuki Tekko +3", augments={'Enh. "Ninja Tool Expertise" effect',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Hattori Kyahan +2",
+		feet="Hattori Kyahan +3",
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear={ name="Lugra Earring +1", augments={'Path: A',}},
@@ -660,7 +664,7 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Malignance Gloves",
 		legs={ name="Mpaca's Hose", augments={'Path: A',}},
-		feet="Hattori Kyahan +2",
+		feet="Hattori Kyahan +3",
 		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
 		waist="Fotia Belt",
 		left_ear={ name="Lugra Earring +1", augments={'Path: A',}},
@@ -758,7 +762,7 @@ function init_gear_sets()
 	sets.precast.WS['Evisceration'] = {
 		ammo="Yetshila +1",
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
-		body="Hattori Ningi +2",
+		body="Hattori Ningi +3",
 		hands={ name="Ryuo Tekko +1", augments={'DEX+12','Accuracy+25','"Dbl.Atk."+4',}},
 		legs={ name="Mpaca's Hose", augments={'Path: A',}},
 		feet="Ken. Sune-Ate +1",
@@ -773,7 +777,7 @@ function init_gear_sets()
 	sets.precast.WS['Evisceration'].ATKCAP = {
 		ammo="Yetshila +1",
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
-		body="Hattori Ningi +2",
+		body="Hattori Ningi +3",
 		hands={ name="Ryuo Tekko +1", augments={'DEX+12','Accuracy+25','"Dbl.Atk."+4',}},
 		legs={ name="Mpaca's Hose", augments={'Path: A',}},
 		feet="Ken. Sune-Ate +1",
@@ -800,7 +804,7 @@ function init_gear_sets()
 		body={ name="Adhemar Jacket +1", augments={'HP+105','"Fast Cast"+10','Magic dmg. taken -4',}},
 		hands={ name="Mochizuki Tekko +3", augments={'Enh. "Ninja Tool Expertise" effect',}},
 		legs={ name="Rawhide Trousers", augments={'MP+50','"Fast Cast"+5','"Refresh"+1',}},
-		feet="Hattori Kyahan +2",
+		feet="Hattori Kyahan +3",
 		neck="Orunmila's Torque",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear="Loquac. Earring",
@@ -828,7 +832,7 @@ function init_gear_sets()
 		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
 		head={ name="Mochi. Hatsuburi +3", augments={'Enhances "Yonin" and "Innin" effect',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Hattori Tekko +2",
+		hands="Hattori Tekko +3",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Mochi. Kyahan +3", augments={'Enh. Ninj. Mag. Acc/Cast Time Red.',}},
 		neck="Sibyl Scarf",
@@ -842,8 +846,8 @@ function init_gear_sets()
     sets.midcast.EnfeeblingNinjutsu = {
 		ammo="Yamarang",
 		head="Hachiya Hatsu. +3",
-		body="Hattori Ningi +2",
-		hands="Hattori Tekko +2",
+		body="Hattori Ningi +3",
+		hands="Hattori Tekko +3",
 		legs="Hattori Hakama +2",
 		feet="Hachiya Kyahan +3",
 		neck="Sanctity Necklace",
@@ -1057,13 +1061,13 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 	
 	sets.NightMovement = {feet="Hachiya Kyahan +3"}
-	sets.DayMovement = {feet="Danzo Sune-Ate"}
+	sets.DayMovement = {right_ring="Shneddick Ring",}
 
-    sets.buff.Migawari = {body="Hattori Ningi +2",}
+    sets.buff.Migawari = {body="Hattori Ningi +3",}
     sets.buff.Sange = {ammo="Hachiya Shuriken"}
 
-	sets.Heishi = {main="Kunimitsu",sub={ name="Gleti's Knife", augments={'Path: A',}},}
-	sets.Heishi_Hitaki = {main="Kunimitsu",sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Heishi = {main={ name="Heishi Shorinken", augments={'Path: A',}},sub={ name="Kunimitsu", augments={'Path: A',}},}
+	sets.Heishi_Hitaki = {main={ name="Heishi Shorinken", augments={'Path: A',}},sub={ name="Kunimitsu", augments={'Path: A',}},}
 	sets.Gokotai = {main="Gokotai",sub={ name="Kunimitsu", augments={'Path: A',}},}
 	sets.Gokotai_Hitaki = {main="Gokotai",sub={ name="Kunimitsu", augments={'Path: A',}},}
 	sets.Naegling = {main="Naegling",sub="Kunimitsu",}

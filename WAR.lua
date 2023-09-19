@@ -38,7 +38,7 @@
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
 --					[ ALT + Numpad+ ]		Dimensional Ring Dem
 --
--- Range Script:	[ CTRL + Numpad0 ]
+-- Range Script:	[ CTRL + Numpad0 ] 		Ranged Attack
 --
 -- Toggles:			[ Windows + U ]			Stops Gear Swap from constantly updating gear
 --					[ Windows + D ]			Unloads Dressup then reloads to change lockstyle
@@ -122,7 +122,6 @@ function user_setup()
 	state.Reraise = M(false, "Reraise Mode")
 	
 	state.WeaponSet = M{['description']='Weapon Set', 'Chango', 'Lycurgos', 'Shining_One', 'Naegling', 'Loxotic_Mace', 'Ikenga_axe', 'Dolichenus'}
-
     state.CP = M(false, "Capacity Points Mode")
 
 	--Load Gearinfo/Dressup Lua
@@ -137,6 +136,7 @@ function user_setup()
 	send_command('bind @t gs c cycle TreasureMode')
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @r gs c toggle Reraise')
+	send_command('bind ^space tc nearest')
 	
 	--Command to show global binds in game[ CTRL + numpad- ]
 	send_command([[bind ^numpad- 
@@ -169,7 +169,7 @@ function user_setup()
 		input /echo [ Windows + D ]	Unloads then reloads dressup;
 		]])
 		
-	--Command to show Rune Fencer binds in game[ ALT + numpad- ]
+	--Command to show Rune Fencer binds in game [ ALT + numpad- ]
 	send_command([[bind !numpad- 
 		input /echo -----Abilities-----;
 		input /echo  
@@ -280,9 +280,14 @@ function user_unload()
 
 	send_command('unbind @u')
 	send_command('unbind @d')
-    send_command('unbind @t')
-    send_command('unbind @c')
+	send_command('unbind @e')	
+    send_command('unbind @w')
 	send_command('unbind @r')
+    send_command('unbind @c')
+	send_command('unbind @t')
+	send_command('unbind @b')
+	send_command('unbind @m')
+	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
 	send_command('unbind ^=')
@@ -872,7 +877,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-	sets.Kiting = {feet="Hermes' Sandals"}
+	sets.Kiting = {left_ring="Shneddick Ring",}
 
     sets.TreasureHunter = {
 		ammo="Per. Lucky Egg", --TH1
@@ -933,7 +938,7 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 		--Handles Mighty Strikes on Weapon skills
     if spell.type == "WeaponSkill" then
         if state.Buff['Mighty Strikes'] then
-			if spell.english == "Sanguine Blade" then
+			if spell.english == "Sanguine Blade" or spell.english == "Armor Break" or spell.english == "Weapon Break" then
 			else
 			equip(sets.Mighty)
 			end

@@ -1,11 +1,11 @@
--- Original: Finanx
 -- Haste/DW Detection Requires Gearinfo Addon
 -- Dressup is setup to auto load with this Lua
 -- Itemizer addon is required for auto gear sorting / Warp Scripts / Range Scripts
 --
 -------------------------------------------------------------------------------------------------------------------
---  Keybinds (Global Binds for all Jobs)
+--  Keybinds
 -------------------------------------------------------------------------------------------------------------------
+--
 --  Modes:      	[ F9 ]              	Cycle Offense Mode
 --              	[ F10 ]             	Cycle Idle Mode
 --              	[ F11 ]             	Cycle Casting Mode
@@ -13,11 +13,12 @@
 --					[ CTRL + F9 ]			Cycle Weapon Skill Mode
 --					[ ALT + F9 ]			Cycle Range Mode
 --              	[ Windows + F9 ]    	Cycle Hybrid Modes
---			    	[ Windows + W ]         Toggles Weapon Lock
---  				[ Windows + R ]         Toggles Range Lock
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
---              	[ Windows + A ]     	AttackMode: Capped/Uncapped WS Modifier
+--              	[ Windows + R ]     	Toggle Reraise Mode
+--
+-- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
+--					[ ALT + Numpad+ ]		Dimensional Ring Dem
 --
 -- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
 --					[ Shift + Numpad2 ]		Holy Water
@@ -31,6 +32,7 @@
 --					[ Windows + Numpad3 ]	Tropical Crepe
 --					[ Windows + Numpad4 ]	Miso Ramen
 --					[ Windows + Numpad5 ]	Red Curry Bun
+--					[ Windows + Numpad6 ]	Rolan. Daifuku
 --					[ Windows + Numpad7 ]	Toolbag (Shihei)
 --
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
@@ -38,25 +40,16 @@
 --
 -- Range Script:	[ CTRL + Numpad0 ] 		Ranged Attack
 --
+-- Toggles:			[ Windows + U ]			Stops Gear Swap from constantly updating gear
+--					[ Windows + D ]			Unloads Dressup then reloads to change lockstyle
+--
 -------------------------------------------------------------------------------------------------------------------
 --  Job Specific Keybinds (Monk Binds)
 -------------------------------------------------------------------------------------------------------------------
 --
---	Modes:			[ Windows + 1 ]			Sets Weapon to Godhands
---					[ Windows + 2 ]			Sets Weapon to Spharai
---					[ Windows + 3 ]			Sets Weapon to Verethranga
---					[ Windows + 4 ]			Sets Weapon to Xoanan
---					[ Windows + 5 ]			Sets Weapon to Karambit
---
---  WS:         	[ CTRL + Numpad1 ]		Victory Smite
---					[ CTRL + Numpad2 ]		Tornado Kick
---					[ CTRL + Numpad3 ]		Raging Fists
---					[ CTRL + Numpad4 ]		Howling Fist
---					[ CTRL + Numpad5 ]		Shijin Spiral
---					[ CTRL + Numpad6 ]		Asuran Fists
---					[ CTRL + Numpad7 ]		Spinning Attack
---				
---					[ ALT + Numpad1 ]		Shell Crusher
+--	Weapons:		[ Windows: + 1 ]		Godhands Weapon Set
+--					[ Windows: + 2 ]		Karambit Weapon Set
+--					[ Windows: + 3 ]		Xoanon Weapon Set
 --
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -74,18 +67,17 @@ end
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
 
+    state.Buff['Impetus'] = buffactive['impetus'] or false
+
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
 					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox's Ring"}
 
 	include('Mote-TreasureHunter')
 	
-    state.Buff.Footwork = buffactive.Footwork or false
-    state.Buff.Impetus = buffactive.Impetus or false
-
-    state.FootworkWS = M(false, 'Footwork on WS')
-
-    info.impetus_hit_count = 0
-    windower.raw_register_event('action', on_action_for_impetus)
+    -- JA IDs for actions that always have TH: Provoke, Animated Flourish
+    info.default_ja_ids = S{35, 204}
+    -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
+    info.default_u_ja_ids = S{201, 202, 203, 205, 207}
 	
 	lockstyleset = 10
 end
@@ -98,52 +90,62 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     state.OffenseMode:options('Normal', 'Acc')
-    state.WeaponskillMode:options('Normal', 'Acc')
+    state.WeaponskillMode:options('Normal', 'ATKCAP')
     state.HybridMode:options('Normal', 'DT', 'Counter')
+    state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
 
     state.CP = M(false, "Capacity Points Mode")
-	state.WeaponSet = M{['description']='Weapon Set', 'Godhands', 'Spharai', 'Verethranga', 'Xoanan', 'Karambit' }
+	state.WeaponSet = M{['description']='Weapon Set', 'Godhands', 'Karambit', 'Xoanon'}
 	
-	--Load Dressup Lua
-
+	--Load Gearinfo/Dressup Lua
+	
+    send_command('wait 3; lua l gearinfo')
 	send_command('wait 10; lua l Dressup')
 	
     --Global Monk binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
+	send_command('bind @u input //gi ugs')
+	send_command('bind @d input //lua u dressup; wait 10; input //lua l dressup')
 	send_command('bind @t gs c cycle TreasureMode')
-	send_command('bind @w gs c cycle WeaponSet')
     send_command('bind @c gs c toggle CP')
-	send_command('bind ^` input /ja "Perfect Counter" <me>')
+	send_command('bind ^space tc nearest')
 	
+	--Command to show global binds in game[ CTRL + numpad- ]
+	send_command([[bind ^numpad- 
+		input /echo -----Item_Binds-----;
+		input /echo [ Shift + Numpad1 ]	Echo Drop;
+		input /echo [ Shift + Numpad2 ]	Holy Water;
+		input /echo [ Shift + Numpad3 ]	Remedy;
+		input /echo [ Shift + Numpad4 ]	Panacea;
+		input /echo [ Shift + Numpad7 ]	Silent Oil;
+		input /echo [ Shift + Numpad9 ]	Prism Powder;
+		input /echo -----Food_Binds-----;
+		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
+		input /echo [ Windows + Numpad2 ]	Grape Daifuku;
+		input /echo [ Windows + Numpad3 ]	Tropical Crepe;
+		input /echo [ Windows + Numpad4 ]	Miso Ramen;
+		input /echo [ Windows + Numpad5 ]	Red Curry Bun;
+		input /echo [ Windows + Numpad6 ]	Rolan. Daifuku;
+		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
+		input /echo -----Modes-----;
+		input /echo [ Windows + 1 ]	Sets Weapon to Godhands;
+		input /echo [ Windows + 2 ]	Sets Weapon to Karambit;
+		input /echo [ Windows + 3 ]	Sets Weapon to Xoanon;
+		input /echo -----Toggles-----;
+		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
+		input /echo [ Windows + D ]	Unloads then reloads dressup;
+		]])
+		
 	--Weapon set Binds
 
 	send_command('bind @1 gs c set WeaponSet Godhands')
-	send_command('bind @2 gs c set WeaponSet Spharai')
-	send_command('bind @3 gs c set WeaponSet Verethranga')
-	send_command('bind @4 gs c set WeaponSet Xoanan')
-	send_command('bind @5 gs c set WeaponSet Karambit')
+	send_command('bind @2 gs c set WeaponSet Karambit')
+	send_command('bind @3 gs c set WeaponSet Xoanon')
 
 	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
-    send_command('bind ^numpad1 input /ws "Victory Smite" <t>')
-    send_command('bind ^numpad2 input /ws "Tornado Kick" <t>')
-    send_command('bind ^numpad3 input /ws "Raging Fists" <t>')
-	send_command('bind ^numpad4 input /ws "Howling Fist" <t>')
-	send_command('bind ^numpad5 input /ws "Shijin Spiral" <t>')
-    send_command('bind ^numpad6 input /ws "Asuran Fists" <t>')
-	send_command('bind ^numpad7 input /ws "Spinning Attack" <t>')
-	send_command('bind ^numpad9 input /ws "Ascetic\'s Fury" <t>')
-	
-	send_command('bind !numpad1 input /ws "Shell Crusher" <t>')	
-	send_command('bind !numpad7 input /ws "Shoulder Tackle" <t>')	
-	send_command('bind !numpad9 input /ws "Dragon Kick" <t>')	
-	
-	--Dual Box binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	--send_command('bind @1 input //assist me; wait 0.5; input //send Aurorasky /attack')
-	--send_command('bind @2 input //assist me; wait 0.5; input //send Ardana /attack')
-	--send_command('bind @q input //assist me; wait 0.5; input //send Ardana /ma "Distract" <t>')
+
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -159,24 +161,31 @@ function user_setup()
 	send_command('bind @numpad3 input /item "Tropical Crepe" <me>')
 	send_command('bind @numpad4 input /item "Miso Ramen" <me>')
 	send_command('bind @numpad5 input /item "Red Curry Bun" <me>')
+	send_command('bind @numpad6 input /item "Rolan. Daifuku" <me>')
 	send_command('bind @numpad7 input //get Toolbag (Shihe) satchel; wait 3; input /item "Toolbag (Shihei)" <me>')
 		
-	--Ranged Scripts  (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	--Ranged Scripts (Tags CTRL + Numpad0 as ranged attack) (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
 	send_command('bind ^numpad0 input /ra <t>')
 
-	--Warp scripts (this allows the ring to stay in your satchel fulltime) (Requires Itemizer Addon) (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	--Warp scripts (this allows the ring to stay in your satchel fulltime) (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 
 	send_command('bind ^numpad+ input //get Warp Ring satchel; wait 1; input /equip Ring1 "Warp Ring"; wait 12; input /item "Warp Ring" <me>; wait 60; input //put Warp Ring satchel')
 	send_command('bind !numpad+ input //get Dim. Ring (Dem) satchel; wait 1; input /equip Ring1 "Dim. Ring (Dem)"; wait 12; input /item "Dim. Ring (Dem)" <me>; wait 60; input //put Dim. Ring (Dem) satchel')
 	
 	--Gear Retrieval Commands
 
-		
 	--Job Settings
+	
+	select_default_macro_book()
+    set_lockstyle()
 
-    select_default_macro_book()
-	set_lockstyle()
+	--Gearinfo functions
+
+    state.Auto_Kite = M(false, 'Auto_Kite')
+    moving = false
+    update_combat_form()
+	determine_impetus()
 end
 
 
@@ -186,17 +195,25 @@ function user_unload()
 
 	--Remove Global Monk Binds
 	
-    send_command('unbind @t')
+	send_command('unbind @u')
+	send_command('unbind @d')
+	send_command('unbind @e')	
     send_command('unbind @w')
-    send_command('unbind @e')
+	send_command('unbind @r')
+    send_command('unbind @c')
+	send_command('unbind @t')
+	send_command('unbind @b')
+	send_command('unbind @m')
+	send_command('unbind ^space')
 	send_command('unbind ^`')
-	
-	
-	--Remove Dual Box Binds
-	
-	--send_command('unbind @1')
-	--send_command('unbind @2')
-	--send_command('unbind @q')
+	send_command('unbind ^-')
+	send_command('unbind ^=')
+	send_command('unbind !`')
+	send_command('unbind !-')
+	send_command('unbind !=')
+	send_command('unbind @`')
+	send_command('unbind @-')
+	send_command('unbind @=')
 	
 	--Remove Weapon Set binds
 	
@@ -209,6 +226,7 @@ function user_unload()
 	send_command('unbind @7')
 	send_command('unbind @8')
 	send_command('unbind @9')
+	send_command('unbind @0')
 	
 	--Remove Weaponskill Binds
     
@@ -221,6 +239,7 @@ function user_unload()
 	send_command('unbind ^numpad7')
 	send_command('unbind ^numpad8')
 	send_command('unbind ^numpad9')
+	send_command('unbind ^numpad.')
 	
 	send_command('unbind !numpad1')
     send_command('unbind !numpad2')
@@ -231,7 +250,7 @@ function user_unload()
 	send_command('unbind !numpad7')
 	send_command('unbind !numpad8')
 	send_command('unbind !numpad9')
-	
+	send_command('unbind !numpad.')
 	
 	--Remove Item Binds
 	
@@ -244,6 +263,7 @@ function user_unload()
 	send_command('unbind ~numpad7')
 	send_command('unbind ~numpad8')
 	send_command('unbind ~numpad9')
+	send_command('unbind ~numpad.')
 	
 	send_command('unbind @numpad1')
     send_command('unbind @numpad2')
@@ -254,6 +274,7 @@ function user_unload()
 	send_command('unbind @numpad7')
 	send_command('unbind @numpad8')
 	send_command('unbind @numpad9')
+	send_command('unbind @numpad.')
 	
 	--Remove Ranged Scripts
 	
@@ -264,11 +285,14 @@ function user_unload()
 	send_command('unbind ^numpad+')
 	send_command('unbind !numpad+')
 	
-	--Unload Dressup Lua
-	
-	send_command('lua u Dressup')
-	
 	--Gear Removal Commands
+	
+	--send_command('wait 5; input //put Living Bullet satchel all')
+
+	--Unload Gearinfo/Dressup Lua
+
+    send_command('lua u gearinfo')
+	send_command('lua u Dressup')
 	
 end
 
@@ -358,67 +382,72 @@ function init_gear_sets()
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
-		ammo="Knobkierrie",
-		head={ name="Blistering Sallet +1", augments={'Path: A',}},
-		body={ name="Herculean Vest", augments={'Accuracy+4','Weapon skill damage +4%','DEX+10','Attack+13',}},
-		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs="Hiza. Hizayoroi +2",
-		feet={ name="Herculean Boots", augments={'Accuracy+10 Attack+10','"Triple Atk."+4','Accuracy+14',}},
-		neck="Fotia Gorget",
-		waist="Fotia Belt",
-		left_ear="Sherida Earring",
-		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		left_ring="Niqmaddu Ring",
-		right_ring="Gere Ring",
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head={ name="Mpaca's Cap", augments={'Path: A',}},
+		body="Bhikku Cyclas +2",
+		hands="Bhikku Gloves +2",
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet="Mpaca's Boots",
+		neck="Rep. Plat. Medal",
+		waist="Moonbow Belt +1",
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear={ name="Schere Earring", augments={'Path: A',}},
+		left_ring="Gere Ring",
+		right_ring="Niqmaddu Ring",
 		back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},}
 		
-    sets.precast.WS.Acc = {}	
+    sets.precast.WS.Acc = {}
+	
+	sets.precast.WS.FullTPMagical = {left_ear="Hecate's Earring"}
+	sets.precast.WS.FullTPPhysical = {left_ear="Sherida Earring",}
 		
 	sets.precast.WS["Victory Smite"] = {
-		ammo="Knobkierrie",
-		head={ name="Blistering Sallet +1", augments={'Path: A',}},
-		body="Mummu Jacket +2",
-		hands="Mummu Wrists +2",
-		legs="Hiza. Hizayoroi +2",
-		feet="Mummu Gamash. +2",
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head={ name="Mpaca's Cap", augments={'Path: A',}},
+		body={ name="Mpaca's Doublet", augments={'Path: A',}},
+		hands={ name="Ryuo Tekko +1", augments={'DEX+12','Accuracy+25','"Dbl.Atk."+4',}},
+		legs={ name="Mpaca's Hose", augments={'Path: A',}},
+		feet="Mpaca's Boots",
 		neck="Fotia Gorget",
-		waist="Fotia Belt",
-		left_ear="Sherida Earring",
-		right_ear="Odr Earring",
-		left_ring="Niqmaddu Ring",
-		right_ring="Gere Ring",
-		back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},}
+		waist="Moonbow Belt +1",
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear={ name="Schere Earring", augments={'Path: A',}},
+		left_ring="Gere Ring",
+		right_ring="Niqmaddu Ring",
+		back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10',}},}
 		
 	sets.precast.WS['Tornado Kick'] = {
-		ammo="Knobkierrie",
-		head={ name="Blistering Sallet +1", augments={'Path: A',}},
-		body={ name="Herculean Vest", augments={'Accuracy+4','Weapon skill damage +4%','DEX+10','Attack+13',}},
-		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs="Hiza. Hizayoroi +2",
-		feet={ name="Herculean Boots", augments={'Accuracy+10 Attack+10','"Triple Atk."+4','Accuracy+14',}},
-		neck="Fotia Gorget",
-		waist="Fotia Belt",
-		left_ear="Sherida Earring",
-		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		left_ring="Niqmaddu Ring",
-		right_ring="Gere Ring",
-		back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},}
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head={ name="Mpaca's Cap", augments={'Path: A',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet="Anch. Gaiters +3",
+		neck={ name="Mnk. Nodowa +2", augments={'Path: A',}},
+		waist="Moonbow Belt +1",
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear={ name="Schere Earring", augments={'Path: A',}},
+		left_ring="Gere Ring",
+		right_ring="Niqmaddu Ring",
+		back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		
+	sets.precast.WS['Dragon Kick'] = sets.precast.WS['Tornado Kick']
 	
 	sets.precast.WS['Tornado Kick'].Acc = {}
 	
 	sets.precast.WS['Raging Fists'] = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Mpaca's Cap",
-		body={ name="Adhemar Jacket +1", augments={'STR+12','DEX+12','Attack+20',}},
-		hands={ name="Adhemar Wrist. +1", augments={'STR+12','DEX+12','Attack+20',}},
-		legs="Mpaca's Hose",
-		feet={ name="Herculean Boots", augments={'Accuracy+10 Attack+10','"Triple Atk."+4','Accuracy+14',}},
-		neck="Fotia Gorget",
-		waist="Fotia Belt",
+		head={ name="Mpaca's Cap", augments={'Path: A',}},
+		body="Bhikku Cyclas +2",
+		hands="Bhikku Gloves +2",
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet="Mpaca's Boots",
+		neck="Rep. Plat. Medal",
+		waist="Moonbow Belt +1",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Sherida Earring",
-		left_ring="Niqmaddu Ring",
-		right_ring="Gere Ring",
+		right_ear={ name="Schere Earring", augments={'Path: A',}},
+		left_ring="Gere Ring",
+		right_ring="Niqmaddu Ring",
 		back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},}
 	
 	sets.precast.WS["Raging Fists"].Acc = {}
@@ -441,51 +470,51 @@ function init_gear_sets()
 	sets.precast.WS['Shijin Spiral'].Acc = {}
 	
 	sets.precast.WS['Howling Fist'] = {
-		ammo="Aurgelmir Orb +1",
-		head="Mpaca's Cap",
-		body={ name="Tatena. Harama. +1", augments={'Path: A',}},
-		hands={ name="Adhemar Wrist. +1", augments={'STR+12','DEX+12','Attack+20',}},
-		legs="Mpaca's Hose",
-		feet={ name="Herculean Boots", augments={'Accuracy+10 Attack+10','"Triple Atk."+4','Accuracy+14',}},
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head={ name="Mpaca's Cap", augments={'Path: A',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Fotia Gorget",
-		waist="Fotia Belt",
+		waist="Moonbow Belt +1",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear={ name="Schere Earring", augments={'Path: A',}},
-		left_ring="Niqmaddu Ring",
-		right_ring="Gere Ring",
-		back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},}
+		left_ring="Gere Ring",
+		right_ring="Niqmaddu Ring",
+		back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 	
 	sets.precast.WS['Howling Fist'].Acc = {}
 	
-		sets.precast.WS['Asuran Fists'] = {
-		ammo="Knobkierrie",
-		head={ name="Blistering Sallet +1", augments={'Path: A',}},
-		body={ name="Herculean Vest", augments={'Accuracy+4','Weapon skill damage +4%','DEX+10','Attack+13',}},
-		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs="Hiza. Hizayoroi +2",
-		feet={ name="Herculean Boots", augments={'Accuracy+10 Attack+10','"Triple Atk."+4','Accuracy+14',}},
-		neck="Fotia Gorget",
-		waist="Fotia Belt",
+	sets.precast.WS['Asuran Fists'] = {
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head={ name="Hes. Crown +3", augments={'Enhances "Penance" effect',}},
+		body="Bhikku Cyclas +2",
+		hands="Bhikku Gloves +2",
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet="Mpaca's Boots",
+		neck="Rep. Plat. Medal",
+		waist="Moonbow Belt +1",
 		left_ear="Sherida Earring",
-		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		left_ring="Niqmaddu Ring",
-		right_ring="Gere Ring",
+		right_ear={ name="Schere Earring", augments={'Path: A',}},
+		left_ring="Sroda Ring",
+		right_ring="Ephramad's Ring",
 		back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},}
 	
 	sets.precast.WS["Ascetic's Fury"] = {
-		ammo="Knobkierrie",
-		head={ name="Blistering Sallet +1", augments={'Path: A',}},
-		body="Mummu Jacket +2",
-		hands="Mummu Wrists +2",
-		legs="Hiza. Hizayoroi +2",
-		feet="Mummu Gamash. +2",
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head={ name="Mpaca's Cap", augments={'Path: A',}},
+		body={ name="Mpaca's Doublet", augments={'Path: A',}},
+		hands={ name="Ryuo Tekko +1", augments={'DEX+12','Accuracy+25','"Dbl.Atk."+4',}},
+		legs={ name="Mpaca's Hose", augments={'Path: A',}},
+		feet="Mpaca's Boots",
 		neck="Fotia Gorget",
-		waist="Fotia Belt",
+		waist="Moonbow Belt +1",
 		left_ear="Sherida Earring",
-		right_ear="Odr Earring",
-		left_ring="Niqmaddu Ring",
-		right_ring="Gere Ring",
-		back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}},}
+		right_ear={ name="Schere Earring", augments={'Path: A',}},
+		left_ring="Gere Ring",
+		right_ring="Niqmaddu Ring",
+		back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Crit.hit rate+10',}},}
 	
 	sets.precast.WS['Spinning Attack'] = {
 		ammo="Knobkierrie",
@@ -519,45 +548,21 @@ function init_gear_sets()
 		left_ring="Prolix Ring",
 		right_ring="Defending Ring",
 		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
-        
-    -- Specific spells
-
-    
-    -- Sets to return to when not performing an action.
-    
-    -- Resting sets
-    sets.resting = {
-		main="Sakpata's Fists",
-		ammo="Staunch Tathlum +1",
-		head="Malignance Chapeau",
-		body="Malignance Tabard",
-		hands="Malignance Gloves",
-		legs="Malignance Tights",
-		feet="Malignance Boots",
-		neck="Sanctity Necklace",
-		waist="Kasiri Belt",
-		left_ear="Eabani Earring",
-		right_ear="Hearty Earring",
-		left_ring="Defending Ring",
-		right_ring="Chirich Ring +1",
-		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
-    
 
     -- Idle sets
     sets.idle = {
-		main="Sakpata's Fists",
 		ammo="Staunch Tathlum +1",
-		head="Malignance Chapeau",
-		body="Malignance Tabard",
-		hands="Malignance Gloves",
-		legs="Malignance Tights",
-		feet="Malignance Boots",
-		neck="Sanctity Necklace",
-		waist="Kasiri Belt",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck={ name="Loricate Torque +1", augments={'Path: A',}},
+		waist="Moonbow Belt +1",
 		left_ear="Eabani Earring",
-		right_ear="Hearty Earring",
-		left_ring="Defending Ring",
-		right_ring="Chirich Ring +1",
+		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+		left_ring="Ilabrat Ring",
+		right_ring="Shadow Ring",
 		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 
  
@@ -566,115 +571,89 @@ function init_gear_sets()
     
     -- Normal melee sets
     sets.engaged = {
-		ammo="Aurgelmir Orb +1",
-		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		body={ name="Tatena. Harama. +1", augments={'Path: A',}},
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head="Ken. Jinpachi +1",
+		body={ name="Mpaca's Doublet", augments={'Path: A',}},
 		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs={ name="Tatena. Haidate +1", augments={'Path: A',}},
-		feet={ name="Tatena. Sune. +1", augments={'Path: A',}},
-		neck="Combatant's Torque",
-		waist="Windbuffet Belt +1",
-		left_ear="Telos Earring",
-		right_ear="Sherida Earring",
-		left_ring="Niqmaddu Ring",
-		right_ring="Gere Ring",
+		legs="Bhikku Hose +2",
+		feet="Anch. Gaiters +3",
+		neck={ name="Mnk. Nodowa +2", augments={'Path: A',}},
+		waist="Moonbow Belt +1",
+		left_ear="Sherida Earring",
+		right_ear={ name="Schere Earring", augments={'Path: A',}},
+		left_ring="Gere Ring",
+		right_ring="Niqmaddu Ring",
 		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 
     sets.engaged.Acc = {
-		ammo="Aurgelmir Orb +1",
-		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		body={ name="Tatena. Harama. +1", augments={'Path: A',}},
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head="Ken. Jinpachi +1",
+		body={ name="Mpaca's Doublet", augments={'Path: A',}},
 		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs={ name="Tatena. Haidate +1", augments={'Path: A',}},
-		feet={ name="Tatena. Sune. +1", augments={'Path: A',}},
-		neck="Combatant's Torque",
-		waist="Windbuffet Belt +1",
-		left_ear="Telos Earring",
-		right_ear="Sherida Earring",
-		left_ring="Niqmaddu Ring",
-		right_ring="Gere Ring",
+		legs="Bhikku Hose +2",
+		feet="Anch. Gaiters +3",
+		neck={ name="Mnk. Nodowa +2", augments={'Path: A',}},
+		waist="Moonbow Belt +1",
+		left_ear="Sherida Earring",
+		right_ear={ name="Schere Earring", augments={'Path: A',}},
+		left_ring="Gere Ring",
+		right_ring="Niqmaddu Ring",
 		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+		
+	sets.engaged.Impetus = set_combine(sets.engaged, {body="Bhikku Cyclas +2",})
+	sets.engaged.Acc.Impetus = set_combine(sets.engaged.Acc, {body="Bhikku Cyclas +2",})
 
 	--Hybrid Sets
 	
 	sets.engaged.Hybrid = {
-		head="Malignance Chapeau", --6%
-		body="Malignance Tabard",  --9%
-		hands="Malignance Gloves", --5%
-		legs="Malignance Tights", --7%
-		feet="Malignance Boots", --4%
-		left_ring="Defending Ring", --10
-        }
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head="Bhikku Crown +2",
+		body={ name="Mpaca's Doublet", augments={'Path: A',}},
+		hands="Mpaca's Gloves",
+		legs="Bhikku Hose +2",
+		feet="Mpaca's Boots",
+		neck={ name="Mnk. Nodowa +2", augments={'Path: A',}},
+		waist="Moonbow Belt +1",
+		left_ear="Sherida Earring",
+		right_ear={ name="Schere Earring", augments={'Path: A',}},
+		left_ring="Gere Ring",
+		right_ring="Niqmaddu Ring",
+		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 		
 	sets.engaged.Counter = {
-		ammo="Amar Cluster",
-		head="Malignance Chapeau",
-		body="Malignance Tabard",
-		hands="Malignance Gloves",
-		legs="Malignance Tights",
-		feet="Malignance Boots",
+		ammo="Crepuscular Pebble",
+		head="Bhikku Crown +2",
+		body={ name="Mpaca's Doublet", augments={'Path: A',}},
+		hands="Mpaca's Gloves",
+		legs="Anch. Hose +2",
+		feet="Bhikku Gaiters +2",
+		neck={ name="Bathy Choker +1", augments={'Path: A',}},
+		waist="Moonbow Belt +1",
 		left_ear="Cryptic Earring",
-		left_ring="Defending Ring", --10
-		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+9','"Dbl.Atk."+10','System: 1 ID: 640 Val: 4',}},
-		}
-		
-	
-
+		right_ear={ name="Bhikku Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+17','Mag. Acc.+17','"Store TP"+6','STR+9 DEX+9',}},
+		left_ring="Defending Ring",
+		right_ring="Niqmaddu Ring",
+		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','System: 1 ID: 640 Val: 4',}},}
 
     -- Defensive melee hybrid sets
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
-	sets.engaged.Counter = set_combine(sets.engaged.Acc, sets.engaged.Counter)
+	sets.engaged.Counter = set_combine(sets.engaged, sets.engaged.Counter)
 	sets.engaged.Acc.Counter = set_combine(sets.engaged.Acc, sets.engaged.Counter)
-
-
-    -- Hundred Fists/Impetus melee set mods
-    sets.engaged.HF = set_combine(sets.engaged)
-    sets.engaged.HF.Impetus = set_combine(sets.engaged, {body="Tantra Cyclas +2"})
-    sets.engaged.Acc.HF = set_combine(sets.engaged.Acc)
-    sets.engaged.Acc.HF.Impetus = set_combine(sets.engaged.Acc, {body="Tantra Cyclas +2"})
-
-
-    -- Footwork combat form
-    
-	sets.engaged.Footwork = {
-		ammo="Ginsen",
-		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
-		feet={ name="Herculean Boots", augments={'Accuracy+10 Attack+10','"Triple Atk."+4','Accuracy+14',}},
-		neck="Combatant's Torque",
-		waist="Windbuffet Belt +1",
-		left_ear="Sherida Earring",
-		right_ear="Telos Earring",
-		left_ring="Gere Ring",
-		right_ring="Niqmaddu Ring",
-		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
-    
-	sets.engaged.Footwork.Acc = {
-		ammo="Ginsen",
-		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
-		feet={ name="Herculean Boots", augments={'Accuracy+10 Attack+10','"Triple Atk."+4','Accuracy+14',}},
-		neck="Combatant's Torque",
-		waist="Windbuffet Belt +1",
-		left_ear="Sherida Earring",
-		right_ear="Telos Earring",
-		left_ring="Gere Ring",
-		right_ring="Niqmaddu Ring",
-		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+	
+    sets.engaged.Impetus.DT = set_combine(sets.engaged.Impetus, sets.engaged.Hybrid)
+    sets.engaged.Acc.Impetus.DT = set_combine(sets.engaged.Acc.Impetus, sets.engaged.Hybrid)
+    sets.engaged.Impetus.Counter = set_combine(sets.engaged.Impetus, sets.engaged.Counter)
+    sets.engaged.Acc.Impetus.Counter = set_combine(sets.engaged.Acc.Impetus, sets.engaged.Counter)
 		
     --------------------------------------
     -- Custom buff sets
     --------------------------------------
 
-    --sets.impetus_body = {body="Tantra Cyclas +2"}
+	sets.Kiting = {left_ring="Shneddick Ring",}
 	
-    sets.footwork_kick_feet = {feet="Anchorite's Gaiters +1"}
-
+	sets.Impetus = {body="Bhikku Cyclas +2",}
+	
     sets.buff.Doom = {
 		neck="Nicander's Necklace",
         waist="Gishdubar Sash", --10
@@ -687,11 +666,9 @@ function init_gear_sets()
 		body="Volte Jupon",		--TH2
 		waist="Chaac Belt",} --TH+1
 		
-	sets.Godhands = {main="Sakpata's Fists",}
-	sets.Spharai = {main="Sakpata's Fists",}
-	sets.Verethranga = {main="Sakpata's Fists",}
-	sets.Xoanan = {main="Sakpata's Fists",}
-	sets.Karambit = {main="Kaja Knuckles"}
+	sets.Godhands = {main="Karambit",}
+	sets.Karambit = {main="Karambit",}
+	sets.Xoanon = {main="Xoanon",sub={ name="Rigorous Grip +1", augments={'Path: A',}},}
 
 
 end
@@ -700,59 +677,57 @@ end
 -- Job-specific Functions
 -------------------------------------------------------------------------------------------------------------------
 
+function job_precast(spell, action, spellMap, eventArgs)
+
+		--Will stop utsusemi from being cast if 2 shadows or more
+    if spellMap == 'Utsusemi' then
+        if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
+            cancel_spell()
+            add_to_chat(123, '**!! '..spell.english..' Canceled: [3+ IMAGES] !!**')
+            eventArgs.handled = true
+            return
+        elseif buffactive['Copy Image'] or buffactive['Copy Image (2)'] then
+            send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
+        end
+    end
+
+end
+
 function job_post_precast(spell, action, spellMap, eventArgs)
 
-		--Handles Impetus/Footwork Weaponskills
-    if spell.type == 'WeaponSkill' and state.DefenseMode.current ~= 'None' then
-        if state.Buff.Impetus and (spell.english == "Ascetic's Fury" or spell.english == "Victory Smite") then
-            -- Need 6 hits at capped dDex, or 9 hits if dDex is uncapped, for Tantra to tie or win.
-            if (info.impetus_hit_count > 5) or (info.impetus_hit_count > 8) then
-                equip(sets.impetus_body)
-            end
-        elseif state.Buff.Footwork and (spell.english == "Dragon's Kick" or spell.english == "Tornado Kick") then
-            equip(sets.footwork_kick_feet)
-        end
+		--Handles TP Overflow on Weapon skills
+    if spell.type == "WeaponSkill" then
+		if spell.english == "Victory Smite" or spell.english == "Ascetic\'s Fury" then
+			if state.Buff['Impetus'] == true then
+				equip(sets.Impetus)
+			end
+		else
+			if spell.english == "Final Heaven" or spell.english == "Shijin Spiral" or spell.english == "Asuran Fists" or spell.english == "Shattersoul" or spell.english == "Shell Crusher" then
+			else
+				if spell.english == "Cataclysm" or spell.english == "Earth Crusher" then
+					if player.tp > 2900 then
+						equip(sets.precast.WS.FullTPMagical)
+					end
+				else
+					if state.WeaponSet.value == "Godhands" then
+						if player.tp > 2200 then
+							equip(sets.precast.WS.FullTPPhysical)
+						end
+					elseif state.WeaponSet.value == "Karambit" or state.WeaponSet.value == "Xoanon" then
+						if state.WeaponskillMode.value == "Normal" then
+							if player.tp > 2700 then
+								equip(sets.precast.WS.FullTPPhysical)
+							end
+						end
+					end
+				end
+			end
+		end
     end
-	
 end
 
-function job_aftercast(spell, action, spellMap, eventArgs)
+function job_buff_change(buff,gain)
 
-    if spell.type == 'WeaponSkill' and not spell.interrupted and state.FootworkWS and state.Buff.Footwork then
-        send_command('cancel Footwork')
-    end
-	
-end
-
-function job_buff_change(buff, gain)
-
-		--Set Footwork as combat form any time it's active and Hundred Fists is not.
-    if buff == 'Footwork' and gain and not buffactive['hundred fists'] then
-        state.CombatForm:set('Footwork')
-    elseif buff == "Hundred Fists" and not gain and buffactive.footwork then
-        state.CombatForm:set('Footwork')
-    else
-        state.CombatForm:reset()
-    end
-    
-		-- Hundred Fists and Impetus modify the custom melee groups
-    if buff == "Hundred Fists" or buff == "Impetus" then
-        classes.CustomMeleeGroups:clear()
-        
-        if (buff == "Hundred Fists" and gain) or buffactive['hundred fists'] then
-            classes.CustomMeleeGroups:append('HF')
-        end
-        
-        if (buff == "Impetus" and gain) or buffactive.impetus then
-            classes.CustomMeleeGroups:append('Impetus')
-        end
-    end
-
-		-- Update gear if any of the above changed
-    if buff == "Hundred Fists" or buff == "Impetus" or buff == "Footwork" then
-        handle_equipping_gear(player.status)
-    end
-	
 		--Auto equips Cursna Recieved doom set when doom debuff is on
     if buff == "doom" then
         if gain then
@@ -764,14 +739,84 @@ function job_buff_change(buff, gain)
             handle_equipping_gear(player.status)
         end
     end
+
+end
+
+-------------------------------------------------------------------------------------------------------------------
+-- Code for Melee sets
+-------------------------------------------------------------------------------------------------------------------
+
+-- Handles Gearinfo / Melee / Weapon / Range Sets
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    update_combat_form()
+	determine_impetus()
+	check_moving()
+end
+
+function job_update(cmdParams, eventArgs)
+	check_gear()
+	Weaponskill_Keybinds()
+    handle_equipping_gear(player.status)
+end
+
+	--Determines Dual Wield melee set
+function update_combat_form()
+
+	if state.WeaponSet.value == 'Godhands' then
+		equip(sets.Godhands)
+	end
+
+	if state.WeaponSet.value == 'Karambit' then
+		equip(sets.Karambit) 
+	end
+	
+	if state.WeaponSet.value == 'Xoanon' then
+		equip(sets.Xoanon) 
+	end
 	
 end
 
-	--Handles Weapon set changes and Reraise set
-function job_state_change(field, new_value, old_value)
- 
-    equip(sets[state.WeaponSet.current])
-	
+function Weaponskill_Keybinds()
+
+	if state.WeaponSet.value == 'Godhands' or state.WeaponSet.value == 'Karambit' then
+		send_command([[bind !numpad- 
+			input /echo -----H2H-----;
+			input /echo [ CTRL + Numpad1 ] Howling Fist;
+			input /echo [ CTRL + Numpad2 ] Tornado Kick;
+			input /echo [ CTRL + Numpad3 ] Dragon Kick;
+			input /echo [ CTRL + Numpad4 ] Victory Smite;
+			input /echo [ CTRL + Numpad5 ] Raging Fists;
+			input /echo [ CTRL + Numpad6 ] Shijin Spiral;
+			input /echo [ CTRL + Numpad7 ] Asuran Fists;
+			input /echo [ CTRL + Numpad9 ] Ascetic's Fury;
+			input /echo [ CTRL + Numpad. ] Spinning Attack;]])
+		send_command('bind ^numpad1 input /ws "Howling Fist" <t>')
+		send_command('bind ^numpad2 input /ws "Tornado Kick" <t>')
+		send_command('bind ^numpad3 input /ws "Dragon Kick" <t>')	
+		send_command('bind ^numpad4 input /ws "Victory Smite" <t>')
+		send_command('bind ^numpad5 input /ws "Raging Fists" <t>')
+		send_command('bind ^numpad6 input /ws "Shijin Spiral" <t>')
+		send_command('bind ^numpad7 input /ws "Asuran Fists" <t>')
+		send_command('bind ^numpad9 input /ws "Ascetic\'s Fury" <t>')
+		send_command('bind ^numpad. input /ws "Spinning Attack" <t>')
+		
+	elseif state.WeaponSet.value == 'Xoanon' then
+		send_command([[bind !numpad- 
+			input /echo -----Staff-----;
+			input /echo [ ALT + Numpad1 ] Retribution;
+			input /echo [ ALT + Numpad2 ] Full Swing;
+			input /echo [ ALT + Numpad3 ] Shell Crusher;
+			input /echo [ ALT + Numpad4 ] Cataclysm;
+			input /echo [ ALT + Numpad5 ] Earth Crusher;
+			input /echo [ ALT + Numpad6 ] Shattersoul;]])
+		send_command('bind ^numpad1 input /ws "Retribution" <t>')
+		send_command('bind ^numpad2 input /ws "Full Swing" <t>')
+		send_command('bind ^numpad3 input /ws "Shell Crusher" <t>')
+		send_command('bind ^numpad4 input /ws "Cataclysm" <t>')
+		send_command('bind ^numpad5 input /ws "Earth Crusher" <t>')
+		send_command('bind ^numpad6 input /ws "Shattersoul" <t>')
+	end
+
 end
 
 function customize_idle_set(idleSet)
@@ -784,56 +829,14 @@ function customize_idle_set(idleSet)
         enable('back')
     end
     
+	if state.Auto_Kite.value == true then
+       idleSet = set_combine(idleSet, sets.Kiting)
+    end
+	
     return idleSet
-	
 end
 
--------------------------------------------------------------------------------------------------------------------
--- Code for Melee sets
--------------------------------------------------------------------------------------------------------------------
-
-function update_combat_form()
-
-    if buffactive.footwork and not buffactive['hundred fists'] then
-        state.CombatForm:set('Footwork')
-    else
-        state.CombatForm:reset()
-    end
-
-	if state.WeaponSet.value == 'Godhands' then
-		equip(sets.Godhands)
-	end
-	
-	if state.WeaponSet.value == 'Spharai' then
-		equip(sets.Spharai) 
-	end
-
-	if state.WeaponSet.value == 'Verethranga' then
-		equip(sets.Verethranga)
-	end
-
-	if state.WeaponSet.value == 'Xoanan' then
-		equip(sets.Xoanan) 
-	end
-	
-	if state.WeaponSet.value == 'Karambit' then
-		equip(sets.Karambit) 
-	end
-	
-end
-
-function update_melee_groups()
-    classes.CustomMeleeGroups:clear()
-    
-    if buffactive['hundred fists'] then
-        classes.CustomMeleeGroups:append('HF')
-    end
-    
-    if buffactive.impetus then
-        classes.CustomMeleeGroups:append('Impetus')
-    end
-end
-
+-- Function to display the current relevant user state when doing an update.
 function display_current_job_state(eventArgs)
     local cf_msg = ''
     if state.CombatForm.has_value then
@@ -857,98 +860,98 @@ function display_current_job_state(eventArgs)
     local i_msg = state.IdleMode.value
 
     local msg = ''
-	
     if state.TreasureMode.value == 'Tag' then
         msg = msg .. ' TH: Tag |'
     end
-	
+    if state.Kiting.value then
+        msg = msg .. ' Kiting: On |'
+    end
+
     add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
         ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,060).. ' Magic: ' ..string.char(31,001)..c_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
         ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
         ..string.char(31,002)..msg)
 
     eventArgs.handled = true
 end
 
+-------------------------------------------------------------------------------------------------------------------
+-- Utility functions specific to this job.
+-------------------------------------------------------------------------------------------------------------------
+
+	--Determines Impetus Engaged Melee set
+function determine_impetus()
+    classes.CustomMeleeGroups:clear()
+	
+	if state.Buff['Impetus'] == true then
+		classes.CustomMeleeGroups:append('Impetus')
+    end
+	
+end
+
+	--Gear Info Functions
+function job_self_command(cmdParams, eventArgs)
+    gearinfo(cmdParams, eventArgs)
+end
+
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
+    end
+end
+
+	--Auto_Kite function
+function check_moving()
+    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
+        if state.Auto_Kite.value == false and moving then
+            state.Auto_Kite:set(true)
+        elseif state.Auto_Kite.value == true and moving == false then
+            state.Auto_Kite:set(false)
+        end
+    end
+end
+
+	--Allows equipping of warp/exp rings without auto swapping back to current set
+function check_gear()
+    if no_swap_gear:contains(player.equipment.left_ring) then
+        disable("ring1")
+    else
+        enable("ring1")
+    end
+    if no_swap_gear:contains(player.equipment.right_ring) then
+        disable("ring2")
+    else
+        enable("ring2")
+    end
+end
+
+windower.register_event('zone change',
+    function()
+        if no_swap_gear:contains(player.equipment.left_ring) then
+            enable("ring1")
+            equip(sets.idle)
+        end
+        if no_swap_gear:contains(player.equipment.right_ring) then
+            enable("ring2")
+            equip(sets.idle)
+        end
+    end
+)
+
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
         set_macro_page(1, 1)
-
-end
-
-
--------------------------------------------------------------------------------------------------------------------
--- Custom event hooks.
--------------------------------------------------------------------------------------------------------------------
-
--- Keep track of the current hit count while Impetus is up.
-function on_action_for_impetus(action)
-    if state.Buff.Impetus then
-        -- count melee hits by player
-        if action.actor_id == player.id then
-            if action.category == 1 then
-                for _,target in pairs(action.targets) do
-                    for _,action in pairs(target.actions) do
-                        -- Reactions (bitset):
-                        -- 1 = evade
-                        -- 2 = parry
-                        -- 4 = block/guard
-                        -- 8 = hit
-                        -- 16 = JA/weaponskill?
-                        -- If action.reaction has bits 1 or 2 set, it missed or was parried. Reset count.
-                        if (action.reaction % 4) > 0 then
-                            info.impetus_hit_count = 0
-                        else
-                            info.impetus_hit_count = info.impetus_hit_count + 1
-                        end
-                    end
-                end
-            elseif action.category == 3 then
-                -- Missed weaponskill hits will reset the counter.  Can we tell?
-                -- Reaction always seems to be 24 (what does this value mean? 8=hit, 16=?)
-                -- Can't tell if any hits were missed, so have to assume all hit.
-                -- Increment by the minimum number of weaponskill hits: 2.
-                for _,target in pairs(action.targets) do
-                    for _,action in pairs(target.actions) do
-                        -- This will only be if the entire weaponskill missed or was parried.
-                        if (action.reaction % 4) > 0 then
-                            info.impetus_hit_count = 0
-                        else
-                            info.impetus_hit_count = info.impetus_hit_count + 2
-                        end
-                    end
-                end
-            end
-        elseif action.actor_id ~= player.id and action.category == 1 then
-            -- If mob hits the player, check for counters.
-            for _,target in pairs(action.targets) do
-                if target.id == player.id then
-                    for _,action in pairs(target.actions) do
-                        -- Spike effect animation:
-                        -- 63 = counter
-                        -- ?? = missed counter
-                        if action.has_spike_effect then
-                            -- spike_effect_message of 592 == missed counter
-                            if action.spike_effect_message == 592 then
-                                info.impetus_hit_count = 0
-                            elseif action.spike_effect_animation == 63 then
-                                info.impetus_hit_count = info.impetus_hit_count + 1
-                            end
-                        end
-                    end
-                end
-            end
-        end
-        
-        --add_to_chat(123,'Current Impetus hit count = ' .. tostring(info.impetus_hit_count))
-    else
-        info.impetus_hit_count = 0
-    end
-    
 end
 
 function set_lockstyle()
-    send_command('wait 5; input /lockstyleset ' .. lockstyleset)
+    send_command('wait 2; input /lockstyleset ' .. lockstyleset)
 end

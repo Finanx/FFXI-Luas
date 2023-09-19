@@ -149,6 +149,7 @@ function user_setup()
 	send_command('bind @d input //lua u dressup; wait 10; input //lua l dressup')	
     send_command ('bind ^` gs c toggle LuzafRing')
 	send_command('bind @t gs c cycle TreasureMode')
+	send_command('bind ^space tc nearest')
 	
 	--Command to show global binds in game[ CTRL + numpad- ]
 	send_command([[bind ^numpad- 
@@ -298,9 +299,16 @@ function user_unload()
 	--Remove Global Corsair Binds
 
 	send_command('unbind @u')
-	send_command('unbind @d')	
-    send_command('unbind @t')
-    send_command('unbind ^`')
+	send_command('unbind @d')
+	send_command('unbind @e')	
+    send_command('unbind @w')
+	send_command('unbind @r')
+    send_command('unbind @c')
+	send_command('unbind @t')
+	send_command('unbind @b')
+	send_command('unbind @m')
+	send_command('unbind ^space')
+	send_command('unbind ^`')
 	send_command('unbind ^-')
 	send_command('unbind ^=')
 	send_command('unbind !`')
@@ -1117,7 +1125,7 @@ function init_gear_sets()
 		legs="Chas. Culottes +3",  --11%
 		feet="Malignance Boots", --4%
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}}, --7%
-        } -- 35%DT + 7% PDT + 10% PDT Back Piece
+        } -- 35%DT + 7% PDT + 10% PDT Back Piece 
 		--[[	{
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
 		body="Mummu Jacket +2",
@@ -1130,7 +1138,7 @@ function init_gear_sets()
 		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Crit.hit rate+7','STR+11 AGI+11',}},
 		left_ring="Begrudging Ring",
 		right_ring="Mummu Ring",
-		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}		]]
+		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}  ]]		
 		
 	sets.engaged.Hybrid.Defense = {
 		head={ name="Nyame Helm", augments={'Path: B',}},																						--7%
@@ -1184,7 +1192,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-	sets.Kiting = {legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},}
+	sets.Kiting = {left_ring="Shneddick Ring",}
 
     sets.TreasureHunter = {
 		body="Volte Jupon",		--TH2

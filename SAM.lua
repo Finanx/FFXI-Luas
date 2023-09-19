@@ -134,6 +134,7 @@ function user_setup()
 	send_command('bind @r gs c toggle Reraise')
     send_command('bind ^` input /ja "Hasso" <me>')
 	send_command('bind !` input /ja "Seigan" <me>')
+	send_command('bind ^space tc nearest')
 	
 	--Command to show global binds in game[ CTRL + numpad- ]
 	send_command([[bind ^numpad- 
@@ -267,10 +268,15 @@ function user_unload()
 	--Remove Global Samurai Binds
 
 	send_command('unbind @u')
-	send_command('unbind @d')	
-    send_command('unbind @t')
+	send_command('unbind @d')
+	send_command('unbind @e')	
+    send_command('unbind @w')
+	send_command('unbind @r')
     send_command('unbind @c')
-    send_command('unbind @r')
+	send_command('unbind @t')
+	send_command('unbind @b')
+	send_command('unbind @m')
+	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
 	send_command('unbind ^=')
@@ -722,7 +728,7 @@ function init_gear_sets()
 
 	sets.CP = {neck={ name="Sam. Nodowa +2", augments={'Path: A',}}}
 
-	sets.Kiting = {feet="Danzo Sune-Ate"}
+	sets.Kiting = {left_ring="Shneddick Ring",}
 
     sets.Sekkanoki = {hands="Kasuga Kote +3",}
     sets.Sengikori = {feet="Kasuga Sune-ate +2"}

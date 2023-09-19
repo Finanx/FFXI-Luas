@@ -143,6 +143,7 @@ function user_setup()
 	send_command('bind ^` input /ja "Sneak Attack" <me>')
     send_command('bind !` input /ja "Trick Attack" <me>')
 	send_command('bind ~` input /ja "Flee" <me>')
+	send_command('bind ^space tc nearest')
 	
 	--Command to show global binds in game[ CTRL + numpad- ]
 	send_command([[bind ^numpad- 
@@ -270,9 +271,14 @@ function user_unload()
 
 	send_command('unbind @u')
 	send_command('unbind @d')
-    send_command('unbind @t')
+	send_command('unbind @e')	
+    send_command('unbind @w')
+	send_command('unbind @r')
     send_command('unbind @c')
+	send_command('unbind @t')
 	send_command('unbind @b')
+	send_command('unbind @m')
+	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
 	send_command('unbind ^=')
@@ -282,7 +288,6 @@ function user_unload()
 	send_command('unbind @`')
 	send_command('unbind @-')
 	send_command('unbind @=')
-	send_command('unbind ~`')
 	
 	--Remove Weapon Set binds
 	
@@ -372,8 +377,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.TreasureHunter = {
-		ammo="Per. Lucky Egg", --TH1
-		feet="Skulk. Poulaines +2", --TH4
+		feet="Skulk. Poulaines +3", --TH5
         }
 
     -- Actions we want to use to tag TH.
@@ -388,11 +392,11 @@ function init_gear_sets()
 
     -- Precast sets to enhance JAs
 
-    sets.precast.JA['Collaborator'] = {head="Skulker's Bonnet +2"}
-    sets.precast.JA['Accomplice'] = {head="Skulker's Bonnet +2"}
+    sets.precast.JA['Collaborator'] = {head="Skulker's Bonnet +3"}
+    sets.precast.JA['Accomplice'] = {head="Skulker's Bonnet +3"}
     sets.precast.JA['Flee'] = {feet="Pill. Poulaines +3"}
     sets.precast.JA['Hide'] = {body="Pillager's Vest +3"}
-    sets.precast.JA['Conspirator'] = {body="Skulker's Vest +2"}
+    sets.precast.JA['Conspirator'] = {body="Skulker's Vest +3"}
 
     sets.precast.JA['Steal'] = {
         ammo="Barathrum", --3
@@ -402,7 +406,7 @@ function init_gear_sets()
 		
 	sets.precast.JA['Mug'] = {head={ name="Plun. Bonnet +3", augments={'Enhances "Aura Steal" effect',}},}
 
-    sets.precast.JA['Despoil'] = {ammo="Barathrum",legs="Skulk. Culottes +2",feet="Skulk. Poulaines +2",}
+    sets.precast.JA['Despoil'] = {ammo="Barathrum",legs="Skulk. Culottes +3",feet="Skulk. Poulaines +3",}
     sets.precast.JA['Perfect Dodge'] = {hands="Plunderer's Armlets +1"}
     sets.precast.JA['Feint'] = {legs="Plunderer's Culottes +3"}
 
@@ -453,7 +457,7 @@ function init_gear_sets()
     sets.precast.WS = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
-		body="Skulker's Vest +2",
+		body="Skulker's Vest +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Plun. Culottes +3", augments={'Enhances "Feint" effect',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
@@ -467,7 +471,7 @@ function init_gear_sets()
 		
     sets.precast.WS.ATKCAP = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Skulker's Bonnet +2",
+		head="Skulker's Bonnet +3",
 		body={ name="Gleti's Cuirass", augments={'Path: A',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Plun. Culottes +3", augments={'Enhances "Feint" effect',}},
@@ -479,13 +483,16 @@ function init_gear_sets()
 		left_ring="Epaminondas's Ring",
 		right_ring="Regal Ring",
 		back={ name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
+		
+	sets.precast.WS.FullTPMagical = {}
+	sets.precast.WS.FullTPPhysical = {}
 
     sets.precast.WS['Evisceration'] = {
 		ammo="Yetshila +1",
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
 		body={ name="Gleti's Cuirass", augments={'Path: A',}},
 		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
-		legs="Skulk. Culottes +2",
+		legs="Skulk. Culottes +3",
 		feet={ name="Gleti's Boots", augments={'Path: A',}},
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
@@ -498,7 +505,7 @@ function init_gear_sets()
 	sets.precast.WS['Rudra\'s Storm'] = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
-		body="Skulker's Vest +2",
+		body="Skulker's Vest +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
@@ -512,8 +519,8 @@ function init_gear_sets()
 		
 	sets.precast.WS['Rudra\'s Storm'].ATKCAP = {
 		ammo="Yetshila +1",
-		head="Skulker's Bonnet +2",
-		body="Skulker's Vest +2",
+		head="Skulker's Bonnet +3",
+		body="Skulker's Vest +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
@@ -530,7 +537,7 @@ function init_gear_sets()
 	sets.precast.WS['Mandalic Stab'] = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
-		body="Skulker's Vest +2",
+		body="Skulker's Vest +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
@@ -544,8 +551,8 @@ function init_gear_sets()
 		
 	sets.precast.WS['Mandalic Stab'].ATKCAP = {
 		ammo="Yetshila +1",
-		head="Skulker's Bonnet +2",
-		body="Skulker's Vest +2",
+		head="Skulker's Bonnet +3",
+		body="Skulker's Vest +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
@@ -561,8 +568,8 @@ function init_gear_sets()
 		
 	sets.precast.WS['Shark Bite'] = {
 		ammo="Yetshila +1",
-		head="Skulker's Bonnet +2",
-		body="Skulker's Vest +2",
+		head="Skulker's Bonnet +3",
+		body="Skulker's Vest +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
@@ -576,8 +583,8 @@ function init_gear_sets()
 		
 	sets.precast.WS['Shark Bite'].ATKCAP = {
 		ammo="Yetshila +1",
-		head="Skulker's Bonnet +2",
-		body="Skulker's Vest +2",
+		head="Skulker's Bonnet +3",
+		body="Skulker's Vest +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
@@ -594,7 +601,7 @@ function init_gear_sets()
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
 		body={ name="Gleti's Cuirass", augments={'Path: A',}},
 		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
-		legs="Skulk. Culottes +2",
+		legs="Skulk. Culottes +3",
 		feet={ name="Gleti's Boots", augments={'Path: A',}},
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
@@ -619,12 +626,12 @@ function init_gear_sets()
 		right_ring="Epaminondas's Ring",
 		back={ name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
 		
-	sets.precast.WS['Cyclone'] = set_combine(sets.precast.WS['Aeolian Edge'], {feet="Skulk. Poulaines +2",})
+	sets.precast.WS['Cyclone'] = set_combine(sets.precast.WS['Aeolian Edge'], {feet="Skulk. Poulaines +3",})
 
 	sets.precast.WS['Savage Blade'] = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
-		body="Skulker's Vest +2",
+		body="Skulker's Vest +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
@@ -638,8 +645,8 @@ function init_gear_sets()
 		
 	sets.precast.WS['Savage Blade'].ATKCAP = {
 		ammo="Crepuscular Pebble",
-		head="Skulker's Bonnet +2",
-		body="Skulker's Vest +2",
+		head="Skulker's Bonnet +3",
+		body="Skulker's Vest +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
@@ -672,7 +679,7 @@ function init_gear_sets()
 		ammo="Aurgelmir Orb +1",
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Skulk. Armlets +2",
+		hands="Skulk. Armlets +3",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Gleti's Boots", augments={'Path: A',}},
 		neck="Fotia Gorget",
@@ -685,7 +692,7 @@ function init_gear_sets()
 		
 	sets.precast.WS['Asuran Fists'].ATKCAP = {
 		ammo="Crepuscular Pebble",
-		head="Skulker's Bonnet +2",
+		head="Skulker's Bonnet +3",
 		body={ name="Gleti's Cuirass", augments={'Path: A',}},
 		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
@@ -759,7 +766,7 @@ function init_gear_sets()
 
     sets.engaged = {
 		ammo="Aurgelmir Orb +1",
-		head="Skulker's Bonnet +2",
+		head="Skulker's Bonnet +3",
 		body="Pillager's Vest +3",
 		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
@@ -774,7 +781,7 @@ function init_gear_sets()
 
     sets.engaged.Acc = {
 		ammo="Aurgelmir Orb +1",
-		head="Skulker's Bonnet +2",
+		head="Skulker's Bonnet +3",
 		body="Pillager's Vest +3",
 		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
@@ -793,7 +800,7 @@ function init_gear_sets()
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
 		ammo="Aurgelmir Orb +1",
-		head="Skulker's Bonnet +2",
+		head="Skulker's Bonnet +3",
 		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},											--6%
 		hands={ name="Floral Gauntlets", augments={'Rng.Acc.+15','Accuracy+15','"Triple Atk."+3','Magic dmg. taken -4%',}},		--5%
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
@@ -809,7 +816,7 @@ function init_gear_sets()
 		
     sets.engaged.DW.Acc = {
 		ammo="Aurgelmir Orb +1",
-		head="Skulker's Bonnet +2",
+		head="Skulker's Bonnet +3",
 		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},											--6%
 		hands={ name="Floral Gauntlets", augments={'Rng.Acc.+15','Accuracy+15','"Triple Atk."+3','Magic dmg. taken -4%',}},		--5%
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
@@ -826,7 +833,7 @@ function init_gear_sets()
     -- 15% Magic Haste (67% DW to cap)
     sets.engaged.DW.LowHaste = {
 		ammo="Aurgelmir Orb +1",
-		head="Skulker's Bonnet +2",
+		head="Skulker's Bonnet +3",
 		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},											--6%
 		hands={ name="Floral Gauntlets", augments={'Rng.Acc.+15','Accuracy+15','"Triple Atk."+3','Magic dmg. taken -4%',}},		--5%
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
@@ -843,7 +850,7 @@ function init_gear_sets()
 
     sets.engaged.DW.Acc.LowHaste = {
 		ammo="Aurgelmir Orb +1",
-		head="Skulker's Bonnet +2",
+		head="Skulker's Bonnet +3",
 		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},											--6%
 		hands={ name="Floral Gauntlets", augments={'Rng.Acc.+15','Accuracy+15','"Triple Atk."+3','Magic dmg. taken -4%',}},		--5%
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
@@ -861,7 +868,7 @@ function init_gear_sets()
     -- 30% Magic Haste (56% DW to cap)
     sets.engaged.DW.MidHaste = {
 		ammo="Aurgelmir Orb +1",
-		head="Skulker's Bonnet +2",
+		head="Skulker's Bonnet +3",
 		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},											--6%
 		hands={ name="Floral Gauntlets", augments={'Rng.Acc.+15','Accuracy+15','"Triple Atk."+3','Magic dmg. taken -4%',}},		--5%
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
@@ -877,7 +884,7 @@ function init_gear_sets()
 
     sets.engaged.DW.Acc.MidHaste = {
 		ammo="Aurgelmir Orb +1",
-		head="Skulker's Bonnet +2",
+		head="Skulker's Bonnet +3",
 		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},											--6%
 		hands={ name="Floral Gauntlets", augments={'Rng.Acc.+15','Accuracy+15','"Triple Atk."+3','Magic dmg. taken -4%',}},		--5%
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
@@ -894,7 +901,7 @@ function init_gear_sets()
     -- 35% Magic Haste (51% DW to cap)
     sets.engaged.DW.HighHaste = {
 		ammo="Aurgelmir Orb +1",
-		head="Skulker's Bonnet +2",
+		head="Skulker's Bonnet +3",
 		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},											--6%
 		hands={ name="Floral Gauntlets", augments={'Rng.Acc.+15','Accuracy+15','"Triple Atk."+3','Magic dmg. taken -4%',}},		--5%
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
@@ -910,7 +917,7 @@ function init_gear_sets()
 
     sets.engaged.DW.Acc.HighHaste = {
 		ammo="Aurgelmir Orb +1",
-		head="Skulker's Bonnet +2",
+		head="Skulker's Bonnet +3",
 		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},											--6%
 		hands={ name="Floral Gauntlets", augments={'Rng.Acc.+15','Accuracy+15','"Triple Atk."+3','Magic dmg. taken -4%',}},		--5%
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
@@ -927,7 +934,7 @@ function init_gear_sets()
     -- 45% Magic Haste (36% DW to cap)
     sets.engaged.DW.MaxHaste = {
 		ammo="Aurgelmir Orb +1",
-		head="Skulker's Bonnet +2",
+		head="Skulker's Bonnet +3",
 		body="Pillager's Vest +3",
 		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
@@ -943,7 +950,7 @@ function init_gear_sets()
 
     sets.engaged.DW.Acc.MaxHaste = {
 		ammo="Aurgelmir Orb +1",
-		head="Skulker's Bonnet +2",
+		head="Skulker's Bonnet +3",
 		body="Pillager's Vest +3",
 		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
@@ -1000,18 +1007,15 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
         }
 		
-	sets.Kiting = {feet="Pill. Poulaines +3",}
+	sets.Kiting = {right_ring="Shneddick Ring",}
 
     sets.CP = {neck={ name="Asn. Gorget +2", augments={'Path: A',}},}
 	
 	sets.Twashtar = {main={ name="Gleti's Knife", augments={'Path: A',}},sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
-	sets.Twashtar_Centovente = {main={ name="Gleti's Knife", augments={'Path: A',}},sub="Fusetto +2",}
 	
 	sets.Mandau = {main={ name="Mandau", augments={'Path: A',}}, sub={ name="Gleti's Knife", augments={'Path: A',}},}
-	sets.Mandau_Centovente = {main={ name="Mandau", augments={'Path: A',}}, sub="Fusetto +2",}
 	
 	sets.Tauret = {main="Tauret", sub={ name="Gleti's Knife", augments={'Path: A',}},}
-	sets.Tauret_Centovente = {main="Tauret", sub="Fusetto +2",}
 	
 	sets.Naegling = {main="Naegling", { name="Gleti's Knife", augments={'Path: A',}},}
 	sets.Naegling_Centovente = {main="Naegling", sub="Fusetto +2",}
@@ -1063,6 +1067,21 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 			end
         end
     end
+	
+    if spell.type == "WeaponSkill" then
+		if spell.english == "Exenterator" or spell.english == "Mercy Stroke" then
+		else
+			if state.TPBonus.value == true then
+				if player.tp > 2900 then
+					if spell.english == "Aeolian Edge" or spell.english == "Gust Slash" or spell.english == "Cyclone" then
+							equip(sets.precast.WS.FullTPMagical)
+					else
+						equip(sets.precast.WS.FullTPPhysical)
+					end
+				end
+			end
+		end
+	end
 
 end
 
@@ -1135,39 +1154,21 @@ function update_combat_form()
     end
 
 	if state.WeaponSet.value == 'Twashtar' then
-		if state.TPBonus.value == true then
-			enable('main','sub')
-			equip(sets.Twashtar_Centovente)
-			disable('main','sub')
-		else
-			enable('main','sub')
-			equip(sets.Twashtar)
-			disable('main','sub')
-		end
+		enable('main','sub')
+		equip(sets.Twashtar)
+		disable('main','sub')
 	end
 	
 	if state.WeaponSet.value == 'Mandau' then
-		if state.TPBonus.value == true then
-			enable('main','sub')
-			equip(sets.Mandau_Centovente)
-			disable('main','sub')
-		else
-			enable('main','sub')
-			equip(sets.Mandau)
-			disable('main','sub')
-		end
+		enable('main','sub')
+		equip(sets.Mandau)
+		disable('main','sub')
 	end
 
 	if state.WeaponSet.value == 'Tauret' then
-		if state.TPBonus.value == true then
-			enable('main','sub')
-			equip(sets.Tauret_Centovente)
-			disable('main','sub')
-		else
-			enable('main','sub')
-			equip(sets.Tauret)
-			disable('main','sub')
-		end
+		enable('main','sub')
+		equip(sets.Tauret)
+		disable('main','sub')
 	end
 	
 	if state.WeaponSet.value == 'Naegling' then

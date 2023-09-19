@@ -139,6 +139,7 @@ function user_setup()
 	send_command('bind ^` input //gs c rune')
 	send_command('bind ^= gs c cycle Runes')
 	send_command('bind ^- gs c cycleback Runes')
+	send_command('bind ^space tc nearest')
 	
 	send_command('bind !` input //gs c barspell')
     send_command('bind !- gs c cycleback Barspell')
@@ -271,9 +272,14 @@ function user_unload()
 
 	send_command('unbind @u')
 	send_command('unbind @d')
+	send_command('unbind @e')	
+    send_command('unbind @w')
+	send_command('unbind @r')
     send_command('unbind @c')
-    send_command('unbind @e')
-    send_command('unbind @t')
+	send_command('unbind @t')
+	send_command('unbind @b')
+	send_command('unbind @m')
+	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
 	send_command('unbind ^=')
@@ -283,9 +289,6 @@ function user_unload()
 	send_command('unbind @`')
 	send_command('unbind @-')
 	send_command('unbind @=')
-	send_command('unbind !`')
-    send_command('unbind !-')
-    send_command('unbind !=')
 	
 	--Remove Weapon Set binds
 	
@@ -484,11 +487,11 @@ function init_gear_sets()
 
     sets.precast.JA['Lunge'] = {
 		ammo={ name="Seeth. Bomblet +1", augments={'Path: A',}},
-		head={"Agwu's Cap", augments={'Path: A',}},
+		head={ name="Agwu's Cap", augments={'Path: A',}},
 		body={ name="Agwu's Robe", augments={'Path: A',}},
-		hands={"Agwu's Gages", augments={'Path: A',}},
-		legs={"Agwu's Slops", augments={'Path: A',}},
-		feet={"Agwu's Pigaches", augments={'Path: A',}},
+		hands={ name="Agwu's Gages", augments={'Path: A',}},
+		legs={ name="Agwu's Slops", augments={'Path: A',}},
+		feet={ name="Agwu's Pigaches", augments={'Path: A',}},
 		neck="Baetyl Pendant",
 		waist="Orpheus's Sash",
 		left_ear="Friomisi Earring",
@@ -678,7 +681,7 @@ function init_gear_sets()
 		neck="Erra Pendant",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Crep. Earring",
-		right_ear={ name="Erilaz Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','Damage taken-3%',}},
+		right_ear={ name="Erilaz Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',}},
 		left_ring="Stikini Ring +1",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},}
@@ -708,7 +711,7 @@ function init_gear_sets()
 		neck="Erra Pendant",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Crep. Earring",
-		right_ear={ name="Erilaz Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','Damage taken-3%',}},
+		right_ear={ name="Erilaz Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',}},
 		left_ring="Stikini Ring +1",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},}
@@ -837,12 +840,12 @@ function init_gear_sets()
 		neck="Sacro Gorget",
 		waist="Sroda Belt",
 		left_ear="Tuisto Earring",
-		right_ear={ name="Erilaz Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','Damage taken-3%',}},
+		right_ear={ name="Erilaz Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',}},
 		left_ring="Moonlight Ring",
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},}
 		
-	sets.RegenRecieved = {right_ear={ name="Erilaz Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','Damage taken-3%',}},}
+	sets.RegenRecieved = {right_ear={ name="Erilaz Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',}},}
 		
     sets.midcast['Refresh'] = {
 		ammo="Staunch Tathlum +1",
@@ -1084,7 +1087,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-	sets.Kiting = {legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},}
+	sets.Kiting = {right_ring="Shneddick Ring",}
 
     sets.TreasureHunter = {
 		ammo="Per. Lucky Egg", --TH1

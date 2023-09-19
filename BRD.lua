@@ -304,12 +304,14 @@ function user_unload()
 	--Remove Global Bard Binds
 
 	send_command('unbind @u')
-	send_command('unbind @d')	
-	send_command('unbind ^`')
+	send_command('unbind @d')
+	send_command('unbind @e')	
     send_command('unbind @w')
+	send_command('unbind @r')
     send_command('unbind @c')
 	send_command('unbind @t')
 	send_command('unbind @b')
+	send_command('unbind @m')
 	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
@@ -431,7 +433,7 @@ function init_gear_sets()
 		body="Inyanga Jubbah +2",
 		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
 		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		feet="Fili Cothurnes +2",
+		feet="Fili Cothurnes +3",
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
 		left_ear="Loquac. Earring",
@@ -588,9 +590,9 @@ function init_gear_sets()
 		range={ name="Linos", augments={'Accuracy+12 Attack+12','Weapon skill damage +3%','DEX+8',}},
 		head="Fili Calot +3",
 		body="Fili Hongreline +3",
-		hands="Fili Manchettes +2",
-		legs="Fili Rhingrave +2",
-		feet="Fili Cothurnes +2",
+		hands="Fili Manchettes +3",
+		legs="Fili Rhingrave +3",
+		feet="Fili Cothurnes +3",
 		neck="Sanctity Necklace",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Digni. Earring",
@@ -643,7 +645,7 @@ function init_gear_sets()
 		range={ name="Linos", augments={'Mag. Evasion+15','Phys. dmg. taken -4%','HP+20',}},
 		head="Halitus Helm",
 		body={ name="Emet Harness +1", augments={'Path: A',}},
-		hands="Fili Manchettes +2",
+		hands="Fili Manchettes +3",
 		legs={ name="Zoar Subligar +1", augments={'Path: A',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Unmoving Collar +1", augments={'Path: A',}},
@@ -660,7 +662,7 @@ function init_gear_sets()
 		range={ name="Linos", augments={'Mag. Evasion+15','Phys. dmg. taken -4%','HP+20',}},
 		head="Halitus Helm",
 		body={ name="Emet Harness +1", augments={'Path: A',}},
-		hands="Fili Manchettes +2",
+		hands="Fili Manchettes +3",
 		legs={ name="Zoar Subligar +1", augments={'Path: A',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Unmoving Collar +1", augments={'Path: A',}},
@@ -679,7 +681,7 @@ function init_gear_sets()
 		sub={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
 		head="Fili Calot +3",
 		body="Fili Hongreline +3",
-		hands="Fili Manchettes +2",
+		hands="Fili Manchettes +3",
 		legs="Inyanga Shalwar +2",
 		feet="Brioso Slippers +3",
 		neck="Mnbw. Whistle +1",
@@ -705,11 +707,11 @@ function init_gear_sets()
 	sets.midcast.Minne = set_combine(sets.midcast.SongEnhancing, {})
 	sets.midcast.Minuet = set_combine(sets.midcast.SongEnhancing, {body="Fili Hongreline +3"})
 	sets.midcast.Madrigal = set_combine(sets.midcast.SongEnhancing, {head="Fili Calot +3"})
-	sets.midcast.HonorMarch = set_combine(sets.midcast.SongEnhancing, {range="Marsyas", hands="Fili Manchettes +2"})
-	sets.midcast.March = set_combine(sets.midcast.SongEnhancing, {hands="Fili Manchettes +2"})
+	sets.midcast.HonorMarch = set_combine(sets.midcast.SongEnhancing, {range="Marsyas", hands="Fili Manchettes +3"})
+	sets.midcast.March = set_combine(sets.midcast.SongEnhancing, {hands="Fili Manchettes +3"})
 	sets.midcast.Etude = set_combine(sets.midcast.SongEnhancing, {head="Mousai Turban +1",})
 	sets.midcast.Carol = set_combine(sets.midcast.SongEnhancing, {hands="Mousai Gages +1",})
-	sets.midcast["Sentinel's Scherzo"] = set_combine(sets.midcast.SongEnhancing, {feet="Fili Cothurnes +2"})
+	sets.midcast["Sentinel's Scherzo"] = set_combine(sets.midcast.SongEnhancing, {feet="Fili Cothurnes +3"})
 	sets.midcast.Mazurka = set_combine(sets.midcast.SongEnhancing, {range="Marsyas"})
 	
 
@@ -720,8 +722,8 @@ function init_gear_sets()
 		range="Gjallarhorn",
 		head="Brioso Roundlet +3",
 		body="Fili Hongreline +3",
-		hands="Fili Manchettes +2",
-		legs="Fili Rhingrave +2",
+		hands="Fili Manchettes +3",
+		legs="Fili Rhingrave +3",
 		feet="Brioso Slippers +3",
 		neck="Mnbw. Whistle +1",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
@@ -738,7 +740,7 @@ function init_gear_sets()
 		range="Gjallarhorn",
 		head="Brioso Roundlet +3",
 		body="Brioso Justau. +3",
-		hands="Fili Manchettes +2",
+		hands="Fili Manchettes +3",
 		legs="Brioso Cannions +3",
 		feet="Brioso Slippers +3",
 		neck="Mnbw. Whistle +1",
@@ -776,7 +778,7 @@ function init_gear_sets()
 		head="Brioso Roundlet +3",
 		body="Brioso Justau. +3",
 		hands="Brioso Cuffs +3",
-		legs="Fili Rhingrave +2",
+		legs="Fili Rhingrave +3",
 		feet="Brioso Slippers +3",
 		neck="Mnbw. Whistle +1",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
@@ -935,8 +937,8 @@ function init_gear_sets()
 		range="Gjallarhorn",
 		head="Brioso Roundlet +3",
 		body="Fili Hongreline +3",
-		hands="Fili Manchettes +2",
-		legs="Fili Rhingrave +2",
+		hands="Fili Manchettes +3",
+		legs="Fili Rhingrave +3",
 		feet="Brioso Slippers +3",
 		neck="Mnbw. Whistle +1",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
@@ -1254,7 +1256,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-	sets.Kiting = {feet="Fili Cothurnes +2"}
+	sets.Kiting = {right_ring="Shneddick Ring",}
 
     sets.TreasureHunter = {
 		hands={ name="Chironic Gloves", augments={'MND+4','Phys. dmg. taken -2%','"Treasure Hunter"+1','Accuracy+5 Attack+5',}},	--TH1

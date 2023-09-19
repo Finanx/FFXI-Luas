@@ -135,6 +135,7 @@ function user_setup()
 	send_command('bind @c gs c toggle CP')
 	send_command('bind ^- input /ja "Light Arts" <me>')
 	send_command('bind ^= input /ja "Dark Arts" <me>')
+	send_command('bind ^space tc nearest')
 	
 	--Command to show global binds in game[ CTRL + numpad- ]
 	send_command([[bind ^numpad- 
@@ -257,10 +258,14 @@ function user_unload()
 
 	send_command('unbind @u')
 	send_command('unbind @d')
-	send_command('unbind @w')
+	send_command('unbind @e')	
+    send_command('unbind @w')
+	send_command('unbind @r')
+    send_command('unbind @c')
 	send_command('unbind @t')
-    send_command('unbind @m')
-	send_command('unbind @s')
+	send_command('unbind @b')
+	send_command('unbind @m')
+	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
 	send_command('unbind ^=')
@@ -1008,7 +1013,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-	sets.Kiting = {feet="Herald's Gaiters"}
+	sets.Kiting = {left_ring="Shneddick Ring"}
 
     sets.buff['Rapture'] = {head="Arbatel Bonnet +3"}
     sets.buff['Perpetuance'] = {hands="Arbatel Bracers +3"}

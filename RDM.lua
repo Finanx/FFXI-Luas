@@ -49,25 +49,11 @@
 --					[ Windows + 1 ]			Sets Weapon to Naegling then locks Main/Sub Slots
 --					[ Windows + 2 ]			Sets Weapon to Crocea Mors then locks Main/Sub Slots
 --					[ Windows + 3 ]			Sets Weapon to Murgleis then locks Main/Sub Slots
---					[ Windows + 4 ]			Sets Weapon to Tauret then locks Main/Sub Slots
---					[ Windows + 5 ]			Sets Weapon to Mandau then locks Main/Sub Slots
+--					[ Windows + 4 ]			Sets Weapon to Mandau then locks Main/Sub Slots
+--					[ Windows + 5 ]			Sets Weapon to Tauret then locks Main/Sub Slots
 --					[ Windows + 6 ]			Sets Weapon to Malevolence then locks Main/Sub Slots
 --					[ Windows + 7 ]			Sets Weapon to Maxentius then locks Main/Sub Slots
 --
---  WS:         	[ CTRL + Numpad1 ]    	Sanguine Blade
---					[ CTRL + Numpad2 ]    	Seraph Blade
---					[ CTRL + Numpad3 ]    	Requiescat
---					[ CTRL + Numpad4 ]    	Savage Blade
---					[ CTRL + Numpad5 ]    	Chant Du Cygne
---					[ CTRL + Numpad6 ]    	Death Blossom
---					[ CTRL + Numpad7 ]    	Circle Blade
---				
---					[ ALT + Numpad1 ]     	Black Halo
---					[ ALT + Numpad2 ]     	True Strike
---					[ ALT + Numpad4 ]     	Aeolian Edge
---					[ ALT + Numpad5 ]     	Evisceration
---					[ ALT + Numpad6 ]     	Mercy Stroke
---					[ ALT + Numpad7 ]     	Empyreal Arrow
 --
 --  Abilities:  	[ CTRL + ` ]        	Composure
 --					[ CTRL + - ]        	Light Arts
@@ -119,7 +105,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'MACC')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Crocea_Mors', 'Murgleis', 'Tauret', 'Mandau', 'Malevolence', 'Maxentius'}
+	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Crocea_Mors', 'Murgleis', 'Mandau', 'Tauret', 'Malevolence', 'Maxentius'}
 
 	state.RangeLock = M(false, 'Range Lock')
     state.MagicBurst = M(false, 'Magic Burst')
@@ -142,6 +128,7 @@ function user_setup()
     send_command('bind ^` input /ja "Composure" <me>')
 	send_command('bind ^- input /ja "Light Arts" <me>')
 	send_command('bind ^= input /ja "Dark Arts" <me>')
+	send_command('bind ^space tc nearest')
 	
 	--Command to show global binds in game[ CTRL + numpad- ]
 	send_command([[bind ^numpad- 
@@ -178,60 +165,18 @@ function user_setup()
 		input /echo [ Windows + D ]	Unloads then reloads dressup;
 		]])
 		
-	--Command to show Red Mage binds in game[ ALT + numpad- ]
-	send_command([[bind !numpad- 
-		input /echo -----Abilities-----;
-		input /echo [ CTRL + ` ] Composure;
-		input /echo [ CTRL + - ] Light Arts;
-		input /echo [ CTRL + = ] Dark Arts;
-		input /echo -----Sword-----;
-		input /echo [ CTRL + Numpad1 ] Sanguine Blade;
-		input /echo [ CTRL + Numpad2 ] Seraph Blade;
-		input /echo [ CTRL + Numpad3 ] Requiescat;
-		input /echo [ CTRL + Numpad4 ] Savage Blade;
-		input /echo [ CTRL + Numpad5 ] Chant Du Cygne;
-		input /echo [ CTRL + Numpad6 ] Death Blossom;
-		input /echo [ CTRL + Numpad7 ] Red Lotus Blade;
-		input /echo -----Club-----;
-		input /echo [ ALT + Numpad1 ] Black Halo;
-		input /echo [ ALT + Numpad2 ] True Strike;
-		input /echo -----Dagger-----;
-		input /echo [ ALT + Numpad4 ] Aeolian Edge;
-		input /echo [ ALT + Numpad5 ] Evisceration;
-		input /echo [ ALT + Numpad6 ] Mercy Stroke;
-		input /echo -----Bow-----;
-		input /echo [ ALT + Numpad7 ] Empyreal Arrow;
-		]])
-		
 	--Weapon set Binds
 
 	send_command('bind @1 gs c set WeaponSet Naegling')
 	send_command('bind @2 gs c set WeaponSet Crocea_Mors')
 	send_command('bind @3 gs c set WeaponSet Murgleis')
-	send_command('bind @4 gs c set WeaponSet Tauret')
-	send_command('bind @5 gs c set WeaponSet Mandau')
+	send_command('bind @4 gs c set WeaponSet Mandau')
+	send_command('bind @5 gs c set WeaponSet Tauret')
 	send_command('bind @6 gs c set WeaponSet Malevolence')
 	send_command('bind @7 gs c set WeaponSet Maxentius')
 
 	send_command('bind @w input /equip sub; gs c set WeaponSet None')
 	
-	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-
-    send_command('bind ^numpad1 input /ws "Sanguine Blade" <t>')
-    send_command('bind ^numpad2 input /ws "Seraph Blade" <t>')
-    send_command('bind ^numpad3 input /ws "Requiescat" <t>')
-	send_command('bind ^numpad4 input /ws "Savage Blade" <t>')
-    send_command('bind ^numpad5 input /ws "Chant du Cygne" <t>')
-    send_command('bind ^numpad6 input /ws "Death Blossom" <t>')
-	send_command('bind ^numpad7 input /ws "Red Lotus Blade" <t>')
-		
-	send_command('bind !numpad1 input /ws "Black Halo" <t>')
-    send_command('bind !numpad2 input /ws "True Strike" <t>')
-	send_command('bind !numpad4 input /ws "Aeolian Edge" <t>')
-	send_command('bind !numpad5 input /ws "Evisceration" <t>')
-	send_command('bind !numpad6 input /ws "Mercy Stroke" <t>')
-	send_command('bind !numpad7 input /ws "Empyreal Arrow" <t>')
-
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('bind ~numpad1 input /item "Echo Drops" <me>')
@@ -292,11 +237,14 @@ function user_unload()
 
 	send_command('unbind @u')
 	send_command('unbind @d')
-	send_command('unbind @w')
+	send_command('unbind @e')	
+    send_command('unbind @w')
 	send_command('unbind @r')
+    send_command('unbind @c')
 	send_command('unbind @t')
-    send_command('unbind @m')
 	send_command('unbind @b')
+	send_command('unbind @m')
+	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
 	send_command('unbind ^=')
@@ -1171,7 +1119,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.idle = {
-		main="Daybreak",																		
+		main={ name="Sakpata's Sword", augments={'Path: A',}},																		
 		sub="Genmei Shield",																												--10% PDT
 		ammo="Homiliary",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
@@ -1462,7 +1410,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-	sets.Kiting = {legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},}
+	sets.Kiting = {left_ring="Shneddick Ring",}
 
 	sets.TreasureHunter = {
 		hands={ name="Chironic Gloves", augments={'MND+4','Phys. dmg. taken -2%','"Treasure Hunter"+1','Accuracy+5 Attack+5',}}, 	--TH1
@@ -1496,7 +1444,7 @@ function init_gear_sets()
 	sets.Malevolence_Thibron = {main="Malevolence", sub={ name="Machaera +2", augments={'TP Bonus +1000',}},}
 	sets.Malevolence.SW = {main={ name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}}, sub="Ammurapi Shield"}
 	
-	sets.Tauret = {main="Tauret", sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Tauret = {main="Norgish Dagger",sub="Qutrub Knife",}--{main="Tauret", sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	sets.Tauret.SW = {main="Tauret", sub="Genmei Shield"}
 	
 	sets.Mandau = {main="Mandau", sub={ name="Gleti's Knife", augments={'Path: A',}},}
@@ -1689,6 +1637,7 @@ end
 
 function job_update(cmdParams, eventArgs)
 	check_gear()
+	Weaponskill_Keybinds()
     handle_equipping_gear(player.status)
 end
 
@@ -1747,6 +1696,24 @@ function update_combat_form()
 			disable('main','sub')
 		end
 	end
+	
+	if state.WeaponSet.value == 'Mandau' then
+		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+			if state.TPBonus.value == true then
+				enable('main','sub')
+				equip(sets.Mandau_Thibron)
+				disable('main','sub')
+			else
+				enable('main','sub')
+				equip(sets.Mandau)
+				disable('main','sub')
+			end
+		else
+			enable('main','sub')
+			equip(sets.Mandau.SW)
+			disable('main','sub')
+		end
+	end
 
 	if state.WeaponSet.value == 'Tauret' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
@@ -1775,24 +1742,6 @@ function update_combat_form()
 		else
 			enable('main','sub')
 			equip(sets.Malevolence.SW)
-			disable('main','sub')
-		end
-	end
-
-	if state.WeaponSet.value == 'Mandau' then
-		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			if state.TPBonus.value == true then
-				enable('main','sub')
-				equip(sets.Mandau_Thibron)
-				disable('main','sub')
-			else
-				enable('main','sub')
-				equip(sets.Mandau)
-				disable('main','sub')
-			end
-		else
-			enable('main','sub')
-			equip(sets.Mandau.SW)
 			disable('main','sub')
 		end
 	end
@@ -1827,6 +1776,121 @@ function update_combat_form()
 	else
 		enable('range','ammo')
 	end
+end
+
+function Weaponskill_Keybinds()
+
+	if state.WeaponSet.value == 'Naegling' or state.WeaponSet.value == 'Crocea_Mors' or state.WeaponSet.value == 'Murgleis' then
+		send_command([[bind !numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + ` ] Composure;
+			input /echo [ CTRL + - ] Light Arts;
+			input /echo [ CTRL + = ] Dark Arts;
+			input /echo -----Bow-----;
+			input /echo [ ALT + Numpad7 ]  Empyreal Arrow;
+			input /echo -----Sword-----;
+			input /echo [ ALT + Numpad1 ]  Fast Blade;
+			input /echo [ ALT + Numpad2 ]  Burning Blade;
+			input /echo [ ALT + Numpad3 ]  Shining Blade;
+			input /echo [ ALT + Numpad4 ]  Circle Blade;
+			input /echo [ ALT + Numpad5 ]  Spirits Within;
+			input /echo [ CTRL + Numpad1 ] Sanguine Blade;
+			input /echo [ CTRL + Numpad2 ] Seraph Blade;
+			input /echo [ CTRL + Numpad3 ] Requiescat;
+			input /echo [ CTRL + Numpad4 ] Savage Blade;
+			input /echo [ CTRL + Numpad5 ] Chant Du Cygne;
+			input /echo [ CTRL + Numpad6 ] Death Blossom;
+			input /echo [ CTRL + Numpad7 ] Red Lotus Blade;
+			input /echo [ CTRL + Numpad9 ] Vorpal Blade;
+			input /echo [ CTRL + Numpad. ] Flat Blade;]])
+		send_command('bind !numpad7 input /ws "Empyreal Arrow" <t>')
+		send_command('bind !numpad1 input /ws "Fast Blade" <t>')
+		send_command('bind !numpad2 input /ws "Burning Blade" <t>')
+		send_command('bind !numpad3 input /ws "Shining Blade" <t>')
+		send_command('bind !numpad4 input /ws "Circle Blade" <t>')
+		send_command('bind !numpad5 input /ws "Spirits Within" <t>')
+		send_command('bind ^numpad1 input /ws "Sanguine Blade" <t>')
+		send_command('bind ^numpad2 input /ws "Seraph Blade" <t>')
+		send_command('bind ^numpad3 input /ws "Requiescat" <t>')
+		send_command('bind ^numpad4 input /ws "Savage Blade" <t>')
+		send_command('bind ^numpad5 input /ws "Chant du Cygne" <t>')
+		send_command('bind ^numpad6 input /ws "Death Blossom" <t>')
+		send_command('bind ^numpad7 input /ws "Red Lotus Blade" <t>')
+		send_command('bind ^numpad9 input /ws "Vorpal Blade" <t>')
+		send_command('bind ^numpad. input /ws "Flat Blade" <t>')
+		
+	elseif state.WeaponSet.value == 'Mandau' or state.WeaponSet.value == 'Tauret' or state.WeaponSet.value == 'Malevolence' then
+		send_command([[bind !numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + ` ] Composure;
+			input /echo [ CTRL + - ] Light Arts;
+			input /echo [ CTRL + = ] Dark Arts;		
+			input /echo -----Bow-----;
+			input /echo [ ALT + Numpad7 ]  Empyreal Arrow;
+			input /echo -----Dagger-----;
+			input /echo [ ALT + Numpad1 ]  Energy Steal;
+			input /echo [ ALT + Numpad2 ]  Energy Drain;
+			input /echo [ CTRL + Numpad1 ] Evisceration;
+			input /echo [ CTRL + Numpad2 ] Mercy Stroke;
+			input /echo [ CTRL + Numpad3 ] Exenterator;
+			input /echo [ CTRL + Numpad4 ] Aeolian Edge;
+			input /echo [ CTRL + Numpad5 ] Cyclone;
+			input /echo [ CTRL + Numpad6 ] Viper Bite;
+			input /echo [ CTRL + Numpad7 ] Gust Slash;
+			input /echo [ CTRL + Numpad9 ] Wasp Sting;
+			input /echo [ CTRL + Numpad. ] Shadowstitch;]])
+		send_command('bind !numpad7 input /ws "Empyreal Arrow" <t>')
+		send_command('bind !numpad1 input /ws "Energy Steal" <t>')
+		send_command('bind !numpad2 input /ws "Energy Drain" <t>')
+		send_command('bind ^numpad1 input /ws "Evisceration" <t>')
+		send_command('bind ^numpad2 input /ws "Mercy Stroke" <t>')
+		send_command('bind ^numpad3 input /ws "Exenterator" <t>')
+		send_command('bind ^numpad4 input /ws "Aeolian Edge" <t>')
+		send_command('bind ^numpad5 input /ws "Cyclone" <t>')
+		send_command('bind ^numpad6 input /ws "Viper Bite" <t>')
+		send_command('bind ^numpad7 input /ws "Gust Slash" <t>')
+		send_command('bind ^numpad9 input /ws "Wasp Sting" <t>')
+		send_command('bind ^numpad. input /ws "Shadowstitch" <t>')
+		
+	elseif state.WeaponSet.value == 'Maxentius' then
+		send_command([[bind !numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + ` ] Composure;
+			input /echo [ CTRL + - ] Light Arts;
+			input /echo [ CTRL + = ] Dark Arts;	
+			input /echo -----Bow-----;
+			input /echo [ ALT + Numpad7 ]  Empyreal Arrow;
+			input /echo -----Club-----;
+			input /echo [ ALT + Numpad1 ]  Starlight;
+			input /echo [ ALT + Numpad2 ]  Moonlight;
+			input /echo [ CTRL + Numpad1 ] Black Halo;
+			input /echo [ CTRL + Numpad2 ] True Strike;
+			input /echo [ CTRL + Numpad3 ] Shining Strike;
+			input /echo [ CTRL + Numpad4 ] Skullbreaker;
+			input /echo [ CTRL + Numpad5 ] Judgment;
+			input /echo [ CTRL + Numpad6 ] Flash Nova;
+			input /echo [ CTRL + Numpad7 ] Seraph Strike;
+			input /echo [ CTRL + Numpad. ] Brainshaker;]])
+		send_command('bind !numpad7 input /ws "Empyreal Arrow" <t>')
+		send_command('bind !numpad1 input /ws "Starlight" <t>')
+		send_command('bind !numpad2 input /ws "Moonlight" <t>')
+		send_command('bind ^numpad1 input /ws "Black Halo" <t>')
+		send_command('bind ^numpad2 input /ws "True Strike" <t>')
+		send_command('bind ^numpad3 input /ws "Shining Strike" <t>')
+		send_command('bind ^numpad4 input /ws "Skullbreaker" <t>')
+		send_command('bind ^numpad5 input /ws "Judgment" <t>')
+		send_command('bind ^numpad6 input /ws "Flash Nova" <t>')
+		send_command('bind ^numpad7 input /ws "Seraph Strike" <t>')
+		send_command('bind ^numpad. input /ws "Brainshaker" <t>')
+		
+	elseif state.WeaponSet.value == 'None'	then
+		send_command([[bind !numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + ` ] Composure;
+			input /echo [ CTRL + - ] Light Arts;
+			input /echo [ CTRL + = ] Dark Arts;]])
+	end
+
 end
 
 -- Modify the default idle set after it was constructed.

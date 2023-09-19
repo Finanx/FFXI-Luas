@@ -240,6 +240,7 @@ function user_setup()
 	send_command('bind @e gs c toggle EvasiveMode')
 	send_command('bind ^- input /ja "Chain Affinity" <me>')
 	send_command('bind ^= input /ja "Burst Affinity" <me>')
+	send_command('bind ^space tc nearest')
 	
 	--Command to show global binds in game[ CTRL + numpad- ]
 	send_command([[bind ^numpad- 
@@ -369,10 +370,14 @@ function user_unload()
 
 	send_command('unbind @u')
 	send_command('unbind @d')
+	send_command('unbind @e')	
+    send_command('unbind @w')
+	send_command('unbind @r')
     send_command('unbind @c')
-	send_command('unbind @t ')
-	send_command('unbind @e')
+	send_command('unbind @t')
 	send_command('unbind @b')
+	send_command('unbind @m')
+	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
 	send_command('unbind ^=')
@@ -1368,7 +1373,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-	sets.Kiting = {legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},}
+	sets.Kiting = {left_ring="Shneddick Ring",}
 
     --sets.Learning = {hands="Assim. Bazu. +1"}
     sets.latent_refresh = {waist="Fucho-no-obi"}

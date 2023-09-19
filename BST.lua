@@ -38,7 +38,7 @@
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
 --					[ ALT + Numpad+ ]		Dimensional Ring Dem
 --
--- Range Script:	[ CTRL + Numpad0 ]
+-- Range Script:	[ CTRL + Numpad0 ] 		Ranged Attack
 --
 -- Toggles:			[ Windows + U ]			Stops Gear Swap from constantly updating gear
 --					[ Windows + D ]			Unloads Dressup then reloads to change lockstyle
@@ -172,7 +172,7 @@ function user_setup()
 	send_command('wait 3; lua l gearinfo')
 	send_command('wait 10; lua l Dressup')
 
-	--Global Warrior binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	--Global Beastmaster binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('bind @u input //gi ugs')
 	send_command('bind @d input //lua u dressup; wait 10; input //lua l dressup')	
@@ -180,7 +180,8 @@ function user_setup()
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @r gs c toggle Reraise')
 	send_command('bind ^- gs c cycleback JugPet')
-    send_command('bind ^= gs c cycle JugPet')	
+    send_command('bind ^= gs c cycle JugPet')
+	send_command('bind ^space tc nearest')
 	
 	--Command to show global binds in game[ CTRL + numpad- ]
 	send_command([[bind ^numpad- 
@@ -322,13 +323,18 @@ function user_unload()
 
 	enable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
 
-	--Remove Global Warrior Binds
+	--Remove Global Beastmaster Binds
 
 	send_command('unbind @u')
 	send_command('unbind @d')
-    send_command('unbind @t')
-    send_command('unbind @c')
+	send_command('unbind @e')	
+    send_command('unbind @w')
 	send_command('unbind @r')
+    send_command('unbind @c')
+	send_command('unbind @t')
+	send_command('unbind @b')
+	send_command('unbind @m')
+	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
 	send_command('unbind ^=')
@@ -789,10 +795,10 @@ function init_gear_sets()
 	sets.midcast.Pet.MaccReady = {
 		main="Agwu's Axe",
 		sub="Adapa Shield",
-	    ammo="Hesperiidae",
-		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		ammo={ name="Hesperiidae", augments={'Path: A',}},
+		head="Nuk. Cabasset +2",
+		body="Nukumi Gausape +2",
+		hands="Nukumi Manoplas +2",
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
 		feet={ name="Gleti's Boots", augments={'Path: A',}},
 		neck={ name="Bst. Collar +2", augments={'Path: A',}},
@@ -1196,7 +1202,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-	sets.Kiting = {legs={ name="Desultor Tassets", augments={'"Phantom Roll" ability delay -5','Movement speed +8%+2',}},}
+	sets.Kiting = {left_ring="Shneddick Ring",}
 
     sets.TreasureHunter = {
 		ammo="Per. Lucky Egg", --TH1
