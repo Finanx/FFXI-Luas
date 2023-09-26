@@ -16,6 +16,7 @@
 --  				[ Windows + R ]         Toggles Range Lock
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
+--              	[ Windows + I ]     	Pulls all items in Gear Retrieval
 --
 -- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
 --					[ Shift + Numpad2 ]		Holy Water
@@ -54,6 +55,10 @@
 --					[ Windows + 6 ]			Sets Weapon to Malevolence then locks Main/Sub Slots
 --					[ Windows + 7 ]			Sets Weapon to Maxentius then locks Main/Sub Slots
 --
+--	Echo Binds:		[ CTRL + Numpad- ]		Shows main Weaponskill Binds in game
+--					[ ALT + Numpad- ]		Shows Alternate Weaponskill Binds in game
+--					[ Shift + Numpad- ]		Shows Item Binds in game
+--					[ Windows + Numpad- ]	Shows Food/Weapon/Misc. Binds in game
 --
 --  Abilities:  	[ CTRL + ` ]        	Composure
 --					[ CTRL + - ]        	Light Arts
@@ -130,8 +135,8 @@ function user_setup()
 	send_command('bind ^= input /ja "Dark Arts" <me>')
 	send_command('bind ^space tc nearest')
 	
-	--Command to show global binds in game[ CTRL + numpad- ]
-	send_command([[bind ^numpad- 
+	--Command to show Item binds in game[ Shift + numpad- ]
+	send_command([[bind ~numpad- 
 		input /echo -----Item_Binds-----;
 		input /echo [ Shift + Numpad1 ]	Echo Drop;
 		input /echo [ Shift + Numpad2 ]	Holy Water;
@@ -139,7 +144,10 @@ function user_setup()
 		input /echo [ Shift + Numpad4 ]	Panacea;
 		input /echo [ Shift + Numpad7 ]	Silent Oil;
 		input /echo [ Shift + Numpad9 ]	Prism Powder;
-		input /echo [ CTRL  + Numpad. ] Chapuli Quiver;
+		]])
+		
+	--Command to show Command binds in game[ Windows + numpad- ]		
+	send_command([[bind @numpad- 		
 		input /echo -----Food_Binds-----;
 		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
 		input /echo [ Windows + Numpad2 ]	Grape Daifuku;
@@ -293,6 +301,10 @@ function user_unload()
 	send_command('unbind @`')
 	send_command('unbind @-')
 	send_command('unbind @=')
+	send_command('unbind ^numpad-')
+	send_command('unbind @numpad-')
+	send_command('unbind ~numpad-')
+	send_command('unbind !numpad-')	
 	
 	--Remove Weapon Set binds
 	
@@ -369,22 +381,22 @@ function user_unload()
 	send_command('input //put Chapuli Arrow satchel all')
 	send_command('input //put Shihei satchel all')
 	
-	send_command('wait 5; input //put Ammurapi Shield sack')
-	send_command('wait 5; input //put Bunzi\'s Rod case')
-	send_command('wait 5; input //put Crocea Mors case')
-	send_command('wait 5; input //put Murgleis case')
-	send_command('wait 5; input //put Daybreak case')
-	send_command('wait 5; input //put Genmei Shield sack')
-	send_command('wait 5; input //put Gleti\'s Knife case')
-	send_command('wait 5; input //put Machaera +2 case')
-	send_command('wait 5; input //put Malevolence case')
-	send_command('wait 5; input //put Mandau case')
-	send_command('wait 5; input //put Maxentius case')
-	send_command('wait 5; input //put Naegling case')
-	send_command('wait 5; input //put Pukulatmuj +1 case')
-	send_command('wait 5; input //put Sakpata\'s Sword case')
-	send_command('wait 5; input //put Tauret case')
-	send_command('wait 5; input //put Ullr case')
+	send_command('input //put Ammurapi Shield sack')
+	send_command('input //put Bunzi\'s Rod case')
+	send_command('input //put Crocea Mors case')
+	send_command('input //put Murgleis case')
+	send_command('input //put Daybreak case')
+	send_command('input //put Genmei Shield sack')
+	send_command('input //put Gleti\'s Knife case')
+	send_command('input //put Machaera +2 case')
+	send_command('input //put Malevolence case')
+	send_command('input //put Mandau case')
+	send_command('input //put Maxentius case')
+	send_command('input //put Naegling case')
+	send_command('input //put Pukulatmuj +1 case')
+	send_command('input //put Sakpata\'s Sword case')
+	send_command('input //put Tauret case')
+	send_command('input //put Ullr case')
 
 	--Unload Gearinfo/Dressup Lua
 	
@@ -1834,20 +1846,13 @@ end
 
 function Weaponskill_Keybinds()
 
-	if state.WeaponSet.value == 'Naegling' or state.WeaponSet.value == 'Crocea_Mors' or state.WeaponSet.value == 'Murgleis' then
-		send_command([[bind !numpad- 
+	if state.WeaponSet.value == 'None' or state.WeaponSet.value == 'Naegling' or state.WeaponSet.value == 'Crocea_Mors' or state.WeaponSet.value == 'Murgleis' then
+		send_command([[bind ^numpad- 
 			input /echo -----Abilities-----;
 			input /echo [ CTRL + ` ] Composure;
 			input /echo [ CTRL + - ] Light Arts;
 			input /echo [ CTRL + = ] Dark Arts;
-			input /echo -----Bow-----;
-			input /echo [ ALT + Numpad7 ]  Empyreal Arrow;
 			input /echo -----Sword-----;
-			input /echo [ ALT + Numpad1 ]  Fast Blade;
-			input /echo [ ALT + Numpad2 ]  Burning Blade;
-			input /echo [ ALT + Numpad3 ]  Shining Blade;
-			input /echo [ ALT + Numpad4 ]  Circle Blade;
-			input /echo [ ALT + Numpad5 ]  Spirits Within;
 			input /echo [ CTRL + Numpad1 ] Sanguine Blade;
 			input /echo [ CTRL + Numpad2 ] Seraph Blade;
 			input /echo [ CTRL + Numpad3 ] Requiescat;
@@ -1857,12 +1862,6 @@ function Weaponskill_Keybinds()
 			input /echo [ CTRL + Numpad7 ] Red Lotus Blade;
 			input /echo [ CTRL + Numpad9 ] Vorpal Blade;
 			input /echo [ CTRL + Numpad. ] Flat Blade;]])
-		send_command('bind !numpad7 input /ws "Empyreal Arrow" <t>')
-		send_command('bind !numpad1 input /ws "Fast Blade" <t>')
-		send_command('bind !numpad2 input /ws "Burning Blade" <t>')
-		send_command('bind !numpad3 input /ws "Shining Blade" <t>')
-		send_command('bind !numpad4 input /ws "Circle Blade" <t>')
-		send_command('bind !numpad5 input /ws "Spirits Within" <t>')
 		send_command('bind ^numpad1 input /ws "Sanguine Blade" <t>')
 		send_command('bind ^numpad2 input /ws "Seraph Blade" <t>')
 		send_command('bind ^numpad3 input /ws "Requiescat" <t>')
@@ -1872,18 +1871,30 @@ function Weaponskill_Keybinds()
 		send_command('bind ^numpad7 input /ws "Red Lotus Blade" <t>')
 		send_command('bind ^numpad9 input /ws "Vorpal Blade" <t>')
 		send_command('bind ^numpad. input /ws "Flat Blade" <t>')
+
+		send_command([[bind !numpad- 
+			input /echo -----Bow-----;
+			input /echo [ ALT + Numpad7 ]  Empyreal Arrow;
+			input /echo -----Sword-----;
+			input /echo [ ALT + Numpad1 ]  Fast Blade;
+			input /echo [ ALT + Numpad2 ]  Burning Blade;
+			input /echo [ ALT + Numpad3 ]  Shining Blade;
+			input /echo [ ALT + Numpad4 ]  Circle Blade;
+			input /echo [ ALT + Numpad5 ]  Spirits Within;]])
+		send_command('bind !numpad7 input /ws "Empyreal Arrow" <t>')
+		send_command('bind !numpad1 input /ws "Fast Blade" <t>')
+		send_command('bind !numpad2 input /ws "Burning Blade" <t>')
+		send_command('bind !numpad3 input /ws "Shining Blade" <t>')
+		send_command('bind !numpad4 input /ws "Circle Blade" <t>')
+		send_command('bind !numpad5 input /ws "Spirits Within" <t>')
 		
 	elseif state.WeaponSet.value == 'Mandau' or state.WeaponSet.value == 'Tauret' or state.WeaponSet.value == 'Malevolence' then
-		send_command([[bind !numpad- 
+		send_command([[bind ^numpad- 
 			input /echo -----Abilities-----;
 			input /echo [ CTRL + ` ] Composure;
 			input /echo [ CTRL + - ] Light Arts;
 			input /echo [ CTRL + = ] Dark Arts;		
-			input /echo -----Bow-----;
-			input /echo [ ALT + Numpad7 ]  Empyreal Arrow;
 			input /echo -----Dagger-----;
-			input /echo [ ALT + Numpad1 ]  Energy Steal;
-			input /echo [ ALT + Numpad2 ]  Energy Drain;
 			input /echo [ CTRL + Numpad1 ] Evisceration;
 			input /echo [ CTRL + Numpad2 ] Mercy Stroke;
 			input /echo [ CTRL + Numpad3 ] Exenterator;
@@ -1893,9 +1904,6 @@ function Weaponskill_Keybinds()
 			input /echo [ CTRL + Numpad7 ] Gust Slash;
 			input /echo [ CTRL + Numpad9 ] Wasp Sting;
 			input /echo [ CTRL + Numpad. ] Shadowstitch;]])
-		send_command('bind !numpad7 input /ws "Empyreal Arrow" <t>')
-		send_command('bind !numpad1 input /ws "Energy Steal" <t>')
-		send_command('bind !numpad2 input /ws "Energy Drain" <t>')
 		send_command('bind ^numpad1 input /ws "Evisceration" <t>')
 		send_command('bind ^numpad2 input /ws "Mercy Stroke" <t>')
 		send_command('bind ^numpad3 input /ws "Exenterator" <t>')
@@ -1906,14 +1914,22 @@ function Weaponskill_Keybinds()
 		send_command('bind ^numpad9 input /ws "Wasp Sting" <t>')
 		send_command('bind ^numpad. input /ws "Shadowstitch" <t>')
 		
-	elseif state.WeaponSet.value == 'Maxentius' then
 		send_command([[bind !numpad- 
+			input /echo -----Bow-----;
+			input /echo [ ALT + Numpad7 ]  Empyreal Arrow;
+			input /echo -----Dagger-----;
+			input /echo [ ALT + Numpad1 ]  Energy Steal;
+			input /echo [ ALT + Numpad2 ]  Energy Drain;]])
+		send_command('bind !numpad7 input /ws "Empyreal Arrow" <t>')
+		send_command('bind !numpad1 input /ws "Energy Steal" <t>')
+		send_command('bind !numpad2 input /ws "Energy Drain" <t>')
+		
+	elseif state.WeaponSet.value == 'Maxentius' then
+		send_command([[bind ^numpad- 
 			input /echo -----Abilities-----;
 			input /echo [ CTRL + ` ] Composure;
 			input /echo [ CTRL + - ] Light Arts;
 			input /echo [ CTRL + = ] Dark Arts;	
-			input /echo -----Bow-----;
-			input /echo [ ALT + Numpad7 ]  Empyreal Arrow;
 			input /echo -----Club-----;
 			input /echo [ ALT + Numpad1 ]  Starlight;
 			input /echo [ ALT + Numpad2 ]  Moonlight;
@@ -1925,9 +1941,6 @@ function Weaponskill_Keybinds()
 			input /echo [ CTRL + Numpad6 ] Flash Nova;
 			input /echo [ CTRL + Numpad7 ] Seraph Strike;
 			input /echo [ CTRL + Numpad. ] Brainshaker;]])
-		send_command('bind !numpad7 input /ws "Empyreal Arrow" <t>')
-		send_command('bind !numpad1 input /ws "Starlight" <t>')
-		send_command('bind !numpad2 input /ws "Moonlight" <t>')
 		send_command('bind ^numpad1 input /ws "Black Halo" <t>')
 		send_command('bind ^numpad2 input /ws "True Strike" <t>')
 		send_command('bind ^numpad3 input /ws "Shining Strike" <t>')
@@ -1937,14 +1950,17 @@ function Weaponskill_Keybinds()
 		send_command('bind ^numpad7 input /ws "Seraph Strike" <t>')
 		send_command('bind ^numpad. input /ws "Brainshaker" <t>')
 		
-	elseif state.WeaponSet.value == 'None'	then
 		send_command([[bind !numpad- 
-			input /echo -----Abilities-----;
-			input /echo [ CTRL + ` ] Composure;
-			input /echo [ CTRL + - ] Light Arts;
-			input /echo [ CTRL + = ] Dark Arts;]])
-	end
+			input /echo -----Bow-----;
+			input /echo [ ALT + Numpad7 ]  Empyreal Arrow;
+			input /echo -----Club-----;
+			input /echo [ ALT + Numpad1 ]  Starlight;
+			input /echo [ ALT + Numpad2 ]  Moonlight;]])
+		send_command('bind !numpad7 input /ws "Empyreal Arrow" <t>')
+		send_command('bind !numpad1 input /ws "Starlight" <t>')
+		send_command('bind !numpad2 input /ws "Moonlight" <t>')
 
+	end
 end
 
 -- Modify the default idle set after it was constructed.

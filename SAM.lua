@@ -12,9 +12,10 @@
 --					[ CTRL + F9 ]			Cycle Weapon Skill Mode
 --					[ ALT + F9 ]			Cycle Range Mode
 --              	[ Windows + F9 ]    	Cycle Hybrid Modes
+--              	[ Windows + R ]     	Toggle Reraise Mode
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
---              	[ Windows + R ]     	Toggle Reraise Mode
+--              	[ Windows + I ]     	Pulls all items in Gear Retrieval
 --
 -- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
 --					[ Shift + Numpad2 ]		Holy Water
@@ -137,8 +138,8 @@ function user_setup()
 	send_command('bind !` input /ja "Seigan" <me>')
 	send_command('bind ^space tc nearest')
 	
-	--Command to show global binds in game[ CTRL + numpad- ]
-	send_command([[bind ^numpad- 
+	--Command to show Item binds in game[ Shift + numpad- ]
+	send_command([[bind ~numpad- 
 		input /echo -----Item_Binds-----;
 		input /echo [ Shift + Numpad1 ]	Echo Drop;
 		input /echo [ Shift + Numpad2 ]	Holy Water;
@@ -146,6 +147,10 @@ function user_setup()
 		input /echo [ Shift + Numpad4 ]	Panacea;
 		input /echo [ Shift + Numpad7 ]	Silent Oil;
 		input /echo [ Shift + Numpad9 ]	Prism Powder;
+		]])
+		
+	--Command to show Command binds in game[ Windows + numpad- ]		
+	send_command([[bind @numpad- 		
 		input /echo -----Food_Binds-----;
 		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
 		input /echo [ Windows + Numpad2 ]	Grape Daifuku;
@@ -308,6 +313,10 @@ function user_unload()
 	send_command('unbind @`')
 	send_command('unbind @-')
 	send_command('unbind @=')
+	send_command('unbind ^numpad-')
+	send_command('unbind @numpad-')
+	send_command('unbind ~numpad-')
+	send_command('unbind !numpad-')	
 	
 	--Remove Weapon Set binds
 	
@@ -381,14 +390,14 @@ function user_unload()
 	
 	--Gear Removal Scripts
 	
-	send_command('wait 5; input //put Dojikiri Yasutsuna case')
-	send_command('wait 5; input //put Hachimonji case')
-	send_command('wait 5; input //put Malevolence case')
-	send_command('wait 5; input //put Masamune case')
-	send_command('wait 5; input //put Shining One case')
-	send_command('wait 5; input //put Soboro Sukehiro case')
-	send_command('wait 5; input //put Ternion Dagger +1 case')
-	send_command('wait 5; input //put Utu Grip sack')
+	send_command('input //put Dojikiri Yasutsuna case')
+	send_command('input //put Hachimonji case')
+	send_command('input //put Malevolence case')
+	send_command('input //put Masamune case')
+	send_command('input //put Shining One case')
+	send_command('input //put Soboro Sukehiro case')
+	send_command('input //put Ternion Dagger +1 case')
+	send_command('input //put Utu Grip sack')
 	
 	--Unload Gearinfo/Dressup Lua
 

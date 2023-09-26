@@ -3,9 +3,8 @@
 -- Itemizer addon is required for auto gear sorting / Warp Scripts / Range Scripts
 --
 -------------------------------------------------------------------------------------------------------------------
---  Keybinds
+--  Keybinds (Global Binds for all Jobs)
 -------------------------------------------------------------------------------------------------------------------
---
 --  Modes:      	[ F9 ]              	Cycle Offense Mode
 --              	[ F10 ]             	Cycle Idle Mode
 --              	[ F11 ]             	Cycle Casting Mode
@@ -13,9 +12,10 @@
 --					[ CTRL + F9 ]			Cycle Weapon Skill Mode
 --					[ ALT + F9 ]			Cycle Range Mode
 --              	[ Windows + F9 ]    	Cycle Hybrid Modes
+--              	[ Windows + R ]     	Toggle Reraise Mode
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
---              	[ Windows + R ]     	Toggle Reraise Mode
+--              	[ Windows + I ]     	Pulls all items in Gear Retrieval
 --
 -- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
 --					[ ALT + Numpad+ ]		Dimensional Ring Dem
@@ -183,8 +183,8 @@ function user_setup()
     send_command('bind ^= gs c cycle JugPet')
 	send_command('bind ^space tc nearest')
 	
-	--Command to show global binds in game[ CTRL + numpad- ]
-	send_command([[bind ^numpad- 
+	--Command to show Item binds in game[ Shift + numpad- ]
+	send_command([[bind ~numpad- 
 		input /echo -----Item_Binds-----;
 		input /echo [ Shift + Numpad1 ]	Echo Drop;
 		input /echo [ Shift + Numpad2 ]	Holy Water;
@@ -192,6 +192,10 @@ function user_setup()
 		input /echo [ Shift + Numpad4 ]	Panacea;
 		input /echo [ Shift + Numpad7 ]	Silent Oil;
 		input /echo [ Shift + Numpad9 ]	Prism Powder;
+		]])
+		
+	--Command to show Command binds in game[ Windows + numpad- ]		
+	send_command([[bind @numpad- 		
 		input /echo -----Food_Binds-----;
 		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
 		input /echo [ Windows + Numpad2 ]	Grape Daifuku;
@@ -374,6 +378,10 @@ function user_unload()
 	send_command('unbind @`')
 	send_command('unbind @-')
 	send_command('unbind @=')
+	send_command('unbind ^numpad-')
+	send_command('unbind @numpad-')
+	send_command('unbind ~numpad-')
+	send_command('unbind !numpad-')
 	
 	--Remove Weapon Set binds
 	

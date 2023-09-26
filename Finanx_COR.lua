@@ -16,6 +16,7 @@
 --  				[ Windows + R ]         Toggles Range Sets
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
+--              	[ Windows + I ]     	Pulls all items in Gear Retrieval
 --
 -- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
 --					[ Shift + Numpad2 ]		Holy Water
@@ -53,20 +54,10 @@
 --					[ Windows + 9 ]			Fomalhaut Range Set
 --					[ Windows + 0 ]			Death Penalty Range Set
 --
---	WS:				[ CTRL + Numpad1 ]		Leaden Salute
---					[ CTRL + Numpad2 ]		Wildfire
---					[ CTRL + Numpad3 ]		Last Stand
---					[ CTRL + Numpad4 ]		Savage Blade
---					[ CTRL + Numpad5 ]		Hot Shot
---					[ CTRL + Numpad6 ]		Terminus
---					[ CTRL + Numpad7 ]		Detonator
---					[ CTRL + Numpad9 ]		Requiescat
---
---					[ ALT + Numpad1 ]		Evisceration
---					[ ALT + Numpad2 ]		Exenterator
---					[ ALT + Numpad3 ]		Cyclone
---					[ ALT + Numpad4 ]		Aeolian Edge
---					[ ALT + Numpad5 ]		Viper Bite
+--	Echo Binds:		[ CTRL + Numpad- ]		Shows main Weaponskill Binds in game
+--					[ ALT + Numpad- ]		Shows Alternate Weaponskill Binds in game
+--					[ Shift + Numpad- ]		Shows Item Binds in game
+--					[ Windows + Numpad- ]	Shows Food/Weapon/Misc. Binds in game
 --
 -- Luzaf Ring:     	[ CTRL + ` ]     		Toggle use of Luzaf Ring.
 --
@@ -151,8 +142,8 @@ function user_setup()
 	send_command('bind @t gs c cycle TreasureMode')
 	send_command('bind ^space tc nearest')
 	
-	--Command to show global binds in game[ CTRL + numpad- ]
-	send_command([[bind ^numpad- 
+	--Command to show Item binds in game[ Shift + numpad- ]
+	send_command([[bind ~numpad- 
 		input /echo -----Item_Binds-----;
 		input /echo [ Shift + Numpad1 ]	Echo Drop;
 		input /echo [ Shift + Numpad2 ]	Holy Water;
@@ -163,6 +154,10 @@ function user_setup()
 		input /echo [ CTRL  + Numpad. ] Uses Chrono Bullet Pouch;
 		input /echo [ Windows  + Numpad. ] Uses Living Bullet Pouch;
 		input /echo [ Alt  + Numpad. ] Uses Devastating Bullet Pouch;
+		]])
+		
+	--Command to show Command binds in game[ Windows + numpad- ]		
+	send_command([[bind @numpad- 		
 		input /echo -----Food_Binds-----;
 		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
 		input /echo [ Windows + Numpad2 ]	Grape Daifuku;
@@ -185,26 +180,6 @@ function user_setup()
 		input /echo [ Windows + D ]	Unloads then reloads dressup;
 		]])
 		
-	--Command to show Corsair binds in game[ ALT + numpad- ]
-	send_command([[bind !numpad- 
-		input /echo -----Gun-----;
-		input /echo [ CTRL + Numpad1 ] Leaden Salute;
-		input /echo [ CTRL + Numpad2 ] Wildfire;
-		input /echo [ CTRL + Numpad3 ] Last Stand;
-		input /echo [ CTRL + Numpad5 ] Hot Shot;
-		input /echo [ CTRL + Numpad6 ] Terminus;
-		input /echo [ CTRL + Numpad7 ] Detonator;
-		input /echo -----Sword-----;
-		input /echo [ CTRL + Numpad4 ] Savage Blade;
-		input /echo [ CTRL + Numpad9 ] Requiescat;
-		input /echo -----Dagger-----;
-		input /echo [ ALT + Numpad1 ] Evisceration;
-		input /echo [ ALT + Numpad2 ] Exenterator;
-		input /echo [ ALT + Numpad3 ] Cyclone;
-		input /echo [ ALT + Numpad4 ] Aeolian Edge;
-		input /echo [ ALT + Numpad5 ] Viper Bite;
-		]])
-	
 	--Weapon set Binds
 	
 	send_command('bind @1 gs c set WeaponSet Naegling')
@@ -215,23 +190,6 @@ function user_setup()
 	send_command('bind @8 gs c set RangeSet Armageddon')
 	send_command('bind @9 gs c set RangeSet Fomalhaut')
 	send_command('bind @0 gs c set RangeSet DeathPenalty')
-		
-	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	send_command('bind ^numpad1 input /ws "Leaden Salute" <t>')
-    send_command('bind ^numpad2 input /ws "Wildfire" <t>')
-    send_command('bind ^numpad3 input /ws "Last Stand" <t>')
-	send_command('bind ^numpad4 input /ws "Savage Blade" <t>')
-	send_command('bind ^numpad5 input /ws "Hot Shot" <t>')
-	send_command('bind ^numpad6 input /ws "Terminus" <t>')
-	send_command('bind ^numpad7 input /ws "Detonator" <t>')
-	send_command('bind ^numpad9 input /ws "Requiescat" <t>')
-	
-	send_command('bind !numpad1 input /ws "Evisceration" <t>')
-	send_command('bind !numpad2 input /ws "Exenterator" <t>')
-	send_command('bind !numpad3 input /ws "Cyclone" <t>')
-	send_command('bind !numpad4 input /ws "Aeolian Edge" <t>')
-	send_command('bind !numpad5 input /ws "Viper Bite" <t>')
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -349,6 +307,10 @@ function user_unload()
 	send_command('unbind @`')
 	send_command('unbind @-')
 	send_command('unbind @=')
+	send_command('unbind ^numpad-')
+	send_command('unbind @numpad-')
+	send_command('unbind ~numpad-')
+	send_command('unbind !numpad-')	
 
 	--Remove Weapon Set binds
 	
@@ -428,23 +390,23 @@ function user_unload()
 	
 	--Gear Removal Scripts
 	
-	send_command('wait 3; input //put Chrono Bullet satchel all')
-	send_command('wait 3; input //put Devastating Bullet satchel all')
-	send_command('wait 3; input //put Living Bullet satchel all')
-	send_command('wait 3; input //put Trump Card satchel all')
-	send_command('wait 3; input //put Shihei satchel all')
+	send_command('input //put Chrono Bullet satchel all')
+	send_command('input //put Devastating Bullet satchel all')
+	send_command('input //put Living Bullet satchel all')
+	send_command('input //put Trump Card satchel all')
+	send_command('input //put Shihei satchel all')
 	
-	send_command('wait 5; input //put Nusku Shield sack')
-	send_command('wait 5; input //put Anarchy +2 case')
-	send_command('wait 5; input //put Armageddon case')
-	send_command('wait 5; input //put Compensator case')
-	send_command('wait 5; input //put Death Penalty case')
-	send_command('wait 5; input //put Earp case')
-	send_command('wait 5; input //put Fomalhaut case')
-	send_command('wait 5; input //put Gleti\'s Knife case')
-	send_command('wait 5; input //put Kustawi +1 case')
-	send_command('wait 5; input //put Naegling case')
-	send_command('wait 5; input //put Rostam case all')
+	send_command('input //put Nusku Shield sack')
+	send_command('input //put Anarchy +2 case')
+	send_command('input //put Armageddon case')
+	send_command('input //put Compensator case')
+	send_command('input //put Death Penalty case')
+	send_command('input //put Earp case')
+	send_command('input //put Fomalhaut case')
+	send_command('input //put Gleti\'s Knife case')
+	send_command('input //put Kustawi +1 case')
+	send_command('input //put Naegling case')
+	send_command('input //put Rostam case all')
 
 	--Unload Gearinfo/Dressup Lua
 
@@ -1571,6 +1533,7 @@ function job_update(cmdParams, eventArgs)
 	check_rangeset()
 	check_gear()
     handle_equipping_gear(player.status)
+	Weaponskill_Keybinds()
 end
 
 	--Determines Dual Wield melee set
@@ -1581,6 +1544,94 @@ function update_combat_form()
         state.CombatForm:reset()
     end
 end
+
+	--Command to show Corsair binds in game[ ALT + numpad- ]
+	send_command([[bind !numpad- 
+		input /echo -----Gun-----;
+		input /echo [ CTRL + Numpad1 ] Leaden Salute;
+		input /echo [ CTRL + Numpad2 ] Wildfire;
+		input /echo [ CTRL + Numpad3 ] Last Stand;
+		input /echo [ CTRL + Numpad5 ] Hot Shot;
+		input /echo [ CTRL + Numpad6 ] Terminus;
+		input /echo [ CTRL + Numpad7 ] Detonator;
+		input /echo -----Sword-----;
+		input /echo [ CTRL + Numpad4 ] Savage Blade;
+		input /echo [ CTRL + Numpad9 ] Requiescat;
+		input /echo -----Dagger-----;
+		input /echo [ ALT + Numpad1 ] Evisceration;
+		input /echo [ ALT + Numpad2 ] Exenterator;
+		input /echo [ ALT + Numpad3 ] Cyclone;
+		input /echo [ ALT + Numpad4 ] Aeolian Edge;
+		input /echo [ ALT + Numpad5 ] Viper Bite;
+		]])
+		
+function Weaponskill_Keybinds()
+
+		send_command([[bind ^numpad- 
+			input /echo -----Gun-----;
+			input /echo [ CTRL + Numpad1 ] Leaden Salute;
+			input /echo [ CTRL + Numpad2 ] Wildfire;
+			input /echo [ CTRL + Numpad3 ] Last Stand;
+			input /echo [ CTRL + Numpad4 ] Hot Shot;
+			input /echo [ CTRL + Numpad5 ] Detonator;
+			input /echo [ CTRL + Numpad6 ] Terminus;
+			input /echo [ CTRL + Numpad7 ] Slug Shot;
+			input /echo [ CTRL + Numpad9 ] Sniper Shot;
+			input /echo [ CTRL + Numpad. ] Numbing Shot;]])
+		send_command('bind ^numpad1 input /ws "Leaden Salute" <t>')
+		send_command('bind ^numpad2 input /ws "Wildfire" <t>')
+		send_command('bind ^numpad3 input /ws "Last Stand" <t>')
+		send_command('bind ^numpad4 input /ws "Hot Shot" <t>')
+		send_command('bind ^numpad5 input /ws "Detonator" <t>')
+		send_command('bind ^numpad6 input /ws "Terminus" <t>')
+		send_command('bind ^numpad7 input /ws "Slug Shot" <t>')
+		send_command('bind ^numpad9 input /ws "Sniper Shot" <t>')
+		send_command('bind ^numpad. input /ws "Numbing Shot" <t>')
+
+	if state.WeaponSet.value == 'Naegling' then		
+		send_command([[bind !numpad- 
+			input /echo -----Sword-----;
+			input /echo [ ALT + Numpad1 ]  Fast Blade;
+			input /echo [ ALT + Numpad2 ]  Burning Blade;
+			input /echo [ ALT + Numpad3 ]  Requiescat;
+			input /echo [ ALT + Numpad4 ]  Savage Blade;
+			input /echo [ ALT + Numpad5 ]  Shining Blade;
+			input /echo [ ALT + Numpad6 ]  Circle Blade;
+			input /echo [ ALT + Numpad7 ]  Spirits Within;
+			input /echo [ ALT + Numpad. ]  Flat Blade;]])
+		send_command('bind !numpad1 input /ws "Fast Blade" <t>')
+		send_command('bind !numpad2 input /ws "Burning Blade" <t>')
+		send_command('bind !numpad3 input /ws "Requiescat" <t>')
+		send_command('bind !numpad4 input /ws "Savage Blade" <t>')
+		send_command('bind !numpad5 input /ws "Shining Blade" <t>')
+		send_command('bind !numpad6 input /ws "Circle Blade" <t>')
+		send_command('bind !numpad7 input /ws "Spirits Within" <t>')
+		send_command('bind !numpad. input /ws "Flat Blade" <t>')
+		
+	elseif state.WeaponSet.value == 'Rostam' then
+		send_command([[bind !numpad- 
+			input /echo -----Dagger-----;
+			input /echo [ ALT + Numpad1 ]  Evisceration;
+			input /echo [ ALT + Numpad2 ]  Exenterator;
+			input /echo [ ALT + Numpad3 ]  Cyclone;
+			input /echo [ ALT + Numpad4 ]  Aeolian Edge;
+			input /echo [ ALT + Numpad5 ]  Gust Slash;
+			input /echo [ ALT + Numpad6 ]  Viper Bite;
+			input /echo [ ALT + Numpad7 ]  Wasp Sting;
+			input /echo [ ALT + Numpad. ]  Shadowstitch;]])
+		send_command('bind !numpad1 input /ws "Evisceration" <t>')
+		send_command('bind !numpad2 input /ws "Exenterator" <t>')
+		send_command('bind !numpad3 input /ws "Cyclone" <t>')
+		send_command('bind !numpad4 input /ws "Aeolian Edge" <t>')
+		send_command('bind !numpad5 input /ws "Gust Slash" <t>')
+		send_command('bind !numpad6 input /ws "Viper Bite" <t>')
+		send_command('bind !numpad7 input /ws "Wasp Sting" <t>')
+		send_command('bind !numpad. input /ws "Shadowstitch" <t>')
+
+	end
+end
+
+
 
 	-- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)

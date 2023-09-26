@@ -16,6 +16,7 @@
 --  				[ Windows + R ]         Toggles Range Lock
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
+--              	[ Windows + I ]     	Pulls all items in Gear Retrieval
 --
 -- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
 --					[ Shift + Numpad2 ]		Holy Water
@@ -168,8 +169,8 @@ function user_setup()
 	send_command('bind !numpad8 input //gs c Etude')
     send_command('bind !numpad9 gs c cycle Etude')
 	
-	--Command to show global binds in game[ CTRL + numpad- ]
-	send_command([[bind ^numpad- 
+	--Command to show Item binds in game[ Shift + numpad- ]
+	send_command([[bind ~numpad- 
 		input /echo -----Item_Binds-----;
 		input /echo [ Shift + Numpad1 ]	Echo Drop;
 		input /echo [ Shift + Numpad2 ]	Holy Water;
@@ -177,6 +178,10 @@ function user_setup()
 		input /echo [ Shift + Numpad4 ]	Panacea;
 		input /echo [ Shift + Numpad7 ]	Silent Oil;
 		input /echo [ Shift + Numpad9 ]	Prism Powder;
+		]])
+		
+	--Command to show Command binds in game[ Windows + numpad- ]		
+	send_command([[bind @numpad- 		
 		input /echo -----Food_Binds-----;
 		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
 		input /echo [ Windows + Numpad2 ]	Grape Daifuku;
@@ -364,6 +369,10 @@ function user_unload()
 	send_command('unbind @`')
 	send_command('unbind @-')
 	send_command('unbind @=')
+	send_command('unbind ^numpad-')
+	send_command('unbind @numpad-')
+	send_command('unbind ~numpad-')
+	send_command('unbind !numpad-')
     
 	send_command('unbind !numpad1')
 	send_command('unbind !numpad2')
@@ -451,24 +460,24 @@ function user_unload()
 
 	send_command('input //put Shihei satchel all')
 	
-	send_command('wait 5; input //put Ammurapi Shield sack')
-	send_command('wait 5; input //put Carnwenhan case')
-	send_command('wait 5; input //put Crepuscular Knife case')
-	send_command('wait 5; input //put Daurdabla case')
-	send_command('wait 5; input //put Daybreak case')
-	send_command('wait 5; input //put Enki Strap sack')
-	send_command('wait 5; input //put Fusetto +2 case')
-	send_command('wait 5; input //put Genmei Shield sack')
-	send_command('wait 5; input //put Gjallarhorn case')
-	send_command('wait 5; input //put Gleti\'s Knife case')
-	send_command('wait 5; input //put Kali case all')
-	send_command('wait 5; input //put Linos case all')
-	send_command('wait 5; input //put Mandau case')
-	send_command('wait 5; input //put Marsyas case')
-	send_command('wait 5; input //put Naegling case')
-	send_command('wait 5; input //put Tauret case')
-	send_command('wait 5; input //put Twashtar case')
-	send_command('wait 5; input //put Xoanon case')
+	send_command('input //put Ammurapi Shield sack')
+	send_command('input //put Carnwenhan case')
+	send_command('input //put Crepuscular Knife case')
+	send_command('input //put Daurdabla case')
+	send_command('input //put Daybreak case')
+	send_command('input //put Enki Strap sack')
+	send_command('input //put Fusetto +2 case')
+	send_command('input //put Genmei Shield sack')
+	send_command('input //put Gjallarhorn case')
+	send_command('input //put Gleti\'s Knife case')
+	send_command('input //put Kali case all')
+	send_command('input //put Linos case all')
+	send_command('input //put Mandau case')
+	send_command('input //put Marsyas case')
+	send_command('input //put Naegling case')
+	send_command('input //put Tauret case')
+	send_command('input //put Twashtar case')
+	send_command('input //put Xoanon case')
 
 	--Unload Gearinfo/Dressup Lua
 	

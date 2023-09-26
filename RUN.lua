@@ -12,9 +12,10 @@
 --					[ CTRL + F9 ]			Cycle Weapon Skill Mode
 --					[ ALT + F9 ]			Cycle Range Mode
 --              	[ Windows + F9 ]    	Cycle Hybrid Modes
---			    	[ Windows + W ]			Toggle Weapon sets
+--			    	[ Windows + W ]			Toggles Weapon sets
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
+--              	[ Windows + I ]     	Pulls all items in Gear Retrieval
 --
 -- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
 --					[ Shift + Numpad2 ]		Holy Water
@@ -145,8 +146,8 @@ function user_setup()
     send_command('bind !- gs c cycleback Barspell')
     send_command('bind != gs c cycle Barspell')
 	
-	--Command to show global binds in game[ CTRL + numpad- ]
-	send_command([[bind ^numpad- 
+	--Command to show Item binds in game[ Shift + numpad- ]
+	send_command([[bind ~numpad- 
 		input /echo -----Item_Binds-----;
 		input /echo [ Shift + Numpad1 ]	Echo Drop;
 		input /echo [ Shift + Numpad2 ]	Holy Water;
@@ -154,6 +155,10 @@ function user_setup()
 		input /echo [ Shift + Numpad4 ]	Panacea;
 		input /echo [ Shift + Numpad7 ]	Silent Oil;
 		input /echo [ Shift + Numpad9 ]	Prism Powder;
+		]])
+		
+	--Command to show Command binds in game[ Windows + numpad- ]		
+	send_command([[bind @numpad- 		
 		input /echo -----Food_Binds-----;
 		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
 		input /echo [ Windows + Numpad2 ]	Grape Daifuku;
@@ -307,6 +312,10 @@ function user_unload()
 	send_command('unbind @`')
 	send_command('unbind @-')
 	send_command('unbind @=')
+	send_command('unbind ^numpad-')
+	send_command('unbind @numpad-')
+	send_command('unbind ~numpad-')
+	send_command('unbind !numpad-')	
 	
 	--Remove Weapon Set binds
 	
@@ -380,14 +389,14 @@ function user_unload()
 	
 	--Gear Removal Scripts
 	
-	send_command('wait 5; input //put Sors Shield sack')
-	send_command('wait 5; input //put Aettir case')
-	send_command('wait 5; input //put Deacon Sword case')
-	send_command('wait 5; input //put Epeolatry case')
-	send_command('wait 5; input //put Lycurgos case')
-	send_command('wait 5; input //put Morgelai case')
-	send_command('wait 5; input //put Refined Grip +1 sack')
-	send_command('wait 5; input //put Utu Grip sack')
+	send_command('input //put Sors Shield sack')
+	send_command('input //put Aettir case')
+	send_command('input //put Deacon Sword case')
+	send_command('input //put Epeolatry case')
+	send_command('input //put Lycurgos case')
+	send_command('input //put Morgelai case')
+	send_command('input //put Refined Grip +1 sack')
+	send_command('input //put Utu Grip sack')
 
 	--Unload Dressup Lua
 	
