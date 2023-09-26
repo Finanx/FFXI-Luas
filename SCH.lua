@@ -236,7 +236,33 @@ function user_setup()
 	
 	--Ammo Scripts (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
-	--Gear Retrieval Commands
+	--Gear Retrieval Scripts (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	
+	send_command('wait 10; input //get Ammurapi Shield sack')
+	send_command('wait 10; input //get Bunzi\'s Rod case')
+	send_command('wait 10; input //get Chatoyant Staff case')
+	send_command('wait 10; input //get Culminus sack')
+	send_command('wait 10; input //get Daybreak case')
+	send_command('wait 10; input //get Genmei Shield sack')
+	send_command('wait 10; input //get Khonsu sack')
+	send_command('wait 10; input //get Maxentius case')
+	send_command('wait 10; input //get Mpaca\'s Staff case')
+	send_command('wait 10; input //get Musa case')
+	send_command('wait 10; input //get Xoanon case')
+	
+	send_command([[bind @i ;
+		input //get Ammurapi Shield sack;
+		input //get Bunzi\'s Rod case;
+		input //get Chatoyant Staff case;
+		input //get Culminus sack;
+		input //get Daybreak case;
+		input //get Genmei Shield sack;
+		input //get Khonsu sack;
+		input //get Maxentius case;
+		input //get Mpaca\'s Staff case;
+		input //get Musa case;
+		input //get Xoanon case;
+		]])
 	
 	--Job settings
 
@@ -265,6 +291,7 @@ function user_unload()
 	send_command('unbind @t')
 	send_command('unbind @b')
 	send_command('unbind @m')
+	send_command('unbind @i')
 	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
@@ -345,6 +372,20 @@ function user_unload()
 	
 	send_command('unbind ^numpad+')
 	send_command('unbind !numpad+')
+	
+	--Gear Removal Scripts
+	
+	send_command('wait 5; input //put Ammurapi Shield sack')
+	send_command('wait 5; input //put Bunzi\'s Rod case')
+	send_command('wait 5; input //put Chatoyant Staff case')
+	send_command('wait 5; input //put Culminus sack')
+	send_command('wait 5; input //put Daybreak case')
+	send_command('wait 5; input //put Genmei Shield sack')
+	send_command('wait 5; input //put Khonsu sack')
+	send_command('wait 5; input //put Maxentius case')
+	send_command('wait 5; input //put Mpaca\'s Staff case')
+	send_command('wait 5; input //put Musa case')
+	send_command('wait 5; input //put Xoanon case')
 	
 	--Unload Gearinfo/Dressup Lua
 	

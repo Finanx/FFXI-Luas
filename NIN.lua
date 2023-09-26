@@ -269,15 +269,38 @@ function user_setup()
 	send_command('bind !numpad+ input //get Dim. Ring (Dem) satchel; wait 1; input /equip Ring1 "Dim. Ring (Dem)"; wait 12; input /item "Dim. Ring (Dem)" <me>; wait 60; input //put Dim. Ring (Dem) satchel')
 	
 	
-	--Gear Retrieval Commands
+	--Gear Retrieval Scripts (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 		
-	--Tools
-	
 	send_command('wait 10; input //get Shihei satchel all')
 	send_command('wait 10; input //get Chonofuda satchel all')
 	send_command('wait 10; input //get Shikanofuda satchel all')
 	send_command('wait 10; input //get Inoshishinofuda satchel all')
 	send_command('wait 10; input //get Seki Shuriken satchel all')
+	
+	send_command('wait 10; input //get Gleti\'s Knife case')
+	send_command('wait 10; input //get Gokotai case')
+	send_command('wait 10; input //get Hachimonji case')
+	send_command('wait 10; input //get Heishi Shorinken case')
+	send_command('wait 10; input //get Kaja Tachi case')
+	send_command('wait 10; input //get Kunimitsu case')
+	send_command('wait 10; input //get Rigorous Grip +1 sack')
+	send_command('wait 10; input //get Naegling case')
+	
+	send_command([[bind @i ;
+		input //get Gleti\'s Knife case;
+		input //get Gokotai case;
+		input //get Hachimonji case;
+		input //get Heishi Shorinken case;
+		input //get Kaja Tachi case;
+		input //get Kunimitsu case;
+		input //get Rigorous Grip +1 sack;
+		input //get Naegling case;
+		input //get Shihei satchel all;
+		input //get Chonofuda satchel all;
+		input //get Shikanofuda satchel all;
+		input //get Inoshishinofuda satchel all;
+		input //get Seki Shuriken satchel all;
+		]])
 	
 	--Job Settings
 
@@ -311,6 +334,7 @@ function user_unload()
 	send_command('unbind @t')
 	send_command('unbind @b')
 	send_command('unbind @m')
+	send_command('unbind @i')
 	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
@@ -401,13 +425,20 @@ function user_unload()
 	
 	--Gear Removal Commands
 	
-	--Tools
+	send_command('input //put Shihei satchel all')
+	send_command('input //put Chonofuda satchel all')
+	send_command('input //put Shikanofuda satchel all')
+	send_command('input //put Inoshishinofuda satchel all')
+	send_command('input //put Seki Shuriken satchel all')
 	
-	send_command('wait 5; input //put Shihei satchel all')
-	send_command('wait 5; input //put Chonofuda satchel all')
-	send_command('wait 5; input //put Shikanofuda satchel all')
-	send_command('wait 5; input //put Inoshishinofuda satchel all')
-	send_command('wait 5; input //put Seki Shuriken satchel all')
+	send_command('input //put Gleti\'s Knife case')
+	send_command('input //put Gokotai case')
+	send_command('input //put Hachimonji case')
+	send_command('input //put Heishi Shorinken case')
+	send_command('input //put Kaja Tachi case')
+	send_command('input //put Kunimitsu case')
+	send_command('input //put Rigorous Grip +1 sack')
+	send_command('input //put Naegling case')
 
 	--Unload Gearinfo/Dressup Lua
 	
@@ -515,12 +546,12 @@ function init_gear_sets()
 		neck="Rep. Plat. Medal",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Store TP"+4',}},
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
 		left_ring="Sroda Ring",
 		right_ring="Epaminondas's Ring",
 		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 		
-	sets.precast.WS.FullTPPhysical = {left_ear={ name="Lugra Earring +1", augments={'Path: A',}},right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Store TP"+4',}},}
+	sets.precast.WS.FullTPPhysical = {left_ear={ name="Lugra Earring +1", augments={'Path: A',}},right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},}
 	sets.precast.WS.FullTPMagical = {left_ear={ name="Lugra Earring +1", augments={'Path: A',}},right_ear="Friomisi Earring",}
 
     sets.precast.WS['Blade: Hi'] = {
@@ -548,7 +579,7 @@ function init_gear_sets()
 		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
 		waist="Gerdr Belt +1",
 		left_ear="Odr Earring",
-		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Store TP"+4',}},
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
 		left_ring="Sroda Ring",
 		right_ring="Regal Ring",
 		back={ name="Andartia's Mantle", augments={'AGI+20','Accuracy+20 Attack+20','AGI+10','Crit.hit rate+10',}},}
@@ -578,7 +609,7 @@ function init_gear_sets()
 		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Store TP"+4',}},
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
 		left_ring="Sroda Ring",
 		right_ring="Epaminondas's Ring",
 		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
@@ -608,7 +639,7 @@ function init_gear_sets()
 		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Store TP"+4',}},
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
 		left_ring="Sroda Ring",
 		right_ring="Epaminondas's Ring",
 		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
@@ -638,7 +669,7 @@ function init_gear_sets()
 		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
 		waist="Fotia Belt",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Store TP"+4',}},
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
 		left_ring="Gere Ring",
 		right_ring="Regal Ring",
 		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10',}},}
@@ -653,7 +684,7 @@ function init_gear_sets()
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear={ name="Lugra Earring +1", augments={'Path: A',}},
-		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Store TP"+4',}},
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
 		left_ring="Gere Ring",
 		right_ring="Regal Ring",
 		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10',}},}
@@ -668,7 +699,7 @@ function init_gear_sets()
 		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
 		waist="Fotia Belt",
 		left_ear={ name="Lugra Earring +1", augments={'Path: A',}},
-		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Store TP"+4',}},
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
 		left_ring="Gere Ring",
 		right_ring="Sroda Ring",
 		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10',}},}
@@ -683,7 +714,7 @@ function init_gear_sets()
 		neck="Fotia Gorget",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Lugra Earring +1", augments={'Path: A',}},
-		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Store TP"+4',}},
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
 		left_ring="Gere Ring",
 		right_ring="Regal Ring",
 		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
@@ -698,7 +729,7 @@ function init_gear_sets()
 		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Lugra Earring +1", augments={'Path: A',}},
-		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Store TP"+4',}},
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
 		left_ring="Sroda Ring",
 		right_ring="Regal Ring",
 		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
@@ -784,7 +815,7 @@ function init_gear_sets()
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear="Odr Earring",
-		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Store TP"+4',}},
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
 		left_ring="Gere Ring",
 		right_ring="Begrudging Ring",
 		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}
@@ -848,12 +879,12 @@ function init_gear_sets()
 		head="Hachiya Hatsu. +3",
 		body="Hattori Ningi +3",
 		hands="Hattori Tekko +3",
-		legs="Hattori Hakama +2",
+		legs="Hattori Hakama +3",
 		feet="Hachiya Kyahan +3",
 		neck="Sanctity Necklace",
 		waist="Eschan Stone",
 		left_ear="Crep. Earring",
-		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Store TP"+4',}},
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
 		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		right_ring="Stikini Ring +1",
 		back={ name="Andartia's Mantle", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}},}

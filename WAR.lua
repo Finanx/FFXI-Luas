@@ -250,7 +250,34 @@ function user_setup()
 	send_command('bind ^numpad+ input //get Warp Ring satchel; wait 1; input /equip Ring1 "Warp Ring"; wait 12; input /item "Warp Ring" <me>; wait 60; input //put Warp Ring satchel')
 	send_command('bind !numpad+ input //get Dim. Ring (Dem) satchel; wait 1; input /equip Ring1 "Dim. Ring (Dem)"; wait 12; input /item "Dim. Ring (Dem)" <me>; wait 60; input //put Dim. Ring (Dem) satchel')
 	
-	--Gear Retrieval Commands (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	--Gear Retrieval Scripts (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	
+	send_command('wait 10; input //get Thr. Tomahawk satchel all')
+	send_command('wait 10; input //get Shihei satchel all')
+	
+	send_command('wait 10; input //get Blurred Shield +1 sack')
+	send_command('wait 10; input //get Chango case')
+	send_command('wait 10; input //get Ikenga\'s Axe case')
+	send_command('wait 10; input //get Kaja Axe case')
+	send_command('wait 10; input //get Loxotic Mace +1 case')
+	send_command('wait 10; input //get Lycurgos case')
+	send_command('wait 10; input //get Naegling case')
+	send_command('wait 10; input //get Shining One case')
+	send_command('wait 10; input //get Utu Grip sack')
+	
+	send_command([[bind @i ;
+		input //get Blurred Shield +1 sack;
+		input //get Chango case;
+		input //get Ikenga\'s Axe case;
+		input //get Kaja Axe case;
+		input //get Loxotic Mace +1 case;
+		input //get Lycurgos case;
+		input //get Naegling case;
+		input //get Shining One case;
+		input //get Utu Grip sack;
+		input //get Thr. Tomahawk satchel all;
+		input //get Shihei satchel all;
+		]])
 	
 	--send_command('wait 10; input //get Trump Card satchel all')
 		
@@ -287,6 +314,7 @@ function user_unload()
 	send_command('unbind @t')
 	send_command('unbind @b')
 	send_command('unbind @m')
+	send_command('unbind @i')
 	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
@@ -368,9 +396,20 @@ function user_unload()
 	send_command('unbind ^numpad+')
 	send_command('unbind !numpad+')
 	
-	--Gear Removal Commands
+	--Gear Removal Scripts
 	
-	--send_command('wait 5; input //put Living Bullet satchel all')
+	send_command('wait 5; input //put Thr. Tomahawk satchel all')
+	send_command('wait 5; input //put Shihei satchel all')
+	
+	send_command('wait 5; input //put Blurred Shield +1 sack')
+	send_command('wait 5; input //put Chango case')
+	send_command('wait 5; input //put Ikenga\'s Axe case')
+	send_command('wait 5; input //put Kaja Axe case')
+	send_command('wait 5; input //put Loxotic Mace +1 case')
+	send_command('wait 5; input //put Lycurgos case')
+	send_command('wait 5; input //put Naegling case')
+	send_command('wait 5; input //put Shining One case')
+	send_command('wait 5; input //put Utu Grip sack')
 
 	--Unload Gearinfo/Dressup Lua
 
@@ -889,7 +928,6 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
         }
 
-	sets.Warp = {left_ring="Warp Ring"}
     sets.CP = {back={ name="Mecisto. Mantle", augments={'Cap. Point+48%','CHR+3','Accuracy+2','DEF+10',}},}
     sets.Obi = {waist="Hachirin-no-Obi"}
 	sets.Reraise = {head="Crepuscular Helm",body="Crepuscular Mail",}

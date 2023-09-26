@@ -266,13 +266,44 @@ function user_setup()
     send_command('bind @numpad. input //get Liv. Bul. Pouch satchel; wait 1; input /equip waist "Liv. Bul. Pouch"; wait 15; input /item "Liv. Bul. Pouch" <me>; wait 5; input /equip waist; input //put Liv. Bul. Pouch satchel')
 	send_command('bind !numpad. input //get Dev. Bul. Pouch satchel; wait 1; input /equip waist "Dev. Bul. Pouch"; wait 15; input /item "Dev. Bul. Pouch" <me>; wait 5; input /equip waist; input //put Dev. Bul. Pouch satchel')
 	
-	--Gear Retrieval Commands (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	--Gear Retrieval Scripts (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('wait 10; input //get Chrono Bullet satchel all')
 	send_command('wait 10; input //get Devastating Bullet satchel all')
 	send_command('wait 10; input //get Living Bullet satchel all')
 	send_command('wait 10; input //get Trump Card satchel all')
 	send_command('wait 10; input //get Shihei satchel all')
+	
+	send_command('wait 10; input //get Nusku Shield sack')
+	send_command('wait 10; input //get Anarchy +2 case')
+	send_command('wait 10; input //get Armageddon case')
+	send_command('wait 10; input //get Compensator case')
+	send_command('wait 10; input //get Death Penalty case')
+	send_command('wait 10; input //get Earp case')
+	send_command('wait 10; input //get Fomalhaut case')
+	send_command('wait 10; input //get Gleti\'s Knife case')
+	send_command('wait 10; input //get Kustawi +1 case')
+	send_command('wait 10; input //get Naegling case')
+	send_command('wait 10; input //get Rostam case all')
+	
+	send_command([[bind @i ;
+		input //get Nusku Shield sack;
+		input //get Anarchy +2 case;
+		input //get Armageddon case;
+		input //get Compensator case;
+		input //get Death Penalty case;
+		input //get Earp case;
+		input //get Fomalhaut case;
+		input //get Gleti\'s Knife case;
+		input //get Kustawi +1 case;
+		input //get Naegling case;
+		input //get Rostam case all;
+		input //get Chrono Bullet satchel all;
+		input //get Devastating Bullet satchel all;
+		input //get Living Bullet satchel all;
+		input //get Trump Card satchel all;
+		input //get Shihei satchel all;
+		]])
 		
 	--Job Settings
 	
@@ -307,6 +338,7 @@ function user_unload()
 	send_command('unbind @t')
 	send_command('unbind @b')
 	send_command('unbind @m')
+	send_command('unbind @i')
 	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
@@ -394,13 +426,25 @@ function user_unload()
 	send_command('unbind !numpad.')
 	send_command('unbind @numpad.')
 	
-	--Gear Removal Commands
+	--Gear Removal Scripts
 	
-	send_command('wait 5; input //put Chrono Bullet satchel all')
-	send_command('wait 5; input //put Devastating Bullet satchel all')
-	send_command('wait 5; input //put Living Bullet satchel all')
-	send_command('wait 5; input //put Trump Card satchel all')
-	send_command('wait 5; input //put Shihei satchel all')
+	send_command('wait 3; input //put Chrono Bullet satchel all')
+	send_command('wait 3; input //put Devastating Bullet satchel all')
+	send_command('wait 3; input //put Living Bullet satchel all')
+	send_command('wait 3; input //put Trump Card satchel all')
+	send_command('wait 3; input //put Shihei satchel all')
+	
+	send_command('wait 5; input //put Nusku Shield sack')
+	send_command('wait 5; input //put Anarchy +2 case')
+	send_command('wait 5; input //put Armageddon case')
+	send_command('wait 5; input //put Compensator case')
+	send_command('wait 5; input //put Death Penalty case')
+	send_command('wait 5; input //put Earp case')
+	send_command('wait 5; input //put Fomalhaut case')
+	send_command('wait 5; input //put Gleti\'s Knife case')
+	send_command('wait 5; input //put Kustawi +1 case')
+	send_command('wait 5; input //put Naegling case')
+	send_command('wait 5; input //put Rostam case all')
 
 	--Unload Gearinfo/Dressup Lua
 
@@ -791,7 +835,7 @@ function init_gear_sets()
     sets.midcast.RA.Acc = {
 		ammo=gear.RAbullet,
 		head={ name="Ikenga's Hat", augments={'Path: A',}},
-		body="Laksa. Frac +3",
+		body="Chasseur's Frac +3",
 		hands="Malignance Gloves",
 		legs="Chas. Culottes +3",
 		feet="Malignance Boots",
@@ -799,7 +843,7 @@ function init_gear_sets()
 		waist="K. Kachina Belt +1",
 		left_ear="Telos Earring",
 		right_ear="Crep. Earring",
-		left_ring="Regal Ring",
+		left_ring={ name="Cacoethic Ring +1", augments={'Path: A',}},
 		right_ring="Ephramad's Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10',}},}
 		
@@ -829,7 +873,7 @@ function init_gear_sets()
 		waist="K. Kachina Belt +1",
 		left_ear="Telos Earring",
 		right_ear="Crep. Earring",
-		left_ring="Regal Ring",
+		left_ring={ name="Cacoethic Ring +1", augments={'Path: A',}},
 		right_ring="Ephramad's Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10',}},}
 	
@@ -859,7 +903,7 @@ function init_gear_sets()
 		waist="K. Kachina Belt +1",
 		left_ear="Telos Earring",
 		right_ear="Crep. Earring",
-		left_ring="Regal Ring",
+		left_ring={ name="Cacoethic Ring +1", augments={'Path: A',}},
 		right_ring="Ephramad's Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10',}},}
 
@@ -1203,7 +1247,6 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
         }
 
-	sets.Warp = {left_ring="Warp Ring"}
     sets.Obi = {waist="Hachirin-no-Obi"}
 	sets.Orpheus = {waist="Orpheus's Sash"}
     sets.CP = {back="Mecisto. Mantle"}

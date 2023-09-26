@@ -341,9 +341,26 @@ function user_setup()
 	send_command('bind ^numpad+ input //get Warp Ring satchel; wait 1; input /equip Ring1 "Warp Ring"; wait 12; input /item "Warp Ring" <me>; wait 60; input //put Warp Ring satchel')
 	send_command('bind !numpad+ input //get Dim. Ring (Dem) satchel; wait 1; input /equip Ring1 "Dim. Ring (Dem)"; wait 12; input /item "Dim. Ring (Dem)" <me>; wait 60; input //put Dim. Ring (Dem) satchel')
 
-	--Gear Retrieval Commands 
+	--Gear Retrieval Scripts (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('wait 10; input //get Shihei satchel all')
+	
+	send_command('wait 10; input //get Bunzi\'s Rod case')
+	send_command('wait 10; input //get Machaera +2 case')
+	send_command('wait 10; input //get Maxentius case')
+	send_command('wait 10; input //get Naegling case')
+	send_command('wait 10; input //get Sakpata\'s Sword case')
+	send_command('wait 10; input //get Tizona case')
+	
+	send_command([[bind @i ;
+		input //get Bunzi\'s Rod case;
+		input //get Machaera +2 case;
+		input //get Maxentius case;
+		input //get Naegling case;
+		input //get Sakpata\'s Sword case;
+		input //get Tizona case;
+		input //get Shihei satchel all;
+		]])
 	
 	--Job Settings
 
@@ -377,6 +394,7 @@ function user_unload()
 	send_command('unbind @t')
 	send_command('unbind @b')
 	send_command('unbind @m')
+	send_command('unbind @i')
 	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
@@ -458,9 +476,16 @@ function user_unload()
 	send_command('unbind ^numpad+')
 	send_command('unbind !numpad+')
 	
-	--Gear Removal Commands
+	--Gear Removal Scripts
 
 	send_command('input //put Shihei satchel all')
+	
+	send_command('input //put Bunzi\'s Rod case')
+	send_command('input //put Machaera +2 case')
+	send_command('input //put Maxentius case')
+	send_command('input //put Naegling case')
+	send_command('input //put Sakpata\'s Sword case')
+	send_command('input //put Tizona case')
 
 	--Unload Gearinfo/Azuresets/Dressup Lua
 	
@@ -534,7 +559,7 @@ function init_gear_sets()
 		waist="Yemaya Belt",
 		left_ear="Genmei Earring",
 		right_ear="Etiolation Earring",
-		left_ring="Vocane Ring",
+		left_ring="Sirona's Ring",
 		right_ring="Defending Ring",
 		back={ name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},} 
 
@@ -928,7 +953,7 @@ function init_gear_sets()
 		waist="Gishdubar Sash",
 		left_ear="Mendi. Earring",
 		right_ear="Meili Earring",
-		left_ring="Vocane Ring",
+		left_ring="Sirona's Ring",
 		right_ring="Kunaji Ring",
 		back={ name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
@@ -977,7 +1002,7 @@ function init_gear_sets()
 		waist="Gishdubar Sash",
 		left_ear="Mendi. Earring",
 		right_ear="Meili Earring",
-		left_ring="Vocane Ring",
+		left_ring="Sirona's Ring",
 		right_ring="Kunaji Ring",
 		back={ name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 

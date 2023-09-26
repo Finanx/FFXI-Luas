@@ -207,10 +207,48 @@ function user_setup()
 	
     send_command('bind ^numpad. input //get Chapuli Quiver satchel; wait 1; input /item "Chapuli Quiver" <me>')	
 	
-	--Gear Retrieval Commands
+	--Gear Retrieval Scripts (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('wait 10; input //get Chapuli Arrow satchel all')
 	send_command('wait 10; input //get Shihei satchel all')
+	
+	send_command('wait 10; input //get Ammurapi Shield sack')
+	send_command('wait 10; input //get Bunzi\'s Rod case')
+	send_command('wait 10; input //get Crocea Mors case')
+	send_command('wait 10; input //get Murgleis case')
+	send_command('wait 10; input //get Daybreak case')
+	send_command('wait 10; input //get Genmei Shield sack')
+	send_command('wait 10; input //get Gleti\'s Knife case')
+	send_command('wait 10; input //get Machaera +2 case')
+	send_command('wait 10; input //get Malevolence case')
+	send_command('wait 10; input //get Mandau case')
+	send_command('wait 10; input //get Maxentius case')
+	send_command('wait 10; input //get Naegling case')
+	send_command('wait 10; input //get Pukulatmuj +1 case')
+	send_command('wait 10; input //get Sakpata\'s Sword case')
+	send_command('wait 10; input //get Tauret case')
+	send_command('wait 10; input //get Ullr case')
+	
+	send_command([[bind @i ;
+		input //get Ammurapi Shield sack;
+		input //get Bunzi\'s Rod case;
+		input //get Crocea Mors case;
+		input //get Murgleis case;
+		input //get Daybreak case;
+		input //get Genmei Shield sack;
+		input //get Gleti\'s Knife case;
+		input //get Machaera +2 case;
+		input //get Malevolence case;
+		input //get Mandau case;
+		input //get Maxentius case;
+		input //get Naegling case;
+		input //get Pukulatmuj +1 case;
+		input //get Sakpata\'s Sword case;
+		input //get Tauret case;
+		input //get Ullr case;
+		input //get Chapuli Arrow satchel all;
+		input //get Shihei satchel all;
+		]])
 		
 	--Job settings
 
@@ -244,6 +282,7 @@ function user_unload()
 	send_command('unbind @t')
 	send_command('unbind @b')
 	send_command('unbind @m')
+	send_command('unbind @i')
 	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
@@ -325,10 +364,27 @@ function user_unload()
 	send_command('unbind ^numpad+')
 	send_command('unbind !numpad+')
 	
-	--Gear Removal Commands
+	--Gear Removal Scripts
 	
 	send_command('input //put Chapuli Arrow satchel all')
 	send_command('input //put Shihei satchel all')
+	
+	send_command('wait 5; input //put Ammurapi Shield sack')
+	send_command('wait 5; input //put Bunzi\'s Rod case')
+	send_command('wait 5; input //put Crocea Mors case')
+	send_command('wait 5; input //put Murgleis case')
+	send_command('wait 5; input //put Daybreak case')
+	send_command('wait 5; input //put Genmei Shield sack')
+	send_command('wait 5; input //put Gleti\'s Knife case')
+	send_command('wait 5; input //put Machaera +2 case')
+	send_command('wait 5; input //put Malevolence case')
+	send_command('wait 5; input //put Mandau case')
+	send_command('wait 5; input //put Maxentius case')
+	send_command('wait 5; input //put Naegling case')
+	send_command('wait 5; input //put Pukulatmuj +1 case')
+	send_command('wait 5; input //put Sakpata\'s Sword case')
+	send_command('wait 5; input //put Tauret case')
+	send_command('wait 5; input //put Ullr case')
 
 	--Unload Gearinfo/Dressup Lua
 	
@@ -665,7 +721,7 @@ function init_gear_sets()
 		waist="Gishdubar Sash",
 		left_ear="Beatific Earring",
 		right_ear="Meili Earring",
-		left_ring="Vocane Ring",
+		left_ring="Sirona's Ring",
 		right_ring="Kunaji Ring",
 		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
 
@@ -1171,7 +1227,7 @@ function init_gear_sets()
 
     sets.engaged.Acc = {
 		main="Naegling",
-		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
+		sub={ name="Gleti's Knife", augments={'Path: A',}},
 		ammo="Aurgelmir Orb +1",
 		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
 		body="Malignance Tabard",
@@ -1189,7 +1245,7 @@ function init_gear_sets()
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
 		main="Naegling",
-		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
+		sub={ name="Gleti's Knife", augments={'Path: A',}},
 		ammo="Aurgelmir Orb +1",
 		head="Malignance Chapeau",
 		body="Malignance Tabard",
@@ -1207,7 +1263,7 @@ function init_gear_sets()
 
 	sets.engaged.DW.Acc = {
 		main="Naegling",
-		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
+		sub={ name="Gleti's Knife", augments={'Path: A',}},
 		ammo="Aurgelmir Orb +1",
 		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
 		body="Malignance Tabard",
@@ -1226,7 +1282,7 @@ function init_gear_sets()
     -- 15% Magic Haste (67% DW to cap)
     sets.engaged.DW.LowHaste = {
 		main="Naegling",
-		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
+		sub={ name="Gleti's Knife", augments={'Path: A',}},
 		ammo="Aurgelmir Orb +1",
 		head="Malignance Chapeau",
 		body="Malignance Tabard",
@@ -1244,7 +1300,7 @@ function init_gear_sets()
 
     sets.engaged.DW.Acc.LowHaste = {
 		main="Naegling",
-		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
+		sub={ name="Gleti's Knife", augments={'Path: A',}},
 		ammo="Aurgelmir Orb +1",
 		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
 		body="Malignance Tabard",
@@ -1263,7 +1319,7 @@ function init_gear_sets()
     -- 30% Magic Haste (56% DW to cap)
     sets.engaged.DW.MidHaste = {
 		main="Naegling",
-		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
+		sub={ name="Gleti's Knife", augments={'Path: A',}},
 		ammo="Aurgelmir Orb +1",
 		head="Malignance Chapeau",
 		body="Malignance Tabard",
@@ -1281,7 +1337,7 @@ function init_gear_sets()
 
     sets.engaged.DW.Acc.MidHaste = {
 		main="Naegling",
-		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
+		sub={ name="Gleti's Knife", augments={'Path: A',}},
 		ammo="Aurgelmir Orb +1",
 		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
 		body="Malignance Tabard",
@@ -1300,7 +1356,7 @@ function init_gear_sets()
     -- 35% Magic Haste (51% DW to cap)
     sets.engaged.DW.HighHaste = {
 		main="Naegling",
-		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
+		sub={ name="Gleti's Knife", augments={'Path: A',}},
 		ammo="Aurgelmir Orb +1",
 		head="Malignance Chapeau",
 		body="Malignance Tabard",
@@ -1318,7 +1374,7 @@ function init_gear_sets()
 
     sets.engaged.DW.Acc.HighHaste = {
 		main="Naegling",
-		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
+		sub={ name="Gleti's Knife", augments={'Path: A',}},
 		ammo="Aurgelmir Orb +1",
 		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
 		body="Malignance Tabard",
@@ -1337,7 +1393,7 @@ function init_gear_sets()
     -- 45% Magic Haste (36% DW to cap)
     sets.engaged.DW.MaxHaste = {
 		main="Naegling",
-		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
+		sub={ name="Gleti's Knife", augments={'Path: A',}},
 		ammo="Aurgelmir Orb +1",
 		head="Malignance Chapeau",
 		body="Malignance Tabard",
@@ -1355,7 +1411,7 @@ function init_gear_sets()
 
     sets.engaged.DW.Acc.MaxHaste = {
 		main="Naegling",
-		sub={ name="Ternion Dagger +1", augments={'Path: A',}},
+		sub={ name="Gleti's Knife", augments={'Path: A',}},
 		ammo="Aurgelmir Orb +1",
 		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
 		body="Malignance Tabard",
@@ -1422,8 +1478,6 @@ function init_gear_sets()
 		neck="Nicander's Necklace",
 		waist="Gishdubar Sash", --10
         }
-		
-	sets.Warp = {left_ring="Warp Ring"}
 
     sets.Obi = {waist="Hachirin-no-Obi"}
 	
@@ -1444,7 +1498,7 @@ function init_gear_sets()
 	sets.Malevolence_Thibron = {main="Malevolence", sub={ name="Machaera +2", augments={'TP Bonus +1000',}},}
 	sets.Malevolence.SW = {main={ name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}}, sub="Ammurapi Shield"}
 	
-	sets.Tauret = {main="Norgish Dagger",sub="Qutrub Knife",}--{main="Tauret", sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Tauret = {main="Tauret", sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	sets.Tauret.SW = {main="Tauret", sub="Genmei Shield"}
 	
 	sets.Mandau = {main="Mandau", sub={ name="Gleti's Knife", augments={'Path: A',}},}

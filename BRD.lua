@@ -274,9 +274,50 @@ function user_setup()
 	send_command('bind ^numpad+ input //get Warp Ring satchel; wait 1; input /equip Ring1 "Warp Ring"; wait 12; input /item "Warp Ring" <me>; wait 60; input //put Warp Ring satchel')
 	send_command('bind !numpad+ input //get Dim. Ring (Dem) satchel; wait 1; input /equip Ring1 "Dim. Ring (Dem)"; wait 12; input /item "Dim. Ring (Dem)" <me>; wait 60; input //put Dim. Ring (Dem) satchel')
 
-	--Gear Retrieval Commands (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	--Gear Retrieval Scripts (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('wait 10; input //get Shihei satchel all')
+	
+	send_command('wait 10; input //get Ammurapi Shield sack')
+	send_command('wait 10; input //get Carnwenhan case')
+	send_command('wait 10; input //get Crepuscular Knife case')
+	send_command('wait 10; input //get Daurdabla case')
+	send_command('wait 10; input //get Daybreak case')
+	send_command('wait 10; input //get Enki Strap sack')
+	send_command('wait 10; input //get Fusetto +2 case')
+	send_command('wait 10; input //get Genmei Shield sack')
+	send_command('wait 10; input //get Gjallarhorn case')
+	send_command('wait 10; input //get Gleti\'s Knife case')
+	send_command('wait 10; input //get Kali case all')
+	send_command('wait 10; input //get Linos case all')
+	send_command('wait 10; input //get Mandau case')
+	send_command('wait 10; input //get Marsyas case')
+	send_command('wait 10; input //get Naegling case')
+	send_command('wait 10; input //get Tauret case')
+	send_command('wait 10; input //get Twashtar case')
+	send_command('wait 10; input //get Xoanon case')
+	
+	send_command([[bind @i ;
+		input //get Ammurapi Shield sack;
+		input //get Carnwenhan case;
+		input //get Crepuscular Knife case;
+		input //get Daurdabla case;
+		input //get Daybreak case;
+		input //get Enki Strap sack;
+		input //get Fusetto +2 case;
+		input //get Genmei Shield sack;
+		input //get Gjallarhorn case;
+		input //get Gleti\'s Knife case;
+		input //get Kali case all;
+		input //get Linos case all;
+		input //get Mandau case;
+		input //get Marsyas case;
+		input //get Naegling case;
+		input //get Tauret case;
+		input //get Twashtar case;
+		input //get Xoanon case;
+		input //get Shihei satchel all;
+		]])
 	
 	
 	--Job Settings
@@ -312,6 +353,7 @@ function user_unload()
 	send_command('unbind @t')
 	send_command('unbind @b')
 	send_command('unbind @m')
+	send_command('unbind @i')
 	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
@@ -405,9 +447,28 @@ function user_unload()
 	send_command('unbind ^numpad+')
 	send_command('unbind !numpad+')
 	
-	--Gear Removal Commands
+	--Gear Removal Scripts
 
 	send_command('input //put Shihei satchel all')
+	
+	send_command('wait 5; input //put Ammurapi Shield sack')
+	send_command('wait 5; input //put Carnwenhan case')
+	send_command('wait 5; input //put Crepuscular Knife case')
+	send_command('wait 5; input //put Daurdabla case')
+	send_command('wait 5; input //put Daybreak case')
+	send_command('wait 5; input //put Enki Strap sack')
+	send_command('wait 5; input //put Fusetto +2 case')
+	send_command('wait 5; input //put Genmei Shield sack')
+	send_command('wait 5; input //put Gjallarhorn case')
+	send_command('wait 5; input //put Gleti\'s Knife case')
+	send_command('wait 5; input //put Kali case all')
+	send_command('wait 5; input //put Linos case all')
+	send_command('wait 5; input //put Mandau case')
+	send_command('wait 5; input //put Marsyas case')
+	send_command('wait 5; input //put Naegling case')
+	send_command('wait 5; input //put Tauret case')
+	send_command('wait 5; input //put Twashtar case')
+	send_command('wait 5; input //put Xoanon case')
 
 	--Unload Gearinfo/Dressup Lua
 	
@@ -728,7 +789,7 @@ function init_gear_sets()
 		neck="Mnbw. Whistle +1",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Regal Earring",
-		right_ear={ name="Fili Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+9','Mag. Acc.+9',}},
+		right_ear={ name="Fili Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
 		left_ring="Stikini Ring +1",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}
@@ -746,7 +807,7 @@ function init_gear_sets()
 		neck="Mnbw. Whistle +1",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Regal Earring",
-		right_ear={ name="Fili Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+9','Mag. Acc.+9',}},
+		right_ear={ name="Fili Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
 		left_ring="Stikini Ring +1",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}
@@ -766,7 +827,7 @@ function init_gear_sets()
 		neck="Mnbw. Whistle +1",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Regal Earring",
-		right_ear={ name="Fili Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+9','Mag. Acc.+9',}},
+		right_ear={ name="Fili Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
 		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring +1",
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}	
@@ -783,7 +844,7 @@ function init_gear_sets()
 		neck="Mnbw. Whistle +1",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Regal Earring",
-		right_ear={ name="Fili Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+9','Mag. Acc.+9',}},
+		right_ear={ name="Fili Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
 		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring +1",
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}
@@ -855,7 +916,7 @@ function init_gear_sets()
 		waist="Gishdubar Sash",
 		left_ear="Beatific Earring",
 		right_ear="Meili Earring",
-		left_ring="Vocane Ring",
+		left_ring="Sirona's Ring",
 		right_ring="Kunaji Ring",
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}
 
@@ -943,7 +1004,7 @@ function init_gear_sets()
 		neck="Mnbw. Whistle +1",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Regal Earring",
-		right_ear={ name="Fili Earring", augments={'System: 1 ID: 1676 Val: 0','Accuracy+9','Mag. Acc.+9',}},
+		right_ear={ name="Fili Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
 		left_ring="Stikini Ring +1",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}

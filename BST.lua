@@ -300,6 +300,35 @@ function user_setup()
 	send_command('wait 10; input //get Bubbly Broth satchel all')
 	send_command('wait 10; input //get Dire Broth satchel all')
 	send_command('wait 10; input //get C. Plasma Broth satchel all')
+	
+	send_command('wait 10; input //get Adapa Shield sack')
+	send_command('wait 10; input //get Agwu\'s Axe case')
+	send_command('wait 10; input //get Arktoi case')
+	send_command('wait 10; input //get Izizoeksi case')
+	send_command('wait 10; input //get Ikenga\'s Axe case')
+	send_command('wait 10; input //get Kaidate sack')
+	send_command('wait 10; input //get Kaja Axe case')
+	send_command('wait 10; input //get Killer Shortbow case')
+	send_command('wait 10; input //get Malevolence case')
+	send_command('wait 10; input //get Naegling case')
+	
+	
+	send_command([[bind @i ;
+		input //get Adapa Shield sack;
+		input //get Agwu\'s Axe case;
+		input //get Arktoi case;
+		input //get Izizoeksi case;
+		input //get Ikenga\'s Axe case;
+		input //get Kaidate sack;
+		input //get Kaja Axe case;
+		input //get Killer Shortbow case;
+		input //get Malevolence case;
+		input //get Naegling case;
+		input //get Pet Food Theta satchel all;
+		input //get Bubbly Broth satchel all;
+		input //get Dire Broth satchel all;
+		input //get C. Plasma Broth satchel all;
+		]])
 		
 	--Job Settings
 	
@@ -334,6 +363,7 @@ function user_unload()
 	send_command('unbind @t')
 	send_command('unbind @b')
 	send_command('unbind @m')
+	send_command('unbind @i')
 	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
@@ -415,13 +445,24 @@ function user_unload()
 	send_command('unbind ^numpad+')
 	send_command('unbind !numpad+')
 	
-	--Gear Removal Commands
+	--Gear Removal Scripts
 	
-	send_command('wait 5; input //put Pet Food Theta satchel all')
-	send_command('wait 5; input //put Bubbly Broth satchel all')
-	send_command('wait 5; input //put Dire Broth satchel all')
-	send_command('wait 5; input //put C. Plasma Broth satchel all')
-
+	send_command('input //put Pet Food Theta satchel all')
+	send_command('input //put Bubbly Broth satchel all')
+	send_command('input //put Dire Broth satchel all')
+	send_command('input //put C. Plasma Broth satchel all')
+	
+	send_command('input //put Adapa Shield sack')
+	send_command('input //put Agwu\'s Axe case')
+	send_command('input //put Arktoi case')
+	send_command('input //put Izizoeksi case')
+	send_command('input //put Ikenga\'s Axe case')
+	send_command('input //put Kaidate sack')
+	send_command('input //put Kaja Axe case')
+	send_command('input //put Killer Shortbow case')
+	send_command('input //put Malevolence case')
+	send_command('input //put Naegling case')
+	
 	--Unload Gearinfo/Dressup Lua
 
     send_command('lua u gearinfo')
@@ -610,7 +651,7 @@ function init_gear_sets()
 	sets.precast.WS['Calamity'] = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Ankusa Helm +3", augments={'Enhances "Killer Instinct" effect',}},
-		body="Nukumi Gausape +3",
+		body="Nukumi Gausape +2",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
@@ -625,7 +666,7 @@ function init_gear_sets()
 	sets.precast.WS['Calamity'].ATKCAP = {
 		ammo="Crepuscular Pebble",
 		head={ name="Ankusa Helm +3", augments={'Enhances "Killer Instinct" effect',}},
-		body="Nukumi Gausape +3",
+		body="Nukumi Gausape +2",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet="Nukumi Ocreae +2", 
@@ -764,7 +805,7 @@ function init_gear_sets()
 		ammo="Hesperiidae",
 		head={ name="Emicho Coronet +1", augments={'Pet: Accuracy+20','Pet: Attack+20','Pet: "Dbl. Atk."+4',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Nukumi Manoplas +3",
+		hands="Nukumi Manoplas +2",
 		legs="Tot. Trousers +3",
 		feet={ name="Gleti's Boots", augments={'Path: A',}},
 		neck={ name="Bst. Collar +2", augments={'Path: A',}},
@@ -781,7 +822,7 @@ function init_gear_sets()
 		ammo="Hesperiidae",
 		head={ name="Emicho Coronet +1", augments={'Pet: Accuracy+20','Pet: Attack+20','Pet: "Dbl. Atk."+4',}},
 		body={ name="An. Jackcoat +3", augments={'Enhances "Feral Howl" effect',}},
-		hands="Nukumi Manoplas +3",
+		hands="Nukumi Manoplas +2",
 		legs={ name="Emicho Hose +1", augments={'Pet: Accuracy+20','Pet: Attack+20','Pet: "Dbl. Atk."+4',}},
 		feet={ name="Gleti's Boots", augments={'Path: A',}},
 		neck={ name="Bst. Collar +2", augments={'Path: A',}},
@@ -1216,7 +1257,6 @@ function init_gear_sets()
 		
 	sets.Killer = {}
 
-	sets.Warp = {left_ring="Warp Ring"}
     sets.CP = {back={ name="Mecisto. Mantle", augments={'Cap. Point+48%','CHR+3','Accuracy+2','DEF+10',}},}
     sets.Obi = {waist="Hachirin-no-Obi"}
 	sets.Reraise = {head="Crepuscular Helm",body="Crepuscular Mail",}

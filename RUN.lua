@@ -219,8 +219,6 @@ function user_setup()
 	send_command('bind !numpad5 input /ws "Weapon Break" <t>')
     send_command('bind !numpad. input /ja "Lunge" <t>')
 	
-	
-	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('bind ~numpad1 input /item "Echo Drops" <me>')
@@ -247,9 +245,28 @@ function user_setup()
 	send_command('bind ^numpad+ input //get Warp Ring satchel; wait 1; input /equip Ring1 "Warp Ring"; wait 12; input /item "Warp Ring" <me>; wait 60; input //put Warp Ring satchel')
 	send_command('bind !numpad+ input //get Dim. Ring (Dem) satchel; wait 1; input /equip Ring1 "Dim. Ring (Dem)"; wait 12; input /item "Dim. Ring (Dem)" <me>; wait 60; input //put Dim. Ring (Dem) satchel')
 
-	--Gear Retrieval Commands (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	--Gear Retrieval Scripts (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
-
+	send_command('wait 10; input //get Sors Shield sack')
+	send_command('wait 10; input //get Aettir case')
+	send_command('wait 10; input //get Deacon Sword case')
+	send_command('wait 10; input //get Epeolatry case')
+	send_command('wait 10; input //get Lycurgos case')
+	send_command('wait 10; input //get Morgelai case')
+	send_command('wait 10; input //get Refined Grip +1 sack')
+	send_command('wait 10; input //get Utu Grip sack')
+	
+	send_command([[bind @i ;
+		input //get Sors Shield sack;
+		input //get Aettir case;
+		input //get Deacon Sword case;
+		input //get Epeolatry case;
+		input //get Lycurgos case;
+		input //get Morgelai case;
+		input //get Refined Grip +1 sack;
+		input //get Utu Grip sack;
+		]])
+	
 	--Job Settings
 	
     select_default_macro_book()
@@ -279,6 +296,7 @@ function user_unload()
 	send_command('unbind @t')
 	send_command('unbind @b')
 	send_command('unbind @m')
+	send_command('unbind @i')
 	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
@@ -360,7 +378,16 @@ function user_unload()
 	send_command('unbind ^numpad+')
 	send_command('unbind !numpad+')
 	
-	--Gear Removal Commands
+	--Gear Removal Scripts
+	
+	send_command('wait 5; input //put Sors Shield sack')
+	send_command('wait 5; input //put Aettir case')
+	send_command('wait 5; input //put Deacon Sword case')
+	send_command('wait 5; input //put Epeolatry case')
+	send_command('wait 5; input //put Lycurgos case')
+	send_command('wait 5; input //put Morgelai case')
+	send_command('wait 5; input //put Refined Grip +1 sack')
+	send_command('wait 5; input //put Utu Grip sack')
 
 	--Unload Dressup Lua
 	
@@ -1108,7 +1135,6 @@ function init_gear_sets()
     sets.Epeolatry = {main={ name="Epeolatry", augments={'Path: A',}},}
     sets.Aettir = {main="Aettir"}
 	sets.Lycurgos = {main="Lycurgos"}
-	sets.Hepatizon_Axe = {main="Hepatizon Axe +1"}
 	
 	--Grip Sets
 	

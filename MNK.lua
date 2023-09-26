@@ -96,7 +96,7 @@ function user_setup()
 	state.TreasureMode:options('Tag', 'None')
 
     state.CP = M(false, "Capacity Points Mode")
-	state.WeaponSet = M{['description']='Weapon Set', 'Godhands', 'Karambit', 'Xoanon'}
+	state.WeaponSet = M{['description']='Weapon Set', 'Godhands', 'Karambit', 'Verethragna', 'Xoanon'}
 	
 	--Load Gearinfo/Dressup Lua
 	
@@ -173,7 +173,21 @@ function user_setup()
 	send_command('bind ^numpad+ input //get Warp Ring satchel; wait 1; input /equip Ring1 "Warp Ring"; wait 12; input /item "Warp Ring" <me>; wait 60; input //put Warp Ring satchel')
 	send_command('bind !numpad+ input //get Dim. Ring (Dem) satchel; wait 1; input /equip Ring1 "Dim. Ring (Dem)"; wait 12; input /item "Dim. Ring (Dem)" <me>; wait 60; input //put Dim. Ring (Dem) satchel')
 	
-	--Gear Retrieval Commands
+	--Gear Retrieval Scripts (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	
+	send_command('wait 10; input //get Karambit case')
+	send_command('wait 10; input //get Verethragna case')
+	send_command('wait 10; input //get Godhands case')
+	send_command('wait 10; input //get Xoanon case')
+	send_command('wait 10; input //get Rigorous Grip +1 sack')
+	
+	send_command([[bind @i ;
+		input //get Karambit case;
+		input //get Verethragna case;
+		input //get Godhands case;
+		input //get Xoanon case;
+		input //get Rigorous Grip +1 sack;
+		]])
 
 	--Job Settings
 	
@@ -204,6 +218,7 @@ function user_unload()
 	send_command('unbind @t')
 	send_command('unbind @b')
 	send_command('unbind @m')
+	send_command('unbind @i')
 	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
@@ -285,7 +300,13 @@ function user_unload()
 	send_command('unbind ^numpad+')
 	send_command('unbind !numpad+')
 	
-	--Gear Removal Commands
+	--Gear Removal Scripts
+	
+	send_command('input //put Karambit case')
+	send_command('input //put Verethragna case')
+	send_command('input //put Godhands case')
+	send_command('input //put Xoanon case')
+	send_command('input //put Rigorous Grip +1 sack')
 	
 	--send_command('wait 5; input //put Living Bullet satchel all')
 

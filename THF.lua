@@ -243,7 +243,23 @@ function user_setup()
 	send_command('bind ^numpad+ input //get Warp Ring satchel; wait 1; input /equip Ring1 "Warp Ring"; wait 12; input /item "Warp Ring" <me>; wait 60; input //put Warp Ring satchel')
 	send_command('bind !numpad+ input //get Dim. Ring (Dem) satchel; wait 1; input /equip Ring1 "Dim. Ring (Dem)"; wait 12; input /item "Dim. Ring (Dem)" <me>; wait 60; input //put Dim. Ring (Dem) satchel')
 
-	--Gear Retrieval Commands
+	--Gear Retrieval Scripts (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	
+	send_command('wait 10; input //get Twashtar case')
+	send_command('wait 10; input //get Gleti\'s Knife case')
+	send_command('wait 10; input //get Karambit case')
+	send_command('wait 10; input //get Mandau case')
+	send_command('wait 10; input //get Naegling case')
+	send_command('wait 10; input //get Tauret case')
+	
+	send_command([[bind @i ;
+		input //get Twashtar case;
+		input //get Gleti\'s Knife case;
+		input //get Karambit case;
+		input //get Mandau case;
+		input //get Naegling case;
+		input //get Tauret case;
+		]])
 
 	--Job Settings
 	
@@ -278,6 +294,7 @@ function user_unload()
 	send_command('unbind @t')
 	send_command('unbind @b')
 	send_command('unbind @m')
+	send_command('unbind @i')
 	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
@@ -365,6 +382,13 @@ function user_unload()
 	send_command('lua u Dressup')
 	
 	--Gear Removal Commands
+	
+	send_command('input //put Twashtar case')
+	send_command('input //put Gleti\'s Knife case')
+	send_command('input //put Karambit case')
+	send_command('input //put Mandau case')
+	send_command('input //put Naegling case')
+	send_command('input //put Tauret case')
 	
 end
 
@@ -1011,7 +1035,7 @@ function init_gear_sets()
 
     sets.CP = {neck={ name="Asn. Gorget +2", augments={'Path: A',}},}
 	
-	sets.Twashtar = {main={ name="Gleti's Knife", augments={'Path: A',}},sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
+	sets.Twashtar = {main={ name="Mandau", augments={'Path: A',}}, sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	
 	sets.Mandau = {main={ name="Mandau", augments={'Path: A',}}, sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	

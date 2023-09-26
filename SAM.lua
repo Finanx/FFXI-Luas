@@ -116,6 +116,7 @@ function user_setup()
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
 	state.WeaponSet = M{['description']='Weapon Set', 'Dojikiri', 'Masamune', 'Shining_One', 'Hachimonji', 'Soboro', 'Dagger' }
+	state.GripSet = M{['description']='Grip Set', 'Utu'}
 	state.Reraise = M(false, "Reraise Mode")
 	
 	state.CP = M(false, "Capacity Points Mode")
@@ -240,7 +241,27 @@ function user_setup()
 	send_command('bind ^numpad+ input //get Warp Ring satchel; wait 1; input /equip Ring1 "Warp Ring"; wait 12; input /item "Warp Ring" <me>; wait 60; input //put Warp Ring satchel')
 	send_command('bind !numpad+ input //get Dim. Ring (Dem) satchel; wait 1; input /equip Ring1 "Dim. Ring (Dem)"; wait 12; input /item "Dim. Ring (Dem)" <me>; wait 60; input //put Dim. Ring (Dem) satchel')
 	
-	--Gear Retrieval Commands 
+	--Gear Retrieval Scripts (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	
+	send_command('wait 10; input //get Dojikiri Yasutsuna case')
+	send_command('wait 10; input //get Hachimonji case')
+	send_command('wait 10; input //get Malevolence case')
+	send_command('wait 10; input //get Masamune case')
+	send_command('wait 10; input //get Shining One case')
+	send_command('wait 10; input //get Soboro Sukehiro case')
+	send_command('wait 10; input //get Ternion Dagger +1 case')
+	send_command('wait 10; input //get Utu Grip sack')
+	
+	send_command([[bind @i ;
+		input //get Dojikiri Yasutsuna case;
+		input //get Hachimonji case;
+		input //get Malevolence case;
+		input //get Masamune case;
+		input //get Shining One case;
+		input //get Soboro Sukehiro case;
+		input //get Ternion Dagger +1 case;
+		input //get Utu Grip sack;
+		]])
 
 	--Job Settings
 
@@ -276,6 +297,7 @@ function user_unload()
 	send_command('unbind @t')
 	send_command('unbind @b')
 	send_command('unbind @m')
+	send_command('unbind @i')
 	send_command('unbind ^space')
 	send_command('unbind ^`')
 	send_command('unbind ^-')
@@ -357,7 +379,16 @@ function user_unload()
 	send_command('unbind ^numpad+')
 	send_command('unbind !numpad+')
 	
-	--Gear Removal Commands
+	--Gear Removal Scripts
+	
+	send_command('wait 5; input //put Dojikiri Yasutsuna case')
+	send_command('wait 5; input //put Hachimonji case')
+	send_command('wait 5; input //put Malevolence case')
+	send_command('wait 5; input //put Masamune case')
+	send_command('wait 5; input //put Shining One case')
+	send_command('wait 5; input //put Soboro Sukehiro case')
+	send_command('wait 5; input //put Ternion Dagger +1 case')
+	send_command('wait 5; input //put Utu Grip sack')
 	
 	--Unload Gearinfo/Dressup Lua
 
@@ -413,7 +444,7 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Kasuga Kote +3",
 		legs={ name="Mpaca's Hose", augments={'Path: A',}},
-		feet="Kas. Sune-Ate +2",
+		feet="Kas. Sune-Ate +3",
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -446,7 +477,7 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Mpaca's Hose", augments={'Path: A',}},
-		feet="Kas. Sune-Ate +2",
+		feet="Kas. Sune-Ate +3",
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -476,7 +507,7 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Kasuga Kote +3",
 		legs={ name="Mpaca's Hose", augments={'Path: A',}},
-		feet="Kas. Sune-Ate +2",
+		feet="Kas. Sune-Ate +3",
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Lugra Earring +1", augments={'Path: A',}},
@@ -506,7 +537,7 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Kasuga Kote +3",
 		legs={ name="Mpaca's Hose", augments={'Path: A',}},
-		feet="Kas. Sune-Ate +2",
+		feet="Kas. Sune-Ate +3",
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},"Thrud Earring",
@@ -538,7 +569,7 @@ function init_gear_sets()
 		body="Mpaca's Doublet",
 		hands="Mpaca's Gloves",
 		legs={ name="Mpaca's Hose", augments={'Path: A',}},
-		feet="Kas. Sune-Ate +2",
+		feet="Kas. Sune-Ate +3",
 		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
 		waist="Fotia Belt",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -555,7 +586,7 @@ function init_gear_sets()
 		body="Kasuga Domaru +3",
 		hands="Kasuga Kote +3",
 		legs="Kasuga Haidate +3",
-		feet="Kas. Sune-Ate +2",
+		feet="Kas. Sune-Ate +3",
 		neck="Sanctity Necklace",
 		waist="Eschan Stone",
 		left_ear="Crep. Earring",
@@ -731,8 +762,7 @@ function init_gear_sets()
 	sets.Kiting = {left_ring="Shneddick Ring",}
 
     sets.Sekkanoki = {hands="Kasuga Kote +3",}
-    sets.Sengikori = {feet="Kasuga Sune-ate +2"}
-    sets.Meikyo = {feet="Sakonji Sune-ate"}
+    sets.Sengikori = {feet="Kas. Sune-Ate +3"}
 
     sets.TreasureHunter = {
 		ammo="Per. Lucky Egg", --TH1
@@ -744,17 +774,20 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
         }
 	
-	sets.Dojikiri = {main={ name="Dojikiri Yasutsuna", augments={'Path: A',}},sub="Utu Grip"}
-	sets.Masamune = {main={ name="Masamune", augments={'Path: A',}},sub="Utu Grip"}
-	sets.Shining_One = {main='Shining One',sub="Utu Grip"}
-	sets.Hachimonji = {main="Hachimonji",sub="Utu Grip"}
-	sets.Soboro = {main="Soboro Sukehiro",sub="Utu Grip"}
+	sets.Dojikiri = {main={ name="Dojikiri Yasutsuna", augments={'Path: A',}},}
+	sets.Masamune = {main={ name="Masamune", augments={'Path: A',}},}
+	sets.Shining_One = {main='Shining One',}
+	sets.Hachimonji = {main="Hachimonji",}
+	sets.Soboro = {main="Soboro Sukehiro",}
 	sets.Dagger = {main={ name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},sub={ name="Ternion Dagger +1", augments={'Path: A',}},}
 	
     sets.Obi = {waist="Hachirin-no-Obi"}
 	
 	sets.Reraise = {head="Crepuscular Helm",body="Crepuscular Mail",}
 	
+	--Grip Sets
+	
+	sets.Utu = {sub="Utu Grip",}
 	
 end
 
@@ -778,7 +811,7 @@ function job_precast(spell, action, spellMap, eventArgs)
     end
 end
 
-function job_post_midcast(spell, action, spellMap, eventArgs)
+function job_post_precast(spell, action, spellMap, eventArgs)
 
 		--Handles TP Overflow
 	if spell.type == 'WeaponSkill' then
@@ -812,9 +845,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 		if state.Buff['Sengikori'] then
 			equip(sets.Sengikori)
 		end
-		if state.Buff['Meikyo Shisui'] then
-			equip(sets.Meikyo)
-		end
 	end
 end
 
@@ -845,6 +875,7 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
 	check_moving()
+	Auto_Reraise()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -859,13 +890,18 @@ function update_combat_form()
     elseif DW == false then
         state.CombatForm:reset()
     end
+
+	if state.WeaponSet.value ~= 'Dagger' then
+		equip(sets[state.WeaponSet.current])
+		equip(sets[state.GripSet.current])
+	else
+		equip(sets[state.WeaponSet.current])	
+	end	
+	
 end
 
 	--Handles Weapon set changes and Reraise set
-function job_state_change(field, new_value, old_value)
- 
-    equip(sets[state.WeaponSet.current])
-	
+function Auto_Reraise()
 	if state.Reraise.current == 'on' then
         equip(sets.Reraise)
         disable('head', 'body')
