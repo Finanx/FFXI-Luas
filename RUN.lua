@@ -49,19 +49,10 @@
 --					[ Windows + 3 ]			Lycurgos Weapon set
 --					[ Windows + E]			Toggle Grip Sets
 --
---  WS:         	[ CTRL + Numpad1 ]    	Resolution
---              	[ CTRL + Numpad2 ]    	Dimidiation
---              	[ CTRL + Numpad3 ]    	Ground strike
---              	[ CTRL + Numpad4 ]    	Shockwave
---              	[ CTRL + Numpad5 ]    	Herculean Slash
---              	[ CTRL + Numpad. ]    	Swipe
---
---					[ ALT + Numpad1 ]		Upheaval
---					[ ALT + Numpad2 ]		Steel Cyclone
---					[ ALT + Numpad3 ]		Armor Break
---					[ ALT + Numpad4 ]		Fell Cleave
---					[ ALT + Numpad5 ]		Weapon Break
---					[ ALT + Numpad. ]		Lunge
+--	Echo Binds:		[ CTRL + Numpad- ]		Shows main Weaponskill Binds in game
+--					[ ALT + Numpad- ]		Shows Alternate Weaponskill Binds in game
+--					[ Shift + Numpad- ]		Shows Item Binds in game
+--					[ Windows + Numpad- ]	Shows Food/Weapon/Misc. Binds in game
 --
 --  Abilities:  	[ CTRL + ` ]        	Use current Rune
 --              	[ Alt + ` ]         	Rune element cycle forward.
@@ -159,7 +150,7 @@ function user_setup()
 		input /echo [ Shift + Numpad9 ]	Prism Powder;
 		]])
 		
-	--Command to show Command binds in game[ Windows + numpad- ]		
+	--Command to show Food/Weapon/Misc binds in game[ Windows + numpad- ]		
 	send_command([[bind @numpad- 		
 		input /echo -----Food_Binds-----;
 		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
@@ -1381,9 +1372,9 @@ function Weaponskill_Keybinds()
 			input /echo [ ALT + = ] Cycle Barspells;		
 			input /echo -----Great_Sword-----;
 			input /echo [ ALT + Numpad1 ] Hard Slash;
-			input /echo [ ALT + Numpad1 ] Power Slash;
-			input /echo [ ALT + Numpad1 ] Freezebite;
-			input /echo [ ALT + Numpad1 ] Frostbite;
+			input /echo [ ALT + Numpad2 ] Power Slash;
+			input /echo [ ALT + Numpad3 ] Freezebite;
+			input /echo [ ALT + Numpad4 ] Frostbite;
 			input /echo [ ALT  + Numpad. ] Lunge;]])
 		send_command('bind !numpad1 input /ws "Hard Slash" <t>')
 		send_command('bind !numpad2 input /ws "Power Slash" <t>')
@@ -1434,7 +1425,7 @@ function Weaponskill_Keybinds()
 			input /echo [ CTRL + ` ] Uses Assigned Rune;
 			input /echo [ CTRL + - ] Cycleback Runes;
 			input /echo [ CTRL + = ] Cycle Runes;
-			input /echo -----Great_Axe-----;
+			input /echo -----Axe-----;
 			input /echo [ CTRL + Numpad1 ] Decimation;
 			input /echo [ CTRL + Numpad2 ] Ruinator;
 			input /echo [ CTRL + Numpad3 ] Bora Axe;
@@ -1459,14 +1450,12 @@ function Weaponskill_Keybinds()
 			input /echo [ ALT + ` ] Uses Assigned Barspell;
 			input /echo [ ALT + - ] Cycleback Barspells;
 			input /echo [ ALT + = ] Cycle Barspells;		
-			input /echo -----Great_Axe-----;
+			input /echo -----Axe-----;
 			input /echo [ ALT + Numpad1 ] Smash Axe;
 			input /echo [ ALT  + Numpad. ] Lunge;]])
 		send_command('bind !numpad1 input /ja "Smash Axe" <t>')
 		send_command('bind !numpad. input /ja "Lunge" <t>')
 	end
-
-
 
 end
 

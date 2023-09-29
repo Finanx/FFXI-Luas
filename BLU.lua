@@ -51,18 +51,10 @@
 --					[ Windows + 2 ]			Maxentius Weapon Set
 --					[ Windows + 3 ]			Mboze Weapon Set
 --
---  WS:         	[ CTRL + Numpad1 ]    	Sanguine Blade
---					[ CTRL + Numpad2 ]    	Flat Blade
---					[ CTRL + Numpad3 ]    	Requiescat
---					[ CTRL + Numpad4 ]    	Savage Blade
---					[ CTRL + Numpad5 ]    	Chant Du Cygne
---					[ CTRL + Numpad6 ]    	Expiacion
---				
---					[ ALT + Numpad1 ]     	Black Halo
---					[ ALT + Numpad2 ]     	True Strike
---					[ ALT + Numpad3 ]     	Judgment
---					[ ALT + Numpad4 ]     	Realm Razer
---					[ ALT + Numpad4 ]     	Moonlight
+--	Echo Binds:		[ CTRL + Numpad- ]		Shows main Weaponskill Binds in game
+--					[ ALT + Numpad- ]		Shows Alternate Weaponskill Binds in game
+--					[ Shift + Numpad- ]		Shows Item Binds in game
+--					[ Windows + Numpad- ]	Shows Food/Weapon/Misc. Binds in game
 --
 --------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -254,7 +246,7 @@ function user_setup()
 		input /echo [ Shift + Numpad9 ]	Prism Powder;
 		]])
 		
-	--Command to show Command binds in game[ Windows + numpad- ]		
+	--Command to show Food/Weapon/Misc binds in game[ Windows + numpad- ]	
 	send_command([[bind @numpad- 		
 		input /echo -----Food_Binds-----;
 		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
@@ -277,26 +269,6 @@ function user_setup()
 		input /echo [ Windows + D ]	Unloads then reloads dressup;
 		]])
 		
-	--Command to show Blue Mage binds in game[ ALT + numpad- ]
-	send_command([[bind !numpad- 
-		input /echo -----Abilities-----;
-		input /echo [ CTRL + - ] Chain Affinity;
-		input /echo [ CTRL + = ] Burst Affinity;
-		input /echo -----Sword-----;
-		input /echo [ CTRL + Numpad1 ] Sanguine Blade;
-		input /echo [ CTRL + Numpad2 ] Flat Blade;
-		input /echo [ CTRL + Numpad3 ] Requiescat;
-		input /echo [ CTRL + Numpad4 ] Savage Blade;
-		input /echo [ CTRL + Numpad5 ] Chant Du Cygne;
-		input /echo [ CTRL + Numpad6 ] Expiacion;
-		input /echo -----Club-----;
-		input /echo [ ALT + Numpad1 ] Black Halo;
-		input /echo [ ALT + Numpad2 ] True Strike;
-		input /echo [ ALT + Numpad3 ] Judgment;
-		input /echo [ ALT + Numpad4 ] Realm Razer;
-		input /echo [ ALT + Numpad5 ] Moonlight;
-		]])
-
 	--Weapon set Binds
 	
 	send_command('bind @1 gs c set WeaponSet Tizona')
@@ -304,21 +276,6 @@ function user_setup()
 	send_command('bind @3 gs c set WeaponSet Maxentius')
 	send_command('bind @4 gs c set WeaponSet Bunzi')
 	send_command('bind @5 gs c set WeaponSet Mboze')
-	
-	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-
-    send_command('bind ^numpad1 input /ws "Sanguine Blade" <t>')
-    send_command('bind ^numpad2 input /ws "Flat Blade" <t>')
-	send_command('bind ^numpad3 input /ws "Requiescat" <t>')
-	send_command('bind ^numpad4 input /ws "Savage Blade" <t>')
-	send_command('bind ^numpad5 input /ws "Chant du Cygne" <t>')
-    send_command('bind ^numpad6 input /ws "Expiacion" <t>')
-
-    send_command('bind !numpad1 input /ws "Black Halo" <t>')
-    send_command('bind !numpad2 input /ws "True Strike" <t>')
-	send_command('bind !numpad3 input /ws "Judgment" <t>')
-	send_command('bind !numpad4 input /ws "Realm Razer" <t>')
-	send_command('bind !numpad5 input /ws "Moonlight" <t>')
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -1564,53 +1521,6 @@ function job_buff_change(buff,gain)
 
 end
 
-function check_weaponset()
-		if	state.WeaponSet.value == 'Tizona' then
-			if state.TPBonus.value == true then
-				enable('main','sub')
-				equip(sets.Tizona_Thibron)
-				disable('main','sub')
-			else
-				enable('main','sub')
-				equip(sets.Tizona)
-				disable('main','sub')
-			end	
-		end
-		if	state.WeaponSet.value == 'Naegling' then
-			if state.TPBonus.value == true then
-				enable('main','sub')
-				equip(sets.Naegling_Thibron)
-				disable('main','sub')
-			else
-				enable('main','sub')
-				equip(sets.Naegling)
-				disable('main','sub')
-			end	
-		end
-		if state.WeaponSet.value == 'Maxentius' then
-			if state.TPBonus.value == true then
-				enable('main','sub')
-				equip(sets.Maxentius_Thibron)
-				disable('main','sub')
-			else
-				enable('main','sub')
-				equip(sets.Maxentius)
-				disable('main','sub')
-			end	
-		end
-		if state.WeaponSet.value == 'Bunzi' then
-			enable('main','sub')
-			equip(sets.Bunzi)
-			disable('main','sub')
-		end
-		if state.WeaponSet.value == 'Mboze' then
-			enable('main','sub')
-			equip(sets.Mboze)
-			disable('main','sub')
-		end
-end
-
-
 -------------------------------------------------------------------------------------------------------------------
 -- Code for Melee sets
 -------------------------------------------------------------------------------------------------------------------
@@ -1624,9 +1534,8 @@ end
 
 function job_update(cmdParams, eventArgs)
 	check_gear()
-	check_weaponset()
+	Weaponskill_Keybinds()
     handle_equipping_gear(player.status)
-    th_update(cmdParams, eventArgs)
 end
 
 	--Adjusts Melee/Weapon sets for Dual Wield or Single Wield
@@ -1636,6 +1545,126 @@ function update_combat_form()
     elseif DW == false then
         state.CombatForm:reset()
     end
+	
+	if	state.WeaponSet.value == 'Tizona' then
+		if state.TPBonus.value == true then
+			enable('main','sub')
+			equip(sets.Tizona_Thibron)
+			disable('main','sub')
+		else
+			enable('main','sub')
+			equip(sets.Tizona)
+			disable('main','sub')
+		end	
+	end
+	if	state.WeaponSet.value == 'Naegling' then
+		if state.TPBonus.value == true then
+			enable('main','sub')
+			equip(sets.Naegling_Thibron)
+			disable('main','sub')
+		else
+			enable('main','sub')
+			equip(sets.Naegling)
+			disable('main','sub')
+		end	
+	end
+	if state.WeaponSet.value == 'Maxentius' then
+		if state.TPBonus.value == true then
+			enable('main','sub')
+			equip(sets.Maxentius_Thibron)
+			disable('main','sub')
+		else
+			enable('main','sub')
+			equip(sets.Maxentius)
+			disable('main','sub')
+		end	
+	end
+	if state.WeaponSet.value == 'Bunzi' then
+		enable('main','sub')
+		equip(sets.Bunzi)
+		disable('main','sub')
+	end
+	if state.WeaponSet.value == 'Mboze' then
+		enable('main','sub')
+		equip(sets.Mboze)
+		disable('main','sub')
+	end
+
+end
+
+function Weaponskill_Keybinds()
+
+	if state.WeaponSet.value == 'Tizona' or state.WeaponSet.value == 'Naegling' or state.WeaponSet.value == 'Mboze' then
+		send_command([[bind ^numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + - ] Chain Affinity;
+			input /echo [ CTRL + = ] Burst Affinity;
+			input /echo -----Sword-----;
+			input /echo [ CTRL + Numpad1 ] Sanguine Blade;
+			input /echo [ CTRL + Numpad2 ] Seraph Blade;
+			input /echo [ CTRL + Numpad3 ] Requiescat;
+			input /echo [ CTRL + Numpad4 ] Savage Blade;
+			input /echo [ CTRL + Numpad5 ] Chant Du Cygne;
+			input /echo [ CTRL + Numpad6 ] Expiacion;
+			input /echo [ CTRL + Numpad7 ] Red Lotus Blade;
+			input /echo [ CTRL + Numpad9 ] Vorpal Blade;
+			input /echo [ CTRL + Numpad. ] Flat Blade;]])
+		send_command('bind ^numpad1 input /ws "Sanguine Blade" <t>')
+		send_command('bind ^numpad2 input /ws "Seraph Blade" <t>')
+		send_command('bind ^numpad3 input /ws "Requiescat" <t>')
+		send_command('bind ^numpad4 input /ws "Savage Blade" <t>')
+		send_command('bind ^numpad5 input /ws "Chant du Cygne" <t>')
+		send_command('bind ^numpad6 input /ws "Expiacion" <t>')
+		send_command('bind ^numpad7 input /ws "Red Lotus Blade" <t>')
+		send_command('bind ^numpad9 input /ws "Vorpal Blade" <t>')
+		send_command('bind ^numpad. input /ws "Flat Blade" <t>')
+
+		send_command([[bind !numpad- 
+			input /echo -----Sword-----;
+			input /echo [ ALT + Numpad1 ]  Fast Blade;
+			input /echo [ ALT + Numpad2 ]  Burning Blade;
+			input /echo [ ALT + Numpad3 ]  Shining Blade;
+			input /echo [ ALT + Numpad4 ]  Circle Blade;
+			input /echo [ ALT + Numpad5 ]  Spirits Within;]])
+		send_command('bind !numpad1 input /ws "Fast Blade" <t>')
+		send_command('bind !numpad2 input /ws "Burning Blade" <t>')
+		send_command('bind !numpad3 input /ws "Shining Blade" <t>')
+		send_command('bind !numpad4 input /ws "Circle Blade" <t>')
+		send_command('bind !numpad5 input /ws "Spirits Within" <t>')
+		
+	elseif state.WeaponSet.value == 'Maxentius' or state.WeaponSet.value == 'Bunzi' then
+		send_command([[bind ^numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + - ] Chain Affinity;
+			input /echo [ CTRL + = ] Burst Affinity;
+			input /echo -----Club-----;
+			input /echo [ CTRL + Numpad1 ] Black Halo;
+			input /echo [ CTRL + Numpad2 ] Judgment;
+			input /echo [ CTRL + Numpad3 ] Skullbreaker;
+			input /echo [ CTRL + Numpad4 ] Seraph Strike;
+			input /echo [ CTRL + Numpad5 ] True Strike;
+			input /echo [ CTRL + Numpad6 ] Flash Nova;
+			input /echo [ CTRL + Numpad7 ] Shining Strike;
+			input /echo [ CTRL + Numpad9 ] Realmrazer;
+			input /echo [ CTRL + Numpad. ] Brainshaker;]])
+		send_command('bind ^numpad1 input /ws "Black Halo" <t>')
+		send_command('bind ^numpad2 input /ws "Judgment" <t>')
+		send_command('bind ^numpad3 input /ws "Skullbreaker" <t>')
+		send_command('bind ^numpad4 input /ws "Seraph Strike" <t>')
+		send_command('bind ^numpad5 input /ws "True Strike" <t>')
+		send_command('bind ^numpad6 input /ws "Flash Nova" <t>')
+		send_command('bind ^numpad7 input /ws "Shining Strike" <t>')
+		send_command('bind ^numpad9 input /ws "Realmrazer" <t>')
+		send_command('bind ^numpad. input /ws "Brainshaker" <t>')
+		
+		send_command([[bind !numpad- 
+			input /echo -----Club-----;
+			input /echo [ ALT + Numpad1 ]  Starlight;
+			input /echo [ ALT + Numpad2 ]  Moonlight;]])
+		send_command('bind !numpad1 input /ws "Starlight" <t>')
+		send_command('bind !numpad2 input /ws "Moonlight" <t>')
+	end
+
 end
 
 	--Custom spell mapping.

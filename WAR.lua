@@ -55,22 +55,10 @@
 --					[ Windows: + 6 ]		Ikenga_axe Weapon Set
 --					[ Windows: + 7 ]		Dolichenus Weapon Set
 --
---	Weaponskills:	[ CTRL + Numpad1 ]		Upheaval
---					[ CTRL + Numpad2 ]		Ukko's Furry
---					[ CTRL + Numpad3 ]		Armor Break
---					[ CTRL + Numpad4 ]		Fell Cleave
---					[ CTRL + Numpad5 ]		Steel Cyclone
---					[ CTRL + Numpad6 ]		King's Justice
---					[ CTRL + Numpad7 ]		Raging Rush
---
---					[ ALT + Numpad1 ]		Impulse Drive
---					[ ALT + Numpad2 ]		Stardiver
---					[ ALT + Numpad3 ]		Sonic Thrust
---					[ ALT + Numpad4 ]		Savage Blade
---					[ ALT + Numpad5 ]		Sanguine Blade
---					[ ALT + Numpad6 ] 		Decimation
---					[ ALT + Numpad7 ]		Judgment
---					[ ALT + Numpad9 ]		Black Halo
+--	Echo Binds:		[ CTRL + Numpad- ]		Shows main Weaponskill Binds in game
+--					[ ALT + Numpad- ]		Shows Alternate Weaponskill Binds in game
+--					[ Shift + Numpad- ]		Shows Item Binds in game
+--					[ Windows + Numpad- ]	Shows Food/Weapon/Misc. Binds in game
 --
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -149,7 +137,7 @@ function user_setup()
 		input /echo [ Shift + Numpad9 ]	Prism Powder;
 		]])
 		
-	--Command to show Command binds in game[ Windows + numpad- ]		
+	--Command to show Food/Weapon/Misc binds in game[ Windows + numpad- ]	
 	send_command([[bind @numpad- 		
 		input /echo -----Food_Binds-----;
 		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
@@ -172,32 +160,6 @@ function user_setup()
 		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
 		input /echo [ Windows + D ]	Unloads then reloads dressup;
 		]])
-		
-	--Command to show Rune Fencer binds in game [ ALT + numpad- ]
-	send_command([[bind !numpad- 
-		input /echo -----Abilities-----;
-		input /echo  
-		input /echo -----Great_Axe-----;
-		input /echo [ CTRL + Numpad1 ] Upheaval;
-		input /echo [ CTRL + Numpad2 ] Ukko's Fury;
-		input /echo [ CTRL + Numpad3 ] Armor Break;
-		input /echo [ CTRL + Numpad4 ] Fell Cleave;
-		input /echo [ CTRL + Numpad5 ] Steel Cyclone;
-		input /echo [ CTRL + Numpad6 ] King's Justice;
-		input /echo [ CTRL + Numpad7 ] Raging Rush;
-		input /echo -----Polearm-----;
-		input /echo [ ALT + Numpad1 ] Impulse Drive;
-		input /echo [ ALT + Numpad2 ] Stardiver;
-		input /echo [ ALT + Numpad3 ] Sonic Thrust;
-		input /echo -----Sword-----;
-		input /echo [ ALT + Numpad4 ] Savage Blade;
-		input /echo [ ALT + Numpad5 ] Sanguine Blade;
-		input /echo -----Axe-----;
-		input /echo [ ALT + Numpad6 ] Decimation;
-		input /echo -----Club-----;
-		input /echo [ ALT + Numpad7 ] Judgment;
-		input /echo [ ALT + Numpad9 ] Black Halo;
-		]])
 	
 	--Weapon set Binds
 
@@ -208,25 +170,6 @@ function user_setup()
 	send_command('bind @5 gs c set WeaponSet Shining_One')
 	send_command('bind @6 input /equip main; gs c set WeaponSet Ikenga_axe')
 	send_command('bind @7 input /equip main; gs c set WeaponSet Dolichenus')
-	
-	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	send_command('bind ^numpad1 input /ws "Upheaval" <t>')
-    send_command('bind ^numpad2 input /ws "Ukko\'s Fury" <t>')
-	send_command('bind ^numpad3 input /ws "Armor Break" <t>')
-    send_command('bind ^numpad4 input /ws "Fell Cleave" <t>')
-	send_command('bind ^numpad5 input /ws "Steel Cyclone" <t>')
-	send_command('bind ^numpad6 input /ws "King\'s Justice" <t>')
-	send_command('bind ^numpad7 input /ws "Raging Rush" <t>')
-	
-	send_command('bind !numpad1 input /ws "Impulse Drive" <t>')
-	send_command('bind !numpad2 input /ws "Stardiver" <t>')
-	send_command('bind !numpad3 input /ws "Sonic Thrust" <t>')
-	send_command('bind !numpad4 input /ws "Savage Blade" <t>')
-	send_command('bind !numpad5 input /ws "Sanguine Blade" <t>')
-	send_command('bind !numpad6 input /ws "Decimation" <t>')
-	send_command('bind !numpad7 input /ws "Judgment" <t>')
-	send_command('bind !numpad9 input /ws "Black Halo" <t>')
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -1127,6 +1070,7 @@ end
 
 function job_update(cmdParams, eventArgs)
 	check_gear()
+	Weaponskill_Keybinds()
     handle_equipping_gear(player.status)
 end
 
@@ -1182,6 +1126,159 @@ function update_combat_form()
 		end
 	end
 	
+end
+
+function Weaponskill_Keybinds()
+
+	if state.WeaponSet.value == 'Chango' or state.WeaponSet.value == 'Lycurgos' then
+		send_command([[bind ^numpad- 
+			input /echo -----Great_Axe-----;
+			input /echo [ CTRL + Numpad1 ] Upheaval;
+			input /echo [ CTRL + Numpad2 ] Ukko's Fury;
+			input /echo [ CTRL + Numpad3 ] Armor Break;
+			input /echo [ CTRL + Numpad4 ] Fell Cleave;
+			input /echo [ CTRL + Numpad5 ] Steel Cyclone;
+			input /echo [ CTRL + Numpad6 ] King's Justice;
+			input /echo [ CTRL + Numpad7 ] Raging Rush;
+			input /echo [ CTRL + Numpad9 ] Weapon Break;
+			input /echo [ CTRL + Numpad. ] Full Break;]])
+		send_command('bind ^numpad1 input /ws "Upheaval" <t>')
+		send_command('bind ^numpad2 input /ws "Ukko\'s Fury" <t>')
+		send_command('bind ^numpad3 input /ws "Armor Break" <t>')
+		send_command('bind ^numpad4 input /ws "Fell Cleave" <t>')
+		send_command('bind ^numpad5 input /ws "Steel Cyclone" <t>')
+		send_command('bind ^numpad6 input /ws "King\'s Justice" <t>')
+		send_command('bind ^numpad7 input /ws "Raging Rush" <t>')
+		send_command('bind ^numpad9 input /ws "Weapon Break" <t>')
+		send_command('bind ^numpad. input /ja "Full Break" <t>')
+
+		send_command([[bind !numpad- 
+			input /echo -----Great_Axe-----;
+			input /echo [ ALT + Numpad1 ] Iron Tempest;
+			input /echo [ ALT + Numpad1 ] Sturmwind;
+			input /echo [ ALT + Numpad1 ] Keen Edge;
+			input /echo [ ALT  + Numpad. ] Shield Break;]])
+		send_command('bind !numpad1 input /ja "Iron Tempest" <t>')
+		send_command('bind !numpad1 input /ja "Sturmwind" <t>')
+		send_command('bind !numpad1 input /ja "Keen Edge" <t>')
+		send_command('bind !numpad. input /ja "Shield Break" <t>')
+
+	elseif state.WeaponSet.value == 'Naegling' then
+		send_command([[bind ^numpad- 
+			input /echo -----Sword-----;
+			input /echo [ CTRL + Numpad1 ] Sanguine Blade;
+			input /echo [ CTRL + Numpad2 ] Seraph Blade;
+			input /echo [ CTRL + Numpad3 ] Requiescat;
+			input /echo [ CTRL + Numpad4 ] Savage Blade;
+			input /echo [ CTRL + Numpad5 ] Burning Blade;
+			input /echo [ CTRL + Numpad6 ] Shining Blade;
+			input /echo [ CTRL + Numpad7 ] Red Lotus Blade;
+			input /echo [ CTRL + Numpad9 ] Vorpal Blade;
+			input /echo [ CTRL + Numpad. ] Flat Blade;]])
+		send_command('bind ^numpad1 input /ws "Sanguine Blade" <t>')
+		send_command('bind ^numpad2 input /ws "Seraph Blade" <t>')
+		send_command('bind ^numpad3 input /ws "Requiescat" <t>')
+		send_command('bind ^numpad4 input /ws "Savage Blade" <t>')
+		send_command('bind ^numpad5 input /ws "Burning Blade" <t>')
+		send_command('bind ^numpad6 input /ws "Shining Blade" <t>')
+		send_command('bind ^numpad7 input /ws "Red Lotus Blade" <t>')
+		send_command('bind ^numpad9 input /ws "Vorpal Blade" <t>')
+		send_command('bind ^numpad. input /ws "Flat Blade" <t>')
+
+		send_command([[bind !numpad- 
+			input /echo -----Sword-----;
+			input /echo [ ALT + Numpad1 ]  Fast Blade;
+			input /echo [ ALT + Numpad2 ]  Spirits Within;
+			input /echo [ ALT + Numpad3 ]  Circle Blade;]])
+		send_command('bind !numpad1 input /ws "Fast Blade" <t>')
+		send_command('bind !numpad2 input /ws "Spirits Within" <t>')
+		send_command('bind !numpad3 input /ws "Circle Blade" <t>')
+		
+	elseif state.WeaponSet.value == 'Loxotic_Mace' then
+		send_command([[bind ^numpad- 
+			input /echo -----Club-----;
+			input /echo [ CTRL + Numpad1 ] Judgment;
+			input /echo [ CTRL + Numpad2 ] Black Halo;
+			input /echo [ CTRL + Numpad3 ] Skullbreaker;
+			input /echo [ CTRL + Numpad4 ] Seraph Strike;
+			input /echo [ CTRL + Numpad5 ] True Strike;
+			input /echo [ CTRL + Numpad6 ] Flash Nova;
+			input /echo [ CTRL + Numpad7 ] Shining Strike;
+			input /echo [ CTRL + Numpad9 ] Realmrazer;
+			input /echo [ CTRL + Numpad. ] Brainshaker;]])
+		send_command('bind ^numpad1 input /ws "Judgment" <t>')
+		send_command('bind ^numpad2 input /ws "Black Halo" <t>')
+		send_command('bind ^numpad3 input /ws "Skullbreaker" <t>')
+		send_command('bind ^numpad4 input /ws "Seraph Strike" <t>')
+		send_command('bind ^numpad5 input /ws "True Strike" <t>')
+		send_command('bind ^numpad6 input /ws "Flash Nova" <t>')
+		send_command('bind ^numpad7 input /ws "Shining Strike" <t>')
+		send_command('bind ^numpad9 input /ws "Realmrazer" <t>')
+		send_command('bind ^numpad. input /ws "Brainshaker" <t>')
+
+		send_command([[bind !numpad- 
+			input /echo -----Club-----;
+			input /echo [ ALT + Numpad1 ]  Starlight;
+			input /echo [ ALT + Numpad2 ]  Moonlight;]])
+		send_command('bind !numpad1 input /ws "Starlight" <t>')
+		send_command('bind !numpad2 input /ws "Moonlight" <t>')
+		
+	elseif state.WeaponSet.value == 'Shining_One' then
+		send_command([[bind ^numpad- 
+			input /echo -----Polearm-----;
+			input /echo [ CTRL + Numpad1 ] Impulse Drive;
+			input /echo [ CTRL + Numpad2 ] Stardiver;
+			input /echo [ CTRL + Numpad3 ] Penta Thrust;
+			input /echo [ CTRL + Numpad4 ] Sonic Thrust;
+			input /echo [ CTRL + Numpad5 ] Vorpal Thrust;
+			input /echo [ CTRL + Numpad6 ] Double Thrust;
+			input /echo [ CTRL + Numpad7 ] Raiden Thrust;
+			input /echo [ CTRL + Numpad9 ] Thunder Thrust;
+			input /echo [ CTRL + Numpad. ] Leg Sweep;]])
+		send_command('bind ^numpad1 input /ws "Impulse Drive" <t>')
+		send_command('bind ^numpad2 input /ws "Stardiver" <t>')
+		send_command('bind ^numpad3 input /ws "Penta Thrust" <t>')
+		send_command('bind ^numpad4 input /ws "Sonic Thrust" <t>')
+		send_command('bind ^numpad5 input /ws "Vorpal Thrust" <t>')
+		send_command('bind ^numpad6 input /ws "Double Thrust" <t>')
+		send_command('bind ^numpad7 input /ws "Raiden Thrust" <t>')
+		send_command('bind ^numpad9 input /ws "Thunder Thrust" <t>')
+		send_command('bind ^numpad. input /ws "Leg Sweep" <t>')
+
+		send_command('unbind !numpad-')
+		
+	elseif state.WeaponSet.value == 'Dolichenus' or state.WeaponSet.value == 'Ikenga_axe' then
+		send_command([[bind ^numpad- 
+			input /echo -----Axe-----;
+			input /echo [ CTRL + Numpad1 ] Decimation;
+			input /echo [ CTRL + Numpad2 ] Ruinator;
+			input /echo [ CTRL + Numpad3 ] Bora Axe;
+			input /echo [ CTRL + Numpad4 ] Rampage;
+			input /echo [ CTRL + Numpad5 ] Gale Axe;
+			input /echo [ CTRL + Numpad6 ] Avalanche Axe;
+			input /echo [ CTRL + Numpad7 ] Spinning Axe;
+			input /echo [ CTRL + Numpad9 ] Raging Axe;]])
+		send_command('bind ^numpad1 input /ws "Decimation" <t>')
+		send_command('bind ^numpad2 input /ws "Ruinator" <t>')
+		send_command('bind ^numpad3 input /ws "Bora Axe" <t>')
+		send_command('bind ^numpad4 input /ws "Rampage" <t>')
+		send_command('bind ^numpad5 input /ws "Gale Axe" <t>')
+		send_command('bind ^numpad6 input /ws "Avalanche Axe" <t>')
+		send_command('bind ^numpad7 input /ws "Spinning Axe" <t>')
+		send_command('bind ^numpad9 input /ws "Raging Axe" <t>')
+
+		send_command([[bind !numpad- 
+			input /echo -----Axe-----;
+			input /echo [ ALT + Numpad1 ] Smash Axe;
+			input /echo [ ALT + Numpad1 ] Mistral Axe;
+			input /echo [ ALT + Numpad1 ] Calamity;
+			input /echo [ ALT + Numpad1 ] Cloudsplitter;]])
+		send_command('bind !numpad1 input /ja "Smash Axe" <t>')
+		send_command('bind !numpad1 input /ja "Mistral Axe" <t>')
+		send_command('bind !numpad1 input /ja "Calamity" <t>')
+		send_command('bind !numpad1 input /ja "Cloudsplitter" <t>')
+	end
+
 end
 
 function customize_idle_set(idleSet)

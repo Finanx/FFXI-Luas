@@ -53,14 +53,10 @@
 --					[ Windows + 5 ]			Sets Weapon to Tauret then locks Main/Sub Slots
 --					[ Windows + 6 ]			Sets Weapon to Xoanon then locks Main/Sub Slots
 --
---  WS:         	[ CTRL + Numpad1 ]    	Evisceration
---              	[ CTRL + Numpad2 ]    	Rudra's Storm
---              	[ CTRL + Numpad3 ]    	Mordant Rime
---              	[ CTRL + Numpad4 ]    	Savage Blade
---              	[ CTRL + Numpad5 ]    	Aeolian Edge
---					[ CTRL + Numpad6 ]    	Extenterator
---					[ CTRL + Numpad7 ]    	Retribution
---					[ CTRL + Numpad9 ]    	Shell Crusher
+--	Echo Binds:		[ CTRL + Numpad- ]		Shows main Weaponskill Binds in game
+--					[ ALT + Numpad- ]		Shows Alternate Weaponskill Binds in game
+--					[ Shift + Numpad- ]		Shows Item Binds in game
+--					[ Windows + Numpad- ]	Shows Food/Weapon/Misc. Binds in game
 --
 -- Song Binds:		[ ALT + Numpad1 ]		Cycle Carol	I
 --					[ ALT + Numpad2 ]		Cast Carol I
@@ -153,22 +149,6 @@ function user_setup()
 	send_command('bind @b gs c toggle TPBonus')
 	send_command('bind ^space tc nearest')
 	
-	send_command('bind !` input //gs c Threnody')
-    send_command('bind !- gs c cycleback Threnody')
-    send_command('bind != gs c cycle Threnody')	
-	
-	send_command('bind !numpad1 gs c cycleback Carol1')
-	send_command('bind !numpad2 input //gs c Carol1')
-    send_command('bind !numpad3 gs c cycle Carol1')	
-
-	send_command('bind !numpad4 gs c cycleback Carol2')
-	send_command('bind !numpad5 input //gs c Carol2')
-    send_command('bind !numpad6 gs c cycle Carol2')
-	
-	send_command('bind !numpad7 gs c cycleback Etude')
-	send_command('bind !numpad8 input //gs c Etude')
-    send_command('bind !numpad9 gs c cycle Etude')
-	
 	--Command to show Item binds in game[ Shift + numpad- ]
 	send_command([[bind ~numpad- 
 		input /echo -----Item_Binds-----;
@@ -180,7 +160,7 @@ function user_setup()
 		input /echo [ Shift + Numpad9 ]	Prism Powder;
 		]])
 		
-	--Command to show Command binds in game[ Windows + numpad- ]		
+	--Command to show Food/Weapon/Misc binds in game[ Windows + numpad- ]	
 	send_command([[bind @numpad- 		
 		input /echo -----Food_Binds-----;
 		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
@@ -204,34 +184,6 @@ function user_setup()
 		input /echo [ Windows + D ]	Unloads then reloads dressup;
 		]])
 		
-	--Command to show Bard binds in game[ ALT + numpad- ]
-	send_command([[bind !numpad- 
-		input /echo -----Abilities-----;
-		input /echo [ ALT + ` ] Uses Assigned Threnody;
-		input /echo [ ALT + - ] Cycleback Threnody's;
-		input /echo [ ALT + = ] Cycle Threnody's;
-		input /echo [ ALT + Numpad2 ] Uses Assigned Carol 1;
-		input /echo [ ALT + Numpad1 ] Cycleback Carol 1;
-		input /echo [ ALT + Numpad3 ] Cycle Carol 1;
-		input /echo [ ALT + Numpad5 ] Uses Assigned Carol 2;
-		input /echo [ ALT + Numpad4 ] Cycleback Carol 2;
-		input /echo [ ALT + Numpad6 ] Cycle Carol 2;
-		input /echo [ ALT + Numpad8 ] Uses Assigned Etude;
-		input /echo [ ALT + Numpad7 ] Cycleback Etudes;
-		input /echo [ ALT + Numpad9 ] Cycle Etudes;
-		input /echo -----Dagger-----;
-		input /echo [ CTRL + Numpad1 ] Evisceration;
-		input /echo [ CTRL + Numpad2 ] Rudra's Storm;
-		input /echo [ CTRL + Numpad3 ] Mordant Rime;
-		input /echo [ CTRL + Numpad5 ] Aeolian Edge;
-		input /echo [ CTRL + Numpad6 ] Exenterator;
-		input /echo -----Sword-----;
-		input /echo [ CTRL + Numpad4 ] Savage Blade;
-		input /echo -----Staff-----;
-		input /echo [ CTRL + Numpad7 ] Retribution;
-		input /echo [ CTRL + Numpad9 ] Shell Crusher;
-		]])	
-	
 	--Weapon set Binds
 
 	send_command('bind @1 gs c set WeaponSet Naegling')
@@ -241,17 +193,6 @@ function user_setup()
 	send_command('bind @5 gs c set WeaponSet Tauret')
 	send_command('bind @6 gs c set WeaponSet Xoanon')
 	send_command('bind @w input /equip sub; gs c set WeaponSet None')
-	
-	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-    send_command('bind ^numpad1 input /ws "Evisceration" <t>')
-    send_command('bind ^numpad2 input /ws "Rudra\'s Storm" <t>')
-    send_command('bind ^numpad3 input /ws "Mordant Rime" <t>')
-	send_command('bind ^numpad4 input /ws "Savage Blade" <t>')
-	send_command('bind ^numpad5 input /ws "Aeolian Edge" <t>')
-    send_command('bind ^numpad6 input /ws "Exenterator" <t>')
-	send_command('bind ^numpad7 input /ws "Retribution" <t>')
-	send_command('bind ^numpad9 input /ws "Shell Crusher" <t>')
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -323,7 +264,6 @@ function user_setup()
 		input //get Xoanon case;
 		input //get Shihei satchel all;
 		]])
-	
 	
 	--Job Settings
 
@@ -1529,8 +1469,26 @@ end
 -- Code for Melee sets
 -------------------------------------------------------------------------------------------------------------------
 
-	--Adjusts Weapon sets for Dual Wield or Single Wield
-function job_state_change(stateField, newValue, oldValue)
+	--Gearinfo related function
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_gear()
+    update_combat_form()
+    determine_haste_group()
+    check_moving()
+end
+
+function job_update(cmdParams, eventArgs)
+    handle_equipping_gear(player.status)
+	Weaponskill_Keybinds()
+end
+
+function update_combat_form()
+    if DW == true then
+        state.CombatForm:set('DW')
+    elseif DW == false then
+        state.CombatForm:reset()
+    end
+	
 	if state.WeaponSet.value == 'Naegling' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
 			if state.TPBonus.value == true then
@@ -1629,27 +1587,103 @@ function job_state_change(stateField, newValue, oldValue)
 	
 	if state.WeaponSet.value == 'None' then
 		enable('main','sub')
+	end	
+	
+end
+
+function Weaponskill_Keybinds()
+
+	send_command([[bind !numpad- 
+		input /echo -----Abilities-----;
+		input /echo [ ALT + ` ] Uses Assigned Threnody;
+		input /echo [ ALT + - ] Cycleback Threnody's;
+		input /echo [ ALT + = ] Cycle Threnody's;
+		input /echo [ ALT + Numpad2 ] Uses Assigned Carol 1;
+		input /echo [ ALT + Numpad1 ] Cycleback Carol 1;
+		input /echo [ ALT + Numpad3 ] Cycle Carol 1;
+		input /echo [ ALT + Numpad5 ] Uses Assigned Carol 2;
+		input /echo [ ALT + Numpad4 ] Cycleback Carol 2;
+		input /echo [ ALT + Numpad6 ] Cycle Carol 2;
+		input /echo [ ALT + Numpad8 ] Uses Assigned Etude;
+		input /echo [ ALT + Numpad7 ] Cycleback Etudes;
+		input /echo [ ALT + Numpad9 ] Cycle Etudes;]])
+	send_command('bind !` input //gs c Threnody')
+    send_command('bind !- gs c cycleback Threnody')
+    send_command('bind != gs c cycle Threnody')	
+	
+	send_command('bind !numpad1 gs c cycleback Carol1')
+	send_command('bind !numpad2 input //gs c Carol1')
+    send_command('bind !numpad3 gs c cycle Carol1')	
+
+	send_command('bind !numpad4 gs c cycleback Carol2')
+	send_command('bind !numpad5 input //gs c Carol2')
+    send_command('bind !numpad6 gs c cycle Carol2')
+	
+	send_command('bind !numpad7 gs c cycleback Etude')
+	send_command('bind !numpad8 input //gs c Etude')
+    send_command('bind !numpad9 gs c cycle Etude')
+
+	if state.WeaponSet.value == 'Naegling' or state.WeaponSet.value == 'None' then
+		send_command([[bind ^numpad- 
+			input /echo -----Sword-----;
+			input /echo [ CTRL + Numpad1 ] Fast Blade;
+			input /echo [ CTRL + Numpad2 ] Burning Blade;
+			input /echo [ CTRL + Numpad3 ] Shining Blade;
+			input /echo [ CTRL + Numpad4 ] Savage Blade;
+			input /echo [ CTRL + Numpad5 ] Circle Blade;
+			input /echo [ CTRL + Numpad6 ] Spirits Within;
+			input /echo [ CTRL + Numpad. ] Flat Blade;]])
+		send_command('bind ^numpad1 input /ws "Fast Blade" <t>')
+		send_command('bind ^numpad2 input /ws "Burning Blade" <t>')
+		send_command('bind ^numpad3 input /ws "Shining Blade" <t>')
+		send_command('bind ^numpad4 input /ws "Savage Blade" <t>')
+		send_command('bind ^numpad5 input /ws "Circle Blade" <t>')
+		send_command('bind ^numpad6 input /ws "Spirits Within" <t>')
+		send_command('bind ^numpad. input /ja "Flat Blade" <t>')
+			
+	elseif state.WeaponSet.value == 'Carnwenhan' or state.WeaponSet.value == 'Twashtar' or state.WeaponSet.value == 'Mandau' or state.WeaponSet.value == 'Tauret' then
+		send_command([[bind ^numpad- 
+			input /echo -----Dagger-----;
+			input /echo [ CTRL + Numpad1 ] Evisceration;
+			input /echo [ CTRL + Numpad2 ] Rudra's Storm;
+			input /echo [ CTRL + Numpad3 ] Mordant Rime;
+			input /echo [ CTRL + Numpad4 ] Aeolian Edge;
+			input /echo [ CTRL + Numpad5 ] Exenterator;
+			input /echo [ CTRL + Numpad6 ] Mercy Stroke;
+			input /echo [ CTRL + Numpad7 ] Cyclone;
+			input /echo [ CTRL + Numpad9 ] Gust Slash;
+			input /echo [ CTRL + Numpad. ] Shadowstitch;]])
+		send_command('bind ^numpad1 input /ws "Evisceration" <t>')
+		send_command('bind ^numpad2 input /ws "Rudra\'s Storm" <t>')
+		send_command('bind ^numpad3 input /ws "Mordant Rime" <t>')
+		send_command('bind ^numpad4 input /ws "Aeolian Edge" <t>')
+		send_command('bind ^numpad5 input /ws "Exenterator" <t>')
+		send_command('bind ^numpad6 input /ws "Mercy Stroke" <t>')
+		send_command('bind ^numpad7 input /ws "Cyclone" <t>')
+		send_command('bind ^numpad9 input /ws "Gust Slash" <t>')
+		send_command('bind ^numpad. input /ws "Shadowstitch" <t>')
+
+	elseif state.WeaponSet.value == 'Xoanon' then
+		send_command([[bind ^numpad- 
+			input /echo -----Staff-----;
+			input /echo [ CTRL + Numpad1 ] Retribution;
+			input /echo [ CTRL + Numpad2 ] Full Swing;
+			input /echo [ CTRL + Numpad3 ] Shell Crusher;
+			input /echo [ CTRL + Numpad4 ] Spirit Taker;
+			input /echo [ CTRL + Numpad5 ] Rock Crusher;
+			input /echo [ CTRL + Numpad6 ] Starburst;
+			input /echo [ CTRL + Numpad7 ] Heavy Swing;
+			input /echo [ CTRL + Numpad. ] Shattersoul;]])
+		send_command('bind ^numpad1 input /ws "Retribution" <t>')
+		send_command('bind ^numpad2 input /ws "Full Swing" <t>')
+		send_command('bind ^numpad3 input /ws "Shell Crusher" <t>')
+		send_command('bind ^numpad4 input /ws "Spirit Taker" <t>')
+		send_command('bind ^numpad5 input /ws "Rock Crusher" <t>')
+		send_command('bind ^numpad6 input /ws "Starburst" <t>')
+		send_command('bind ^numpad7 input /ws "Heavy Swing" <t>')
+		send_command('bind ^numpad. input /ja "Shattersoul" <t>')
 	end
-end
-
-	--Gearinfo related function
-function job_handle_equipping_gear(playerStatus, eventArgs)
-    check_gear()
-    update_combat_form()
-    determine_haste_group()
-    check_moving()
-end
-
-function job_update(cmdParams, eventArgs)
-    handle_equipping_gear(player.status)
-end
-
-function update_combat_form()
-    if DW == true then
-        state.CombatForm:set('DW')
-    elseif DW == false then
-        state.CombatForm:reset()
-    end
+		
 end
 
 	--Handles Carol 1 / Carol 2 / Etude / Threnody keybinds

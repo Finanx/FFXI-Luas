@@ -51,17 +51,10 @@
 --					[ Windows + 4 ]			Sets Weapon to Naegling
 --					[ Windows + 5 ]			Sets Weapon to Karambit
 --
---  WS:         	[ CTRL + Numpad1 ]    	Evisceration
---					[ CTRL + Numpad2 ]    	Rudra's Storm
---					[ CTRL + Numpad3 ]    	Mandalic Stab
---					[ CTRL + Numpad4 ]    	Aeolian Edge
---					[ CTRL + Numpad5 ]    	Exenterator
---					[ CTRL + Numpad6 ]    	Shark Bite
---				
---					[ ALT + Numpad1 ]     	Savage Blade
---					[ ALT + Numpad2 ]     	Sanguine Blade
---
---					[ ALT + Numpad4 ]     	Asuran Fists
+--	Echo Binds:		[ CTRL + Numpad- ]		Shows main Weaponskill Binds in game
+--					[ ALT + Numpad- ]		Shows Alternate Weaponskill Binds in game
+--					[ Shift + Numpad- ]		Shows Item Binds in game
+--					[ Windows + Numpad- ]	Shows Food/Weapon/Misc. Binds in game
 --
 --  Abilities:  	[ CTRL + ` ]   	Sneak Attack
 --					[ ALT + ` ]   	Trick Attack
@@ -127,7 +120,7 @@ function user_setup()
 
 	state.WeaponSet = M{['description']='Weapon Set', 'Twashtar', 'Mandau', 'Tauret', 'Naegling', 'Karambit'}
 	state.WeaponLock = M(false, 'Weapon Lock')
-	state.TPBonus = M(false, 'TP Bonus')
+	state.TPBonus = M(true, 'TP Bonus')
 
 	--Load Gearinfo/Dressup Lua
 	
@@ -157,7 +150,7 @@ function user_setup()
 		input /echo [ Shift + Numpad9 ]	Prism Powder;
 		]])
 		
-	--Command to show Command binds in game[ Windows + numpad- ]		
+	--Command to show Food/Weapon/Misc binds in game[ Windows + numpad- ]	
 	send_command([[bind @numpad- 		
 		input /echo -----Food_Binds-----;
 		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
@@ -179,25 +172,6 @@ function user_setup()
 		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
 		input /echo [ Windows + D ]	Unloads then reloads dressup;
 		]])
-		
-	--Command to show Blue Mage binds in game[ ALT + numpad- ]
-	send_command([[bind !numpad- 
-		input /echo -----Abilities-----;
-		input /echo [ CTRL + ` ] Sneak Attack;
-		input /echo [ ALT + ` ] Trick Attack;
-		input /echo -----Dagger-----;
-		input /echo [ CTRL + Numpad1 ] Evisceration;
-		input /echo [ CTRL + Numpad2 ] Rudra's Storm;
-		input /echo [ CTRL + Numpad3 ] Mandalic Stab;
-		input /echo [ CTRL + Numpad4 ] Aeolian Edge;
-		input /echo [ CTRL + Numpad5 ] Exenterator;
-		input /echo [ CTRL + Numpad6 ] Shark Bite;
-		input /echo -----Sword-----;
-		input /echo [ ALT + Numpad1 ] Savage Blade;
-		input /echo [ ALT + Numpad2 ] Sanguine Blade;
-		input /echo -----Hand-to-Hand-----;
-		input /echo [ ALT + Numpad4 ] Asuran Fists;
-		]])
 
 	--Weapon set Binds
 
@@ -207,21 +181,6 @@ function user_setup()
 	send_command('bind @4 gs c set WeaponSet Naegling')
 	send_command('bind @5 gs c set WeaponSet Karambit')
 
-	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-
-    send_command('bind ^numpad1 input /ws "Evisceration" <t>')
-    send_command('bind ^numpad2 input /ws "Rudra\'s Storm" <t>')
-    send_command('bind ^numpad3 input /ws "Mandalic Stab" <t>')
-    send_command('bind ^numpad4 input /ws "Aeolian Edge" <t>')
-	send_command('bind ^numpad5 input /ws "Exenterator" <t>')
-	send_command('bind ^numpad6 input /ws "Shark Bite" <t>')
-	send_command('bind ^numpad7 input /ws "Mercy Stroke" <t>')
-	
-	send_command('bind !numpad1 input /ws "Savage Blade" <t>')
-	send_command('bind !numpad2 input /ws "Sanguine Blade" <t>')
-	
-	send_command('bind !numpad4 input /ws "Asuran Fists" <t>')
-	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('bind ~numpad1 input /item "Echo Drops" <me>')
@@ -252,6 +211,7 @@ function user_setup()
 	
 	send_command('wait 10; input //get Twashtar case')
 	send_command('wait 10; input //get Gleti\'s Knife case')
+	send_command('wait 10; input //get Fusetto +2 case')
 	send_command('wait 10; input //get Karambit case')
 	send_command('wait 10; input //get Mandau case')
 	send_command('wait 10; input //get Naegling case')
@@ -260,6 +220,7 @@ function user_setup()
 	send_command([[bind @i ;
 		input //get Twashtar case;
 		input //get Gleti\'s Knife case;
+		input //get Fusetto +2 case;
 		input //get Karambit case;
 		input //get Mandau case;
 		input //get Naegling case;
@@ -394,6 +355,7 @@ function user_unload()
 	
 	send_command('input //put Twashtar case')
 	send_command('input //put Gleti\'s Knife case')
+	send_command('input //put Fusetto +2 case')
 	send_command('input //put Karambit case')
 	send_command('input //put Mandau case')
 	send_command('input //put Naegling case')
@@ -1050,7 +1012,7 @@ function init_gear_sets()
 	
 	sets.Tauret = {main="Tauret", sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	
-	sets.Naegling = {main="Naegling", { name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Naegling = {main="Naegling", sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	sets.Naegling_Centovente = {main="Naegling", sub="Fusetto +2",}
 	
 	sets.Karambit = {main="Karambit"}
@@ -1153,13 +1115,6 @@ function job_buff_change(buff,gain)
     end
 end
 
-	--Handles Weapon set changes
-function job_state_change(stateField, newValue, oldValue)
-
-    equip(sets[state.WeaponSet.current])
-
-end
-
 -------------------------------------------------------------------------------------------------------------------
 -- Code for Melee sets
 -------------------------------------------------------------------------------------------------------------------
@@ -1173,8 +1128,8 @@ end
 
 function job_update(cmdParams, eventArgs)
 	check_gear()
+	Weaponskill_Keybinds()
     handle_equipping_gear(player.status)
-    th_update(cmdParams, eventArgs)
 end
 
 	--Adjusts Melee/Weapon sets for Dual Wield or Single Wield
@@ -1187,41 +1142,128 @@ function update_combat_form()
     end
 
 	if state.WeaponSet.value == 'Twashtar' then
-		enable('main','sub')
 		equip(sets.Twashtar)
-		disable('main','sub')
 	end
 	
 	if state.WeaponSet.value == 'Mandau' then
-		enable('main','sub')
 		equip(sets.Mandau)
-		disable('main','sub')
 	end
 
 	if state.WeaponSet.value == 'Tauret' then
-		enable('main','sub')
 		equip(sets.Tauret)
-		disable('main','sub')
 	end
 	
 	if state.WeaponSet.value == 'Naegling' then
 		if state.TPBonus.value == true then
-			enable('main','sub')
 			equip(sets.Naegling_Centovente)
-			disable('main','sub')
 		else
-			enable('main','sub')
 			equip(sets.Naegling)
-			disable('main','sub')
 		end
 	end
 	
 	if state.WeaponSet.value == 'Karambit' then
-		enable('main','sub')
 		equip(sets.Karambit)
-		disable('main','sub')
 	end
 					
+end
+
+function Weaponskill_Keybinds()
+
+	if state.WeaponSet.value == 'Twashtar' or state.WeaponSet.value == 'Mandau' or state.WeaponSet.value == 'Tauret' then
+		send_command([[bind ^numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + ` ] Sneak Attack;	
+			input /echo -----Dagger-----;
+			input /echo [ CTRL + Numpad1 ] Evisceration;
+			input /echo [ CTRL + Numpad2 ] Rudra's Storm;
+			input /echo [ CTRL + Numpad3 ] Mandalic Stab;
+			input /echo [ CTRL + Numpad4 ] Aeolian Edge;
+			input /echo [ CTRL + Numpad5 ] Exenterator;
+			input /echo [ CTRL + Numpad6 ] Mercy Stroke;
+			input /echo [ CTRL + Numpad7 ] Shark Bite;
+			input /echo [ CTRL + Numpad9 ] Dancing Edge;
+			input /echo [ CTRL + Numpad. ] Shadowstitch;]])
+		send_command('bind ^numpad1 input /ws "Evisceration" <t>')
+		send_command('bind ^numpad2 input /ws "Rudra\'s Storm" <t>')
+		send_command('bind ^numpad3 input /ws "Mandalic Stab" <t>')
+		send_command('bind ^numpad4 input /ws "Aeolian Edge" <t>')
+		send_command('bind ^numpad5 input /ws "Exenterator" <t>')
+		send_command('bind ^numpad6 input /ws "Mercy Stroke" <t>')
+		send_command('bind ^numpad7 input /ws "Shark Bite" <t>')
+		send_command('bind ^numpad9 input /ws "Dancing Edge" <t>')
+		send_command('bind ^numpad. input /ws "Shadowstitch" <t>')
+		
+		send_command([[bind !numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ ALT + ` ] Trick Attack;
+			input /echo -----Dagger-----;
+			input /echo [ ALT + Numpad1 ]  Wasp Sting;
+			input /echo [ ALT + Numpad2 ]  Viper Bite;
+			input /echo [ ALT + Numpad3 ]  Gust Slash;
+			input /echo [ ALT + Numpad4 ]  Cyclone;			
+			input /echo [ ALT + Numpad5 ]  Energy Steal;
+			input /echo [ ALT + Numpad6 ]  Energy Drain;]])
+		send_command('bind !numpad1 input /ws "Wasp Sting" <t>')
+		send_command('bind !numpad2 input /ws "Viper Bite" <t>')
+		send_command('bind !numpad3 input /ws "Gust Slash" <t>')
+		send_command('bind !numpad4 input /ws "Cyclone" <t>')
+		send_command('bind !numpad5 input /ws "Energy Steal" <t>')
+		send_command('bind !numpad6 input /ws "Energy Drain" <t>')
+
+	elseif state.WeaponSet.value == 'Naegling' then
+		send_command([[bind ^numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + ` ] Sneak Attack;
+			input /echo -----Sword-----;
+			input /echo [ CTRL + Numpad1 ] Sanguine Blade;
+			input /echo [ CTRL + Numpad2 ] Seraph Blade;
+			input /echo [ CTRL + Numpad3 ] Red Lotus Blade;
+			input /echo [ CTRL + Numpad4 ] Savage Blade;
+			input /echo [ CTRL + Numpad5 ] Burning Blade;
+			input /echo [ CTRL + Numpad6 ] Shining Blade;
+			input /echo [ CTRL + Numpad9 ] Vorpal Blade;
+			input /echo [ CTRL + Numpad. ] Flat Blade;]])
+		send_command('bind ^numpad1 input /ws "Sanguine Blade" <t>')
+		send_command('bind ^numpad2 input /ws "Seraph Blade" <t>')
+		send_command('bind ^numpad3 input /ws "Red Lotus Blade" <t>')
+		send_command('bind ^numpad4 input /ws "Savage Blade" <t>')
+		send_command('bind ^numpad5 input /ws "Burning Blade" <t>')
+		send_command('bind ^numpad6 input /ws "Shining Blade" <t>')
+		send_command('bind ^numpad9 input /ws "Vorpal Blade" <t>')
+		send_command('bind ^numpad. input /ws "Flat Blade" <t>')
+
+		send_command([[bind !numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ ALT + ` ] Trick Attack;
+			input /echo -----Sword-----;
+			input /echo [ ALT + Numpad1 ]  Fast Blade;
+			input /echo [ ALT + Numpad2 ]  Spirits Within;
+			input /echo [ ALT + Numpad3 ]  Circle Blade;]])
+		send_command('bind !numpad1 input /ws "Fast Blade" <t>')
+		send_command('bind !numpad2 input /ws "Spirits Within" <t>')
+		send_command('bind !numpad3 input /ws "Circle Blade" <t>')
+		
+	elseif state.WeaponSet.value == 'Karambit' then
+		send_command([[bind ^numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + ` ] Sneak Attack;
+			input /echo -----Club-----;
+			input /echo [ CTRL + Numpad1 ] Asuran Fists;
+			input /echo [ CTRL + Numpad2 ] Combo;
+			input /echo [ CTRL + Numpad3 ] Backhand Blow;
+			input /echo [ CTRL + Numpad4 ] Spinning Attack;
+			input /echo [ CTRL + Numpad. ] Shoulder Tackle;]])
+		send_command('bind ^numpad1 input /ws "Asuran Fists" <t>')
+		send_command('bind ^numpad2 input /ws "Combo" <t>')
+		send_command('bind ^numpad3 input /ws "Backhand Blow" <t>')
+		send_command('bind ^numpad4 input /ws "Spinning Attack" <t>')
+		send_command('bind ^numpad. input /ws "Shoulder Tackle" <t>')
+		
+		send_command([[bind !numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ ALT + ` ] Trick Attack;]])
+	end
+
 end
 
 function customize_idle_set(idleSet)

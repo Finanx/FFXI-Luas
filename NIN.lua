@@ -50,30 +50,14 @@
 --					[ Windows + 1 ]			Sets Weapon to Heishi
 --					[ Windows + 2 ]			Sets Weapon to Gokotai
 --					[ Windows + 3 ]			Sets Weapon to Naegling
---					[ Windows + 4 ]			Sets Weapon to Gleti's_Knife
+--					[ Windows + 4 ]			Sets Weapon to Tauret
 --					[ Windows + 5 ]			Sets Weapon to Kaja_Tachi
 --					[ Windows + 6 ]			Sets Weapon to Hachimonji
 --
---  WS:         	[ CTRL + Numpad1 ]		Blade: Shun
---					[ CTRL + Numpad2 ]		Blade: Ten
---					[ CTRL + Numpad3 ]		Blade: Hi
---					[ CTRL + Numpad4 ]		Blade: To
---					[ CTRL + Numpad5 ]		Blade: Chi
---					[ CTRL + Numpad6 ]		Blade: Teki
---					[ CTRL + Numpad7 ]		Blade: Ei
---					[ CTRL + Numpad9 ]		Blade: Yu
---					[ CTRL + Numpad. ]		Blade: Kamu
---				
---					[ ALT + Numpad1 ]		Tachi: Jinpu
---					[ ALT + Numpad2 ]		Tachi: Goten
---					[ ALT + Numpad3 ]		Tachi: Kagero
---					[ ALT + Numpad. ]		Tachi: Koki
---
---					[ ALT + Numpad4 ]		Savage Blade
---					[ ALT + Numpad5 ]		Sanguine Blade
---
---					[ ALT + Numpad7 ]		Aeolian Edge
---					[ ALT + Numpad9 ]		Evisceration
+--	Echo Binds:		[ CTRL + Numpad- ]		Shows main Weaponskill Binds in game
+--					[ ALT + Numpad- ]		Shows Alternate Weaponskill Binds in game
+--					[ Shift + Numpad- ]		Shows Item Binds in game
+--					[ Windows + Numpad- ]	Shows Food/Weapon/Misc. Binds in game
 --
 --  Abilities:  	[ CTRL + ` ]        	Yonin
 --					[ Alt + ` ]        		Innin
@@ -126,7 +110,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'Heishi', 'Gokotai', 'Naegling', 'Gletis_Knife', 'Kaja_Tachi', 'Hachimonji'}
+	state.WeaponSet = M{['description']='Weapon Set', 'Heishi', 'Gokotai', 'Naegling', 'Tauret', 'Kaja_Tachi', 'Hachimonji'}
     state.WeaponLock = M(false, 'Weapon Lock')
 	state.MagicBurst = M(false, 'Magic_Burst')
 	state.TPBonus = M(false, 'TP Bonus')
@@ -161,7 +145,7 @@ function user_setup()
 		input /echo [ Shift + Numpad9 ]	Prism Powder;
 		]])
 		
-	--Command to show Command binds in game[ Windows + numpad- ]		
+	--Command to show Food/Weapon/Misc binds in game[ Windows + numpad- ]	
 	send_command([[bind @numpad- 		
 		input /echo -----Food_Binds-----;
 		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
@@ -177,76 +161,24 @@ function user_setup()
 		input /echo [ Windows + 1 ]	Sets Weapon to Heishi;
 		input /echo [ Windows + 2 ]	Sets Weapon to Gokotai;
 		input /echo [ Windows + 3 ]	Sets Weapon to Naegling;
-		input /echo [ Windows + 4 ]	Sets Weapon to Gleti's_Knife;
+		input /echo [ Windows + 4 ]	Sets Weapon to Tauret;
 		input /echo [ Windows + 5 ]	Sets Weapon to Kaja_Tachi;
 		input /echo [ Windows + 6 ]	Sets Weapon to Hachimonji;
-		]])
-
-	--Command to show Ninja binds in game[ ALT + numpad- ]
-	send_command([[bind !numpad- 
-
-		input /echo -----Abilities-----;
-		input /echo [ CTRL + ` ] Yonin;
-		input /echo [ ALT + ` ] Innin;
-		input /echo -----Katana-----;
-		input /echo [ CTRL + Numpad1 ] Blade: Shun;
-		input /echo [ CTRL + Numpad2 ] Blade: Ten;
-		input /echo [ CTRL + Numpad3 ] Blade: Hi;
-		input /echo [ CTRL + Numpad4 ] Blade: To;
-		input /echo [ CTRL + Numpad5 ] Blade: Chi;
-		input /echo [ CTRL + Numpad6 ] Blade: Teki;
-		input /echo [ CTRL + Numpad7 ] Blade: Ei;
-		input /echo [ CTRL + Numpad9 ] Blade: Yu;
-		input /echo [ CTRL + Numpad. ] Blade: Kamu;
-		input /echo -----Great_Katana-----;
-		input /echo [ ALT + Numpad1 ] Tachi: Jinpu;
-		input /echo [ ALT + Numpad2 ] Tachi: Goten;
-		input /echo [ ALT + Numpad3 ] Tachi: Kagero;
-		input /echo [ ALT + Numpad. ] Tachi: Koki;
-		input /echo -----Sword-----;
-		input /echo [ ALT + Numpad4 ] Savage Blade;
-		input /echo [ ALT + Numpad5 ] Sanguine Blade;
-		input /echo -----Dagger-----;
-		input /echo [ ALT + Numpad7 ] Aeolian Edge;
-		input /echo [ ALT + Numpad9 ] Evisceration;
 		input /echo -----Toggles-----;
 		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
 		input /echo [ Windows + D ]	Unloads then reloads dressup;
 		]])
-	
+
 	--Weapon set Binds
 
 	send_command('bind @1 input /equip sub; gs c set WeaponSet Heishi')
 	send_command('bind @2 input /equip sub; gs c set WeaponSet Gokotai')
 	send_command('bind @3 input /equip sub; gs c set WeaponSet Naegling')
-	send_command('bind @4 input /equip sub; gs c set WeaponSet Gletis_Knife')
+	send_command('bind @4 input /equip sub; gs c set WeaponSet Tauret')
 	send_command('bind @5 input /equip sub; gs c set WeaponSet Kaja_Tachi')
 	send_command('bind @6 input /equip sub; gs c set WeaponSet Hachimonji')
 	send_command('bind @w gs c toggle WeaponLock')
 
-	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-
-    send_command('bind ^numpad1 input /ws "Blade: Shun" <t>')
-    send_command('bind ^numpad2 input /ws "Blade: Ten" <t>')
-    send_command('bind ^numpad3 input /ws "Blade: Hi" <t>')
-    send_command('bind ^numpad4 input /ws "Blade: To" <t>')
-	send_command('bind ^numpad5 input /ws "Blade: Chi" <t>')
-    send_command('bind ^numpad6 input /ws "Blade: Teki" <t>')
-	send_command('bind ^numpad7 input /ws "Blade: Ei" <t>')
-	send_command('bind ^numpad9 input /ws "Blade: Yu" <t>')
-	send_command('bind ^numpad. input /ws "Blade: Kamu" <t>')
-	
-	send_command('bind !numpad7 input /ws "Aeolian Edge" <t>')
-	send_command('bind !numpad9 input /ws "Evisceration" <t>')
-		
-	send_command('bind !numpad4 input /ws "Savage Blade" <t>')
-	send_command('bind !numpad5 input /ws "Sanguine Blade" <t>')
-	
-	send_command('bind !numpad1 input /ws "Tachi: Jinpu" <t>')
-	send_command('bind !numpad2 input /ws "Tachi: Goten" <t>')
-	send_command('bind !numpad3 input /ws "Tachi: Kagero" <t>')
-	send_command('bind !numpad. input /ws "Tachi: Koki" <t>')
-	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('bind ~numpad1 input /item "/echo Drops" <me>')
@@ -283,6 +215,7 @@ function user_setup()
 	send_command('wait 10; input //get Seki Shuriken satchel all')
 	
 	send_command('wait 10; input //get Gleti\'s Knife case')
+	send_command('wait 10; input //get Tauret case')
 	send_command('wait 10; input //get Gokotai case')
 	send_command('wait 10; input //get Hachimonji case')
 	send_command('wait 10; input //get Heishi Shorinken case')
@@ -293,6 +226,7 @@ function user_setup()
 	
 	send_command([[bind @i ;
 		input //get Gleti\'s Knife case;
+		input //get Tauret case;
 		input //get Gokotai case;
 		input //get Hachimonji case;
 		input //get Heishi Shorinken case;
@@ -441,6 +375,7 @@ function user_unload()
 	send_command('input //put Seki Shuriken satchel all')
 	
 	send_command('input //put Gleti\'s Knife case')
+	send_command('input //put Tauret case')
 	send_command('input //put Gokotai case')
 	send_command('input //put Hachimonji case')
 	send_command('input //put Heishi Shorinken case')
@@ -1112,8 +1047,7 @@ function init_gear_sets()
 	sets.Gokotai_Hitaki = {main="Gokotai",sub={ name="Kunimitsu", augments={'Path: A',}},}
 	sets.Naegling = {main="Naegling",sub="Kunimitsu",}
 	sets.Naegling_Hitaki = {main="Naegling",sub="Kunimitsu",}
-	sets.Gletis_Knife = {main={ name="Gleti's Knife", augments={'Path: A',}},sub="Kunimitsu",}
-	sets.Gletis_Knife_Hitaki = {main={ name="Gleti's Knife", augments={'Path: A',}},sub="Kunimitsu",}
+	sets.Tauret = {main="Tauret",sub={ name="Gleti's Knife", augments={'Path: A',}},}
 	sets.Hachimonji = {main="Hachimonji",sub={ name="Rigorous Grip +1", augments={'Path: A',}},}
 	sets.Kaja_Tachi = {main="Kaja Tachi",sub={ name="Rigorous Grip +1", augments={'Path: A',}},}
 
@@ -1278,7 +1212,7 @@ end
 
 function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
-    th_update(cmdParams, eventArgs)
+	Weaponskill_Keybinds()
 end
 
 function update_combat_form()
@@ -1319,12 +1253,8 @@ function update_combat_form()
 		end
 	end
 	
-	if state.WeaponSet.value == 'Gletis_Knife' then
-		if state.TPBonus.value == true then
-			equip(sets.Gletis_Knife_Hitaki)
-		else
-			equip(sets.Gletis_Knife)
-		end
+	if state.WeaponSet.value == 'Tauret' then
+		equip(sets.Tauret)
 	end
 	
 	if state.WeaponSet.value == 'Kaja_Tachi' then
@@ -1333,6 +1263,139 @@ function update_combat_form()
 	
 	if state.WeaponSet.value == 'Hachimonji' then
 		equip(sets.Hachimonji)
+	end
+	
+end
+
+function Weaponskill_Keybinds()
+
+	if state.WeaponSet.value == 'Heishi' or state.WeaponSet.value == 'Gokotai' then
+		send_command([[bind ^numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + ` ] Yonin;
+			input /echo -----Katana-----;
+			input /echo [ CTRL + Numpad1 ] Blade: Shun;
+			input /echo [ CTRL + Numpad2 ] Blade: Ten;
+			input /echo [ CTRL + Numpad3 ] Blade: Hi;
+			input /echo [ CTRL + Numpad4 ] Blade: Kamu;
+			input /echo [ CTRL + Numpad5 ] Blade: Ku;
+			input /echo [ CTRL + Numpad6 ] Blade: Jin;
+			input /echo [ CTRL + Numpad7 ] Blade: Rin;
+			input /echo [ CTRL + Numpad9 ] Blade: Retsu;]])
+		send_command('bind ^numpad1 input /ws "Blade: Shun" <t>')
+		send_command('bind ^numpad2 input /ws "Blade: Ten" <t>')
+		send_command('bind ^numpad3 input /ws "Blade: Hi" <t>')
+		send_command('bind ^numpad4 input /ws "Blade: Kamu" <t>')
+		send_command('bind ^numpad5 input /ws "Blade: Ku" <t>')
+		send_command('bind ^numpad6 input /ws "Blade: Jin" <t>')
+		send_command('bind ^numpad7 input /ws "Blade: Rin" <t>')
+		send_command('bind ^numpad9 input /ws "Blade: Retsu" <t>')
+
+		send_command([[bind !numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ ALT + ` ] Innin;
+			input /echo -----Katana-----;
+			input /echo [ ALT + Numpad1 ] Blade: Chi;
+			input /echo [ ALT + Numpad2 ] Blade: To;
+			input /echo [ ALT + Numpad3 ] Blade: Teki;
+			input /echo [ ALT + Numpad4 ] Blade: Ei;
+			input /echo [ ALT + Numpad5 ] Blade: Yu;]])
+		send_command('bind !numpad1 input /ws "Blade: Chi" <t>')
+		send_command('bind !numpad2 input /ws "Blade: To" <t>')
+		send_command('bind !numpad3 input /ws "Blade: Teki" <t>')
+		send_command('bind !numpad4 input /ws "Blade: Ei" <t>')
+		send_command('bind !numpad5 input /ws "Blade: Yu" <t>')
+
+	elseif state.WeaponSet.value == 'Hachimonji' or state.WeaponSet.value == 'Kaja_Tachi' then
+		send_command([[bind ^numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + ` ] Yonin;
+			input /echo -----Great_Katana-----;
+			input /echo [ CTRL + Numpad1 ] Tachi: Jinpu;
+			input /echo [ CTRL + Numpad2 ] Tachi: Kagero;
+			input /echo [ CTRL + Numpad3 ] Tachi: Goten;
+			input /echo [ CTRL + Numpad4 ] Tachi: Ageha;
+			input /echo [ CTRL + Numpad5 ] Tachi: Koki;
+			input /echo [ CTRL + Numpad6 ] Tachi: Kasha;
+			input /echo [ CTRL + Numpad7 ] Tachi: Enpi;
+			input /echo [ CTRL + Numpad. ] Tachi: Hobaku;]])
+		send_command('bind ^numpad1 input /ws "Tachi: Jinpu" <t>')
+		send_command('bind ^numpad2 input /ws "Tachi: Kagero" <t>')
+		send_command('bind ^numpad3 input /ws "Tachi: Goten" <t>')
+		send_command('bind ^numpad4 input /ws "Tachi: Ageha" <t>')
+		send_command('bind ^numpad5 input /ws "Tachi: Koki" <t>')
+		send_command('bind ^numpad6 input /ws "Tachi: Kasha" <t>')
+		send_command('bind ^numpad7 input /ws "Tachi: Enpi" <t>')
+		send_command('bind ^numpad. input /ws "Tachi: Hobaku" <t>')
+		
+		send_command([[bind !numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ ALT + ` ] Innin;]])
+			
+	elseif state.WeaponSet.value == 'Naegling'  then
+		send_command([[bind ^numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + ` ] Yonin;
+			input /echo -----Sword-----;
+			input /echo [ CTRL + Numpad1 ] Sanguine Blade;
+			input /echo [ CTRL + Numpad2 ] Seraph Blade;
+			input /echo [ CTRL + Numpad3 ] Red Lotus Blade;
+			input /echo [ CTRL + Numpad4 ] Savage Blade;
+			input /echo [ CTRL + Numpad5 ] Burning Blade;
+			input /echo [ CTRL + Numpad6 ] Shining Blade;
+			input /echo [ CTRL + Numpad9 ] Vorpal Blade;
+			input /echo [ CTRL + Numpad. ] Flat Blade;]])
+		send_command('bind ^numpad1 input /ws "Sanguine Blade" <t>')
+		send_command('bind ^numpad2 input /ws "Seraph Blade" <t>')
+		send_command('bind ^numpad3 input /ws "Red Lotus Blade" <t>')
+		send_command('bind ^numpad4 input /ws "Savage Blade" <t>')
+		send_command('bind ^numpad5 input /ws "Burning Blade" <t>')
+		send_command('bind ^numpad6 input /ws "Shining Blade" <t>')
+		send_command('bind ^numpad7 input /ws "" <t>')
+		send_command('bind ^numpad9 input /ws "Vorpal Blade" <t>')
+		send_command('bind ^numpad. input /ws "Flat Blade" <t>')
+		
+		send_command([[bind !numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ ALT + ` ] Innin;
+			input /echo -----Sword-----;
+			input /echo [ ALT + Numpad1 ]  Fast Blade;
+			input /echo [ ALT + Numpad2 ]  Spirits Within;
+			input /echo [ ALT + Numpad3 ]  Circle Blade;]])
+		send_command('bind !numpad1 input /ws "Fast Blade" <t>')
+		send_command('bind !numpad2 input /ws "Spirits Within" <t>')
+		send_command('bind !numpad3 input /ws "Circle Blade" <t>')
+		
+	elseif state.WeaponSet.value == 'Tauret' then
+		send_command([[bind ^numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + ` ] Yonin;	
+			input /echo -----Dagger-----;
+			input /echo [ CTRL + Numpad1 ] Evisceration;
+			input /echo [ CTRL + Numpad2 ] Viper Bite;
+			input /echo [ CTRL + Numpad3 ] Exenterator;
+			input /echo [ CTRL + Numpad4 ] Aeolian Edge;
+			input /echo [ CTRL + Numpad5 ] Cyclone;
+			input /echo [ CTRL + Numpad6 ] Gust Slash;
+			input /echo [ CTRL + Numpad9 ] Wasp Sting;
+			input /echo [ CTRL + Numpad. ] Shadowstitch;]])
+		send_command('bind ^numpad1 input /ws "Evisceration" <t>')
+		send_command('bind ^numpad2 input /ws "Viper Bite" <t>')
+		send_command('bind ^numpad3 input /ws "Exenterator" <t>')
+		send_command('bind ^numpad4 input /ws "Aeolian Edge" <t>')
+		send_command('bind ^numpad5 input /ws "Cyclone" <t>')
+		send_command('bind ^numpad6 input /ws "Gust Slash" <t>')
+		send_command('bind ^numpad9 input /ws "Wasp Sting" <t>')
+		send_command('bind ^numpad. input /ws "Shadowstitch" <t>')
+		
+		send_command([[bind !numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ ALT + ` ] Innin;
+			input /echo -----Dagger-----;
+			input /echo [ ALT + Numpad1 ]  Energy Steal;
+			input /echo [ ALT + Numpad2 ]  Energy Drain;]])
+		send_command('bind !numpad1 input /ws "Energy Steal" <t>')
+		send_command('bind !numpad2 input /ws "Energy Drain" <t>')
 	end
 	
 end

@@ -156,7 +156,7 @@ function user_setup()
 		input /echo [ Alt  + Numpad. ] Uses Devastating Bullet Pouch;
 		]])
 		
-	--Command to show Command binds in game[ Windows + numpad- ]		
+	--Command to show Food/Weapon/Misc binds in game[ Windows + numpad- ]		
 	send_command([[bind @numpad- 		
 		input /echo -----Food_Binds-----;
 		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
@@ -1627,8 +1627,8 @@ function Weaponskill_Keybinds()
 		send_command('bind !numpad6 input /ws "Viper Bite" <t>')
 		send_command('bind !numpad7 input /ws "Wasp Sting" <t>')
 		send_command('bind !numpad. input /ws "Shadowstitch" <t>')
-
 	end
+	
 end
 
 

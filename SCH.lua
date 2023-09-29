@@ -51,18 +51,10 @@
 --					[ Windows + 2 ]			Sets Weapon to Xoanon then locks Main/Sub Slots
 --					[ Windows + 3 ]			Sets Weapon to Musa then locks Main/Sub Slots
 --
---  WS:         	[ CTRL + Numpad1 ]    	Retribution
---					[ CTRL + Numpad2 ]    	Full Swing
---					[ CTRL + Numpad3 ]    	Shell Crusher
---					[ CTRL + Numpad4 ]    	Omniscience
---					[ CTRL + Numpad5 ]    	Myrkr
---					[ CTRL + Numpad6 ]    	Cataclysm
---				
---					[ ALT + Numpad1 ]     	Black Halo
---					[ ALT + Numpad2 ]     	True Strike
---					[ ALT + Numpad3 ]     	Realmrazer
---					[ ALT + Numpad4 ]     	Shining Strike
---					[ ALT + Numpad5 ]     	Starlight
+--	Echo Binds:		[ CTRL + Numpad- ]		Shows main Weaponskill Binds in game
+--					[ ALT + Numpad- ]		Shows Alternate Weaponskill Binds in game
+--					[ Shift + Numpad- ]		Shows Item Binds in game
+--					[ Windows + Numpad- ]	Shows Food/Weapon/Misc. Binds in game
 --
 --  Abilities:  	[ CTRL + - ]        	Light Arts
 --					[ CTRL + = ]        	Dark Arts
@@ -115,7 +107,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'MACC')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Maxentius', 'Xoanon', 'Musa'}
+	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Maxentius', 'Xoanon', 'Musa', 'Opashoro'}
 
     state.MagicBurst = M(false, 'Magic Burst')
 	state.Subtle_Blow = M(false, 'Subtle Blow')
@@ -149,7 +141,7 @@ function user_setup()
 		input /echo [ Shift + Numpad9 ]	Prism Powder;
 		]])
 		
-	--Command to show Command binds in game[ Windows + numpad- ]		
+	--Command to show Food/Weapon/Misc binds in game[ Windows + numpad- ]	
 	send_command([[bind @numpad- 		
 		input /echo -----Food_Binds-----;
 		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
@@ -170,26 +162,6 @@ function user_setup()
 		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
 		input /echo [ Windows + D ]	Unloads then reloads dressup;
 		]])
-		
-	--Command to show Red Mage binds in game[ ALT + numpad- ]
-	send_command([[bind !numpad- 
-		input /echo -----Abilities-----;
-		input /echo [ CTRL + - ] Light Arts;
-		input /echo [ CTRL + = ] Dark Arts;
-		input /echo -----Staff-----;
-		input /echo [ CTRL + Numpad1 ] Retribution;
-		input /echo [ CTRL + Numpad2 ] Full Swing;
-		input /echo [ CTRL + Numpad3 ] Shell Crusher;
-		input /echo [ CTRL + Numpad4 ] Omniscience;
-		input /echo [ CTRL + Numpad5 ] Myrkr;
-		input /echo [ CTRL + Numpad6 ] Cataclysm;
-		input /echo -----Club-----;
-		input /echo [ ALT + Numpad1 ] Black Halo;
-		input /echo [ ALT + Numpad2 ] True Strike;
-		input /echo [ ALT + Numpad2 ] Realmrazer;
-		input /echo [ ALT + Numpad2 ] Shining Strike;
-		input /echo [ ALT + Numpad2 ] Starlight;
-		]])
 	
 	--Weapon set Binds
 
@@ -197,21 +169,6 @@ function user_setup()
 	send_command('bind @2 gs c set WeaponSet Xoanon')
 	send_command('bind @3 gs c set WeaponSet Musa')
 	send_command('bind @w input /equip sub; gs c set WeaponSet None')
-	
-	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-
-	send_command('bind ^numpad1 input /ws "Retribution" <t>')
-    send_command('bind ^numpad2 input /ws "Full Swing" <t>')
-	send_command('bind ^numpad3 input /ws "Shell Crusher" <t>')
-	send_command('bind ^numpad4 input /ws "Omniscience" <t>')
-	send_command('bind ^numpad5 input /ws "Myrkr" <t>')	
-	send_command('bind ^numpad6 input /ws "Cataclysm" <t>')
-
-    send_command('bind !numpad1 input /ws "Black Halo" <t>')
-    send_command('bind !numpad2 input /ws "True Strike" <t>')
-	send_command('bind !numpad3 input /ws "Realmrazer" <t>')
-	send_command('bind !numpad4 input /ws "Shining Strike" <t>')
-    send_command('bind !numpad5 input /ws "Starlight" <t>')
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -1102,6 +1059,8 @@ function init_gear_sets()
 	sets.Xoanon = {main="Xoanon", sub="Khonsu"}
 	
 	sets.Musa = {main={ name="Musa", augments={'Path: C',}}, sub="Khonsu"}
+	
+	sets.Opashoro = {main="Opashoro", sub="Khonsu"}
 
 end
 
@@ -1273,8 +1232,26 @@ function job_buff_change(buff,gain)
 	
 end
 
-	--Handles Weapon Locking
-function job_state_change(stateField, newValue, oldValue)
+-------------------------------------------------------------------------------------------------------------------
+-- User code that supplements standard library decisions.
+-------------------------------------------------------------------------------------------------------------------
+
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_gear()
+    check_moving()
+	update_combat_form()
+end
+
+-- Called by the 'update' self-command.
+function job_update(cmdParams, eventArgs)
+    handle_equipping_gear(player.status)
+	Weaponskill_Keybinds()
+    update_active_strategems()
+    update_sublimation()
+end
+
+	--Adjusts Melee/Weapon sets for Dual Wield or Single Wield
+function update_combat_form()
 
 	if state.WeaponSet.value == 'Maxentius' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
@@ -1303,23 +1280,82 @@ function job_state_change(stateField, newValue, oldValue)
 	if state.WeaponSet.value == 'None' then
 		enable('main','sub')
 	end
+
 end
 
--------------------------------------------------------------------------------------------------------------------
--- User code that supplements standard library decisions.
--------------------------------------------------------------------------------------------------------------------
+function Weaponskill_Keybinds()
 
-function job_handle_equipping_gear(playerStatus, eventArgs)
-    check_gear()
-    check_moving()
-	check_moving()
-end
+	if state.WeaponSet.value == 'Xoanon' or state.WeaponSet.value == 'Musa' or state.WeaponSet.value == 'Opashoro' or state.WeaponSet.value == 'None' then
+		send_command([[bind ^numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + - ] Light Arts;
+			input /echo [ CTRL + = ] Dark Arts;
+			input /echo -----Staff-----;
+			input /echo [ CTRL + Numpad1 ] Retribution;
+			input /echo [ CTRL + Numpad2 ] Full Swing;
+			input /echo [ CTRL + Numpad3 ] Shell Crusher;
+			input /echo [ CTRL + Numpad4 ] Cataclysm;
+			input /echo [ CTRL + Numpad5 ] Myrkr;
+			input /echo [ CTRL + Numpad6 ] Oshala;
+			input /echo [ CTRL + Numpad7 ] Omniscience;
+			input /echo [ CTRL + Numpad9 ] Spirit Taker;
+			input /echo [ CTRL + Numpad. ] Shattersoul;]])
+		send_command('bind ^numpad1 input /ws "Retribution" <t>')
+		send_command('bind ^numpad2 input /ws "Full Swing" <t>')
+		send_command('bind ^numpad3 input /ws "Shell Crusher" <t>')
+		send_command('bind ^numpad4 input /ws "Cataclysm" <t>')
+		send_command('bind ^numpad5 input /ws "Myrker" <t>')
+		send_command('bind ^numpad6 input /ws "Oshala" <t>')
+		send_command('bind ^numpad7 input /ws "Omniscience" <t>')
+		send_command('bind ^numpad9 input /ws "Spirit Taker" <t>')
+		send_command('bind ^numpad. input /ja "Shattersoul" <t>')
 
--- Called by the 'update' self-command.
-function job_update(cmdParams, eventArgs)
-    handle_equipping_gear(player.status)
-    update_active_strategems()
-    update_sublimation()
+		send_command([[bind !numpad- 
+			input /echo -----Staff-----;
+			input /echo [ ALT + Numpad1 ] Sunburst;
+			input /echo [ ALT + Numpad2 ] Starburst;
+			input /echo [ ALT + Numpad3 ] Rock Crusher;
+			input /echo [ ALT + Numpad4 ] Earth Crusher;
+			input /echo [ ALT + Numpad5 ] Heavy Swing;]])
+		send_command('bind !numpad1 input /ws "Sunburst" <t>')
+		send_command('bind !numpad2 input /ws "Starburst" <t>')
+		send_command('bind !numpad3 input /ws "Rock Crusher" <t>')
+		send_command('bind !numpad4 input /ws "Earth Crusher" <t>')
+		send_command('bind !numpad5 input /ja "Heavy Swing" <t>')
+			
+	elseif state.WeaponSet.value == 'Maxentius' then
+		send_command([[bind ^numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + - ] Light Arts;
+			input /echo [ CTRL + = ] Dark Arts;
+			input /echo -----Club-----;
+			input /echo [ CTRL + Numpad1 ] Judgment;
+			input /echo [ CTRL + Numpad2 ] Black Halo;
+			input /echo [ CTRL + Numpad3 ] Skullbreaker;
+			input /echo [ CTRL + Numpad4 ] Shining Strike;
+			input /echo [ CTRL + Numpad5 ] True Strike;
+			input /echo [ CTRL + Numpad6 ] Flash Nova;
+			input /echo [ CTRL + Numpad7 ] Seraph Strike;
+			input /echo [ CTRL + Numpad9 ] Realmrazer;
+			input /echo [ CTRL + Numpad. ] Brainshaker;]])
+		send_command('bind ^numpad1 input /ws "Judgment" <t>')
+		send_command('bind ^numpad2 input /ws "Black Halo" <t>')
+		send_command('bind ^numpad3 input /ws "Skullbreaker" <t>')
+		send_command('bind ^numpad4 input /ws "Shining Strike" <t>')
+		send_command('bind ^numpad5 input /ws "True Strike" <t>')
+		send_command('bind ^numpad6 input /ws "Flash Nova" <t>')
+		send_command('bind ^numpad7 input /ws "Seraph Strike" <t>')
+		send_command('bind ^numpad9 input /ws "Realmrazer" <t>')
+		send_command('bind ^numpad. input /ws "Brainshaker" <t>')
+
+		send_command([[bind !numpad- 
+			input /echo -----Club-----;
+			input /echo [ ALT + Numpad1 ]  Starlight;
+			input /echo [ ALT + Numpad2 ]  Moonlight;]])
+		send_command('bind !numpad1 input /ws "Starlight" <t>')
+		send_command('bind !numpad2 input /ws "Moonlight" <t>')
+	end
+		
 end
 
 -- Custom spell mapping.

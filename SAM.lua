@@ -51,18 +51,10 @@
 --					[ Windows + 5 ]			Sets Weapon to Soboro then locks Main/Sub Slots
 --					[ Windows + 6 ]			Sets Weapon to Malevolence then locks Main/Sub Slots
 --
---  WS:         	[ CTRL + Numpad1 ]    	Tachi: Fudo
---					[ CTRL + Numpad2 ]    	Tachi: Shoha
---					[ CTRL + Numpad3 ]    	Tachi: Kasha
---					[ CTRL + Numpad4 ]    	Tachi: Ageha
---					[ CTRL + Numpad5 ]    	Tachi: Jinpu
---					[ CTRL + Numpad6 ]    	Tachi: Yukikaze
---					[ CTRL + Numpad7 ]    	Tachi: Rana
---				
---					[ ALT + Numpad1 ]		Tachi: Kagero
---					[ ALT + Numpad2 ]		Tachi: Goten
---					[ ALT + Numpad3 ]		Tachi: Koki
---					[ ALT + Numpad4 ]		Impulse Drive
+--	Echo Binds:		[ CTRL + Numpad- ]		Shows main Weaponskill Binds in game
+--					[ ALT + Numpad- ]		Shows Alternate Weaponskill Binds in game
+--					[ Shift + Numpad- ]		Shows Item Binds in game
+--					[ Windows + Numpad- ]	Shows Food/Weapon/Misc. Binds in game
 --
 --  Abilities:  	[ CTRL + ` ]        	Hasso
 --
@@ -149,7 +141,7 @@ function user_setup()
 		input /echo [ Shift + Numpad9 ]	Prism Powder;
 		]])
 		
-	--Command to show Command binds in game[ Windows + numpad- ]		
+	--Command to show Food/Weapon/Misc binds in game[ Windows + numpad- ]	
 	send_command([[bind @numpad- 		
 		input /echo -----Food_Binds-----;
 		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
@@ -171,28 +163,6 @@ function user_setup()
 		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
 		input /echo [ Windows + D ]	Unloads then reloads dressup;
 		]])
-		
-	--Command to show Rune Fencer binds in game[ ALT + numpad- ]
-	send_command([[bind !numpad- 
-		input /echo -----Abilities-----;
-		input /echo [ CTRL + ` ] Uses Hasso;
-		input /echo [ ALT + ` ] Seigan;
-		input /echo -----Great_Katana-----;
-		input /echo [ CTRL + Numpad1 ] Tachi: Fudo;
-		input /echo [ CTRL + Numpad2 ] Tachi: Shoha;
-		input /echo [ CTRL + Numpad3 ] Tachi: Kasha;
-		input /echo [ CTRL + Numpad4 ] Tachi: Ageha;
-		input /echo [ CTRL + Numpad5 ] Tachi: Jinpu;
-		input /echo [ CTRL + Numpad6 ] Tachi: Yukikaze;
-		input /echo [ CTRL + Numpad7 ] Tachi: Rana;
-		input /echo [ ALT  + Numpad1 ] Tachi: Kagero;
-		input /echo [ ALT  + Numpad2 ] Tachi: Goten;
-		input /echo [ ALT  + Numpad3 ] Tachi: Koki;
-		input /echo -----Polearm-----;
-		input /echo [ ALT + Numpad4 ] Impulse Drive;
-		input /echo [ ALT + Numpad5 ] Stardiver;
-		input /echo [ ALT + Numpad6 ] Sonic Thrust;
-		]])
 	
 	--Weapon set Binds
 
@@ -202,23 +172,6 @@ function user_setup()
 	send_command('bind @4 gs c set WeaponSet Hachimonji')
 	send_command('bind @5 gs c set WeaponSet Soboro')
 	send_command('bind @6 gs c set WeaponSet Dagger')
-	
-	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-
-    send_command('bind ^numpad1 input /ws "Tachi: Fudo" <t>')
-    send_command('bind ^numpad2 input /ws "Tachi: Shoha" <t>')
-    send_command('bind ^numpad3 input /ws "Tachi: Kasha" <t>')
-	send_command('bind ^numpad4 input /ws "Tachi: Ageha" <t>')
-    send_command('bind ^numpad5 input /ws "Tachi: Jinpu" <t>')
-    send_command('bind ^numpad6 input /ws "Tachi: Yukikaze" <t>')
-	send_command('bind ^numpad7 input /ws "Tachi: Rana" <t>')
-
-	send_command('bind !numpad1 input /ws "Tachi: Kagero" <t>')
-	send_command('bind !numpad2 input /ws "Tachi: Goten" <t>')
-	send_command('bind !numpad3 input /ws "Tachi: Koki" <t>')
-	send_command('bind !numpad4 input /ws "Impulse Drive" <t>')
-	send_command('bind !numpad5 input /ws "Stardiver" <t>')
-	send_command('bind !numpad6 input /ws "Sonic Thrust" <t>')
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -889,6 +842,7 @@ end
 
 function job_update(cmdParams, eventArgs)
 	check_gear()
+	Weaponskill_Keybinds()
     handle_equipping_gear(player.status)
 end
 
@@ -900,12 +854,120 @@ function update_combat_form()
         state.CombatForm:reset()
     end
 
-	if state.WeaponSet.value ~= 'Dagger' then
-		equip(sets[state.WeaponSet.current])
-		equip(sets[state.GripSet.current])
-	else
-		equip(sets[state.WeaponSet.current])	
-	end	
+	if state.WeaponSet.value == 'Dojikiri' then
+		equip(sets.Dojikiri)
+		equip(sets.Utu)
+	elseif state.WeaponSet.value == 'Masamune' then
+		equip(sets.Masamune)
+		equip(sets.Utu)
+	elseif state.WeaponSet.value == 'Shining_One' then
+		equip(sets.Shining_One)
+		equip(sets.Utu)
+	elseif state.WeaponSet.value == 'Hachimonji' then
+		equip(sets.Hachimonji)
+		equip(sets.Utu)
+	elseif state.WeaponSet.value == 'Soboro' then
+		equip(sets.Soboro)
+		equip(sets.Utu)
+	elseif state.WeaponSet.value == 'Dagger' then
+		equip(sets.Dagger)
+	end
+	
+end
+
+function Weaponskill_Keybinds()
+
+	if state.WeaponSet.value == 'Dojikiri' or state.WeaponSet.value == 'Masamune' or state.WeaponSet.value == 'Hachimonji' or state.WeaponSet.value == 'Soboro' then
+		send_command([[bind ^numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + ` ] Uses Hasso;
+			input /echo -----Great_Katana-----;
+			input /echo [ CTRL + Numpad1 ] Tachi: Fudo;
+			input /echo [ CTRL + Numpad2 ] Tachi: Shoha;
+			input /echo [ CTRL + Numpad3 ] Tachi: Kasha;
+			input /echo [ CTRL + Numpad4 ] Tachi: Ageha;
+			input /echo [ CTRL + Numpad5 ] Tachi: Mumei;
+			input /echo [ CTRL + Numpad6 ] Tachi: Rana;
+			input /echo [ CTRL + Numpad7 ] Tachi: Yukikaze;
+			input /echo [ CTRL + Numpad9 ] Tachi: Enpi;
+			input /echo [ CTRL + Numpad. ] Tachi: Hobaku;]])
+		send_command('bind ^numpad1 input /ws "Tachi: Fudo" <t>')
+		send_command('bind ^numpad2 input /ws "Tachi: Shoha" <t>')
+		send_command('bind ^numpad3 input /ws "Tachi: Kasha" <t>')
+		send_command('bind ^numpad4 input /ws "Tachi: Ageha" <t>')
+		send_command('bind ^numpad5 input /ws "Tachi: Mumei" <t>')
+		send_command('bind ^numpad6 input /ws "Tachi: Rana" <t>')
+		send_command('bind ^numpad7 input /ws "Tachi: Yukikaze" <t>')
+		send_command('bind ^numpad9 input /ws "Tachi: Enpi" <t>')
+		send_command('bind ^numpad. input /ws "Tachi: Hobaku" <t>')
+		
+		send_command([[bind !numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ ALT + ` ] Seigan;
+			input /echo -----Great_Katana-----;
+			input /echo [ ALT + Numpad1 ] Tachi: Jinpu;
+			input /echo [ ALT + Numpad2 ] Tachi: Kagero;
+			input /echo [ ALT + Numpad3 ] Tachi: Gekko;
+			input /echo [ ALT + Numpad4 ] Tachi: Koki;]])
+		send_command('bind !numpad1 input /ws "Tachi: Jinpu" <t>')
+		send_command('bind !numpad2 input /ws "Tachi: Kagero" <t>')
+		send_command('bind !numpad3 input /ws "Tachi: Gekko" <t>')
+		send_command('bind !numpad4 input /ws "Tachi: Koki" <t>')
+		
+	elseif state.WeaponSet.value == 'Shining_One' then
+		send_command([[bind ^numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + ` ] Uses Hasso;
+			input /echo -----Polearm-----;
+			input /echo [ CTRL + Numpad1 ] Impulse Drive;
+			input /echo [ CTRL + Numpad2 ] Stardiver;
+			input /echo [ CTRL + Numpad3 ] Penta Thrust;
+			input /echo [ CTRL + Numpad4 ] Sonic Thrust;
+			input /echo [ CTRL + Numpad5 ] Vorpal Thrust;
+			input /echo [ CTRL + Numpad6 ] Double Thrust;
+			input /echo [ CTRL + Numpad7 ] Raiden Thrust;
+			input /echo [ CTRL + Numpad9 ] Thunder Thrust;
+			input /echo [ CTRL + Numpad. ] Leg Sweep;]])
+		send_command('bind ^numpad1 input /ws "Impulse Drive" <t>')
+		send_command('bind ^numpad2 input /ws "Stardiver" <t>')
+		send_command('bind ^numpad3 input /ws "Penta Thrust" <t>')
+		send_command('bind ^numpad4 input /ws "Sonic Thrust" <t>')
+		send_command('bind ^numpad5 input /ws "Vorpal Thrust" <t>')
+		send_command('bind ^numpad6 input /ws "Double Thrust" <t>')
+		send_command('bind ^numpad7 input /ws "Raiden Thrust" <t>')
+		send_command('bind ^numpad9 input /ws "Thunder Thrust" <t>')
+		send_command('bind ^numpad. input /ws "Leg Sweep" <t>')
+
+		send_command([[bind !numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ ALT + ` ] Seigan;]])
+		
+	elseif state.WeaponSet.value == 'Dagger' then
+		send_command([[bind ^numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + ` ] Uses Hasso;	
+			input /echo -----Dagger-----;
+			input /echo [ CTRL + Numpad1 ] Wasp Sting;
+			input /echo [ CTRL + Numpad2 ] Viper Bite;
+			input /echo [ CTRL + Numpad3 ] Cyclone;
+			input /echo [ CTRL + Numpad4 ] Aeolian Edge;
+			input /echo [ CTRL + Numpad5 ] Gust Slash;
+			input /echo [ CTRL + Numpad7 ] Energy Drain;
+			input /echo [ CTRL + Numpad9 ] Energy Steal;
+			input /echo [ CTRL + Numpad. ] Shadowstitch;]])
+		send_command('bind ^numpad1 input /ws "Wasp Sting" <t>')
+		send_command('bind ^numpad2 input /ws "Viper Bite" <t>')
+		send_command('bind ^numpad3 input /ws "Cyclone" <t>')
+		send_command('bind ^numpad4 input /ws "Aeolian Edge" <t>')
+		send_command('bind ^numpad5 input /ws "Gust Slash" <t>')
+		send_command('bind ^numpad7 input /ws "Energy Drain" <t>')
+		send_command('bind ^numpad9 input /ws "Energy Steal" <t>')
+		send_command('bind ^numpad. input /ws "Shadowstitch" <t>')
+		
+		send_command([[bind !numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ ALT + ` ] Seigan;]])
+	end
 	
 end
 

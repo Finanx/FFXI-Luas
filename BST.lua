@@ -53,22 +53,10 @@
 --					[ Windows: + 4 ]		Naegling Weapon Set
 --					[ Windows: + 5 ]		Malevolence Weapon Set
 --
---	Weaponskills:	[ CTRL + Numpad1 ]		Upheaval
---					[ CTRL + Numpad2 ]		Ukko's Furry
---					[ CTRL + Numpad3 ]		Armor Break
---					[ CTRL + Numpad4 ]		Fell Cleave
---					[ CTRL + Numpad5 ]		Steel Cyclone
---					[ CTRL + Numpad6 ]		King's Justice
---					[ CTRL + Numpad7 ]		Raging Rush
---
---					[ ALT + Numpad1 ]		Impulse Drive
---					[ ALT + Numpad2 ]		Stardiver
---					[ ALT + Numpad3 ]		Sonic Thrust
---					[ ALT + Numpad4 ]		Savage Blade
---					[ ALT + Numpad5 ]		Sanguine Blade
---					[ ALT + Numpad6 ] 		Decimation
---					[ ALT + Numpad7 ]		Judgment
---					[ ALT + Numpad9 ]		Black Halo
+--	Echo Binds:		[ CTRL + Numpad- ]		Shows main Weaponskill Binds in game
+--					[ ALT + Numpad- ]		Shows Alternate Weaponskill Binds in game
+--					[ Shift + Numpad- ]		Shows Item Binds in game
+--					[ Windows + Numpad- ]	Shows Food/Weapon/Misc. Binds in game
 --
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -194,7 +182,7 @@ function user_setup()
 		input /echo [ Shift + Numpad9 ]	Prism Powder;
 		]])
 		
-	--Command to show Command binds in game[ Windows + numpad- ]		
+	--Command to show Food/Weapon/Misc binds in game[ Windows + numpad- ]	
 	send_command([[bind @numpad- 		
 		input /echo -----Food_Binds-----;
 		input /echo [ Windows + Numpad1 ]	Sublime Sushi;

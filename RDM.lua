@@ -146,7 +146,7 @@ function user_setup()
 		input /echo [ Shift + Numpad9 ]	Prism Powder;
 		]])
 		
-	--Command to show Command binds in game[ Windows + numpad- ]		
+	--Command to show Food/Weapon/Misc binds in game[ Windows + numpad- ]		
 	send_command([[bind @numpad- 		
 		input /echo -----Food_Binds-----;
 		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
@@ -1931,20 +1931,18 @@ function Weaponskill_Keybinds()
 			input /echo [ CTRL + - ] Light Arts;
 			input /echo [ CTRL + = ] Dark Arts;	
 			input /echo -----Club-----;
-			input /echo [ ALT + Numpad1 ]  Starlight;
-			input /echo [ ALT + Numpad2 ]  Moonlight;
 			input /echo [ CTRL + Numpad1 ] Black Halo;
 			input /echo [ CTRL + Numpad2 ] True Strike;
-			input /echo [ CTRL + Numpad3 ] Shining Strike;
-			input /echo [ CTRL + Numpad4 ] Skullbreaker;
+			input /echo [ CTRL + Numpad3 ] Skullbreaker;
+			input /echo [ CTRL + Numpad4 ] Shining Strike;
 			input /echo [ CTRL + Numpad5 ] Judgment;
 			input /echo [ CTRL + Numpad6 ] Flash Nova;
 			input /echo [ CTRL + Numpad7 ] Seraph Strike;
 			input /echo [ CTRL + Numpad. ] Brainshaker;]])
 		send_command('bind ^numpad1 input /ws "Black Halo" <t>')
 		send_command('bind ^numpad2 input /ws "True Strike" <t>')
-		send_command('bind ^numpad3 input /ws "Shining Strike" <t>')
-		send_command('bind ^numpad4 input /ws "Skullbreaker" <t>')
+		send_command('bind ^numpad3 input /ws "Skullbreaker" <t>')
+		send_command('bind ^numpad4 input /ws "Shining Strike" <t>')
 		send_command('bind ^numpad5 input /ws "Judgment" <t>')
 		send_command('bind ^numpad6 input /ws "Flash Nova" <t>')
 		send_command('bind ^numpad7 input /ws "Seraph Strike" <t>')
@@ -1959,8 +1957,8 @@ function Weaponskill_Keybinds()
 		send_command('bind !numpad7 input /ws "Empyreal Arrow" <t>')
 		send_command('bind !numpad1 input /ws "Starlight" <t>')
 		send_command('bind !numpad2 input /ws "Moonlight" <t>')
-
 	end
+
 end
 
 -- Modify the default idle set after it was constructed.
