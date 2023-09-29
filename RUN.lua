@@ -118,8 +118,9 @@ function user_setup()
 	state.TreasureMode:options('Tag', 'None')
 
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Aettir', 'Lycurgos'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Aettir', 'Lycurgos', 'Dolichenus'}
 	state.GripSet = M{['description']='Grip Set', 'Refined', 'Utu'}
+	state.WeaponLock = M(false, 'Weapon Lock')
     state.CP = M(false, "Capacity Points Mode")
 
     state.Runes = M{['description']='Runes', 'Tenebrae', 'Lux', 'Ignis', 'Gelus', 'Flabra', 'Tellus', 'Sulpor', 'Unda'}
@@ -137,6 +138,7 @@ function user_setup()
     send_command('bind @c gs c toggle CP')
 	send_command('bind @t gs c cycle TreasureMode')
 	send_command('bind @e gs c cycle GripSet')
+	send_command('bind @w gs c toggle WeaponLock')
 	send_command('bind ^` input //gs c rune')
 	send_command('bind ^= gs c cycle Runes')
 	send_command('bind ^- gs c cycleback Runes')
@@ -176,53 +178,13 @@ function user_setup()
 		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
 		input /echo [ Windows + D ]	Unloads then reloads dressup;
 		]])
-		
-	--Command to show Rune Fencer binds in game[ ALT + numpad- ]
-	send_command([[bind !numpad- 
-		input /echo -----Abilities-----;
-		input /echo [ CTRL + ` ] Uses Assigned Rune;
-		input /echo [ CTRL + - ] Cycleback Runes;
-		input /echo [ CTRL + = ] Cycle Runes;
-		input /echo [ ALT + ` ] Uses Assigned Barspell;
-		input /echo [ ALT + - ] Cycleback Barspells;
-		input /echo [ ALT + = ] Cycle Barspells;
-		input /echo [ CTRL + Numpad. ] Swipe;
-		input /echo [ ALT  + Numpad. ] Lunge;
-		input /echo -----Great_Sword-----;
-		input /echo [ CTRL + Numpad1 ] Resolution;
-		input /echo [ CTRL + Numpad2 ] Dimidiation;
-		input /echo [ CTRL + Numpad3 ] Ground Strike;
-		input /echo [ CTRL + Numpad4 ] Shockwave;
-		input /echo [ CTRL + Numpad5 ] Herculean Slash;
-		input /echo -----Great_Axe-----;
-		input /echo [ ALT + Numpad1 ] Upheaval;
-		input /echo [ ALT + Numpad2 ] Steel Cyclone;
-		input /echo [ ALT + Numpad3 ] Armor Break;
-		input /echo [ ALT + Numpad4 ] Fell Cleave;
-		input /echo [ ALT + Numpad5 ] Weapon Break;
-		]])
 	
 	--Weapon set Binds
 
-	send_command('bind @1 gs c set WeaponSet Epeolatry')
-	send_command('bind @2 gs c set WeaponSet Aettir')
-	send_command('bind @3 gs c set WeaponSet Lycurgos')
-	
-	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-
-    send_command('bind ^numpad1 input /ws "Resolution" <t>')
-    send_command('bind ^numpad2 input /ws "Dimidiation" <t>')
-    send_command('bind ^numpad3 input /ws "Ground Strike" <t>')
-	send_command('bind ^numpad4 input /ws "Shockwave" <t>')
-	send_command('bind ^numpad5 input /ws "Herculean Slash" <t>')
-	send_command('bind ^numpad. input /ja "Swipe" <t>')
-	
-	send_command('bind !numpad1 input /ws "Upheaval" <t>')
-	send_command('bind !numpad2 input /ws "Steel Cyclone" <t>;')
-	send_command('bind !numpad3 input /ws "Armor Break" <t>')
-	send_command('bind !numpad4 input /ws "Fell Cleave" <t>')
-	send_command('bind !numpad5 input /ws "Weapon Break" <t>')
-    send_command('bind !numpad. input /ja "Lunge" <t>')
+	send_command('bind @1 gs c set WeaponLock off; gs c set WeaponSet Epeolatry')
+	send_command('bind @2 gs c set WeaponLock off; gs c set WeaponSet Aettir')
+	send_command('bind @3 gs c set WeaponLock off; gs c set WeaponSet Lycurgos')
+	send_command('bind @4 gs c set WeaponLock off; gs c set WeaponSet Dolichenus')
 	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
@@ -754,6 +716,23 @@ function init_gear_sets()
 		
 	sets.precast.WS['Full Break'] = sets.precast.WS['Armor Break']
 	sets.precast.WS['Weapon Break'] = sets.precast.WS['Armor Break']
+
+	sets.precast.WS['Ruinator'] = {	
+		ammo="Yamarang",
+		head="Erilaz Galea +3",
+		body="Erilaz Surcoat +3",
+		hands="Erilaz Gauntlets +3",
+		legs="Eri. Leg Guards +3",
+		feet="Erilaz Greaves +3",
+		neck="Combatant's Torque",
+		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
+		left_ear="Odr Earring",
+		right_ear="Mache Earring +1",
+		left_ring="Chirich Ring +1",
+		right_ring="Chirich Ring +1",
+		back={ name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
+		
+	sets.precast.WS['Ruinator'].Acc = sets.precast.WS['Ruinator']
     
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
@@ -824,22 +803,6 @@ function init_gear_sets()
 		left_ring="Defending Ring",
 		right_ring="Stikini Ring +1",
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},}
-	--[[{
-		ammo="Staunch Tathlum +1",																											--3%DT
-		head="Erilaz Galea +3",
-		body="Erilaz Surcoat +3",
-		hands="Erilaz Gauntlets +3",																										--11%DT
-		legs="Eri. Leg Guards +3",																											--13%DT
-		feet="Erilaz Greaves +3",																											--11%DT
-		neck={ name="Warder's Charm +1", augments={'Path: A',}},
-		waist="Flume Belt +1",																												--4%PDT
-		left_ear="Tuisto Earring",
-		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},																		--3%DT
-		left_ring="Shadow Ring",
-		right_ring="Moonlight Ring",																										--5%DT
-		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Parrying rate+5%',}},}		
-			--42% DT + 3%(Strap) 7% PDT	]]	
-	
 		
 	sets.PhalanxRecieved =    { 
 		main="Deacon Sword",
@@ -1044,7 +1007,7 @@ function init_gear_sets()
 		waist="Flume Belt +1",																												--4%PDT
 		left_ear="Tuisto Earring",
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},																		--3%DT
-		left_ring="Shadow Ring",
+		left_ring="Roller's Ring",
 		right_ring="Moonlight Ring",																										--5%DT
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Parrying rate+5%',}},}		
 			--42% DT + 3%(Strap) 7% PDT		
@@ -1144,6 +1107,7 @@ function init_gear_sets()
     sets.Epeolatry = {main={ name="Epeolatry", augments={'Path: A',}},}
     sets.Aettir = {main="Aettir"}
 	sets.Lycurgos = {main="Lycurgos"}
+	sets.Dolichenus = {main="Kaja Axe"}
 	
 	--Grip Sets
 	
@@ -1320,6 +1284,7 @@ end
 
 function job_update(cmdParams, eventArgs)
 	check_gear()
+	Weaponskill_Keybinds()
     handle_equipping_gear(player.status)
 end
 
@@ -1330,8 +1295,179 @@ function update_combat_form()
     elseif DW == false then
         state.CombatForm:reset()
     end
-	equip(sets[state.WeaponSet.current])
-	equip(sets[state.GripSet.current])
+
+	if state.WeaponSet.value == 'Epeolatry' then
+		if state.WeaponLock.value == true then
+			equip(sets.Epeolatry)
+			disable('main')
+		else
+			equip(sets.Epeolatry)
+		end
+	elseif state.WeaponSet.value == 'Aettir' then
+		if state.WeaponLock.value == true then
+			equip(sets.Aettir)
+			disable('main')
+		else
+			equip(sets.Aettir)
+		end
+	elseif state.WeaponSet.value == 'Lycurgos' then
+		if state.WeaponLock.value == true then
+			equip(sets.Lycurgos)
+			disable('main')
+		else
+			equip(sets.Lycurgos)
+		end
+	elseif state.WeaponSet.value == 'Dolichenus' then
+		if state.WeaponLock.value == true then
+			equip(sets.Dolichenus)
+			disable('main')
+		else
+			equip(sets.Dolichenus)
+		end
+	end
+	
+	if state.WeaponSet.value ~= 'Dolichenus' then
+		if state.GripSet.value == 'Refined' then
+			if state.WeaponLock.value == true then
+			equip(sets.Refined)
+				disable('sub')
+			else
+			equip(sets.Refined)
+			end
+		elseif state.GripSet.value == 'Utu' then
+			if state.WeaponLock.value == true then
+				equip(sets.Utu)
+				disable('sub')
+			else
+				equip(sets.Utu)
+			end
+		end
+	end
+
+end
+
+function Weaponskill_Keybinds()
+
+	if state.WeaponSet.value == 'Epeolatry' or state.WeaponSet.value == 'Aettir' then
+		send_command([[bind ^numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + ` ] Uses Assigned Rune;
+			input /echo [ CTRL + - ] Cycleback Runes;
+			input /echo [ CTRL + = ] Cycle Runes;
+			input /echo -----Great_Sword-----;
+			input /echo [ CTRL + Numpad1 ] Resolution;
+			input /echo [ CTRL + Numpad2 ] Dimidiation;
+			input /echo [ CTRL + Numpad3 ] Ground Strike;
+			input /echo [ CTRL + Numpad4 ] Shockwave;
+			input /echo [ CTRL + Numpad5 ] Herculean Slash;
+			input /echo [ CTRL + Numpad6 ] Spinning Slash;
+			input /echo [ CTRL + Numpad7 ] Sickle Moon;
+			input /echo [ CTRL + Numpad9 ] Crescent Moon;
+			input /echo [ CTRL + Numpad. ] Swipe;]])
+		send_command('bind ^numpad1 input /ws "Resolution" <t>')
+		send_command('bind ^numpad2 input /ws "Dimidiation" <t>')
+		send_command('bind ^numpad3 input /ws "Ground Strike" <t>')
+		send_command('bind ^numpad4 input /ws "Shockwave" <t>')
+		send_command('bind ^numpad5 input /ws "Herculean Slash" <t>')
+		send_command('bind ^numpad6 input /ws "Spinning Slash" <t>')
+		send_command('bind ^numpad7 input /ws "Sickle Moon" <t>')
+		send_command('bind ^numpad9 input /ws "Crescent Moon" <t>')
+		send_command('bind ^numpad. input /ja "Swipe" <t>')
+
+		send_command([[bind !numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ ALT + ` ] Uses Assigned Barspell;
+			input /echo [ ALT + - ] Cycleback Barspells;
+			input /echo [ ALT + = ] Cycle Barspells;		
+			input /echo -----Great_Sword-----;
+			input /echo [ ALT + Numpad1 ] Hard Slash;
+			input /echo [ ALT + Numpad1 ] Power Slash;
+			input /echo [ ALT + Numpad1 ] Freezebite;
+			input /echo [ ALT + Numpad1 ] Frostbite;
+			input /echo [ ALT  + Numpad. ] Lunge;]])
+		send_command('bind !numpad1 input /ws "Hard Slash" <t>')
+		send_command('bind !numpad2 input /ws "Power Slash" <t>')
+		send_command('bind !numpad3 input /ws "Freezebite" <t>')
+		send_command('bind !numpad4 input /ws "Frostbite" <t>')
+		send_command('bind !numpad. input /ja "Lunge" <t>')
+			
+	elseif state.WeaponSet.value == 'Lycurgos' then
+		send_command([[bind ^numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + ` ] Uses Assigned Rune;
+			input /echo [ CTRL + - ] Cycleback Runes;
+			input /echo [ CTRL + = ] Cycle Runes;
+			input /echo -----Great_Axe-----;
+			input /echo [ CTRL + Numpad1 ] Upheaval;
+			input /echo [ CTRL + Numpad2 ] Steel Cyclone;
+			input /echo [ CTRL + Numpad3 ] Armor Break;
+			input /echo [ CTRL + Numpad4 ] Fell Cleave;
+			input /echo [ CTRL + Numpad5 ] Weapon Break;
+			input /echo [ CTRL + Numpad6 ] Shield Break;
+			input /echo [ CTRL + Numpad7 ] Keen Edge;
+			input /echo [ CTRL + Numpad9 ] Sturmwind;
+			input /echo [ CTRL + Numpad. ] Swipe;]])
+		send_command('bind ^numpad1 input /ws "Upheaval" <t>')
+		send_command('bind ^numpad2 input /ws "Steel Cyclone" <t>')
+		send_command('bind ^numpad3 input /ws "Armor Break" <t>')
+		send_command('bind ^numpad4 input /ws "Fell Cleave" <t>')
+		send_command('bind ^numpad5 input /ws "Weapon Break" <t>')
+		send_command('bind ^numpad6 input /ws "Shield Break" <t>')
+		send_command('bind ^numpad7 input /ws "Keen Edge" <t>')
+		send_command('bind ^numpad9 input /ws "Sturmwind" <t>')
+		send_command('bind ^numpad. input /ja "Swipe" <t>')
+
+		send_command([[bind !numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ ALT + ` ] Uses Assigned Barspell;
+			input /echo [ ALT + - ] Cycleback Barspells;
+			input /echo [ ALT + = ] Cycle Barspells;		
+			input /echo -----Great_Axe-----;
+			input /echo [ ALT + Numpad1 ] Iron Tempest;
+			input /echo [ ALT  + Numpad. ] Lunge;]])
+		send_command('bind !numpad1 input /ja "Iron Tempest" <t>')
+		send_command('bind !numpad. input /ja "Lunge" <t>')
+		
+	elseif state.WeaponSet.value == 'Dolichenus' then
+		send_command([[bind ^numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ CTRL + ` ] Uses Assigned Rune;
+			input /echo [ CTRL + - ] Cycleback Runes;
+			input /echo [ CTRL + = ] Cycle Runes;
+			input /echo -----Great_Axe-----;
+			input /echo [ CTRL + Numpad1 ] Decimation;
+			input /echo [ CTRL + Numpad2 ] Ruinator;
+			input /echo [ CTRL + Numpad3 ] Bora Axe;
+			input /echo [ CTRL + Numpad4 ] Rampage;
+			input /echo [ CTRL + Numpad5 ] Gale Axe;
+			input /echo [ CTRL + Numpad6 ] Avalanche Axe;
+			input /echo [ CTRL + Numpad7 ] Spinning Axe;
+			input /echo [ CTRL + Numpad9 ] Raging Axe;
+			input /echo [ CTRL + Numpad. ] Swipe;]])
+		send_command('bind ^numpad1 input /ws "Decimation" <t>')
+		send_command('bind ^numpad2 input /ws "Ruinator" <t>')
+		send_command('bind ^numpad3 input /ws "Bora Axe" <t>')
+		send_command('bind ^numpad4 input /ws "Rampage" <t>')
+		send_command('bind ^numpad5 input /ws "Gale Axe" <t>')
+		send_command('bind ^numpad6 input /ws "Avalanche Axe" <t>')
+		send_command('bind ^numpad7 input /ws "Spinning Axe" <t>')
+		send_command('bind ^numpad9 input /ws "Raging Axe" <t>')
+		send_command('bind ^numpad. input /ja "Swipe" <t>')
+
+		send_command([[bind !numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ ALT + ` ] Uses Assigned Barspell;
+			input /echo [ ALT + - ] Cycleback Barspells;
+			input /echo [ ALT + = ] Cycle Barspells;		
+			input /echo -----Great_Axe-----;
+			input /echo [ ALT + Numpad1 ] Smash Axe;
+			input /echo [ ALT  + Numpad. ] Lunge;]])
+		send_command('bind !numpad1 input /ja "Smash Axe" <t>')
+		send_command('bind !numpad. input /ja "Lunge" <t>')
+	end
+
+
+
 end
 
 -- Modify the default idle set after it was constructed.

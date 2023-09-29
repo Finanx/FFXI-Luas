@@ -202,7 +202,6 @@ function user_setup()
     state.Auto_Kite = M(false, 'Auto_Kite')
     moving = false
     update_combat_form()
-	determine_impetus()
 end
 
 
@@ -654,6 +653,36 @@ function init_gear_sets()
 		left_ring="Gere Ring",
 		right_ring="Niqmaddu Ring",
 		back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10',}},}
+		
+	sets.precast.WS["Cataclysm"] = {
+		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
+		head="Pixie Hairpin +1",
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck="Sibyl Scarf",
+		waist="Orpheus's Sash",
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Friomisi Earring",
+		left_ring="Archon Ring",
+		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		
+	sets.precast.WS["Earth Crusher"] = {
+		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck="Sibyl Scarf",
+		waist="Orpheus's Sash",
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Friomisi Earring",
+		left_ring="Shiva Ring +1",
+		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 	
     -- Midcast Sets
     sets.midcast.FastRecast = {
@@ -742,6 +771,21 @@ function init_gear_sets()
 		right_ring="Niqmaddu Ring",
 		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 		
+	sets.engaged.Hybrid.Impetus = {
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head="Bhikku Crown +2",
+		body="Bhikku Cyclas +2",
+		hands="Mpaca's Gloves",
+		legs="Bhikku Hose +2",
+		feet="Mpaca's Boots",
+		neck={ name="Mnk. Nodowa +2", augments={'Path: A',}},
+		waist="Moonbow Belt +1",
+		left_ear="Sherida Earring",
+		right_ear={ name="Schere Earring", augments={'Path: A',}},
+		left_ring="Gere Ring",
+		right_ring="Niqmaddu Ring",
+		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+		
 	sets.engaged.Counter = {
 		ammo="Crepuscular Pebble",
 		head="Bhikku Crown +2",
@@ -760,11 +804,10 @@ function init_gear_sets()
     -- Defensive melee hybrid sets
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
-	sets.engaged.Counter = set_combine(sets.engaged, sets.engaged.Counter)
 	sets.engaged.Acc.Counter = sets.engaged.Counter
 	
-    sets.engaged.Impetus.DT = set_combine(sets.engaged.Impetus, sets.engaged.Hybrid)
-    sets.engaged.Acc.Impetus.DT = set_combine(sets.engaged.Acc.Impetus, sets.engaged.Hybrid)
+    sets.engaged.Impetus.DT = set_combine(sets.engaged, sets.engaged.Hybrid.Impetus)
+    sets.engaged.Acc.Impetus.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid.Impetus)
     sets.engaged.Impetus.Counter = sets.engaged.Counter
     sets.engaged.Acc.Impetus.Counter = sets.engaged.Counter
 		
@@ -871,7 +914,6 @@ end
 -- Handles Gearinfo / Melee / Weapon / Range Sets
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
-	determine_impetus()
 	check_moving()
 end
 
@@ -883,6 +925,11 @@ end
 
 	--Determines Dual Wield melee set
 function update_combat_form()
+	if state.Buff['Impetus'] == true then
+        state.CombatForm:set('Impetus')
+    elseif state.Buff['Impetus'] == false then
+        state.CombatForm:reset()
+    end
 
 	if state.WeaponSet.value == 'Godhands' then
 		equip(sets.Godhands)
@@ -951,7 +998,7 @@ function Weaponskill_Keybinds()
 		send_command('unbind !numpad-')
 		
 	end
-
+	
 end
 
 function customize_idle_set(idleSet)
@@ -998,6 +1045,7 @@ function display_current_job_state(eventArgs)
     if state.TreasureMode.value == 'Tag' then
         msg = msg .. ' TH: Tag |'
     end
+	
     if state.Kiting.value then
         msg = msg .. ' Kiting: On |'
     end
@@ -1013,16 +1061,6 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
-
-	--Determines Impetus Engaged Melee set
-function determine_impetus()
-    classes.CustomMeleeGroups:clear()
-	
-	if state.Buff['Impetus'] == true then
-		classes.CustomMeleeGroups:append('Impetus')
-    end
-	
-end
 
 	--Gear Info Functions
 function job_self_command(cmdParams, eventArgs)
