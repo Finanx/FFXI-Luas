@@ -1155,12 +1155,12 @@ function Weaponskill_Keybinds()
 		send_command([[bind !numpad- 
 			input /echo -----Great_Axe-----;
 			input /echo [ ALT + Numpad1 ] Iron Tempest;
-			input /echo [ ALT + Numpad1 ] Sturmwind;
-			input /echo [ ALT + Numpad1 ] Keen Edge;
+			input /echo [ ALT + Numpad2 ] Sturmwind;
+			input /echo [ ALT + Numpad3 ] Keen Edge;
 			input /echo [ ALT  + Numpad. ] Shield Break;]])
 		send_command('bind !numpad1 input /ja "Iron Tempest" <t>')
-		send_command('bind !numpad1 input /ja "Sturmwind" <t>')
-		send_command('bind !numpad1 input /ja "Keen Edge" <t>')
+		send_command('bind !numpad2 input /ja "Sturmwind" <t>')
+		send_command('bind !numpad3 input /ja "Keen Edge" <t>')
 		send_command('bind !numpad. input /ja "Shield Break" <t>')
 
 	elseif state.WeaponSet.value == 'Naegling' then
@@ -1270,13 +1270,13 @@ function Weaponskill_Keybinds()
 		send_command([[bind !numpad- 
 			input /echo -----Axe-----;
 			input /echo [ ALT + Numpad1 ] Smash Axe;
-			input /echo [ ALT + Numpad1 ] Mistral Axe;
-			input /echo [ ALT + Numpad1 ] Calamity;
-			input /echo [ ALT + Numpad1 ] Cloudsplitter;]])
+			input /echo [ ALT + Numpad2 ] Mistral Axe;
+			input /echo [ ALT + Numpad3 ] Calamity;
+			input /echo [ ALT + Numpad4 ] Cloudsplitter;]])
 		send_command('bind !numpad1 input /ja "Smash Axe" <t>')
-		send_command('bind !numpad1 input /ja "Mistral Axe" <t>')
-		send_command('bind !numpad1 input /ja "Calamity" <t>')
-		send_command('bind !numpad1 input /ja "Cloudsplitter" <t>')
+		send_command('bind !numpad2 input /ja "Mistral Axe" <t>')
+		send_command('bind !numpad3 input /ja "Calamity" <t>')
+		send_command('bind !numpad4 input /ja "Cloudsplitter" <t>')
 	end
 
 end

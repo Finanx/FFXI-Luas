@@ -151,10 +151,6 @@ function user_setup()
 	send_command('bind @2 gs c set WeaponSet Karambit')
 	send_command('bind @3 gs c set WeaponSet Xoanon')
 
-	--Weaponskill Binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-
-
-	
 	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
 	send_command('bind ~numpad1 input /item "Echo Drops" <me>')
@@ -359,7 +355,7 @@ function init_gear_sets()
     sets.precast.JA['Chakra'] = {    
 		ammo="Aurgelmir Orb +1",
 		head={ name="Hes. Crown +3", augments={'Enhances "Penance" effect',}},
-		body="Anch. Cyclas +1",
+		body="Anch. Cyclas +2",
 		hands={ name="Hes. Gloves +3", augments={'Enhances "Invigorate" effect',}},
 		legs={ name="Mpaca's Hose", augments={'Path: A',}},
 		feet="Bhikku Gaiters +2",

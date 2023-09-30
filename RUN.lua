@@ -205,22 +205,22 @@ function user_setup()
 
 	--Gear Retrieval Scripts (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
 	
-	send_command('wait 10; input //get Sors Shield sack')
 	send_command('wait 10; input //get Aettir case')
 	send_command('wait 10; input //get Deacon Sword case')
 	send_command('wait 10; input //get Epeolatry case')
 	send_command('wait 10; input //get Lycurgos case')
 	send_command('wait 10; input //get Morgelai case')
+	send_command('wait 10; input //get Kaja Axe case')
 	send_command('wait 10; input //get Refined Grip +1 sack')
 	send_command('wait 10; input //get Utu Grip sack')
 	
 	send_command([[bind @i ;
-		input //get Sors Shield sack;
 		input //get Aettir case;
 		input //get Deacon Sword case;
 		input //get Epeolatry case;
 		input //get Lycurgos case;
 		input //get Morgelai case;
+		input //get Kaja Axe case;
 		input //get Refined Grip +1 sack;
 		input //get Utu Grip sack;
 		]])
@@ -342,12 +342,12 @@ function user_unload()
 	
 	--Gear Removal Scripts
 	
-	send_command('input //put Sors Shield sack')
 	send_command('input //put Aettir case')
 	send_command('input //put Deacon Sword case')
 	send_command('input //put Epeolatry case')
 	send_command('input //put Lycurgos case')
 	send_command('input //put Morgelai case')
+	send_command('input //put Kaja Axe case')
 	send_command('input //put Refined Grip +1 sack')
 	send_command('input //put Utu Grip sack')
 
@@ -715,8 +715,8 @@ function init_gear_sets()
 		hands="Erilaz Gauntlets +3",
 		legs="Eri. Leg Guards +3",
 		feet="Erilaz Greaves +3",
-		neck="Combatant's Torque",
-		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
+		neck="Fotia Gorget",
+		waist="Fotia Belt",
 		left_ear="Odr Earring",
 		right_ear="Mache Earring +1",
 		left_ring="Chirich Ring +1",
@@ -780,7 +780,6 @@ function init_gear_sets()
     
     sets.midcast['Phalanx'] = {
 		main="Deacon Sword",
-		sub="Sors Shield",
 		ammo="Staunch Tathlum +1",
 		head={ name="Fu. Bandeau +3", augments={'Enhances "Battuta" effect',}},
 		body={ name="Taeon Tabard", augments={'Phalanx +3',}},
@@ -797,7 +796,6 @@ function init_gear_sets()
 		
 	sets.PhalanxRecieved =    { 
 		main="Deacon Sword",
-		sub="Sors Shield",
 		head={ name="Fu. Bandeau +3", augments={'Enhances "Battuta" effect',}},
 		body={ name="Taeon Tabard", augments={'Phalanx +3',}},
 		hands={ name="Taeon Gloves", augments={'"Recycle"+7','Phalanx +3',}},
@@ -1292,6 +1290,7 @@ function update_combat_form()
 			equip(sets.Epeolatry)
 			disable('main')
 		else
+			enable('main')
 			equip(sets.Epeolatry)
 		end
 	elseif state.WeaponSet.value == 'Aettir' then
@@ -1299,6 +1298,7 @@ function update_combat_form()
 			equip(sets.Aettir)
 			disable('main')
 		else
+			enable('main')
 			equip(sets.Aettir)
 		end
 	elseif state.WeaponSet.value == 'Lycurgos' then
@@ -1306,6 +1306,7 @@ function update_combat_form()
 			equip(sets.Lycurgos)
 			disable('main')
 		else
+			enable('main')
 			equip(sets.Lycurgos)
 		end
 	elseif state.WeaponSet.value == 'Dolichenus' then
@@ -1313,6 +1314,7 @@ function update_combat_form()
 			equip(sets.Dolichenus)
 			disable('main')
 		else
+			enable('main')
 			equip(sets.Dolichenus)
 		end
 	end
@@ -1320,16 +1322,18 @@ function update_combat_form()
 	if state.WeaponSet.value ~= 'Dolichenus' then
 		if state.GripSet.value == 'Refined' then
 			if state.WeaponLock.value == true then
-			equip(sets.Refined)
+				equip(sets.Refined)
 				disable('sub')
 			else
-			equip(sets.Refined)
+				enable('sub')
+				equip(sets.Refined)
 			end
 		elseif state.GripSet.value == 'Utu' then
 			if state.WeaponLock.value == true then
 				equip(sets.Utu)
 				disable('sub')
 			else
+				enable('sub')
 				equip(sets.Utu)
 			end
 		end
