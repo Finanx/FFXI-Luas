@@ -98,12 +98,12 @@ function user_setup()
 
 	--Includes Global Bind keys
 	
-	send_command('exec Global-Binds.txt')
+	send_command('wait 1; exec Global-Binds.txt')
 
     --Scholar binds	
 
-	send_command('exec /SCH/SCH-Binds.txt')
-	
+	send_command('wait 2; exec /SCH/SCH-Binds.txt')
+
 	--Gear Retrieval Scripts
 	
 	send_command('wait 10; exec /SCH/SCH-Gear-Retrieval.txt')
@@ -124,7 +124,7 @@ end
 function user_unload()
 	enable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
 
-	--Remove Global Scholar Binds
+	--Remove Global Binds
 
 	send_command('exec Global-UnBinds.txt')
 	
@@ -133,8 +133,6 @@ function user_unload()
 	send_command('exec /SCH/SCH-Gear-Removal.txt')
 	
 end
-
-
 
 -- Define sets and vars used by this job file.
 function init_gear_sets()

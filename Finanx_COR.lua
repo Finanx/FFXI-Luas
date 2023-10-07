@@ -116,139 +116,17 @@ function user_setup()
     gear.QDbullet = "Devastating Bullet"
     options.ammo_warning_limit = 10
 	
-	--Load Gearinfo/Dressup Lua
+	--Includes Global Bind keys
 	
-    send_command('wait 3; lua l gearinfo')
-	send_command('wait 10; lua l Dressup')
-
-	--Global Corsair binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	send_command('wait 1; exec Global-Binds.txt')
 	
-	send_command('bind @u input //gi ugs')
-	send_command('bind @d input //lua u dressup; wait 10; input //lua l dressup')	
-    send_command ('bind ^` gs c toggle LuzafRing')
-	send_command('bind @t gs c cycle TreasureMode')
-	send_command('bind ^space tc nearest')
+	--Corsair Binds
 	
-	--Command to show Item binds in game[ Shift + numpad- ]
-	send_command([[bind ~numpad- 
-		input /echo -----Item_Binds-----;
-		input /echo [ Shift + Numpad1 ]	Echo Drop;
-		input /echo [ Shift + Numpad2 ]	Holy Water;
-		input /echo [ Shift + Numpad3 ]	Remedy;
-		input /echo [ Shift + Numpad4 ]	Panacea;
-		input /echo [ Shift + Numpad7 ]	Silent Oil;
-		input /echo [ Shift + Numpad9 ]	Prism Powder;
-		input /echo [ CTRL  + Numpad. ] Uses Chrono Bullet Pouch;
-		input /echo [ Windows  + Numpad. ] Uses Living Bullet Pouch;
-		input /echo [ Alt  + Numpad. ] Uses Devastating Bullet Pouch;
-		]])
-		
-	--Command to show Food/Weapon/Misc binds in game[ Windows + numpad- ]		
-	send_command([[bind @numpad- 		
-		input /echo -----Food_Binds-----;
-		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
-		input /echo [ Windows + Numpad2 ]	Grape Daifuku;
-		input /echo [ Windows + Numpad3 ]	Tropical Crepe;
-		input /echo [ Windows + Numpad4 ]	Miso Ramen;
-		input /echo [ Windows + Numpad5 ]	Red Curry Bun;
-		input /echo [ Windows + Numpad6 ]	Rolan. Daifuku;
-		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
-		input /echo -----Modes-----;
-		input /echo [ CTRL + ` ]	Toggles Luzaf Ring;
-		input /echo [ Windows + 1 ]	Sets Weapon to Naegling;
-		input /echo [ Windows + 2 ]	Sets Weapon to Rostam;
-		input /echo [ Windows + 6 ]	Sets Weapon to TP Gun;
-		input /echo [ Windows + 7 ]	Sets Weapon to Earp;
-		input /echo [ Windows + 8 ]	Sets Weapon to Armageddon;
-		input /echo [ Windows + 9 ]	Sets Weapon to Fomalhaut;
-		input /echo [ Windows + 0 ]	Sets Weapon to Death Penalty;
-		input /echo -----Toggles-----;
-		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
-		input /echo [ Windows + D ]	Unloads then reloads dressup;
-		]])
-		
-	--Weapon set Binds
+	send_command('wait 2; exec /COR/COR-Binds.txt')
 	
-	send_command('bind @1 gs c set WeaponSet Naegling')
-	send_command('bind @2 gs c set WeaponSet Rostam')
+	--Gear Retrieval Script
 	
-	send_command('bind @6 gs c set RangeSet TP_Gun')
-	send_command('bind @7 gs c set RangeSet Earp')
-	send_command('bind @8 gs c set RangeSet Armageddon')
-	send_command('bind @9 gs c set RangeSet Fomalhaut')
-	send_command('bind @0 gs c set RangeSet DeathPenalty')
-	
-	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	send_command('bind ~numpad1 input /item "Echo Drops" <me>')
-	send_command('bind ~numpad2 input /item "Holy Water" <me>')
-    send_command('bind ~numpad3 input /item "Remedy" <me>')
-    send_command('bind ~numpad4 input /item "Panacea" <me>')
-	send_command('bind ~numpad7 input /item "Silent Oil" <me>')
-	send_command('bind ~numpad9 input /item "Prism Powder" <me>')
-	
-	send_command('bind @numpad1 input /item "Sublime Sushi" <me>')
-	send_command('bind @numpad2 input /item "Grape Daifuku" <me>')
-	send_command('bind @numpad3 input /item "Tropical Crepe" <me>')
-	send_command('bind @numpad4 input /item "Miso Ramen" <me>')
-	send_command('bind @numpad5 input /item "Red Curry Bun" <me>')
-	send_command('bind @numpad6 input /item "Rolan. Daifuku" <me>')
-	send_command('bind @numpad7 input //get Toolbag (Shihe) satchel; wait 3; input /item "Toolbag (Shihei)" <me>')
-	send_command('bind @numpad9 input /item "Trump Card Case" <me>')
-		
-	--Ranged Scripts (Tags CTRL + Numpad0 as ranged attack) (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-
-	send_command('bind ^numpad0 input /ra <t>')
-
-	--Warp scripts (this allows the ring to stay in your satchel fulltime) (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-
-	send_command('bind ^numpad+ input //get Warp Ring satchel; wait 1; input /equip Ring1 "Warp Ring"; wait 12; input /item "Warp Ring" <me>; wait 60; input //put Warp Ring satchel')
-	send_command('bind !numpad+ input //get Dim. Ring (Dem) satchel; wait 1; input /equip Ring1 "Dim. Ring (Dem)"; wait 12; input /item "Dim. Ring (Dem)" <me>; wait 60; input //put Dim. Ring (Dem) satchel')
-	
-	--Ammo Scripts (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-    send_command('bind ^numpad. input //get Chr. Bul. Pouch satchel; wait 1; input /equip waist "Chr. Bul. Pouch"; wait 15; input /item "Chr. Bul. Pouch" <me>; wait 5; input /equip waist; input //put Chr. Bul. Pouch satchel')
-    send_command('bind @numpad. input //get Liv. Bul. Pouch satchel; wait 1; input /equip waist "Liv. Bul. Pouch"; wait 15; input /item "Liv. Bul. Pouch" <me>; wait 5; input /equip waist; input //put Liv. Bul. Pouch satchel')
-	send_command('bind !numpad. input //get Dev. Bul. Pouch satchel; wait 1; input /equip waist "Dev. Bul. Pouch"; wait 15; input /item "Dev. Bul. Pouch" <me>; wait 5; input /equip waist; input //put Dev. Bul. Pouch satchel')
-	
-	--Gear Retrieval Scripts (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	send_command('wait 10; input //get Chrono Bullet satchel all')
-	send_command('wait 10; input //get Devastating Bullet satchel all')
-	send_command('wait 10; input //get Living Bullet satchel all')
-	send_command('wait 10; input //get Trump Card satchel all')
-	send_command('wait 10; input //get Shihei satchel all')
-	
-	send_command('wait 10; input //get Nusku Shield sack')
-	send_command('wait 10; input //get Anarchy +2 case')
-	send_command('wait 10; input //get Armageddon case')
-	send_command('wait 10; input //get Compensator case')
-	send_command('wait 10; input //get Death Penalty case')
-	send_command('wait 10; input //get Earp case')
-	send_command('wait 10; input //get Fomalhaut case')
-	send_command('wait 10; input //get Gleti\'s Knife case')
-	send_command('wait 10; input //get Kustawi +1 case')
-	send_command('wait 10; input //get Naegling case')
-	send_command('wait 10; input //get Rostam case all')
-	
-	send_command([[bind @i ;
-		input //get Nusku Shield sack;
-		input //get Anarchy +2 case;
-		input //get Armageddon case;
-		input //get Compensator case;
-		input //get Death Penalty case;
-		input //get Earp case;
-		input //get Fomalhaut case;
-		input //get Gleti\'s Knife case;
-		input //get Kustawi +1 case;
-		input //get Naegling case;
-		input //get Rostam case all;
-		input //get Chrono Bullet satchel all;
-		input //get Devastating Bullet satchel all;
-		input //get Living Bullet satchel all;
-		input //get Trump Card satchel all;
-		input //get Shihei satchel all;
-		]])
+	send_command('wait 10; exec /COR/COR-Gear-Retrieval.txt')
 		
 	--Job Settings
 	
@@ -269,137 +147,16 @@ end
 
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
-
 	enable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
 
-	--Remove Global Corsair Binds
+	--Remove Global Binds
 
-	send_command('unbind @u')
-	send_command('unbind @d')
-	send_command('unbind @e')	
-    send_command('unbind @w')
-	send_command('unbind @r')
-    send_command('unbind @c')
-	send_command('unbind @t')
-	send_command('unbind @b')
-	send_command('unbind @m')
-	send_command('unbind @i')
-	send_command('unbind ^space')
-	send_command('unbind ^`')
-	send_command('unbind ^-')
-	send_command('unbind ^=')
-	send_command('unbind !`')
-	send_command('unbind !-')
-	send_command('unbind !=')
-	send_command('unbind @`')
-	send_command('unbind @-')
-	send_command('unbind @=')
-	send_command('unbind ^numpad-')
-	send_command('unbind @numpad-')
-	send_command('unbind ~numpad-')
-	send_command('unbind !numpad-')	
-
-	--Remove Weapon Set binds
+	send_command('exec Global-UnBinds.txt')
 	
-	send_command('unbind @1')
-	send_command('unbind @2')
-	send_command('unbind @3')
-	send_command('unbind @4')
-	send_command('unbind @5')
-	send_command('unbind @6')
-	send_command('unbind @7')
-	send_command('unbind @8')
-	send_command('unbind @9')
-	send_command('unbind @0')
+	--Gear Removal Script
 	
-	--Remove Weaponskill Binds
-    
-	send_command('unbind ^numpad1')
-    send_command('unbind ^numpad2')
-    send_command('unbind ^numpad3')
-    send_command('unbind ^numpad4')
-    send_command('unbind ^numpad5')
-    send_command('unbind ^numpad6')
-	send_command('unbind ^numpad7')
-	send_command('unbind ^numpad8')
-	send_command('unbind ^numpad9')
-	send_command('unbind ^numpad.')
+	send_command('exec /COR/COR-Gear-Removal.txt')
 	
-	send_command('unbind !numpad1')
-    send_command('unbind !numpad2')
-	send_command('unbind !numpad3')
-    send_command('unbind !numpad4')
-	send_command('unbind !numpad5')
-    send_command('unbind !numpad6')
-	send_command('unbind !numpad7')
-	send_command('unbind !numpad8')
-	send_command('unbind !numpad9')
-	send_command('unbind !numpad.')
-	
-	--Remove Item Binds
-	
-	send_command('unbind ~numpad1')
-    send_command('unbind ~numpad2')
-	send_command('unbind ~numpad3')
-    send_command('unbind ~numpad4')
-	send_command('unbind ~numpad5')
-    send_command('unbind ~numpad6')
-	send_command('unbind ~numpad7')
-	send_command('unbind ~numpad8')
-	send_command('unbind ~numpad9')
-	send_command('unbind ~numpad.')
-	
-	send_command('unbind @numpad1')
-    send_command('unbind @numpad2')
-	send_command('unbind @numpad3')
-    send_command('unbind @numpad4')
-	send_command('unbind @numpad5')
-    send_command('unbind @numpad6')
-	send_command('unbind @numpad7')
-	send_command('unbind @numpad8')
-	send_command('unbind @numpad9')
-	send_command('unbind @numpad.')
-	
-	--Remove Ranged Scripts
-	
-	send_command('unbind ^numpad0')
-	
-	--Remove Warp Scripts
-	
-	send_command('unbind ^numpad+')
-	send_command('unbind !numpad+')
-	
-	--Remove Ammo Scripts
-	
-	send_command('unbind ^numpad.')
-	send_command('unbind !numpad.')
-	send_command('unbind @numpad.')
-	
-	--Gear Removal Scripts
-	
-	send_command('input //put Chrono Bullet satchel all')
-	send_command('input //put Devastating Bullet satchel all')
-	send_command('input //put Living Bullet satchel all')
-	send_command('input //put Trump Card satchel all')
-	send_command('input //put Shihei satchel all')
-	
-	send_command('input //put Nusku Shield sack')
-	send_command('input //put Anarchy +2 case')
-	send_command('input //put Armageddon case')
-	send_command('input //put Compensator case')
-	send_command('input //put Death Penalty case')
-	send_command('input //put Earp case')
-	send_command('input //put Fomalhaut case')
-	send_command('input //put Gleti\'s Knife case')
-	send_command('input //put Kustawi +1 case')
-	send_command('input //put Naegling case')
-	send_command('input //put Rostam case all')
-
-	--Unload Gearinfo/Dressup Lua
-
-    send_command('lua u gearinfo')
-	send_command('lua u Dressup')
-
 end
 
 -- Define sets and vars used by this job file.

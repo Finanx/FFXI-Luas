@@ -155,128 +155,18 @@ function user_setup()
 
     state.CP = M(false, "Capacity Points Mode")
 
-	--Load Gearinfo/Dressup Lua
+	--Includes Global Bind keys
 	
-	send_command('wait 3; lua l gearinfo')
-	send_command('wait 10; lua l Dressup')
+	send_command('wait 1; exec Global-Binds.txt')
 
-	--Global Beastmaster binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	--Beast Master Binds
 	
-	send_command('bind @u input //gi ugs')
-	send_command('bind @d input //lua u dressup; wait 10; input //lua l dressup')	
-	send_command('bind @t gs c cycle TreasureMode')
-	send_command('bind @c gs c toggle CP')
-	send_command('bind @r gs c toggle Reraise')
-	send_command('bind ^- gs c cycleback JugPet')
-    send_command('bind ^= gs c cycle JugPet')
-	send_command('bind ^space tc nearest')
+	send_command('wait 2; exec /BST/BST-Binds.txt')
 	
-	--Command to show Item binds in game[ Shift + numpad- ]
-	send_command([[bind ~numpad- 
-		input /echo -----Item_Binds-----;
-		input /echo [ Shift + Numpad1 ]	Echo Drop;
-		input /echo [ Shift + Numpad2 ]	Holy Water;
-		input /echo [ Shift + Numpad3 ]	Remedy;
-		input /echo [ Shift + Numpad4 ]	Panacea;
-		input /echo [ Shift + Numpad7 ]	Silent Oil;
-		input /echo [ Shift + Numpad9 ]	Prism Powder;
-		]])
-		
-	--Command to show Food/Weapon/Misc binds in game[ Windows + numpad- ]	
-	send_command([[bind @numpad- 		
-		input /echo -----Food_Binds-----;
-		input /echo [ Windows + Numpad1 ]	Sublime Sushi;
-		input /echo [ Windows + Numpad2 ]	Grape Daifuku;
-		input /echo [ Windows + Numpad3 ]	Tropical Crepe;
-		input /echo [ Windows + Numpad4 ]	Miso Ramen;
-		input /echo [ Windows + Numpad5 ]	Red Curry Bun;
-		input /echo [ Windows + Numpad6 ]	Rolan. Daifuku;
-		input /echo [ Windows + Numpad7 ]	Toolbag (Shihei);
-		input /echo -----Modes-----;
-		input /echo [ Windows + R ]	Puts Reraise Set on;
-		input /echo [ Windows + W ]	Sets Weapon to None;
-		input /echo [ Windows + 1 ]	Sets Weapon to MACC_Axe;
-		input /echo [ Windows + 2 ]	Sets Weapon to Dolichenus;
-		input /echo [ Windows + 3 ]	Sets Weapon to Ikenga_Axe;
-		input /echo [ Windows + 4 ]	Sets Weapon to Naegling;
-		input /echo [ Windows + 5 ]	Sets Weapon to Malevolence;
-		input /echo -----Toggles-----;
-		input /echo [ Windows + U ]	Toggles Gearswap autoupdate;
-		input /echo [ Windows + D ]	Unloads then reloads dressup;
-		]])
-		
-	--Weapon set Binds
-
-	send_command('bind @1 input /equip main; gs c set WeaponSet MACC_Axe')
-	send_command('bind @2 input /equip main; gs c set WeaponSet Dolichenus')
-	send_command('bind @3 input /equip main; gs c set WeaponSet Ikenga_Axe')
-	send_command('bind @4 input /equip main; gs c set WeaponSet Naegling')
-	send_command('bind @5 input /equip main; gs c set WeaponSet Malevolence')
+	--Gear Retrieval Scripts
 	
-	send_command('bind @w input /equip sub; gs c set WeaponSet None')
+	send_command('wait 10; exec /THF/THF-Gear-Retrieval.txt')
 	
-	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	send_command('bind ~numpad1 input /item "Echo Drops" <me>')
-	send_command('bind ~numpad2 input /item "Holy Water" <me>')
-    send_command('bind ~numpad3 input /item "Remedy" <me>')
-    send_command('bind ~numpad4 input /item "Panacea" <me>')
-	send_command('bind ~numpad7 input /item "Silent Oil" <me>')
-	send_command('bind ~numpad9 input /item "Prism Powder" <me>')
-	
-	send_command('bind @numpad1 input /item "Sublime Sushi" <me>')
-	send_command('bind @numpad2 input /item "Grape Daifuku" <me>')
-	send_command('bind @numpad3 input /item "Tropical Crepe" <me>')
-	send_command('bind @numpad4 input /item "Miso Ramen" <me>')
-	send_command('bind @numpad5 input /item "Red Curry Bun" <me>')
-	send_command('bind @numpad6 input /item "Rolan. Daifuku" <me>')
-	send_command('bind @numpad7 input //get Toolbag (Shihe) satchel; wait 3; input /item "Toolbag (Shihei)" <me>')
-		
-	--Ranged Scripts (Tags CTRL + Numpad0 as ranged attack) (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-
-	send_command('bind ^numpad0 input /ra <t>')
-
-	--Warp scripts (this allows the ring to stay in your satchel fulltime) (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-
-	send_command('bind ^numpad+ input //get Warp Ring satchel; wait 1; input /equip Ring1 "Warp Ring"; wait 12; input /item "Warp Ring" <me>; wait 60; input //put Warp Ring satchel')
-	send_command('bind !numpad+ input //get Dim. Ring (Dem) satchel; wait 1; input /equip Ring1 "Dim. Ring (Dem)"; wait 12; input /item "Dim. Ring (Dem)" <me>; wait 60; input //put Dim. Ring (Dem) satchel')
-	
-	--Gear Retrieval Commands (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
-	
-	send_command('wait 10; input //get Pet Food Theta satchel all')
-	send_command('wait 10; input //get Bubbly Broth satchel all')
-	send_command('wait 10; input //get Dire Broth satchel all')
-	send_command('wait 10; input //get C. Plasma Broth satchel all')
-	
-	send_command('wait 10; input //get Adapa Shield sack')
-	send_command('wait 10; input //get Agwu\'s Axe case')
-	send_command('wait 10; input //get Arktoi case')
-	send_command('wait 10; input //get Izizoeksi case')
-	send_command('wait 10; input //get Ikenga\'s Axe case')
-	send_command('wait 10; input //get Kaidate sack')
-	send_command('wait 10; input //get Kaja Axe case')
-	send_command('wait 10; input //get Killer Shortbow case')
-	send_command('wait 10; input //get Malevolence case')
-	send_command('wait 10; input //get Naegling case')
-	
-	
-	send_command([[bind @i ;
-		input //get Adapa Shield sack;
-		input //get Agwu\'s Axe case;
-		input //get Arktoi case;
-		input //get Izizoeksi case;
-		input //get Ikenga\'s Axe case;
-		input //get Kaidate sack;
-		input //get Kaja Axe case;
-		input //get Killer Shortbow case;
-		input //get Malevolence case;
-		input //get Naegling case;
-		input //get Pet Food Theta satchel all;
-		input //get Bubbly Broth satchel all;
-		input //get Dire Broth satchel all;
-		input //get C. Plasma Broth satchel all;
-		]])
-		
 	--Job Settings
 	
 	select_default_macro_book()
@@ -293,132 +183,18 @@ function user_setup()
     determine_haste_group()
 end
 
-
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
-
 	enable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
 
-	--Remove Global Beastmaster Binds
+	--Remove Global Binds
 
-	send_command('unbind @u')
-	send_command('unbind @d')
-	send_command('unbind @e')	
-    send_command('unbind @w')
-	send_command('unbind @r')
-    send_command('unbind @c')
-	send_command('unbind @t')
-	send_command('unbind @b')
-	send_command('unbind @m')
-	send_command('unbind @i')
-	send_command('unbind ^space')
-	send_command('unbind ^`')
-	send_command('unbind ^-')
-	send_command('unbind ^=')
-	send_command('unbind !`')
-	send_command('unbind !-')
-	send_command('unbind !=')
-	send_command('unbind @`')
-	send_command('unbind @-')
-	send_command('unbind @=')
-	send_command('unbind ^numpad-')
-	send_command('unbind @numpad-')
-	send_command('unbind ~numpad-')
-	send_command('unbind !numpad-')
+	send_command('exec Global-UnBinds.txt')
 	
-	--Remove Weapon Set binds
+	--Gear Removal Script
 	
-	send_command('unbind @1')
-	send_command('unbind @2')
-	send_command('unbind @3')
-	send_command('unbind @4')
-	send_command('unbind @5')
-	send_command('unbind @6')
-	send_command('unbind @7')
-	send_command('unbind @8')
-	send_command('unbind @9')
-	send_command('unbind @0')
+	send_command('exec /BST/BST-Gear-Removal.txt')
 	
-	--Remove Weaponskill Binds
-    
-	send_command('unbind ^numpad1')
-    send_command('unbind ^numpad2')
-    send_command('unbind ^numpad3')
-    send_command('unbind ^numpad4')
-    send_command('unbind ^numpad5')
-    send_command('unbind ^numpad6')
-	send_command('unbind ^numpad7')
-	send_command('unbind ^numpad8')
-	send_command('unbind ^numpad9')
-	send_command('unbind ^numpad.')
-	
-	send_command('unbind !numpad1')
-    send_command('unbind !numpad2')
-	send_command('unbind !numpad3')
-    send_command('unbind !numpad4')
-	send_command('unbind !numpad5')
-    send_command('unbind !numpad6')
-	send_command('unbind !numpad7')
-	send_command('unbind !numpad8')
-	send_command('unbind !numpad9')
-	send_command('unbind !numpad.')
-	
-	--Remove Item Binds
-	
-	send_command('unbind ~numpad1')
-    send_command('unbind ~numpad2')
-	send_command('unbind ~numpad3')
-    send_command('unbind ~numpad4')
-	send_command('unbind ~numpad5')
-    send_command('unbind ~numpad6')
-	send_command('unbind ~numpad7')
-	send_command('unbind ~numpad8')
-	send_command('unbind ~numpad9')
-	send_command('unbind ~numpad.')
-	
-	send_command('unbind @numpad1')
-    send_command('unbind @numpad2')
-	send_command('unbind @numpad3')
-    send_command('unbind @numpad4')
-	send_command('unbind @numpad5')
-    send_command('unbind @numpad6')
-	send_command('unbind @numpad7')
-	send_command('unbind @numpad8')
-	send_command('unbind @numpad9')
-	send_command('unbind @numpad.')
-	
-	--Remove Ranged Scripts
-	
-	send_command('unbind ^numpad0')
-	
-	--Remove Warp Scripts
-	
-	send_command('unbind ^numpad+')
-	send_command('unbind !numpad+')
-	
-	--Gear Removal Scripts
-	
-	send_command('input //put Pet Food Theta satchel all')
-	send_command('input //put Bubbly Broth satchel all')
-	send_command('input //put Dire Broth satchel all')
-	send_command('input //put C. Plasma Broth satchel all')
-	
-	send_command('input //put Adapa Shield sack')
-	send_command('input //put Agwu\'s Axe case')
-	send_command('input //put Arktoi case')
-	send_command('input //put Izizoeksi case')
-	send_command('input //put Ikenga\'s Axe case')
-	send_command('input //put Kaidate sack')
-	send_command('input //put Kaja Axe case')
-	send_command('input //put Killer Shortbow case')
-	send_command('input //put Malevolence case')
-	send_command('input //put Naegling case')
-	
-	--Unload Gearinfo/Dressup Lua
-
-    send_command('lua u gearinfo')
-	send_command('lua u Dressup')
-
 end
 
 -- Define sets and vars used by this job file.
