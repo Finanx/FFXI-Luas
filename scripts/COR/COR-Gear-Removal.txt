@@ -1,0 +1,16 @@
+put Nusku Shield sack;
+put Anarchy +2 case;
+put Armageddon case;
+put Compensator case;
+put Death Penalty case;
+put Earp case;
+put Fomalhaut case;
+put Gleti\'s Knife case;
+put Kustawi +1 case;
+put Naegling case;
+put Rostam case all;
+put Chrono Bullet satchel all;
+put Devastating Bullet satchel all;
+put Living Bullet satchel all;
+put Trump Card satchel all;
+put Shihei satchel all;

@@ -1,0 +1,16 @@
+get Nusku Shield sack;
+get Anarchy +2 case;
+get Armageddon case;
+get Compensator case;
+get Death Penalty case;
+get Earp case;
+get Fomalhaut case;
+get Gleti\'s Knife case;
+get Kustawi +1 case;
+get Naegling case;
+get Rostam case all;
+get Chrono Bullet satchel all;
+get Devastating Bullet satchel all;
+get Living Bullet satchel all;
+get Trump Card satchel all;
+get Shihei satchel all;

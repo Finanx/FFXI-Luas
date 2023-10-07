@@ -1,3 +1,6 @@
+lua u gearinfo
+lua u Dressup
+
 unbind @u
 unbind @d
 unbind @e	
@@ -94,11 +97,5 @@ unbind ^numpad+
 unbind !numpad+
 unbind @numpad+
 unbind ~numpad+
-
-	
-	--Unload Gearinfo/Dressup Lua
-	
-lua u gearinfo
-lua u Dressup	
 	
 	

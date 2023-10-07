@@ -1,0 +1,8 @@
+get Dojikiri Yasutsuna case;
+get Hachimonji case;
+get Malevolence case;
+get Masamune case;
+get Shining One case;
+get Soboro Sukehiro case;
+get Ternion Dagger +1 case;
+get Utu Grip sack;

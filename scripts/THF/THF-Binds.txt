@@ -1,0 +1,25 @@
+    --Global Thief binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)	
+	
+bind @u gi ugs
+bind @d lua u dressup; wait 10; lua l dressup
+bind @t gs c cycle TreasureMode
+bind @c gs c toggle CP
+bind @b gs c toggle TPBonus
+bind ^` input /ja "Sneak Attack" <me>
+bind !` input /ja "Trick Attack" <me>
+bind ~` input /ja "Flee" <me>
+bind ^space tc nearest
+bind @i exec /THF/THF-Gear-Retrieval.txt
+
+	--Command to show Food/Weapon/Misc binds in game[ Windows + numpad- ]
+bind @numpad- exec /THF/THF-Show-Binds.txt
+	
+	--Weapon set Binds
+
+bind @1 gs c set WeaponSet Twashtar; exec /THF/THF-Dagger.txt
+bind @2 gs c set WeaponSet Mandau; exec /THF/THF-Dagger.txt
+bind @3 gs c set WeaponSet Tauret; exec /THF/THF-Dagger.txt
+bind @4 gs c set WeaponSet Naegling; exec /THF/THF-Sword.txt
+bind @5 gs c set WeaponSet Karambit; exec /THF/THF-H2H.txt
+
+exec /THF/THF-Dagger.txt

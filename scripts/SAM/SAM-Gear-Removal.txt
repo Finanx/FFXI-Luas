@@ -1,0 +1,8 @@
+put Dojikiri Yasutsuna case;
+put Hachimonji case;
+put Malevolence case;
+put Masamune case;
+put Shining One case;
+put Soboro Sukehiro case;
+put Ternion Dagger +1 case;
+put Utu Grip sack;

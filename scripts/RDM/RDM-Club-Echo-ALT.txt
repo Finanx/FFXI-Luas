@@ -1,0 +1,5 @@
+input /echo -----Bow-----;
+input /echo [ ALT + Numpad7 ]  Empyreal Arrow;
+input /echo -----Club-----;
+input /echo [ ALT + Numpad1 ]  Starlight;
+input /echo [ ALT + Numpad2 ]  Moonlight;

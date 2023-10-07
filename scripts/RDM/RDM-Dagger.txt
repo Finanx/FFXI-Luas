@@ -1,0 +1,22 @@
+bind ^numpad- exec /RDM/RDM-Dagger-Echo-CTRL.txt
+bind ^numpad1 input /ws "Evisceration" <t>
+bind ^numpad2 input /ws "Mercy Stroke" <t>
+bind ^numpad3 input /ws "Exenterator" <t>
+bind ^numpad4 input /ws "Aeolian Edge" <t>
+bind ^numpad5 input /ws "Cyclone" <t>
+bind ^numpad6 input /ws "Viper Bite" <t>
+bind ^numpad7 input /ws "Gust Slash" <t>
+bind ^numpad9 input /ws "Wasp Sting" <t>
+bind ^numpad. input /ws "Shadowstitch" <t>
+
+bind !numpad- exec /RDM/RDM-Sword-Echo-ALT.txt
+bind !numpad1 input /ws "Energy Steal" <t>
+bind !numpad2 input /ws "Energy Drain" <t>
+unbind !numpad3
+unbind !numpad4
+unbind !numpad5
+unbind !numpad6
+bind !numpad7 input /ws "Empyreal Arrow" <t>
+unbind !numpad8
+unbind !numpad9
+unbind !numpad.

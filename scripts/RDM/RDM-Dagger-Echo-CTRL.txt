@@ -1,0 +1,14 @@
+input /echo -----Abilities-----;
+input /echo [ CTRL + ` ] Composure;
+input /echo [ CTRL + - ] Light Arts;
+input /echo [ CTRL + = ] Dark Arts;		
+input /echo -----Dagger-----;
+input /echo [ CTRL + Numpad1 ] Evisceration;
+input /echo [ CTRL + Numpad2 ] Mercy Stroke;
+input /echo [ CTRL + Numpad3 ] Exenterator;
+input /echo [ CTRL + Numpad4 ] Aeolian Edge;
+input /echo [ CTRL + Numpad5 ] Cyclone;
+input /echo [ CTRL + Numpad6 ] Viper Bite;
+input /echo [ CTRL + Numpad7 ] Gust Slash;
+input /echo [ CTRL + Numpad9 ] Wasp Sting;
+input /echo [ CTRL + Numpad. ] Shadowstitch;

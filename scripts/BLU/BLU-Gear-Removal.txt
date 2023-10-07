@@ -1,0 +1,8 @@
+put Bunzi\'s Rod case;
+put Machaera +2 case;
+put Maxentius case;
+put Naegling case;
+put Sakpata\'s Sword case;
+put Tizona case;
+put Zantetsuken case;
+put Shihei satchel all;

@@ -1,0 +1,5 @@
+get Karambit case;
+get Verethragna case;
+get Godhands case;
+get Xoanon case;
+get Rigorous Grip +1 sack;

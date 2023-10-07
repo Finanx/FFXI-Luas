@@ -1,0 +1,34 @@
+    --Global Red Mage binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)	
+	
+bind @u gi ugs
+bind @d lua u dressup; wait 10; lua l dressup
+bind @m gs c toggle MagicBurst
+bind @r gs c toggle RangeLock
+bind @b gs c toggle TPBonus
+bind @t gs c cycle TreasureMode
+bind ^` input /ja "Composure" <me>
+bind ^- input /ja "Light Arts" <me>
+bind ^= input /ja "Dark Arts" <me>
+bind ^space tc nearest
+bind @i exec /RDM/RDM-Gear-Retrieval.txt
+
+	--Command to show Food/Weapon/Misc binds in game[ Windows + numpad- ]
+bind @numpad- exec /RDM/RDM-Show-Binds.txt
+	
+	--Weapon set Binds
+
+bind @1 gs c set WeaponSet Naegling; exec /RDM/RDM-Sword.txt
+bind @2 gs c set WeaponSet Crocea_Mors; exec /RDM/RDM-Sword.txt
+bind @3 gs c set WeaponSet Murgleis; exec /RDM/RDM-Sword.txt
+bind @4 gs c set WeaponSet Mandau; exec /RDM/RDM-Dagger.txt
+bind @5 gs c set WeaponSet Tauret; exec /RDM/RDM-Dagger.txt
+bind @6 gs c set WeaponSet Malevolence; exec /RDM/RDM-Dagger.txt
+bind @7 gs c set WeaponSet Maxentius; exec /RDM/RDM-Club.txt
+
+bind @w input /equip sub; gs c set WeaponSet None; exec /RDM/RDM-Sword.txt
+
+exec /RDM/RDM-Sword.txt
+	
+	--Ammo Scripts (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+
+bind @numpad. get Chapuli Quiver satchel; wait 1; input /item "Chapuli Quiver" <me>

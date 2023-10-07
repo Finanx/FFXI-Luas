@@ -1,0 +1,8 @@
+get Aettir case;
+get Deacon Sword case;
+get Epeolatry case;
+get Lycurgos case;
+get Morgelai case;
+get Kaja Axe case;
+get Refined Grip +1 sack;
+get Utu Grip sack;

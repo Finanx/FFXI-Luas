@@ -1,0 +1,27 @@
+    --Global Ninja binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	
+bind @u gi ugs
+bind @d lua u dressup; wait 10; lua l dressup
+bind @t gs c cycle TreasureMode
+bind @c gs c toggle CP
+bind @b gs c toggle TPBonus
+bind @m gs c toggle MagicBurst
+bind ^` input /ja "Yonin" <me>
+bind !` input /ja "Innin" <me>
+bind ^space tc nearest
+bind @i exec /NIN/NIN-Gear-Retrieval.txt
+
+	--Command to show Food/Weapon/Misc binds in game[ Windows + numpad- ]
+bind @numpad- exec /NIN/NIN-Show-Binds.txt
+	
+	--Weapon set Binds
+
+bind @1 input /equip sub; gs c set WeaponSet Heishi; exec /NIN/NIN-Katana.txt
+bind @2 input /equip sub; gs c set WeaponSet Gokotai; exec /NIN/NIN-Katana.txt
+bind @3 input /equip sub; gs c set WeaponSet Naegling; exec /NIN/NIN-Sword.txt
+bind @4 input /equip sub; gs c set WeaponSet Tauret; exec /NIN/NIN-Dagger.txt
+bind @5 input /equip sub; gs c set WeaponSet Kaja_Tachi; exec /NIN/NIN-Great_Katana.txt
+bind @6 input /equip sub; gs c set WeaponSet Hachimonji; exec /NIN/NIN-Great_Katana.txt
+bind @w gs c toggle WeaponLock
+
+exec /NIN/NIN-Katana.txt

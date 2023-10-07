@@ -5,7 +5,7 @@ input /echo [ Windows + Numpad3 ]	Tropical Crepe;
 input /echo [ Windows + Numpad4 ]	Miso Ramen; 
 input /echo [ Windows + Numpad5 ]	Red Curry Bun; 
 input /echo [ Windows + Numpad6 ]	Rolan. Daifuku; 
-input /echo [ Windows + Numpad7 ]	Toolbag (Shihei); 
+input /echo [ Windows + Numpad7 ]	Antacid; 
 input /echo -----Modes-----; 
 input /echo [ Windows + M ]	Toggles Magic Burst Mode; 
 input /echo [ Windows + S ]	Toggles Subtle Blow Mode; 

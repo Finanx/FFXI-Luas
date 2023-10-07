@@ -1,0 +1,14 @@
+input /echo -----Abilities-----;
+input /echo [ CTRL + ` ] Composure;
+input /echo [ CTRL + - ] Light Arts;
+input /echo [ CTRL + = ] Dark Arts;
+input /echo -----Sword-----;
+input /echo [ CTRL + Numpad1 ] Sanguine Blade;
+input /echo [ CTRL + Numpad2 ] Seraph Blade;
+input /echo [ CTRL + Numpad3 ] Requiescat;
+input /echo [ CTRL + Numpad4 ] Savage Blade;
+input /echo [ CTRL + Numpad5 ] Chant Du Cygne;
+input /echo [ CTRL + Numpad6 ] Death Blossom;
+input /echo [ CTRL + Numpad7 ] Red Lotus Blade;
+input /echo [ CTRL + Numpad9 ] Vorpal Blade;
+input /echo [ CTRL + Numpad. ] Flat Blade;

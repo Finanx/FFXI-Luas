@@ -1,0 +1,14 @@
+put Gleti\'s Knife case;
+put Tauret case;
+put Gokotai case;
+put Hachimonji case;
+put Heishi Shorinken case;
+put Kaja Tachi case;
+put Kunimitsu case;
+put Rigorous Grip +1 sack;
+put Naegling case;
+put Shihei satchel all;
+put Chonofuda satchel all;
+put Shikanofuda satchel all;
+put Inoshishinofuda satchel all;
+put Seki Shuriken satchel all;

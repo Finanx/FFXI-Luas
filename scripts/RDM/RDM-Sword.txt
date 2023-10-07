@@ -1,0 +1,22 @@
+bind ^numpad- exec /RDM/RDM-Sword-Echo-CTRL.txt
+bind ^numpad1 input /ws "Sanguine Blade" <t>
+bind ^numpad2 input /ws "Seraph Blade" <t>
+bind ^numpad3 input /ws "Requiescat" <t>
+bind ^numpad4 input /ws "Savage Blade" <t>
+bind ^numpad5 input /ws "Chant du Cygne" <t>
+bind ^numpad6 input /ws "Death Blossom" <t>
+bind ^numpad7 input /ws "Red Lotus Blade" <t>
+bind ^numpad9 input /ws "Vorpal Blade" <t>
+bind ^numpad. input /ws "Flat Blade" <t>
+
+bind !numpad- exec /RDM/RDM-Sword-Echo-ALT.txt
+bind !numpad1 input /ws "Fast Blade" <t>
+bind !numpad2 input /ws "Burning Blade" <t>
+bind !numpad3 input /ws "Shining Blade" <t>
+bind !numpad4 input /ws "Circle Blade" <t>
+bind !numpad5 input /ws "Spirits Within" <t>
+unbind !numpad6
+bind !numpad7 input /ws "Empyreal Arrow" <t>
+unbind !numpad8
+unbind !numpad9
+unbind !numpad.

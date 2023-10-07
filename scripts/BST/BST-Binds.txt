@@ -1,0 +1,26 @@
+	--Global Beastmaster binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	
+bind @u gi ugs
+bind @d lua u dressup; wait 10; lua l dressup	
+bind @t gs c cycle TreasureMode
+bind @c gs c toggle CP
+bind @r gs c toggle Reraise
+bind ^- gs c cycleback JugPet
+bind ^= gs c cycle JugPet
+bind ^space tc nearest
+bind @i exec /BST/BST-Gear-Retrieval.txt
+
+	--Command to show Food/Weapon/Misc binds in game[ Windows + numpad- ]
+bind @numpad- exec /BST/BST-Show-Binds.txt
+	
+	--Weapon set Binds
+
+bind @1 input /equip main; gs c set WeaponSet MACC_Axe; exec /BST/BST-Axe.txt
+bind @2 input /equip main; gs c set WeaponSet Dolichenus; exec /BST/BST-Axe.txt
+bind @3 input /equip main; gs c set WeaponSet Ikenga_Axe; exec /BST/BST-Axe.txt
+bind @4 input /equip main; gs c set WeaponSet Naegling; exec /BST/BST-Sword.txt
+bind @5 input /equip main; gs c set WeaponSet Malevolence; exec /BST/BST-Dagger.txt
+	
+bind @w input /equip sub; gs c set WeaponSet None
+
+exec /BST/BST-Axe.txt

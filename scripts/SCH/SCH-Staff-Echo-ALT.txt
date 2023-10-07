@@ -1,3 +1,6 @@
-input /echo -----Club-----;
-input /echo [ ALT + Numpad1 ]  Starlight;
-input /echo [ ALT + Numpad2 ]  Moonlight;
+input /echo -----Staff-----;
+input /echo [ ALT + Numpad1 ] Sunburst;
+input /echo [ ALT + Numpad2 ] Starburst;
+input /echo [ ALT + Numpad3 ] Rock Crusher;
+input /echo [ ALT + Numpad4 ] Earth Crusher;
+input /echo [ ALT + Numpad5 ] Heavy Swing;

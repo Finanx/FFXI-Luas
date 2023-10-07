@@ -1,0 +1,7 @@
+get Twashtar case;
+get Gleti\'s Knife case;
+get Fusetto +2 case;
+get Karambit case;
+get Mandau case;
+get Naegling case;
+get Tauret case;
