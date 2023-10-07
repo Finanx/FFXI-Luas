@@ -1273,10 +1273,10 @@ function Weaponskill_Keybinds()
 			input /echo [ ALT + Numpad2 ] Mistral Axe;
 			input /echo [ ALT + Numpad3 ] Calamity;
 			input /echo [ ALT + Numpad4 ] Cloudsplitter;]])
-		send_command('bind !numpad1 input /ja "Smash Axe" <t>')
-		send_command('bind !numpad2 input /ja "Mistral Axe" <t>')
-		send_command('bind !numpad3 input /ja "Calamity" <t>')
-		send_command('bind !numpad4 input /ja "Cloudsplitter" <t>')
+		send_command('bind !numpad1 input /ws "Smash Axe" <t>')
+		send_command('bind !numpad2 input /ws "Mistral Axe" <t>')
+		send_command('bind !numpad3 input /ws "Calamity" <t>')
+		send_command('bind !numpad4 input /ws "Cloudsplitter" <t>')
 	end
 
 end

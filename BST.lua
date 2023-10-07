@@ -1309,12 +1309,7 @@ end
 
 function job_state_change(field, new_value, old_value)
  
-	if state.Reraise.value == true then
-        equip(sets.Reraise)
-        disable('head', 'body')
-    else
-        enable('head', 'body')
-    end
+
 	
 end
 
@@ -1424,6 +1419,13 @@ function update_combat_form()
 			disable('main','sub')
 		end
 	end
+	
+	if state.Reraise.value == true then
+        equip(sets.Reraise)
+        disable('head', 'body')
+    else
+        enable('head', 'body')
+    end
 
 end
 
