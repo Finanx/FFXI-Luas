@@ -18,7 +18,7 @@
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
 --              	[ Windows + I ]     	Pulls all items in Gear Retrieval
 --
--- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
+-- Warp Scripts:	[ CTRL + Numpad+ ]		Warp Ring
 --					[ ALT + Numpad+ ]		Dimensional Ring Dem
 --					[ Windows + Numpad+ ]	Dimensional Ring Holla
 --					[ Shift + Numpad+ ]		Dimensional Ring Mea
@@ -104,33 +104,9 @@ function user_setup()
 
 	send_command('exec /SCH/SCH-Binds.txt')
 	
-	--Gear Retrieval Scripts (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	--Gear Retrieval Scripts
 	
-	send_command('wait 10; get Ammurapi Shield sack')
-	send_command('wait 10; get Bunzi\'s Rod case')
-	send_command('wait 10; get Chatoyant Staff case')
-	send_command('wait 10; get Culminus sack')
-	send_command('wait 10; get Daybreak case')
-	send_command('wait 10; get Genmei Shield sack')
-	send_command('wait 10; get Khonsu sack')
-	send_command('wait 10; get Maxentius case')
-	send_command('wait 10; get Mpaca\'s Staff case')
-	send_command('wait 10; get Musa case')
-	send_command('wait 10; get Xoanon case')
-	
-	send_command([[bind @i ;
-		get Ammurapi Shield sack;
-		get Bunzi\'s Rod case;
-		get Chatoyant Staff case;
-		get Culminus sack;
-		get Daybreak case;
-		get Genmei Shield sack;
-		get Khonsu sack;
-		get Maxentius case;
-		get Mpaca\'s Staff case;
-		get Musa case;
-		get Xoanon case;
-		]])
+	send_command('wait 10; exec /SCH/SCH-Gear-Retrieval.txt')
 	
 	--Job settings
 
@@ -150,119 +126,11 @@ function user_unload()
 
 	--Remove Global Scholar Binds
 
-	send_command('unbind @u')
-	send_command('unbind @d')
-	send_command('unbind @e')	
-    send_command('unbind @w')
-	send_command('unbind @r')
-    send_command('unbind @c')
-	send_command('unbind @t')
-	send_command('unbind @b')
-	send_command('unbind @m')
-	send_command('unbind @i')
-	send_command('unbind ^space')
-	send_command('unbind ^`')
-	send_command('unbind ^-')
-	send_command('unbind ^=')
-	send_command('unbind !`')
-	send_command('unbind !-')
-	send_command('unbind !=')
-	send_command('unbind @`')
-	send_command('unbind @-')
-	send_command('unbind @=')
-	send_command('unbind ^numpad-')
-	send_command('unbind @numpad-')
-	send_command('unbind ~numpad-')
-	send_command('unbind !numpad-')
+	send_command('exec Global-UnBinds.txt')
 	
-	--Remove Weapon Set binds
+	--Gear Removal Script
 	
-	send_command('unbind @1')
-	send_command('unbind @2')
-	send_command('unbind @3')
-	send_command('unbind @4')
-	send_command('unbind @5')
-	send_command('unbind @6')
-	send_command('unbind @7')
-	send_command('unbind @8')
-	send_command('unbind @9')
-	send_command('unbind @0')
-	
-	--Remove Weaponskill Binds
-    
-	send_command('unbind ^numpad1')
-    send_command('unbind ^numpad2')
-    send_command('unbind ^numpad3')
-    send_command('unbind ^numpad4')
-    send_command('unbind ^numpad5')
-    send_command('unbind ^numpad6')
-	send_command('unbind ^numpad7')
-	send_command('unbind ^numpad8')
-	send_command('unbind ^numpad9')
-	send_command('unbind ^numpad.')
-	
-	send_command('unbind !numpad1')
-    send_command('unbind !numpad2')
-	send_command('unbind !numpad3')
-    send_command('unbind !numpad4')
-	send_command('unbind !numpad5')
-    send_command('unbind !numpad6')
-	send_command('unbind !numpad7')
-	send_command('unbind !numpad8')
-	send_command('unbind !numpad9')
-	send_command('unbind !numpad.')
-	
-	--Remove Item Binds
-	
-	send_command('unbind ~numpad1')
-    send_command('unbind ~numpad2')
-	send_command('unbind ~numpad3')
-    send_command('unbind ~numpad4')
-	send_command('unbind ~numpad5')
-    send_command('unbind ~numpad6')
-	send_command('unbind ~numpad7')
-	send_command('unbind ~numpad8')
-	send_command('unbind ~numpad9')
-	send_command('unbind ~numpad.')
-	
-	send_command('unbind @numpad1')
-    send_command('unbind @numpad2')
-	send_command('unbind @numpad3')
-    send_command('unbind @numpad4')
-	send_command('unbind @numpad5')
-    send_command('unbind @numpad6')
-	send_command('unbind @numpad7')
-	send_command('unbind @numpad8')
-	send_command('unbind @numpad9')
-	send_command('unbind @numpad.')
-	
-	--Remove Ranged Scripts
-	
-	send_command('unbind ^numpad0')
-	
-	--Remove Warp Scripts
-	
-	send_command('unbind ^numpad+')
-	send_command('unbind !numpad+')
-	
-	--Gear Removal Scripts
-	
-	send_command('put Ammurapi Shield sack')
-	send_command('put Bunzi\'s Rod case')
-	send_command('put Chatoyant Staff case')
-	send_command('put Culminus sack')
-	send_command('put Daybreak case')
-	send_command('put Genmei Shield sack')
-	send_command('put Khonsu sack')
-	send_command('put Maxentius case')
-	send_command('put Mpaca\'s Staff case')
-	send_command('put Musa case')
-	send_command('put Xoanon case')
-	
-	--Unload Gearinfo/Dressup Lua
-	
-    send_command('lua u gearinfo')
-	send_command('lua u Dressup')	
+	send_command('exec /SCH/SCH-Gear-Removal.txt')
 	
 end
 

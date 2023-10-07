@@ -18,23 +18,10 @@
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
 --              	[ Windows + I ]     	Pulls all items in Gear Retrieval
 --
--- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
---					[ Shift + Numpad2 ]		Holy Water
---					[ Shift + Numpad3 ]		Remedy
---					[ Shift + Numpad4 ]		Panacea
---					[ Shift + Numpad7 ]		Silent Oil
---					[ Shift + Numpad9 ]		Prism Powder
---
---					[ Windows + Numpad1 ]	Sublime Sushi
---					[ Windows + Numpad2 ]	Grape Daifuku
---					[ Windows + Numpad3 ]	Tropical Crepe
---					[ Windows + Numpad4 ]	Miso Ramen
---					[ Windows + Numpad5 ]	Red Curry Bun
---					[ Windows + Numpad6 ]	Rolan. Daifuku
---					[ Windows + Numpad7 ]	Toolbag (Shihei)
---
--- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
+-- Warp Scripts:	[ CTRL + Numpad+ ]		Warp Ring
 --					[ ALT + Numpad+ ]		Dimensional Ring Dem
+--					[ Windows + Numpad+ ]	Dimensional Ring Holla
+--					[ Shift + Numpad+ ]		Dimensional Ring Mea
 --
 -- Range Script:	[ CTRL + Numpad0 ] 		Ranged Attack
 --
@@ -54,22 +41,10 @@
 --					[ Windows + 6 ]			Sets Weapon to Xoanon then locks Main/Sub Slots
 --
 --	Echo Binds:		[ CTRL + Numpad- ]		Shows main Weaponskill Binds in game
---					[ ALT + Numpad- ]		Shows Alternate Weaponskill Binds in game
+--					[ ALT + Numpad- ]		Shows Song Binds in game
 --					[ Shift + Numpad- ]		Shows Item Binds in game
 --					[ Windows + Numpad- ]	Shows Food/Weapon/Misc. Binds in game
 --
--- Song Binds:		[ ALT + Numpad1 ]		Cycle Carol	I
---					[ ALT + Numpad2 ]		Cast Carol I
---					[ ALT + Numpad3 ]		Cycle Back Carol I
---					[ ALT + Numpad4 ]		Cycle Carol II
---					[ ALT + Numpad5 ]		Cast Carol II
---					[ ALT + Numpad6 ]		Cycle Back Carol II
---					[ ALT + Numpad7 ]		Cycle Etude
---					[ ALT + Numpad8 ]		Cast Etude
---					[ ALT + Numpad9 ]		Cycle Back Etude
---					[ ALT + ` ]				Cycle Threnody II
---					[ ALT + - ]				Cast Threnody II
---					[ ALT + = ]				Cycle Back Threnody II
 --					
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.

@@ -17,23 +17,10 @@
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
 --              	[ Windows + I ]     	Pulls all items in Gear Retrieval
 --
--- Item Binds:		[ Shift + Numpad1 ]		Echo Drop
---					[ Shift + Numpad2 ]		Holy Water
---					[ Shift + Numpad3 ]		Remedy
---					[ Shift + Numpad4 ]		Panacea
---					[ Shift + Numpad7 ]		Silent Oil
---					[ Shift + Numpad9 ]		Prism Powder
---
---					[ Windows + Numpad1 ]	Sublime Sushi
---					[ Windows + Numpad2 ]	Grape Daifuku
---					[ Windows + Numpad3 ]	Tropical Crepe
---					[ Windows + Numpad4 ]	Miso Ramen
---					[ Windows + Numpad5 ]	Red Curry Bun
---					[ Windows + Numpad6 ]	Rolan. Daifuku
---					[ Windows + Numpad7 ]	Toolbag (Shihei)
---
--- Warp Script:		[ CTRL + Numpad+ ]		Warp Ring
+-- Warp Scripts:	[ CTRL + Numpad+ ]		Warp Ring
 --					[ ALT + Numpad+ ]		Dimensional Ring Dem
+--					[ Windows + Numpad+ ]	Dimensional Ring Holla
+--					[ Shift + Numpad+ ]		Dimensional Ring Mea
 --
 -- Range Script:	[ CTRL + Numpad0 ] 		Ranged Attack
 --
