@@ -1,0 +1,6 @@
+get Warp Ring satchel; 
+wait 1; 
+input /equip Ring1 "Warp Ring"; 
+wait 12; input /item "Warp Ring" <me>; 
+wait 60; 
+put Warp Ring satchel

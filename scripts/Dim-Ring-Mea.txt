@@ -1,0 +1,7 @@
+get Dim. Ring (Mea) satchel; 
+wait 1; 
+input /equip Ring1 "Dim. Ring (Mea)"; 
+wait 12; 
+input /item "Dim. Ring (Mea)" <me>; 
+wait 60; 
+put Dim. Ring (Mea) satchel

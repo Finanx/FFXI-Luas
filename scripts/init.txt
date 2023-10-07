@@ -1,0 +1,11 @@
+keyboard_allowmmf 1
+
+console_position 15 50
+console_color 255 255 0 0
+console_displayactivity 1
+console_fadedelay 3500
+console_screendir screenshots
+
+bind f12 showfps
+bind sysrq screenshot jpg hide
+bind ^v paste

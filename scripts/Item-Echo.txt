@@ -1,0 +1,7 @@
+input /echo -----Item_Binds-----; 
+input /echo [ Shift + Numpad1 ]	Echo Drop; 
+input /echo [ Shift + Numpad2 ]	Holy Water; 
+input /echo [ Shift + Numpad3 ]	Remedy; 
+input /echo [ Shift + Numpad4 ]	Panacea; 
+input /echo [ Shift + Numpad7 ]	Silent Oil; 
+input /echo [ Shift + Numpad9 ]	Prism Powder;

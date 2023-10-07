@@ -1,0 +1,37 @@
+	--Command to show Item binds in game[ Shift + numpad- ]
+bind ~numpad- exec Item-Echo.txt
+
+
+	--Item binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	
+bind ~numpad1 input /item "Echo Drops" <me>
+bind ~numpad2 input /item "Holy Water" <me>
+bind ~numpad3 input /item "Remedy" <me>
+bind ~numpad4 input /item "Panacea" <me>
+bind ~numpad7 input /item "Silent Oil" <me>
+bind ~numpad9 input /item "Prism Powder" <me>
+
+bind @numpad1 input /item "Sublime Sushi" <me>
+bind @numpad2 input /item "Grape Daifuku" <me>
+bind @numpad3 input /item "Tropical Crepe" <me>
+bind @numpad4 input /item "Miso Ramen" <me>
+bind @numpad5 input /item "Red Curry Bun" <me>
+bind @numpad6 input /item "Rolan. Daifuku" <me>
+bind @numpad7 exec Toolbag-Shihei.txt
+
+	--Ranged Scripts  (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	
+bind ^numpad0 input /ra <t>
+
+	--Warp scripts (this allows the ring to stay in your satchel fulltime) (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+	
+bind ^numpad+ exec Warp Script.txt
+bind !numpad+ exec Dim-Ring-Dem.txt
+bind @numpad+ exec Dim-Ring-Holla.txt
+bind ~numpad+ exec Dim-Ring-Mea.txt
+
+	--Load Gearinfo/Dressup Lua
+wait 3; lua l gearinfo;
+wait 7; lua l Dressup;
+	
+	

@@ -1,0 +1,22 @@
+bind ^numpad- exec /SCH/SCH-Staff-Echo-CTRL.txt
+bind ^numpad1 input /ws "Judgment" <t>
+bind ^numpad2 input /ws "Black Halo" <t>
+bind ^numpad3 input /ws "Skullbreaker" <t>
+bind ^numpad4 input /ws "Shining Strike" <t>
+bind ^numpad5 input /ws "True Strike" <t>
+bind ^numpad6 input /ws "Flash Nova" <t>
+bind ^numpad7 input /ws "Seraph Strike" <t>
+bind ^numpad9 input /ws "Realmrazer" <t>
+bind ^numpad. input /ws "Brainshaker" <t>
+
+bind !numpad- exec /SCH/SCH-Staff-Echo-ALT.txt
+bind !numpad1 input /ws "Starlight" <t>
+bind !numpad2 input /ws "Moonlight" <t>
+unbind !numpad3
+unbind !numpad4
+unbind !numpad5
+unbind !numpad6
+unbind !numpad7
+unbind !numpad8
+unbind !numpad9
+unbind !numpad.
