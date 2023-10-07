@@ -10,13 +10,14 @@ bind @c gs c toggle CP
 bind ^- input /ja "Light Arts" <me>
 bind ^= input /ja "Dark Arts" <me>
 bind ^space tc nearest
+bind @i exec /SCH/SCH-Gear-Retrieval.txt
 
 	--Command to show Food/Weapon/Misc binds in game[ Windows + numpad- ]
 bind @numpad- exec /SCH/SCH_Show_Binds.txt
 	
 	--Weapon set Binds
 
-bind @1 gs c set WeaponSet Maxentius
+bind @1 gs c set WeaponSet Maxentius; exec /SCH/SCH-Club.txt
 bind @2 gs c set WeaponSet Xoanon; exec /SCH/SCH-Staff.txt
 bind @3 gs c set WeaponSet Musa; exec /SCH/SCH-Staff.txt
 bind @w input /equip sub; gs c set WeaponSet None; exec /SCH/SCH-Staff.txt

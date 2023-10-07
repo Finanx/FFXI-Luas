@@ -1,0 +1,104 @@
+unbind @u
+unbind @d
+unbind @e	
+unbind @w
+unbind @r
+unbind @c
+unbind @t
+unbind @b
+unbind @m
+unbind @i
+unbind ^space
+unbind ^`
+unbind ^-
+unbind ^=
+unbind !`
+unbind !-
+unbind !=
+unbind @`
+unbind @-
+unbind @=
+unbind ^numpad-
+unbind @numpad-
+unbind ~numpad-
+unbind !numpad-
+	
+	--Remove Weapon Set binds
+	
+unbind @1
+unbind @2
+unbind @3
+unbind @4
+unbind @5
+unbind @6
+unbind @7
+unbind @8
+unbind @9
+unbind @0
+	
+	--Remove Weaponskill Binds
+    
+unbind ^numpad1
+unbind ^numpad2
+unbind ^numpad3
+unbind ^numpad4
+unbind ^numpad5
+unbind ^numpad6
+unbind ^numpad7
+unbind ^numpad8
+unbind ^numpad9
+unbind ^numpad.
+	
+unbind !numpad1
+unbind !numpad2
+unbind !numpad3
+unbind !numpad4
+unbind !numpad5
+unbind !numpad6
+unbind !numpad7
+unbind !numpad8
+unbind !numpad9
+unbind !numpad.
+	
+	--Remove Item Binds
+	
+unbind ~numpad1
+unbind ~numpad2
+unbind ~numpad3
+unbind ~numpad4
+unbind ~numpad5
+unbind ~numpad6
+unbind ~numpad7
+unbind ~numpad8
+unbind ~numpad9
+unbind ~numpad.
+	
+unbind @numpad1
+unbind @numpad2
+unbind @numpad3
+unbind @numpad4
+unbind @numpad5
+unbind @numpad6
+unbind @numpad7
+unbind @numpad8
+unbind @numpad9
+unbind @numpad.
+	
+	--Remove Ranged Scripts
+	
+unbind ^numpad0
+	
+	--Remove Warp Scripts
+	
+unbind ^numpad+
+unbind !numpad+
+unbind @numpad+
+unbind ~numpad+
+
+	
+	--Unload Gearinfo/Dressup Lua
+	
+lua u gearinfo
+lua u Dressup	
+	
+	
