@@ -63,7 +63,7 @@ function job_setup()
     state.Buff['Sublimation: Activated'] = buffactive['Sublimation: Activated'] or false
     state.RegenMode = M{['description']='Regen Mode', 'Potency', 'Duration'}
     state.CP = M(false, "Capacity Points Mode")
-
+	
     update_active_strategems()
 	
 	include('Mote-TreasureHunter')
@@ -98,7 +98,7 @@ function user_setup()
 
 	--Includes Global Bind keys
 	
-	send_command('wait 1; exec Global-Binds.txt')
+	send_command('wait 2; exec Global-Binds.txt')
 
     --Scholar binds	
 
@@ -126,11 +126,11 @@ function user_unload()
 
 	--Remove Global Binds
 
-	send_command('exec Global-UnBinds.txt')
+	send_command('wait 1; exec Global-UnBinds.txt')
 	
 	--Gear Removal Script
 	
-	send_command('exec /SCH/SCH-Gear-Removal.txt')
+	send_command('wait 1; exec /SCH/SCH-Gear-Removal.txt')
 	
 end
 
@@ -413,7 +413,7 @@ function init_gear_sets()
 		main={ name="Musa", augments={'Path: C',}},
 		sub="Khonsu",
 		ammo="Sapience Orb",
-		head={ name="Amalric Coif +1", augments={'INT+12','Mag. Acc.+25','Enmity-6',}},
+		head={ name="Amalric Coif +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
 		hands={ name="Telchine Gloves", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +9',}},
 		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
@@ -430,7 +430,7 @@ function init_gear_sets()
 		main={ name="Musa", augments={'Path: C',}},
 		sub="Khonsu",
 		ammo="Sapience Orb",
-		head={ name="Amalric Coif +1", augments={'INT+12','Mag. Acc.+25','Enmity-6',}},
+		head={ name="Amalric Coif +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		body={ name="Telchine Chas.", augments={'Enh. Mag. eff. dur. +10',}},
 		hands={ name="Telchine Gloves", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +9',}},
 		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
@@ -464,7 +464,7 @@ function init_gear_sets()
 		main={ name="Musa", augments={'Path: C',}},
 		sub="Khonsu",
 		ammo="Sapience Orb",
-		head={ name="Amalric Coif +1", augments={'INT+12','Mag. Acc.+25','Enmity-6',}},
+		head={ name="Amalric Coif +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
 		hands="Regal Cuffs",
 		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
@@ -650,10 +650,10 @@ function init_gear_sets()
 		sub="Culminus",
 		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
 		head={ name="Agwu's Cap", augments={'Path: A',}},
-		body={ name="Agwu's Robe", augments={'Path: A',}},
-		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
+		body="Arbatel Gown +3",
+		hands="Arbatel Bracers +3",
 		legs={ name="Agwu's Slops", augments={'Path: A',}},
-		feet={ name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}},
+		feet="Arbatel Loafers +3",
 		neck={ name="Argute Stole +2", augments={'Path: A',}},
 		waist="Skrymir Cord +1",
 		left_ear="Regal Earring",
@@ -681,16 +681,16 @@ function init_gear_sets()
 	
 	sets.midcast.Helix.MagicBurst = {
 		main={ name="Bunzi's Rod", augments={'Path: A',}},
-		sub="Ammurapi Shield",
+		sub="Culminus",
 		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
-		head={ name="Peda. M.Board +3", augments={'Enh. "Altruism" and "Focalization"',}},
+		head={ name="Agwu's Cap", augments={'Path: A',}},
 		body={ name="Agwu's Robe", augments={'Path: A',}},
 		hands={ name="Agwu's Gages", augments={'Path: A',}},
-		legs={ name="Agwu's Slops", augments={'Path: A',}},
+		legs="Arbatel Pants +3",
 		feet="Arbatel Loafers +3",
 		neck={ name="Argute Stole +2", augments={'Path: A',}},
 		waist="Skrymir Cord +1",
-		left_ear="Malignance Earring",
+		left_ear="Regal Earring",
 		right_ear={ name="Arbatel Earring +1", augments={'System: 1 ID: 1676 Val: 0','Mag. Acc.+13','Enmity-3',}},
 		left_ring="Mujin Band",
 		right_ring="Freke Ring",
@@ -698,7 +698,7 @@ function init_gear_sets()
 		
 	sets.midcast.Helix.MagicBurstEbullience = {
 		main={ name="Bunzi's Rod", augments={'Path: A',}},
-		sub="Ammurapi Shield",
+		sub="Culminus",
 		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
 		head="Arbatel Bonnet +3",
 		body={ name="Agwu's Robe", augments={'Path: A',}},
@@ -707,14 +707,14 @@ function init_gear_sets()
 		feet="Arbatel Loafers +3",
 		neck={ name="Argute Stole +2", augments={'Path: A',}},
 		waist="Skrymir Cord +1",
-		left_ear="Malignance Earring",
+		left_ear="Regal Earring",
 		right_ear={ name="Arbatel Earring +1", augments={'System: 1 ID: 1676 Val: 0','Mag. Acc.+13','Enmity-3',}},
 		left_ring="Mujin Band",
 		right_ring="Freke Ring",
-		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}	
+		back={ name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
 
-    sets.midcast.DarkHelix = set_combine(sets.midcast.Helix, {head="Pixie Hairpin +1",left_ring="Archon Ring",})
-    sets.midcast.DarkHelix.MagicBurst = set_combine(sets.midcast.Helix.MagicBurst, {head="Pixie Hairpin +1",right_ring="Archon Ring",})
+    sets.midcast.DarkHelix = set_combine(sets.midcast.Helix, {left_ring="Archon Ring",})
+    sets.midcast.DarkHelix.MagicBurst = set_combine(sets.midcast.Helix.MagicBurst, {right_ring="Archon Ring",})
     sets.midcast.DarkHelix.MagicBurstEbullience = set_combine(sets.midcast.Helix.MagicBurst, {head="Arbatel Bonnet +3",right_ring="Archon Ring",})
 
     sets.midcast.LightHelix = set_combine(sets.midcast.Helix,{main="Daybreak",sub="Ammurapi Shield",})
@@ -867,41 +867,35 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 			end
 		end
 		
-        if spellMap == "Helix" then
-			if state.Subtle_Blow.value == true and state.Buff.Immanence then
-				equip(sets.midcast.Subtle_Blow)
-			else
-				if state.MagicBurst.value == true then
-					if state.Buff.Ebullience then
-						equip(sets.midcast.Helix.MagicBurstEbullience)
-					else
-						equip(sets.midcast.Helix.MagicBurst)
-					end
-
-					if spell.english:startswith('Lumino') then
-						equip(sets.midcast.LightHelix.MagicBurst)
-					elseif spell.english:startswith('Nocto') then
-						equip(sets.midcast.DarkHelix.MagicBurst)
-						if state.Buff.Ebullience and spell.english:startswith('Lumino') then
-							equip(sets.midcast.LightHelix.MagicBurstEbullience)
-						elseif state.Buff.Ebullience and spell.english:startswith('Nocto') then
-							equip(sets.midcast.DarkHelix.MagicBurstEbullience)
-						end
-					end
-				else 
-					equip(sets.midcast.Helix)
-						if spell.english:startswith('Lumino') then
-							equip(sets.midcast.LightHelix)
-						elseif spell.english:startswith('Nocto') then
-							equip(sets.midcast.DarkHelix)
-						end
+        if spell.english == 'Geohelix' or spell.english == 'Luminohelix' or spell.english == 'Noctohelix' then
+			equip(sets.midcast.Subtle_Blow)
+		elseif spell.name:endswith('helix II') then
+			if state.MagicBurst.value == true then
+				if state.Buff.Ebullience then
+					equip(sets.midcast.Helix.MagicBurstEbullience)
+				else
+					equip(sets.midcast.Helix.MagicBurst)
 				end
+				if spell.english == 'Luminohelix II' then
+					equip(sets.midcast.LightHelix.MagicBurst)
+					if state.Buff.Ebullience then
+						equip(sets.midcast.LightHelix.MagicBurstEbullience)
+					end
+				elseif spell.english == 'Noctohelix II' then
+					equip(sets.midcast.DarkHelix.MagicBurst)
+					if state.Buff.Ebullience then
+						equip(sets.midcast.DarkHelix.MagicBurstEbullience)
+					end
+				end
+			else 
+				equip(sets.midcast.Helix)
+					if spell.english == 'Luminohelix II' then
+						equip(sets.midcast.LightHelix)
+					elseif spell.english == 'Noctohelix II' then
+						equip(sets.midcast.DarkHelix)
+					end
 			end
-			
-			--[[if state.Buff.Klimaform and spell.element == world.weather_element then
-				equip(sets.buff['Klimaform'])
-			end]]
-        end
+		end
 		
     end
 	

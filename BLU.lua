@@ -210,7 +210,7 @@ function user_setup()
     state.CastingMode:options('Normal')
     state.IdleMode:options('Normal', 'Refresh')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Tizona', 'Maxentius', 'Bunzi', 'Mboze'}
+	state.WeaponSet = M{['description']='Weapon Set', 'Tizona', 'Naegling', 'Maxentius', 'Bunzi', 'Mboze'}
 	state.EvasiveMode = M(false, 'EvasiveMode')
 
     state.CP = M(false, "Capacity Points Mode")
@@ -218,7 +218,7 @@ function user_setup()
 
 	--Includes Global Bind keys
 	
-	send_command('wait 1; exec Global-Binds.txt')
+	send_command('wait 2; exec Global-Binds.txt')
 
 	--Blue Mage Binds
 	
@@ -250,11 +250,11 @@ function user_unload()
 
 	--Remove Global Binds
 
-	send_command('exec Global-UnBinds.txt')
+	send_command('wait 1; exec Global-UnBinds.txt')
 	
 	--Gear Removal Script
 	
-	send_command('exec /BLU/BLU-Gear-Removal.txt')
+	send_command('wait 1; exec /BLU/BLU-Gear-Removal.txt')
 	
 end
 
@@ -420,7 +420,7 @@ function init_gear_sets()
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear={ name="Hashi. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Dbl.Atk."+4',}},
+		right_ear={ name="Hashi. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Dbl.Atk."+4',}},
 		left_ring="Epaminondas's Ring",
 		right_ring="Epona's Ring",
 		back={ name="Rosmerta's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
@@ -546,7 +546,7 @@ function init_gear_sets()
 		neck={ name="Mirage Stole +2", augments={'Path: A',}},
 		waist="Eschan Stone",
 		left_ear="Telos Earring",
-		right_ear={ name="Hashi. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Dbl.Atk."+4',}},
+		right_ear={ name="Hashi. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Dbl.Atk."+4',}},
 		left_ring="Ilabrat Ring",
 		right_ring="Excelsis Ring",
 		back={ name="Rosmerta's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
@@ -561,7 +561,7 @@ function init_gear_sets()
 		neck={ name="Mirage Stole +2", augments={'Path: A',}},
 		waist="Eschan Stone",
 		left_ear="Telos Earring",
-		right_ear={ name="Hashi. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Dbl.Atk."+4',}},
+		right_ear={ name="Hashi. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Dbl.Atk."+4',}},
 		left_ring="Ilabrat Ring",
 		right_ring="Excelsis Ring",
 		back={ name="Rosmerta's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
@@ -618,7 +618,7 @@ function init_gear_sets()
 		neck={ name="Mirage Stole +2", augments={'Path: A',}},
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Crep. Earring",
-		right_ear={ name="Hashi. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Dbl.Atk."+4',}},
+		right_ear={ name="Hashi. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Dbl.Atk."+4',}},
 		left_ring="Stikini Ring +1",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
@@ -633,7 +633,7 @@ function init_gear_sets()
 		neck={ name="Mirage Stole +2", augments={'Path: A',}},
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Crep. Earring",
-		right_ear={ name="Hashi. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Dbl.Atk."+4',}},
+		right_ear={ name="Hashi. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Dbl.Atk."+4',}},
 		left_ring="Stikini Ring +1",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
@@ -668,7 +668,7 @@ function init_gear_sets()
 		neck={ name="Mirage Stole +2", augments={'Path: A',}},
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Crep. Earring",
-		right_ear={ name="Hashi. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Dbl.Atk."+4',}},
+		right_ear={ name="Hashi. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Dbl.Atk."+4',}},
 		left_ring="Defending Ring",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
@@ -685,7 +685,7 @@ function init_gear_sets()
 		neck={ name="Mirage Stole +2", augments={'Path: A',}},
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Crep. Earring",
-		right_ear={ name="Hashi. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','"Dbl.Atk."+4',}},
+		right_ear={ name="Hashi. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Dbl.Atk."+4',}},
 		left_ring="Stikini Ring +1",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
@@ -786,7 +786,7 @@ function init_gear_sets()
 		
 	sets.midcast['Refresh'] = {
 		ammo="Staunch Tathlum +1",
-		head={ name="Amalric Coif +1", augments={'INT+12','Mag. Acc.+25','Enmity-6',}},
+		head={ name="Amalric Coif +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		body={ name="Telchine Chas.", augments={'Enh. Mag. eff. dur. +10',}},
 		hands={ name="Telchine Gloves", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +9',}},
 		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
@@ -822,7 +822,7 @@ function init_gear_sets()
 		legs={ name="Taeon Tights", augments={'Accuracy+19 Attack+19','"Triple Atk."+2','Phalanx +3',}},
 		feet={ name="Herculean Boots", augments={'Sklchn.dmg.+4%','MND+4','Phalanx +4','Mag. Acc.+15 "Mag.Atk.Bns."+15',}},}
 		
-	sets.midcast['Aquaveil'] = {set_combine(sets.midcast['Enhancing Magic'], {head={ name="Amalric Coif +1", augments={'INT+12','Mag. Acc.+25','Enmity-6',}},hands="Regal Cuffs",})}
+	sets.midcast['Aquaveil'] = {set_combine(sets.midcast['Enhancing Magic'], {head={ name="Amalric Coif +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},hands="Regal Cuffs",})}
 	
 	sets.midcast.Enspell = {
 		ammo="Staunch Tathlum +1",
@@ -1195,7 +1195,7 @@ function init_gear_sets()
 	
 	sets.Bunzi = {main={ name="Bunzi's Rod", augments={'Path: A',}},sub="Sakpata's Sword",}
 	
-	sets.Mboze = {main="Naegling", sub="Sakpata's Sword"}
+	sets.Mboze = {main="Tizona", sub="Sakpata's Sword"}
     
 
 end

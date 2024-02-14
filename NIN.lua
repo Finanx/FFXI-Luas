@@ -119,7 +119,7 @@ function user_setup()
 
 	--Includes Global Bind keys
 	
-	send_command('wait 1; exec Global-Binds.txt')
+	send_command('wait 2; exec Global-Binds.txt')
 			
 	--Ninja Binds
 	
@@ -151,11 +151,11 @@ function user_unload()
 
 	--Remove Global Binds
 
-	send_command('exec Global-UnBinds.txt')
+	send_command('wait 1; exec Global-UnBinds.txt')
 	
 	--Gear Removal Script
 	
-	send_command('exec /NIN/NIN-Gear-Removal.txt')
+	send_command('wait 1; exec /NIN/NIN-Gear-Removal.txt')
 	
 end
 
@@ -815,7 +815,7 @@ function init_gear_sets()
 	sets.Gokotai_Hitaki = {main="Gokotai",sub={ name="Kunimitsu", augments={'Path: A',}},}
 	sets.Naegling = {main="Naegling",sub="Kunimitsu",}
 	sets.Naegling_Hitaki = {main="Naegling",sub="Kunimitsu",}
-	sets.Tauret = {main="Tauret",sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Tauret = {main="Tauret",sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
 	sets.Hachimonji = {main="Hachimonji",sub={ name="Rigorous Grip +1", augments={'Path: A',}},}
 	sets.Kaja_Tachi = {main="Kaja Tachi",sub={ name="Rigorous Grip +1", augments={'Path: A',}},}
 
@@ -1170,7 +1170,6 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
-
 
     if state.Buff.Migawari then
        idleSet = set_combine(idleSet, sets.buff.Migawari)

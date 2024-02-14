@@ -89,7 +89,7 @@ end
 function user_setup()
     state.OffenseMode:options('Normal', 'Acc')
     state.HybridMode:options('Normal', 'DT')
-    state.WeaponskillMode:options('Normal')
+    state.WeaponskillMode:options('Normal', 'Acc', 'ATKCAP')
     state.CastingMode:options('Normal', 'MACC')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
@@ -102,7 +102,7 @@ function user_setup()
 
 	--Includes Global Bind keys
 	
-	send_command('wait 1; exec /Global-Binds.txt')
+	send_command('wait 2; exec Global-Binds.txt')
 	
     --Red Mage binds	
 
@@ -134,11 +134,11 @@ function user_unload()
 
 	--Remove Global Binds
 
-	send_command('exec Global-UnBinds.txt')
+	send_command('wait 1; exec Global-UnBinds.txt')
 	
 	--Gear Removal Script
 	
-	send_command('exec /RDM/RDM-Gear-Removal.txt')
+	send_command('wait 1; exec /RDM/RDM-Gear-Removal.txt')
 	
 end
 
@@ -151,59 +151,58 @@ function init_gear_sets()
 
     -- Precast sets to enhance JAs
     sets.precast.JA['Chainspell'] = {body="Viti. Tabard +3"}
-	sets.precast.JA['Convert'] = {main="Murgleis"}
+	sets.precast.JA['Convert'] = {main={ name="Murgleis", augments={'Path: A',}},}
 
     -- Fast cast sets for spells
     sets.precast.FC = {
 		main={ name="Crocea Mors", augments={'Path: C',}},
 		sub="Genmei Shield",
-		ammo="Sapience Orb",
+		ammo="Staunch Tathlum +1",
 		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
+		body="Lethargy Sayon +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Carmine Greaves +1", augments={'HP+80','MP+80','Phys. dmg. taken -4',}},
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Dbl.Atk."+5',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','"Dbl.Atk."+5',}},
 		left_ring="Kishar Ring",
-		right_ring="Prolix Ring",
-		back={ name="Fi Follet Cape +1", augments={'Path: A',}},}
+		right_ring="Defending Ring",
+		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10','Phys. dmg. taken-10%',}},}
 
     sets.precast.FC.Impact = {
 		main={ name="Crocea Mors", augments={'Path: C',}},
 		sub="Genmei Shield",
-		ammo="Sapience Orb",
-		head=empty,
+		ammo="Staunch Tathlum +1",
 		body="Crepuscular Cloak",
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		hands="Leth. Ganth. +3",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Carmine Greaves +1", augments={'HP+80','MP+80','Phys. dmg. taken -4',}},
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Dbl.Atk."+5',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','"Dbl.Atk."+5',}},
 		left_ring="Kishar Ring",
-		right_ring="Prolix Ring",
-		back={ name="Fi Follet Cape +1", augments={'Path: A',}},}
+		right_ring="Defending Ring",
+		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10','Phys. dmg. taken-10%',}},}
 		
 	sets.precast.FC.Dispelga = {
 		main="Daybreak",
 		sub="Genmei Shield",
-		ammo="Sapience Orb",
+		ammo="Staunch Tathlum +1",
 		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
+		body="Lethargy Sayon +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Carmine Greaves +1", augments={'HP+80','MP+80','Phys. dmg. taken -4',}},
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Dbl.Atk."+5',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','"Dbl.Atk."+5',}},
 		left_ring="Kishar Ring",
-		right_ring="Prolix Ring",
-		back={ name="Fi Follet Cape +1", augments={'Path: A',}},}
+		right_ring="Defending Ring",
+		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10','Phys. dmg. taken-10%',}},}
 
 	sets.precast.RA = {
 		range="Ullr",
@@ -235,18 +234,85 @@ function init_gear_sets()
 		neck="Rep. Plat. Medal",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Regal Earring",
+		right_ear="Ishvara Earring",
 		left_ring="Epaminondas's Ring",
-		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		right_ring="Ephramad's Ring",
+		back={ name="Sucellos's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		
+	sets.precast.WS.Acc = {
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head="Leth. Chappel +3",
+		body="Lethargy Sayon +3",
+		hands="Leth. Ganth. +3",
+		legs="Leth. Fuseau +3",
+		feet="Leth. Houseaux +3",
+		neck="Combatant's Torque",
+		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
+		left_ear="Mache Earring +1",
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','"Dbl.Atk."+5',}},
+		left_ring="Ephramad's Ring",
+		right_ring={ name="Cacoethic Ring +1", augments={'Path: A',}},
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}	
+		
+	sets.precast.WS.ATKCAP = {
+		ammo="Crepuscular Pebble",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands="Malignance Gloves",
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet="Leth. Houseaux +3",
+		neck="Rep. Plat. Medal",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Ishvara Earring",
+		left_ring="Sroda Ring",
+		right_ring="Ephramad's Ring",
 		back={ name="Sucellos's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 		
 	sets.precast.WS.FullTPPhysical = {left_ear="Sherida Earring",}
 	sets.precast.WS.FullTPMagical = {left_ear="Regal Earring",}
 
-    sets.precast.WS['Chant du Cygne'] = {
+    sets.precast.WS['Savage Blade'] = {
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet="Leth. Houseaux +3",
+		neck="Rep. Plat. Medal",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Ishvara Earring",
+		left_ring="Epaminondas's Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Sucellos's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		
+    sets.precast.WS['Savage Blade'].Acc = sets.precast.WS.Acc
+    sets.precast.WS['Savage Blade'].ATKCAP = sets.precast.WS.ATKCAP
+	
+	sets.precast.WS['Flat Blade'] = sets.precast.WS.Acc
+	
+	sets.precast.WS['Chant du Cygne'] = {
 		ammo="Yetshila +1",
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
 		body="Lethargy Sayon +3",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Zoar Subligar +1", augments={'Path: A',}},
+		feet="Thereoid Greaves",
+		neck="Fotia Gorget",
+		waist="Fotia Belt",
+		left_ear="Sherida Earring",
+		right_ear="Mache Earring +1",
+		left_ring="Ilabrat Ring",
+		right_ring="Begrudging Ring",
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}
+		
+	sets.precast.WS['Chant du Cygne'].Acc = sets.precast.WS.Acc
+	
+	sets.precast.WS['Chant du Cygne'].ATKCAP = {
+		ammo="Yetshila +1",
+		head={ name="Blistering Sallet +1", augments={'Path: A',}},
+		body="Malignance Tabard",
 		hands="Malignance Gloves",
 		legs={ name="Zoar Subligar +1", augments={'Path: A',}},
 		feet="Thereoid Greaves",
@@ -259,8 +325,42 @@ function init_gear_sets()
 		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}
 	
 	sets.precast.WS['Evisceration'] = sets.precast.WS['Chant du Cygne']
+	sets.precast.WS['Evisceration'].Acc = sets.precast.WS.Acc
+	sets.precast.WS['Evisceration'].ATKCAP = sets.precast.WS['Chant du Cygne'].ATKCAP
+		
+	sets.precast.WS['Death Blossom'] = {
+	    ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet="Leth. Houseaux +3",
+		neck="Rep. Plat. Medal",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Regal Earring",
+		right_ear="Sherida Earring",
+		left_ring="Sroda Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Sucellos's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		
+	sets.precast.WS['Death Blossom'].Acc = sets.precast.WS.Acc
 
-    sets.precast.WS['Savage Blade'] = {
+	sets.precast.WS['Death Blossom'].ATKCAP = {
+		ammo="Crepuscular Pebble",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Bunzi's Robe", augments={'Path: A',}},
+		hands="Malignance Gloves",
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet="Leth. Houseaux +3",
+		neck="Rep. Plat. Medal",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Regal Earring",
+		right_ear="Sherida Earring",
+		left_ring="Sroda Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Sucellos's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+
+	sets.precast.WS['Black Halo'] = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
@@ -271,14 +371,14 @@ function init_gear_sets()
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Regal Earring",
-		left_ring="Epaminondas's Ring",
-		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		right_ring="Ephramad's Ring",
 		back={ name="Sucellos's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 		
-	sets.precast.WS['Death Blossom'] = sets.precast.WS['Savage Blade']
-
-	sets.precast.WS['Black Halo'] = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+	sets.precast.WS['Black Halo'].Acc = sets.precast.WS.Acc
+	
+	sets.precast.WS['Black Halo'].ATKCAP = {
+		ammo="Crepuscular Pebble",
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
@@ -288,10 +388,9 @@ function init_gear_sets()
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Regal Earring",
-		left_ring="Epaminondas's Ring",
-		right_ring="Sroda Ring",
+		left_ring="Sroda Ring",
+		right_ring="Ephramad's Ring",
 		back={ name="Sucellos's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-
 
     sets.precast.WS['Requiescat'] = {
 		ammo="Regal Gem",
@@ -310,7 +409,7 @@ function init_gear_sets()
 
     sets.precast.WS['Aeolian Edge'] = {
 		ammo="Sroda Tathlum",
-		head={ name="Nyame Helm", augments={'Path: B',}},
+		head="Leth. Chappel +3",
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Jhakri Cuffs +2",
 		legs="Leth. Fuseau +3",
@@ -334,13 +433,13 @@ function init_gear_sets()
 		waist="Orpheus's Sash",
 		left_ear="Regal Earring",
 		right_ear="Malignance Earring",
-		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		left_ring="Epaminondas's Ring",
 		right_ring="Archon Ring",
 		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Weapon skill damage +10%',}},}
 		
 	sets.precast.WS['Red Lotus Blade'] = {
 		ammo="Sroda Tathlum",
-		head={ name="Nyame Helm", augments={'Path: B',}},
+		head="Leth. Chappel +3",
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Jhakri Cuffs +2",
 		legs="Leth. Fuseau +3",
@@ -355,7 +454,7 @@ function init_gear_sets()
 		
 	sets.precast.WS['Seraph Blade'] = {
 		ammo="Sroda Tathlum",
-		head={ name="Nyame Helm", augments={'Path: B',}},
+		head="Leth. Chappel +3",
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Jhakri Cuffs +2",
 		legs="Leth. Fuseau +3",
@@ -379,7 +478,7 @@ function init_gear_sets()
 		waist="Yemaya Belt",
 		left_ear="Telos Earring",
 		right_ear="Enervating Earring",
-		left_ring={ name="Cacoethic Ring +1", augments={'Path: A',}},
+		left_ring="Ephramad's Ring",
 		right_ring="Epaminondas's Ring",
 		back={ name="Sucellos's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 
@@ -399,7 +498,7 @@ function init_gear_sets()
 		waist="Yemaya Belt",
 		left_ear="Telos Earring",
 		right_ear="Crep. Earring",
-		left_ring={ name="Cacoethic Ring +1", augments={'Path: A',}},
+		left_ring="Ephramad's Ring",
 		right_ring="Chirich Ring +1",
 		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
@@ -416,9 +515,9 @@ function init_gear_sets()
 		right_ear="Cryptic Earring",
 		left_ring="Eihwaz Ring",
 		right_ring="Begrudging Ring",
-		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
+		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10','Phys. dmg. taken-10%',}},}
 
-	sets.precast.Flourish1 = {}
+	sets.precast.Flourish1 = sets.precast.WS.Acc
 	sets.precast.Flourish1['Animated Flourish'] = sets.Enmity	
 
     sets.midcast.FastRecast = sets.precast.FC
@@ -440,22 +539,11 @@ function init_gear_sets()
 		right_ring="Sirona's Ring",
 		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
 
-    sets.midcast.CureWeather = {
-		main="Daybreak",
-		sub="Ammurapi Shield",
-		ammo="Regal Gem",
-		head={ name="Kaykaus Mitra +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		body={ name="Kaykaus Bliaut +1", augments={'MP+80','"Cure" potency +6%','"Conserve MP"+7',}},
-		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		legs="Atrophy Tights +3",
-		feet={ name="Kaykaus Boots +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		neck="Incanter's Torque",
+    sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {		
+		main="Chatoyant Staff",
+		sub="Enki Strap",
 		waist="Hachirin-no-Obi",
-		left_ear="Beatific Earring",
-		right_ear="Meili Earring",
-		left_ring="Stikini Ring +1",
-		right_ring="Sirona's Ring",
-		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
+		back="Twilight Cape",})
 
     sets.midcast.CureSelf = {
 		main="Daybreak",
@@ -473,40 +561,14 @@ function init_gear_sets()
 		left_ring="Sirona's Ring",
 		right_ring="Kunaji Ring",
 		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
+		
+	sets.midcast.CureSelfWeather = set_combine(sets.midcast.CureSelf, {		
+		main="Chatoyant Staff",
+		sub="Enki Strap",
+		waist="Hachirin-no-Obi",
+		back="Twilight Cape",})
 
-    sets.midcast.Curaga = {
-		main="Daybreak",
-		sub="Ammurapi Shield",
-		ammo="Regal Gem",
-		head={ name="Kaykaus Mitra +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		body={ name="Kaykaus Bliaut +1", augments={'MP+80','"Cure" potency +6%','"Conserve MP"+7',}},
-		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		feet={ name="Kaykaus Boots +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		neck="Incanter's Torque",
-		waist="Luminary Sash",
-		left_ear="Beatific Earring",
-		right_ear="Meili Earring",
-		left_ring="Stikini Ring +1",
-		right_ring="Sirona's Ring",
-		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
-
-    sets.midcast.StatusRemoval = {
-		main="Daybreak",
-		sub="Ammurapi Shield",
-		ammo="Regal Gem",
-		head={ name="Kaykaus Mitra +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		body={ name="Viti. Tabard +3", augments={'Enhances "Chainspell" effect',}},
-		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
-		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},
-		feet={ name="Carmine Greaves +1", augments={'HP+80','MP+80','Phys. dmg. taken -4',}},
-		neck="Incanter's Torque",
-		waist="Bishop's Sash",
-		left_ear="Beatific Earring",
-		right_ear="Meili Earring",
-		left_ring="Stikini Ring +1",
-		right_ring="Sirona's Ring",
-		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
+    sets.midcast.StatusRemoval = sets.precast.FC
 
     sets.midcast.Cursna = {
 		main="Daybreak",
@@ -516,12 +578,12 @@ function init_gear_sets()
 		body={ name="Viti. Tabard +3", augments={'Enhances "Chainspell" effect',}},
 		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
 		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},
-		feet={ name="Carmine Greaves +1", augments={'HP+80','MP+80','Phys. dmg. taken -4',}},
-		neck="Incanter's Torque",
+		feet={ name="Vanya Clogs", augments={'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+		neck="Debilis Medallion",
 		waist="Bishop's Sash",
 		left_ear="Beatific Earring",
 		right_ear="Meili Earring",
-		left_ring="Haoma's Ring",
+		left_ring="Menelaus's Ring",
 		right_ring="Sirona's Ring",
 		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
 
@@ -534,18 +596,18 @@ function init_gear_sets()
 		hands="Atrophy Gloves +3",
 		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
 		feet="Leth. Houseaux +3",
-		neck="Dls. Torque +2",
+		neck={ name="Dls. Torque +2", augments={'Path: A',}},
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Dbl.Atk."+5',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','"Dbl.Atk."+5',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
-		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     sets.midcast['Phalanx'] = {
-		main="Sakpata's Sword",
+		main={ name="Sakpata's Sword", augments={'Path: A',}},
 		sub="Ammurapi Shield",
-		ammo="Sapience Orb",
+		ammo="Staunch Tathlum +1",
 		head={ name="Telchine Cap", augments={'"Fast Cast"+4','Enh. Mag. eff. dur. +10',}},
 		body={ name="Taeon Tabard", augments={'Phalanx +3',}},
 		hands={ name="Taeon Gloves", augments={'"Recycle"+7','Phalanx +3',}},
@@ -554,27 +616,27 @@ function init_gear_sets()
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
 		waist="Embla Sash",
 		left_ear="Mimir Earring",
-		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Dbl.Atk."+5',}},
-		left_ring="Stikini Ring +1",
-		right_ring="Stikini Ring +1",
-		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','"Dbl.Atk."+5',}},
+		left_ring="Defending Ring",
+		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 		
 	sets.midcast['Aquaveil'] = {
 		main={ name="Crocea Mors", augments={'Path: C',}},
 		sub="Ammurapi Shield",
 		ammo="Sapience Orb",
-		head={ name="Amalric Coif +1", augments={'INT+12','Mag. Acc.+25','Enmity-6',}},
+		head={ name="Amalric Coif +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		body={ name="Viti. Tabard +3", augments={'Enhances "Chainspell" effect',}},
 		hands="Regal Cuffs",
 		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
 		feet="Leth. Houseaux +3",
-		neck="Dls. Torque +2",
+		neck={ name="Dls. Torque +2", augments={'Path: A',}},
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Dbl.Atk."+5',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','"Dbl.Atk."+5',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
-		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     sets.midcast.EnhancingSkill = {
 		main="Pukulatmuj +1",
@@ -605,10 +667,10 @@ function init_gear_sets()
 		neck="Dls. Torque +2",
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Dbl.Atk."+5',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','"Dbl.Atk."+5',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
-		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
+		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10','Phys. dmg. taken-10%',}},}
 		
     sets.midcast['Gain-STR'] = set_combine(sets.midcast['Enhancing Magic'], {hands="Viti. Gloves +3",})
 	sets.midcast['Gain-DEX'] = set_combine(sets.midcast['Enhancing Magic'], {hands="Viti. Gloves +3",})
@@ -623,7 +685,7 @@ function init_gear_sets()
 		main={ name="Crocea Mors", augments={'Path: C',}},
 		sub="Ammurapi Shield",
 		ammo="Sapience Orb",
-		head={ name="Amalric Coif +1", augments={'INT+12','Mag. Acc.+25','Enmity-6',}},
+		head={ name="Amalric Coif +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		body="Atrophy Tabard +3",
 		hands="Atrophy Gloves +3",
 		legs="Leth. Fuseau +3",
@@ -631,10 +693,10 @@ function init_gear_sets()
 		neck={ name="Dls. Torque +2", augments={'Path: A',}},
 		waist="Embla Sash",
 		left_ear="Malignance Earring",
-		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Dbl.Atk."+5',}},
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','"Dbl.Atk."+5',}},
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
-		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10',}},}
+		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10','Phys. dmg. taken-10%',}},}
 
     sets.midcast.RefreshSelf = set_combine(sets.midcast.Refresh, {
         waist="Gishdubar Sash",})
@@ -677,10 +739,10 @@ function init_gear_sets()
 		hands="Leth. Ganth. +3",
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
-		neck="Dls. Torque +2",
+		neck={ name="Dls. Torque +2", augments={'Path: A',}},
 		waist={ name="Obstin. Sash", augments={'Path: A',}},
-		left_ear="Snotra Earring",
-		right_ear="Regal Earring",
+		left_ear="Regal Earring",
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','"Dbl.Atk."+5',}},
 		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring +1",
 		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
@@ -696,7 +758,7 @@ function init_gear_sets()
 		sub="Ammurapi Shield",
 		ammo="Regal Gem",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
-		body="Atrophy Tabard +3",
+		body="Lethargy Sayon +3",
 		hands="Leth. Ganth. +3",
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
@@ -719,7 +781,7 @@ function init_gear_sets()
 		sub="Ammurapi Shield",
 		ammo="Regal Gem",
 		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
-		body="Atrophy Tabard +3",
+		body="Lethargy Sayon +3",
 		hands="Regal Cuffs",
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
 		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
@@ -739,83 +801,44 @@ function init_gear_sets()
 	sets.midcast['Sleepga'] = sets.midcast['Enfeebling Magic'].Duration
 	
 	
-	sets.midcast.Dispelga = {
-		main="Daybreak",
+	sets.midcast.Dispelga = set_combine(sets.midcast['Enfeebling Magic'].MACC, {main="Daybreak",sub="Ammurapi Shield",})
+		
+	sets.midcast['Dia III'] = set_combine(sets.midcast['Enfeebling Magic'].Duration, {
+		body="Volte Jupon",
+		hands={ name="Chironic Gloves", augments={'MND+4','Phys. dmg. taken -2%','"Treasure Hunter"+1','Accuracy+5 Attack+5',}},
+		waist="Chaac Belt",})
+		
+	sets.midcast['Diaga'] = set_combine(sets.midcast['Enfeebling Magic'].Duration, {
+		body="Volte Jupon",
+		hands={ name="Chironic Gloves", augments={'MND+4','Phys. dmg. taken -2%','"Treasure Hunter"+1','Accuracy+5 Attack+5',}},
+		waist="Chaac Belt",})
+		
+    sets.midcast['Dark Magic'] = {
+		main={ name="Crocea Mors", augments={'Path: C',}},
 		sub="Ammurapi Shield",
 		ammo="Regal Gem",
 		head="Atrophy Chapeau +3",
-		body="Atrophy Tabard +3",
+		body="Lethargy Sayon +3",
 		hands="Leth. Ganth. +3",
-		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
-		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
-		neck="Dls. Torque +2",
-		waist={ name="Obstin. Sash", augments={'Path: A',}},
-		left_ear="Snotra Earring",
-		right_ear="Regal Earring",
+		legs="Leth. Fuseau +3",
+		feet="Leth. Houseaux +3",
+		neck={ name="Dls. Torque +2", augments={'Path: A',}},
+		waist={ name="Acuity Belt +1", augments={'Path: A',}},
+		left_ear="Malignance Earring",
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','"Dbl.Atk."+5',}},
 		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring +1",
 		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
-		
-	sets.midcast['Dia III'] = {
-		main={ name="Murgleis", augments={'Path: A',}},
-		sub="Ammurapi Shield",
-		ammo="Regal Gem",
-		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
-		body="Volte Jupon",
-		hands={ name="Chironic Gloves", augments={'MND+4','Phys. dmg. taken -2%','"Treasure Hunter"+1','Accuracy+5 Attack+5',}},
-		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
-		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
-		neck={ name="Dls. Torque +2", augments={'Path: A',}},
-		waist="Chaac Belt",
-		left_ear="Regal Earring",
-		right_ear="Snotra Earring",
-		left_ring="Kishar Ring",
-		right_ring="Stikini Ring +1",
-		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
-		
-	sets.midcast['Diaga'] = {
-		main={ name="Murgleis", augments={'Path: A',}},
-		sub="Ammurapi Shield",
-		ammo="Regal Gem",
-		head={ name="Viti. Chapeau +3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
-		body="Volte Jupon",
-		hands={ name="Chironic Gloves", augments={'MND+4','Phys. dmg. taken -2%','"Treasure Hunter"+1','Accuracy+5 Attack+5',}},
-		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
-		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
-		neck={ name="Dls. Torque +2", augments={'Path: A',}},
-		waist="Chaac Belt",
-		left_ear="Regal Earring",
-		right_ear="Snotra Earring",
-		left_ring="Kishar Ring",
-		right_ring="Stikini Ring +1",
-		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
-		
-    sets.midcast['Dark Magic'] = {
-		main={ name="Murgleis", augments={'Path: A',}},
+
+    sets.midcast.Drain = {
+		main={ name="Bunzi's Rod", augments={'Path: A',}},
 		sub="Ammurapi Shield",
 		ammo="Regal Gem",
 		head="Atrophy Chapeau +3",
 		body="Atrophy Tabard +3",
 		hands="Leth. Ganth. +3",
-		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
-		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
-		neck="Dls. Torque +2",
-		waist="Luminary Sash",
-		left_ear="Snotra Earring",
-		right_ear="Regal Earring",
-		left_ring="Stikini Ring +1",
-		right_ring="Stikini Ring +1",
-		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
-
-    sets.midcast.Drain = {
-		main={ name="Murgleis", augments={'Path: A',}},
-		sub="Ammurapi Shield",
-		ammo="Pemphredo Tathlum",
-		head="Pixie Hairpin +1",
-		body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		feet={ name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}},
+		legs="Leth. Fuseau +3",
+		feet="Leth. Houseaux +3",
 		neck="Erra Pendant",
 		waist="Fucho-no-Obi",
 		left_ear="Malignance Earring",
@@ -825,17 +848,34 @@ function init_gear_sets()
 		back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},}
 
     sets.midcast.Aspir = sets.midcast.Drain
+	
+	sets.midcast['Absorb-TP'] = {
+		main={ name="Crocea Mors", augments={'Path: C',}},
+		sub="Ammurapi Shield",
+		ammo="Regal Gem",
+		head="Atrophy Chapeau +3",
+		body="Lethargy Sayon +3",
+		hands="Leth. Ganth. +3",
+		legs="Leth. Fuseau +3",
+		feet="Leth. Houseaux +3",
+		neck="Erra Pendant",
+		waist={ name="Acuity Belt +1", augments={'Path: A',}},
+		left_ear="Malignance Earring",
+		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','"Dbl.Atk."+5',}},
+		left_ring="Stikini Ring +1",
+		right_ring="Stikini Ring +1",
+		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
 
     sets.midcast['Elemental Magic'] = {
-		main="Bunzi's Rod",
+		main={ name="Bunzi's Rod", augments={'Path: A',}},
 		sub="Ammurapi Shield",
 		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
 		head="Leth. Chappel +3",
 		body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		hands={ name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
 		legs={ name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-		feet={ name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}},
-		neck="Sanctity Necklace",
+		feet="Leth. Houseaux +3",
+		neck="Sibyl Scarf",
 		waist="Skrymir Cord +1",
 		left_ear="Malignance Earring",
 		right_ear="Regal Earring",
@@ -852,8 +892,8 @@ function init_gear_sets()
 		hands="Leth. Ganth. +3",
 		legs="Leth. Fuseau +3",
 		feet="Leth. Houseaux +3",
-		neck="Sibyl Scarf",
-		waist={ name="Acuity Belt +1", augments={'Path: A',}},
+		neck={ name="Dls. Torque +2", augments={'Path: A',}},
+		waist="Skrymir Cord +1",
 		left_ear="Malignance Earring",
 		right_ear="Regal Earring",
 		left_ring="Freke Ring",
@@ -861,41 +901,22 @@ function init_gear_sets()
 		back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},}
 
 	sets.midcast['Elemental Magic'].MagicBurst = {
-		main="Bunzi's Rod",																								--10 0
+		main={ name="Bunzi's Rod", augments={'Path: A',}},
 		sub="Ammurapi Shield",
 		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
-		head="Ea Hat +1",																								--7 +7
-		body="Ea Houppe. +1",																							--9 +9
-		hands="Ea Cuffs +1",																							--6 +6
-		legs="Ea Slops +1",																								--8 +8
+		head="Ea Hat +1",
+		body="Ea Houppe. +1",
+		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
+		legs="Leth. Fuseau +3",
 		feet="Leth. Houseaux +3",
 		neck="Sibyl Scarf",
-		waist="Skrymir Cord +1",
+		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Malignance Earring",
 		right_ear="Regal Earring",
-		left_ring="Mujin Band",																							--0 +5
+		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		right_ring="Freke Ring",
 		back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},}
-		--40 +35 = 75%
 
-	sets.midcast['Elemental Magic'].MagicBurstWeaponlock = {
-		main="Bunzi's Rod",
-		sub="Ammurapi Shield",
-		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
-		head="Ea Hat +1",																								--7 +7
-		body="Ea Houppe. +1",																							--9 +9
-		hands="Ea Cuffs +1",																							--6 +6
-		legs="Ea Slops +1",																								--8 +8
-		feet="Leth. Houseaux +3",
-		neck="Mizu. Kubikazari",																						--10
-		waist="Skrymir Cord +1",
-		left_ear="Malignance Earring",
-		right_ear="Regal Earring",
-		left_ring="Mujin Band",																							--0 +5
-		right_ring="Freke Ring",
-		back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},}
-		--40 +35 = 75%
-		
     sets.midcast.Impact = {
 		main={ name="Murgleis", augments={'Path: A',}},
 		sub="Ammurapi Shield",
@@ -912,6 +933,22 @@ function init_gear_sets()
 		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		right_ring="Stikini Ring +1",
 		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
+		
+	sets.midcast.ImpactMB = {
+		main={ name="Bunzi's Rod", augments={'Path: A',}},
+		sub="Ammurapi Shield",
+		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
+		body="Crepuscular Cloak",
+		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
+		legs="Leth. Fuseau +3",
+		feet="Leth. Houseaux +3",
+		neck="Mizu. Kubikazari",
+		waist={ name="Acuity Belt +1", augments={'Path: A',}},
+		left_ear="Malignance Earring",
+		right_ear="Regal Earring",
+		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
+		right_ring="Archon Ring",
+		back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},}
 
     -- Initializes trusts at iLvl 119
     sets.midcast.Trust = sets.precast.FC
@@ -961,7 +998,7 @@ function init_gear_sets()
 		main="Naegling",
 		sub="Genmei Shield",
 		ammo="Aurgelmir Orb +1",
-		head="Malignance Chapeau",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Malignance Tabard",
 		hands="Malignance Gloves",
 		legs="Malignance Tights",
@@ -970,22 +1007,22 @@ function init_gear_sets()
 		waist="Windbuffet Belt +1",
 		left_ear="Telos Earring",
 		right_ear="Sherida Earring",
-		left_ring="Ilabrat Ring",
+		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
 		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     sets.engaged.Acc = {
 		main="Naegling",
-		sub={ name="Gleti's Knife", augments={'Path: A',}},
+		sub="Genmei Shield",
 		ammo="Aurgelmir Orb +1",
-		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Malignance Tabard",
 		hands="Malignance Gloves",
-		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},
+		legs="Malignance Tights",
 		feet="Malignance Boots",
 		neck="Combatant's Torque",
 		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
-		left_ear="Mache Earring +1",
+		left_ear="Eabani Earring",
 		right_ear="Telos Earring",
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
@@ -994,9 +1031,9 @@ function init_gear_sets()
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
 		main="Naegling",
-		sub={ name="Gleti's Knife", augments={'Path: A',}},
+		sub={ name="Gleti\'s Knife", augments={'Path: A',}},
 		ammo="Aurgelmir Orb +1",
-		head="Malignance Chapeau",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Malignance Tabard",
 		hands="Malignance Gloves",
 		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},											--6%
@@ -1005,35 +1042,35 @@ function init_gear_sets()
 		waist="Reiki Yotai",																												--7%
 		left_ear="Eabani Earring",																											--4%
 		right_ear="Suppanomimi",																											--5%
-		left_ring="Ilabrat Ring",
+		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
-		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},} 	--10%
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}--10%
 		--41%GDW + 25%JADW = 66%
 
 	sets.engaged.DW.Acc = {
 		main="Naegling",
-		sub={ name="Gleti's Knife", augments={'Path: A',}},
+		sub="Genmei Shield",
 		ammo="Aurgelmir Orb +1",
-		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Malignance Tabard",
 		hands="Malignance Gloves",
 		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},											--6%
-		feet="Malignance Boots",
+		feet={ name="Taeon Boots", augments={'Accuracy+25','"Dual Wield"+5','STR+5 DEX+5',}},												--9%
 		neck="Combatant's Torque",
 		waist="Reiki Yotai",																												--7%
-		left_ear="Mache Earring +1",
+		left_ear="Eabani Earring",																											--4%
 		right_ear="Suppanomimi",																											--5%
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
-		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}	--10%
-		--28%GDW + 25%JADW = 53%
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}--10%
+		--41%GDW + 25%JADW = 66%
 
     -- 15% Magic Haste (67% DW to cap)
     sets.engaged.DW.LowHaste = {
 		main="Naegling",
-		sub={ name="Gleti's Knife", augments={'Path: A',}},
+		sub={ name="Gleti\'s Knife", augments={'Path: A',}},
 		ammo="Aurgelmir Orb +1",
-		head="Malignance Chapeau",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Malignance Tabard",
 		hands="Malignance Gloves",
 		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},											--6%
@@ -1042,72 +1079,72 @@ function init_gear_sets()
 		waist="Reiki Yotai",																												--7%
 		left_ear="Eabani Earring",																											--4%
 		right_ear="Suppanomimi",																											--5%
-		left_ring="Ilabrat Ring",
+		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
-		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},} 	--10%
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}--10%
 		--41%GDW + 25%JADW = 66%
 
     sets.engaged.DW.Acc.LowHaste = {
 		main="Naegling",
-		sub={ name="Gleti's Knife", augments={'Path: A',}},
+		sub="Genmei Shield",
 		ammo="Aurgelmir Orb +1",
-		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
-		body="Malignance Tabard",
-		hands="Malignance Gloves",
-		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},											--6%
-		feet="Malignance Boots",
-		neck="Combatant's Torque",
-		waist="Reiki Yotai",																												--7%
-		left_ear="Mache Earring +1",
-		right_ear="Suppanomimi",																											--5%
-		left_ring="Chirich Ring +1",
-		right_ring="Chirich Ring +1",
-		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}	--10%
-		--28%GDW + 25%JADW = 53%
-
-    -- 30% Magic Haste (56% DW to cap)
-    sets.engaged.DW.MidHaste = {
-		main="Naegling",
-		sub={ name="Gleti's Knife", augments={'Path: A',}},
-		ammo="Aurgelmir Orb +1",
-		head="Malignance Chapeau",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Malignance Tabard",
 		hands="Malignance Gloves",
 		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},											--6%
 		feet={ name="Taeon Boots", augments={'Accuracy+25','"Dual Wield"+5','STR+5 DEX+5',}},												--9%
+		neck="Combatant's Torque",
+		waist="Reiki Yotai",																												--7%
+		left_ear="Eabani Earring",																											--4%
+		right_ear="Suppanomimi",																											--5%
+		left_ring="Chirich Ring +1",
+		right_ring="Chirich Ring +1",
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}--10%
+		--41%GDW + 25%JADW = 66%
+
+    -- 30% Magic Haste (56% DW to cap)
+    sets.engaged.DW.MidHaste = {
+		main="Naegling",
+		sub={ name="Gleti\'s Knife", augments={'Path: A',}},
+		ammo="Aurgelmir Orb +1",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
+		body="Malignance Tabard",
+		hands="Malignance Gloves",
+		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},											--6%
+		feet="Malignance Boots",
 		neck="Anu Torque",
 		waist="Reiki Yotai",																												--7%
 		left_ear="Eabani Earring",																											--4%
 		right_ear="Suppanomimi",																											--5%
-		left_ring="Ilabrat Ring",
+		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
-		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},} 	--10%
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}--10%
 		--32%GDW + 25%JADW = 57%
 
     sets.engaged.DW.Acc.MidHaste = {
 		main="Naegling",
-		sub={ name="Gleti's Knife", augments={'Path: A',}},
+		sub="Genmei Shield",
 		ammo="Aurgelmir Orb +1",
-		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Malignance Tabard",
 		hands="Malignance Gloves",
 		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},											--6%
 		feet="Malignance Boots",
 		neck="Combatant's Torque",
 		waist="Reiki Yotai",																												--7%
-		left_ear="Mache Earring +1",
+		left_ear="Eabani Earring",																											--4%
 		right_ear="Suppanomimi",																											--5%
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
-		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}	--10%
-		--28%GDW + 25%JADW = 53%
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}--10%
+		--32%GDW + 25%JADW = 57%
 
     -- 35% Magic Haste (51% DW to cap)
     sets.engaged.DW.HighHaste = {
 		main="Naegling",
-		sub={ name="Gleti's Knife", augments={'Path: A',}},
+		sub={ name="Gleti\'s Knife", augments={'Path: A',}},
 		ammo="Aurgelmir Orb +1",
-		head="Malignance Chapeau",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Malignance Tabard",
 		hands="Malignance Gloves",
 		legs="Malignance Tights",
@@ -1116,35 +1153,35 @@ function init_gear_sets()
 		waist="Reiki Yotai",																												--7%
 		left_ear="Eabani Earring",																											--4%
 		right_ear="Suppanomimi",																											--5%
-		left_ring="Ilabrat Ring",
+		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
-		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},} 	--10%
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}--10%
 		--26%GDW + 25%JADW = 51%
 
     sets.engaged.DW.Acc.HighHaste = {
 		main="Naegling",
-		sub={ name="Gleti's Knife", augments={'Path: A',}},
+		sub="Genmei Shield",
 		ammo="Aurgelmir Orb +1",
-		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Malignance Tabard",
 		hands="Malignance Gloves",
-		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},											--6%
+		legs="Malignance Tights",
 		feet="Malignance Boots",
 		neck="Combatant's Torque",
-		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
-		left_ear="Mache Earring +1",
-		right_ear="Telos Earring",
+		waist="Reiki Yotai",																												--7%
+		left_ear="Eabani Earring",																											--4%
+		right_ear="Suppanomimi",																											--5%
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
-		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}	--10%
-		--16%GDW + 25%JADW = 35%
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}--10%
+		--26%GDW + 25%JADW = 51%
 
     -- 45% Magic Haste (36% DW to cap)
     sets.engaged.DW.MaxHaste = {
 		main="Naegling",
-		sub={ name="Gleti's Knife", augments={'Path: A',}},
+		sub={ name="Gleti\'s Knife", augments={'Path: A',}},
 		ammo="Aurgelmir Orb +1",
-		head="Malignance Chapeau",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Malignance Tabard",
 		hands="Malignance Gloves",
 		legs="Malignance Tights",
@@ -1153,28 +1190,28 @@ function init_gear_sets()
 		waist="Reiki Yotai",																												--7%
 		left_ear="Eabani Earring",																											--4%
 		right_ear="Sherida Earring",
-		left_ring="Ilabrat Ring",
+		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
 		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 		--11%GDW + 25%JADW = 36%
 
     sets.engaged.DW.Acc.MaxHaste = {
 		main="Naegling",
-		sub={ name="Gleti's Knife", augments={'Path: A',}},
+		sub="Genmei Shield",
 		ammo="Aurgelmir Orb +1",
-		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Malignance Tabard",
 		hands="Malignance Gloves",
-		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},											--6%
+		legs="Malignance Tights",
 		feet="Malignance Boots",
 		neck="Combatant's Torque",
-		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
-		left_ear="Mache Earring +1",
+		waist="Reiki Yotai",																												--7%
+		left_ear="Eabani Earring",																											--4%
 		right_ear="Telos Earring",
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
-		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}	--10%
-		--16%GDW + 25%JADW = 35%
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		--11%GDW + 25%JADW = 36%
 
 
     ------------------------------------------------------------------------------------------------
@@ -1182,11 +1219,11 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged.Hybrid =  {
-		head={ name="Nyame Helm", augments={'Path: B',}},
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Malignance Tabard",
 		hands="Malignance Gloves",
 		legs="Malignance Tights",
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		feet="Malignance Boots",
 		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
 		}--41% DT + 10% PDT
@@ -1232,29 +1269,29 @@ function init_gear_sets()
 	
 	--Weapon Sets
 
-	sets.Naegling = {main="Naegling", sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Naegling = {main="Naegling", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
 	sets.Naegling_Thibron = {main="Naegling", sub={ name="Machaera +2", augments={'TP Bonus +1000',}},}
 	sets.Naegling.SW = {main="Naegling", sub="Genmei Shield",}
 	
 	sets.Crocea_Mors = {main={ name="Crocea Mors", augments={'Path: C',}}, sub="Daybreak",}
 	sets.Crocea_Mors.SW = {main={ name="Crocea Mors", augments={'Path: C',}}, sub="Ammurapi Shield",}
 
-	sets.Murgleis = {main={ name="Murgleis", augments={'Path: A',}},sub="Bunzi's Rod",}
+	sets.Murgleis = {main={ name="Murgleis", augments={'Path: A',}},sub={ name="Bunzi's Rod", augments={'Path: A',}},}
 	sets.Murgleis_Thibron = {main={ name="Murgleis", augments={'Path: A',}}, sub={ name="Machaera +2", augments={'TP Bonus +1000',}},}
 	sets.Murgleis.SW = {main={ name="Murgleis", augments={'Path: A',}},sub="Ammurapi Shield"}
 	
-	sets.Malevolence = {main={ name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},sub={ name="Bunzi's Rod", augments={'Path: A',}}}
+	sets.Malevolence = {main={ name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},sub={ name="Bunzi's Rod", augments={'Path: A',}},}
 	sets.Malevolence_Thibron = {main="Malevolence", sub={ name="Machaera +2", augments={'TP Bonus +1000',}},}
 	sets.Malevolence.SW = {main={ name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}}, sub="Ammurapi Shield"}
 	
-	sets.Tauret = {main="Tauret", sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Tauret = {main="Tauret", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
 	sets.Tauret.SW = {main="Tauret", sub="Genmei Shield"}
 	
-	sets.Mandau = {main="Mandau", sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Mandau = {main="Mandau", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
 	sets.Mandau_Thibron = {main="Mandau", sub={ name="Machaera +2", augments={'TP Bonus +1000',}},}
 	sets.Mandau.SW = {main="Mandau", sub="Genmei Shield",}
 	
-	sets.Maxentius = {main="Maxentius", sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Maxentius = {main="Maxentius", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
 	sets.Maxentius_Thibron = {main="Maxentius", sub={ name="Machaera +2", augments={'TP Bonus +1000',}},}
 	sets.Maxentius.SW = {main="Maxentius", sub="Genmei Shield",}
 	
@@ -1319,8 +1356,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	end
 	
 		--Handles TP Overflow
-	if spell.type == 'WeaponSkill' then
-		if spell.english ~= "Chant du Cygne" or spell.english ~= "Evisceration" or spell.english ~= "Empyreal Arrow" or spell.english ~= "Sanguine Blade" then
+	if spell.type == 'WeaponSkill' and state.WeaponskillMode.value ~= 'Acc' then
+		if spell.english ~= "Chant du Cygne" or spell.english ~= "Evisceration" or spell.english ~= "Empyreal Arrow" or spell.english ~= "Sanguine Blade" or spell.english ~= "Death Blossom" then
 			if spell.english == 'Seraph Blade' or spell.english == 'Red Lotus Blade' or spell.english == 'Aeolian Edge' then
 				if state.TPBonus.value == true and (player.sub_job == 'DNC' or player.sub_job == 'NIN') then
 					if player.tp > 1900 then
@@ -1340,17 +1377,32 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 					if player.tp > 2900 then
 						equip(sets.precast.WS.FullTPPhysical)
 					end
-				end	
+				end
+			end
+		end
+		if spell.english == "Sanguine Blade" then
+			if (world.weather_element == 'Dark' or world.day_element == 'Dark') then
+				equip(sets.Obi)
+			end
+		elseif spell.english == "Seraph Blade" then
+			if (world.weather_element == 'Light' or world.day_element == 'Light') then
+				equip(sets.Obi)
+			end
+		elseif spell.english == "Red Lotus Blade" then
+			if (world.weather_element == 'Fire' or world.day_element == 'Fire') then
+				equip(sets.Obi)
+			end
+		elseif spell.english == "Aeolian Edge" then
+			if (world.weather_element == 'Wind' or world.day_element == 'Wind') then
+				equip(sets.Obi)
 			end
 		end
 	end
 	
 		--Handles Magic Burst Toggle
 	if state.MagicBurst.value == true and spell.skill == 'Elemental Magic' then
-		if state.WeaponSet.value == 'None' then
+		if spell.name ~= 'Impact' then
 			equip(sets.midcast['Elemental Magic'].MagicBurst)
-		else
-			equip(sets.midcast['Elemental Magic'].MagicBurstWeaponlock)
 		end
 	end
 	
@@ -1376,6 +1428,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 		--Changes Cure set if Curing yourself
     if spellMap == 'Cure' and spell.target.type == 'SELF' then
         equip(sets.midcast.CureSelf)
+			if (world.weather_element == 'Light' or world.day_element == 'Light') then
+				equip(sets.midcast.CureSelfWeather)
+			end
     end
 	
 		--Handles Elemental Magic Mappings
@@ -1383,23 +1438,99 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
 			--Equips gearset to cast Impact
 		if spell.english == "Impact" then
-            equip(sets.midcast.Impact)
+			if state.MagicBurst.value == true then
+				equip(sets.midcast.ImpactMB)
+			else
+				equip(sets.midcast.Impact)
 				if state.WeaponSet.value == 'None' then
 					equip(sets.Empyreal)
 				end
+			end
         end
 		
-			--Equips gearset to cast Impact
+			--Equips gearset to cast Dispelga
 		if spell.english == "Dispelga" then
             equip(sets.midcast.Dispelga)
         end
 		
 			--Equips Obi set if the correct day or weather matches Elemental Magic and if correct distance
-        if (spell.element == world.day_element or spell.element == world.weather_element) and spell.target.distance > (8 + spell.target.model_size)then
-            equip(sets.Obi)
-		elseif spell.target.distance < (8 + spell.target.model_size) then
+		if spell.element == 'Fire' then
+			if (world.weather_element == 'Fire' or world.day_element == 'Fire') then
+				equip(sets.Obi)
+				if world.day_element == 'Water' then
+					if spell.target.distance < (6 + spell.target.model_size) then
+						equip({waist="Orpheus's Sash"})
+					end
+				end
+			end
+		elseif spell.element == 'Ice' then
+			if (world.weather_element == 'Ice' or world.day_element == 'Ice') then
+				equip(sets.Obi)
+				if world.day_element == 'Fire' then
+					if spell.target.distance < (6 + spell.target.model_size) then
+						equip({waist="Orpheus's Sash"})
+					end
+				end
+			end
+		elseif spell.element == 'Wind' then
+			if (world.weather_element == 'Wind' or world.day_element == 'Wind') then
+				equip(sets.Obi)
+				if world.day_element == 'Ice' then
+					if spell.target.distance < (6 + spell.target.model_size) then
+						equip({waist="Orpheus's Sash"})
+					end
+				end
+			end
+		elseif spell.element == 'Earth' then
+			if (world.weather_element == 'Earth' or world.day_element == 'Earth') then
+				equip(sets.Obi)
+				if world.day_element == 'Wind' then
+					if spell.target.distance < (6 + spell.target.model_size) then
+						equip({waist="Orpheus's Sash"})
+					end
+				end
+			end
+		elseif spell.element == 'Lightning' then
+			if (world.weather_element == 'Lightning' or world.day_element == 'Lightning') then
+				equip(sets.Obi)
+				if world.day_element == 'Earth' then
+					if spell.target.distance < (6 + spell.target.model_size) then
+						equip({waist="Orpheus's Sash"})
+					end
+				end
+			end
+		elseif spell.element == 'Water' then
+			if (world.weather_element == 'Water' or world.day_element == 'Water') then
+				equip(sets.Obi)
+				if world.day_element == 'Lightning' then
+					if spell.target.distance < (6 + spell.target.model_size) then
+						equip({waist="Orpheus's Sash"})
+					end
+				end
+			end
+		elseif spell.element == 'Light' then
+			if (world.weather_element == 'Light' or world.day_element == 'Light') then
+				equip(sets.Obi)
+				if world.day_element == 'Dark' then
+					if spell.target.distance < (6 + spell.target.model_size) then
+						equip({waist="Orpheus's Sash"})
+					end
+				end
+			end
+		elseif spell.element == 'Dark' then
+			if (world.weather_element == 'Dark' or world.day_element == 'Dark') then
+				equip(sets.Obi)
+				if world.day_element == 'Light' then
+					if spell.target.distance < (6 + spell.target.model_size) then
+						equip({waist="Orpheus's Sash"})
+					end
+				end
+			end
+		end
+		if spell.target.distance < (8 + spell.target.model_size) then
             equip({waist="Orpheus's Sash"})
         end
+		
     end
 end
 
@@ -1656,13 +1787,17 @@ function determine_haste_group()
     if DW == true then
         if DW_needed <= 11 then
             classes.CustomMeleeGroups:append('MaxHaste')
-        elseif DW_needed > 11 and DW_needed <= 26 then
+        end
+		if DW_needed > 11 and DW_needed <= 26 then
             classes.CustomMeleeGroups:append('HighHaste')
-        elseif DW_needed > 26 and DW_needed <= 31 then
+        end
+		if DW_needed > 26 and DW_needed <= 33 then
             classes.CustomMeleeGroups:append('MidHaste')
-        elseif DW_needed > 31 and DW_needed <= 42 then
+        end
+		if DW_needed > 33 and DW_needed <= 42 then
             classes.CustomMeleeGroups:append('LowHaste')
-        elseif DW_needed > 42 then
+        end
+		if DW_needed > 42 then
             classes.CustomMeleeGroups:append('')
         end
     end

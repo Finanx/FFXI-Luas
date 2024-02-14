@@ -104,7 +104,7 @@ function user_setup()
 	
 	--Includes Global Bind keys
 	
-	send_command('wait 1; exec Global-Binds.txt')
+	send_command('wait 2; exec Global-Binds.txt')
 
 	--Monk Binds
 	
@@ -132,11 +132,11 @@ function user_unload()
 
 	--Remove Global Binds
 
-	send_command('exec Global-UnBinds.txt')
+	send_command('wait 1; exec Global-UnBinds.txt')
 	
 	--Gear Removal Script
 	
-	send_command('exec /MNK/MNK-Gear-Removal.txt')
+	send_command('wait 1; exec /MNK/MNK-Gear-Removal.txt')
 	
 end
 
@@ -145,9 +145,9 @@ function init_gear_sets()
     
     -- Precast sets to enhance JAs on use
     sets.precast.JA['Hundred Fists'] = {legs="Hesychast's Hose +3"}
-    sets.precast.JA['Boost'] = {hands="Anchorite's Gloves +1"}
+    sets.precast.JA['Boost'] = {hands="Anchorite's Gloves +2"}
     sets.precast.JA['Dodge'] = {feet="Anchorite's Gaiters +3"}
-    sets.precast.JA['Focus'] = {head="Anchorite's Crown +1"}
+    sets.precast.JA['Focus'] = {head="Anchorite's Crown +2"}
     sets.precast.JA['Counterstance'] = {feet="Hesychast's Gaiters +3"}
     sets.precast.JA['Footwork'] = {feet="Bhikku Gaiters +2"}
     sets.precast.JA['Formless Strikes'] = {body="Hesychast's Cyclas +3"}
@@ -608,7 +608,7 @@ function init_gear_sets()
 		head="Bhikku Crown +2",
 		body={ name="Mpaca's Doublet", augments={'Path: A',}},
 		hands="Mpaca's Gloves",
-		legs="Anch. Hose +2",
+		legs="Anch. Hose +3",
 		feet="Bhikku Gaiters +2",
 		neck={ name="Bathy Choker +1", augments={'Path: A',}},
 		waist="Moonbow Belt +1",

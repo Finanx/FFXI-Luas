@@ -114,7 +114,7 @@ function user_setup()
 
 	--Includes Global Bind keys
 	
-	send_command('exec Global-Binds.txt')
+	send_command('wait 2; exec Global-Binds.txt')
 	
 	--Warrior Binds
 	
@@ -146,11 +146,11 @@ function user_unload()
 
 	--Remove Global Binds
 
-	send_command('wait 1; exec Global-Binds.txt')
+	send_command('wait 1; exec Global-UnBinds.txt')
 	
 	--Gear Removal Script
 	
-	send_command('exec /WAR/WAR-Gear-Removal.txt')
+	send_command('wait 1; exec /WAR/WAR-Gear-Removal.txt')
 	
 end
 
@@ -451,6 +451,12 @@ function init_gear_sets()
 	
 	sets.precast.WS['Decimation'] = sets.precast.WS['Savage Blade']
 	sets.precast.WS['Decimation'].ATKCAP = sets.precast.WS['Savage Blade'].ATKCAP
+	
+	sets.precast.WS['Mistral Axe'] = sets.precast.WS['Savage Blade']
+	sets.precast.WS['Mistral Axe'].ATKCAP = sets.precast.WS['Savage Blade'].ATKCAP
+	
+	sets.precast.WS['Calamity'] = sets.precast.WS['Savage Blade']
+	sets.precast.WS['Calamity'].ATKCAP = sets.precast.WS['Savage Blade'].ATKCAP
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
@@ -679,9 +685,9 @@ function init_gear_sets()
 	sets.Loxotic_Mace = {main={ name="Loxotic Mace +1", augments={'Path: A',}},sub="Blurred Shield +1",}
 	sets.Loxotic_Mace.DW = {main={ name="Loxotic Mace +1", augments={'Path: A',}},sub="Ikenga's Axe",}
 	sets.Ikenga_axe = {main="Ikenga's Axe", sub="Blurred Shield +1",}
-	sets.Ikenga_axe.DW = {main="Ikenga's Axe", sub="Kaja Axe",}
-	sets.Dolichenus = {main="Kaja Axe", sub="Blurred Shield +1",}
-	sets.Dolichenus.DW = {main="Kaja Axe", sub="Ikenga's Axe",}
+	sets.Ikenga_axe.DW = {main="Ikenga's Axe", sub="Dolichenus",}
+	sets.Dolichenus = {main="Dolichenus", sub="Blurred Shield +1",}
+	sets.Dolichenus.DW = {main="Dolichenus", sub="Ikenga's Axe",}
 	
 
 end

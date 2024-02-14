@@ -116,7 +116,7 @@ function user_setup()
 	
 	--Includes Global Bind keys
 	
-	send_command('wait 1; exec Global-Binds.txt')
+	send_command('wait 2; exec Global-Binds.txt')
     
 	--Samurai Binds
 	
@@ -149,11 +149,11 @@ function user_unload()
 
 	--Remove Global Binds
 
-	send_command('exec Global-UnBinds.txt')
+	send_command('wait 1; exec Global-UnBinds.txt')
 	
 	--Gear Removal Script
 	
-	send_command('exec /SAM/SAM-Gear-Removal.txt')
+	send_command('wait 1; exec /SAM/SAM-Gear-Removal.txt')
 	
 end
 

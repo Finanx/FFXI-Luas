@@ -99,7 +99,7 @@ function user_setup()
     state.OffenseMode:options('Normal', 'Acc')
     state.HybridMode:options('Normal', 'DT', 'Defense')
     state.RangedMode:options('Normal', 'Acc')
-    state.WeaponskillMode:options('Normal', 'Acc')
+    state.WeaponskillMode:options('Normal', 'Acc', 'ATKCAP')
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
@@ -118,7 +118,7 @@ function user_setup()
 	
 	--Includes Global Bind keys
 	
-	send_command('wait 1; exec Global-Binds.txt')
+	send_command('wait 2; exec Global-Binds.txt')
 	
 	--Corsair Binds
 	
@@ -151,11 +151,11 @@ function user_unload()
 
 	--Remove Global Binds
 
-	send_command('exec Global-UnBinds.txt')
+	send_command('wait 1; exec Global-UnBinds.txt')
 	
 	--Gear Removal Script
 	
-	send_command('exec /COR/COR-Gear-Removal.txt')
+	send_command('wait 1; exec /COR/COR-Gear-Removal.txt')
 	
 end
 
@@ -306,7 +306,7 @@ function init_gear_sets()
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Crit.hit rate+7','STR+11 AGI+11',}},
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
 		left_ring="Regal Ring",
 		right_ring="Ephramad's Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},}		
@@ -392,7 +392,7 @@ function init_gear_sets()
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear="Odr Earring",
-		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Crit.hit rate+7','STR+11 AGI+11',}},
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
 		left_ring="Begrudging Ring",
 		right_ring="Mummu Ring",
 		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}
@@ -407,7 +407,7 @@ function init_gear_sets()
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear="Odr Earring",
-		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Crit.hit rate+7','STR+11 AGI+11',}},
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
 		left_ring="Begrudging Ring",
 		right_ring="Mummu Ring",
 		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}
@@ -422,7 +422,7 @@ function init_gear_sets()
 		neck="Combatant's Torque",
 		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
 		left_ear="Odr Earring",
-		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Crit.hit rate+7','STR+11 AGI+11',}},
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
 		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}
@@ -502,7 +502,7 @@ function init_gear_sets()
 		neck={ name="Comm. Charm +2", augments={'Path: A',}},
 		waist="K. Kachina Belt +1",
 		left_ear="Crep. Earring",
-		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Crit.hit rate+7','STR+11 AGI+11',}},
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
 		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		right_ring="Stikini Ring +1",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}},}
@@ -517,7 +517,7 @@ function init_gear_sets()
 		neck={ name="Comm. Charm +2", augments={'Path: A',}},
 		waist="K. Kachina Belt +1",
 		left_ear="Crep. Earring",
-		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Crit.hit rate+7','STR+11 AGI+11',}},
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
 		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		right_ring="Stikini Ring +1",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}},}
@@ -539,13 +539,13 @@ function init_gear_sets()
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10',}},}
 
     sets.midcast.RA.Acc = {
-		ammo=gear.RAbullet,
+		ammo=gear.WSAccbullet,
 		head={ name="Ikenga's Hat", augments={'Path: A',}},
 		body="Chasseur's Frac +3",
 		hands="Malignance Gloves",
 		legs="Chas. Culottes +3",
-		feet="Malignance Boots",
-		neck={ name="Comm. Charm +2", augments={'Path: A',}},
+		feet={ name="Ikenga's Clogs", augments={'Path: A',}},
+		neck="Iskur Gorget",
 		waist="K. Kachina Belt +1",
 		left_ear="Telos Earring",
 		right_ear="Crep. Earring",
@@ -563,19 +563,19 @@ function init_gear_sets()
 		neck="Iskur Gorget",
 		waist="K. Kachina Belt +1",
 		left_ear="Odr Earring",
-		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Crit.hit rate+7','STR+11 AGI+11',}},
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
 		left_ring="Mummu Ring",
 		right_ring="Regal Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Crit.hit rate+10','Phys. dmg. taken-10%',}},}
 		
 	sets.TripleShot.Acc = {
-		ammo=gear.RAbullet,
+		ammo=gear.WSAccbullet,
 		head={ name="Ikenga's Hat", augments={'Path: A',}},
 		body="Chasseur's Frac +3",
 		hands="Malignance Gloves",
 		legs="Chas. Culottes +3",
-		feet="Malignance Boots",
-		neck={ name="Comm. Charm +2", augments={'Path: A',}},
+		feet={ name="Ikenga's Clogs", augments={'Path: A',}},
+		neck="Iskur Gorget",
 		waist="K. Kachina Belt +1",
 		left_ear="Telos Earring",
 		right_ear="Crep. Earring",
@@ -593,19 +593,19 @@ function init_gear_sets()
 		neck="Iskur Gorget",
 		waist="K. Kachina Belt +1",
 		left_ear="Odr Earring",
-		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Crit.hit rate+7','STR+11 AGI+11',}},
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
 		left_ring="Mummu Ring",
 		right_ring="Regal Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Crit.hit rate+10','Phys. dmg. taken-10%',}},}
 		
 	sets.TripleShot_AM.Acc = {
-		ammo=gear.RAbullet,
+		ammo=gear.WSAccbullet,
 		head={ name="Ikenga's Hat", augments={'Path: A',}},
 		body="Chasseur's Frac +3",
 		hands="Malignance Gloves",
 		legs="Chas. Culottes +3",
-		feet="Malignance Boots",
-		neck={ name="Comm. Charm +2", augments={'Path: A',}},
+		feet={ name="Ikenga's Clogs", augments={'Path: A',}},
+		neck="Iskur Gorget",
 		waist="K. Kachina Belt +1",
 		left_ear="Telos Earring",
 		right_ear="Crep. Earring",
@@ -868,15 +868,15 @@ function init_gear_sets()
     ---------------------------------------- Hybrid Sets -------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.engaged.Hybrid =	{
+    sets.engaged.Hybrid =	--[[{
 		head="Malignance Chapeau", --6%
 		body="Malignance Tabard",  --9%
 		hands="Malignance Gloves", --5%
 		legs="Chas. Culottes +3",  --11%
 		feet="Malignance Boots", --4%
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}}, --7%
-        } -- 35%DT + 7% PDT + 10% PDT Back Piece 
-		--[[	{
+        } -- 35%DT + 7% PDT + 10% PDT Back Piece ]]
+		{
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
 		body="Mummu Jacket +2",
 		hands="Chasseur's Gants +3",
@@ -885,10 +885,10 @@ function init_gear_sets()
 		neck="Combatant's Torque",
 		waist="K. Kachina Belt +1",
 		left_ear="Odr Earring",
-		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Crit.hit rate+7','STR+11 AGI+11',}},
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
 		left_ring="Begrudging Ring",
 		right_ring="Mummu Ring",
-		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}  ]]		
+		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}	
 		
 	sets.engaged.Hybrid.Defense = {
 		head={ name="Nyame Helm", augments={'Path: B',}},																						--7%
@@ -959,11 +959,11 @@ function init_gear_sets()
 
 	--Weaponsets
 
-    sets.Rostam = {main={ name="Rostam", augments={'Path: A',}}, sub={ name="Gleti's Knife", augments={'Path: A',}},}--{main="Bone Knife",sub="Bone Knife",}
-    sets.Rostam.Acc = {main={ name="Rostam", augments={'Path: A',}}, sub={ name="Gleti's Knife", augments={'Path: A',}},}
+    sets.Rostam = {main={ name="Rostam", augments={'Path: A',}}, sub={ name="Gleti\'s Knife", augments={'Path: A',}},}--{main="Bone Knife",sub="Bone Knife",}
+    sets.Rostam.Acc = {main={ name="Rostam", augments={'Path: A',}}, sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
 	sets.Rostam.RAcc = {main={ name="Rostam", augments={'Path: A',}}, sub={ name="Kustawi +1", augments={'Path: A',}},}
-	sets.Naegling = {main="Naegling", sub={ name="Gleti's Knife", augments={'Path: A',}},}
-    sets.Naegling.Acc = {main="Naegling", sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Naegling = {main="Naegling", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
+    sets.Naegling.Acc = {main="Naegling", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
 	sets.Naegling.RAcc = {main="Naegling", sub={ name="Kustawi +1", augments={'Path: A',}},}
 	
 	sets.Rostam.SW = {main={ name="Rostam", augments={'Path: A',}}, sub="Nusku Shield"}

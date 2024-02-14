@@ -96,7 +96,7 @@ function user_setup()
 	state.TreasureMode:options('Tag', 'None')
 
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Aettir', 'Lycurgos', 'Dolichenus'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Aettir', 'Reikiko', 'Lycurgos', 'Dolichenus'}
 	state.GripSet = M{['description']='Grip Set', 'Refined', 'Utu'}
 	state.WeaponLock = M(false, 'Weapon Lock')
     state.CP = M(false, "Capacity Points Mode")
@@ -106,7 +106,7 @@ function user_setup()
 
 	--Includes Global Bind keys
 	
-	send_command('wait 1; exec Global-Binds.txt')
+	send_command('wait 2; exec Global-Binds.txt')
 	
 	--Rune Fencer Binds
 	
@@ -136,11 +136,11 @@ function user_unload()
 
 	--Remove Global Binds
 
-	send_command('exec Global-UnBinds.txt')
+	send_command('wait 1; exec Global-UnBinds.txt')
 	
 	--Gear Removal Script
 	
-	send_command('exec /RUN/RUN-Gear-Removal.txt')
+	send_command('wait 1; exec /RUN/RUN-Gear-Removal.txt')
 	
 end
 
@@ -211,8 +211,7 @@ function init_gear_sets()
 		left_ring="Eihwaz Ring",
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Phys. dmg. taken-10%',}},}
-		
-		
+			
     sets.precast.JA['Valiance'] = sets.precast.JA['Vallation']
 	
     sets.precast.JA['Pflug'] = {
@@ -569,7 +568,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum +1",
 		head={ name="Fu. Bandeau +3", augments={'Enhances "Battuta" effect',}},
 		body={ name="Taeon Tabard", augments={'Phalanx +3',}},
-		hands={ name="Taeon Gloves", augments={'"Recycle"+7','Phalanx +3',}},
+		hands={ name="Taeon  Gloves", augments={'"Recycle"+7','Phalanx +3',}},
 		legs={ name="Taeon Tights", augments={'Accuracy+19 Attack+19','"Triple Atk."+2','Phalanx +3',}},
 		feet={ name="Herculean Boots", augments={'Sklchn.dmg.+4%','MND+4','Phalanx +4','Mag. Acc.+15 "Mag.Atk.Bns."+15',}},
 		neck="Moonlight Necklace",
@@ -782,9 +781,9 @@ function init_gear_sets()
 		waist="Flume Belt +1",																												--4%PDT
 		left_ear="Tuisto Earring",
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},																		--3%DT
-		left_ring="Roller's Ring",
+		left_ring="Shadow Ring",
 		right_ring="Moonlight Ring",																										--5%DT
-		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Parrying rate+5%',}},}		
+		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Phys. dmg. taken-10%',}},}		
 			--42% DT + 3%(Strap) 7% PDT		
 	
 
@@ -882,7 +881,8 @@ function init_gear_sets()
     sets.Epeolatry = {main={ name="Epeolatry", augments={'Path: A',}},}
     sets.Aettir = {main="Aettir"}
 	sets.Lycurgos = {main="Lycurgos"}
-	sets.Dolichenus = {main="Kaja Axe"}
+	sets.Dolichenus = {main="Dolichenus"}
+	sets.Reikiko = {main="Reikiko"}
 	
 	--Grip Sets
 	
@@ -990,13 +990,6 @@ function job_state_change(field, new_value, old_value)
 end
 
 function job_buff_change(buff,gain)
-
-		--Changes gear to tanking idle set when terrorized
-    if buff == "terror" then
-        if gain then
-            equip(sets.idle)
-        end
-    end
 
 		--Auto equips Cursna Recieved doom set when doom debuff is on
     if buff == "doom" then
@@ -1108,6 +1101,14 @@ function update_combat_form()
 		else
 			enable('main','sub')
 			equip(sets.Dolichenus)
+		end
+	elseif state.WeaponSet.value == 'Reikiko' then
+		if state.WeaponLock.value == true then
+			equip(sets.Reikiko)
+			disable('main','sub')
+		else
+			enable('main','sub')
+			equip(sets.Reikiko)
 		end
 	end
 	
@@ -1230,6 +1231,44 @@ function Weaponskill_Keybinds()
 			input /echo [ ALT + Numpad1 ] Smash Axe;
 			input /echo [ ALT  + Numpad. ] Lunge;]])
 		send_command('bind !numpad1 input /ja "Smash Axe" <t>')
+		send_command('bind !numpad. input /ja "Lunge" <t>')
+	elseif state.WeaponSet.value == 'Reikiko' then
+		send_command([[bind ^numpad- 
+			input /echo -----Sword-----;
+			input /echo [ CTRL + Numpad1 ] Sanguine Blade;
+			input /echo [ CTRL + Numpad2 ] Seraph Blade;
+			input /echo [ CTRL + Numpad3 ] Requiescat;
+			input /echo [ CTRL + Numpad4 ] Savage Blade;
+			input /echo [ CTRL + Numpad5 ] Burning Blade;
+			input /echo [ CTRL + Numpad6 ] Shining Blade;
+			input /echo [ CTRL + Numpad7 ] Red Lotus Blade;
+			input /echo [ CTRL + Numpad9 ] Vorpal Blade;
+			input /echo [ CTRL + Numpad. ] Flat Blade;]])
+		send_command('bind ^numpad1 input /ws "Sanguine Blade" <t>')
+		send_command('bind ^numpad2 input /ws "Seraph Blade" <t>')
+		send_command('bind ^numpad3 input /ws "Requiescat" <t>')
+		send_command('bind ^numpad4 input /ws "Savage Blade" <t>')
+		send_command('bind ^numpad5 input /ws "Burning Blade" <t>')
+		send_command('bind ^numpad6 input /ws "Shining Blade" <t>')
+		send_command('bind ^numpad7 input /ws "Red Lotus Blade" <t>')
+		send_command('bind ^numpad9 input /ws "Vorpal Blade" <t>')
+		send_command('bind ^numpad. input /ja "Swipe" <t>')
+
+		send_command([[bind !numpad- 
+			input /echo -----Abilities-----;
+			input /echo [ ALT + ` ] Uses Assigned Barspell;
+			input /echo [ ALT + - ] Cycleback Barspells;
+			input /echo [ ALT + = ] Cycle Barspells;		
+			input /echo -----Sword-----;
+			input /echo [ ALT + Numpad1 ]  Fast Blade;
+			input /echo [ ALT + Numpad2 ]  Spirits Within;
+			input /echo [ ALT + Numpad3 ]  Circle Blade;
+			input /echo [ ALT + Numpad4 ]  Flat Blade;
+			input /echo [ ALT  + Numpad. ] Lunge;]])
+		send_command('bind !numpad1 input /ws "Fast Blade" <t>')
+		send_command('bind !numpad2 input /ws "Spirits Within" <t>')
+		send_command('bind !numpad3 input /ws "Circle Blade" <t>')
+		send_command('bind ^numpad4 input /ws "Flat Blade" <t>')
 		send_command('bind !numpad. input /ja "Lunge" <t>')
 	end
 

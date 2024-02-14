@@ -92,25 +92,17 @@ function user_setup()
     state.CP = M(false, "Capacity Points Mode")
 	state.TPBonus = M(true, 'TP Bonus')
 	
-	state.Threnody = M{['description']='Threnody',
-        '"Fire Threnody II"', '"Ice Threnody II"', '"Wind Threnody II"', '"Earth Threnody II"',
-        '"Ltng. Threnody II"', '"Water Threnody II"', '"Light Threnody II"', '"Dark Threnody II"',}
+	state.Threnody = M{['description']='Threnody', '"Fire Threnody II"', '"Ice Threnody II"', '"Wind Threnody II"', '"Earth Threnody II"', '"Ltng. Threnody II"', '"Water Threnody II"', '"Light Threnody II"', '"Dark Threnody II"',}
 		
-	state.Carol1 = M{['description']='Carol1',
-        '"Fire Carol"', '"Ice Carol"', '"Wind Carol"', '"Earth Carol"', 
-		'"Lightning Carol"', '"Water Carol"', '"Light Carol"', '"Dark Carol"',}
+	state.Carol1 = M{['description']='Carol1', '"Fire Carol"', '"Ice Carol"', '"Wind Carol"', '"Earth Carol"', '"Lightning Carol"', '"Water Carol"', '"Light Carol"', '"Dark Carol"',}
 		
-	state.Carol2 = M{['description']='Carol2',
-        '"Fire Carol II"', '"Ice Carol II"', '"Wind Carol II"', '"Earth Carol II"', 
-		'"Lightning Carol II"', '"Water Carol II"', '"Light Carol II"', '"Dark Carol II"',}
+	state.Carol2 = M{['description']='Carol2', '"Fire Carol II"', '"Ice Carol II"', '"Wind Carol II"', '"Earth Carol II"', '"Lightning Carol II"', '"Water Carol II"', '"Light Carol II"', '"Dark Carol II"',}
 		
-	state.Etude = M{['description']='Etude',
-        '"Herculean Etude"', '"Uncanny Etude"', '"Vital Etude"', '"Swift Etude"', 
-		'"Sage Etude"', '"Logical Etude"', '"Bewitching Etude"',}
+	state.Etude = M{['description']='Etude', '"Herculean Etude"', '"Uncanny Etude"', '"Vital Etude"', '"Swift Etude"', '"Sage Etude"', '"Logical Etude"', '"Bewitching Etude"',}
 
 	--Includes Global Bind keys
 	
-	send_command('wait 1; exec Global-Binds.txt')
+	send_command('wait 2; exec Global-Binds.txt')
 	
 	--Bard Binds
 	
@@ -142,11 +134,11 @@ function user_unload()
 
 	--Remove Global Binds
 
-	send_command('exec Global-UnBinds.txt')
+	send_command('wait 1; exec Global-UnBinds.txt')
 	
 	--Gear Removal Script
 	
-	send_command('exec /BRD/BRD-Gear-Removal.txt')
+	send_command('wait 1; exec /BRD/BRD-Gear-Removal.txt')
 	
 end
 
@@ -438,9 +430,11 @@ function init_gear_sets()
 	sets.midcast.Paeon = set_combine(sets.midcast.SongEnhancing, {head="Brioso Roundlet +3"})
 	sets.midcast.Ballad = set_combine(sets.midcast.SongEnhancing, {})
 	sets.midcast.Minne = set_combine(sets.midcast.SongEnhancing, {})
+	sets.midcast.Mambo = set_combine(sets.midcast.SongEnhancing, {})
 	sets.midcast.Minuet = set_combine(sets.midcast.SongEnhancing, {body="Fili Hongreline +3"})
 	sets.midcast.Madrigal = set_combine(sets.midcast.SongEnhancing, {head="Fili Calot +3"})
 	sets.midcast.HonorMarch = set_combine(sets.midcast.SongEnhancing, {range="Marsyas", hands="Fili Manchettes +3"})
+	sets.midcast.Aria = set_combine(sets.midcast.SongEnhancing, {range="Loughnashade"})
 	sets.midcast.March = set_combine(sets.midcast.SongEnhancing, {hands="Fili Manchettes +3"})
 	sets.midcast.Etude = set_combine(sets.midcast.SongEnhancing, {head="Mousai Turban +1",})
 	sets.midcast.Carol = set_combine(sets.midcast.SongEnhancing, {hands="Mousai Gages +1",})
@@ -793,7 +787,7 @@ function init_gear_sets()
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
 		main="Naegling",
-		sub={ name="Gleti's Knife", augments={'Path: A',}},
+		sub={ name="Gleti\'s Knife", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
 		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
@@ -811,7 +805,7 @@ function init_gear_sets()
 
     sets.engaged.DW.Acc = {
 		main="Naegling",
-		sub={ name="Gleti's Knife", augments={'Path: A',}},
+		sub={ name="Gleti\'s Knife", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
 		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
@@ -842,7 +836,7 @@ function init_gear_sets()
     -- 45% Magic Haste (36% DW to cap)
     sets.engaged.DW.MaxHaste = {
 		main="Naegling",
-		sub={ name="Gleti's Knife", augments={'Path: A',}},
+		sub={ name="Gleti\'s Knife", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
 		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
@@ -860,7 +854,7 @@ function init_gear_sets()
 
     sets.engaged.DW.MaxHaste.Acc = {
 		main="Naegling",
-		sub={ name="Gleti's Knife", augments={'Path: A',}},
+		sub={ name="Gleti\'s Knife", augments={'Path: A',}},
 		range={ name="Linos", augments={'Accuracy+15','"Store TP"+4','Quadruple Attack +3',}},
 		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
@@ -1010,24 +1004,21 @@ function init_gear_sets()
     sets.CP = {neck={ name="Bard's Charm +2", augments={'Path: A',}},}
 	
 	
-	sets.Naegling = {main="Naegling", sub={ name="Gleti's Knife", augments={'Path: A',}},}
+	sets.Naegling = {main="Naegling", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
 	sets.Naegling_Centovente = {main="Naegling", sub="Fusetto +2",}
 	sets.Naegling.SW = {main="Naegling", sub="Genmei Shield"}
 	
 	sets.Carnwenhan = {main="Carnwenhan", sub="Crepuscular Knife",}
-	sets.Carnwenhan_Centovente = {main="Carnwenhan", sub="Fusetto +2",}
 	sets.Carnwenhan.SW = {main="Carnwenhan", sub="Genmei Shield"}
 	
-	sets.Twashtar = {main="Twashtar", sub={ name="Gleti's Knife", augments={'Path: A',}},}
-	sets.Twashtar_Centovente = {main="Twashtar", sub="Fusetto +2",}
-	sets.Twashtar.SW = {main="Twashtar", sub="Genmei Shield"}
+	sets.Twashtar = {main={ name="Twashtar", augments={'Path: A',}}, sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
+	sets.Twashtar_Centovente = {main={ name="Twashtar", augments={'Path: A',}}, sub="Fusetto +2",}
+	sets.Twashtar.SW = {main={ name="Twashtar", augments={'Path: A',}}, sub="Genmei Shield"}
 	
-	sets.Mandau = {main="Mandau", sub={ name="Gleti's Knife", augments={'Path: A',}},}
-	sets.Mandau_Centovente = {main="Mandau", sub="Fusetto +2",}
+	sets.Mandau = {main="Mandau", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
 	sets.Mandau.SW = {main="Mandau", sub="Genmei Shield"}
 	
-	sets.Tauret = {main="Tauret", sub={ name="Gleti's Knife", augments={'Path: A',}},}
-	sets.Tauret_Centovente = {main="Tauret", sub="Fusetto +2",}
+	sets.Tauret = {main="Tauret", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
 	sets.Tauret.SW = {main="Tauret", sub="Genmei Shield"}
 	
 	sets.Xoanon = {main="Xoanon", sub="Enki Strap"}
@@ -1045,6 +1036,9 @@ function job_precast(spell, action, spellMap, eventArgs)
     if spell.type == 'BardSong' then
         if spell.name == 'Honor March' then
             equip({range="Marsyas"})
+        end
+		if spell.name == 'Aria of Passion' then
+            equip({range="Loughnashade"})
         end
     end
 
@@ -1076,6 +1070,10 @@ function job_midcast(spell, action, spellMap, eventArgs)
 			--Equips Marsyas for Honor March
         if spell.name == 'Honor March' then
             equip(sets.midcast.HonorMarch)
+        end
+		
+		if spell.name == 'Aria of Passion' then
+            equip(sets.midcast.Aria)
         end
 
 			--Handles Lullaby sets
@@ -1132,7 +1130,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 				end
 			end
 			if spell.english == 'Aeolian Edge' then
-				if state.TPBonus.value == true and (player.sub_job == 'DNC' or player.sub_job == 'NIN') then
+				if state.TPBonus.value == true and state.WeaponSet.value == 'Twashtar' and (player.sub_job == 'DNC' or player.sub_job == 'NIN') then
 					if player.tp > 1900 then
 						equip(sets.precast.WS.FullTPMagical)
 					end
@@ -1143,7 +1141,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 				end
 			end
 			if spell.english == 'Rudra\'s Storm' then
-				if state.TPBonus.value == true and (player.sub_job == 'DNC' or player.sub_job == 'NIN') then
+				if state.TPBonus.value == true and state.WeaponSet.value == 'Twashtar' and (player.sub_job == 'DNC' or player.sub_job == 'NIN') then
 					if player.tp > 1900 then
 						equip(sets.precast.WS.FullTPRudra)
 					end
@@ -1232,15 +1230,9 @@ function update_combat_form()
 	
 	if state.WeaponSet.value == 'Carnwenhan' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			if state.TPBonus.value == true then
-				enable('main','sub')
-				equip(sets.Carnwenhan_Centovente)
-				disable('main','sub')
-			else
-				enable('main','sub')
-				equip(sets.Carnwenhan)
-				disable('main','sub')
-			end	
+			enable('main','sub')
+			equip(sets.Carnwenhan)
+			disable('main','sub')
 		else
 			enable('main','sub')
 			equip(sets.Carnwenhan.SW)
@@ -1268,15 +1260,9 @@ function update_combat_form()
 	
 	if state.WeaponSet.value == 'Mandau' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			if state.TPBonus.value == true then
-				enable('main','sub')
-				equip(sets.Mandau_Centovente)
-				disable('main','sub')
-			else
-				enable('main','sub')
-				equip(sets.Mandau)
-				disable('main','sub')
-			end	
+			enable('main','sub')
+			equip(sets.Mandau)
+			disable('main','sub')
 		else
 			enable('main','sub')
 			equip(sets.Mandau.SW)
@@ -1286,15 +1272,9 @@ function update_combat_form()
 	
 	if state.WeaponSet.value == 'Tauret' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
-			if state.TPBonus.value == true then
-				enable('main','sub')
-				equip(sets.Tauret_Centovente)
-				disable('main','sub')
-			else
-				enable('main','sub')
-				equip(sets.Tauret)
-				disable('main','sub')
-			end
+			enable('main','sub')
+			equip(sets.Tauret)
+			disable('main','sub')
 		else
 			enable('main','sub')
 			equip(sets.Tauret.SW)

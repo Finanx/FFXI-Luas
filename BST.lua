@@ -78,6 +78,7 @@ function job_setup()
 		'Slug', 
 		'Cricket', 
 		'Leech', 
+		'Fly',
 		--'Sheep', 
 		--'Pig', 
 		--'Pink Bird', 
@@ -85,7 +86,6 @@ function job_setup()
 		--'Crab',
 		--'Acuex',
 		--'Lizard',
-		--'Fly',
 		--'Hippo',
 		--'Slime',
 		}	
@@ -146,7 +146,7 @@ function user_setup()
     state.WeaponskillMode:options('Normal', 'ATKCAP')
 	state.CorrelationMode = M{['description']='Correlation Mode', 'Neutral'}
     state.CastingMode:options('Normal', 'Resistant')
-    state.IdleMode:options('Normal', 'Pet', 'Killer', 'PetTP')
+    state.IdleMode:options('Normal', 'PetDT', 'Killer', 'PetTP')
 	state.TreasureMode:options('Tag', 'None')
 	state.WeaponSet = M{['description']='Weapon Set', 'None', 'MACC_Axe', 'Dolichenus', 'Ikenga_Axe', 'Naegling', 'Malevolence'}
 	state.Reraise = M(false, "Reraise Mode")
@@ -157,7 +157,7 @@ function user_setup()
 
 	--Includes Global Bind keys
 	
-	send_command('wait 1; exec Global-Binds.txt')
+	send_command('wait 2; exec Global-Binds.txt')
 
 	--Beast Master Binds
 	
@@ -165,7 +165,7 @@ function user_setup()
 	
 	--Gear Retrieval Scripts
 	
-	send_command('wait 10; exec /THF/THF-Gear-Retrieval.txt')
+	send_command('wait 10; exec /BST/BST-Gear-Retrieval.txt')
 	
 	--Job Settings
 	
@@ -189,11 +189,11 @@ function user_unload()
 
 	--Remove Global Binds
 
-	send_command('exec Global-UnBinds.txt')
+	send_command('wait 1; exec Global-UnBinds.txt')
 	
 	--Gear Removal Script
 	
-	send_command('exec /BST/BST-Gear-Removal.txt')
+	send_command('wait 1; exec /BST/BST-Gear-Removal.txt')
 	
 end
 
@@ -242,7 +242,7 @@ function init_gear_sets()
 	sets.precast.JA['Tame'] = {}
 	
 	sets.precast.JA['Reward'] = {
-	    main="Kaja Axe",
+	    main="Dolichenus",
 		sub="Adapa Shield",
 		ammo="Pet Food Theta",
 		head="Crepuscular Helm",
@@ -597,10 +597,10 @@ function init_gear_sets()
 	sets.midcast.Pet.ReadyRecast = {
 		main="Agwu's Axe",
 		sub="Adapa Shield",
-	    ammo="Hesperiidae",
-		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		ammo={ name="Hesperiidae", augments={'Path: A',}},
+		head="Nuk. Cabasset +2",
+		body="Nukumi Gausape +2",
+		hands="Nukumi Manoplas +2",
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
 		feet={ name="Gleti's Boots", augments={'Path: A',}},
 		neck={ name="Bst. Collar +2", augments={'Path: A',}},
@@ -625,14 +625,14 @@ function init_gear_sets()
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
-		waist="Fotia Belt",
+		waist="Flume Belt +1",
 		left_ear="Tuisto Earring",
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
 		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		right_ring="Defending Ring",
 		back={ name="Artio's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 	
-	sets.idle.Pet = {
+	sets.idle.PetDT = {
 	    main="Izizoeksi",
 		sub="Adapa Shield",
 		ammo="Staunch Tathlum +1",
@@ -993,10 +993,10 @@ function init_gear_sets()
 
 	sets.MACC_Axe = {main="Agwu's Axe", sub="Adapa Shield",}
 	sets.MACC_Axe.DW = {main="Agwu's Axe", sub="Ikenga's Axe",}	
-	sets.Dolichenus = {main="Kaja Axe", sub="Adapa Shield",}
-	sets.Dolichenus.DW = {main="Kaja Axe", sub="Ikenga's Axe",}
+	sets.Dolichenus = {main="Dolichenus", sub="Adapa Shield",}
+	sets.Dolichenus.DW = {main="Dolichenus", sub="Ikenga's Axe",}
 	sets.Ikenga_Axe = {main="Ikenga's Axe", sub="Adapa Shield",}
-	sets.Ikenga_Axe.DW = {main="Ikenga's Axe", sub="Kaja Axe",}	
+	sets.Ikenga_Axe.DW = {main="Ikenga's Axe", sub="Dolichenus",}	
 	sets.Naegling = {main="Naegling", sub="Adapa Shield",}
 	sets.Naegling.DW = {main="Naegling", sub="Ikenga's Axe",}
 	sets.Malevolence = {main={ name="Malevolence", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}}, sub="Adapa Shield",}
