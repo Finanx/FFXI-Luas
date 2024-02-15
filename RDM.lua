@@ -1383,18 +1383,30 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 		if spell.english == "Sanguine Blade" then
 			if (world.weather_element == 'Dark' or world.day_element == 'Dark') then
 				equip(sets.Obi)
+				if world.day_element == 'Light' then
+					equip({waist="Orpheus's Sash"})
+				end
 			end
 		elseif spell.english == "Seraph Blade" then
 			if (world.weather_element == 'Light' or world.day_element == 'Light') then
 				equip(sets.Obi)
+				if world.day_element == 'Dark' then
+					equip({waist="Orpheus's Sash"})
+				end
 			end
 		elseif spell.english == "Red Lotus Blade" then
 			if (world.weather_element == 'Fire' or world.day_element == 'Fire') then
 				equip(sets.Obi)
+				if world.day_element == 'Water' then
+					equip({waist="Orpheus's Sash"})
+				end
 			end
 		elseif spell.english == "Aeolian Edge" then
 			if (world.weather_element == 'Wind' or world.day_element == 'Wind') then
 				equip(sets.Obi)
+				if world.day_element == 'Ice' then
+					equip({waist="Orpheus's Sash"})
+				end
 			end
 		end
 	end
@@ -1454,6 +1466,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
 		
 			--Equips Obi set if the correct day or weather matches Elemental Magic and if correct distance
+		if spell.target.distance < (8 + spell.target.model_size) then
+            equip({waist="Orpheus's Sash"})
+        end
 		if spell.element == 'Fire' then
 			if (world.weather_element == 'Fire' or world.day_element == 'Fire') then
 				equip(sets.Obi)
@@ -1527,9 +1542,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 				end
 			end
 		end
-		if spell.target.distance < (8 + spell.target.model_size) then
-            equip({waist="Orpheus's Sash"})
-        end
+
 		
     end
 end

@@ -103,15 +103,18 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Rostam'}
+	state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'RostamA', 'RostamC'}
 	state.RangeSet = M{['description']='Range Set', 'Armageddon', 'Fomalhaut', 'DeathPenalty', 'Earp', 'TP_Gun'}
+	state.Quickdraw = M{['description']='Quickdraw', 'Fire', 'Ice', 'Earth', 'Wind', 'Thunder', 'Water'}
+
 
     state.CP = M(false, "Capacity Points Mode")
+	state.RangeLock = M(false, 'Range Lock')
 
 	gear.RAbullet = "Chrono Bullet"
 	gear.WSbullet = "Chrono Bullet"
 	gear.MeleeWSbullet = "Chrono Bullet"
-	gear.WSAccbullet = "Devastating Bullet"
+	gear.Accbullet = "Devastating Bullet"
     gear.MAbullet = "Living Bullet"
     gear.QDbullet = "Devastating Bullet"
     options.ammo_warning_limit = 10
@@ -197,12 +200,9 @@ function init_gear_sets()
 
     sets.precast.FoldDoubleBust = {hands="Lanun Gants +3"}
 
-    sets.precast.Waltz = {
-        ring1="Asklepian Ring",
-        waist="Gishdubar Sash",
-        }
+    sets.precast.Waltz = set_combine(sets.idle, {legs="Dashing Subligar",ring1="Asklepian Ring",waist="Gishdubar Sash",})
 
-    sets.precast.Waltz['Healing Waltz'] = {}
+    sets.precast.Waltz['Healing Waltz'] = set_combine(sets.idle, {legs="Dashing Subligar",})
 
     sets.precast.FC = {
 		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
@@ -216,48 +216,43 @@ function init_gear_sets()
 		right_ear="Etiolation Earring",
 		left_ring="Kishar Ring",
 		right_ring="Prolix Ring",
-		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},
-        }
+		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}
 
     -- (10% Snapshot from JP Gifts)
 		
-		
 	sets.precast.RA = {
-		ammo=gear.RAbullet,
 		head="Chass. Tricorne +3",
 		body="Oshosi Vest +1",
-		hands={ name="Lanun Gants +3", augments={'Enhances "Fold" effect',}},
+		hands={ name="Carmine Fin. Ga. +1", augments={'Rng.Atk.+20','"Mag.Atk.Bns."+12','"Store TP"+6',}},
 		legs={ name="Adhemar Kecks +1", augments={'AGI+12','"Rapid Shot"+13','Enmity-6',}},
 		feet="Meg. Jam. +2",
 		neck={ name="Comm. Charm +2", augments={'Path: A',}},
-		waist="Yemaya Belt",
+		waist="Impulse Belt",
 		left_ear="Genmei Earring",
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-		left_ring="Defending Ring",
-		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
-		back={ name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10',}},
-		}		--10% JP + 61% Gear SS / 30% Job Trait + 34% Gear RS
-		--71% SS 64% RS
+		left_ring="Crepuscular Ring",
+		right_ring="Defending Ring",
+		back={ name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10',}},}
+		--10% JP + 64% Gear SS / 30% Job Trait + 42% Gear RS
+		--74% SS 64% RS
 
 	sets.precast.RA.Flurry1 = {
-		ammo=gear.RAbullet,
 		head="Chass. Tricorne +3",
 		body="Laksa. Frac +3",
-		hands={ name="Lanun Gants +3", augments={'Enhances "Fold" effect',}},
+		hands={ name="Carmine Fin. Ga. +1", augments={'Rng.Atk.+20','"Mag.Atk.Bns."+12','"Store TP"+6',}},
 		legs={ name="Adhemar Kecks +1", augments={'AGI+12','"Rapid Shot"+13','Enmity-6',}},
 		feet="Meg. Jam. +2",
 		neck={ name="Comm. Charm +2", augments={'Path: A',}},
 		waist="Yemaya Belt",
 		left_ear="Genmei Earring",
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-		left_ring="Defending Ring",
-		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
-		back={ name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10',}},
-		}		--10% JP + 15% Flurry1 + 47% Gear SS / 30% Job Trait + 56% Gear RS
-		--72% SS 86% RS
+		left_ring="Crepuscular Ring",
+		right_ring="Defending Ring",
+		back={ name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10',}},}
+		--10% JP + 15% Flurry1 + 45% Gear SS / 30% Job Trait + 67% Gear RS
+		--70% SS 97% RS
 
 	sets.precast.RA.Flurry2 = {
-		ammo=gear.RAbullet,
 		head="Chass. Tricorne +3",
 		body="Laksa. Frac +3",
 		hands={ name="Carmine Fin. Ga. +1", augments={'Rng.Atk.+20','"Mag.Atk.Bns."+12','"Store TP"+6',}},
@@ -267,41 +262,56 @@ function init_gear_sets()
 		waist="Yemaya Belt",
 		left_ear="Genmei Earring",
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-		left_ring="Defending Ring",
-		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
-		back={ name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10',}},
-		}		--10% JP + 30% Flurry2 + 32% Gear SS / 30% Job Trait + 75% Gear RS
-		--72% SS 105% RS	
-			
-
+		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		right_ring="Defending Ring",
+		back={ name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10',}},}
+		--10% JP + 30% Flurry1 + 32% Gear SS / 30% Job Trait + 77% Gear RS
+		--72% SS 107% RS
 
     ------------------------------------------------------------------------------------------------
     ------------------------------------- Weapon Skill Sets ----------------------------------------
     ------------------------------------------------------------------------------------------------
 
+		--Ranged Weaponskill Sets
+
     sets.precast.WS = {
 		ammo=gear.WSbullet,
-		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="Comm. Charm +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Ishvara Earring",
-		left_ring="Ephramad's Ring",
-		right_ring="Epaminondas's Ring",
-		back={ name="Camulus's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-		
-	sets.precast.WS.FullTP = {left_ear="Telos Earring",}
-
-    sets.precast.WS['Last Stand'] = {
-		ammo=gear.WSbullet,
-		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
+		head={ name="Lanun Tricorne +3", augments={'Enhances "Winning Streak" effect',}},
+		body={ name="Ikenga's Vest", augments={'Path: A',}},
 		hands="Chasseur's Gants +3",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Lanun Bottes +3", augments={'Enhances "Wild Card" effect',}},
+		neck="Fotia Gorget",
+		waist="Fotia Belt",
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
+		left_ring="Regal Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},}
+		
+	sets.precast.WS.FullTP = {left_ear="Telos Earring",}
+	
+	sets.precast.WS.Acc = {
+		ammo=gear.Accbullet,
+		head="Chass. Tricorne +3",
+		body="Chasseur's Frac +3",
+		hands="Chasseur's Gants +3",
+		legs="Chas. Culottes +3",
+		feet={ name="Ikenga's Clogs", augments={'Path: A',}},
+		neck={ name="Comm. Charm +2", augments={'Path: A',}},
+		waist="K. Kachina Belt +1",
+		left_ear="Telos Earring",
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
+		left_ring={ name="Cacoethic Ring +1", augments={'Path: A',}},
+		right_ring="Ephramad's Ring",
+		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10',}},}
+		
+	sets.precast.WS.ATKCAP = {
+		ammo=gear.WSbullet,
+	    head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Ikenga's Vest", augments={'Path: A',}},
+		hands="Chasseur's Gants +3",
+		legs={ name="Ikenga's Trousers", augments={'Path: A',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
@@ -309,30 +319,40 @@ function init_gear_sets()
 		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
 		left_ring="Regal Ring",
 		right_ring="Ephramad's Ring",
-		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},}		
+		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},}
 		
-	sets.precast.WS['Last Stand'].Acc = {
-		ammo=gear.RAbullet,
-		head={ name="Ikenga's Hat", augments={'Path: A',}},
-		body="Chasseur's Frac +3",
-		hands="Malignance Gloves",
-		legs="Chas. Culottes +3",
-		feet="Malignance Boots",
-		neck={ name="Comm. Charm +2", augments={'Path: A',}},
-		waist="K. Kachina Belt +1",
-		left_ear="Telos Earring",
-		right_ear="Crep. Earring",
-		left_ring="Regal Ring",
-		right_ring="Ephramad's Ring",
-		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10',}},}
-		
+    sets.precast.WS['Last Stand'] = sets.precast.WS
+	sets.precast.WS['Last Stand'].Acc = sets.precast.WS.Acc
+	sets.precast.WS['Last Stand'].ATKCAP = sets.precast.WS.ATKCAP
 	sets.precast.WS['Last Stand'].FullTP = {left_ear="Odr Earring",}
-	sets.precast.WS['Detonator'] = sets.precast.WS['Last Stand']
-	sets.precast.WS['Detonator'].Acc = sets.precast.WS['Last Stand'].Acc
-	sets.precast.WS['Detonator'].FullTP = sets.precast.WS['Last Stand'].FullTP
-	sets.precast.WS['Terminus'] = sets.precast.WS['Last Stand']
-	sets.precast.WS['Terminus'].Acc = sets.precast.WS['Last Stand'].Acc
+	
+	sets.precast.WS['Detonator'] = sets.precast.WS
+	sets.precast.WS['Detonator'].Acc = sets.precast.WS.RangedAcc
+	sets.precast.WS['Detonator'].ATKCAP = sets.precast.WS.ATKCAP
+	sets.precast.WS['Detonator'].FullTP = {left_ear="Odr Earring",}
+	
+	sets.precast.WS['Terminus'] = sets.precast.WS
+	sets.precast.WS['Terminus'].Acc = sets.precast.WS.Acc
+	sets.precast.WS['Terminus'].ATKCAP = sets.precast.WS.ATKCAP
+	sets.precast.WS['Terminus'].FullTP = {left_ear="Odr Earring",}
+	
+    sets.precast.WS['Leaden Salute'] = {
+		ammo=gear.MAbullet,
+		head="Pixie Hairpin +1",
+		body={ name="Lanun Frac +3", augments={'Enhances "Loaded Deck" effect',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Lanun Bottes +3", augments={'Enhances "Wild Card" effect',}},
+		neck={ name="Comm. Charm +2", augments={'Path: A',}},
+		waist="Skrymir Cord +1",
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Friomisi Earring",
+		left_ring="Dingir Ring",
+		right_ring="Archon Ring",
+		back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}},}
 
+	sets.precast.WS['Leaden Salute'].FullTP = {left_ear="Hecate's Earring"}
+	
     sets.precast.WS['Wildfire'] = {
 		ammo=gear.MAbullet,
 		head={ name="Nyame Helm", augments={'Path: B',}},
@@ -352,7 +372,7 @@ function init_gear_sets()
 		ammo=gear.WSbullet,
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		hands="Chasseur's Gants +3",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Lanun Bottes +3", augments={'Enhances "Wild Card" effect',}},
 		neck="Fotia Gorget",
@@ -365,22 +385,57 @@ function init_gear_sets()
 		
 	sets.precast.WS['Hot Shot'].FullTP = {left_ear="Hecate's Earring"}
 
-    sets.precast.WS['Leaden Salute'] = {
-		ammo=gear.MAbullet,
-		head="Pixie Hairpin +1",
-		body={ name="Lanun Frac +3", augments={'Enhances "Loaded Deck" effect',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Lanun Bottes +3", augments={'Enhances "Wild Card" effect',}},
-		neck={ name="Comm. Charm +2", augments={'Path: A',}},
-		waist="Skrymir Cord +1",
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Friomisi Earring",
-		left_ring="Dingir Ring",
-		right_ring="Archon Ring",
-		back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}},}
+		--Melee Weaponskill sets
 
-	sets.precast.WS['Leaden Salute'].FullTP = {left_ear="Hecate's Earring"}
+	sets.precast.WS.Melee = {
+		ammo=gear.MeleeWSbullet,
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands="Chasseur's Gants +3",
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck="Rep. Plat. Medal",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Ishvara Earring",
+		left_ring="Ephramad's Ring",
+		right_ring="Sroda Ring",
+		back={ name="Camulus's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+
+	sets.precast.WS.MeleeAcc = {
+		ammo=gear.MeleeWSbullet,
+		head="Chass. Tricorne +3",
+		body="Chasseur's Frac +3",
+		hands="Chasseur's Gants +3",
+		legs="Chas. Culottes +3",
+		feet="Chass. Bottes +3",
+		neck="Combatant's Torque",
+		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
+		left_ear="Odr Earring",
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
+		left_ring={ name="Cacoethic Ring +1", augments={'Path: A',}},
+		right_ring="Ephramad's Ring",
+		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}
+	
+	sets.precast.WS.MeleeATKCAP = {
+		ammo=gear.MeleeWSbullet,
+	    head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Ikenga's Vest", augments={'Path: A',}},
+		hands="Chasseur's Gants +3",
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck="Rep. Plat. Medal",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Ishvara Earring",
+		left_ring="Ephramad's Ring",
+		right_ring="Sroda Ring",
+		back={ name="Camulus's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+
+    sets.precast.WS['Savage Blade'] = sets.precast.WS.Melee
+	sets.precast.WS['Savage Blade'].Acc = sets.precast.WS.MeleeAcc
+	sets.precast.WS['Savage Blade'].ATKCAP = sets.precast.WS.MeleeATKCAP
+	sets.precast.WS['Savage Blade'].FullTP = {left_ear="Telos Earring",}
 
     sets.precast.WS['Evisceration'] = {
 		ammo=gear.MeleeWSbullet,
@@ -393,57 +448,13 @@ function init_gear_sets()
 		waist="Fotia Belt",
 		left_ear="Odr Earring",
 		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
-		left_ring="Begrudging Ring",
-		right_ring="Mummu Ring",
+		left_ring="Ilabrat Ring",
+		right_ring="Regal Ring",
 		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}
-		
-    sets.precast.WS['Exenterator'] = {
-		ammo=gear.MeleeWSbullet,
-		head={ name="Blistering Sallet +1", augments={'Path: A',}},
-		body="Mummu Jacket +2",
-		hands="Chasseur's Gants +3",
-		legs={ name="Zoar Subligar +1", augments={'Path: A',}},
-		feet="Mummu Gamash. +2",
-		neck="Fotia Gorget",
-		waist="Fotia Belt",
-		left_ear="Odr Earring",
-		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
-		left_ring="Begrudging Ring",
-		right_ring="Mummu Ring",
-		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}
-		
-    sets.precast.WS['Exenterator'].Acc = {
-		ammo=gear.MeleeWSbullet,
-		head="Chass. Tricorne +3",
-		body="Chasseur's Frac +3",
-		hands="Chasseur's Gants +3",
-		legs="Chas. Culottes +3",
-		feet="Chass. Bottes +3",
-		neck="Combatant's Torque",
-		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
-		left_ear="Odr Earring",
-		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
-		left_ring="Chirich Ring +1",
-		right_ring="Chirich Ring +1",
-		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}
 
-    sets.precast.WS['Savage Blade'] = {
-		ammo=gear.MeleeWSbullet,
-		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Rep. Plat. Medal",
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Ishvara Earring",
-		left_ring="Ephramad's Ring",
-		right_ring="Sroda Ring",
-		back={ name="Camulus's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-		
-	sets.precast.WS['Savage Blade'].FullTP = {left_ear="Telos Earring",}
-		
+	sets.precast.WS['Exenterator'] = sets.precast.WS['Evisceration']		
+    sets.precast.WS['Exenterator'].Acc = sets.precast.WS.MeleeAcc
+
 	sets.precast.WS['Aeolian Edge'] = {
 		ammo=gear.MAbullet,
 		head={ name="Nyame Helm", augments={'Path: B',}},
@@ -451,7 +462,7 @@ function init_gear_sets()
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Lanun Bottes +3", augments={'Enhances "Wild Card" effect',}},
-		neck={ name="Comm. Charm +2", augments={'Path: A',}},
+		neck="Baetyl Pendant",
 		waist="Orpheus's Sash",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Friomisi Earring",
@@ -524,12 +535,11 @@ function init_gear_sets()
     
     -- Ranged gear
     sets.midcast.RA = {
-		ammo=gear.RAbullet,
-		head="Ikenga's Hat",
+		head={ name="Ikenga's Hat", augments={'Path: A',}},
 		body={ name="Ikenga's Vest", augments={'Path: A',}},
-		hands="Malignance Gloves",
-		legs="Ikenga's Trousers",
-		feet="Malignance Boots",
+		hands={ name="Ikenga's Gloves", augments={'Path: A',}},
+		legs="Chas. Culottes +3",
+		feet={ name="Ikenga's Clogs", augments={'Path: A',}},
 		neck="Iskur Gorget",
 		waist="Yemaya Belt",
 		left_ear="Telos Earring",
@@ -539,10 +549,9 @@ function init_gear_sets()
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10',}},}
 
     sets.midcast.RA.Acc = {
-		ammo=gear.WSAccbullet,
 		head={ name="Ikenga's Hat", augments={'Path: A',}},
 		body="Chasseur's Frac +3",
-		hands="Malignance Gloves",
+		hands={ name="Ikenga's Gloves", augments={'Path: A',}},
 		legs="Chas. Culottes +3",
 		feet={ name="Ikenga's Clogs", augments={'Path: A',}},
 		neck="Iskur Gorget",
@@ -554,25 +563,23 @@ function init_gear_sets()
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10',}},}
 		
 	sets.TripleShot = {
-		ammo=gear.RAbullet,
-		head={ name="Blistering Sallet +1", augments={'Path: A',}},
-		body="Chasseur's Frac +3",
-		hands="Chasseur's Gants +3",
-		legs="Ikenga's Trousers",
-		feet="Osh. Leggings +1",
-		neck="Iskur Gorget",
-		waist="K. Kachina Belt +1",
-		left_ear="Odr Earring",
-		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
-		left_ring="Mummu Ring",
-		right_ring="Regal Ring",
-		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Crit.hit rate+10','Phys. dmg. taken-10%',}},}
-		
-	sets.TripleShot.Acc = {
-		ammo=gear.WSAccbullet,
 		head={ name="Ikenga's Hat", augments={'Path: A',}},
 		body="Chasseur's Frac +3",
-		hands="Malignance Gloves",
+		hands={ name="Lanun Gants +3", augments={'Enhances "Fold" effect',}},
+		legs="Chas. Culottes +3",
+		feet="Osh. Leggings +1",
+		neck="Iskur Gorget",
+		waist="Yemaya Belt",
+		left_ear="Telos Earring",
+		right_ear="Crep. Earring",
+		left_ring="Ilabrat Ring",
+		right_ring="Dingir Ring",
+		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10',}},}
+		
+	sets.TripleShot.Acc = {
+		head={ name="Ikenga's Hat", augments={'Path: A',}},
+		body="Chasseur's Frac +3",
+		hands={ name="Ikenga's Gloves", augments={'Path: A',}},
 		legs="Chas. Culottes +3",
 		feet={ name="Ikenga's Clogs", augments={'Path: A',}},
 		neck="Iskur Gorget",
@@ -584,25 +591,23 @@ function init_gear_sets()
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10',}},}
 	
 	sets.TripleShot_AM = {
-		ammo=gear.RAbullet,
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
 		body="Chasseur's Frac +3",
 		hands="Chasseur's Gants +3",
-		legs="Ikenga's Trousers",
+		legs={ name="Ikenga's Trousers", augments={'Path: A',}},
 		feet="Osh. Leggings +1",
 		neck="Iskur Gorget",
 		waist="K. Kachina Belt +1",
 		left_ear="Odr Earring",
 		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
 		left_ring="Mummu Ring",
-		right_ring="Regal Ring",
+		right_ring="Ephramad's Ring",
 		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Crit.hit rate+10','Phys. dmg. taken-10%',}},}
 		
 	sets.TripleShot_AM.Acc = {
-		ammo=gear.WSAccbullet,
 		head={ name="Ikenga's Hat", augments={'Path: A',}},
 		body="Chasseur's Frac +3",
-		hands="Malignance Gloves",
+		hands={ name="Ikenga's Gloves", augments={'Path: A',}},
 		legs="Chas. Culottes +3",
 		feet={ name="Ikenga's Clogs", augments={'Path: A',}},
 		neck="Iskur Gorget",
@@ -868,14 +873,16 @@ function init_gear_sets()
     ---------------------------------------- Hybrid Sets -------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.engaged.Hybrid =	--[[{
+    sets.engaged.Hybrid = {
 		head="Malignance Chapeau", --6%
 		body="Malignance Tabard",  --9%
 		hands="Malignance Gloves", --5%
 		legs="Chas. Culottes +3",  --11%
 		feet="Malignance Boots", --4%
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}}, --7%
-        } -- 35%DT + 7% PDT + 10% PDT Back Piece ]]
+        } -- 35%DT + 7% PDT + 10% PDT Back Piece
+		
+	--[[ Use this for a full Crit Set
 		{
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
 		body="Mummu Jacket +2",
@@ -888,7 +895,7 @@ function init_gear_sets()
 		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
 		left_ring="Begrudging Ring",
 		right_ring="Mummu Ring",
-		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}	
+		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}	]]
 		
 	sets.engaged.Hybrid.Defense = {
 		head={ name="Nyame Helm", augments={'Path: B',}},																						--7%
@@ -899,9 +906,6 @@ function init_gear_sets()
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
         } -- 41% DT + 10% PDT Back Piece
 		
-		
-		
-
 		
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
@@ -959,16 +963,22 @@ function init_gear_sets()
 
 	--Weaponsets
 
-    sets.Rostam = {main={ name="Rostam", augments={'Path: A',}}, sub={ name="Gleti\'s Knife", augments={'Path: A',}},}--{main="Bone Knife",sub="Bone Knife",}
-    sets.Rostam.Acc = {main={ name="Rostam", augments={'Path: A',}}, sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
-	sets.Rostam.RAcc = {main={ name="Rostam", augments={'Path: A',}}, sub={ name="Kustawi +1", augments={'Path: A',}},}
+    sets.RostamA = {main={ name="Rostam", augments={'Path: A',}}, sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
+    sets.RostamA.Acc = {main={ name="Rostam", augments={'Path: A',}}, sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
+	sets.RostamA.RAcc = {main={ name="Rostam", augments={'Path: A',}}, sub={ name="Kustawi +1", augments={'Path: A',}},}
+    sets.RostamC = {main={ name="Rostam", augments={'Path: C',}}, sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
+    sets.RostamC.Acc = {main={ name="Rostam", augments={'Path: C',}}, sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
+	sets.RostamC.RAcc = {main={ name="Rostam", augments={'Path: C',}}, sub={ name="Kustawi +1", augments={'Path: A',}},}
 	sets.Naegling = {main="Naegling", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
     sets.Naegling.Acc = {main="Naegling", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
 	sets.Naegling.RAcc = {main="Naegling", sub={ name="Kustawi +1", augments={'Path: A',}},}
 	
-	sets.Rostam.SW = {main={ name="Rostam", augments={'Path: A',}}, sub="Nusku Shield"}
-    sets.Rostam.SW.Acc = {main={ name="Rostam", augments={'Path: A',}}, sub="Nusku Shield"}
-	sets.Rostam.SW.RAcc = {main={ name="Rostam", augments={'Path: A',}}, sub="Nusku Shield"}
+	sets.RostamA.SW = {main={ name="Rostam", augments={'Path: A',}}, sub="Nusku Shield"}
+    sets.RostamA.SW.Acc = {main={ name="Rostam", augments={'Path: A',}}, sub="Nusku Shield"}
+	sets.RostamA.SW.RAcc = {main={ name="Rostam", augments={'Path: A',}}, sub="Nusku Shield"}
+	sets.RostamC.SW = {main={ name="Rostam", augments={'Path: C',}}, sub="Nusku Shield"}
+    sets.RostamC.SW.Acc = {main={ name="Rostam", augments={'Path: C',}}, sub="Nusku Shield"}
+	sets.RostamC.SW.RAcc = {main={ name="Rostam", augments={'Path: C',}}, sub="Nusku Shield"}
 	sets.Naegling.SW = {main="Naegling", sub="Nusku Shield"}
     sets.Naegling.SW.Acc = {main="Naegling", sub="Nusku Shield"}
 	sets.Naegling.SW.RAcc = {main="Naegling", sub="Nusku Shield"}
@@ -1039,6 +1049,11 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 
 		--Handles Snapshot sets based on if Flurry is on
     if spell.action_type == 'Ranged Attack' then
+		if state.RangedMode.value == 'Acc' then
+			equip({ammo=gear.Accbullet})
+		else
+			equip({ammo=gear.RAbullet})
+		end
         if flurry == 2 then
             equip(sets.precast.RA.Flurry2)
         elseif flurry == 1 then
@@ -1070,23 +1085,31 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 					equip(sets.precast.WS['Leaden Salute'].FullTP)
 				end
 			end
-			if spell.target.distance > (8 + spell.target.model_size) then
-				if (world.weather_element == 'Dark' or world.day_element == 'Dark') then
-					equip(sets.Obi)
+			if spell.target.distance < (8 + spell.target.model_size) then
+				equip({waist="Orpheus's Sash"})
+			end
+			if (world.weather_element == 'Dark' or world.day_element == 'Dark') then
+				equip(sets.Obi)
+				if world.day_element == 'Light' then
+					if spell.target.distance < (6 + spell.target.model_size) then
+						equip({waist="Orpheus's Sash"})
+					end
 				end
-			else
-				equip(sets.Orpheus)
 			end
         elseif spell.english == 'Wildfire' then
 			if player.tp > 2900 then
 				equip(sets.precast.WS['Wildfire'])
 			end			
-			if spell.target.distance > (8 + spell.target.model_size) then
-				if (world.weather_element == 'Fire' or world.day_element == 'Fire') then
-					equip(sets.Obi)
+			if spell.target.distance < (8 + spell.target.model_size) then
+				equip({waist="Orpheus's Sash"})
+			end
+			if (world.weather_element == 'Fire' or world.day_element == 'Fire') then
+				equip(sets.Obi)
+				if world.day_element == 'Water' then
+					if spell.target.distance < (6 + spell.target.model_size) then
+						equip({waist="Orpheus's Sash"})
+					end
 				end
-			else
-				equip(sets.Orpheus)
 			end
 		elseif spell.english == 'Hot Shot' then
 			if state.RangeSet.value == 'Fomalhaut' then
@@ -1098,12 +1121,16 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 					equip(sets.precast.WS['Hot Shot'].FullTP)
 				end
 			end
-			if spell.target.distance > (8 + spell.target.model_size) then
-				if (world.weather_element == 'Fire' or world.day_element == 'Fire') then
-					equip(sets.Obi)
+			if spell.target.distance < (8 + spell.target.model_size) then
+				equip({waist="Orpheus's Sash"})
+			end
+			if (world.weather_element == 'Fire' or world.day_element == 'Fire') then
+				equip(sets.Obi)
+				if world.day_element == 'Water' then
+					if spell.target.distance < (6 + spell.target.model_size) then
+						equip({waist="Orpheus's Sash"})
+					end
 				end
-			else
-				equip(sets.Orpheus)
 			end
 		elseif spell.english == 'Aeolian Edge' or spell.english == 'Cyclone' then
 			if state.RangeSet.value == 'TP_Gun' then
@@ -1117,6 +1144,12 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 			elseif state.RangeSet.value == 'DeathPenalty' or state.RangeSet.value == 'Armageddon' or state.RangeSet.value == 'Earp' then
 				if player.tp > 2900 then
 					equip(sets.precast.WS['Aeolian Edge'].FullTP)
+				end
+			end
+			if (world.weather_element == 'Wind' or world.day_element == 'Wind') then
+				equip(sets.Obi)
+				if world.day_element == 'Ice' then
+					equip({waist="Orpheus's Sash"})
 				end
 			end
 		elseif spell.english == 'Savage Blade' then
@@ -1143,6 +1176,10 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 					equip(sets.precast.WS['Last Stand'].FullTP)
 				end
 			end
+		elseif spell.english == 'Terminus' then
+			if player.tp > 2900 then
+				equip(sets.precast.WS['Terminus'].FullTP)
+			end
 		elseif spell.english == 'Detonator' then
 			if state.RangeSet.value == 'Fomalhaut' then
 				if player.tp > 2400 then
@@ -1163,16 +1200,65 @@ end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
 
-		--Equip obi if weather/day matches for Quick Draw.
-    if spell.type == 'CorsairShot' then
-		if spell.target.distance > (8 + spell.target.model_size) and (spell.english ~= 'Light Shot' and spell.english ~= 'Dark Shot') then
-			if (spell.element == world.day_element or spell.element == world.weather_element) then 
-				equip(sets.Obi)
-			end
-		else
-			equip(sets.Orpheus)
+			--Equips Obi set if the correct day or weather matches Quick Draw and if correct distance
+		if spell.target.distance < (8 + spell.target.model_size) then
+            equip({waist="Orpheus's Sash"})
         end
-	end
+		if spell.english == 'Fire Shot' then
+			if (world.weather_element == 'Fire' or world.day_element == 'Fire') then
+				equip(sets.Obi)
+				if world.day_element == 'Water' then
+					if spell.target.distance < (6 + spell.target.model_size) then
+						equip({waist="Orpheus's Sash"})
+					end
+				end
+			end
+		elseif spell.english == 'Ice Shot' then
+			if (world.weather_element == 'Ice' or world.day_element == 'Ice') then
+				equip(sets.Obi)
+				if world.day_element == 'Fire' then
+					if spell.target.distance < (6 + spell.target.model_size) then
+						equip({waist="Orpheus's Sash"})
+					end
+				end
+			end
+		elseif spell.english == 'Wind Shot' then
+			if (world.weather_element == 'Wind' or world.day_element == 'Wind') then
+				equip(sets.Obi)
+				if world.day_element == 'Ice' then
+					if spell.target.distance < (6 + spell.target.model_size) then
+						equip({waist="Orpheus's Sash"})
+					end
+				end
+			end
+		elseif spell.english == 'Earth Shot' then
+			if (world.weather_element == 'Earth' or world.day_element == 'Earth') then
+				equip(sets.Obi)
+				if world.day_element == 'Wind' then
+					if spell.target.distance < (6 + spell.target.model_size) then
+						equip({waist="Orpheus's Sash"})
+					end
+				end
+			end
+		elseif spell.english == 'Thunder Shot' then
+			if (world.weather_element == 'Lightning' or world.day_element == 'Lightning') then
+				equip(sets.Obi)
+				if world.day_element == 'Earth' then
+					if spell.target.distance < (6 + spell.target.model_size) then
+						equip({waist="Orpheus's Sash"})
+					end
+				end
+			end
+		elseif spell.english == 'Water Shot' then
+			if (world.weather_element == 'Water' or world.day_element == 'Water') then
+				equip(sets.Obi)
+				if world.day_element == 'Lightning' then
+					if spell.target.distance < (6 + spell.target.model_size) then
+						equip({waist="Orpheus's Sash"})
+					end
+				end
+			end
+		end
 	if spell.action_type == 'Ranged Attack' then
 	    if buffactive['Triple Shot'] then
 			if state.RangedMode.value == 'Acc' then
@@ -1258,9 +1344,15 @@ end
 
 function check_rangeset()
 	equip(sets[state.RangeSet.current])
+	
+	if state.RangeLock.value == true then
+		disable('range')
+	else
+		enable('range')
+	end
+	
 end
 		
-
 -------------------------------------------------------------------------------------------------------------------
 -- Code for Melee sets
 -------------------------------------------------------------------------------------------------------------------
@@ -1277,7 +1369,6 @@ function job_update(cmdParams, eventArgs)
 	check_rangeset()
 	check_gear()
     handle_equipping_gear(player.status)
-	Weaponskill_Keybinds()
 end
 
 	--Determines Dual Wield melee set
@@ -1287,95 +1378,8 @@ function update_combat_form()
     elseif DW == false then
         state.CombatForm:reset()
     end
-end
-
-	--Command to show Corsair binds in game[ ALT + numpad- ]
-	send_command([[bind !numpad- 
-		input /echo -----Gun-----;
-		input /echo [ CTRL + Numpad1 ] Leaden Salute;
-		input /echo [ CTRL + Numpad2 ] Wildfire;
-		input /echo [ CTRL + Numpad3 ] Last Stand;
-		input /echo [ CTRL + Numpad5 ] Hot Shot;
-		input /echo [ CTRL + Numpad6 ] Terminus;
-		input /echo [ CTRL + Numpad7 ] Detonator;
-		input /echo -----Sword-----;
-		input /echo [ CTRL + Numpad4 ] Savage Blade;
-		input /echo [ CTRL + Numpad9 ] Requiescat;
-		input /echo -----Dagger-----;
-		input /echo [ ALT + Numpad1 ] Evisceration;
-		input /echo [ ALT + Numpad2 ] Exenterator;
-		input /echo [ ALT + Numpad3 ] Cyclone;
-		input /echo [ ALT + Numpad4 ] Aeolian Edge;
-		input /echo [ ALT + Numpad5 ] Viper Bite;
-		]])
-		
-function Weaponskill_Keybinds()
-
-		send_command([[bind ^numpad- 
-			input /echo -----Gun-----;
-			input /echo [ CTRL + Numpad1 ] Leaden Salute;
-			input /echo [ CTRL + Numpad2 ] Wildfire;
-			input /echo [ CTRL + Numpad3 ] Last Stand;
-			input /echo [ CTRL + Numpad4 ] Hot Shot;
-			input /echo [ CTRL + Numpad5 ] Detonator;
-			input /echo [ CTRL + Numpad6 ] Terminus;
-			input /echo [ CTRL + Numpad7 ] Slug Shot;
-			input /echo [ CTRL + Numpad9 ] Sniper Shot;
-			input /echo [ CTRL + Numpad. ] Numbing Shot;]])
-		send_command('bind ^numpad1 input /ws "Leaden Salute" <t>')
-		send_command('bind ^numpad2 input /ws "Wildfire" <t>')
-		send_command('bind ^numpad3 input /ws "Last Stand" <t>')
-		send_command('bind ^numpad4 input /ws "Hot Shot" <t>')
-		send_command('bind ^numpad5 input /ws "Detonator" <t>')
-		send_command('bind ^numpad6 input /ws "Terminus" <t>')
-		send_command('bind ^numpad7 input /ws "Slug Shot" <t>')
-		send_command('bind ^numpad9 input /ws "Sniper Shot" <t>')
-		send_command('bind ^numpad. input /ws "Numbing Shot" <t>')
-
-	if state.WeaponSet.value == 'Naegling' then		
-		send_command([[bind !numpad- 
-			input /echo -----Sword-----;
-			input /echo [ ALT + Numpad1 ]  Fast Blade;
-			input /echo [ ALT + Numpad2 ]  Burning Blade;
-			input /echo [ ALT + Numpad3 ]  Requiescat;
-			input /echo [ ALT + Numpad4 ]  Savage Blade;
-			input /echo [ ALT + Numpad5 ]  Shining Blade;
-			input /echo [ ALT + Numpad6 ]  Circle Blade;
-			input /echo [ ALT + Numpad7 ]  Spirits Within;
-			input /echo [ ALT + Numpad. ]  Flat Blade;]])
-		send_command('bind !numpad1 input /ws "Fast Blade" <t>')
-		send_command('bind !numpad2 input /ws "Burning Blade" <t>')
-		send_command('bind !numpad3 input /ws "Requiescat" <t>')
-		send_command('bind !numpad4 input /ws "Savage Blade" <t>')
-		send_command('bind !numpad5 input /ws "Shining Blade" <t>')
-		send_command('bind !numpad6 input /ws "Circle Blade" <t>')
-		send_command('bind !numpad7 input /ws "Spirits Within" <t>')
-		send_command('bind !numpad. input /ws "Flat Blade" <t>')
-		
-	elseif state.WeaponSet.value == 'Rostam' then
-		send_command([[bind !numpad- 
-			input /echo -----Dagger-----;
-			input /echo [ ALT + Numpad1 ]  Evisceration;
-			input /echo [ ALT + Numpad2 ]  Exenterator;
-			input /echo [ ALT + Numpad3 ]  Cyclone;
-			input /echo [ ALT + Numpad4 ]  Aeolian Edge;
-			input /echo [ ALT + Numpad5 ]  Gust Slash;
-			input /echo [ ALT + Numpad6 ]  Viper Bite;
-			input /echo [ ALT + Numpad7 ]  Wasp Sting;
-			input /echo [ ALT + Numpad. ]  Shadowstitch;]])
-		send_command('bind !numpad1 input /ws "Evisceration" <t>')
-		send_command('bind !numpad2 input /ws "Exenterator" <t>')
-		send_command('bind !numpad3 input /ws "Cyclone" <t>')
-		send_command('bind !numpad4 input /ws "Aeolian Edge" <t>')
-		send_command('bind !numpad5 input /ws "Gust Slash" <t>')
-		send_command('bind !numpad6 input /ws "Viper Bite" <t>')
-		send_command('bind !numpad7 input /ws "Wasp Sting" <t>')
-		send_command('bind !numpad. input /ws "Shadowstitch" <t>')
-	end
 	
 end
-
-
 
 	-- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
@@ -1412,6 +1416,15 @@ function display_current_job_state(eventArgs)
     local ws_msg = state.WeaponskillMode.value
 
     local c_msg = state.CastingMode.value
+	
+    local q_msg = state.Quickdraw.current
+    local q_color = ''
+    if state.Quickdraw.current == 'Fire' then r_color = 167
+    elseif state.Quickdraw.current == 'Ice' then r_color = 210
+    elseif state.Quickdraw.current == 'Wind' then r_color = 204
+    elseif state.Quickdraw.current == 'Earth' then r_color = 050
+    elseif state.Quickdraw.current == 'Thunder' then r_color = 215
+    elseif state.Quickdraw.current == 'Water' then r_color = 207 end
 
     local d_msg = 'None'
     if state.DefenseMode.value ~= 'None' then
@@ -1428,7 +1441,8 @@ function display_current_job_state(eventArgs)
         msg = msg .. ' Kiting: On |'
     end
 
-    add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
+    add_to_chat(q_color, string.char(129,121).. '  ' ..string.upper(q_msg).. '  ' ..string.char(129,122) ..string.char(31,002)..  ' | '
+		..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
 		..string.char(31,060).. ' Range: ' ..string.char(31,001)..r_msg.. string.char(31,002)..  ' |'
         ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
         ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
@@ -1489,20 +1503,8 @@ end
 
 	--Gear Info Functions
 function job_self_command(cmdParams, eventArgs)
-    if cmdParams[1] == 'qd' then
-        if cmdParams[2] == 't' then
-            state.IgnoreTargetting:set()
-        end
-
-        local doqd = ''
-        if state.UseAltqd.value == true then
-            doqd = state[state.Currentqd.current..'qd'].current
-            state.Currentqd:cycle()
-        else
-            doqd = state.Mainqd.current
-        end
-
-        send_command('@input /ja "'..doqd..'" <t>')
+	if cmdParams[1]:lower() == 'eleshot' then
+        send_command('@input /ja "'..state.Quickdraw.value..' Shot" <t>')
     end
 
     gearinfo(cmdParams, eventArgs)
