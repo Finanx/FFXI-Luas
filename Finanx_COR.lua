@@ -12,8 +12,7 @@
 --					[ CTRL + F9 ]			Cycle Weapon Skill Mode
 --					[ ALT + F9 ]			Cycle Range Mode
 --              	[ Windows + F9 ]    	Cycle Hybrid Modes
---			    	[ Windows + W ]         Toggles Weapon Sets
---  				[ Windows + R ]         Toggles Range Sets
+--  				[ Windows + R ]         Locks Range Weapon
 --					[ Windows + T ]			Toggles Treasure Hunter Mode
 --              	[ Windows + C ]     	Toggle Capacity Points Mode
 --              	[ Windows + I ]     	Pulls all items in Gear Retrieval
@@ -33,7 +32,8 @@
 -------------------------------------------------------------------------------------------------------------------
 --
 --  Weapons:    	[ Windows + 1 ]			Naegling Weapon Set
---					[ Windows + 2 ]			Rostam Weapon Set
+--					[ Windows + 2 ]			RostamA Weapon Set
+--					[ Windows + 3 ]			RostamC Weapon Set
 --
 --	Range Weapons:	[ Windows + 6 ]			TP Gun Range Set
 --					[ Windows + 7 ]			Earp Range Set
@@ -130,6 +130,34 @@ function user_setup()
 	--Gear Retrieval Script
 	
 	send_command('wait 10; exec /COR/COR-Gear-Retrieval.txt')
+
+	--[[		Remove the comments for this if you want basic key binds and dont want to use mine and delete all my Scripts
+	
+	--Global Corsair binds (^ = CTRL)(! = ALT)(@ = Windows key)(~ = Shift)(# = Apps key)
+
+	send_command('bind @u gi ugs')
+	send_command('bind @d lua u dressup; wait 10; lua l dressup')
+	send_command('bind @r gs c toggle RangeLock')
+	send_command('bind ^` gs c toggle LuzafRing')
+	send_command('bind @t gs c cycle TreasureMode')
+	send_command('bind ^= gs c cycle Quickdraw')
+	send_command('bind ^- gs c cycleback Quickdraw')
+	send_command('bind ^space tc nearest')
+	
+	send_command('bind @1 gs c set WeaponSet Naegling')
+	send_command('bind @2 gs c set WeaponSet RostamA')
+	send_command('bind @3 gs c set WeaponSet RostamC')
+	
+	send_command('bind @6 gs c set RangeLock false; gs c set RangeSet TP_Gun')
+	send_command('bind @7 gs c set RangeLock false; gs c set RangeSet Earp')
+	send_command('bind @8 gs c set RangeLock false; gs c set RangeSet Armageddon')
+	send_command('bind @9 gs c set RangeLock false; gs c set RangeSet Fomalhaut')
+	send_command('bind @0 gs c set RangeLock false; gs c set RangeSet DeathPenalty')
+	
+	send_command('wait 3; lua l gearinfo;')
+	send_command('wait 17; lua l Dressup;')
+	
+	]]
 		
 	--Job Settings
 	
@@ -159,6 +187,32 @@ function user_unload()
 	--Gear Removal Script
 	
 	send_command('wait 1; exec /COR/COR-Gear-Removal.txt')
+	
+	--[[		Remove the comments for this if you want basic key binds and dont want to use mine and delete all my Scripts
+	
+	send_command('unbind @u')
+	send_command('unbind @d')
+	send_command('unbind @r')
+	send_command('unbind ^`')
+	send_command('unbind @t')
+	send_command('unbind ^=')
+	send_command('unbind ^-')
+	send_command('unbind ^space')
+	
+	send_command('unbind @1')
+	send_command('unbind @2')
+	send_command('unbind @3')
+	
+	send_command('unbind @6')
+	send_command('unbind @7')
+	send_command('unbind @8')
+	send_command('unbind @9')
+	send_command('unbind @0')
+	
+	send_command('wait 1; lua u gearinfo')
+	send_command('wait 1; lua u Dressup')
+	
+	]]
 	
 end
 
@@ -484,6 +538,21 @@ function init_gear_sets()
         legs="Carmine Cuisses +1", --20
         ring1="Evanescence Ring", --5
         }
+		
+	sets.midcast['Absorb-TP'] = {
+		ammo=gear.Accbullet,
+		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
+		body="Chasseur's Frac +3",
+		hands="Chasseur's Gants +3",
+		legs="Chas. Culottes +3",
+		feet="Chass. Bottes +3",
+		neck={ name="Comm. Charm +2", augments={'Path: A',}},
+		waist="K. Kachina Belt +1",
+		left_ear="Digni. Earring",
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
+		left_ring="Stikini Ring +1",
+		right_ring="Stikini Ring +1",
+		back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}},}
 
 
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
