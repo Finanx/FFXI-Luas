@@ -1,7 +1,0 @@
-get Dim. Ring (Holla) satchel; 
-wait 1; 
-input /equip Ring1 "Dim. Ring (Holla)"; 
-wait 12; 
-input /item "Dim. Ring (Holla)" <me>; 
-wait 60; 
-put Dim. Ring (Holla) satchel

@@ -1,3 +1,0 @@
-get Toolbag (Shihe) satchel; 
-wait 3; 
-input /item "Toolbag (Shihei)" <me>

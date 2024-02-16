@@ -1,8 +1,0 @@
-put Aettir case;
-put Deacon Sword case;
-put Epeolatry case;
-put Lycurgos case;
-put Morgelai case;
-put Kaja Axe case;
-put Refined Grip +1 sack;
-put Utu Grip sack;

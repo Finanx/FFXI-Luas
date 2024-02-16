@@ -1,8 +1,0 @@
-input /echo -----Bow-----;
-input /echo [ ALT + Numpad7 ]  Empyreal Arrow;
-input /echo -----Sword-----;
-input /echo [ ALT + Numpad1 ]  Fast Blade;
-input /echo [ ALT + Numpad2 ]  Burning Blade;
-input /echo [ ALT + Numpad3 ]  Shining Blade;
-input /echo [ ALT + Numpad4 ]  Circle Blade;
-input /echo [ ALT + Numpad5 ]  Spirits Within;

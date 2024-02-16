@@ -1,5 +1,0 @@
-put Karambit case;
-put Verethragna case;
-put Godhands case;
-put Xoanon case;
-put Rigorous Grip +1 sack;

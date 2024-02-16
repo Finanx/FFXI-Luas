@@ -1,8 +1,0 @@
-get Bunzi\'s Rod case;
-get Machaera +2 case;
-get Maxentius case;
-get Naegling case;
-get Sakpata\'s Sword case;
-get Tizona case;
-get Zantetsuken case;
-get Shihei satchel all;

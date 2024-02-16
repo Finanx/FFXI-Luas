@@ -1,3 +1,0 @@
-input /echo -----Club-----;
-input /echo [ ALT + Numpad1 ]  Starlight;
-input /echo [ ALT + Numpad2 ]  Moonlight;

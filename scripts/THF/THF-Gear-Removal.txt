@@ -1,7 +1,0 @@
-put Twashtar case;
-put Gleti\'s Knife case;
-put Fusetto +2 case;
-put Karambit case;
-put Mandau case;
-put Naegling case;
-put Tauret case;
