@@ -182,82 +182,15 @@ function init_gear_sets()
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},}
 		
-	sets.precast.JA['One for All'] = {
-		ammo="Staunch Tathlum +1",
-		head="Halitus Helm",
-		body="Emet Harness +1",
-		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +3",
-		feet="Erilaz Greaves +3",
-		neck={ name="Futhark Torque +2", augments={'Path: A',}},
-		waist="Kasiri Belt",
-		left_ear="Cryptic Earring",
-		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-		left_ring="Eihwaz Ring",
-		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
-		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Phys. dmg. taken-10%',}},}
-
-    sets.precast.JA['Vallation'] = {
-		ammo="Staunch Tathlum +1",
-		head="Halitus Helm",
-		body="Runeist Coat +3",
-		hands="Kurys Gloves",
-		legs="Futhark Trousers +3",
-		feet="Erilaz Greaves +3",
-		neck={ name="Futhark Torque +2", augments={'Path: A',}},
-		waist="Kasiri Belt",
-		left_ear="Cryptic Earring",
-		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-		left_ring="Eihwaz Ring",
-		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
-		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Phys. dmg. taken-10%',}},}
-			
-    sets.precast.JA['Valiance'] = sets.precast.JA['Vallation']
-	
-    sets.precast.JA['Pflug'] = {
-		ammo="Staunch Tathlum +1",
-		head="Halitus Helm",
-		body="Emet Harness +1",
-		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +3",
-		feet="Erilaz Greaves +3",
-		neck={ name="Futhark Torque +2", augments={'Path: A',}},
-		waist="Kasiri Belt",
-		left_ear="Cryptic Earring",
-		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-		left_ring="Eihwaz Ring",
-		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
-		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Phys. dmg. taken-10%',}},}
-		
-    sets.precast.JA['Battuta'] = {
-		ammo="Staunch Tathlum +1",
-		head="Halitus Helm",
-		body="Emet Harness +1",
-		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +3",
-		feet="Erilaz Greaves +3",
-		neck={ name="Futhark Torque +2", augments={'Path: A',}},
-		waist="Kasiri Belt",
-		left_ear="Cryptic Earring",
-		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-		left_ring="Eihwaz Ring",
-		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
-		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Phys. dmg. taken-10%',}},}
-		
-    sets.precast.JA['Liement'] = {
-		ammo="Staunch Tathlum +1",
-		head="Halitus Helm",
-		body="Futhark Coat +3",
-		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +3",
-		feet="Erilaz Greaves +3",
-		neck={ name="Futhark Torque +2", augments={'Path: A',}},
-		waist="Kasiri Belt",
-		left_ear="Cryptic Earring",
-		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-		left_ring="Eihwaz Ring",
-		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
-		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Phys. dmg. taken-10%',}},}
+	sets.precast.JA['One for All'] = set_combine(sets.Enmity,{})
+    sets.precast.JA['Vallation'] = set_combine(sets.Enmity,{body="Runeist Coat +3",legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}}})
+    sets.precast.JA['Valiance'] = set_combine(sets.Enmity,{body="Runeist Coat +3",legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}}})
+    sets.precast.JA['Pflug'] = set_combine(sets.Enmity,{})
+    sets.precast.JA['Battuta'] = set_combine(sets.Enmity,{})
+    sets.precast.JA['Liement'] = set_combine(sets.Enmity,{body={ name="Futhark Coat +3", augments={'Enhances "Elemental Sforzo" effect',}},})
+	sets.precast.JA['Swordplay'] = set_combine(sets.Enmity,{})
+	sets.precast.JA['Vivacious Pulse'] = {main={ name="Morgelai", augments={'Path: C',}},head="Erilaz Galea +3",}
+	sets.precast.JA['Elemental Sforzo'] = set_combine(sets.Enmity,{body={ name="Futhark Coat +3", augments={'Enhances "Elemental Sforzo" effect',}},})
 
     sets.precast.JA['Lunge'] = {
 		ammo={ name="Seeth. Bomblet +1", augments={'Path: A',}},
@@ -278,40 +211,7 @@ function init_gear_sets()
 	
     sets.precast.JA['Gambit'] = {hands="Runeist Mitons +3"}
     sets.precast.JA['Rayke'] = {feet="Futhark Boots +3"}
-    
-	sets.precast.JA['Elemental Sforzo'] = {
-		ammo="Staunch Tathlum +1",
-		head="Halitus Helm",
-		body={ name="Futhark Coat +3", augments={'Enhances "Elemental Sforzo" effect',}},
-		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +3",
-		feet="Erilaz Greaves +3",
-		neck={ name="Futhark Torque +2", augments={'Path: A',}},
-		waist="Kasiri Belt",
-		left_ear="Cryptic Earring",
-		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-		left_ring="Eihwaz Ring",
-		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
-		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Phys. dmg. taken-10%',}},}
-		
-    sets.precast.JA['Swordplay'] = {
-		ammo="Staunch Tathlum +1",
-		head="Halitus Helm",
-		body="Emet Harness +1",
-		hands="Kurys Gloves",
-		legs="Eri. Leg Guards +3",
-		feet="Erilaz Greaves +3",
-		neck={ name="Futhark Torque +2", augments={'Path: A',}},
-		waist="Kasiri Belt",
-		left_ear="Cryptic Earring",
-		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-		left_ring="Eihwaz Ring",
-		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
-		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Phys. dmg. taken-10%',}},}
-		
-	sets.precast.JA['Vivacious Pulse'] = {main={ name="Morgelai", augments={'Path: C',}},head="Erilaz Galea +3",} 
-	
-	
+
 	sets.precast.RA = {
 		range="Trollbane",
 		head={ name="Taeon Chapeau", augments={'"Snapshot"+5','"Snapshot"+5',}},
@@ -326,7 +226,6 @@ function init_gear_sets()
 		left_ring="Moonlight Ring",
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Phys. dmg. taken-10%',}},}
-
 
     -- Fast cast sets for spells
 
@@ -347,9 +246,9 @@ function init_gear_sets()
 		
 	sets.precast.FC.Enhancing = set_combine(sets.precast.FC, {legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},})
 		
-	sets.precast.FC.Val = set_combine(sets.precast.FC,{left_ear="Tuisto Earring",})
+	sets.precast.FC.Val = set_combine(sets.precast.FC,{ammo="Staunch Tathlum +1",left_ear="Tuisto Earring",})
 	
-	sets.precast.FC.ValEnhancing = set_combine(sets.precast.FC.Val, {legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},})
+	sets.precast.FC.ValEnhancing = set_combine(sets.precast.FC, {legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},})
 	
 
     ------------------------------------------------------------------------------------------------
@@ -357,44 +256,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
 	sets.precast.WS = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Fotia Gorget",
-		waist="Fotia Belt",
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Sherida Earring",
-		left_ring="Regal Ring",
-		right_ring="Niqmaddu Ring",
-		back={ name="Ogma's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-		
-	sets.precast.WS.FullTP = {left_ear="Ishvara Earring",}
-
-	sets.precast.WS['Resolution'] = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Fotia Gorget",
-		waist="Fotia Belt",
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Sherida Earring",
-		left_ring="Epona's Ring",
-		right_ring="Niqmaddu Ring",
-		back={ name="Ogma's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-		
-	sets.precast.WS['Resolution'].FullTP = {left_ear="Ishvara Earring",}
-	
-	sets.precast.WS['Steel Cyclone'] = sets.precast.WS['Resolution']
-    sets.precast.WS['Upheaval'] = sets.precast.WS['Resolution']
-
-	sets.precast.WS['Dimidiation'] = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		ammo="Knobkierrie",
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
@@ -403,13 +265,13 @@ function init_gear_sets()
 		neck="Fotia Gorget",
 		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Sherida Earring",
-		left_ring="Regal Ring",
+		right_ear="Odr Earring",
+		left_ring="Ephramad's Ring",
 		right_ring="Niqmaddu Ring",
 		back={ name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
 		
-	sets.precast.WS['Dimidiation'].Acc = {
-		ammo="Yamarang",
+	sets.precast.WS.Acc = {
+	    ammo="Yamarang",
 		head="Erilaz Galea +3",
 		body="Erilaz Surcoat +3",
 		hands="Erilaz Gauntlets +3",
@@ -419,12 +281,34 @@ function init_gear_sets()
 		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
 		left_ear="Odr Earring",
 		right_ear="Mache Earring +1",
-		left_ring="Chirich Ring +1",
-		right_ring="Chirich Ring +1",
+		left_ring="Ephramad's Ring",
+		right_ring={ name="Cacoethic Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
+
+	sets.precast.WS.FullTP = {left_ear="Sherida Earring",}
 		
-	sets.precast.WS['Dimidiation'].FullTP = {left_ear="Odr Earring",}
-		
+	sets.precast.WS['Dimidiation'] = sets.precast.WS
+	sets.precast.WS['Dimidiation'].Acc = sets.precast.WS.Acc
+	sets.precast.WS['Dimidiation'].FullTP = {left_ear="Sherida Earring",}
+
+	sets.precast.WS['Resolution'] = {
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head={ name="Adhemar Bonnet +1", augments={'STR+12','DEX+12','Attack+20',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands="Erilaz Gauntlets +3",
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck="Fotia Gorget",
+		waist="Fotia Belt",
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Sherida Earring",
+		left_ring="Ephramad's Ring",
+		right_ring="Niqmaddu Ring",
+		back={ name="Ogma's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+
+	sets.precast.WS['Resolution'].Acc = sets.precast.WS.Acc
+	sets.precast.WS['Resolution'].FullTP = {left_ear="Odr Earring",}
+	
     sets.precast.WS['Herculean Slash'] = {
 		ammo="Knobkierrie",
 		head={ name="Nyame Helm", augments={'Path: B',}},
@@ -455,7 +339,7 @@ function init_gear_sets()
 		neck="Erra Pendant",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Crep. Earring",
-		right_ear={ name="Erilaz Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',}},
+		right_ear={ name="Erilaz Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','Damage taken-4%',}},
 		left_ring="Stikini Ring +1",
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},}
@@ -475,40 +359,15 @@ function init_gear_sets()
 		right_ring="Regal Ring",
 		back={ name="Ogma's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 		
-	sets.precast.WS['Armor Break'] = {
-		ammo="Yamarang",
-		head="Erilaz Galea +3",
-		body="Erilaz Surcoat +3",
-		hands="Erilaz Gauntlets +3",
-		legs="Eri. Leg Guards +3",
-		feet="Erilaz Greaves +3",
-		neck="Erra Pendant",
-		waist={ name="Acuity Belt +1", augments={'Path: A',}},
-		left_ear="Crep. Earring",
-		right_ear={ name="Erilaz Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',}},
-		left_ring="Stikini Ring +1",
-		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
-		back={ name="Ogma's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},}
+	sets.precast.WS['Steel Cyclone'] = sets.precast.WS['Fell Cleave']
+    sets.precast.WS['Upheaval'] = sets.precast.WS['Fell Cleave']
 		
+	sets.precast.WS['Armor Break'] = sets.precast.WS['Shockwave']
 	sets.precast.WS['Full Break'] = sets.precast.WS['Armor Break']
 	sets.precast.WS['Weapon Break'] = sets.precast.WS['Armor Break']
 
-	sets.precast.WS['Ruinator'] = {	
-		ammo="Yamarang",
-		head="Erilaz Galea +3",
-		body="Erilaz Surcoat +3",
-		hands="Erilaz Gauntlets +3",
-		legs="Eri. Leg Guards +3",
-		feet="Erilaz Greaves +3",
-		neck="Fotia Gorget",
-		waist="Fotia Belt",
-		left_ear="Odr Earring",
-		right_ear="Mache Earring +1",
-		left_ring="Chirich Ring +1",
-		right_ring="Chirich Ring +1",
-		back={ name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
-		
-	sets.precast.WS['Ruinator'].Acc = sets.precast.WS['Ruinator']
+	sets.precast.WS['Ruinator'] = sets.precast.WS.Acc
+	sets.precast.WS['Ruinator'].Acc = sets.precast.WS.Acc
     
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
@@ -535,7 +394,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum +1",
 		head="Erilaz Galea +3",
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Regal Gauntlets",
+		hands="Runeist Mitons +3",
 		legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},
 		feet="Erilaz Greaves +3",
 		neck="Moonlight Necklace",
@@ -547,15 +406,15 @@ function init_gear_sets()
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},}
 		
 	sets.midcast.BarElement = {
-	    ammo="Staunch Tathlum +1",
+		ammo="Staunch Tathlum +1",
 		head="Erilaz Galea +3",
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Regal Gauntlets",
+		hands="Runeist Mitons +3",
 		legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},
 		feet="Erilaz Greaves +3",
-		neck="Incanter's Torque",
+		neck="Moonlight Necklace",
 		waist="Audumbla Sash",
-		left_ear="Mimir Earring",
+		left_ear="Tuisto Earring",
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
 		left_ring="Stikini Ring +1",
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
@@ -567,12 +426,12 @@ function init_gear_sets()
 		main="Deacon Sword",
 		ammo="Staunch Tathlum +1",
 		head={ name="Fu. Bandeau +3", augments={'Enhances "Battuta" effect',}},
-		body={ name="Taeon Tabard", augments={'Phalanx +3',}},
-		hands={ name="Taeon  Gloves", augments={'"Recycle"+7','Phalanx +3',}},
+		body={ name="Herculean Vest", augments={'"Mag.Atk.Bns."+6','"Store TP"+1','Phalanx +4','Mag. Acc.+12 "Mag.Atk.Bns."+12',}},
+		hands={ name="Taeon Gloves", augments={'"Recycle"+7','Phalanx +3',}},
 		legs={ name="Taeon Tights", augments={'Accuracy+19 Attack+19','"Triple Atk."+2','Phalanx +3',}},
 		feet={ name="Herculean Boots", augments={'Sklchn.dmg.+4%','MND+4','Phalanx +4','Mag. Acc.+15 "Mag.Atk.Bns."+15',}},
 		neck="Moonlight Necklace",
-		waist="Olympus Sash",
+		waist="Audumbla Sash",
 		left_ear="Andoaa Earring",
 		right_ear="Mimir Earring",
 		left_ring="Defending Ring",
@@ -582,7 +441,7 @@ function init_gear_sets()
 	sets.PhalanxRecieved =    { 
 		main="Deacon Sword",
 		head={ name="Fu. Bandeau +3", augments={'Enhances "Battuta" effect',}},
-		body={ name="Taeon Tabard", augments={'Phalanx +3',}},
+		body={ name="Herculean Vest", augments={'"Mag.Atk.Bns."+6','"Store TP"+1','Phalanx +4','Mag. Acc.+12 "Mag.Atk.Bns."+12',}},
 		hands={ name="Taeon Gloves", augments={'"Recycle"+7','Phalanx +3',}},
 		legs={ name="Taeon Tights", augments={'Accuracy+19 Attack+19','"Triple Atk."+2','Phalanx +3',}},
 		feet={ name="Herculean Boots", augments={'Sklchn.dmg.+4%','MND+4','Phalanx +4','Mag. Acc.+15 "Mag.Atk.Bns."+15',}},}
@@ -609,16 +468,16 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Regal Gauntlets",
 		legs={ name="Futhark Trousers +3", augments={'Enhances "Inspire" effect',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		feet="Erilaz Greaves +3",
 		neck="Sacro Gorget",
 		waist="Sroda Belt",
-		left_ear="Tuisto Earring",
-		right_ear={ name="Erilaz Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',}},
-		left_ring="Moonlight Ring",
+		left_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+		right_ear={ name="Erilaz Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','Damage taken-4%',}},
+		left_ring="Defending Ring",
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},}
 		
-	sets.RegenRecieved = {right_ear={ name="Erilaz Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',}},}
+	sets.RegenRecieved = {right_ear={ name="Erilaz Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','Damage taken-4%',}},}
 		
     sets.midcast['Refresh'] = {
 		ammo="Staunch Tathlum +1",
@@ -629,9 +488,9 @@ function init_gear_sets()
 		feet={ name="Taeon Boots", augments={'Evasion+23','Spell interruption rate down -10%','HP+50',}},
 		neck="Moonlight Necklace",
 		waist="Gishdubar Sash",
-		left_ear="Tuisto Earring",
-		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-		left_ring="Moonlight Ring",
+		left_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+		right_ear={ name="Erilaz Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','Damage taken-4%',}},
+		left_ring="Defending Ring",
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},}
 		
@@ -689,7 +548,7 @@ function init_gear_sets()
 		body="Erilaz Surcoat +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		feet="Erilaz Greaves +3",
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
 		waist="Flume Belt +1",
 		left_ear="Tuisto Earring",
@@ -702,15 +561,15 @@ function init_gear_sets()
 		ammo="Homiliary",
 		head="Rawhide Mask",
 		body="Runeist Coat +3",
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		hands="Erilaz Gauntlets +3",
 		legs={ name="Rawhide Trousers", augments={'MP+50','"Fast Cast"+5','"Refresh"+1',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="Loricate Torque +1", augments={'Path: A',}},
-		waist="Fucho-no-Obi",
-		left_ear="Sanare Earring",
-		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-		left_ring="Defending Ring",
-		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		feet="Erilaz Greaves +3",
+		neck="Sibyl Scarf",
+		waist="Flume Belt +1",
+		left_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+		right_ear={ name="Erilaz Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','Damage taken-4%',}},
+		left_ring="Stikini Ring +1",
+		right_ring="Stikini Ring +1",
 		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Phys. dmg. taken-10%',}},}
 		
 
@@ -755,19 +614,19 @@ function init_gear_sets()
 		back={ name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 		
 	sets.engaged.InquartataTank =	{
-		ammo="Staunch Tathlum +1",																											--3%DT
-		head={ name="Nyame Helm", augments={'Path: B',}},																					--7%DT
+		ammo="Staunch Tathlum +1",
+		head={ name="Nyame Helm", augments={'Path: B',}},
 		body="Erilaz Surcoat +3",
 		hands="Turms Mittens +1",
-		legs="Eri. Leg Guards +3",																											--12%DT
+		legs="Eri. Leg Guards +3",
 		feet="Turms Leggings +1",
-		neck={ name="Futhark Torque +2", augments={'Path: A',}},																			--7%DT
+		neck={ name="Futhark Torque +2", augments={'Path: A',}},
 		waist="Engraved Belt",
-		left_ear="Eabani Earring",
-		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},																		--3%DT
-		left_ring="Defending Ring",																											--10%DT
-		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},																		--7%PDT
-		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Parrying rate+5%',}},}					
+		left_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+		right_ear={ name="Erilaz Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','Damage taken-4%',}},
+		left_ring="Moonlight Ring",
+		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Parrying rate+5%',}},}
 		--42% DT + 3%(Strap) 7% PDT
 
 	sets.engaged.T3Tank =	{
@@ -954,6 +813,12 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 			if player.tp > 2900 then
 				equip(sets.precast.WS['Herculean Slash'].FullTP)
 			end
+			if (world.weather_element == 'Ice' or world.day_element == 'Ice') then
+				equip(sets.Obi)
+				if world.day_element == 'Fire' then
+					equip({waist="Orpheus's Sash"})
+				end
+			end
 		elseif spell.english == "Resolution" then
 			if player.tp > 2900 then
 				equip(sets.precast.WS['Resolution'].FullTP)
@@ -969,6 +834,65 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 			end
 		end
 	end
+	if spell.english == 'Lunge' or spell.english == 'Swipe' then
+		if buffactive['Ignis'] then
+			if (world.weather_element == 'Fire' or world.day_element == 'Fire') then
+				equip(sets.Obi)
+				if world.day_element == 'Water' then
+					equip({waist="Orpheus's Sash"})
+				end
+			end
+		elseif buffactive['Gelus'] then
+			if (world.weather_element == 'Ice' or world.day_element == 'Ice') then
+				equip(sets.Obi)
+				if world.day_element == 'Fire' then
+					equip({waist="Orpheus's Sash"})
+				end
+			end	
+		elseif buffactive['Flabra'] then
+			if (world.weather_element == 'Wind' or world.day_element == 'Wind') then
+				equip(sets.Obi)
+				if world.day_element == 'Ice' then
+					equip({waist="Orpheus's Sash"})
+				end
+			end
+		elseif buffactive['Tellus'] then
+			if (world.weather_element == 'Earth' or world.day_element == 'Earth') then
+				equip(sets.Obi)
+				if world.day_element == 'Wind' then
+					equip({waist="Orpheus's Sash"})
+				end
+			end
+		elseif buffactive['Sulpor'] then
+			if (world.weather_element == 'Lightning' or world.day_element == 'Lightning') then
+				equip(sets.Obi)
+				if world.day_element == 'Earth' then
+					equip({waist="Orpheus's Sash"})
+				end
+			end
+		elseif buffactive['Unda'] then
+			if (world.weather_element == 'Water' or world.day_element == 'Water') then
+				equip(sets.Obi)
+				if world.day_element == 'Lightning' then
+					equip({waist="Orpheus's Sash"})
+				end
+			end
+		elseif buffactive['Lux'] then
+			if (world.weather_element == 'Light' or world.day_element == 'Light') then
+				equip(sets.Obi)
+				if world.day_element == 'Dark' then
+					equip({waist="Orpheus's Sash"})
+				end
+			end
+		elseif buffactive['Tenebrae'] then
+			if (world.weather_element == 'Dark' or world.day_element == 'Dark') then
+				equip(sets.Obi)
+				if world.day_element == 'Light' then
+					equip({waist="Orpheus's Sash"})
+				end
+			end
+		end
+	end
 	
 end
 
@@ -977,7 +901,7 @@ function job_aftercast(spell, action, spellMap, eventArgs)
 		--Lets you know when Rayke/Gambit Wears off
     if spell.name == 'Rayke' and not spell.interrupted then
         send_command('@timers c "Rayke ['..spell.target.name..']" '..rayke_duration..' down spells/00136.png')
-        send_command('wait '..rayke_duration..';input /echo [Rayke just wore off!];')
+        send_command('wait '..rayke_duration..';input /p Rayke just wore off!;')
     elseif spell.name == 'Gambit' and not spell.interrupted then
         send_command('@timers c "Gambit ['..spell.target.name..']" '..gambit_duration..' down spells/00136.png')
         send_command('wait '..gambit_duration..';input /echo [Gambit just wore off!];')
@@ -1052,7 +976,6 @@ end
 
 function job_update(cmdParams, eventArgs)
 	check_gear()
-	Weaponskill_Keybinds()
     handle_equipping_gear(player.status)
 end
 
@@ -1114,165 +1037,6 @@ function update_combat_form()
 	
 end
 
-function Weaponskill_Keybinds()
-
-	if state.WeaponSet.value == 'Epeolatry' or state.WeaponSet.value == 'Aettir' then
-		send_command([[bind ^numpad- 
-			input /echo -----Abilities-----;
-			input /echo [ CTRL + ` ] Uses Assigned Rune;
-			input /echo [ CTRL + - ] Cycleback Runes;
-			input /echo [ CTRL + = ] Cycle Runes;
-			input /echo -----Great_Sword-----;
-			input /echo [ CTRL + Numpad1 ] Resolution;
-			input /echo [ CTRL + Numpad2 ] Dimidiation;
-			input /echo [ CTRL + Numpad3 ] Ground Strike;
-			input /echo [ CTRL + Numpad4 ] Shockwave;
-			input /echo [ CTRL + Numpad5 ] Herculean Slash;
-			input /echo [ CTRL + Numpad6 ] Spinning Slash;
-			input /echo [ CTRL + Numpad7 ] Sickle Moon;
-			input /echo [ CTRL + Numpad9 ] Crescent Moon;
-			input /echo [ CTRL + Numpad. ] Swipe;]])
-		send_command('bind ^numpad1 input /ws "Resolution" <t>')
-		send_command('bind ^numpad2 input /ws "Dimidiation" <t>')
-		send_command('bind ^numpad3 input /ws "Ground Strike" <t>')
-		send_command('bind ^numpad4 input /ws "Shockwave" <t>')
-		send_command('bind ^numpad5 input /ws "Herculean Slash" <t>')
-		send_command('bind ^numpad6 input /ws "Spinning Slash" <t>')
-		send_command('bind ^numpad7 input /ws "Sickle Moon" <t>')
-		send_command('bind ^numpad9 input /ws "Crescent Moon" <t>')
-		send_command('bind ^numpad. input /ja "Swipe" <t>')
-
-		send_command([[bind !numpad- 
-			input /echo -----Abilities-----;
-			input /echo [ ALT + ` ] Uses Assigned Barspell;
-			input /echo [ ALT + - ] Cycleback Barspells;
-			input /echo [ ALT + = ] Cycle Barspells;		
-			input /echo -----Great_Sword-----;
-			input /echo [ ALT + Numpad1 ] Hard Slash;
-			input /echo [ ALT + Numpad2 ] Power Slash;
-			input /echo [ ALT + Numpad3 ] Freezebite;
-			input /echo [ ALT + Numpad4 ] Frostbite;
-			input /echo [ ALT  + Numpad. ] Lunge;]])
-		send_command('bind !numpad1 input /ws "Hard Slash" <t>')
-		send_command('bind !numpad2 input /ws "Power Slash" <t>')
-		send_command('bind !numpad3 input /ws "Freezebite" <t>')
-		send_command('bind !numpad4 input /ws "Frostbite" <t>')
-		send_command('bind !numpad. input /ja "Lunge" <t>')
-			
-	elseif state.WeaponSet.value == 'Lycurgos' then
-		send_command([[bind ^numpad- 
-			input /echo -----Abilities-----;
-			input /echo [ CTRL + ` ] Uses Assigned Rune;
-			input /echo [ CTRL + - ] Cycleback Runes;
-			input /echo [ CTRL + = ] Cycle Runes;
-			input /echo -----Great_Axe-----;
-			input /echo [ CTRL + Numpad1 ] Upheaval;
-			input /echo [ CTRL + Numpad2 ] Steel Cyclone;
-			input /echo [ CTRL + Numpad3 ] Armor Break;
-			input /echo [ CTRL + Numpad4 ] Fell Cleave;
-			input /echo [ CTRL + Numpad5 ] Weapon Break;
-			input /echo [ CTRL + Numpad6 ] Shield Break;
-			input /echo [ CTRL + Numpad7 ] Keen Edge;
-			input /echo [ CTRL + Numpad9 ] Sturmwind;
-			input /echo [ CTRL + Numpad. ] Swipe;]])
-		send_command('bind ^numpad1 input /ws "Upheaval" <t>')
-		send_command('bind ^numpad2 input /ws "Steel Cyclone" <t>')
-		send_command('bind ^numpad3 input /ws "Armor Break" <t>')
-		send_command('bind ^numpad4 input /ws "Fell Cleave" <t>')
-		send_command('bind ^numpad5 input /ws "Weapon Break" <t>')
-		send_command('bind ^numpad6 input /ws "Shield Break" <t>')
-		send_command('bind ^numpad7 input /ws "Keen Edge" <t>')
-		send_command('bind ^numpad9 input /ws "Sturmwind" <t>')
-		send_command('bind ^numpad. input /ja "Swipe" <t>')
-
-		send_command([[bind !numpad- 
-			input /echo -----Abilities-----;
-			input /echo [ ALT + ` ] Uses Assigned Barspell;
-			input /echo [ ALT + - ] Cycleback Barspells;
-			input /echo [ ALT + = ] Cycle Barspells;		
-			input /echo -----Great_Axe-----;
-			input /echo [ ALT + Numpad1 ] Iron Tempest;
-			input /echo [ ALT  + Numpad. ] Lunge;]])
-		send_command('bind !numpad1 input /ja "Iron Tempest" <t>')
-		send_command('bind !numpad. input /ja "Lunge" <t>')
-		
-	elseif state.WeaponSet.value == 'Dolichenus' then
-		send_command([[bind ^numpad- 
-			input /echo -----Abilities-----;
-			input /echo [ CTRL + ` ] Uses Assigned Rune;
-			input /echo [ CTRL + - ] Cycleback Runes;
-			input /echo [ CTRL + = ] Cycle Runes;
-			input /echo -----Axe-----;
-			input /echo [ CTRL + Numpad1 ] Decimation;
-			input /echo [ CTRL + Numpad2 ] Ruinator;
-			input /echo [ CTRL + Numpad3 ] Bora Axe;
-			input /echo [ CTRL + Numpad4 ] Rampage;
-			input /echo [ CTRL + Numpad5 ] Gale Axe;
-			input /echo [ CTRL + Numpad6 ] Avalanche Axe;
-			input /echo [ CTRL + Numpad7 ] Spinning Axe;
-			input /echo [ CTRL + Numpad9 ] Raging Axe;
-			input /echo [ CTRL + Numpad. ] Swipe;]])
-		send_command('bind ^numpad1 input /ws "Decimation" <t>')
-		send_command('bind ^numpad2 input /ws "Ruinator" <t>')
-		send_command('bind ^numpad3 input /ws "Bora Axe" <t>')
-		send_command('bind ^numpad4 input /ws "Rampage" <t>')
-		send_command('bind ^numpad5 input /ws "Gale Axe" <t>')
-		send_command('bind ^numpad6 input /ws "Avalanche Axe" <t>')
-		send_command('bind ^numpad7 input /ws "Spinning Axe" <t>')
-		send_command('bind ^numpad9 input /ws "Raging Axe" <t>')
-		send_command('bind ^numpad. input /ja "Swipe" <t>')
-
-		send_command([[bind !numpad- 
-			input /echo -----Abilities-----;
-			input /echo [ ALT + ` ] Uses Assigned Barspell;
-			input /echo [ ALT + - ] Cycleback Barspells;
-			input /echo [ ALT + = ] Cycle Barspells;		
-			input /echo -----Axe-----;
-			input /echo [ ALT + Numpad1 ] Smash Axe;
-			input /echo [ ALT  + Numpad. ] Lunge;]])
-		send_command('bind !numpad1 input /ja "Smash Axe" <t>')
-		send_command('bind !numpad. input /ja "Lunge" <t>')
-	elseif state.WeaponSet.value == 'Reikiko' then
-		send_command([[bind ^numpad- 
-			input /echo -----Sword-----;
-			input /echo [ CTRL + Numpad1 ] Sanguine Blade;
-			input /echo [ CTRL + Numpad2 ] Seraph Blade;
-			input /echo [ CTRL + Numpad3 ] Requiescat;
-			input /echo [ CTRL + Numpad4 ] Savage Blade;
-			input /echo [ CTRL + Numpad5 ] Burning Blade;
-			input /echo [ CTRL + Numpad6 ] Shining Blade;
-			input /echo [ CTRL + Numpad7 ] Red Lotus Blade;
-			input /echo [ CTRL + Numpad9 ] Vorpal Blade;
-			input /echo [ CTRL + Numpad. ] Flat Blade;]])
-		send_command('bind ^numpad1 input /ws "Sanguine Blade" <t>')
-		send_command('bind ^numpad2 input /ws "Seraph Blade" <t>')
-		send_command('bind ^numpad3 input /ws "Requiescat" <t>')
-		send_command('bind ^numpad4 input /ws "Savage Blade" <t>')
-		send_command('bind ^numpad5 input /ws "Burning Blade" <t>')
-		send_command('bind ^numpad6 input /ws "Shining Blade" <t>')
-		send_command('bind ^numpad7 input /ws "Red Lotus Blade" <t>')
-		send_command('bind ^numpad9 input /ws "Vorpal Blade" <t>')
-		send_command('bind ^numpad. input /ja "Swipe" <t>')
-
-		send_command([[bind !numpad- 
-			input /echo -----Abilities-----;
-			input /echo [ ALT + ` ] Uses Assigned Barspell;
-			input /echo [ ALT + - ] Cycleback Barspells;
-			input /echo [ ALT + = ] Cycle Barspells;		
-			input /echo -----Sword-----;
-			input /echo [ ALT + Numpad1 ]  Fast Blade;
-			input /echo [ ALT + Numpad2 ]  Spirits Within;
-			input /echo [ ALT + Numpad3 ]  Circle Blade;
-			input /echo [ ALT + Numpad4 ]  Flat Blade;
-			input /echo [ ALT  + Numpad. ] Lunge;]])
-		send_command('bind !numpad1 input /ws "Fast Blade" <t>')
-		send_command('bind !numpad2 input /ws "Spirits Within" <t>')
-		send_command('bind !numpad3 input /ws "Circle Blade" <t>')
-		send_command('bind ^numpad4 input /ws "Flat Blade" <t>')
-		send_command('bind !numpad. input /ja "Lunge" <t>')
-	end
-
-end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)

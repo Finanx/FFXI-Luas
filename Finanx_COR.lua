@@ -506,7 +506,20 @@ function init_gear_sets()
 		right_ring="Regal Ring",
 		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}
 
-	sets.precast.WS['Exenterator'] = sets.precast.WS['Evisceration']		
+	sets.precast.WS['Exenterator'] = {
+		ammo=gear.MeleeWSbullet,
+	    head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands="Chasseur's Gants +3",
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck="Fotia Gorget",
+		waist="Fotia Belt",
+		left_ear="Telos Earring",
+		right_ear={ name="Chas. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Crit.hit rate+7','STR+13 AGI+13',}},
+		left_ring="Ephramad's Ring",
+		right_ring="Dingir Ring",
+		back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}},}
     sets.precast.WS['Exenterator'].Acc = sets.precast.WS.MeleeAcc
 
 	sets.precast.WS['Aeolian Edge'] = {
