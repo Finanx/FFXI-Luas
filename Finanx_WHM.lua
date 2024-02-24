@@ -1,4 +1,3 @@
--- Original: Finanx
 -- Haste/DW Detection Requires Gearinfo Addon
 -- Dressup is setup to auto load with this Lua
 -- Itemizer addon is required for auto gear sorting / Warp Scripts / Range Scripts

@@ -679,6 +679,23 @@ function init_gear_sets()
 
     sets.midcast.Dispelga = set_combine(sets.midcast['Enfeebling Magic'], {main="Daybreak", sub="Ammurapi Shield"})
 	
+	sets.midcast['Absorb-TP'] = {
+		main={ name="Carnwenhan", augments={'Path: A',}},
+		sub="Ammurapi Shield",
+		range={ name="Linos", augments={'Mag. Evasion+15','Phys. dmg. taken -4%','HP+20',}},
+		head="Brioso Roundlet +3",
+		body="Brioso Justau. +3",
+		hands="Fili Manchettes +3",
+		legs="Brioso Cannions +3",
+		feet="Fili Cothurnes +3",
+		neck="Mnbw. Whistle +1",
+		waist={ name="Acuity Belt +1", augments={'Path: A',}},
+		left_ear="Crep. Earring",
+		right_ear={ name="Fili Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
+		left_ring="Stikini Ring +1",
+		right_ring="Stikini Ring +1",
+		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
+	
 	sets.midcast.RA = {
 		range="Trollbane",
 		head={ name="Nyame Helm", augments={'Path: B',}},
