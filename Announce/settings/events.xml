@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<events>
+		<!-- Add more events with keywords and responses as needed -->
+    <event>
+        <keyword>Flaming Kick</keyword>
+        <response>Flaming Kick (NUKE WATER) (USE BURN)</response>
+    </event>
+    <event>
+        <keyword>flashflood</keyword>
+        <response>Flashflood (NUKE THUNDER)</response>
+    </event>
+    <event>
+        <keyword>icy Grasp</keyword>
+        <response>Icy Grasp (NUKE FIRE) (USE BURN)</response>
+    </event>
+    <event>
+        <keyword>eroding Flesh</keyword>
+        <response>Eroding Flesh (NUKE WIND) (USE PANACEA!)</response>
+    </event>
+    <event>
+        <keyword>fulminous Smash</keyword>
+        <response>Fulminous Smash (NUKE STONE)</response>
+    </event>
+    <event>
+        <keyword>undulating Shockwave</keyword>
+        <response>Undulating Shockwave (SWITCH TO ICE)</response>
+    </event>
+    <event>
+        <keyword>shrieking Gale</keyword>
+        <response>Shrieking Gale (NUKE STONE)</response>
+    </event>
+    <event>
+        <keyword>demonfire</keyword>
+        <response>Demonfire (NUKE FIRE)</response>
+    </event>
+    <event>
+        <keyword>torrential Pain</keyword>
+        <response>Torrential Pain (NUKE WATER)</response>
+    </event>
+    <event>
+        <keyword>frozen Blood</keyword>
+        <response>Frozen Blood (NUKE ICE)</response>
+    </event>
+    <event>
+        <keyword>ensepulcher</keyword>
+        <response>Ensepulcher (NUKE STONE)</response>
+    </event>
+    <event>
+        <keyword>ceaseless Surge</keyword>
+        <response>Ceasless Surge (NUKE THUNDER)</response>
+    </event>
+    <event>
+        <keyword>blast of reticence</keyword>
+        <response>Blast of Reticence (NUKE WIND)</response>
+    </event>
+    <event>
+        <keyword>bane of tartarus</keyword>
+        <response>Bane of Tartarus STOP NUKING</response>
+    </event>
+    <event>
+        <keyword>critical hit</keyword>
+        <response>Watch out! Critical!</response>
+    </event>
+    <!-- Add more events with keywords and responses as needed -->
+</events>

@@ -1,0 +1,31 @@
+<settings>
+    <buffs>
+			<!--example-->
+			<!--   <effect>haste</effect> -->
+        <!-- Add more buff effects as needed -->
+    </buffs>
+    <debuffs>
+			<!--example-->
+			<!--   <effect>paralyze</effect> -->
+        <effect>paralyze</effect>
+        <effect>slow</effect>
+		<effect>weighed down</effect>  <!-- gravity-->
+		<effect>sleep</effect>
+		<effect>bind</effect>
+		<effect>blind</effect>
+		<effect>silence</effect>
+		<effect>poison</effect>
+		<effect>break</effect>
+		<effect>addle</effect>
+		<effect>Evasion Down</effect> <!--this covers all evasion downs such as distract and frazzle-->
+		<effect>defense down</effect> <!--this covers all Defense downs-->
+		<effect>bio</effect>
+		<effect>dia</effect>
+		<effect>elegy</effect>
+		<effect>threnody</effect>
+		<effect>requiem</effect>
+		<effect>nocturne</effect>
+		<effect>stun</effect>
+        <!-- Add more debuff effects as needed -->
+    </debuffs>
+</settings>
