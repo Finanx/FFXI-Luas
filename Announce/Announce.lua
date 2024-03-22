@@ -32,7 +32,7 @@ windower.register_event('incoming text', function(original, modified, mode)
     local chatMode = mode
     
     -- Check if the incoming text is from the combat log (mode 20 or higher) and not in party chat (mode 5)
-    if chatMode >= 20 then
+    if chatMode >= 27 then
         -- Convert chat to a string if it's not already
         chat = tostring(chat)
         
@@ -41,7 +41,7 @@ windower.register_event('incoming text', function(original, modified, mode)
             -- Iterate through the effect keywords (buffs)
             for _, buffKeyword in ipairs(effectKeywords.buffs) do
                 -- Check if the keyword is present in the incoming text
-                if string.find(string.lower(chat), buffKeyword) then
+                if string.find(string.lower(chat), buffKeyword:lower()) then
                     -- Code to execute when one of the buff keywords is found
                     
                     -- Send a party message with the chat text and "<call14>"
@@ -56,21 +56,27 @@ windower.register_event('incoming text', function(original, modified, mode)
             -- Iterate through the effect keywords (debuffs)
             for _, debuffKeyword in ipairs(effectKeywords.debuffs) do
                 -- Check if the keyword is present in the incoming text
-                if string.find(string.lower(chat), debuffKeyword) then
-                    -- Code to execute when one of the debuff keywords is found
-                    
-                    -- Send a party message with the chat text and "<call14>"
-                    windower.send_command('@input /p ' .. chat .. ' <call14>')
-                    
-                    -- Additional code for actions after the effect wears off can go here
-                    
-                    -- Exit the loop since we found a match
-                    return
+                if string.find(string.lower(chat), debuffKeyword:lower()) then
+                    -- Check if the player's name is present in the text
+                    local playerName = windower.ffxi.get_player().name:lower()
+                    if not string.find(string.lower(chat), playerName) then
+                        -- Code to execute when one of the debuff keywords is found and the player's name is not in the text
+                        
+                        -- Send a party message with the chat text and "<call14>"
+                        windower.send_command('@input /p ' .. chat .. ' <call14>')
+                        
+                        -- Additional code for actions after the effect wears off can go here
+                        
+                        -- Exit the loop since we found a match
+                        return
+                    end
                 end
             end
         end
     end
 end)
+
+
 
 -- Function to read keywords and responses from events.xml
 local function loadEventKeywords()
@@ -82,10 +88,14 @@ local function loadEventKeywords()
         -- Iterate through each <event> block in the XML
         for event in contents:gmatch("<event>(.-)</event>") do
             local keyword = event:match("<keyword>(.-)</keyword>")
-            local response = event:match("<response>(.-)</response>")
-            if keyword and response then
-                -- Store the keyword in lowercase
-                eventKeywords[string.lower(keyword)] = response
+            local responses = {}
+            -- Find all response tags
+            for response in event:gmatch("<response>(.-)</response>") do
+                table.insert(responses, response)
+            end
+            if keyword and #responses > 0 then
+                -- Store the keyword and responses
+                eventKeywords[string.lower(keyword)] = responses
             end
         end
     end
@@ -100,27 +110,34 @@ windower.register_event('incoming text', function(original, modified, mode)
     local chatMode = mode
     
     -- Check if the incoming text is from the combat log (mode 20 or higher) and not in party chat (mode 5)
-    if chatMode >= 20 then
+    if chatMode >= 27 then
         -- Convert chat to a string if it's not already
         chat = tostring(chat)
         
         -- Check for specific keywords in the combat log
-        for keyword, response in pairs(eventKeywords) do
+        for keyword, responses in pairs(eventKeywords) do
             -- Make the comparison case-insensitive
             if string.find(string.lower(chat), keyword) then
-                -- Code to execute when one of the specific keywords is found
-                
-                -- Send a party message with the corresponding response
-                windower.send_command('@input /p ' .. response)
-                
-                -- Additional code for actions after finding a specific keyword can go here
-                
+                -- Execute each response in the responses table
+                for _, response in ipairs(responses) do
+                    -- Check if the response contains a delay tag
+                    local delay = response:match("<delay>(.-)</delay>")
+                    if delay then
+                        -- Wait for the specified duration
+                        coroutine.sleep(tonumber(delay))
+                    else
+                        -- Send the response
+                        windower.send_command('@input ' .. response)
+                    end
+                end
                 -- Exit the loop since we found a match
                 return
             end
         end
     end
 end)
+
+
 
 
 
