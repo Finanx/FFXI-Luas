@@ -8,6 +8,10 @@ if you wish to add buffs or debuffs to check for and alert in party chat when th
         <effect>slow</effect>
     </debuffs>
 
+if you wish to disable Impact Announcements for when they wear off then set this to false.
+	
+	<Impact_Detection_Enabled>true</Impact_Detection_Enabled>
+
 if you wish to have an event to trigger a response that you want then use this example
 
 	<event>
