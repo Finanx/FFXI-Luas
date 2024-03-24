@@ -2,7 +2,7 @@
 <events>
 		<!-- Add more events with keywords and responses as needed -->
     <event>
-        <keyword>Flaming Kick</keyword>
+        <keyword>flaming kick</keyword>
         <response>/p Flaming Kick (NUKE WATER) (USE BURN) <call14> </response>
     </event>
     <event>
@@ -58,3 +58,5 @@
 		<response>/p Bane of Tartarus STOP NUKING <call14> </response>
 	</event>
 </events>
+
+<!--make sure keywords are lowercase or it will not work-->
