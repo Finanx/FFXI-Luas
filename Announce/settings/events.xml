@@ -10,23 +10,23 @@
         <response>/p Flashflood (NUKE THUNDER) <call14> </response>
     </event>
     <event>
-        <keyword>icy Grasp</keyword>
+        <keyword>icy grasp</keyword>
         <response>/p Icy Grasp (NUKE FIRE) (USE BURN) <call14> </response>
     </event>
     <event>
-        <keyword>eroding Flesh</keyword>
+        <keyword>eroding flesh</keyword>
         <response>/p Eroding Flesh (NUKE WIND) <call14>  (USE PANACEA!) <call14> </response>
     </event>
     <event>
-        <keyword>fulminous Smash</keyword>
+        <keyword>fulminous smash</keyword>
         <response>/p Fulminous Smash (NUKE STONE) <call14> </response>
     </event>
     <event>
-        <keyword>undulating Shockwave</keyword>
+        <keyword>undulating shockwave</keyword>
         <response>/p Undulating Shockwave (SWITCH TO ICE) <call14> </response>
     </event>
     <event>
-        <keyword>shrieking Gale</keyword>
+        <keyword>shrieking gale</keyword>
         <response>/p Shrieking Gale (NUKE STONE) <call14> </response>
     </event>
     <event>
@@ -34,11 +34,11 @@
         <response>/p Demonfire (NUKE FIRE) <call14> </response>
     </event>
     <event>
-        <keyword>torrential Pain</keyword>
+        <keyword>torrential pain</keyword>
         <response>/p Torrential Pain (NUKE WATER) <call14> </response>
     </event>
     <event>
-        <keyword>frozen Blood</keyword>
+        <keyword>frozen blood</keyword>
         <response>/p Frozen Blood (NUKE ICE) <call14> </response>
     </event>
     <event>
@@ -46,7 +46,7 @@
         <response>/p Ensepulcher (NUKE STONE) <call14> </response>
     </event>
     <event>
-        <keyword>ceaseless Surge</keyword>
+        <keyword>ceaseless surge</keyword>
         <response>/p Ceasless Surge (NUKE THUNDER) <call14> </response>
     </event>
     <event>

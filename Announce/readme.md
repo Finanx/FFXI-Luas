@@ -1,11 +1,18 @@
-if you wish to add buffs or debuffs to check for and alert in party chat when they wear off then here is examples of that
+if you wish to add buffs to check for and alert in party chat when they wear off then here is examples of that
 
     <buffs>
 		<effect>haste</effect>
     </buffs>
+	
+if you wish to add debuffs to check for certain monsters and alert in party chat when they wear off then here is examples of that
+
     <debuffs>
-        <effect>paralyze</effect>
-        <effect>slow</effect>
+		<monsters_to_check>
+			<monster>bumba</monster>
+			<monster>aminon</monster>
+		</monsters_to_check>
+			<effect>paralyze</effect>
+			<effect>slow</effect>
     </debuffs>
 
 if you wish to disable Impact Announcements for when they wear off then set this to false.

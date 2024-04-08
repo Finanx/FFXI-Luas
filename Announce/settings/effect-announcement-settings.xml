@@ -1,28 +1,58 @@
 <settings>
     <buffs>
-		<!--Add whichever buffs you want here to be announced in party chat-->
 		<effect>haste</effect>
+		<effect>refresh</effect>
+		<!--Add whichever buffs you want here to be announced in party chat-->
     </buffs>
     <debuffs>
-        <effect>paralyze</effect>
-        <effect>slow</effect>
-		<effect>weighed down</effect>	<!-- gravity-->
-		<effect>sleep</effect>
-		<effect>bound</effect>  		<!--bind-->
-		<effect>blind</effect>
-		<effect>silence</effect>
-		<effect>poison</effect>
-		<effect>petrified</effect>		<!--break-->
-		<effect>addle</effect>
-		<effect>evasion down</effect> 	<!--this covers all evasion downs such as distract and frazzle-->
-		<effect>defense down</effect> 	<!--this covers all Defense downs-->
-		<effect>bio</effect>
-		<effect>dia</effect>
-		<effect>elegy</effect>
-		<effect>threnody</effect>
-		<effect>requiem</effect>
-		<effect>nocturne</effect>
-		<effect>daze</effect>
+		<monsters_to_check>
+			<monster>ghatjot</monster> 
+			<monster>leshonn</monster> 
+			<monster>skomora</monster>
+			<monster>degei</monster> 
+			<monster>dhartok</monster> 
+			<monster>gartell</monster> 
+			<monster>triboulex</monster> 
+			<monster>aita</monster> 
+			<monster>aminon</monster>
+			<monster>dealan-dhe</monster>
+			<monster>sgili</monster>
+			<monster>u bnai</monster>
+			<monster>gogmagog</monster>
+			<monster>aristaeus</monster>
+			<monster>raskovniche</monster>
+			<monster>marmorkrebs</monster>
+			<monster>gigelorum</monster>
+			<monster>procne</monster>
+			<monster>henwen</monster>
+			<monster>xevioso</monster>
+			<monster>ngai</monster>
+			<monster>kalunga</monster>
+			<monster>ongo</monster>
+			<monster>mboze</monster>
+			<monster>arebati</monster>
+			<monster>bumba</monster>
+		</monsters_to_check>
+		<!--Effects to check for-->
+			<effect>paralyze</effect>
+			<effect>slow</effect>
+			<effect>weighed down</effect>	<!-- gravity-->
+			<effect>sleep</effect>
+			<effect>bound</effect>  		<!--bind-->
+			<effect>blind</effect>
+			<effect>silence</effect>
+			<effect>poison</effect>
+			<effect>petrified</effect>		<!--break-->
+			<effect>addle</effect>
+			<effect>evasion down</effect> 	<!--this covers all evasion downs such as distract and frazzle-->
+			<effect>defense down</effect> 	<!--this covers all Defense downs-->
+			<effect>bio</effect>
+			<effect>dia</effect>
+			<effect>elegy</effect>
+			<effect>threnody</effect>
+			<effect>requiem</effect>
+			<effect>nocturne</effect>
+			<effect>daze</effect>
     </debuffs>
 	<Impact_Detection_Enabled>true</Impact_Detection_Enabled>
 </settings>

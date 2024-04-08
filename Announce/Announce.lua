@@ -1,3 +1,4 @@
+-- Load effect keywords and responses from XML files
 local function loadEffectKeywords()
     local effectKeywords = {
         buffs = {},
@@ -18,8 +19,13 @@ local function loadEffectKeywords()
         
         -- Iterate through debuffs
         for debuff in contents:gmatch("<debuffs>(.-)</debuffs>") do
+            local monsters_to_check = debuff:match("<monsters_to_check>(.-)</monsters_to_check>")
+            local effects = {}
             for effect in debuff:gmatch("<effect>(.-)</effect>") do
-                table.insert(effectKeywords.debuffs, effect)
+                table.insert(effects, effect)
+            end
+            if monsters_to_check and #effects > 0 then
+                table.insert(effectKeywords.debuffs, { monsters_to_check = monsters_to_check, effects = effects })
             end
         end
         
@@ -99,67 +105,88 @@ windower.register_event('incoming text', function(original, modified, mode)
                 end
             end
 			
-						-- Iterate through the effect keywords (debuffs)
-			for _, debuffKeyword in ipairs(effectKeywords.debuffs) do
+			for _, debuff in ipairs(effectKeywords.debuffs) do
 				-- Check if the keyword is present in the incoming text
-				if string.find(string.lower(chat), debuffKeyword:lower()) then
-					-- Check if the player's name is present in the text
-					local playerName = windower.ffxi.get_player().name:lower()
-					if not string.find(string.lower(chat), playerName) then
-						-- Code to execute when one of the debuff keywords is found and the player's name is not in the text
-						
-						-- Send a party message with the chat text and "<call14>"
-						windower.send_command('@input /p ' .. chat .. ' <call14>')
-						
-						-- Additional code for actions after the effect wears off can go here
-						
-						-- Exit the loop since we found a match
-						return
+				for _, effect in ipairs(debuff.effects) do
+					if string.find(string.lower(chat), effect:lower()) then
+						-- Check if the player's name is present in the text
+						local playerName = windower.ffxi.get_player().name:lower()
+						for monster in debuff.monsters_to_check:gmatch("<monster>(.-)</monster>") do
+							if string.find(string.lower(chat), monster:lower()) and not string.find(string.lower(chat), playerName) then
+								-- Code to execute when one of the debuff keywords is found,
+								-- the player's name is not in the text, and the monster to check is present in the text
+
+								-- Send a party message with the chat text and "<call14>"
+								windower.send_command('@input /p ' .. chat .. ' <call14>')
+
+								-- Additional code for actions after the effect wears off can go here
+
+								-- Exit the loop since we found a match
+								return
+							end
+						end
 					end
 				end
 			end
+
 		end
 
 		-- This checks the debuff Impact and alerts the party if it wears.
 		if effectKeywords.Impact_Detection_Enabled then
-			-- Check if the incoming text contains any of the specified attributes
-			for attribute, _ in pairs(attributeDetected) do
-				if string.find(string.lower(chat), attribute) then
-					attributeDetected[attribute] = true
-					-- Set a timer to reset the attribute detection after 3 seconds
-					if not timer then
-						timer = os.clock() + 3
+			local playerName = windower.ffxi.get_player().name:lower()
+			if not string.find(string.lower(chat), playerName) then
+				local monsterName
+				-- Extract the monster's name from the chat log
+				local monsterNameMatch = string.match(chat, "The (.+)'s")
+				if monsterNameMatch then
+					monsterName = monsterNameMatch
+				end
+
+				-- Check if the incoming text contains any of the specified attributes
+				for attribute, _ in pairs(attributeDetected) do
+					if string.find(string.lower(chat), attribute) then
+						attributeDetected[attribute] = true
+						-- Set a timer to reset the attribute detection after 3 seconds
+						if not timer then
+							timer = os.clock() + 3
+						end
 					end
 				end
-			end
-			
-			-- Check if the timer has expired and reset attribute detection if necessary
-			if timer and os.clock() > timer then
-				for attribute, _ in pairs(attributeDetected) do
-					attributeDetected[attribute] = false
+				
+				-- Check if the timer has expired and reset attribute detection if necessary
+				if timer and os.clock() > timer then
+					for attribute, _ in pairs(attributeDetected) do
+						attributeDetected[attribute] = false
+					end
+					timer = nil
 				end
-				timer = nil
-			end
 
-			-- Check if all attributes are detected
-			local allAttributesDetected = true
-			for _, detected in pairs(attributeDetected) do
-				if not detected then
-					allAttributesDetected = false
-					break
+				-- Check if all attributes are detected
+				local allAttributesDetected = true
+				for _, detected in pairs(attributeDetected) do
+					if not detected then
+						allAttributesDetected = false
+						break
+					end
 				end
-			end
 
-			-- If all attributes are detected, trigger the action
-			if allAttributesDetected then
-				windower.send_command('@input /p Impact has worn off <call14>')
-				-- Reset attribute detection
-				for attribute, _ in pairs(attributeDetected) do
-					attributeDetected[attribute] = false
+				-- If all attributes are detected, trigger the action
+				if allAttributesDetected then
+					-- Send a party message indicating that Impact has worn off and include the monster's name
+					if monsterName then
+						windower.send_command('@input /p Impact has worn off on ' .. monsterName .. ' <call14>')
+					else
+						windower.send_command('@input /p Impact has worn off <call14>')
+					end
+					-- Reset attribute detection
+					for attribute, _ in pairs(attributeDetected) do
+						attributeDetected[attribute] = false
+					end
+					timer = nil
 				end
-				timer = nil
 			end
 		end
+
 
 
         
