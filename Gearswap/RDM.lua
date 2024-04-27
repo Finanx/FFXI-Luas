@@ -68,7 +68,9 @@ function job_setup()
 	include('Mote-TreasureHunter')
 
     state.Buff.Saboteur = buffactive.Saboteur or false
-    state.Buff.Stymie = buffactive.Stymie or false
+    state.Buff.Chainspell = buffactive.Chainspell or false
+	state.Buff.Spontaneity = buffactive.Spontaneity or false
+    state.Buff.Stymie = buffactive.Stymie or false	
 
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
 					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox's Ring",}
@@ -76,7 +78,19 @@ function job_setup()
     skill_spells = S{
         'Temper', 'Temper II', 'Enfire', 'Enfire II', 'Enblizzard', 'Enblizzard II', 'Enaero', 'Enaero II',
         'Enstone', 'Enstone II', 'Enthunder', 'Enthunder II', 'Enwater', 'Enwater II'}
+		
+	enfeebling_magic_maps = {}
+		
+	enfeebling_magic_maps.mnd = S{"Slow", "Slow II", "Paralyze", "Paralyze II", "Addle", "Addle II"}
+	
+	enfeebling_magic_maps.int = S{"Blind", "Blind II"}
 
+	enfeebling_magic_maps.MACC = S{"Frazzle", "Frazzle II", "Dispel", "Inundation"}
+	
+	enfeebling_magic_maps.Skill = S{"Frazzle III", "Distract", "Distract II", "Distract III", "Poison", "Poison II", "Poisonga"}
+	
+	enfeebling_magic_maps.Duration = S{"Gravity", "Gravity II", "Sleep", "Sleep II", "Sleepga", "Sleepga II", "Bind", "Break", "Silence", "Dia", "Dia II", "Dia III", "Diaga"}
+	
     lockstyleset = 1
 end
 
@@ -93,6 +107,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'MACC')
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
+	state.ImpactMode = M{['description']='Impact Mode', 'Normal', 'MB', 'Occult_Accumen'}
 	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Crocea_Mors', 'Murgleis', 'Mandau', 'Tauret', 'Malevolence', 'Maxentius'}
 
 	state.RangeLock = M(false, 'Range Lock')
@@ -221,7 +236,20 @@ function init_gear_sets()
 		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 	
 		--Set used for Icarus Wing to maximize TP gain	
-	sets.precast.Wing = {}
+	sets.precast.Wing = {
+	    ammo="Aurgelmir Orb +1",
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
+		body="Malignance Tabard",
+		hands="Malignance Gloves",
+		legs="Malignance Tights",
+		feet="Malignance Boots",
+		neck="Anu Torque",
+		waist="Gerdr Belt +1",
+		left_ear="Telos Earring",
+		right_ear="Sherida Earring",
+		left_ring="Chirich Ring +1",
+		right_ring="Chirich Ring +1",
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     ------------------------------------------------------------------------------------------------
     ------------------------------------- Weapon Skill Sets ----------------------------------------
@@ -370,7 +398,7 @@ function init_gear_sets()
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet="Leth. Houseaux +3",
-		neck="Rep. Plat. Medal",
+		neck={ name="Dls. Torque +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Regal Earring",
@@ -383,7 +411,7 @@ function init_gear_sets()
 	sets.precast.WS['Black Halo'].ATKCAP = {
 		ammo="Crepuscular Pebble",
 		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
+		body={ name="Bunzi's Robe", augments={'Path: A',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet="Leth. Houseaux +3",
@@ -391,7 +419,7 @@ function init_gear_sets()
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Regal Earring",
-		left_ring="Sroda Ring",
+		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		right_ring="Ephramad's Ring",
 		back={ name="Sucellos's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 
@@ -675,13 +703,7 @@ function init_gear_sets()
 		right_ring="Prolix Ring",
 		back={ name="Sucellos's Cape", augments={'"Fast Cast"+10','Phys. dmg. taken-10%',}},}
 		
-    sets.midcast['Gain-STR'] = set_combine(sets.midcast['Enhancing Magic'], {hands="Viti. Gloves +3",})
-	sets.midcast['Gain-DEX'] = set_combine(sets.midcast['Enhancing Magic'], {hands="Viti. Gloves +3",})
-	sets.midcast['Gain-AGI'] = set_combine(sets.midcast['Enhancing Magic'], {hands="Viti. Gloves +3",})
-	sets.midcast['Gain-VIT'] = set_combine(sets.midcast['Enhancing Magic'], {hands="Viti. Gloves +3",})
-	sets.midcast['Gain-MND'] = set_combine(sets.midcast['Enhancing Magic'], {hands="Viti. Gloves +3",})
-	sets.midcast['Gain-INT'] = set_combine(sets.midcast['Enhancing Magic'], {hands="Viti. Gloves +3",})
-	sets.midcast['Gain-CHR'] = set_combine(sets.midcast['Enhancing Magic'], {hands="Viti. Gloves +3",})
+	sets.midcast.Gain_Spell = set_combine(sets.midcast['Enhancing Magic'], {hands="Viti. Gloves +3",})
 
     sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
 		main="Bolelabunga",
@@ -739,6 +761,9 @@ function init_gear_sets()
 		right_ring="Stikini Ring +1",
 		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
 		
+	sets.midcast['Enfeebling Magic'].mnd = sets.midcast['Enfeebling Magic']
+	sets.midcast['Enfeebling Magic'].int = sets.midcast['Enfeebling Magic']
+		
 	--Accuracy Based Enfeebling Frazzle 1-2, Dispel, Innundation
 	sets.midcast['Enfeebling Magic'].MACC = {
 		main={ name="Murgleis", augments={'Path: A',}},
@@ -756,11 +781,6 @@ function init_gear_sets()
 		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring +1",
 		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
-		
-	sets.midcast['Frazzle'] = sets.midcast['Enfeebling Magic'].MACC
-	sets.midcast['Frazzle II'] = sets.midcast['Enfeebling Magic'].MACC
-	sets.midcast['Dispel'] = sets.midcast['Enfeebling Magic'].MACC
-	sets.midcast['Inundation'] = sets.midcast['Enfeebling Magic'].MACC
 
 	--Enfeebling Skill based spells Frazzle 3 (625 Skill Cap), Distract 1-3 (610 Skill Cap),
 	sets.midcast['Enfeebling Magic'].Skill	= {
@@ -779,11 +799,6 @@ function init_gear_sets()
 		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring +1",
 		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
-		
-	sets.midcast['Frazzle III'] = sets.midcast['Enfeebling Magic'].Skill
-	sets.midcast['Distract'] = sets.midcast['Enfeebling Magic'].Skill
-	sets.midcast['Distract II'] = sets.midcast['Enfeebling Magic'].Skill
-	sets.midcast['Distract	III'] = sets.midcast['Enfeebling Magic'].Skill
 	
 	--Enfeebling Duration for spells that need to last long Sleeps,Break,Blind,Silence
 	sets.midcast['Enfeebling Magic'].Duration = {
@@ -802,26 +817,8 @@ function init_gear_sets()
 		left_ring="Kishar Ring",
 		right_ring="Stikini Ring +1",
 		back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Enmity-10',}},}
-
-	sets.midcast['Silence'] = sets.midcast['Enfeebling Magic'].Duration		
-	sets.midcast['Break'] = sets.midcast['Enfeebling Magic'].Duration
-	sets.midcast['Bind'] = sets.midcast['Enfeebling Magic'].Duration
-	sets.midcast['Sleep'] = sets.midcast['Enfeebling Magic'].Duration
-	sets.midcast['Sleep II'] = sets.midcast['Enfeebling Magic'].Duration	
-	sets.midcast['Sleepga'] = sets.midcast['Enfeebling Magic'].Duration
-	
 	
 	sets.midcast.Dispelga = set_combine(sets.midcast['Enfeebling Magic'].MACC, {main="Daybreak",sub="Ammurapi Shield",})
-		
-	sets.midcast['Dia III'] = set_combine(sets.midcast['Enfeebling Magic'].Duration, {
-		body="Volte Jupon",
-		hands={ name="Chironic Gloves", augments={'MND+4','Phys. dmg. taken -2%','"Treasure Hunter"+1','Accuracy+5 Attack+5',}},
-		waist="Chaac Belt",})
-		
-	sets.midcast['Diaga'] = set_combine(sets.midcast['Enfeebling Magic'].Duration, {
-		body="Volte Jupon",
-		hands={ name="Chironic Gloves", augments={'MND+4','Phys. dmg. taken -2%','"Treasure Hunter"+1','Accuracy+5 Attack+5',}},
-		waist="Chaac Belt",})
 		
     sets.midcast['Dark Magic'] = {
 		main={ name="Crocea Mors", augments={'Path: C',}},
@@ -933,23 +930,6 @@ function init_gear_sets()
 		ammo="Regal Gem",
 		head=empty,
 		body="Crepuscular Cloak",
-		hands="Malignance Gloves",
-		legs="Malignance Tights",
-		feet="Malignance Boots",
-		neck={ name="Dls. Torque +2", augments={'Path: A',}},
-		waist={ name="Acuity Belt +1", augments={'Path: A',}},
-		left_ear="Snotra Earring",
-		right_ear={ name="Leth. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','"Dbl.Atk."+5',}},
-		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
-		right_ring="Stikini Ring +1",
-		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
-	
-	--[[
-		main={ name="Murgleis", augments={'Path: A',}},
-		sub="Ammurapi Shield",
-		ammo="Regal Gem",
-		head=empty,
-		body="Crepuscular Cloak",
 		hands="Leth. Ganth. +3",
 		legs="Leth. Fuseau +3",
 		feet="Leth. Houseaux +3",
@@ -960,9 +940,8 @@ function init_gear_sets()
 		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		right_ring="Stikini Ring +1",
 		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
-	--]]
 		
-	sets.midcast.ImpactMB = {
+	sets.midcast.Impact.MB = {
 		main={ name="Bunzi's Rod", augments={'Path: A',}},
 		sub="Ammurapi Shield",
 		ammo={ name="Ghastly Tathlum +1", augments={'Path: A',}},
@@ -977,6 +956,22 @@ function init_gear_sets()
 		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		right_ring="Archon Ring",
 		back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},}
+		
+	sets.midcast.Impact.Occult_Accumen = {
+		main={ name="Crocea Mors", augments={'Path: C',}},
+		sub="Ammurapi Shield",
+		ammo="Aurgelmir Orb +1",
+		body="Crepuscular Cloak",
+		hands={ name="Merlinic Dastanas", augments={'Mag. Acc.+4 "Mag.Atk.Bns."+4','"Occult Acumen"+11','"Mag.Atk.Bns."+10',}},
+		legs="Perdition Slops",
+		feet={ name="Merlinic Crackows", augments={'"Occult Acumen"+11','Mag. Acc.+3','"Mag.Atk.Bns."+5',}},
+		neck="Anu Torque",
+		waist="Oneiros Rope",
+		left_ear="Sherida Earring",
+		right_ear="Dedition Earring",
+		left_ring="Chirich Ring +1",
+		right_ring="Chirich Ring +1",
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
     -- Initializes trusts at iLvl 119
     sets.midcast.Trust = sets.precast.FC
@@ -1322,6 +1317,7 @@ function init_gear_sets()
 	sets.Maxentius = {main="Maxentius", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
 	sets.Maxentius_Thibron = {main="Maxentius", sub={ name="Machaera +2", augments={'TP Bonus +1000',}},}
 	sets.Maxentius.SW = {main="Maxentius", sub="Genmei Shield",}
+	sets.Maxentius.SW.Acc = {main="Maxentius", sub="Genmei Shield",}
 	
 	--Range Sets
 	
@@ -1359,11 +1355,52 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 	if spell.name == 'Dispelga' then
         equip(sets.precast.FC.Dispelga)
     end
+	
+		--equips correct sets if Chainspell is active
+	if state.Buff.Chainspell or state.Buff.Spontaneity then
+		if spell.skill == 'Enfeebling Magic' then
+			if state.CastingMode.value == 'MACC' then
+				equip(sets.midcast['Enfeebling Magic'].MACC)
+			else
+				if enfeebling_magic_maps.mnd:contains(spell.english) then
+					equip(sets.midcast['Enfeebling Magic'].mnd)
+				elseif enfeebling_magic_maps.int:contains(spell.english) then
+					equip(sets.midcast['Enfeebling Magic'].int)
+				elseif enfeebling_magic_maps.MACC:contains(spell.english) then
+					equip(sets.midcast['Enfeebling Magic'].MACC)
+				elseif enfeebling_magic_maps.Skill:contains(spell.english) then
+					equip(sets.midcast['Enfeebling Magic'].Skill)
+				elseif enfeebling_magic_maps.Duration:contains(spell.english) then
+					equip(sets.midcast['Enfeebling Magic'].Duration)
+				end
+			end
+			if state.Buff.Saboteur then
+				equip(sets.buff.Saboteur)
+			end
+		end
+	end
+	
 end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
-		--equips Saboteur set if active
+
+		--equips Mappings for Enfeebling Magic
     if spell.skill == 'Enfeebling Magic' then
+		if state.CastingMode.value == 'MACC' then
+			equip(sets.midcast['Enfeebling Magic'].MACC)
+		else
+			if enfeebling_magic_maps.mnd:contains(spell.english) then
+				equip(sets.midcast['Enfeebling Magic'].mnd)
+			elseif enfeebling_magic_maps.int:contains(spell.english) then
+				equip(sets.midcast['Enfeebling Magic'].int)
+			elseif enfeebling_magic_maps.MACC:contains(spell.english) then
+				equip(sets.midcast['Enfeebling Magic'].MACC)
+			elseif enfeebling_magic_maps.Skill:contains(spell.english) then
+				equip(sets.midcast['Enfeebling Magic'].Skill)
+			elseif enfeebling_magic_maps.Duration:contains(spell.english) then
+				equip(sets.midcast['Enfeebling Magic'].Duration)
+			end
+		end
         if state.Buff.Saboteur then
             equip(sets.buff.Saboteur)
         end
@@ -1453,6 +1490,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         elseif skill_spells:contains(spell.english) then
             equip(sets.midcast.EnhancingSkill)
         elseif spell.english:startswith('Gain') then
+			equip(sets.midcast.Gain_Spell)
         end
 		if (spell.target.type == 'PLAYER' or spell.target.type == 'NPC') and buffactive.Composure then
             equip(sets.buff.ComposureOther)
@@ -1484,13 +1522,15 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
 			--Equips gearset to cast Impact
 		if spell.english == "Impact" then
-			if state.MagicBurst.value == true then
-				equip(sets.midcast.ImpactMB)
-			else
+			if state.ImpactMode.value == 'Normal' then
 				equip(sets.midcast.Impact)
 				if state.WeaponSet.value == 'None' then
 					equip(sets.Empyreal)
 				end
+			elseif state.ImpactMode.value == 'MB' then
+				equip(sets.midcast.Impact.MB)
+			elseif state.ImpactMode.value == 'Occult_Accumen' then
+				equip(sets.midcast.Impact.Occult_Accumen)
 			end
         end
 		
@@ -1694,9 +1734,15 @@ function update_combat_form()
 				disable('main','sub')
 			end	
 		else
-			enable('main','sub')
-			equip(sets.Maxentius.SW)
-			disable('main','sub')
+			if state.WeaponskillMode.value == 'Acc' then
+				enable('main','sub')
+				equip(sets.Maxentius.SW)
+				disable('main','sub')
+			else
+				enable('main','sub')
+				equip(sets.Maxentius.SW.Acc)
+				disable('main','sub')
+			end
 		end
 	end
 	

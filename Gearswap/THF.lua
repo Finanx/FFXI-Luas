@@ -806,6 +806,7 @@ function init_gear_sets()
     sets.CP = {neck={ name="Asn. Gorget +2", augments={'Path: A',}},}
 	
 	sets.Twashtar = {main={ name="Twashtar", augments={'Path: A',}}, sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
+	sets.Twashtar_Centovente = {main={ name="Twashtar", augments={'Path: A',}}, sub="Fusetto +2",}
 	
 	sets.Mandau = {main={ name="Mandau", augments={'Path: A',}}, sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
 	
@@ -934,26 +935,22 @@ end
 function update_combat_form()
 
 	if state.WeaponSet.value == 'Twashtar' then
-		equip(sets.Twashtar)
-	end
-	
-	if state.WeaponSet.value == 'Mandau' then
+		if state.TPBonus.value == true then
+			equip(sets.Twashtar_Centovente)
+		else
+			equip(sets.Twashtar)
+		end
+	elseif state.WeaponSet.value == 'Mandau' then
 		equip(sets.Mandau)
-	end
-
-	if state.WeaponSet.value == 'Tauret' then
+	elseif state.WeaponSet.value == 'Tauret' then
 		equip(sets.Tauret)
-	end
-	
-	if state.WeaponSet.value == 'Naegling' then
+	elseif state.WeaponSet.value == 'Naegling' then
 		if state.TPBonus.value == true then
 			equip(sets.Naegling_Centovente)
 		else
 			equip(sets.Naegling)
 		end
-	end
-	
-	if state.WeaponSet.value == 'Karambit' then
+	elseif state.WeaponSet.value == 'Karambit' then
 		equip(sets.Karambit)
 	end
 					

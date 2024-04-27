@@ -516,7 +516,7 @@ function init_gear_sets()
 		right_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		back={ name="Taranus's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},}
 	
-    sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})
+    sets.midcast.Dispelga = set_combine(sets.midcast['Enfeebling Magic'], {main="Daybreak", sub="Ammurapi Shield"})
 	
 	sets.midcast.ElementalEnfeeble = {
 		main={ name="Bunzi's Rod", augments={'Path: A',}},

@@ -81,7 +81,7 @@ end
 function user_setup()
     state.OffenseMode:options('Normal', 'Acc')
     state.HybridMode:options('Normal', 'DT')
-    state.WeaponskillMode:options('Normal', 'Acc')
+    state.WeaponskillMode:options('Normal', 'Acc', 'ATKCAP')
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'Refresh')
 	state.TreasureMode:options('Tag', 'None')
@@ -234,7 +234,7 @@ function init_gear_sets()
 	sets.precast.WS.ATKCAP = {
 		range={ name="Linos", augments={'Accuracy+12 Attack+12','Weapon skill damage +3%','STR+8',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
+		body={ name="Bunzi's Robe", augments={'Path: A',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
@@ -286,6 +286,21 @@ function init_gear_sets()
 		range={ name="Linos", augments={'Accuracy+12 Attack+12','Weapon skill damage +3%','DEX+8',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Bihu Jstcorps. +3", augments={'Enhances "Troubadour" effect',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck={ name="Bard's Charm +2", augments={'Path: A',}},
+		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Mache Earring +1",
+		left_ring="Ephramad's Ring",
+		right_ring="Ilabrat Ring",
+		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
+		
+    sets.precast.WS['Rudra\'s Storm'].ATKCAP = {
+		range={ name="Linos", augments={'Accuracy+12 Attack+12','Weapon skill damage +3%','DEX+8',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Bunzi's Robe", augments={'Path: A',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
@@ -711,6 +726,23 @@ function init_gear_sets()
 		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring +1",
 		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
+		
+	sets.midcast['Absorb-TP'] = {
+		main={ name="Carnwenhan", augments={'Path: A',}},
+		sub="Ammurapi Shield",
+		range={ name="Linos", augments={'Mag. Evasion+15','Phys. dmg. taken -4%','HP+20',}},
+		head={ name="Bunzi's Hat", augments={'Path: A',}},
+		body="Brioso Justau. +3",
+		hands="Inyan. Dastanas +2",
+		legs="Brioso Cannions +3",
+		feet="Fili Cothurnes +3",
+		neck="Mnbw. Whistle +1",
+		waist={ name="Acuity Belt +1", augments={'Path: A',}},
+		left_ear="Regal Earring",
+		right_ear={ name="Fili Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
+		left_ring="Stikini Ring +1",
+		right_ring="Stikini Ring +1",
+		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}
 	
 	sets.midcast.RA = {
 		range="Trollbane",
@@ -764,6 +796,8 @@ function init_gear_sets()
 		left_ring="Stikini Ring +1",
 		right_ring="Stikini Ring +1",
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		
+	sets.idle.Town = set_combine(sets.idle, {range="Loughnashade"})
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Defense Sets ------------------------------------------
@@ -1030,7 +1064,7 @@ function init_gear_sets()
     sets.SongDWDuration = {main="Carnwenhan", sub="Kali"}
 	sets.SongSWDuration = {main="Carnwenhan", sub="Genmei Shield"}
 	sets.Dummy = {range="Daurdabla",}
-	sets.Effect = {range="Gjallarhorn",}
+	sets.Effect = {range="Loughnashade",}
 
     sets.buff.Doom = {
 		neck="Nicander's Necklace",
