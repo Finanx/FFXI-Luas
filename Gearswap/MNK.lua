@@ -188,7 +188,7 @@ function init_gear_sets()
 		head="Halitus Helm",
 		body={ name="Emet Harness +1", augments={'Path: A',}},
 		hands="Kurys Gloves",
-		legs="Bhikku Hose +2",
+		legs="Bhikku Hose +3",
 		feet="Ahosi Leggings",
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
 		waist="Kasiri Belt",
@@ -329,7 +329,7 @@ function init_gear_sets()
 	sets.precast.WS['Raging Fists'] = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Mpaca's Cap", augments={'Path: A',}},
-		body="Bhikku Cyclas +2",
+		body="Bhikku Cyclas +3",
 		hands="Bhikku Gloves +2",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet="Mpaca's Boots",
@@ -359,7 +359,7 @@ function init_gear_sets()
 	sets.precast.WS['Shijin Spiral'] = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Mpaca's Cap", augments={'Path: A',}},
-		body="Bhikku Cyclas +2",
+		body="Bhikku Cyclas +3",
 		hands="Bhikku Gloves +2",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet="Mpaca's Boots",
@@ -374,7 +374,7 @@ function init_gear_sets()
 	sets.precast.WS['Shijin Spiral'].ATKCAP = {
 	    ammo="Crepuscular Pebble",
 		head="Ken. Jinpachi +1",
-		body="Bhikku Cyclas +2",
+		body="Bhikku Cyclas +3",
 		hands="Bhikku Gloves +2",
 		legs={ name="Mpaca's Hose", augments={'Path: A',}},
 		feet="Ken. Sune-Ate +1",
@@ -419,7 +419,7 @@ function init_gear_sets()
 	sets.precast.WS['Asuran Fists'] = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Hes. Crown +3", augments={'Enhances "Penance" effect',}},
-		body="Bhikku Cyclas +2",
+		body="Bhikku Cyclas +3",
 		hands="Bhikku Gloves +2",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet="Mpaca's Boots",
@@ -550,7 +550,7 @@ function init_gear_sets()
 		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
 		body={ name="Mpaca's Doublet", augments={'Path: A',}},
 		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs="Bhikku Hose +2",
+		legs="Bhikku Hose +3",
 		feet="Anch. Gaiters +3",
 		neck={ name="Mnk. Nodowa +2", augments={'Path: A',}},
 		waist="Moonbow Belt +1",
@@ -565,7 +565,7 @@ function init_gear_sets()
 		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
 		body={ name="Mpaca's Doublet", augments={'Path: A',}},
 		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs="Bhikku Hose +2",
+		legs="Bhikku Hose +3",
 		feet="Anch. Gaiters +3",
 		neck={ name="Mnk. Nodowa +2", augments={'Path: A',}},
 		waist="Moonbow Belt +1",
@@ -575,8 +575,8 @@ function init_gear_sets()
 		right_ring="Niqmaddu Ring",
 		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 		
-	sets.engaged.Impetus = set_combine(sets.engaged, {body="Bhikku Cyclas +2",})
-	sets.engaged.Acc.Impetus = set_combine(sets.engaged.Acc, {body="Bhikku Cyclas +2",})
+	sets.engaged.Impetus = set_combine(sets.engaged, {body="Bhikku Cyclas +3",})
+	sets.engaged.Acc.Impetus = set_combine(sets.engaged.Acc, {body="Bhikku Cyclas +3",})
 
 	--Hybrid Sets
 	
@@ -585,7 +585,7 @@ function init_gear_sets()
 		head="Bhikku Crown +2",
 		body={ name="Mpaca's Doublet", augments={'Path: A',}},
 		hands="Mpaca's Gloves",
-		legs="Bhikku Hose +2",
+		legs="Bhikku Hose +3",
 		feet="Mpaca's Boots",
 		neck={ name="Mnk. Nodowa +2", augments={'Path: A',}},
 		waist="Moonbow Belt +1",
@@ -598,9 +598,9 @@ function init_gear_sets()
 	sets.engaged.Hybrid.Impetus = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head="Bhikku Crown +2",
-		body="Bhikku Cyclas +2",
+		body="Bhikku Cyclas +3",
 		hands="Mpaca's Gloves",
-		legs="Bhikku Hose +2",
+		legs="Bhikku Hose +3",
 		feet="Mpaca's Boots",
 		neck={ name="Mnk. Nodowa +2", augments={'Path: A',}},
 		waist="Moonbow Belt +1",
@@ -641,7 +641,7 @@ function init_gear_sets()
 
 	sets.Kiting = {left_ring="Shneddick Ring",}
 	
-	sets.Impetus = {body="Bhikku Cyclas +2",}
+	sets.Impetus = {body="Bhikku Cyclas +3",}
 	
     sets.buff.Doom = {
 		neck="Nicander's Necklace",
@@ -655,7 +655,7 @@ function init_gear_sets()
 		body="Volte Jupon",		--TH2
 		waist="Chaac Belt",} --TH+1
 		
-	sets.Godhands = {main="Karambit",}
+	sets.Godhands = {main="Excalipoor II",}
 	sets.Karambit = {main="Karambit",}
 	sets.Xoanon = {main="Xoanon",sub={ name="Rigorous Grip +1", augments={'Path: A',}},}
 

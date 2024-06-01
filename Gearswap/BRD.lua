@@ -87,7 +87,7 @@ function user_setup()
 	state.TreasureMode:options('Tag', 'None')
 	state.SongMode = M{['description']='Song Mode', 'None', 'Placeholder'}
 	state.SongEnmity = M{['description']='Song Enmity', 'None', 'Enmity'}
-	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Carnwenhan', 'Twashtar', 'Mandau', 'Tauret', 'Xoanon'}
+	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Carnwenhan', 'Twashtar', 'Mpu_Gandring', 'Mandau', 'Tauret', 'Xoanon'}
 	
     state.CP = M(false, "Capacity Points Mode")
 	state.TPBonus = M(true, 'TP Bonus')
@@ -767,10 +767,10 @@ function init_gear_sets()
 		main="Daybreak",
 		sub="Genmei Shield",
 		range={ name="Linos", augments={'Mag. Evasion+15','Phys. dmg. taken -4%','HP+20',}},
-		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		head="Fili Calot +3",
+		body="Adamantite Armor",
+		hands="Regal Gloves",
+		legs="Fili Rhingrave +3",
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
 		waist="Flume Belt +1",
@@ -784,10 +784,10 @@ function init_gear_sets()
 		main="Daybreak",
 		sub="Genmei Shield",
 		range={ name="Linos", augments={'Mag. Evasion+15','Phys. dmg. taken -4%','HP+20',}},
-		head={ name="Nyame Helm", augments={'Path: B',}},
+		head="Fili Calot +3",
 		body={ name="Kaykaus Bliaut +1", augments={'MP+80','"Cure" potency +6%','"Conserve MP"+7',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		legs="Fili Rhingrave +3",
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
 		waist="Flume Belt +1",
@@ -797,7 +797,7 @@ function init_gear_sets()
 		right_ring="Stikini Ring +1",
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 		
-	sets.idle.Town = set_combine(sets.idle, {range="Loughnashade"})
+	sets.idle.Town = set_combine(sets.idle, {main="Mpu Gandring", range="Loughnashade"})
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Defense Sets ------------------------------------------
@@ -1089,6 +1089,10 @@ function init_gear_sets()
 	sets.Mandau = {main="Mandau", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
 	sets.Mandau.SW = {main="Mandau", sub="Genmei Shield"}
 	
+	sets.Mpu_Gandring = {main="Mpu Gandring", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
+	sets.Mpu_Gandring_Centovente = {main="Mpu Gandring", sub="Fusetto +2",}
+	sets.Mpu_Gandring.SW = {main="Mpu Gandring", sub="Genmei Shield"}
+	
 	sets.Tauret = {main="Tauret", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
 	sets.Tauret.SW = {main="Tauret", sub="Genmei Shield"}
 	
@@ -1333,6 +1337,24 @@ function update_combat_form()
 		else
 			enable('main','sub')
 			equip(sets.Twashtar.SW)
+			disable('main','sub')
+		end
+	end
+	
+	if state.WeaponSet.value == 'Mpu_Gandring' then
+		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+			if state.TPBonus.value == true then
+				enable('main','sub')
+				equip(sets.Mpu_Gandring_Centovente)
+				disable('main','sub')
+			else
+				enable('main','sub')
+				equip(sets.Mpu_Gandring)
+				disable('main','sub')
+			end	
+		else
+			enable('main','sub')
+			equip(sets.Mpu_Gandring.SW)
 			disable('main','sub')
 		end
 	end

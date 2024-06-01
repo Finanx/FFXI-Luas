@@ -108,7 +108,7 @@ function user_setup()
     state.IdleMode:options('Normal')
 	state.TreasureMode:options('Tag', 'None')
 	state.ImpactMode = M{['description']='Impact Mode', 'Normal', 'MB', 'Occult_Accumen'}
-	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Crocea_Mors', 'Murgleis', 'Mandau', 'Tauret', 'Malevolence', 'Maxentius'}
+	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Naegling', 'Crocea_Mors', 'Murgleis', 'Mpu_Gandring', 'Tauret', 'Malevolence', 'Maxentius'}
 
 	state.RangeLock = M(false, 'Range Lock')
     state.MagicBurst = M(false, 'Magic Burst')
@@ -1310,9 +1310,9 @@ function init_gear_sets()
 	sets.Tauret = {main="Tauret", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
 	sets.Tauret.SW = {main="Tauret", sub="Genmei Shield"}
 	
-	sets.Mandau = {main="Mandau", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
-	sets.Mandau_Thibron = {main="Mandau", sub={ name="Machaera +2", augments={'TP Bonus +1000',}},}
-	sets.Mandau.SW = {main="Mandau", sub="Genmei Shield",}
+	sets.Mpu_Gandring = {main="Mpu Gandring", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
+	sets.Mpu_Gandring_Thibron = {main="Mpu Gandring", sub={ name="Machaera +2", augments={'TP Bonus +1000',}},}
+	sets.Mpu_Gandring.SW = {main="Mpu Gandring", sub="Genmei Shield",}
 	
 	sets.Maxentius = {main="Maxentius", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
 	sets.Maxentius_Thibron = {main="Maxentius", sub={ name="Machaera +2", augments={'TP Bonus +1000',}},}
@@ -1414,10 +1414,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	if state.WeaponSet.value == 'None' and state.CastingMode.value == 'MACC' and spell.skill == 'Enfeebling Magic' then
 		equip(sets.Empyreal)
 	end
-	if state.WeaponSet.value == 'None' and spell.skill == 'Enfeebling Magic' then
-		if (spell.name == 'Frazzle' or spell.name == 'Frazzle' or spell.name == 'Dispel' or spell.name == 'Inundation')then
-			equip(sets.Empyreal)
-		end
+	if state.WeaponSet.value == 'None' and enfeebling_magic_maps.MACC:contains(spell.english) then
+		equip(sets.Empyreal)
 	end
 	
 		--Handles TP Overflow
@@ -1641,9 +1639,7 @@ function update_combat_form()
 			equip(sets.Naegling.SW)
 			disable('main','sub')
 		end
-	end
-	
-	if state.WeaponSet.value == 'Crocea_Mors' then
+	elseif state.WeaponSet.value == 'Crocea_Mors' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
 			enable('main','sub')
 			equip(sets.Crocea_Mors)
@@ -1653,9 +1649,7 @@ function update_combat_form()
 			equip(sets.Crocea_Mors.SW)
 			disable('main','sub')
 		end
-	end
-
-	if state.WeaponSet.value == 'Murgleis' then
+	elseif state.WeaponSet.value == 'Murgleis' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
 			if state.TPBonus.value == true then
 				enable('main','sub')
@@ -1671,27 +1665,23 @@ function update_combat_form()
 			equip(sets.Murgleis.SW)
 			disable('main','sub')
 		end
-	end
-	
-	if state.WeaponSet.value == 'Mandau' then
+	elseif state.WeaponSet.value == 'Mpu_Gandring' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
 			if state.TPBonus.value == true then
 				enable('main','sub')
-				equip(sets.Mandau_Thibron)
+				equip(sets.Mpu_Gandring_Thibron)
 				disable('main','sub')
 			else
 				enable('main','sub')
-				equip(sets.Mandau)
+				equip(sets.Mpu_Gandring)
 				disable('main','sub')
 			end
 		else
 			enable('main','sub')
-			equip(sets.Mandau.SW)
+			equip(sets.Mpu_Gandring.SW)
 			disable('main','sub')
 		end
-	end
-
-	if state.WeaponSet.value == 'Tauret' then
+	elseif state.WeaponSet.value == 'Tauret' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
 			enable('main','sub')
 			equip(sets.Tauret)
@@ -1701,10 +1691,7 @@ function update_combat_form()
 			equip(sets.Tauret.SW)
 			disable('main','sub')
 		end
-	end
-
-	
-	if state.WeaponSet.value == 'Malevolence' then
+	elseif state.WeaponSet.value == 'Malevolence' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
 			if state.TPBonus.value == true then
 				enable('main','sub')
@@ -1720,9 +1707,7 @@ function update_combat_form()
 			equip(sets.Malevolence.SW)
 			disable('main','sub')
 		end
-	end
-
-	if state.WeaponSet.value == 'Maxentius' then
+	elseif state.WeaponSet.value == 'Maxentius' then
 		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
 			if state.TPBonus.value == true then
 				enable('main','sub')
@@ -1734,19 +1719,11 @@ function update_combat_form()
 				disable('main','sub')
 			end	
 		else
-			if state.WeaponskillMode.value == 'Acc' then
-				enable('main','sub')
-				equip(sets.Maxentius.SW)
-				disable('main','sub')
-			else
-				enable('main','sub')
-				equip(sets.Maxentius.SW.Acc)
-				disable('main','sub')
-			end
+			enable('main','sub')
+			equip(sets.Maxentius.SW.Acc)
+			disable('main','sub')
 		end
-	end
-	
-	if state.WeaponSet.value == 'None' then
+	elseif state.WeaponSet.value == 'None' then
 		enable('main','sub')
 	end
 	
