@@ -125,10 +125,6 @@ function user_setup()
 	
 	send_command('wait 2; exec /NIN/NIN-Binds.txt')
 	
-	--Gear Retrieval Scripts
-	
-	send_command('wait 10; exec /NIN/NIN-Gear-Retrieval.txt')
-	
 	--Job Settings
 
     select_default_macro_book()
@@ -152,10 +148,6 @@ function user_unload()
 	--Remove Global Binds
 
 	send_command('wait 1; exec Global-UnBinds.txt')
-	
-	--Gear Removal Script
-	
-	send_command('wait 1; exec /NIN/NIN-Gear-Removal.txt')
 	
 end
 
@@ -806,7 +798,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 	
-	sets.NightMovement = {feet="Hachiya Kyahan +3"}
+	sets.NightMovement = {right_ring="Shneddick Ring",}--{feet="Hachiya Kyahan +3"}
 	sets.DayMovement = {right_ring="Shneddick Ring",}
 
     sets.buff.Migawari = {body="Hattori Ningi +3",}
@@ -831,10 +823,10 @@ function init_gear_sets()
 
     sets.CP = {neck={ name="Ninja Nodowa +2", augments={'Path: A',}},}
     
-    sets.TreasureHunter = {
-		ammo="Per. Lucky Egg", --TH1
-		body="Volte Jupon",		--TH2
-		waist="Chaac Belt",} --TH+1
+	sets.TreasureHunter = {
+		body="Volte Jupon",
+		hands="Volte Bracers",
+		waist="Chaac Belt",}
 
 
 end
@@ -1258,3 +1250,36 @@ end
 function set_lockstyle()
     send_command('wait 5; input /lockstyleset ' .. lockstyleset)
 end
+
+fixed_pos = ''
+fixed_ts = os.time()
+
+local no_interruptions = true
+
+windower.raw_register_event('outgoing chunk',function(id,original,modified,injected,blocked)
+    if no_interruptions and (not blocked) then
+        if id == 0x15 then
+            if (gearswap.cued_packet or midaction()) and fixed_pos ~= '' and os.time()-fixed_ts < 5 then
+                return original:sub(1,4)..fixed_pos..original:sub(17)
+            else
+                fixed_pos = original:sub(5,16)
+                fixed_ts = os.time()
+            end
+        end
+    end
+end)
+
+register_unhandled_command(function (...)
+    local commands = {...}
+    if commands[1] and commands[1]:lower() == 'interrupts' then
+        if (no_interruptions) then
+            windower.add_to_chat(160, "%s : Disabling \30\2no_interruptions\30\43":format(_addon.name))
+            no_interruptions = false
+        else
+            windower.add_to_chat(160, "%s : Enabling \30\2no_interruptions\30\43":format(_addon.name))
+            no_interruptions = true
+        end
+        return true
+    end
+    return false
+end)

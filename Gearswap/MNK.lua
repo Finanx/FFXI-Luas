@@ -110,10 +110,6 @@ function user_setup()
 	
 	send_command('wait 2; exec /MNK/MNK-Binds.txt')
 	
-	--Gear Retrieval Scripts
-	
-	send_command('wait 10; exec /MNK/MNK-Gear-Retrieval.txt')
-	
 	--Job Settings
 	
 	select_default_macro_book()
@@ -133,10 +129,6 @@ function user_unload()
 	--Remove Global Binds
 
 	send_command('wait 1; exec Global-UnBinds.txt')
-	
-	--Gear Removal Script
-	
-	send_command('wait 1; exec /MNK/MNK-Gear-Removal.txt')
 	
 end
 

@@ -100,10 +100,6 @@ function user_setup()
 
 	send_command('wait 2; exec /WHM/WHM-Binds.txt')
 
-	--Gear Retrieval Scripts
-	
-	send_command('wait 10; exec /WHM/WHM-Gear-Retrieval.txt')
-	
 	--Job settings
 
     select_default_macro_book()
@@ -125,10 +121,6 @@ function user_unload()
 
 	send_command('wait 1; exec Global-UnBinds.txt')
 	
-	--Gear Removal Script
-	
-	send_command('wait 1; exec /WHM/WHM-Gear-Removal.txt')
-	
 end
 
 -- Define sets and vars used by this job file.
@@ -145,11 +137,11 @@ function init_gear_sets()
 		main="Daybreak",
 		sub="Genmei Shield",
 		ammo="Sapience Orb",
-		head="Ebers Cap +2",
+		head="Ebers Cap +3",
 		body="Inyanga Jubbah +2",
 		hands={ name="Fanatic Gloves", augments={'MP+50','Healing magic skill +10','"Conserve MP"+7','"Fast Cast"+7',}},
 		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		feet="Ebers Duckbills +2",
+		feet="Ebers Duckbills +3",
 		neck={ name="Clr. Torque +2", augments={'Path: A',}},
 		waist="Embla Sash",
 		left_ear="Loquac. Earring",
@@ -276,10 +268,10 @@ function init_gear_sets()
 		sub="Genmei Shield",
 		ammo="Pemphredo Tathlum",
 		head={ name="Kaykaus Mitra +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		body="Ebers Bliaut +2",
+		body="Ebers Bliaut +3",
 		hands="Theophany Mitts +3",
 		legs="Ebers Pant. +3",
-		feet={ name="Kaykaus Boots +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		feet={ name="Kaykaus Boots +1", augments={'MP+80','Spell interruption rate down +12%','"Cure" spellcasting time -7%',}},
 		neck={ name="Clr. Torque +2", augments={'Path: A',}},
 		waist={ name="Shinjutsu-no-Obi +1", augments={'Path: A',}},
 		left_ear="Mendi. Earring",
@@ -293,10 +285,10 @@ function init_gear_sets()
 		sub="Genmei Shield",
 		ammo="Pemphredo Tathlum",
 		head={ name="Kaykaus Mitra +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		body="Ebers Bliaut +2",
+		body="Ebers Bliaut +3",
 		hands="Theophany Mitts +3",
 		legs="Ebers Pant. +3",
-		feet={ name="Kaykaus Boots +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		feet={ name="Kaykaus Boots +1", augments={'MP+80','Spell interruption rate down +12%','"Cure" spellcasting time -7%',}},
 		neck={ name="Clr. Torque +2", augments={'Path: A',}},
 		waist="Hachirin-no-Obi",
 		left_ear="Mendi. Earring",
@@ -330,7 +322,7 @@ function init_gear_sets()
 		body="Theo. Bliaut +3",
 		hands="Theophany Mitts +3",
 		legs="Ebers Pant. +3",
-		feet={ name="Kaykaus Boots +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		feet={ name="Kaykaus Boots +1", augments={'MP+80','Spell interruption rate down +12%','"Cure" spellcasting time -7%',}},
 		neck={ name="Clr. Torque +2", augments={'Path: A',}},
 		waist={ name="Shinjutsu-no-Obi +1", augments={'Path: A',}},
 		left_ear="Mendi. Earring",
@@ -347,7 +339,7 @@ function init_gear_sets()
 		body="Theo. Bliaut +3",
 		hands="Theophany Mitts +3",
 		legs="Ebers Pant. +3",
-		feet={ name="Kaykaus Boots +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		feet={ name="Kaykaus Boots +1", augments={'MP+80','Spell interruption rate down +12%','"Cure" spellcasting time -7%',}},
 		neck={ name="Clr. Torque +2", augments={'Path: A',}},
 		waist="Hachirin-no-Obi",
 		left_ear="Mendi. Earring",
@@ -359,8 +351,8 @@ function init_gear_sets()
     --sets.midcast.CureMelee = sets.midcast.CureSolace
 
     sets.midcast.StatusRemoval = set_combine(sets.midcast.Cure_SpellInterrupt, {
-		head="Ebers Cap +2",
-		hands="Ebers Mitts +2",
+		head="Ebers Cap +3",
+		hands="Ebers Mitts +3",
 		legs={ name="Piety Pantaln. +3", augments={'Enhances "Afflatus Misery" effect',}},})
 
     sets.midcast.Cursna = {
@@ -368,7 +360,7 @@ function init_gear_sets()
 		sub="Genmei Shield",
 		ammo="Pemphredo Tathlum",
 		head={ name="Kaykaus Mitra +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		body="Ebers Bliaut +2",
+		body="Ebers Bliaut +3",
 		hands={ name="Fanatic Gloves", augments={'MP+50','Healing magic skill +10','"Conserve MP"+7','"Fast Cast"+7',}},
 		legs="Th. Pant. +3",
 		feet={ name="Vanya Clogs", augments={'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
@@ -384,13 +376,13 @@ function init_gear_sets()
 
     -- 110 total Enhancing Magic Skill; caps even without Light Arts
     sets.midcast['Enhancing Magic'] = {
-		main="Daybreak",
+		main={ name="Gada", augments={'Enh. Mag. eff. dur. +6','MND+6','"Mag.Atk.Bns."+3','DMG:+14',}},
 		sub="Ammurapi Shield",
 		ammo="Sapience Orb",
-		head={ name="Telchine Cap", augments={'"Fast Cast"+4','Enh. Mag. eff. dur. +10',}},
-		body={ name="Telchine Chas.", augments={'Enh. Mag. eff. dur. +10',}},
-		hands={ name="Telchine Gloves", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +9',}},
-		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
+		head={ name="Telchine Cap", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		body={ name="Telchine Chas.", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		hands={ name="Telchine Gloves", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		legs={ name="Telchine Braconi", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
 		feet="Theo. Duckbills +3",
 		neck="Incanter's Torque",
 		waist="Embla Sash",
@@ -402,9 +394,9 @@ function init_gear_sets()
 		
     sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
 		main="Bolelabunga",
-		head={ name="Telchine Cap", augments={'"Fast Cast"+4','Enh. Mag. eff. dur. +10',}},
+		head={ name="Telchine Cap", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
 		body={ name="Piety Bliaut +3", augments={'Enhances "Benediction" effect',}},
-		hands="Ebers Mitts +2",
+		hands="Ebers Mitts +3",
 		legs="Th. Pant. +3",
 		feet={ name="Bunzi's Sabots", augments={'Path: A',}},})
 
@@ -414,14 +406,14 @@ function init_gear_sets()
 
     sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {hands="Regal Cuffs",})
 
-    sets.midcast.Auspice = set_combine(sets.midcast['Enhancing Magic'], {feet="Ebers Duckbills +2",})
+    sets.midcast.Auspice = set_combine(sets.midcast['Enhancing Magic'], {feet="Ebers Duckbills +3",})
 
     sets.midcast.BarElement = set_combine(sets.midcast['Enhancing Magic'], {
-		head="Ebers Cap +2",
-		body="Ebers Bliaut +2",
-		hands="Ebers Mitts +2",
+		head="Ebers Cap +3",
+		body="Ebers Bliaut +3",
+		hands="Ebers Mitts +3",
 		legs={ name="Piety Pantaln. +3", augments={'Enhances "Afflatus Misery" effect',}},
-		feet="Ebers Duckbills +2",})
+		feet="Ebers Duckbills +3",})
 
     sets.midcast.BoostStat = sets.midcast['Enhancing Magic']
 
@@ -468,7 +460,7 @@ function init_gear_sets()
 	    main={ name="Bunzi's Rod", augments={'Path: A',}},
 		sub="Ammurapi Shield",
 		ammo="Hydrocera",
-		head="Ebers Cap +2",
+		head="Ebers Cap +3",
 		body="Theo. Bliaut +3",
 		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
@@ -485,7 +477,7 @@ function init_gear_sets()
 	    main={ name="Bunzi's Rod", augments={'Path: A',}},
 		sub="Ammurapi Shield",
 		ammo="Pemphredo Tathlum",
-		head="Ebers Cap +2",
+		head="Ebers Cap +3",
 		body="Theo. Bliaut +3",
 		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','Haste+2','MND+13','Mag. Acc.+12',}},
@@ -511,9 +503,9 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		head=empty,
 		body="Crepuscular Cloak",
-		hands="Ebers Mitts +2",
+		hands="Ebers Mitts +3",
 		legs="Ebers Pant. +3",
-		feet="Ebers Duckbills +2",
+		feet="Ebers Duckbills +3",
 		neck="Incanter's Torque",
 		waist={ name="Acuity Belt +1", augments={'Path: A',}},
 		left_ear="Malignance Earring",
@@ -531,10 +523,10 @@ function init_gear_sets()
 		sub="Enki Strap",
 		ammo="Homiliary",
 		head="Befouled Crown",
-		body="Ebers Bliaut +2",
-		hands="Ebers Mitts +2",
+		body="Ebers Bliaut +3",
+		hands="Ebers Mitts +3",
 		legs="Ebers Pant. +3",
-		feet="Ebers Duckbills +2",
+		feet="Ebers Duckbills +3",
 		neck="Sibyl Scarf",
 		waist={ name="Shinjutsu-no-Obi +1", augments={'Path: A',}},
 		left_ear="Genmei Earring",
@@ -548,10 +540,10 @@ function init_gear_sets()
 		sub="Genmei Shield",
 		ammo="Homiliary",
 		head={ name="Nyame Helm", augments={'Path: B',}},
-		body="Ebers Bliaut +2",
-		hands="Ebers Mitts +2",
+		body="Ebers Bliaut +3",
+		hands="Ebers Mitts +3",
 		legs="Ebers Pant. +3",
-		feet="Ebers Duckbills +2",
+		feet="Ebers Duckbills +3",
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
 		waist="Plat. Mog. Belt",
 		left_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
@@ -647,7 +639,7 @@ function init_gear_sets()
 		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
 
     -- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
-		sets.buff['Divine Caress'] = {hands="Ebers Mitts +2"}
+		sets.buff['Divine Caress'] = {hands="Ebers Mitts +3"}
 		sets.buff['Devotion'] = {head="Piety Cap +3"}
 		sets.buff.Sublimation = {waist="Embla Sash"}
 	

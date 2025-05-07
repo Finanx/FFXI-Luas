@@ -112,10 +112,6 @@ function user_setup()
 	
 	send_command('wait 2; exec /RUN/RUN-Binds.txt')
 		
-	--Gear Retrieval Script
-	
-	send_command('wait 10; exec /RUN/RUN-Gear-Retrieval.txt')
-		
 	--Job Settings
 	
     select_default_macro_book()
@@ -137,10 +133,6 @@ function user_unload()
 	--Remove Global Binds
 
 	send_command('wait 1; exec Global-UnBinds.txt')
-	
-	--Gear Removal Script
-	
-	send_command('wait 1; exec /RUN/RUN-Gear-Removal.txt')
 	
 end
 
@@ -432,10 +424,10 @@ function init_gear_sets()
 		main="Deacon Sword",
 		ammo="Staunch Tathlum +1",
 		head={ name="Fu. Bandeau +3", augments={'Enhances "Battuta" effect',}},
-		body={ name="Herculean Vest", augments={'"Mag.Atk.Bns."+6','"Store TP"+1','Phalanx +4','Mag. Acc.+12 "Mag.Atk.Bns."+12',}},
-		hands={ name="Taeon Gloves", augments={'"Recycle"+7','Phalanx +3',}},
-		legs={ name="Taeon Tights", augments={'Accuracy+19 Attack+19','"Triple Atk."+2','Phalanx +3',}},
-		feet={ name="Herculean Boots", augments={'Sklchn.dmg.+4%','MND+4','Phalanx +4','Mag. Acc.+15 "Mag.Atk.Bns."+15',}},
+		body={ name="Taeon Tabard", augments={'Spell interruption rate down -10%','Phalanx +3',}},
+		hands={ name="Taeon Gloves", augments={'Spell interruption rate down -10%','Phalanx +3',}},
+		legs={ name="Taeon Tights", augments={'Spell interruption rate down -10%','Phalanx +3',}},
+		feet={ name="Taeon Boots", augments={'Spell interruption rate down -10%','Phalanx +3',}},
 		neck="Moonlight Necklace",
 		waist="Audumbla Sash",
 		left_ear="Andoaa Earring",
@@ -448,8 +440,8 @@ function init_gear_sets()
 		main="Deacon Sword",
 		head={ name="Fu. Bandeau +3", augments={'Enhances "Battuta" effect',}},
 		body={ name="Herculean Vest", augments={'"Mag.Atk.Bns."+6','"Store TP"+1','Phalanx +4','Mag. Acc.+12 "Mag.Atk.Bns."+12',}},
-		hands={ name="Taeon Gloves", augments={'"Recycle"+7','Phalanx +3',}},
-		legs={ name="Taeon Tights", augments={'Accuracy+19 Attack+19','"Triple Atk."+2','Phalanx +3',}},
+		hands={ name="Taeon Gloves", augments={'Spell interruption rate down -10%','Phalanx +3',}},
+		legs={ name="Taeon Tights", augments={'Spell interruption rate down -10%','Phalanx +3',}},
 		feet={ name="Herculean Boots", augments={'Sklchn.dmg.+4%','MND+4','Phalanx +4','Mag. Acc.+15 "Mag.Atk.Bns."+15',}},}
 		
 	sets.midcast['Temper'] = {
@@ -552,17 +544,17 @@ function init_gear_sets()
     sets.idle = {
 		ammo="Staunch Tathlum +1",
 		head={ name="Nyame Helm", augments={'Path: B',}},
-		body="Erilaz Surcoat +3",
+		body="Adamantite Armor",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Erilaz Greaves +3",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
 		waist="Flume Belt +1",
 		left_ear="Tuisto Earring",
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
 		left_ring="Moonlight Ring",
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
-		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Phys. dmg. taken-10%',}},}
+		back="Shadow Mantle",}
 		
 	sets.idle.Refresh = {
 		ammo="Homiliary",
@@ -630,19 +622,19 @@ function init_gear_sets()
 		--42% DT + 3%(Strap) 7% PDT
 
 	sets.engaged.T3Tank =	{
-		ammo="Staunch Tathlum +1",																											--3%DT
-		head="Erilaz Galea +3",
-		body="Erilaz Surcoat +3",
-		hands="Erilaz Gauntlets +3",																										--11%DT
-		legs="Eri. Leg Guards +3",																											--13%DT
-		feet="Erilaz Greaves +3",																											--11%DT
-		neck={ name="Warder's Charm +1", augments={'Path: A',}},
-		waist="Flume Belt +1",																												--4%PDT
+		ammo="Staunch Tathlum +1",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body="Adamantite Armor",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck={ name="Loricate Torque +1", augments={'Path: A',}},
+		waist="Flume Belt +1",
 		left_ear="Tuisto Earring",
-		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},																		--3%DT
-		left_ring="Shadow Ring",
-		right_ring="Moonlight Ring",																										--5%DT
-		back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Phys. dmg. taken-10%',}},}		
+		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+		left_ring="Moonlight Ring",
+		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		back="Shadow Mantle",}		
 			--42% DT + 3%(Strap) 7% PDT		
 	
 

@@ -103,7 +103,7 @@ function job_setup()
 
     state.CP = M(false, "Capacity Points Mode")
 
-    lockstyleset = 11
+    lockstyleset = 6
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -118,9 +118,9 @@ function user_setup()
     state.WeaponskillMode:options('Normal', 'Acc')
     state.IdleMode:options('Normal')
 
-	state.WeaponSet = M{['description']='Weapon Set', 'Twashtar', 'Mandau', 'Tauret', 'Naegling', 'Karambit'}
+	state.WeaponSet = M{['description']='Weapon Set', 'Mpu_Gandring', 'Twashtar', 'Mandau', 'Tauret', 'Naegling', 'Karambit'}
 	state.WeaponLock = M(false, 'Weapon Lock')
-	state.TPBonus = M(true, 'TP Bonus')
+	state.TPBonus = M(false, 'TP Bonus')
 
 	--Includes Global Bind keys
 	
@@ -129,10 +129,6 @@ function user_setup()
 	--Thief Binds
 	
 	send_command('wait 2; exec /THF/THF-Binds.txt')
-	
-	--Gear Retrieval Scripts
-	
-	send_command('wait 10; exec /THF/THF-Gear-Retrieval.txt')
 	
 	--Job Settings
 	
@@ -157,10 +153,6 @@ function user_unload()
 	--Remove Global Binds
 
 	send_command('wait 1; exec Global-UnBinds.txt')
-	
-	--Gear Removal Script
-	
-	send_command('wait 1; exec /THF/THF-Gear-Removal.txt')
 	
 end
 
@@ -365,8 +357,8 @@ function init_gear_sets()
 	sets.precast.WS.MandalicSATA = set_combine(sets.precast.WS['Mandalic Stab'], {head="Pill. Bonnet +3",ammo="Yetshila +1",})
 		
 	sets.precast.WS['Shark Bite'] = {
-		ammo="Yetshila +1",
-		head="Skulker's Bonnet +3",
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
 		body="Skulker's Vest +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
@@ -374,8 +366,8 @@ function init_gear_sets()
 		neck={ name="Asn. Gorget +2", augments={'Path: A',}},
 		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="Odr Earring",
-		left_ring="Epaminondas's Ring",
+		right_ear="Sherida Earring",
+		left_ring="Ephramad's Ring",
 		right_ring="Regal Ring",
 		back={ name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
 		
@@ -564,18 +556,18 @@ function init_gear_sets()
 
     sets.engaged = {
 		ammo="Aurgelmir Orb +1",
-		head="Skulker's Bonnet +3",
-		body="Pillager's Vest +3",
+		head="Malignance Chapeau",
+		body={ name="Gleti's Cuirass", augments={'Path: A',}},
 		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
-		feet={ name="Plun. Poulaines +3", augments={'Enhances "Assassin\'s Charge" effect',}},
-		neck={ name="Asn. Gorget +2", augments={'Path: A',}},
+		feet="Malignance Boots",
+		neck="Iskur Gorget",
 		waist="Reiki Yotai",
-		left_ear="Dedition Earring",
-		right_ear={ name="Skulk. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+16','Mag. Acc.+16','"Store TP"+6','DEX+7 AGI+7',}},
-		left_ring="Gere Ring",
-		right_ring="Hetairoi Ring",
-		back={ name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		left_ear="Eabani Earring",
+		right_ear="Sherida Earring",
+		left_ring="Chirich Ring +1",
+		right_ring="Petrov Ring",
+		back={ name="Mecisto. Mantle", augments={'Cap. Point+48%','HP+19','"Mag.Atk.Bns."+1','DEF+12',}},}
 
     sets.engaged.Acc = {
 		ammo="Aurgelmir Orb +1",
@@ -699,19 +691,18 @@ function init_gear_sets()
     -- 35% Magic Haste (51% DW to cap)
     sets.engaged.DW.HighHaste = {
 		ammo="Aurgelmir Orb +1",
-		head="Skulker's Bonnet +3",
-		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},											--6%
-		hands={ name="Floral Gauntlets", augments={'Rng.Acc.+15','Accuracy+15','"Triple Atk."+3','Magic dmg. taken -4%',}},		--5%
+		head="Malignance Chapeau",
+		body={ name="Gleti's Cuirass", augments={'Path: A',}},
+		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
-		feet={ name="Plun. Poulaines +3", augments={'Enhances "Assassin\'s Charge" effect',}},
-		neck={ name="Asn. Gorget +2", augments={'Path: A',}},
-		waist="Reiki Yotai", 																									--7%
-		left_ear="Suppanomimi", 																								--5%
-		right_ear={ name="Skulk. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+16','Mag. Acc.+16','"Store TP"+6','DEX+7 AGI+7',}},
-		left_ring="Gere Ring",
-		right_ring="Hetairoi Ring",
-		back={ name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
-		} --30% JA + 27% Gear = 57%
+		feet="Malignance Boots",
+		neck="Iskur Gorget",
+		waist="Reiki Yotai",
+		left_ear="Eabani Earring",
+		right_ear="Sherida Earring",
+		left_ring="Chirich Ring +1",
+		right_ring="Petrov Ring",
+		back={ name="Mecisto. Mantle", augments={'Cap. Point+48%','HP+19','"Mag.Atk.Bns."+1','DEF+12',}},}
 
     sets.engaged.DW.Acc.HighHaste = {
 		ammo="Aurgelmir Orb +1",
@@ -732,18 +723,18 @@ function init_gear_sets()
     -- 45% Magic Haste (36% DW to cap)
     sets.engaged.DW.MaxHaste = {
 		ammo="Aurgelmir Orb +1",
-		head="Skulker's Bonnet +3",
-		body="Pillager's Vest +3",
+		head="Malignance Chapeau",
+		body={ name="Gleti's Cuirass", augments={'Path: A',}},
 		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
-		feet={ name="Plun. Poulaines +3", augments={'Enhances "Assassin\'s Charge" effect',}},
-		neck={ name="Asn. Gorget +2", augments={'Path: A',}},
+		feet="Malignance Boots",
+		neck="Iskur Gorget",
 		waist="Reiki Yotai",
-		left_ear="Sherida Earring",
-		right_ear={ name="Skulk. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+16','Mag. Acc.+16','"Store TP"+6','DEX+7 AGI+7',}},
-		left_ring="Gere Ring",
-		right_ring="Chirich Ring +1",
-		back={ name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		left_ear="Eabani Earring",
+		right_ear="Sherida Earring",
+		left_ring="Chirich Ring +1",
+		right_ring="Petrov Ring",
+		back={ name="Mecisto. Mantle", augments={'Cap. Point+48%','HP+19','"Mag.Atk.Bns."+1','DEF+12',}},}
 			--30% JA + 7% Gear = 37%
 
     sets.engaged.DW.Acc.MaxHaste = {
@@ -796,6 +787,12 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
+	sets.TreasureHunter = {
+		body="Volte Jupon",
+		hands="Volte Bracers",
+		ammo="Per. Lucky Egg",
+		waist="Chaac Belt",}
+
     sets.buff.Doom = {
 		neck="Nicander's Necklace",
         waist="Gishdubar Sash", --10
@@ -803,19 +800,26 @@ function init_gear_sets()
 		
 	sets.Kiting = {right_ring="Shneddick Ring",}
 
-    sets.CP = {neck={ name="Asn. Gorget +2", augments={'Path: A',}},}
+    sets.CP = {}
+
+	sets.Mpu_Gandring = {main="Mpu Gandring",}
 	
-	sets.Twashtar = {main={ name="Twashtar", augments={'Path: A',}}, sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
-	sets.Twashtar_Centovente = {main={ name="Twashtar", augments={'Path: A',}}, sub="Fusetto +2",}
+	sets.Twashtar = {main={ name="Twashtar", augments={'Path: A',}},}
 	
-	sets.Mandau = {main={ name="Mandau", augments={'Path: A',}}, sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
+	sets.Mandau = {main={ name="Mandau", augments={'Path: A',}},}
 	
-	sets.Tauret = {main="Tauret", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
+	sets.Naegling = {main="Naegling",}
 	
-	sets.Naegling = {main="Naegling", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
-	sets.Naegling_Centovente = {main="Naegling", sub="Fusetto +2",}
+	sets.Tauret = {main="Tauret",}
 	
 	sets.Karambit = {main="Karambit"}
+	
+	
+	
+	sets.Centovente = {sub="Fusetto +2",}
+
+	sets.Gletis_Knife = {sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
+	
 
 end
 
@@ -934,21 +938,40 @@ end
 	--Adjusts Melee/Weapon sets for Dual Wield or Single Wield
 function update_combat_form()
 
-	if state.WeaponSet.value == 'Twashtar' then
+	if state.WeaponSet.value == 'Mpu_Gandring' then
+		equip(sets.Mpu_Gandring)
 		if state.TPBonus.value == true then
-			equip(sets.Twashtar_Centovente)
+			equip(sets.Centovente)
 		else
-			equip(sets.Twashtar)
+			equip(sets.Gletis_Knife)
+		end
+	elseif state.WeaponSet.value == 'Twashtar' then
+		equip(sets.Twashtar)
+		if state.TPBonus.value == true then
+			equip(sets.Centovente)
+		else
+			equip(sets.Gletis_Knife)
 		end
 	elseif state.WeaponSet.value == 'Mandau' then
 		equip(sets.Mandau)
+		if state.TPBonus.value == true then
+			equip(sets.Centovente)
+		else
+			equip(sets.Gletis_Knife)
+		end
+	elseif state.WeaponSet.value == 'Naegling' then
+		equip(sets.Naegling)
+		if state.TPBonus.value == true then
+			equip(sets.Centovente)
+		else
+			equip(sets.Gletis_Knife)
+		end
 	elseif state.WeaponSet.value == 'Tauret' then
 		equip(sets.Tauret)
-	elseif state.WeaponSet.value == 'Naegling' then
 		if state.TPBonus.value == true then
-			equip(sets.Naegling_Centovente)
+			equip(sets.Centovente)
 		else
-			equip(sets.Naegling)
+			equip(sets.Gletis_Knife)
 		end
 	elseif state.WeaponSet.value == 'Karambit' then
 		equip(sets.Karambit)
@@ -1027,17 +1050,6 @@ end
 	--Determines Haste Group / Melee set for Gear Info
 function determine_haste_group()
     classes.CustomMeleeGroups:clear()
-        if DW_needed <= 6 then
-            classes.CustomMeleeGroups:append('MaxHaste')
-        elseif DW_needed > 6 and DW_needed <= 22 then
-            classes.CustomMeleeGroups:append('HighHaste')
-        elseif DW_needed > 22 and DW_needed <= 26 then
-            classes.CustomMeleeGroups:append('MidHaste')
-        elseif DW_needed > 26 and DW_needed <= 37 then
-            classes.CustomMeleeGroups:append('LowHaste')
-        elseif DW_needed > 37 then
-            classes.CustomMeleeGroups:append('')
-        end
 end
 
 	--Gear Info Functions
@@ -1149,7 +1161,7 @@ windower.register_event('zone change',
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
 
-        set_macro_page(1, 8)
+        set_macro_page(1, 6)
 end
 
 function set_lockstyle()

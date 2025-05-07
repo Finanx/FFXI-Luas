@@ -90,7 +90,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'MACC')
     state.IdleMode:options('Normal', 'Pet')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Mpaca', 'Hvergelmir', 'Laevateinn', 'Opashoro', 'Maxentius'}
+	state.WeaponSet = M{['description']='Weapon Set', 'None', 'Mpaca', 'Hvergelmir', 'Laevateinn', 'Opashoro', 'Maxentius', 'Idris'}
 	state.Element = M{['description']='Element', 'Fire', 'Blizzard', 'Aero', 'Stone', 'Thunder', 'Water'}
 	
 	state.MagicBurst = M{['description']='Magic Burst', 'Off', 'On'}
@@ -103,10 +103,6 @@ function user_setup()
 
 	send_command('wait 2; exec /GEO/GEO-Binds.txt')
 
-	--Gear Retrieval Scripts
-	
-	send_command('wait 10; exec /GEO/GEO-Gear-Retrieval.txt')
-	
 	--Job settings
 
     select_default_macro_book()
@@ -127,10 +123,6 @@ function user_unload()
 
 	send_command('wait 1; exec Global-UnBinds.txt')
 	
-	--Gear Removal Script
-	
-	send_command('wait 1; exec /GEO/GEO-Gear-Removal.txt')
-	
 end
 
 -- Define sets and vars used by this job file.
@@ -143,7 +135,7 @@ function init_gear_sets()
     -- Precast sets to enhance JAs
 
     sets.precast.JA['Sublimation'] = {waist="Embla Sash",} --5
-	sets.precast.JA['Life Cycle'] = {body="Geo. Tunic +3",}
+	sets.precast.JA['Life Cycle'] = {body="Geomancy Tunic +3",}
 
     -- Fast cast sets for spells
     sets.precast.FC = {
@@ -251,8 +243,8 @@ function init_gear_sets()
 		ammo="Staunch Tathlum +1",
 		head={ name="Vanya Hood", augments={'MP+50','"Fast Cast"+10','Haste+2%',}},
 		body={ name="Ros. Jaseran +1", augments={'Path: A',}},
-		hands={ name="Telchine Gloves", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +9',}},
-		legs="Geo. Pants +2",
+		hands={ name="Telchine Gloves", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		legs="Geomancy Pants +3",
 		feet={ name="Vanya Clogs", augments={'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
 		neck="Incanter's Torque",
 		waist="Bishop's Sash",
@@ -268,8 +260,8 @@ function init_gear_sets()
 		ammo="Staunch Tathlum +1",
 		head={ name="Vanya Hood", augments={'MP+50','"Fast Cast"+10','Haste+2%',}},
 		body={ name="Ros. Jaseran +1", augments={'Path: A',}},
-		hands={ name="Telchine Gloves", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +9',}},
-		legs="Geo. Pants +2",
+		hands={ name="Telchine Gloves", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		legs="Geomancy Pants +3",
 		feet={ name="Vanya Clogs", augments={'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
 		neck="Incanter's Torque",
 		waist="Bishop's Sash",
@@ -285,8 +277,8 @@ function init_gear_sets()
 		ammo="Staunch Tathlum +1",
 		head={ name="Vanya Hood", augments={'MP+50','"Fast Cast"+10','Haste+2%',}},
 		body={ name="Ros. Jaseran +1", augments={'Path: A',}},
-		hands={ name="Telchine Gloves", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +9',}},
-		legs="Geo. Pants +2",
+		hands={ name="Telchine Gloves", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		legs="Geomancy Pants +3",
 		feet={ name="Vanya Clogs", augments={'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
 		neck="Incanter's Torque",
 		waist="Bishop's Sash",
@@ -306,7 +298,7 @@ function init_gear_sets()
 		head={ name="Agwu's Cap", augments={'Path: A',}},
 		body={ name="Ros. Jaseran +1", augments={'Path: A',}},
 		hands="Azimuth Gloves +3",
-		legs="Geomancy Pants +2",
+		legs="Geomancy Pants +3",
 		feet={ name="Agwu's Pigaches", augments={'Path: A',}},
 		neck={ name="Bagua Charm +2", augments={'Path: A',}},
 		waist="Plat. Mog. Belt",
@@ -340,11 +332,11 @@ function init_gear_sets()
 		main={ name="Mpaca's Staff", augments={'Path: A',}},
 		sub="Khonsu",
 		ammo="Sapience Orb",
-		head={ name="Telchine Cap", augments={'"Fast Cast"+4','Enh. Mag. eff. dur. +10',}},
-		body={ name="Telchine Chas.", augments={'Enh. Mag. eff. dur. +10',}},
-		hands={ name="Telchine Gloves", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +9',}},
-		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
-		feet={ name="Telchine Pigaches", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +10',}},
+		head={ name="Telchine Cap", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		body={ name="Telchine Chas.", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		hands={ name="Telchine Gloves", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		legs={ name="Telchine Braconi", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		feet={ name="Telchine Pigaches", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
 		neck="Incanter's Torque",
 		waist="Embla Sash",
 		left_ear="Mimir Earring",
@@ -366,7 +358,7 @@ function init_gear_sets()
 		range={ name="Dunna", augments={'MP+20','Mag. Acc.+10','"Fast Cast"+3',}},
 		head="Azimuth Hood +3",
 		body="Azimuth Coat +3",
-		hands="Geo. Mitaines +2",
+		hands="Geo. Mitaines +3",
 		legs={ name="Bagua Pants +3", augments={'Enhances "Mending Halation" effect',}},
 		feet="Azimuth Gaiters +3",
 		neck={ name="Bagua Charm +2", augments={'Path: A',}},
@@ -376,14 +368,49 @@ function init_gear_sets()
 		left_ring="Kishar Ring",
 		right_ring="Defending Ring",
 		back={ name="Nantosuelta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+		
+	sets.midcast['Dia II'] = set_combine(sets.midcast['Enfeebling Magic'], {
+		body="Volte Jupon",
+		feet="Volte Boots",
+		waist="Chaac Belt",})
 	
     sets.midcast['Dark Magic'] = {}
 
     sets.midcast.Drain = {}
 
-    sets.midcast.Aspir = {}
+    sets.midcast.Aspir = {
+		main={ name="Idris", augments={'Path: A',}},
+		sub="Ammurapi Shield",
+		range={ name="Dunna", augments={'MP+20','Mag. Acc.+10','"Fast Cast"+3',}},
+		head={ name="Agwu's Cap", augments={'Path: A',}},
+		body={ name="Agwu's Robe", augments={'Path: A',}},
+		hands={ name="Agwu's Gages", augments={'Path: A',}},
+		legs="Geomancy Pants +3",
+		feet={ name="Agwu's Pigaches", augments={'Path: A',}},
+		neck="Erra Pendant",
+		waist={ name="Acuity Belt +1", augments={'Path: A',}},
+		left_ear="Malignance Earring",
+		right_ear={ name="Azimuth Earring +1", augments={'System: 1 ID: 1676 Val: 0','Mag. Acc.+15','Damage taken-5%',}},
+		left_ring="Kishar Ring",
+		right_ring="Stikini Ring +1",
+		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
 	
-	sets.midcast['Absorb-TP'] = {}
+	sets.midcast['Absorb-TP'] = {
+		main={ name="Idris", augments={'Path: A',}},
+		sub="Ammurapi Shield",
+		range={ name="Dunna", augments={'MP+20','Mag. Acc.+10','"Fast Cast"+3',}},
+		head={ name="Agwu's Cap", augments={'Path: A',}},
+		body={ name="Agwu's Robe", augments={'Path: A',}},
+		hands={ name="Agwu's Gages", augments={'Path: A',}},
+		legs="Geomancy Pants +3",
+		feet={ name="Agwu's Pigaches", augments={'Path: A',}},
+		neck="Erra Pendant",
+		waist={ name="Acuity Belt +1", augments={'Path: A',}},
+		left_ear="Malignance Earring",
+		right_ear={ name="Azimuth Earring +1", augments={'System: 1 ID: 1676 Val: 0','Mag. Acc.+15','Damage taken-5%',}},
+		left_ring="Kishar Ring",
+		right_ring="Stikini Ring +1",
+		back={ name="Aurist's Cape +1", augments={'Path: A',}},}
 
     -- Elemental Magic
     sets.midcast['Elemental Magic'] = {
@@ -506,7 +533,7 @@ function init_gear_sets()
 		range={ name="Dunna", augments={'MP+20','Mag. Acc.+10','"Fast Cast"+3',}},
 		head="Azimuth Hood +3",
 		body="Azimuth Coat +3",
-		hands="Geo. Mitaines +2",
+		hands="Geo. Mitaines +3",
 		legs={ name="Agwu's Slops", augments={'Path: A',}},
 		feet={ name="Bagua Sandals +3", augments={'Enhances "Radial Arcana" effect',}},
 		neck={ name="Bagua Charm +2", augments={'Path: A',}},
@@ -569,6 +596,9 @@ function init_gear_sets()
 
 	sets.Maxentius = {main="Maxentius", sub="Daybreak",}
 	sets.Maxentius.SW = {main="Maxentius", sub="Genmei Shield"}
+	
+	sets.Idris = {main={ name="Idris", augments={'Path: A',}}, sub="Daybreak",}
+	sets.Idris.SW = {main={ name="Idris", augments={'Path: A',}}, sub="Ammurapi Shield"}
 
 	sets.Mpaca = {main={ name="Mpaca's Staff", augments={'Path: A',}}, sub="Khonsu",}
 	
@@ -737,6 +767,16 @@ function update_combat_form()
 		else
 			enable('main','sub')
 			equip(sets.Maxentius.SW)
+			disable('main','sub')
+		end
+	elseif state.WeaponSet.value == 'Idris' then
+		if player.sub_job == 'DNC' or player.sub_job == 'NIN' then
+			enable('main','sub')
+			equip(sets.Idris)
+			disable('main','sub')
+		else
+			enable('main','sub')
+			equip(sets.Idris.SW)
 			disable('main','sub')
 		end
 	elseif state.WeaponSet.value == 'None' then

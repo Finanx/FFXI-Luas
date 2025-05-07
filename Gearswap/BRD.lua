@@ -108,10 +108,6 @@ function user_setup()
 	
 	send_command('wait 2; exec /BRD/BRD-Binds.txt')
 		
-	--Gear Retrieval Script
-	
-	send_command('wait 10; exec /BRD/BRD-Gear-Retrieval.txt')
-		
 	--Job Settings
 
     select_default_macro_book()
@@ -135,10 +131,6 @@ function user_unload()
 	--Remove Global Binds
 
 	send_command('wait 1; exec Global-UnBinds.txt')
-	
-	--Gear Removal Script
-	
-	send_command('wait 1; exec /BRD/BRD-Gear-Removal.txt')
 	
 end
 
@@ -183,6 +175,9 @@ function init_gear_sets()
 		back={ name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},}
 		
     sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield"})
+	
+	sets.precast['Herb Pastoral'] = set_combine(sets.precast.FC.BardSong, sets.Dummy)
+	sets.precast['Shining Fantasia'] = set_combine(sets.precast.FC.BardSong, sets.Dummy)
 
     -- Precast sets to enhance JAs
 
@@ -483,8 +478,8 @@ function init_gear_sets()
 	sets.midcast['Adventurer\'s Dirge'] = sets.midcast.SongEnhancing
 	sets.midcast['Foe Sirvente'] = sets.midcast.SongEnhancing
 		
-	sets.midcast['Herb Pastoral'] = set_combine(sets.precast.FC, {range="Daurdabla"})
-	sets.midcast['Shining Fantasia'] = set_combine(sets.precast.FC, {range="Daurdabla"})
+	sets.midcast['Herb Pastoral'] = set_combine(sets.precast.FC, sets.Dummy)
+	sets.midcast['Shining Fantasia'] = set_combine(sets.precast.FC, sets.Dummy)
 
 
     -- Defines Song sets can also add equipment to increase certain songs.
@@ -624,7 +619,7 @@ function init_gear_sets()
 		body={ name="Kaykaus Bliaut +1", augments={'MP+80','"Cure" potency +6%','"Conserve MP"+7',}},
 		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		feet={ name="Kaykaus Boots +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		feet={ name="Kaykaus Boots +1", augments={'MP+80','Spell interruption rate down +12%','"Cure" spellcasting time -7%',}},
 		neck="Incanter's Torque",
 		waist={ name="Shinjutsu-no-Obi +1", augments={'Path: A',}},
 		left_ear="Magnetic Earring",
@@ -641,7 +636,7 @@ function init_gear_sets()
 		body={ name="Kaykaus Bliaut +1", augments={'MP+80','"Cure" potency +6%','"Conserve MP"+7',}},
 		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		feet={ name="Kaykaus Boots +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		feet={ name="Kaykaus Boots +1", augments={'MP+80','Spell interruption rate down +12%','"Cure" spellcasting time -7%',}},
 		neck="Phalaina Locket",
 		waist="Gishdubar Sash",
 		left_ear="Magnetic Earring",
@@ -675,11 +670,11 @@ function init_gear_sets()
 		main={ name="Kali", augments={'Mag. Acc.+15','String instrument skill +10','Wind instrument skill +10',}},
 		sub="Ammurapi Shield",
 		range={ name="Linos", augments={'Mag. Evasion+15','Phys. dmg. taken -4%','HP+20',}},
-		head={ name="Telchine Cap", augments={'"Fast Cast"+4','Enh. Mag. eff. dur. +10',}},
-		body={ name="Telchine Chas.", augments={'Enh. Mag. eff. dur. +10',}},
-		hands={ name="Telchine Gloves", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +9',}},
-		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
-		feet={ name="Telchine Pigaches", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +10',}},
+		head={ name="Telchine Cap", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		body={ name="Telchine Chas.", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		hands={ name="Telchine Gloves", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		legs={ name="Telchine Braconi", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		feet={ name="Telchine Pigaches", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
 		left_ear="Etiolation Earring",
@@ -732,7 +727,7 @@ function init_gear_sets()
 		sub="Ammurapi Shield",
 		range={ name="Linos", augments={'Mag. Evasion+15','Phys. dmg. taken -4%','HP+20',}},
 		head={ name="Bunzi's Hat", augments={'Path: A',}},
-		body="Brioso Justau. +3",
+		body="Inyanga Jubbah +2",
 		hands="Inyan. Dastanas +2",
 		legs="Brioso Cannions +3",
 		feet="Fili Cothurnes +3",
@@ -1063,8 +1058,8 @@ function init_gear_sets()
 
     sets.SongDWDuration = {main="Carnwenhan", sub="Kali"}
 	sets.SongSWDuration = {main="Carnwenhan", sub="Genmei Shield"}
-	sets.Dummy = {range="Daurdabla",}
-	sets.Effect = {range="Loughnashade",}
+	sets.Dummy = {range="Prime Horn",}
+	sets.Effect = {range="Marsyas",}
 
     sets.buff.Doom = {
 		neck="Nicander's Necklace",
@@ -1115,6 +1110,9 @@ function job_precast(spell, action, spellMap, eventArgs)
 		if spell.name == 'Aria of Passion' then
             equip({range="Loughnashade"})
         end
+		if spell.name == 'Herb Pastoral' or spell.name == 'Shining Fantasia' then
+			equip(sets.Dummy)
+		end
     end
 
 		--Will stop utsusemi from being cast if 2 shadows or more
@@ -1150,6 +1148,10 @@ function job_midcast(spell, action, spellMap, eventArgs)
 		if spell.name == 'Aria of Passion' then
             equip(sets.midcast.Aria)
         end
+		
+		if spell.name == 'Herb Pastoral' or spell.name == 'Shining Fantasia' then
+			equip(sets.Dummy)
+		end
 
 			--Handles Lullaby sets
 		if (spell.name == "Horde Lullaby" or spell.name == "Horde Lullaby II") and state.CastingMode.value == 'Normal' and state.SongEnmity.value == 'None' then 

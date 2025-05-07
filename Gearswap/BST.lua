@@ -163,10 +163,6 @@ function user_setup()
 	
 	send_command('wait 2; exec /BST/BST-Binds.txt')
 	
-	--Gear Retrieval Scripts
-	
-	send_command('wait 10; exec /BST/BST-Gear-Retrieval.txt')
-	
 	--Job Settings
 	
 	select_default_macro_book()
@@ -190,10 +186,6 @@ function user_unload()
 	--Remove Global Binds
 
 	send_command('wait 1; exec Global-UnBinds.txt')
-	
-	--Gear Removal Script
-	
-	send_command('wait 1; exec /BST/BST-Gear-Removal.txt')
 	
 end
 
@@ -594,7 +586,7 @@ function init_gear_sets()
 		left_ear="Enmerkar Earring",
 		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},
 		left_ring="Tali'ah Ring",
-		right_ring="Defending Ring",
+		right_ring="C. Palug Ring",
 		back={ name="Artio's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Accuracy+20 Attack+20','Pet: Mag. Acc.+10','Pet: "Regen"+10','Pet: Damage taken -5%',}},}
 		
 	sets.midcast.Pet.ReadyRecast = {

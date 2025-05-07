@@ -103,10 +103,6 @@ function user_setup()
 
 	send_command('wait 2; exec /BLM/BLM-Binds.txt')
 
-	--Gear Retrieval Scripts
-	
-	send_command('wait 10; exec /BLM/BLM-Gear-Retrieval.txt')
-	
 	--Job settings
 
     select_default_macro_book()
@@ -126,10 +122,6 @@ function user_unload()
 	--Remove Global Binds
 
 	send_command('wait 1; exec Global-UnBinds.txt')
-	
-	--Gear Removal Script
-	
-	send_command('wait 1; exec /BLM/BLM-Gear-Removal.txt')
 	
 end
 
@@ -249,7 +241,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum +1",
 		head={ name="Vanya Hood", augments={'MP+50','"Fast Cast"+10','Haste+2%',}},
 		body="Shamash Robe",
-		hands="Wicce Gloves +2",
+		hands="Wicce Gloves +3",
 		legs={ name="Agwu's Slops", augments={'Path: A',}},
 		feet="Wicce Sabots +3",
 		neck="Incanter's Torque",
@@ -266,7 +258,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum +1",
 		head={ name="Vanya Hood", augments={'MP+50','"Fast Cast"+10','Haste+2%',}},
 		body="Shamash Robe",
-		hands="Wicce Gloves +2",
+		hands="Wicce Gloves +3",
 		legs={ name="Agwu's Slops", augments={'Path: A',}},
 		feet="Wicce Sabots +3",
 		neck="Incanter's Torque",
@@ -283,7 +275,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum +1",
 		head={ name="Vanya Hood", augments={'MP+50','"Fast Cast"+10','Haste+2%',}},
 		body="Shamash Robe",
-		hands="Wicce Gloves +2",
+		hands="Wicce Gloves +3",
 		legs={ name="Agwu's Slops", augments={'Path: A',}},
 		feet="Wicce Sabots +3",
 		neck="Incanter's Torque",
@@ -300,11 +292,11 @@ function init_gear_sets()
 		main={ name="Mpaca's Staff", augments={'Path: A',}},
 		sub="Khonsu",
 		ammo="Sapience Orb",
-		head={ name="Telchine Cap", augments={'"Fast Cast"+4','Enh. Mag. eff. dur. +10',}},
-		body={ name="Telchine Chas.", augments={'Enh. Mag. eff. dur. +10',}},
-		hands={ name="Telchine Gloves", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +9',}},
-		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
-		feet={ name="Telchine Pigaches", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +10',}},
+		head={ name="Telchine Cap", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		body={ name="Telchine Chas.", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		hands={ name="Telchine Gloves", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		legs={ name="Telchine Braconi", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		feet={ name="Telchine Pigaches", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
 		neck="Incanter's Torque",
 		waist="Embla Sash",
 		left_ear="Mimir Earring",
@@ -317,11 +309,11 @@ function init_gear_sets()
 	    main={ name="Mpaca's Staff", augments={'Path: A',}},
 		sub="Khonsu",
 		ammo="Sapience Orb",
-		head={ name="Telchine Cap", augments={'"Fast Cast"+4','Enh. Mag. eff. dur. +10',}},
-		body={ name="Telchine Chas.", augments={'Enh. Mag. eff. dur. +10',}},
-		hands={ name="Telchine Gloves", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +9',}},
-		legs={ name="Telchine Braconi", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +10',}},
-		feet={ name="Telchine Pigaches", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +10',}},
+		head={ name="Telchine Cap", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		body={ name="Telchine Chas.", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		hands={ name="Telchine Gloves", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		legs={ name="Telchine Braconi", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
+		feet={ name="Telchine Pigaches", augments={'"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
 		neck="Incanter's Torque",
 		waist="Olympus Sash",
 		left_ear="Mimir Earring",
@@ -377,7 +369,7 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		head="Wicce Petasos +3",
 		body="Wicce Coat +3",
-		hands="Wicce Gloves +2",
+		hands="Wicce Gloves +3",
 		legs="Spae. Tonban +3",
 		feet={ name="Agwu's Pigaches", augments={'Path: A',}},
 		neck="Erra Pendant",
@@ -394,7 +386,7 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		head="Wicce Petasos +3",
 		body="Wicce Coat +3",
-		hands="Wicce Gloves +2",
+		hands="Wicce Gloves +3",
 		legs="Spae. Tonban +3",
 		feet={ name="Agwu's Pigaches", augments={'Path: A',}},
 		neck="Erra Pendant",
@@ -412,7 +404,7 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		head="Wicce Petasos +3",
 		body="Wicce Coat +3",
-		hands="Wicce Gloves +2",
+		hands="Wicce Gloves +3",
 		legs="Wicce Chausses +3",
 		feet="Wicce Sabots +3",
 		neck={ name="Src. Stole +2", augments={'Path: A',}},
@@ -450,7 +442,7 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		head="Wicce Petasos +3",
 		body="Wicce Coat +3",
-		hands="Wicce Gloves +2",
+		hands="Wicce Gloves +3",
 		legs="Wicce Chausses +3",
 		feet="Wicce Sabots +3",
 		neck={ name="Src. Stole +2", augments={'Path: A',}},
@@ -464,7 +456,7 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'].Manawall = set_combine(sets.midcast['Elemental Magic'],{
 		head="Wicce Petasos +3",
 		body="Spaekona's Coat +3",
-		hands="Wicce Gloves +2",
+		hands="Wicce Gloves +3",
 		feet="Wicce Sabots +3",
 		right_ring="Defending Ring",
 		back={ name="Taranus's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},})
@@ -472,7 +464,7 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'].ManawallBurst = set_combine(sets.midcast['Elemental Magic'].MagicBurst,{
 		head="Wicce Petasos +3",
 		body="Spaekona's Coat +3",
-		hands="Wicce Gloves +2",
+		hands="Wicce Gloves +3",
 		feet="Wicce Sabots +3",
 		right_ring="Defending Ring",
 		back={ name="Taranus's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}},})
