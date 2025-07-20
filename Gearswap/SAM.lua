@@ -91,7 +91,7 @@ function job_setup()
     state.Buff['Meikyo Shisui'] = buffactive['Meikyo Shisui'] or false
 	state.Buff['Berserk'] = buffactive['berserk']  or false
 	
-	lockstyleset = 13
+	lockstyleset = 12
 	
 end
 
@@ -111,6 +111,8 @@ function user_setup()
 	state.WeaponSet = M{['description']='Weapon Set', 'Dojikiri', 'Masamune', 'Shining_One', 'Hachimonji', 'Soboro', 'Dagger' }
 	state.GripSet = M{['description']='Grip Set', 'Utu'}
 	state.Reraise = M(false, "Reraise Mode")
+	
+	reraiseActive = false
 	
 	state.CP = M(false, "Capacity Points Mode")
 	
@@ -178,16 +180,16 @@ function init_gear_sets()
 		ammo="Knobkierrie",
 		head={ name="Mpaca's Cap", augments={'Path: A',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Kasuga Kote +3",
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
+		neck="Fotia Gorget",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Thrud Earring",
 		left_ring="Epaminondas's Ring",
-		right_ring="Sroda Ring",
-		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		right_ring="Ephramad's Ring",
+		back="Null Shawl",}
 		
 	sets.precast.WS.ATKCAP = {
 		ammo="Crepuscular Pebble",
@@ -353,13 +355,13 @@ function init_gear_sets()
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
+		neck="Fotia Gorget",
 		waist="Orpheus's Sash",
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},"Friomisi Earring",
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 		right_ear="Friomisi Earring",
 		left_ring="Epaminondas's Ring",
-		right_ring="Niqmaddu Ring",
-		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		right_ring="Ephramad's Ring",
+		back="Null Shawl",}
 		
 	sets.precast.WS['Tachi: Goten'] = sets.precast.WS['Tachi: Jinpu']
 	sets.precast.WS['Tachi: Kagero'] = sets.precast.WS['Tachi: Jinpu']
@@ -452,18 +454,18 @@ function init_gear_sets()
 
     sets.engaged = {
 		ammo="Aurgelmir Orb +1",
-		head="Kasuga Kabuto +3",
-		body="Kasuga Domaru +3",
+		head="Crepuscular Helm",
+		body="Crepuscular Mail",
 		hands={ name="Tatena. Gote +1", augments={'Path: A',}},
-		legs="Kasuga Haidate +3",
+		legs="Volte Tights",
 		feet={ name="Ryuo Sune-Ate +1", augments={'HP+65','"Store TP"+5','"Subtle Blow"+8',}},
-		neck={ name="Sam. Nodowa +2", augments={'Path: A',}},
-		waist="Sweordfaetels +1",
+		neck="Combatant's Torque",
+		waist="Ioskeha Belt +1",
 		left_ear="Dedition Earring",
-		right_ear={ name="Kasuga Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+16','Mag. Acc.+16','Weapon skill damage +3%','STR+7 DEX+7',}},
-		left_ring="Niqmaddu Ring",
+		right_ear={ name="Kasuga Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Weapon skill damage +3%',}},
+		left_ring="Petrov Ring",
 		right_ring="Chirich Ring +1",
-		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		back="Null Shawl",}
 
 	sets.engaged.Acc = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
@@ -496,10 +498,7 @@ function init_gear_sets()
 		back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 		
 	sets.engaged.Hybrid = {
-		head="Kasuga Kabuto +3",
-		body="Kasuga Domaru +3",
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs="Kasuga Haidate +3",
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},}
 		--46% DT + 6% PDT
 	
@@ -627,7 +626,6 @@ end
 -- Handles Gearinfo / Melee / Weapon / Range Sets
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
-    determine_haste_group()
 	check_moving()
 	Auto_Reraise()
 end
@@ -668,12 +666,14 @@ end
 
 	--Handles Weapon set changes and Reraise set
 function Auto_Reraise()
-	if state.Reraise.current == 'on' then
-        equip(sets.Reraise)
-        disable('head', 'body')
-    else
-        enable('head', 'body')
-    end
+if state.Reraise.current == 'on' then
+    equip(sets.Reraise)
+    disable('head', 'body')
+    reraiseActive = true
+elseif reraiseActive and state.Reraise.current == 'off' then
+    enable('head', 'body')
+    reraiseActive = false
+end
 
 end
 
@@ -831,7 +831,7 @@ windower.register_event('zone change',
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
-        set_macro_page(1, 11)
+        set_macro_page(1, 12)
 end
 
 function set_lockstyle()

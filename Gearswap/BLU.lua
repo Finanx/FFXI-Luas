@@ -194,7 +194,7 @@ function job_setup()
     -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
     info.default_u_ja_ids = S{201, 202, 203, 205, 207}
 
-    lockstyleset = 2
+    lockstyleset = 15
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -237,7 +237,6 @@ function user_setup()
     DW = false
     moving = false
     update_combat_form()
-    determine_haste_group()
 end
 
 -- Called when this job file is unloaded (eg: job change)
@@ -290,7 +289,7 @@ function init_gear_sets()
 		ammo="Sapience Orb",
 		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
 		body={ name="Adhemar Jacket +1", augments={'HP+105','"Fast Cast"+10','Magic dmg. taken -4',}},
-		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
+		hands={ name="Leyline Gloves", augments={'Accuracy+5','"Mag.Atk.Bns."+7','"Fast Cast"+1',}},
 		legs={ name="Rawhide Trousers", augments={'MP+50','"Fast Cast"+5','"Refresh"+1',}},
 		feet={ name="Carmine Greaves +1", augments={'HP+80','MP+80','Phys. dmg. taken -4',}},
 		neck="Orunmila's Torque",
@@ -505,7 +504,7 @@ function init_gear_sets()
 		ammo="Sapience Orb",
 		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
 		body={ name="Adhemar Jacket +1", augments={'HP+105','"Fast Cast"+10','Magic dmg. taken -4',}},
-		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
+		hands={ name="Leyline Gloves", augments={'Accuracy+5','"Mag.Atk.Bns."+7','"Fast Cast"+1',}},
 		legs={ name="Rawhide Trousers", augments={'MP+50','"Fast Cast"+5','"Refresh"+1',}},
 		feet={ name="Carmine Greaves +1", augments={'HP+80','MP+80','Phys. dmg. taken -4',}},
 		neck="Orunmila's Torque",
@@ -723,7 +722,7 @@ function init_gear_sets()
 		ammo="Sapience Orb",
 		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
 		body={ name="Adhemar Jacket +1", augments={'HP+105','"Fast Cast"+10','Magic dmg. taken -4',}},
-		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
+		hands={ name="Leyline Gloves", augments={'Accuracy+5','"Mag.Atk.Bns."+7','"Fast Cast"+1',}},
 		legs={ name="Rawhide Trousers", augments={'MP+50','"Fast Cast"+5','"Refresh"+1',}},
 		feet={ name="Carmine Greaves +1", augments={'HP+80','MP+80','Phys. dmg. taken -4',}},
 		neck="Orunmila's Torque",
@@ -802,7 +801,7 @@ function init_gear_sets()
 		body={ name="Taeon Tabard", augments={'Spell interruption rate down -10%','Phalanx +3',}},
 		hands={ name="Taeon Gloves", augments={'Spell interruption rate down -10%','Phalanx +3',}},
 		legs={ name="Taeon Tights", augments={'Spell interruption rate down -10%','Phalanx +3',}},
-		feet={ name="Herculean Boots", augments={'Sklchn.dmg.+4%','MND+4','Phalanx +4','Mag. Acc.+15 "Mag.Atk.Bns."+15',}},
+		feet={ name="Herculean Boots", augments={'Pet: "Mag.Atk.Bns."+19','AGI+1','Phalanx +5','Accuracy+13 Attack+13',}},
 		neck="Incanter's Torque",
 		waist="Olympus Sash",
 		left_ear="Mimir Earring",
@@ -815,7 +814,7 @@ function init_gear_sets()
 		body={ name="Taeon Tabard", augments={'Spell interruption rate down -10%','Phalanx +3',}},
 		hands={ name="Taeon Gloves", augments={'Spell interruption rate down -10%','Phalanx +3',}},
 		legs={ name="Taeon Tights", augments={'Spell interruption rate down -10%','Phalanx +3',}},
-		feet={ name="Herculean Boots", augments={'Sklchn.dmg.+4%','MND+4','Phalanx +4','Mag. Acc.+15 "Mag.Atk.Bns."+15',}},}
+		feet={ name="Herculean Boots", augments={'Pet: "Mag.Atk.Bns."+19','AGI+1','Phalanx +5','Accuracy+13 Attack+13',}},}
 		
 	sets.midcast['Aquaveil'] = {set_combine(sets.midcast['Enhancing Magic'], {head={ name="Amalric Coif +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},hands="Regal Cuffs",})}
 	
@@ -931,30 +930,30 @@ function init_gear_sets()
 		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
 		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
 		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
-		feet={ name="Herculean Boots", augments={'Accuracy+10 Attack+10','"Triple Atk."+4','Accuracy+14',}},
+		legs="Malignance Tights",
+		feet={ name="Carmine Greaves +1", augments={'HP+80','MP+80','Phys. dmg. taken -4',}},
 		neck={ name="Mirage Stole +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Telos Earring",
-		right_ear="Dedition Earring",
+		left_ear="Dedition Earring",
+		right_ear="Suppanomimi",
 		left_ring="Epona's Ring",
 		right_ring="Chirich Ring +1",
-		back={ name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		back="Null Shawl",}
 
     sets.engaged.Acc = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
 		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
 		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
-		feet={ name="Herculean Boots", augments={'Accuracy+10 Attack+10','"Triple Atk."+4','Accuracy+14',}},
+		legs="Malignance Tights",
+		feet={ name="Carmine Greaves +1", augments={'HP+80','MP+80','Phys. dmg. taken -4',}},
 		neck={ name="Mirage Stole +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Telos Earring",
-		right_ear="Dedition Earring",
+		left_ear="Dedition Earring",
+		right_ear="Suppanomimi",
 		left_ring="Epona's Ring",
 		right_ring="Chirich Ring +1",
-		back={ name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		back="Null Shawl",}
 
     -- Base Dual-Wield Values:
     -- * DW6: +41%
@@ -964,169 +963,36 @@ function init_gear_sets()
     -- * DW2: +15% (DNC Subjob)
     -- * DW1: +10%
 
-    -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},							--6%
+		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
 		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},				--6%
-		feet={ name="Taeon Boots", augments={'Accuracy+25','"Dual Wield"+5','STR+5 DEX+5',}},					--9%
+		legs="Malignance Tights",
+		feet={ name="Carmine Greaves +1", augments={'HP+80','MP+80','Phys. dmg. taken -4',}},
 		neck={ name="Mirage Stole +2", augments={'Path: A',}},
-		waist="Reiki Yotai",																					--7%
-		left_ear="Eabani Earring",																				--4%
-		right_ear="Suppanomimi",																				--5%
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Dedition Earring",
+		right_ear="Suppanomimi",
 		left_ring="Epona's Ring",
 		right_ring="Chirich Ring +1",
-		back={ name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-			 -- 37% + 25% traits = 62%
+		back="Null Shawl",}
+			--11% + 25% traits = 36%
 
     sets.engaged.DW.Acc = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},							--6%
+		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
 		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},				--6%
-		feet={ name="Taeon Boots", augments={'Accuracy+25','"Dual Wield"+5','STR+5 DEX+5',}},					--9%
-		neck={ name="Mirage Stole +2", augments={'Path: A',}},
-		waist="Reiki Yotai",																					--7%
-		left_ear="Eabani Earring",																				--4%
-		right_ear="Suppanomimi",																				--5%
-		left_ring="Epona's Ring",
-		right_ring="Chirich Ring +1",
-		back={ name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-			 -- 37% + 25% traits = 62%
-
-    -- 15% Magic Haste (67% DW to cap)
-    sets.engaged.DW.LowHaste = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},							--6%
-		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},				--6%
-		feet={ name="Taeon Boots", augments={'Accuracy+25','"Dual Wield"+5','STR+5 DEX+5',}},					--9%
-		neck={ name="Mirage Stole +2", augments={'Path: A',}},
-		waist="Reiki Yotai",																					--7%
-		left_ear="Eabani Earring",																				--4%
-		right_ear="Suppanomimi",																				--5%
-		left_ring="Epona's Ring",
-		right_ring="Chirich Ring +1",
-		back={ name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-			 -- 37% + 25% traits = 62%
-
-    sets.engaged.DW.Acc.LowHaste = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},							--6%
-		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},				--6%
-		feet={ name="Taeon Boots", augments={'Accuracy+25','"Dual Wield"+5','STR+5 DEX+5',}},					--9%
-		neck={ name="Mirage Stole +2", augments={'Path: A',}},
-		waist="Reiki Yotai",																					--7%
-		left_ear="Eabani Earring",																				--4%
-		right_ear="Suppanomimi",																				--5%
-		left_ring="Epona's Ring",
-		right_ring="Chirich Ring +1",
-		back={ name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-			 -- 37% + 25% traits = 62%
-		
-    -- 30% Magic Haste (56% DW to cap)
-    sets.engaged.DW.MidHaste = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},							--6%
-		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
-		feet={ name="Taeon Boots", augments={'Accuracy+25','"Dual Wield"+5','STR+5 DEX+5',}},					--9%
-		neck={ name="Mirage Stole +2", augments={'Path: A',}},
-		waist="Reiki Yotai",																					--7%
-		left_ear="Eabani Earring",																				--4%
-		right_ear="Suppanomimi",																				--5%
-		left_ring="Epona's Ring",
-		right_ring="Chirich Ring +1",
-		back={ name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-			 -- 31% + 25% traits = 56%
-
-    sets.engaged.DW.Acc.MidHaste = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},							--6%
-		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
-		feet={ name="Taeon Boots", augments={'Accuracy+25','"Dual Wield"+5','STR+5 DEX+5',}},					--9%
-		neck={ name="Mirage Stole +2", augments={'Path: A',}},
-		waist="Reiki Yotai",																					--7%
-		left_ear="Eabani Earring",																				--4%
-		right_ear="Suppanomimi",																				--5%
-		left_ring="Epona's Ring",
-		right_ring="Chirich Ring +1",
-		back={ name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-			 -- 31% + 25% traits = 56%
-
-    -- 35% Magic Haste (51% DW to cap)
-    sets.engaged.DW.HighHaste = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},							--6%
-		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
-		feet={ name="Taeon Boots", augments={'Accuracy+25','"Dual Wield"+5','STR+5 DEX+5',}},					--9%
-		neck={ name="Mirage Stole +2", augments={'Path: A',}},
-		waist="Reiki Yotai",																					--7%
-		left_ear="Dedition Earring",
-		right_ear="Suppanomimi",																				--5%
-		left_ring="Epona's Ring",
-		right_ring="Chirich Ring +1",
-		back={ name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-			 -- 27% + 25% traits = 52%
-
-    sets.engaged.DW.Acc.HighHaste = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},							--6%
-		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
-		feet={ name="Taeon Boots", augments={'Accuracy+25','"Dual Wield"+5','STR+5 DEX+5',}},					--9%
-		neck={ name="Mirage Stole +2", augments={'Path: A',}},
-		waist="Reiki Yotai",																					--7%
-		left_ear="Telos Earring",
-		right_ear="Suppanomimi",																				--5%
-		left_ring="Epona's Ring",
-		right_ring="Chirich Ring +1",
-		back={ name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-			 -- 27% + 25% traits = 52%
-
-    -- 45% Magic Haste (36% DW to cap)
-    sets.engaged.DW.MaxHaste = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},							--6%
-		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
-		feet={ name="Herculean Boots", augments={'Accuracy+10 Attack+10','"Triple Atk."+4','Accuracy+14',}},
+		legs="Malignance Tights",
+		feet={ name="Carmine Greaves +1", augments={'HP+80','MP+80','Phys. dmg. taken -4',}},
 		neck={ name="Mirage Stole +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear="Dedition Earring",
-		right_ear="Suppanomimi",																				--5%
+		right_ear="Suppanomimi",
 		left_ring="Epona's Ring",
 		right_ring="Chirich Ring +1",
-		back={ name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-			--11% + 25% traits = 36%
-
-    sets.engaged.DW.Acc.MaxHaste = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Adhemar Bonnet +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		body={ name="Adhemar Jacket +1", augments={'DEX+12','AGI+12','Accuracy+20',}},							--6%
-		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-		legs={ name="Samnuha Tights", augments={'STR+10','DEX+10','"Dbl.Atk."+3','"Triple Atk."+3',}},
-		feet={ name="Herculean Boots", augments={'Accuracy+10 Attack+10','"Triple Atk."+4','Accuracy+14',}},
-		neck={ name="Mirage Stole +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Telos Earring",
-		right_ear="Suppanomimi",																				--5%
-		left_ring="Epona's Ring",
-		right_ring="Chirich Ring +1",
-		back={ name="Rosmerta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		back="Null Shawl",}
 			--11% + 25% traits = 36%
 			
     sets.engaged.Aftermath = {
@@ -1152,18 +1018,6 @@ function init_gear_sets()
 
     sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid)
     sets.engaged.DW.Acc.DT = set_combine(sets.engaged.DW.Acc, sets.engaged.Hybrid)
-
-    sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.Lo66666666666wHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.LowHaste = set_combine(sets.engaged.DW.Acc.LowHaste, sets.engaged.Hybrid)
-
-    sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.MidHaste = set_combine(sets.engaged.DW.Acc.MidHaste, sets.engaged.Hybrid)
-
-    sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.HighHaste = set_combine(sets.engaged.DW.Acc.HighHaste, sets.engaged.Hybrid)
-
-    sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.MaxHaste = set_combine(sets.engaged.DW.Acc.MaxHaste, sets.engaged.Hybrid)
 
 
     ------------------------------------------------------------------------------------------------
@@ -1334,7 +1188,6 @@ end
 	--Gearinfo related function
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
-    determine_haste_group()
 	check_moving()
 end
 
@@ -1480,24 +1333,6 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
-	--Determines Haste Group / Melee set for Gear Info
-function determine_haste_group()
-    classes.CustomMeleeGroups:clear()
-    if DW == true then
-        if DW_needed <= 11 then
-            classes.CustomMeleeGroups:append('MaxHaste')
-        elseif DW_needed > 11 and DW_needed <= 21 then
-            classes.CustomMeleeGroups:append('HighHaste')
-        elseif DW_needed > 21 and DW_needed <= 27 then
-            classes.CustomMeleeGroups:append('MidHaste')
-        elseif DW_needed > 27 and DW_needed <= 37 then
-            classes.CustomMeleeGroups:append('LowHaste')
-        elseif DW_needed > 37 then
-            classes.CustomMeleeGroups:append('')
-        end
-    end
-end
-
 	--Gear Info Functions
 function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
@@ -1619,13 +1454,7 @@ windower.register_event('zone change',
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
     -- Default macro set/book
-    if player.sub_job == 'WAR' then
-        set_macro_page(1, 2)
-    elseif player.sub_job == 'RDM' then
-        set_macro_page(10, 2)
-    else
-        set_macro_page(1, 2)
-    end
+	set_macro_page(1, 15)
 end
 
 function set_lockstyle()

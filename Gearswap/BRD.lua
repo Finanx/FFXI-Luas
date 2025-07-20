@@ -70,7 +70,7 @@ function job_setup()
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
 					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox's Ring"}
 
-    lockstyleset = 15
+    lockstyleset = 10
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -147,8 +147,8 @@ function init_gear_sets()
 		sub="Genmei Shield",
 		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Inyanga Jubbah +2",
-		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
-		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		hands={ name="Leyline Gloves", augments={'Accuracy+5','"Mag.Atk.Bns."+7','"Fast Cast"+1',}},
+		legs={ name="Kaykaus Tights +1", augments={'MP+80','Spell interruption rate down +12%','"Cure" spellcasting time -7%',}},
 		feet="Fili Cothurnes +3",
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
@@ -163,8 +163,8 @@ function init_gear_sets()
 		sub="Genmei Shield",
 		head="Fili Calot +3",
 		body="Inyanga Jubbah +2",
-		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
-		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		hands={ name="Leyline Gloves", augments={'Accuracy+5','"Mag.Atk.Bns."+7','"Fast Cast"+1',}},
+		legs={ name="Kaykaus Tights +1", augments={'MP+80','Spell interruption rate down +12%','"Cure" spellcasting time -7%',}},
 		feet={ name="Bihu Slippers +3", augments={'Enhances "Nightingale" effect',}},
 		neck="Orunmila's Torque",
 		waist="Embla Sash",
@@ -413,6 +413,9 @@ function init_gear_sets()
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
 		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		
+	sets.precast.Volte_Harness = set_combine(sets.precast.Wing, {body="Volte Harness"})
+	sets.precast.Prishes_Boots = set_combine(sets.precast.Wing, {feet="Prishe\'s Boots +1",})
 
 
     ------------------------------------------------------------------------------------------------
@@ -618,7 +621,7 @@ function init_gear_sets()
 		head={ name="Kaykaus Mitra +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		body={ name="Kaykaus Bliaut +1", augments={'MP+80','"Cure" potency +6%','"Conserve MP"+7',}},
 		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		legs={ name="Kaykaus Tights +1", augments={'MP+80','Spell interruption rate down +12%','"Cure" spellcasting time -7%',}},
 		feet={ name="Kaykaus Boots +1", augments={'MP+80','Spell interruption rate down +12%','"Cure" spellcasting time -7%',}},
 		neck="Incanter's Torque",
 		waist={ name="Shinjutsu-no-Obi +1", augments={'Path: A',}},
@@ -635,7 +638,7 @@ function init_gear_sets()
 		head={ name="Kaykaus Mitra +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		body={ name="Kaykaus Bliaut +1", augments={'MP+80','"Cure" potency +6%','"Conserve MP"+7',}},
 		hands={ name="Kaykaus Cuffs +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
-		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		legs={ name="Kaykaus Tights +1", augments={'MP+80','Spell interruption rate down +12%','"Cure" spellcasting time -7%',}},
 		feet={ name="Kaykaus Boots +1", augments={'MP+80','Spell interruption rate down +12%','"Cure" spellcasting time -7%',}},
 		neck="Phalaina Locket",
 		waist="Gishdubar Sash",
@@ -656,7 +659,7 @@ function init_gear_sets()
 		head={ name="Kaykaus Mitra +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
 		body={ name="Kaykaus Bliaut +1", augments={'MP+80','"Cure" potency +6%','"Conserve MP"+7',}},
 		hands="Inyan. Dastanas +2",
-		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		legs={ name="Kaykaus Tights +1", augments={'MP+80','Spell interruption rate down +12%','"Cure" spellcasting time -7%',}},
 		feet={ name="Vanya Clogs", augments={'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
 		neck="Debilis Medallion",
 		waist="Bishop's Sash",
@@ -819,14 +822,14 @@ function init_gear_sets()
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
 		legs="Volte Tights",
-		feet="Volte Spats",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Bard's Charm +2", augments={'Path: A',}},
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear="Telos Earring",
-		right_ear="Balder Earring +1",
+		right_ear="Dedition Earring",
 		left_ring="Moonlight Ring",
 		right_ring="Moonlight Ring",
-		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		back="Null Shawl",}
 
     sets.engaged.Acc = {
 		main="Naegling",
@@ -905,15 +908,15 @@ function init_gear_sets()
 		head={ name="Bunzi's Hat", augments={'Path: A',}},
 		body="Ashera Harness",
 		hands={ name="Bunzi's Gloves", augments={'Path: A',}},
-		legs="Volte Tights",
-		feet="Volte Spats",
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Bard's Charm +2", augments={'Path: A',}},
 		waist="Windbuffet Belt +1",
-		left_ear="Telos Earring",
-		right_ear="Balder Earring +1",
+		left_ear="Suppanomimi",
+		right_ear="Eabani Earring",
 		left_ring="Moonlight Ring",
 		right_ring="Moonlight Ring",
-		back={ name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}
+		back="Null Shawl",}
 		--11%GDW + 25%JADW = 36%
 
     sets.engaged.DW.MaxHaste.Acc = {
@@ -1058,8 +1061,8 @@ function init_gear_sets()
 
     sets.SongDWDuration = {main="Carnwenhan", sub="Kali"}
 	sets.SongSWDuration = {main="Carnwenhan", sub="Genmei Shield"}
-	sets.Dummy = {range="Prime Horn",}
-	sets.Effect = {range="Marsyas",}
+	sets.Dummy = {range="Loughnashade"}
+	sets.Effect = {range="Loughnashade"}
 
     sets.buff.Doom = {
 		neck="Nicander's Necklace",
@@ -1067,7 +1070,7 @@ function init_gear_sets()
         }
 
     sets.Obi = {waist="Hachirin-no-Obi"}
-    sets.CP = {neck={ name="Bard's Charm +2", augments={'Path: A',}},}
+    sets.CP = {back="Mecisto. Mantle"}
 	
 	
 	sets.Naegling = {main="Naegling", sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
@@ -1640,7 +1643,7 @@ windower.register_event('zone change',
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
-    set_macro_page(1, 3)
+    set_macro_page(1, 10)
 end
 
 function set_lockstyle()

@@ -815,15 +815,17 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 
 end
 
-function job_state_change(field, new_value, old_value)
- 
-	if state.Reraise.value == true then
-        equip(sets.Reraise)
-        disable('head', 'body')
-    else
-        enable('head', 'body')
-    end
-	
+	--Handles Weapon set changes and Reraise set
+function Auto_Reraise()
+	if state.Reraise.current == 'on' then
+		equip(sets.Reraise)
+		disable('head', 'body')
+		reraiseActive = true
+	elseif reraiseActive and state.Reraise.current == 'off' then
+		enable('head', 'body')
+		reraiseActive = false
+	end
+
 end
 
 function job_buff_change(buff,gain)
@@ -851,6 +853,7 @@ end
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
+	Auto_Reraise()
 	check_moving()
 end
 

@@ -78,8 +78,10 @@ function job_setup()
     blue_magic_maps.Cure = S{'Wild Carrot'}
     blue_magic_maps.Buffs = S{'Cocoon', 'Refueling'}
 
-    rayke_duration = 35
+    rayke_duration = 47
     gambit_duration = 96
+	
+	lockstyleset = 20
 
 end
 
@@ -228,7 +230,7 @@ function init_gear_sets()
 		ammo="Sapience Orb",
 		head="Rune. Bandeau +3",
 		body="Erilaz Surcoat +3",
-		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
+		hands={ name="Leyline Gloves", augments={'Accuracy+5','"Mag.Atk.Bns."+7','"Fast Cast"+1',}},
 		legs="Agwu's Slops",
 		feet={ name="Carmine Greaves +1", augments={'HP+80','MP+80','Phys. dmg. taken -4',}},
 		neck="Orunmila's Torque",
@@ -426,8 +428,8 @@ function init_gear_sets()
 		head={ name="Fu. Bandeau +3", augments={'Enhances "Battuta" effect',}},
 		body={ name="Taeon Tabard", augments={'Spell interruption rate down -10%','Phalanx +3',}},
 		hands={ name="Taeon Gloves", augments={'Spell interruption rate down -10%','Phalanx +3',}},
-		legs={ name="Taeon Tights", augments={'Spell interruption rate down -10%','Phalanx +3',}},
-		feet={ name="Taeon Boots", augments={'Spell interruption rate down -10%','Phalanx +3',}},
+		legs={ name="Herculean Trousers", augments={'Pet: "Subtle Blow"+6','"Store TP"+1','Phalanx +4','Mag. Acc.+3 "Mag.Atk.Bns."+3',}},
+		feet={ name="Herculean Boots", augments={'Pet: "Mag.Atk.Bns."+19','AGI+1','Phalanx +5','Accuracy+13 Attack+13',}},
 		neck="Moonlight Necklace",
 		waist="Audumbla Sash",
 		left_ear="Andoaa Earring",
@@ -439,10 +441,10 @@ function init_gear_sets()
 	sets.PhalanxRecieved = {
 		main="Deacon Sword",
 		head={ name="Fu. Bandeau +3", augments={'Enhances "Battuta" effect',}},
-		body={ name="Herculean Vest", augments={'"Mag.Atk.Bns."+6','"Store TP"+1','Phalanx +4','Mag. Acc.+12 "Mag.Atk.Bns."+12',}},
+		body={ name="Taeon Tabard", augments={'Spell interruption rate down -10%','Phalanx +3',}},
 		hands={ name="Taeon Gloves", augments={'Spell interruption rate down -10%','Phalanx +3',}},
-		legs={ name="Taeon Tights", augments={'Spell interruption rate down -10%','Phalanx +3',}},
-		feet={ name="Herculean Boots", augments={'Sklchn.dmg.+4%','MND+4','Phalanx +4','Mag. Acc.+15 "Mag.Atk.Bns."+15',}},}
+		legs={ name="Herculean Trousers", augments={'Pet: "Subtle Blow"+6','"Store TP"+1','Phalanx +4','Mag. Acc.+3 "Mag.Atk.Bns."+3',}},
+		feet={ name="Herculean Boots", augments={'Pet: "Mag.Atk.Bns."+19','AGI+1','Phalanx +5','Accuracy+13 Attack+13',}},}
 		
 	sets.midcast['Temper'] = {
 		ammo="Staunch Tathlum +1",
@@ -1232,19 +1234,7 @@ windower.register_event('zone change',
 	-- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
     -- Default macro set/book: (set, book)
-    if player.sub_job == 'BLU' then
-        set_macro_page(3, 7)
-    elseif player.sub_job == 'DRK' then
-        set_macro_page(2, 7)
-    elseif player.sub_job == 'WAR' then
-        set_macro_page(1, 7)
-    elseif player.sub_job == 'SAM' then
-        set_macro_page(4, 7)
-    elseif player.sub_job == 'PLD' then
-        set_macro_page(5, 7)
-    else
-        set_macro_page(1, 7)
-    end
+	set_macro_page(1, 20)
 end
 
 function set_lockstyle()

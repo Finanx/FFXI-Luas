@@ -65,6 +65,8 @@ end
 -- Setup vars that are user-independent.
 function job_setup()
 
+	state.Buff.Reprisal = buffactive.Reprisal or false
+
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
 					"Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Emporox's Ring"}
 
@@ -94,11 +96,13 @@ function user_setup()
 	state.TreasureMode:options('Tag', 'None')
 
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Sakpata', 'Excalibur', 'Naegling', 'Burtgang'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Sakpata', 'Excalibur', 'Onion', 'Naegling', 'Burtgang'}
 	state.ShieldSet = M{['description']='Shield Set', 'Duban', 'Aegis'}
 	state.WeaponLock = M(false, 'Weapon Lock')
     state.Reraise = M(false, "Reraise Mode")
 	state.CP = M(false, "Capacity Points Mode")	
+	
+	reraiseActive = false
 
     state.Runes = M{['description']='Runes', 'Lux', 'Tenebrae', 'Ignis', 'Gelus', 'Flabra', 'Tellus', 'Sulpor', 'Unda'}
 	state.Barspell = M{['description']='Barspell', '"Barfire"', '"Barblizzard"', '"Baraero"', '"Barstone"','"Barthunder"', '"Barwater"',}
@@ -145,17 +149,17 @@ function init_gear_sets()
     -- Enmity sets
 	sets.Enmity = {
 		ammo="Sapience Orb",
-		head={ name="Souv. Schaller +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
-		body="Chev. Cuirass +3",
+		head={ name="Loess Barbuta +1", augments={'Path: A',}},
+		body={ name="Souv. Cuirass +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
 		hands={ name="Souv. Handsch. +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
 		legs={ name="Souv. Diechlings +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
 		feet="Chev. Sabatons +3",
 		neck="Moonlight Necklace",
-		waist="Audumbla Sash",
+		waist="Creed Baudrier",
 		left_ear="Cryptic Earring",
-		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-		left_ring="Shadow Ring",
-		right_ring="Vexer Ring +1",
+		right_ear="Trux Earring",
+		left_ring="Supershear Ring",
+		right_ring="Eihwaz Ring",
 		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Phys. dmg. taken-10%',}},}
 		
 	sets.SiR_Enmity = {
@@ -164,7 +168,7 @@ function init_gear_sets()
 		body="Chev. Cuirass +3",
 		hands="Regal Gauntlets",
 		legs={ name="Cab. Breeches +3", augments={'Enhances "Invincible" effect',}},
-		feet="Chev. Sabatons +3",
+		feet={ name="Odyssean Greaves", augments={'Mag. Acc.+14','"Fast Cast"+6','VIT+2','"Mag.Atk.Bns."+12',}},
 		neck="Moonlight Necklace",
 		waist="Audumbla Sash",
 		left_ear="Cryptic Earring",
@@ -173,7 +177,7 @@ function init_gear_sets()
 		right_ring="Defending Ring",
 		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Phys. dmg. taken-10%',}},}
 		
-	sets.precast.JA['Holy Circle'] = set_combine(sets.Enmity,{})
+	sets.precast.JA['Holy Circle'] = set_combine(sets.Enmity,{feet="Rev. Leggings +1",})
     sets.precast.JA['Sentinel'] = set_combine(sets.Enmity,{feet={ name="Cab. Leggings +3", augments={'Enhances "Guardian" effect',}},})
     sets.precast.JA['Rampart'] = set_combine(sets.Enmity,{head={ name="Cab. Coronet +3", augments={'Enhances "Iron Will" effect',}},})
     sets.precast.JA['Fealty'] = set_combine(sets.Enmity,{body={ name="Cab. Surcoat +3", augments={'Enhances "Fealty" effect',}},})
@@ -195,6 +199,9 @@ function init_gear_sets()
 	
 		--Set used for Icarus Wing to maximize TP gain	
 	sets.precast.Wing = {}
+	
+	sets.precast.Volte_Harness = set_combine(sets.precast.Wing, {body="Volte Harness"})
+	sets.precast.Prishes_Boots = set_combine(sets.precast.Wing, {feet="Prishe\'s Boots +1",})
 
     -- Fast cast sets for spells
 
@@ -218,7 +225,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
 	sets.precast.WS = {
-		ammo="Aurgelmir Orb +1",
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
@@ -226,11 +233,26 @@ function init_gear_sets()
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Rep. Plat. Medal",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Thrud Earring",
-		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear="Thrud Earring",
 		left_ring="Sroda Ring",
 		right_ring="Ephramad's Ring",
-		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Phys. dmg. taken-10%',}},}
+		back={ name="Rudianos's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+
+	sets.precast.WS['Fast Blade II'] = {
+	    ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Sakpata's Plate", augments={'Path: A',}},
+		hands={ name="Sakpata's Gauntlets", augments={'Path: A',}},
+		legs={ name="Sakpata's Cuisses", augments={'Path: A',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck="Rep. Plat. Medal",
+		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear={ name="Lugra Earring +1", augments={'Path: A',}},
+		left_ring="Regal Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Rudianos's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
 		
 	sets.precast.WS.Acc = {}
 
@@ -263,8 +285,8 @@ function init_gear_sets()
 		main={ name="Sakpata's Sword", augments={'Path: A',}},
 		sub={ name="Priwen", augments={'HP+50','Mag. Evasion+50','Damage Taken -3%',}},
 		ammo="Staunch Tathlum +1",
-		head={ name="Yorium Barbuta", augments={'"Fast Cast"+2','Phalanx +2',}},
-		body={ name="Yorium Cuirass", augments={'Spell interruption rate down -9%','Phalanx +2',}},
+		head={ name="Yorium Barbuta", augments={'DEF+21','Spell interruption rate down -10%','Phalanx +3',}},
+		body={ name="Yorium Cuirass", augments={'DEF+20','Spell interruption rate down -10%','Phalanx +3',}},
 		hands={ name="Souv. Handsch. +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
 		legs={ name="Sakpata's Cuisses", augments={'Path: A',}},
 		feet={ name="Souveran Schuhs +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
@@ -274,17 +296,17 @@ function init_gear_sets()
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
 		left_ring="Moonlight Ring",
 		right_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
-		back={ name="Weard Mantle", augments={'VIT+5','DEX+3','Enmity+2','Phalanx +4',}},}
+		back={ name="Weard Mantle", augments={'VIT+2','DEX+1','Enmity+5','Phalanx +4',}},}
 		
 	sets.PhalanxRecieved = {
 		main={ name="Sakpata's Sword", augments={'Path: A',}},
 		sub={ name="Priwen", augments={'HP+50','Mag. Evasion+50','Damage Taken -3%',}},
-		head={ name="Yorium Barbuta", augments={'"Fast Cast"+2','Phalanx +2',}},
-		body={ name="Yorium Cuirass", augments={'Spell interruption rate down -9%','Phalanx +2',}},
+		head={ name="Yorium Barbuta", augments={'DEF+21','Spell interruption rate down -10%','Phalanx +3',}},
+		body={ name="Yorium Cuirass", augments={'DEF+20','Spell interruption rate down -10%','Phalanx +3',}},
 		hands={ name="Souv. Handsch. +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
 		legs={ name="Sakpata's Cuisses", augments={'Path: A',}},
 		feet={ name="Souveran Schuhs +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
-		back={ name="Weard Mantle", augments={'VIT+5','DEX+3','Enmity+2','Phalanx +4',}},}
+		back={ name="Weard Mantle", augments={'VIT+2','DEX+1','Enmity+5','Phalanx +4',}},}
 		
     sets.midcast['Reprisal'] = {
 	    ammo="Sapience Orb",
@@ -323,7 +345,7 @@ function init_gear_sets()
 		body="Chev. Cuirass +3",
 		hands="Regal Gauntlets",
 		legs={ name="Souv. Diechlings +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
-		feet={ name="Odyssean Greaves", augments={'Mag. Acc.+18','"Cure" potency +5%','INT+3',}},
+		feet={ name="Odyssean Greaves", augments={'Mag. Acc.+14','"Fast Cast"+6','VIT+2','"Mag.Atk.Bns."+12',}},
 		neck="Moonlight Necklace",
 		waist="Sroda Belt",
 		left_ear={ name="Nourish. Earring +1", augments={'Path: A',}},
@@ -362,7 +384,7 @@ function init_gear_sets()
 		neck="Coatl Gorget +1",
 		waist="Carrier's Sash",
 		left_ear={ name="Lugra Earring +1", augments={'Path: A',}},
-		right_ear={ name="Chev. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','Damage taken-4%',}},
+		right_ear={ name="Chev. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
 		left_ring="Vexer Ring +1",
 		right_ring="Roller's Ring",
 		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Phys. dmg. taken-10%',}},}
@@ -450,7 +472,7 @@ function init_gear_sets()
 		neck="Nicander's Necklace",
         waist="Gishdubar Sash", --10
         }
-		
+
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
 	
@@ -462,9 +484,11 @@ function init_gear_sets()
     sets.Excalibur = {main="Excalibur"}
 	sets.Naegling = {main="Naegling"}
 	sets.Sakpata = {main={ name="Sakpata's Sword", augments={'Path: A',}},}
+	sets.Onion = {main="Onion Sword III"}
 	
 	--Shield Sets
 
+	sets.Priwen = {sub={ name="Priwen", augments={'HP+50','Mag. Evasion+50','Damage Taken -3%',}},}
 	sets.Duban = {sub="Duban",}	
 	sets.Aegis = {sub="Aegis",}
 
@@ -605,6 +629,14 @@ function update_combat_form()
 			enable('main','sub')
 			equip(sets.Naegling)
 		end
+	elseif state.WeaponSet.value == 'Onion' then
+		if state.WeaponLock.value == true then
+			equip(sets.Onion)
+			disable('main','sub')
+		else
+			enable('main','sub')
+			equip(sets.Onion)
+		end
 	elseif state.WeaponSet.value == 'Sakpata' then
 		if state.WeaponLock.value == true then
 			equip(sets.Sakpata)
@@ -620,8 +652,13 @@ function update_combat_form()
 			equip(sets.Duban)
 			disable('main','sub')
 		else
-			enable('main','sub')
-			equip(sets.Duban)
+			if state.Buff.Reprisal then
+				enable('main','sub')
+				equip(sets.Priwen)
+			else
+				enable('main','sub')
+				equip(sets.Duban)
+			end
 		end
 	elseif state.ShieldSet.value == 'Aegis' then
 		if state.WeaponLock.value == true then
@@ -637,12 +674,14 @@ end
 
 	--Handles Weapon set changes and Reraise set
 function Auto_Reraise()
-	if state.Reraise.current == 'on' then
-        equip(sets.Reraise)
-        disable('head', 'body')
-    else
-        enable('head', 'body')
-    end
+if state.Reraise.current == 'on' then
+    equip(sets.Reraise)
+    disable('head', 'body')
+    reraiseActive = true
+elseif reraiseActive and state.Reraise.current == 'off' then
+    enable('head', 'body')
+    reraiseActive = false
+end
 
 end
 
@@ -827,36 +866,3 @@ end
 function set_lockstyle()
     send_command('wait 5; input /lockstyleset ' .. lockstyleset)
 end
-
-fixed_pos = ''
-fixed_ts = os.time()
-
-local no_interruptions = true
-
-windower.raw_register_event('outgoing chunk',function(id,original,modified,injected,blocked)
-    if no_interruptions and (not blocked) then
-        if id == 0x15 then
-            if (gearswap.cued_packet or midaction()) and fixed_pos ~= '' and os.time()-fixed_ts < 5 then
-                return original:sub(1,4)..fixed_pos..original:sub(17)
-            else
-                fixed_pos = original:sub(5,16)
-                fixed_ts = os.time()
-            end
-        end
-    end
-end)
-
-register_unhandled_command(function (...)
-    local commands = {...}
-    if commands[1] and commands[1]:lower() == 'interrupts' then
-        if (no_interruptions) then
-            windower.add_to_chat(160, "%s : Disabling \30\2no_interruptions\30\43":format(_addon.name))
-            no_interruptions = false
-        else
-            windower.add_to_chat(160, "%s : Enabling \30\2no_interruptions\30\43":format(_addon.name))
-            no_interruptions = true
-        end
-        return true
-    end
-    return false
-end)

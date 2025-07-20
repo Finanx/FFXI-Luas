@@ -117,6 +117,7 @@ function user_setup()
 	state.step = M{['description']='step', 'Quickstep', 'Stutter Step', 'Feather Step'}
 
 	state.WeaponSet = M{['description']='Weapon Set', 'Mpu_Gandring', 'Terpsichore', 'Twashtar', 'Mandau', 'Tauret', 'Karambit'}
+	state.OffhandSet = M{['description']='Weapon Set', 'Crepuscular', 'Gletis_Knife'}
 	state.WeaponLock = M(false, 'Weapon Lock')
 	state.TPBonus = M(true, 'TP Bonus')
 
@@ -162,25 +163,25 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 		
 	sets.Enmity = {
-	    ammo="Sapience Orb",
+		ammo="Sapience Orb",
 		head="Halitus Helm",
 		body={ name="Emet Harness +1", augments={'Path: A',}},
 		hands="Kurys Gloves",
 		legs={ name="Zoar Subligar +1", augments={'Path: A',}},
-		feet="Ahosi Leggings",
+		feet="Macu. Toe Sh. +2",
 		neck={ name="Unmoving Collar +1", augments={'Path: A',}},
 		waist="Kasiri Belt",
 		left_ear="Cryptic Earring",
-		right_ear="Friomisi Earring",
+		right_ear="Trux Earring",
 		left_ring="Eihwaz Ring",
-		right_ring="Vengeful Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		right_ring="Supershear Ring",
+		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 
     -- Precast sets to enhance JAs
 	
     sets.precast.JA.Provoke = sets.Enmity
 
-    sets.precast.JA['Saber Dance'] = {legs={ name="Horos Tights +3", augments={'Enhances "Saber Dance" effect',}},}
+    sets.precast.JA['Saber Dance'] = {legs={ name="Horos Tights +4", augments={'Enhances "Saber Dance" effect',}},}
     sets.precast.JA['No Foot Rise'] = {body={ name="Horos Casaque +3", augments={'Enhances "No Foot Rise" effect',}},}
 	sets.precast.JA['Trance'] = {head={ name="Horos Tiara +3", augments={'Enhances "Trance" effect',}},}
 
@@ -197,34 +198,34 @@ function init_gear_sets()
 		right_ear="Digni. Earring",
 		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		right_ring="Stikini Ring +1",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 		
 	sets.precast.JA['Animated Flourish'] = sets.Enmity
 	
-	sets.precast.JA['Reverse Flourish'] = set_combine(sets.idle, {hands="Macu. Bangles +2",back={ name="Toetapper Mantle", augments={'"Store TP"+3','"Dual Wield"+5','"Rev. Flourish"+30',}},})
+	sets.precast.JA['Reverse Flourish'] = set_combine(sets.idle, {hands="Macu. Bangles +2",back={ name="Toetapper Mantle", augments={'"Store TP"+1','"Dual Wield"+2','"Rev. Flourish"+30',}},})
 
 	sets.precast.JA['Box Step'] = {
 		ammo="Yamarang",
 		head="Maxixi Tiara +3",
 		body="Maxixi Casaque +3",
-		hands="Maxixi Bangles +3",
-		legs={ name="Horos Tights +3", augments={'Enhances "Saber Dance" effect',}},
+		hands="Maxixi Bangles +4",
+		legs={ name="Horos Tights +4", augments={'Enhances "Saber Dance" effect',}},
 		feet={ name="Horos T. Shoes +3", augments={'Enhances "Closed Position" effect',}},
 		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
 		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
 		left_ear="Odr Earring",
-		right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
+		right_ear={ name="Macu. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','"Store TP"+7','DEX+13 AGI+13',}},
 		left_ring="Ephramad's Ring",
 		right_ring="Regal Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 		
 	sets.precast.JA['Quickstep'] = sets.precast.JA['Box Step']
 	sets.precast.JA['Stutter Step'] = sets.precast.JA['Box Step']
 	sets.precast.JA['Feather Step'] = set_combine(sets.precast.JA['Box Step'], {feet="Macu. Toe Sh. +2",})
 	
-	sets.precast.Jig = {legs={ name="Horos Tights +3", augments={'Enhances "Saber Dance" effect',}}}
+	sets.precast.Jig = {legs={ name="Horos Tights +4", augments={'Enhances "Saber Dance" effect',}}}
 	
-	sets.precast.Samba = {head="Maxixi Tiara +3",back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+	sets.precast.Samba = {head="Maxixi Tiara +3",back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 
     sets.precast.Waltz = {
 		ammo="Yamarang",
@@ -239,8 +240,42 @@ function init_gear_sets()
 		right_ear="Tuisto Earring",
 		left_ring={ name="Metamor. Ring +1", augments={'Path: A',}},
 		right_ring="Defending Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 	
+	sets.precast.JA['Jump'] = sets.precast.Wing	
+	sets.precast.JA['High Jump'] = sets.precast.Wing
+		
+    sets.precast.FC = {
+		ammo="Sapience Orb",
+		head={ name="Herculean Helm", augments={'"Mag.Atk.Bns."+6','"Fast Cast"+6','MND+3','Mag. Acc.+4',}},
+		body={ name="Adhemar Jacket +1", augments={'HP+105','"Fast Cast"+10','Magic dmg. taken -4',}},
+		hands={ name="Leyline Gloves", augments={'Accuracy+5','"Mag.Atk.Bns."+7','"Fast Cast"+1',}},
+		legs={ name="Rawhide Trousers", augments={'MP+50','"Fast Cast"+5','"Refresh"+1',}},
+		feet={ name="Herculean Boots", augments={'Mag. Acc.+17','"Fast Cast"+6','VIT+6',}},
+		neck="Voltsurge Torque",
+		waist="Plat. Mog. Belt",
+		left_ear="Etiolation Earring",
+		right_ear="Loquac. Earring",
+		left_ring="Prolix Ring",
+		right_ring="Defending Ring",
+		back="Null Shawl",}
+		
+    sets.precast.RA = {
+		range="Trollbane",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body="Volte Harness",
+		hands="Macu. Bangles +2",
+		legs={ name="Adhemar Kecks +1", augments={'AGI+12','"Rapid Shot"+13','Enmity-6',}},
+		feet="Meg. Jam. +2",
+		neck={ name="Loricate Torque +1", augments={'Path: A',}},
+		waist="Flume Belt +1",
+		left_ear="Genmei Earring",
+		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		right_ring="Crepuscular Ring",
+		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+	
+		--Set used for Icarus Wing to maximize TP gain	
 	sets.precast.Wing = {
 		ammo="Aurgelmir Orb +1",
 		head="Maculele Tiara +2",
@@ -251,46 +286,13 @@ function init_gear_sets()
 		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
 		waist="Gerdr Belt +1",
 		left_ear="Dedition Earring",
-		right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
+		right_ear={ name="Macu. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','"Store TP"+7','DEX+13 AGI+13',}},
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 		
-	sets.precast.JA['Jump'] = sets.precast.Wing	
-	sets.precast.JA['High Jump'] = sets.precast.Wing
-		
-    sets.precast.FC = {
-		ammo="Sapience Orb",
-		head={ name="Herculean Helm", augments={'Mag. Acc.+6','"Fast Cast"+6','INT+6','"Mag.Atk.Bns."+2',}},
-		body={ name="Adhemar Jacket +1", augments={'HP+105','"Fast Cast"+10','Magic dmg. taken -4',}},
-		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
-		legs={ name="Rawhide Trousers", augments={'MP+50','"Fast Cast"+5','"Refresh"+1',}},
-		feet={ name="Herculean Boots", augments={'"Fast Cast"+6','MND+5',}},
-		neck="Orunmila's Torque",
-		waist="Flume Belt +1",
-		left_ear="Etiolation Earring",
-		right_ear="Loquac. Earring",
-		left_ring="Prolix Ring",
-		right_ring="Defending Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-		
-    sets.precast.RA = {
-		range="Trollbane",
-		head={ name="Taeon Chapeau", augments={'"Snapshot"+5','"Snapshot"+5',}},
-		body={ name="Taeon Tabard", augments={'"Snapshot"+5','"Snapshot"+5',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Taeon Tights", augments={'"Snapshot"+4','"Snapshot"+5',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="Loricate Torque +1", augments={'Path: A',}},
-		waist="Flume Belt +1",
-		left_ear="Genmei Earring",
-		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
-		right_ring="Defending Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-	
-		--Set used for Icarus Wing to maximize TP gain	
-	sets.precast.Wing = {}
+	sets.precast.Volte_Harness = set_combine(sets.precast.Wing, {body="Volte Harness"})
+	sets.precast.Prishes_Boots = set_combine(sets.precast.Wing, {feet="Prishe\'s Boots +1",})
 
 
     ------------------------------------------------------------------------------------------------
@@ -322,73 +324,73 @@ function init_gear_sets()
 		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
 		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
+		right_ear={ name="Macu. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','"Store TP"+7','DEX+13 AGI+13',}},
 		left_ring="Ephramad's Ring",
 		right_ring="Regal Ring",
 		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
 		
-	sets.precast.WS.FullTPMagical = {}
-	sets.precast.WS.FullTPPhysical = {}
+	sets.precast.WS.FullTPMagical = {left_ear="Ishvara Earring",}
+	sets.precast.WS.FullTPPhysical = {left_ear="Sherida Earring",}
 
 	sets.precast.WS['Rudra\'s Storm'] = {
-        ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-        head="Maculele Tiara +2",
-        body={ name="Nyame Mail", augments={'Path: B',}},
-        hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-        legs={ name="Nyame Flanchard", augments={'Path: B',}},
-        feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head="Maculele Tiara +2",
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands="Maxixi Bangles +4",
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
 		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
-		left_ear="Sherida Earring",
-		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-        left_ring="Epaminondas's Ring",
-        right_ring="Ephramad's Ring",
-        back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear={ name="Macu. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','"Store TP"+7','DEX+13 AGI+13',}},
+		left_ring="Epaminondas's Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
 		
 	sets.precast.WS['Rudra\'s Storm'].ATKCAP = {
         ammo="Crepuscular Pebble",
         head="Maculele Tiara +2",
-        body={ name="Gleti's Cuirass", augments={'Path: A',}},
-        hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-        legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		body={ name="Gleti's Cuirass", augments={'Path: A',}},
+		hands="Maxixi Bangles +4",
+		legs="Maculele Tights +2",
         feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
 		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
         left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-        right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
-        left_ring="Epaminondas's Ring",
-        right_ring="Ephramad's Ring",
-        back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
-
-	sets.precast.WS['Ruthless Stroke'] = {
-        ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-        head="Maculele Tiara +2",
-        body={ name="Nyame Mail", augments={'Path: B',}},
-        hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-        legs={ name="Nyame Flanchard", augments={'Path: B',}},
-        feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
-		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
-		left_ear="Sherida Earring",
-		right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+        right_ear={ name="Macu. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','"Store TP"+7','DEX+13 AGI+13',}},
         left_ring="Epaminondas's Ring",
         right_ring="Ephramad's Ring",
         back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
 		
+	sets.precast.WS['Ruthless Stroke'] = {
+		ammo="C. Palug Stone",
+		head="Maculele Tiara +2",
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands="Maxixi Bangles +4",
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear={ name="Macu. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','"Store TP"+7','DEX+13 AGI+13',}},
+		left_ring="Epaminondas's Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
+		
 	sets.precast.WS['Ruthless Stroke'].ATKCAP = {
-        ammo="Crepuscular Pebble",
-        head="Maculele Tiara +2",
-        body={ name="Gleti's Cuirass", augments={'Path: A',}},
-        hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-        legs={ name="Nyame Flanchard", augments={'Path: B',}},
-        feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		ammo="Crepuscular Pebble",
+		head="Maculele Tiara +2",
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands="Maxixi Bangles +4",
+		legs="Maculele Tights +2",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
 		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
-        left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-        right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
-        left_ring="Epaminondas's Ring",
-        right_ring="Ephramad's Ring",
-        back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
+		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		right_ear={ name="Macu. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','"Store TP"+7','DEX+13 AGI+13',}},
+		left_ring="Epaminondas's Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
 	
 	sets.precast.WS['Pyrrhic Kleos'] = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
@@ -400,7 +402,7 @@ function init_gear_sets()
 		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
 		waist="Fotia Belt",
 		left_ear="Sherida Earring",
-		right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
+		right_ear={ name="Macu. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','"Store TP"+7','DEX+13 AGI+13',}},
 		left_ring="Ephramad's Ring",
 		right_ring="Regal Ring",
 		back={ name="Senuna's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
@@ -415,7 +417,7 @@ function init_gear_sets()
 		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
 		waist="Fotia Belt",
 		left_ear="Sherida Earring",
-		right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
+		right_ear={ name="Macu. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','"Store TP"+7','DEX+13 AGI+13',}},
 		left_ring="Ephramad's Ring",
 		right_ring="Regal Ring",
 		back={ name="Senuna's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
@@ -430,7 +432,7 @@ function init_gear_sets()
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear="Odr Earring",
-		right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
+		right_ear={ name="Macu. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','"Store TP"+7','DEX+13 AGI+13',}},
 		left_ring="Ephramad's Ring",
 		right_ring="Regal Ring",
 		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}
@@ -460,7 +462,7 @@ function init_gear_sets()
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear="Tuisto Earring",
-		right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
+		right_ear={ name="Macu. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','"Store TP"+7','DEX+13 AGI+13',}},
 		left_ring="Sroda Ring",
 		right_ring="Ephramad's Ring",
 		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},}
@@ -490,7 +492,7 @@ function init_gear_sets()
 		right_ear="Enervating Earring",
 		left_ring="Ilabrat Ring",
 		right_ring="Dingir Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 
 
     ------------------------------------------------------------------------------------------------
@@ -512,7 +514,7 @@ function init_gear_sets()
 		right_ear="Sanare Earring",
 		left_ring="Shneddick Ring",
 		right_ring="Shadow Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
+		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
 		}
 		
 	sets.idle.Aminon = {
@@ -528,7 +530,7 @@ function init_gear_sets()
 		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
 		left_ring="Defending Ring",
 		right_ring="Roller's Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 		
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Engaged Sets ------------------------------------------
@@ -542,230 +544,70 @@ function init_gear_sets()
     sets.engaged = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head="Maculele Tiara +2",
-		body={ name="Gleti's Cuirass", augments={'Path: A',}},
-		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
+		body="Malignance Tabard",
+		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
 		feet="Macu. Toe Sh. +2",
 		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
 		left_ear="Sherida Earring",
-		right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		right_ear={ name="Macu. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','"Store TP"+7','DEX+13 AGI+13',}},
+		left_ring="Gere Ring",
+		right_ring="Epona's Ring",
+		back="Null Shawl",} 
 
     sets.engaged.Acc = {
 		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
 		head="Maculele Tiara +2",
-		body={ name="Gleti's Cuirass", augments={'Path: A',}},
-		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
+		body="Malignance Tabard",
+		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
 		feet="Macu. Toe Sh. +2",
 		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
 		left_ear="Sherida Earring",
-		right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-
-    -- * DNC Native DW Trait: 30% DW
-    -- * DNC Job Points DW Gift: 5% DW
-
-    -- No Magic Haste (74% DW to cap)
-    sets.engaged.DW = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Maculele Tiara +2",
-		body={ name="Gleti's Cuirass", augments={'Path: A',}},
-		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
-		legs={ name="Gleti's Breeches", augments={'Path: A',}},
-		feet="Macu. Toe Sh. +2",
-		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Sherida Earring",
-		right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},} 
-	 --30% JA + 27% Gear = 57%
-		
-    sets.engaged.DW.Acc = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Maculele Tiara +2",
-		body={ name="Gleti's Cuirass", augments={'Path: A',}},
-		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
-		legs={ name="Gleti's Breeches", augments={'Path: A',}},
-		feet="Macu. Toe Sh. +2",
-		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Sherida Earring",
-		right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},} 
-	 --30% JA + 27% Gear = 57%
-
-    -- 15% Magic Haste (67% DW to cap)
-    sets.engaged.DW.LowHaste = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Maculele Tiara +2",
-		body={ name="Gleti's Cuirass", augments={'Path: A',}},
-		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
-		legs={ name="Gleti's Breeches", augments={'Path: A',}},
-		feet="Macu. Toe Sh. +2",
-		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Sherida Earring",
-		right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-	 --30% JA + 27% Gear = 57%
-
-
-    sets.engaged.DW.Acc.LowHaste = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Maculele Tiara +2",
-		body={ name="Gleti's Cuirass", augments={'Path: A',}},
-		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
-		legs={ name="Gleti's Breeches", augments={'Path: A',}},
-		feet="Macu. Toe Sh. +2",
-		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Sherida Earring",
-		right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-	 --30% JA + 27% Gear = 57%
-
-
-    -- 30% Magic Haste (56% DW to cap)
-    sets.engaged.DW.MidHaste = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Maculele Tiara +2",
-		body={ name="Gleti's Cuirass", augments={'Path: A',}},
-		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
-		legs={ name="Gleti's Breeches", augments={'Path: A',}},
-		feet="Macu. Toe Sh. +2",
-		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Sherida Earring",
-		right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-	 --30% JA + 27% Gear = 57%
-
-    sets.engaged.DW.Acc.MidHaste = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Maculele Tiara +2",
-		body={ name="Gleti's Cuirass", augments={'Path: A',}},
-		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
-		legs={ name="Gleti's Breeches", augments={'Path: A',}},
-		feet="Macu. Toe Sh. +2",
-		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Sherida Earring",
-		right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-	 --30% JA + 27% Gear = 57%
-
-    -- 35% Magic Haste (51% DW to cap)
-    sets.engaged.DW.HighHaste = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Maculele Tiara +2",
-		body={ name="Gleti's Cuirass", augments={'Path: A',}},
-		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
-		legs={ name="Gleti's Breeches", augments={'Path: A',}},
-		feet="Macu. Toe Sh. +2",
-		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Sherida Earring",
-		right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-	--30% JA + 27% Gear = 57%
-
-    sets.engaged.DW.Acc.HighHaste = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Maculele Tiara +2",
-		body={ name="Gleti's Cuirass", augments={'Path: A',}},
-		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
-		legs={ name="Gleti's Breeches", augments={'Path: A',}},
-		feet="Macu. Toe Sh. +2",
-		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Sherida Earring",
-		right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-	--30% JA + 27% Gear = 57%
-
-    -- 45% Magic Haste (36% DW to cap)
-    sets.engaged.DW.MaxHaste = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Maculele Tiara +2",
-		body={ name="Gleti's Cuirass", augments={'Path: A',}},
-		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
-		legs={ name="Gleti's Breeches", augments={'Path: A',}},
-		feet="Macu. Toe Sh. +2",
-		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Sherida Earring",
-		right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-	--30% JA + 7% Gear = 37%
-
-    sets.engaged.DW.Acc.MaxHaste = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head="Maculele Tiara +2",
-		body={ name="Gleti's Cuirass", augments={'Path: A',}},
-		hands={ name="Gleti's Gauntlets", augments={'Path: A',}},
-		legs={ name="Gleti's Breeches", augments={'Path: A',}},
-		feet="Macu. Toe Sh. +2",
-		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Sherida Earring",
-		right_ear={ name="Macu. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
-		left_ring="Epona's Ring",
-		right_ring="Gere Ring",
-		back={ name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
-	--30% JA + 7% Gear = 37%
-
+		right_ear={ name="Macu. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','"Store TP"+7','DEX+13 AGI+13',}},
+		left_ring="Gere Ring",
+		right_ring="Epona's Ring",
+		back="Null Shawl",} 
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Hybrid Sets -------------------------------------------
     ------------------------------------------------------------------------------------------------
 
     sets.engaged.Hybrid = {
-		left_ring="Defending Ring",}
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head="Maculele Tiara +2",
+		body="Malignance Tabard",
+		hands={ name="Adhemar Wrist. +1", augments={'DEX+12','AGI+12','Accuracy+20',}},
+		legs={ name="Gleti's Breeches", augments={'Path: A',}},
+		feet="Macu. Toe Sh. +2",
+		neck="Null Loop",
+		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
+		left_ear="Sherida Earring",
+		right_ear={ name="Macu. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','"Store TP"+7','DEX+13 AGI+13',}},
+		left_ring="Moonlight Ring",
+		right_ring="Moonlight Ring",
+		back="Null Shawl",}
+		
+	sets.engaged.Hybrid.Defense = {
+		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+		head="Maculele Tiara +2",
+		body="Malignance Tabard",
+		hands="Malignance Gloves",
+		legs={ name="Gleti's Breeches", augments={'Path: A',}},
+		feet="Macu. Toe Sh. +2",
+		neck={ name="Etoile Gorget +2", augments={'Path: A',}},
+		waist={ name="Kentarch Belt +1", augments={'Path: A',}},
+		left_ear="Sherida Earring",
+		right_ear={ name="Macu. Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','"Store TP"+7','DEX+13 AGI+13',}},
+		left_ring="Moonlight Ring",
+		right_ring="Moonlight Ring",
+		back="Null Shawl",}
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
     
-    sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT = set_combine(sets.engaged.DW.Acc, sets.engaged.Hybrid)
-    
-    sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.LowHaste = set_combine(sets.engaged.DW.Acc.LowHaste, sets.engaged.Hybrid)
-    
-    sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.MidHaste = set_combine(sets.engaged.DW.Acc.MidHaste, sets.engaged.Hybrid)
-    
-    sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.HighHaste = set_combine(sets.engaged.DW.Acc.HighHaste, sets.engaged.Hybrid)
-    
-    sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.MaxHaste = set_combine(sets.engaged.DW.Acc.MaxHaste, sets.engaged.Hybrid)
-    
-
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
@@ -790,7 +632,7 @@ function init_gear_sets()
 	
 	sets.Twashtar = {main={ name="Twashtar", augments={'Path: A',}},}
 
-	sets.Terpsichore = {main="Mpu Gandring",}
+	sets.Terpsichore = {}
 	
 	sets.Tauret = {main="Tauret",}
 	
@@ -799,6 +641,8 @@ function init_gear_sets()
 	sets.Centovente = {sub="Fusetto +2",}
 
 	sets.Gletis_Knife = {sub={ name="Gleti\'s Knife", augments={'Path: A',}},}
+	
+	sets.Crepuscular = {sub="Crepuscular Knife",}
 
 end
 
@@ -840,9 +684,17 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 		if spell.english == "Exenterator" or spell.english == "Mercy Stroke" then
 		else
 			if state.TPBonus.value == true then
+				if player.tp > 1900 then
+					if spell.english == "Aeolian Edge" or spell.english == "Gust Slash" or spell.english == "Cyclone" then
+						equip(sets.precast.WS.FullTPMagical)
+					else
+						equip(sets.precast.WS.FullTPPhysical)
+					end
+				end
+			else
 				if player.tp > 2900 then
 					if spell.english == "Aeolian Edge" or spell.english == "Gust Slash" or spell.english == "Cyclone" then
-							equip(sets.precast.WS.FullTPMagical)
+						equip(sets.precast.WS.FullTPMagical)
 					else
 						equip(sets.precast.WS.FullTPPhysical)
 					end
@@ -896,28 +748,28 @@ function update_combat_form()
 		if state.TPBonus.value == true then
 			equip(sets.Centovente)
 		else
-			equip(sets.Gletis_Knife)
+			equip(sets[state.OffhandSet.current])
 		end
 	elseif state.WeaponSet.value == 'Twashtar' then
 		equip(sets.Twashtar)
 		if state.TPBonus.value == true then
 			equip(sets.Centovente)
 		else
-			equip(sets.Gletis_Knife)
+			equip(sets[state.OffhandSet.current])
 		end
 	elseif state.WeaponSet.value == 'Terpsichore' then
 		equip(sets.Terpsichore)
 		if state.TPBonus.value == true then
 			equip(sets.Centovente)
 		else
-			equip(sets.Gletis_Knife)
+			equip(sets[state.OffhandSet.current])
 		end
 	elseif state.WeaponSet.value == 'Tauret' then
 		equip(sets.Tauret)
 		if state.TPBonus.value == true then
 			equip(sets.Centovente)
 		else
-			equip(sets.Gletis_Knife)
+			equip(sets[state.OffhandSet.current])
 		end
 	elseif state.WeaponSet.value == 'Karambit' then
 		equip(sets.Karambit)
@@ -987,17 +839,6 @@ end
 	--Determines Haste Group / Melee set for Gear Info
 function determine_haste_group()
     classes.CustomMeleeGroups:clear()
-        if DW_needed <= 6 then
-            classes.CustomMeleeGroups:append('MaxHaste')
-        elseif DW_needed > 6 and DW_needed <= 22 then
-            classes.CustomMeleeGroups:append('HighHaste')
-        elseif DW_needed > 22 and DW_needed <= 26 then
-            classes.CustomMeleeGroups:append('MidHaste')
-        elseif DW_needed > 26 and DW_needed <= 37 then
-            classes.CustomMeleeGroups:append('LowHaste')
-        elseif DW_needed > 37 then
-            classes.CustomMeleeGroups:append('')
-        end
 end
 
 	--Gear Info Functions

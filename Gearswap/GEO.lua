@@ -196,6 +196,9 @@ function init_gear_sets()
 	
 		--Set used for Icarus Wing to maximize TP gain	
 	sets.precast.Wing = {}
+	
+	sets.precast.Volte_Harness = set_combine(sets.precast.Wing, {body="Volte Harness"})
+	sets.precast.Prishes_Boots = set_combine(sets.precast.Wing, {feet="Prishe\'s Boots +1",})
 
     ------------------------------------------------------------------------------------------------
     ------------------------------------- Weapon Skill Sets ----------------------------------------

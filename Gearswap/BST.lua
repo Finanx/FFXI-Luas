@@ -102,7 +102,7 @@ function job_setup()
 
 
 
-    lockstyleset = 4
+    lockstyleset = 9
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -205,14 +205,14 @@ function init_gear_sets()
 		head={ name="Ankusa Helm +3", augments={'Enhances "Killer Instinct" effect',}},}
 
 	sets.precast.JA['Call Beast'] = {
-		hands={ name="Ankusa Gloves +3", augments={'Enhances "Beast Affinity" effect',}},
+		hands={ name="Ankusa Gloves", augments={'Enhances "Beast Affinity" effect',}},
 		feet={ name="Gleti's Boots", augments={'Path: A',}},
-		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},}
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Pet: "Dbl. Atk."+7',}},}
 	
-	sets.precast.JA['Beastial Loyalty'] = {
-		hands={ name="Ankusa Gloves +3", augments={'Enhances "Beast Affinity" effect',}},
+	sets.precast.JA['Bestial Loyalty'] = {
+		hands={ name="Ankusa Gloves", augments={'Enhances "Beast Affinity" effect',}},
 		feet={ name="Gleti's Boots", augments={'Path: A',}},
-		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},}	
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Pet: "Dbl. Atk."+7',}},}	
 
 	sets.precast.JA['Charm'] = {
 	    main="Agwu's Axe",
@@ -263,7 +263,7 @@ function init_gear_sets()
 		ammo="Sapience Orb",
 		head={ name="Nyame Helm", augments={'Path: B',}},
 		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
+		hands={ name="Leyline Gloves", augments={'Accuracy+5','"Mag.Atk.Bns."+7','"Fast Cast"+1',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		neck="Orunmila's Torque",
@@ -533,7 +533,7 @@ function init_gear_sets()
 		neck={ name="Bst. Collar +2", augments={'Path: A',}},
 		waist="Incarnation Sash",
 		left_ear="Sroda Earring",
-		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Pet: "Dbl. Atk."+7',}},
 		left_ring="Tali'ah Ring",
 		right_ring="C. Palug Ring",
 		back={ name="Artio's Mantle", augments={'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20','Accuracy+20 Attack+20','Pet: Accuracy+10 Pet: Rng. Acc.+10','Pet: Haste+10','Pet: Damage taken -5%',}},}
@@ -550,7 +550,7 @@ function init_gear_sets()
 		neck={ name="Bst. Collar +2", augments={'Path: A',}},
 		waist="Incarnation Sash",
 		left_ear="Sroda Earring",
-		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Pet: "Dbl. Atk."+7',}},
 		left_ring="Tali'ah Ring",
 		right_ring="C. Palug Ring",
 		back={ name="Artio's Mantle", augments={'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20','Accuracy+20 Attack+20','Pet: Accuracy+10 Pet: Rng. Acc.+10','Pet: Haste+10','Pet: Damage taken -5%',}},}
@@ -559,18 +559,18 @@ function init_gear_sets()
 		main="Agwu's Axe",
 		sub="Adapa Shield",
 		ammo={ name="Hesperiidae", augments={'Path: A',}},
-		head="Nuk. Cabasset +2",
-		body="Nukumi Gausape +2",
-		hands="Nukumi Manoplas +2",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Gleti's Breeches", augments={'Path: A',}},
 		feet={ name="Gleti's Boots", augments={'Path: A',}},
 		neck={ name="Bst. Collar +2", augments={'Path: A',}},
 		waist="Incarnation Sash",
 		left_ear="Enmerkar Earring",
-		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Pet: "Dbl. Atk."+7',}},
 		left_ring="Tali'ah Ring",
 		right_ring="C. Palug Ring",
-		back={ name="Artio's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Accuracy+20 Attack+20','Pet: Mag. Acc.+10','Pet: "Regen"+10','Pet: Damage taken -5%',}},}
+		back={ name="Artio's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Accuracy+20 Attack+20','Pet: "Regen"+10','Pet: Damage taken -5%',}},}
 	
 	sets.midcast.Pet.MabReady = {
 		main="Agwu's Axe",
@@ -584,7 +584,7 @@ function init_gear_sets()
 		neck="Adad Amulet",
 		waist="Incarnation Sash",
 		left_ear="Enmerkar Earring",
-		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Pet: "Dbl. Atk."+7',}},
 		left_ring="Tali'ah Ring",
 		right_ring="C. Palug Ring",
 		back={ name="Artio's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Accuracy+20 Attack+20','Pet: Mag. Acc.+10','Pet: "Regen"+10','Pet: Damage taken -5%',}},}
@@ -601,7 +601,7 @@ function init_gear_sets()
 		neck={ name="Bst. Collar +2", augments={'Path: A',}},
 		waist="Incarnation Sash",
 		left_ear="Enmerkar Earring",
-		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Pet: "Dbl. Atk."+7',}},
 		left_ring="Tali'ah Ring",
 		right_ring="C. Palug Ring",
 		back={ name="Artio's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Accuracy+20 Attack+20','Pet: Mag. Acc.+10','Pet: "Regen"+10','Pet: Damage taken -5%',}},}
@@ -639,7 +639,7 @@ function init_gear_sets()
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
 		waist="Isa Belt",
 		left_ear="Enmerkar Earring",
-		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Pet: "Dbl. Atk."+7',}},
 		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		right_ring="Defending Ring",
 		back={ name="Artio's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Accuracy+20 Attack+20','Pet: Mag. Acc.+10','Pet: "Regen"+10','Pet: Damage taken -5%',}},}
@@ -656,7 +656,7 @@ function init_gear_sets()
 		neck={ name="Loricate Torque +1", augments={'Path: A',}},
 		waist="Isa Belt",
 		left_ear="Enmerkar Earring",
-		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','Pet: "Dbl. Atk."+7',}},
+		right_ear={ name="Nukumi Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Pet: "Dbl. Atk."+7',}},
 		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
 		right_ring="Defending Ring",
 		back={ name="Artio's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Accuracy+20 Attack+20','Pet: Mag. Acc.+10','Pet: "Regen"+10','Pet: Damage taken -5%',}},}
@@ -925,12 +925,19 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged.Hybrid = {
-		head="Malignance Chapeau",
-		body="Malignance Tabard",
-		hands="Malignance Gloves",
-		legs="Malignance Tights",
-		feet="Malignance Boots",
-		right_ring="Defending Ring",}
+		ammo="Staunch Tathlum +1",
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs={ name="Nyame Flanchard", augments={'Path: B',}},
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		neck={ name="Loricate Torque +1", augments={'Path: A',}},
+		waist="Flume Belt +1",
+		left_ear="Tuisto Earring",
+		right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+		left_ring={ name="Gelatinous Ring +1", augments={'Path: A',}},
+		right_ring="Defending Ring",
+		back={ name="Artio's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 		
 		
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
@@ -1076,12 +1083,6 @@ function job_aftercast(spell, action, spellMap, eventArgs)
 		
 		eventArgs.handled = true
 	end
-end
-
-function job_state_change(field, new_value, old_value)
- 
-
-	
 end
 
 function job_buff_change(buff,gain)
@@ -1353,7 +1354,7 @@ windower.register_event('zone change',
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
-        set_macro_page(1, 14)
+        set_macro_page(1, 9)
 end
 
 function set_lockstyle()

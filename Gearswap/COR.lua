@@ -102,7 +102,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'Aminon')
 	state.TreasureMode:options('Tag', 'None')
-	state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'RostamA', 'RostamC'}
+	state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Onion', 'RostamA', 'RostamC'}
 	state.RangeSet = M{['description']='Range Set', 'Fomalhaut', 'Armageddon', 'DeathPenalty', 'Earp', 'TP_Gun'}
 	state.Quickdraw = M{['description']='Quickdraw', 'Fire', 'Ice', 'Earth', 'Wind', 'Thunder', 'Water'}
 	state.CorsairShot = M{['description']='Corsair_Shot', 'Store_TP', 'Damage'}
@@ -224,8 +224,8 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.precast.JA['Snake Eye'] = {legs="Lanun Trews +3"}
-    sets.precast.JA['Wild Card'] = {feet="Lanun Bottes +3"}
-    sets.precast.JA['Random Deal'] = {body="Lanun Frac +3"}
+    sets.precast.JA['Wild Card'] = {feet="Lanun Bottes +4"}
+    sets.precast.JA['Random Deal'] = {body="Lanun Frac +4"}
 
 
     sets.precast.CorsairRoll = {
@@ -261,10 +261,10 @@ function init_gear_sets()
     sets.precast.FC = {
 		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
 		body={ name="Adhemar Jacket +1", augments={'HP+105','"Fast Cast"+10','Magic dmg. taken -4',}},
-		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
+		hands={ name="Leyline Gloves", augments={'Accuracy+5','"Mag.Atk.Bns."+7','"Fast Cast"+1',}},
 		legs={ name="Rawhide Trousers", augments={'MP+50','"Fast Cast"+5','"Refresh"+1',}},
 		feet={ name="Carmine Greaves +1", augments={'HP+80','MP+80','Phys. dmg. taken -4',}},
-		neck="Orunmila's Torque",
+		neck="Voltsurge Torque",
 		waist="Flume Belt +1",
 		left_ear="Loquac. Earring",
 		right_ear="Etiolation Earring",
@@ -322,9 +322,6 @@ function init_gear_sets()
 		--10% JP + 30% Flurry1 + 32% Gear SS / 30% Job Trait + 77% Gear RS
 		--72% SS 107% RS
 	
-		--Set used for Icarus Wing to maximize TP gain	
-	sets.precast.Wing = {}
-
     ------------------------------------------------------------------------------------------------
     ------------------------------------- Weapon Skill Sets ----------------------------------------
     ------------------------------------------------------------------------------------------------
@@ -337,7 +334,7 @@ function init_gear_sets()
 		body={ name="Ikenga's Vest", augments={'Path: A',}},
 		hands="Chasseur's Gants +3",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Lanun Bottes +3", augments={'Enhances "Wild Card" effect',}},
+		feet={ name="Lanun Bottes +4", augments={'Enhances "Wild Card" effect',}},
 		neck={ name="Comm. Charm +2", augments={'Path: A',}},
 		waist="Yemaya Belt",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -396,10 +393,10 @@ function init_gear_sets()
     sets.precast.WS['Leaden Salute'] = {
 		ammo=gear.MAbullet,
 		head="Pixie Hairpin +1",
-		body={ name="Lanun Frac +3", augments={'Enhances "Loaded Deck" effect',}},
+		body={ name="Lanun Frac +4", augments={'Enhances "Loaded Deck" effect',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Lanun Bottes +3", augments={'Enhances "Wild Card" effect',}},
+		feet={ name="Lanun Bottes +4", augments={'Enhances "Wild Card" effect',}},
 		neck={ name="Comm. Charm +2", augments={'Path: A',}},
 		waist="Skrymir Cord +1",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -413,10 +410,10 @@ function init_gear_sets()
     sets.precast.WS['Wildfire'] = {
 		ammo=gear.MAbullet,
 		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Lanun Frac +3", augments={'Enhances "Loaded Deck" effect',}},
+		body={ name="Lanun Frac +4", augments={'Enhances "Loaded Deck" effect',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Lanun Bottes +3", augments={'Enhances "Wild Card" effect',}},
+		feet={ name="Lanun Bottes +4", augments={'Enhances "Wild Card" effect',}},
 		neck={ name="Comm. Charm +2", augments={'Path: A',}},
 		waist="Skrymir Cord +1",
 		left_ear="Friomisi Earring",
@@ -431,7 +428,7 @@ function init_gear_sets()
 		body={ name="Nyame Mail", augments={'Path: B',}},
 		hands="Chasseur's Gants +3",
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Lanun Bottes +3", augments={'Enhances "Wild Card" effect',}},
+		feet={ name="Lanun Bottes +4", augments={'Enhances "Wild Card" effect',}},
 		neck="Fotia Gorget",
 		waist="Skrymir Cord +1",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -528,10 +525,10 @@ function init_gear_sets()
 	sets.precast.WS['Aeolian Edge'] = {
 		ammo=gear.MAbullet,
 		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Lanun Frac +3", augments={'Enhances "Loaded Deck" effect',}},
+		body={ name="Lanun Frac +4", augments={'Enhances "Loaded Deck" effect',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Lanun Bottes +3", augments={'Enhances "Wild Card" effect',}},
+		feet={ name="Lanun Bottes +4", augments={'Enhances "Wild Card" effect',}},
 		neck="Baetyl Pendant",
 		waist="Orpheus's Sash",
 		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
@@ -558,6 +555,9 @@ function init_gear_sets()
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
 		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
+		
+	sets.precast.Volte_Harness = set_combine(sets.precast.Wing, {body="Volte Harness"})
+	sets.precast.Prishes_Boots = set_combine(sets.precast.Wing, {feet="Prishe\'s Boots +1",})
 		
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
@@ -606,7 +606,7 @@ function init_gear_sets()
     sets.midcast.CorsairShot = {
 		ammo=gear.MAbullet,
 		head={ name="Nyame Helm", augments={'Path: B',}},
-		body={ name="Lanun Frac +3", augments={'Enhances "Loaded Deck" effect',}},
+		body={ name="Lanun Frac +4", augments={'Enhances "Loaded Deck" effect',}},
 		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
 		legs={ name="Nyame Flanchard", augments={'Path: B',}},
 		feet="Chass. Bottes +2",
@@ -801,11 +801,11 @@ function init_gear_sets()
 		legs="Chas. Culottes +3",
 		feet={ name="Carmine Greaves +1", augments={'HP+80','MP+80','Phys. dmg. taken -4',}},
 		neck="Iskur Gorget",
-		waist="Windbuffet Belt +1",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear="Telos Earring",
-		right_ear="Brutal Earring",
+		right_ear="Dedition Earring",
 		left_ring="Chirich Ring +1",
-		right_ring="Chirich Ring +1",
+		right_ring="Epona's Ring",
 		back="Null Shawl",}
 
     sets.engaged.Acc = {
@@ -822,9 +822,6 @@ function init_gear_sets()
 		right_ring="Chirich Ring +1",
 		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 
-    -- * DNC Subjob DW Trait: +15%
-    -- * NIN Subjob DW Trait: +25%
-
     -- Dual Wield Sets
     sets.engaged.DW = {
 		head="Malignance Chapeau",
@@ -833,13 +830,13 @@ function init_gear_sets()
 		legs="Chas. Culottes +3",
 		feet={ name="Carmine Greaves +1", augments={'HP+80','MP+80','Phys. dmg. taken -4',}},
 		neck="Iskur Gorget",
-		waist="Reiki Yotai",
-		left_ear="Telos Earring",
+		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+		left_ear="Suppanomimi",
 		right_ear="Dedition Earring",
 		left_ring="Chirich Ring +1",
-		right_ring="Chirich Ring +1",
+		right_ring="Epona's Ring",
 		back="Null Shawl",
-		} --52% +15% = 67%
+		}
 
     sets.engaged.DW.Acc = {
 		head={ name="Carmine Mask +1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
@@ -854,22 +851,50 @@ function init_gear_sets()
 		left_ring="Chirich Ring +1",
 		right_ring="Chirich Ring +1",
 		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},	--10%
-		} --31% + 15% = 46%
+		}
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Hybrid Sets -------------------------------------------
     ------------------------------------------------------------------------------------------------
 
     sets.engaged.Hybrid = {
-		head={ name="Nyame Helm", augments={'Path: B',}},	--7%
-		body="Malignance Tabard",  --9%
-		hands="Malignance Gloves", --5%
-		legs="Chas. Culottes +3",	--12%
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},	--7%
-		right_ear="Suppanomimi",
+		head="Malignance Chapeau",
+		body="Malignance Tabard",
+		hands="Malignance Gloves",
+		legs="Chas. Culottes +3",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
 		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
-        } -- 40%DT + 10% PDT Back Piece
+        }
 		
+	sets.engaged.Hybrid.Defense = {
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs="Chas. Culottes +3",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
+        }
+		
+    sets.engaged.Hybrid.DW = {
+		head="Malignance Chapeau",
+		body="Malignance Tabard",
+		hands="Malignance Gloves",
+		legs="Chas. Culottes +3",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		right_ear="Eabani Earring",
+		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
+        }
+		
+	sets.engaged.Hybrid.DW.Defense = {
+		head={ name="Nyame Helm", augments={'Path: B',}},
+		body={ name="Nyame Mail", augments={'Path: B',}},
+		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+		legs="Chas. Culottes +3",
+		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		right_ear="Eabani Earring",
+		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
+        }
+
 	--[[ Use this for a full Crit Set
 		{
 		head={ name="Blistering Sallet +1", augments={'Path: A',}},
@@ -885,17 +910,7 @@ function init_gear_sets()
 		right_ring="Mummu Ring",
 		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}	]]
 		
-	sets.engaged.Hybrid.Defense = {
-		head={ name="Nyame Helm", augments={'Path: B',}},																						--7%
-		body={ name="Nyame Mail", augments={'Path: B',}},																						--9%
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},																					--7%
-		legs="Chas. Culottes +3",																												--11%
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},																					--7%
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear="Eabani Earring",
-		right_ear="Suppanomimi",
-		back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
-        } -- 41% DT + 10% PDT Back Piece
+
 		
 		
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
@@ -903,10 +918,10 @@ function init_gear_sets()
 	sets.engaged.Defense = set_combine(sets.engaged, sets.engaged.Hybrid.Defense)
     sets.engaged.Acc.Defense = set_combine(sets.engaged.Acc, sets.engaged.Hybrid.Defense)
 
-    sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT = set_combine(sets.engaged.DW.Acc, sets.engaged.Hybrid)
-    sets.engaged.DW.Defense = set_combine(sets.engaged.DW, sets.engaged.Hybrid.Defense)
-    sets.engaged.DW.Acc.Defense = set_combine(sets.engaged.DW.Acc, sets.engaged.Hybrid.Defense)
+    sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid.DW)
+    sets.engaged.DW.Acc.DT = set_combine(sets.engaged.DW.Acc, sets.engaged.Hybrid.DW)
+    sets.engaged.DW.Defense = set_combine(sets.engaged.DW, sets.engaged.Hybrid.DW.Defense)
+    sets.engaged.DW.Acc.Defense = set_combine(sets.engaged.DW.Acc, sets.engaged.Hybrid.DW.Defense)
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
@@ -935,22 +950,34 @@ function init_gear_sets()
     sets.RostamA = {main={ name="Rostam", augments={'Path: A',}}, sub="Crepuscular Knife",}
     sets.RostamA.Acc = {main={ name="Rostam", augments={'Path: A',}}, sub="Crepuscular Knife",}
 	sets.RostamA.RAcc = {main={ name="Rostam", augments={'Path: A',}}, sub={ name="Kustawi +1", augments={'Path: A',}},}
+	
     sets.RostamC = {main={ name="Rostam", augments={'Path: C',}}, sub="Crepuscular Knife",}
     sets.RostamC.Acc = {main={ name="Rostam", augments={'Path: C',}}, sub="Crepuscular Knife",}
 	sets.RostamC.RAcc = {main={ name="Rostam", augments={'Path: C',}}, sub={ name="Kustawi +1", augments={'Path: A',}},}
+
 	sets.Naegling = {main="Naegling", sub="Crepuscular Knife",}
     sets.Naegling.Acc = {main="Naegling", sub="Crepuscular Knife",}
 	sets.Naegling.RAcc = {main="Naegling", sub={ name="Kustawi +1", augments={'Path: A',}},}
 	
+	sets.Onion = {main="Onion Sword III", sub="Crepuscular Knife",}
+    sets.Onion.Acc = {main="Onion Sword III", sub="Crepuscular Knife",}
+	sets.Onion.RAcc = {main="Onion Sword III", sub={ name="Kustawi +1", augments={'Path: A',}},}
+	
 	sets.RostamA.SW = {main={ name="Rostam", augments={'Path: A',}}, sub="Nusku Shield"}
     sets.RostamA.SW.Acc = {main={ name="Rostam", augments={'Path: A',}}, sub="Nusku Shield"}
 	sets.RostamA.SW.RAcc = {main={ name="Rostam", augments={'Path: A',}}, sub="Nusku Shield"}
+	
 	sets.RostamC.SW = {main={ name="Rostam", augments={'Path: C',}}, sub="Nusku Shield"}
-    sets.RostamC.SW.Acc = {main={ name="Rostam", augments={'Path: C',}}, sub="Nusku Shield"}
+    sets.RostamC.SW.Acc = {main={ name="Rostam", augments={'Path: C',}}, sub="Nusku Shield"}	
 	sets.RostamC.SW.RAcc = {main={ name="Rostam", augments={'Path: C',}}, sub="Nusku Shield"}
+	
 	sets.Naegling.SW = {main="Naegling", sub="Nusku Shield"}
     sets.Naegling.SW.Acc = {main="Naegling", sub="Nusku Shield"}
 	sets.Naegling.SW.RAcc = {main="Naegling", sub="Nusku Shield"}
+	
+	sets.Onion.SW = {main="Onion Sword III", sub="Nusku Shield"}
+    sets.Onion.SW.Acc = {main="Onion Sword III", sub="Nusku Shield"}
+	sets.Onion.SW.RAcc = {main="Onion Sword III", sub="Nusku Shield"}
 	
 	--Rangesets
 	sets.TP_Gun = {range="Anarchy +2",}
@@ -1712,36 +1739,3 @@ end
 function set_lockstyle()
     send_command('wait 2; input /lockstyleset ' .. lockstyleset)
 end
-
-fixed_pos = ''
-fixed_ts = os.time()
-
-local no_interruptions = true
-
-windower.raw_register_event('outgoing chunk',function(id,original,modified,injected,blocked)
-    if no_interruptions and (not blocked) then
-        if id == 0x15 then
-            if (gearswap.cued_packet or midaction()) and fixed_pos ~= '' and os.time()-fixed_ts < 5 then
-                return original:sub(1,4)..fixed_pos..original:sub(17)
-            else
-                fixed_pos = original:sub(5,16)
-                fixed_ts = os.time()
-            end
-        end
-    end
-end)
-
-register_unhandled_command(function (...)
-    local commands = {...}
-    if commands[1] and commands[1]:lower() == 'interrupts' then
-        if (no_interruptions) then
-            windower.add_to_chat(160, "%s : Disabling \30\2no_interruptions\30\43":format(_addon.name))
-            no_interruptions = false
-        else
-            windower.add_to_chat(160, "%s : Enabling \30\2no_interruptions\30\43":format(_addon.name))
-            no_interruptions = true
-        end
-        return true
-    end
-    return false
-end)

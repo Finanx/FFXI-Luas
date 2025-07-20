@@ -140,7 +140,7 @@ function init_gear_sets()
 		head="Ebers Cap +3",
 		body="Inyanga Jubbah +2",
 		hands={ name="Fanatic Gloves", augments={'MP+50','Healing magic skill +10','"Conserve MP"+7','"Fast Cast"+7',}},
-		legs={ name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}},
+		legs={ name="Kaykaus Tights +1", augments={'MP+80','Spell interruption rate down +12%','"Cure" spellcasting time -7%',}},
 		feet="Ebers Duckbills +3",
 		neck={ name="Clr. Torque +2", augments={'Path: A',}},
 		waist="Embla Sash",

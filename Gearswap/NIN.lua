@@ -190,9 +190,9 @@ function init_gear_sets()
 		ammo="Sapience Orb",
 		head={ name="Herculean Helm", augments={'Mag. Acc.+6','"Fast Cast"+6','INT+6','"Mag.Atk.Bns."+2',}},
 		body={ name="Adhemar Jacket +1", augments={'HP+105','"Fast Cast"+10','Magic dmg. taken -4',}},
-		hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
+		hands={ name="Leyline Gloves", augments={'Accuracy+5','"Mag.Atk.Bns."+7','"Fast Cast"+1',}},
 		legs={ name="Rawhide Trousers", augments={'MP+50','"Fast Cast"+5','"Refresh"+1',}},
-		feet={ name="Herculean Boots", augments={'"Fast Cast"+6','MND+5',}},
+		feet={ name="Herculean Boots", augments={'Mag. Acc.+17','"Fast Cast"+6','VIT+6',}},
 		neck="Orunmila's Torque",
 		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 		left_ear="Loquac. Earring",
@@ -222,7 +222,21 @@ function init_gear_sets()
 		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},}
 	
 		--Set used for Icarus Wing to maximize TP gain	
-	sets.precast.Wing = {}
+	sets.precast.Wing = {
+		ammo="Aurgelmir Orb +1",
+		head="Malignance Chapeau",
+		body="Malignance Tabard",
+		hands="Malignance Gloves",
+		legs="Malignance Tights",
+		feet="Malignance Boots",
+		waist="Gerdr Belt +1",
+		left_ear="Dedition Earring",
+		left_ring="Chirich Ring +1",
+		right_ring="Chirich Ring +1",
+		}
+		
+	sets.precast.Volte_Harness = set_combine(sets.precast.Wing, {body="Volte Harness"})
+	sets.precast.Prishes_Boots = set_combine(sets.precast.Wing, {feet="Prishe\'s Boots +1",})
 
     ------------------------------------------------------------------------------------------------
     ------------------------------------- Weapon Skill Sets ----------------------------------------
