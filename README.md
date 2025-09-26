@@ -1,5 +1,3 @@
-I no longer Play FFXI and don't update these luas or scripts
-
 # FFXI-Luas
 
 Gearswap files
