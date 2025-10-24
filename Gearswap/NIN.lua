@@ -167,10 +167,10 @@ function user_unload()
 	--Remove Gear for Ninja
 	
 	send_command('wait 1; org get Store.lua')
-	send_command('wait 4;put Shihei all')
-	send_command('wait 4;put Inoshishinofuda all')
-	send_command('wait 4;put Shikanofuda all')
-	send_command('wait 4;put Chonofuda all')
+	send_command('wait 4;put Shihei Satchel all')
+	send_command('wait 4;put Inoshishinofuda Satchel all')
+	send_command('wait 4;put Shikanofuda Satchel all')
+	send_command('wait 4;put Chonofuda Satchel all')
 	
 end
 
@@ -298,272 +298,499 @@ function init_gear_sets()
 
 	sets.precast.WS.FullTPPhysical = {left_ear={ name="Lugra Earring +1", augments={'Path: A',}},right_ear={ name="Hattori Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Store TP"+8','DEX+15 AGI+15',}},}
 	sets.precast.WS.FullTPMagical = {left_ear={ name="Lugra Earring +1", augments={'Path: A',}},right_ear="Friomisi Earring",}
-
-    sets.precast.WS['Blade: Hi'] = {
-		ammo="Yetshila +1",
-		head="Hachiya Hatsu. +3",
-		body="Hattori Ningi +3",
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Hattori Kyahan +3",
-		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
-		waist="Gerdr Belt +1",
-		left_ear="Odr Earring",
-		right_ear={ name="Lugra Earring +1", augments={'Path: A',}},
-		left_ring="Gere Ring",
-		right_ring="Regal Ring",
-		back={ name="Andartia's Mantle", augments={'AGI+20','Accuracy+20 Attack+20','AGI+10','Crit.hit rate+10',}},}
-		
-    sets.precast.WS['Blade: Hi'].ATKCAP = {
-		ammo="Yetshila +1",
-		head="Hachiya Hatsu. +3",
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Mpaca's Hose", augments={'Path: A',}},
-		feet="Hattori Kyahan +3",
-		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
-		waist="Gerdr Belt +1",
-		left_ear="Odr Earring",
-		right_ear={ name="Hattori Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Store TP"+8','DEX+15 AGI+15',}},
-		left_ring="Sroda Ring",
-		right_ring="Regal Ring",
-		back={ name="Andartia's Mantle", augments={'AGI+20','Accuracy+20 Attack+20','AGI+10','Crit.hit rate+10',}},}
-
-    sets.precast.WS['Blade: Ten'] = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Mpaca's Cap", augments={'Path: A',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Hattori Kyahan +3",
-		neck="Rep. Plat. Medal",
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear={ name="Lugra Earring +1", augments={'Path: A',}},
-		left_ring="Regal Ring",
-		right_ring="Epaminondas's Ring",
-		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-		
-    sets.precast.WS['Blade: Ten'].ATKCAP = {
-		ammo="Crepuscular Pebble",
-		head={ name="Mpaca's Cap", augments={'Path: A',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Hattori Kyahan +3",
-		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear={ name="Hattori Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Store TP"+8','DEX+15 AGI+15',}},
-		left_ring="Sroda Ring",
-		right_ring="Epaminondas's Ring",
-		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-		
+	
+    ------------------------------------------------------------------------------------------------
+    ----------------------------------Sword Weapon Skill Sets --------------------------------------
+    ------------------------------------------------------------------------------------------------
+	
 	sets.precast.WS['Savage Blade'] = {
-		ammo={ name="Seeth. Bomblet +1", augments={'Path: A',}},
-		head="Mpaca's Cap",
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Hattori Kyahan +3",
+		ammo="Seeth. Bomblet +1",
+		head="Hachi. Hatsu. +4",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Hattori Kyahan +2",
 		neck="Rep. Plat. Medal",
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear={ name="Lugra Earring +1", augments={'Path: A',}},
-		left_ring="Sroda Ring",
+		waist="Sailfi Belt +1",
+		left_ear="Moonshade Earring",
+		right_ear="Alabaster Earring",
+		left_ring="Ephramad's Ring",
 		right_ring="Epaminondas's Ring",
-		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},}
 		
 	sets.precast.WS['Savage Blade'].ATKCAP = {
 		ammo="Crepuscular Pebble",
-		head="Mpaca's Cap",
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Hattori Kyahan +3",
+		head="Hachi. Hatsu. +4",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Hattori Kyahan +2",
 		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear={ name="Hattori Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Store TP"+8','DEX+15 AGI+15',}},
-		left_ring="Sroda Ring",
-		right_ring="Epaminondas's Ring",
-		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-		
-    sets.precast.WS['Blade: Shun'] = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Mpaca's Cap", augments={'Path: A',}},
-		body="Hattori Ningi +3",
-		hands="Hattori Tekko +3",
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Hattori Kyahan +3",
-		neck="Fotia Gorget",
-		waist="Fotia Belt",
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear={ name="Lugra Earring +1", augments={'Path: A',}},
-		left_ring="Gere Ring",
-		right_ring="Regal Ring",
-		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10',}},}
-		
-    sets.precast.WS['Blade: Shun'].ATKCAP = {
-		ammo="Crepuscular Pebble",
-		head={ name="Mpaca's Cap", augments={'Path: A',}},
-		body="Malignance Tabard",
-		hands="Malignance Gloves",
-		legs={ name="Mpaca's Hose", augments={'Path: A',}},
-		feet="Hattori Kyahan +3",
-		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
-		waist="Fotia Belt",
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear={ name="Hattori Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Store TP"+8','DEX+15 AGI+15',}},
-		left_ring="Gere Ring",
-		right_ring="Regal Ring",
-		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10',}},}
-
-    sets.precast.WS['Blade: Ku'] = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Mpaca's Cap", augments={'Path: A',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Mochizuki Tekko +3", augments={'Enh. "Ninja Tool Expertise" effect',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet="Hattori Kyahan +3",
-		neck="Fotia Gorget",
-		waist="Fotia Belt",
-		left_ear={ name="Lugra Earring +1", augments={'Path: A',}},
-		right_ear={ name="Hattori Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Store TP"+8','DEX+15 AGI+15',}},
-		left_ring="Gere Ring",
-		right_ring="Regal Ring",
-		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10',}},}
-		
-    sets.precast.WS['Blade: Ku'].ATKCAP = {
-		ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-		head={ name="Mpaca's Cap", augments={'Path: A',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands="Malignance Gloves",
-		legs={ name="Mpaca's Hose", augments={'Path: A',}},
-		feet="Hattori Kyahan +3",
-		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
-		waist="Fotia Belt",
-		left_ear={ name="Lugra Earring +1", augments={'Path: A',}},
-		right_ear={ name="Hattori Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Store TP"+8','DEX+15 AGI+15',}},
-		left_ring="Gere Ring",
+		waist="Sailfi Belt +1",
+		left_ear="Moonshade Earring",
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Store TP"+5',}},
+		left_ring="Ephramad's Ring",
 		right_ring="Sroda Ring",
-		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10',}},}
-
-    sets.precast.WS['Blade: Kamu'] = {
-		ammo={ name="Seeth. Bomblet +1", augments={'Path: A',}},
-		head={ name="Mpaca's Cap", augments={'Path: A',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Fotia Gorget",
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Lugra Earring +1", augments={'Path: A',}},
-		right_ear={ name="Hattori Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Store TP"+8','DEX+15 AGI+15',}},
-		left_ring="Gere Ring",
-		right_ring="Regal Ring",
-		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},}
 		
-    sets.precast.WS['Blade: Kamu'].ATKCAP = {
-		ammo="Crepuscular Pebble",
-		head={ name="Mpaca's Cap", augments={'Path: A',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Mpaca's Hose", augments={'Path: A',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+	sets.precast.WS['Fast Blade II'] = {
+		ammo="Coiste Bodhar",
+		head="Mpaca's Cap",
+		body="Hattori Ningi +2",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Hattori Kyahan +2",
 		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
-		waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-		left_ear={ name="Lugra Earring +1", augments={'Path: A',}},
-		right_ear={ name="Hattori Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Store TP"+8','DEX+15 AGI+15',}},
-		left_ring="Sroda Ring",
-		right_ring="Regal Ring",
-		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
-
-    sets.precast.WS['Blade: Chi'] = {
-		ammo={ name="Seeth. Bomblet +1", augments={'Path: A',}},
-		head={ name="Mochi. Hatsuburi +3", augments={'Enhances "Yonin" and "Innin" effect',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
-		neck="Fotia Gorget",
-		waist="Orpheus's Sash",
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear={ name="Lugra Earring +1", augments={'Path: A',}},
-		left_ring="Gere Ring",
-		right_ring="Epaminondas's Ring",
-		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},}
+		waist="Sailfi Belt +1",
+		left_ear="Moonshade Earring",
+		right_ear="Alabaster Earring",
+		left_ring="Ephramad's Ring",
+		right_ring="Gere Ring",
+		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 		
-	sets.precast.WS['Blade: Teki'] = sets.precast.WS['Blade: Chi']
-    sets.precast.WS['Blade: To'] = sets.precast.WS['Blade: Chi']
-	sets.precast.WS['Tachi: Jinpu'] = sets.precast.WS['Blade: Chi']
-	sets.precast.WS['Tachi: Kagero'] = sets.precast.WS['Blade: Chi']
-	sets.precast.WS['Tachi: Goten'] = sets.precast.WS['Blade: Chi']
-	sets.precast.WS['Tachi: Koki'] = sets.precast.WS['Blade: Chi']	
+	sets.precast.WS['Fast Blade II'].ATKCAP = {
+		ammo="Coiste Bodhar",
+		head="Mpaca's Cap",
+		body="Malignance Tabard",
+		hands="Nyame Gauntlets",
+		legs="Mpaca's Hose",
+		feet="Ken. Sune-Ate +1",
+		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
+		waist="Sailfi Belt +1",
+		left_ear="Moonshade Earring",
+		right_ear="Alabaster Earring",
+		left_ring="Ephramad's Ring",
+		right_ring="Gere Ring",
+		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 		
-	sets.precast.WS['Blade: Ei'] = {
-		ammo={ name="Seeth. Bomblet +1", augments={'Path: A',}},
-		head="Pixie Hairpin +1",
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+	sets.precast.WS['Sanguine Blade'] = {
+		ammo="Seeth. Bomblet +1",
+		head="Mochi. Hatsu. +4",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Nyame Sollerets",
 		neck="Sibyl Scarf",
 		waist="Orpheus's Sash",
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		left_ear="Friomisi Earring",
+		right_ear="Alabaster Earring",
+		left_ring="Epaminondas's Ring",
+		right_ring="Archon Ring",
+		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},}
+		
+    ------------------------------------------------------------------------------------------------
+    ----------------------------------Katana Weapon Skill Sets -------------------------------------
+    ------------------------------------------------------------------------------------------------
+
+    sets.precast.WS['Blade: Shun'] = {
+		ammo="Coiste Bodhar",
+		head="Mpaca's Cap",
+		body="Malignance Tabard",
+		hands="Malignance Gloves",
+		legs="Mpaca's Hose",
+		feet="Hattori Kyahan +2",
+		neck="Fotia Gorget",
+		waist="Fotia Belt",
+		left_ear="Lugra Earring +1",
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Store TP"+5',}},
+		left_ring="Ephramad's Ring",
+		right_ring="Gere Ring",
+		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+		
+    sets.precast.WS['Blade: Shun'].ATKCAP = {
+		ammo="Coiste Bodhar",
+		head="Ken. Jinpachi +1",
+		body="Malignance Tabard",
+		hands="Malignance Gloves",
+		legs="Mpaca's Hose",
+		feet="Ken. Sune-Ate +1",
+		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
+		waist="Fotia Belt",
+		left_ear="Lugra Earring +1",
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Store TP"+5',}},
+		left_ring="Ephramad's Ring",
+		right_ring="Gere Ring",
+		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+
+    sets.precast.WS['Blade: Ten'] = {
+		ammo="Seeth. Bomblet +1",
+		head="Mpaca's Cap",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Nyame Sollerets",
+		neck="Rep. Plat. Medal",
+		waist="Sailfi Belt +1",
+		left_ear="Moonshade Earring",
+		right_ear="Alabaster Earring",
+		left_ring="Regal Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},}
+		
+    sets.precast.WS['Blade: Ten'].ATKCAP = {
+		ammo="Crepuscular Pebble",
+		head="Hachi. Hatsu. +4",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Hattori Kyahan +2",
+		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
+		waist="Sailfi Belt +1",
+		left_ear="Moonshade Earring",
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Store TP"+5',}},
+		left_ring="Sroda Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},}
+		
+    sets.precast.WS['Blade: Chi'] = {
+		ammo="Seeth. Bomblet +1",
+		head="Mochi. Hatsu. +4",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Nyame Sollerets",
+		neck="Fotia Gorget",
+		waist="Orpheus's Sash",
+		left_ear="Moonshade Earring",
+		right_ear="Alabaster Earring",
+		left_ring="Gere Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},}
+		
+    sets.precast.WS['Blade: Chi'].ATKCAP = {
+		ammo="Seeth. Bomblet +1",
+		head="Mochi. Hatsu. +4",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Nyame Sollerets",
+		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
+		waist="Orpheus's Sash",
+		left_ear="Moonshade Earring",
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Store TP"+5',}},
+		left_ring="Gere Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},}
+		
+	sets.precast.WS['Blade: Teki'] = sets.precast.WS['Blade: Chi']
+	sets.precast.WS['Blade: Teki'].ATKCAP = sets.precast.WS['Blade: Chi'].ATKCAP
+    sets.precast.WS['Blade: To'] = sets.precast.WS['Blade: Chi']
+    sets.precast.WS['Blade: To'].ATKCAP = sets.precast.WS['Blade: Chi'].ATKCAP
+
+    sets.precast.WS['Blade: Hi'] = {
+		ammo="Yetshila +1",
+		head="Hachi. Hatsu. +4",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Hattori Kyahan +2",
+		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
+		waist="Gerdr Belt +1",
+		left_ear="Odr Earring",
+		right_ear="Alabaster Earring",
+		left_ring="Regal Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},}
+		
+    sets.precast.WS['Blade: Hi'].ATKCAP = {
+		ammo="Yetshila +1",
+		head="Hachi. Hatsu. +4",
+		body="Nyame Mail",
+		hands="Malignance Gloves",
+		legs="Nyame Flanchard",
+		feet="Hattori Kyahan +2",
+		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
+		waist="Gerdr Belt +1",
+		left_ear="Alabaster Earring",
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Store TP"+5',}},
+		left_ring="Regal Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},}
+
+    sets.precast.WS['Blade: Ku'] = {
+		ammo="Coiste Bodhar",
+		head="Mpaca's Cap",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Hattori Kyahan +2",
+		neck="Fotia Gorget",
+		waist="Fotia Belt",
+		left_ear="Alabaster Earring",
+		right_ear="Lugra Earring +1",
+		left_ring="Gere Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+		
+    sets.precast.WS['Blade: Ku'].ATKCAP = {
+		ammo="Crepuscular Pebble",
+		head="Blistering Sallet +1",
+		body="Nyame Mail",
+		hands="Malignance Gloves",
+		legs="Mpaca's Hose",
+		feet="Hattori Kyahan +2",
+		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
+		waist="Fotia Belt",
+		left_ear="Lugra Earring +1",
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Store TP"+5',}},
+		left_ring="Gere Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+
+    sets.precast.WS['Blade: Kamu'] = {
+		ammo="Coiste Bodhar",
+		head="Nyame Helm",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Mpaca's Hose",
+		feet="Nyame Sollerets",
+		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
+		waist="Sailfi Belt +1",
+		left_ear="Lugra Earring +1",
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Store TP"+5',}},
+		left_ring="Gere Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},}
+		
+    sets.precast.WS['Blade: Kamu'].ATKCAP = {
+		ammo="Coiste Bodhar",
+		head="Nyame Helm",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Mpaca's Hose",
+		feet="Nyame Sollerets",
+		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
+		waist="Sailfi Belt +1",
+		left_ear="Lugra Earring +1",
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Store TP"+5',}},
+		left_ring="Gere Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},}
+		
+    sets.precast.WS['Blade: Jin'] = {
+		ammo="Yetshila +1",
+		head={ name="Adhemar Bonnet +1", augments={'STR+12','DEX+12','Attack+20',}},
+		body="Mpaca's Doublet",
+		hands={ name="Ryuo Tekko +1", augments={'DEX+12','Accuracy+25','"Dbl.Atk."+4',}},
+		legs="Mpaca's Hose",
+		feet="Ken. Sune-Ate +1",
+		neck="Fotia Gorget",
+		waist="Fotia Belt",
+		left_ear="Odr Earring",
+		right_ear="Lugra Earring +1",
+		left_ring="Gere Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+		
+    sets.precast.WS['Blade: Jin'].ATKCAP = {
+		ammo="Yetshila +1",
+		head={ name="Adhemar Bonnet +1", augments={'STR+12','DEX+12','Attack+20',}},
+		body="Mpaca's Doublet",
+		hands={ name="Ryuo Tekko +1", augments={'DEX+12','Accuracy+25','"Dbl.Atk."+4',}},
+		legs="Mpaca's Hose",
+		feet="Ken. Sune-Ate +1",
+		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
+		waist="Fotia Belt",
+		left_ear="Lugra Earring +1",
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Store TP"+5',}},
+		left_ring="Gere Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+
+	sets.precast.WS['Blade: Ei'] = {
+		ammo="Seeth. Bomblet +1",
+		head="Mochi. Hatsu. +4",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Nyame Sollerets",
+		neck="Baetyl Pendant",
+		waist="Orpheus's Sash",
+		left_ear="Moonshade Earring",
 		right_ear="Friomisi Earring",
 		left_ring="Epaminondas's Ring",
 		right_ring="Archon Ring",
-		back={ name="Andartia's Mantle", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}},}
+		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},}
 
-	sets.precast.WS['Sanguine Blade'] = sets.precast.WS['Blade: Ei']
-		
 	sets.precast.WS['Blade: Yu'] = {
-		ammo={ name="Seeth. Bomblet +1", augments={'Path: A',}},
-		head={ name="Mochi. Hatsuburi +3", augments={'Enhances "Yonin" and "Innin" effect',}},
-		body={ name="Nyame Mail", augments={'Path: B',}},
-		hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-		legs={ name="Nyame Flanchard", augments={'Path: B',}},
-		feet={ name="Nyame Sollerets", augments={'Path: B',}},
+		ammo="Ghastly Tathlum +1",
+		head="Mochi. Hatsu. +4",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Nyame Sollerets",
 		neck="Baetyl Pendant",
 		waist="Orpheus's Sash",
-		left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+		left_ear="Crematio Earring",
 		right_ear="Friomisi Earring",
 		left_ring="Epaminondas's Ring",
 		right_ring="Dingir Ring",
-		back={ name="Andartia's Mantle", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}},}
+		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},}
 		
-	sets.precast.WS['Aeolian Edge'] = sets.precast.WS['Blade: Yu']
+    ------------------------------------------------------------------------------------------------
+    -------------------------------Great Katana Weapon Skill Sets ----------------------------------
+    ------------------------------------------------------------------------------------------------
+	
+	sets.precast.WS['Tachi: Ageha'] = {
+	    ammo="Yamarang",
+		head="Hachi. Hatsu. +4",
+		body="Hattori Ningi +2",
+		hands="Hattori Tekko +2",
+		legs="Mpaca's Hose",
+		feet="Hachiya Kyahan +4",
+		neck="Null Loop",
+		waist="Null Belt",
+		left_ear="Alabaster Earring",
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Store TP"+5',}},
+		left_ring="Metamor. Ring +1",
+		right_ring="Murky Ring",
+		back="Null Shawl",}
+	
+	sets.precast.WS['Tachi: Jinpu'] = {
+	    ammo="Seeth. Bomblet +1",
+		head="Mpaca's Cap",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Nyame Sollerets",
+		neck="Fotia Gorget",
+		waist="Orpheus's Sash",
+		left_ear="Moonshade Earring",
+		right_ear="Friomisi Earring",
+		left_ring="Ephramad's Ring",
+		right_ring="Gere Ring",
+		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},}
+		
+	sets.precast.WS['Tachi: Jinpu'].ATKCAP = {
+	    ammo="Seeth. Bomblet +1",
+		head="Mpaca's Cap",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Nyame Sollerets",
+		neck="Fotia Gorget",
+		waist="Orpheus's Sash",
+		left_ear="Moonshade Earring",
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Store TP"+5',}},
+		left_ring="Ephramad's Ring",
+		right_ring="Gere Ring",
+		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},}
+	
+	sets.precast.WS['Tachi: Kagero'] = sets.precast.WS['Tachi: Jinpu']
+	sets.precast.WS['Tachi: Goten'] = sets.precast.WS['Tachi: Jinpu']
+	sets.precast.WS['Tachi: Koki'] = sets.precast.WS['Tachi: Jinpu']
+	sets.precast.WS['Tachi: Kagero'].ATKCAP = sets.precast.WS['Tachi: Jinpu'].ATKCAP
+	sets.precast.WS['Tachi: Goten'].ATKCAP = sets.precast.WS['Tachi: Jinpu'].ATKCAP
+	sets.precast.WS['Tachi: Koki'].ATKCAP = sets.precast.WS['Tachi: Jinpu'].ATKCAP
+	
+	sets.precast.WS['Tachi: Kasha'] = {
+	    ammo="Crepuscular Pebble",
+		head="Mpaca's Cap",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Nyame Sollerets",
+		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
+		waist="Sailfi Belt +1",
+		left_ear="Moonshade Earring",
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Store TP"+5',}},
+		left_ring="Ephramad's Ring",
+		right_ring="Sroda Ring",
+		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},}
+		
+	sets.precast.WS['Tachi: Kasha'].ATKCAP = {
+		ammo="Crepuscular Pebble",
+		head="Mpaca's Cap",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Hattori Kyahan +2",
+		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
+		waist="Sailfi Belt +1",
+		left_ear="Moonshade Earring",
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Store TP"+5',}},
+		left_ring="Ephramad's Ring",
+		right_ring="Sroda Ring",
+		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},}
+	
+    ------------------------------------------------------------------------------------------------
+    ----------------------------------Dagger Weapon Skill Sets -------------------------------------
+    ------------------------------------------------------------------------------------------------
+	
+	sets.precast.WS['Aeolian Edge'] = {
+	    ammo="Ghastly Tathlum +1",
+		head="Mochi. Hatsu. +4",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Nyame Sollerets",
+		neck="Sibyl Scarf",
+		waist="Orpheus's Sash",
+		left_ear="Moonshade Earring",
+		right_ear="Friomisi Earring",
+		left_ring="Epaminondas's Ring",
+		right_ring="Dingir Ring",
+		back={ name="Andartia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},}
 		
 	sets.precast.WS['Evisceration'] = {
 		ammo="Yetshila +1",
-		head={ name="Blistering Sallet +1", augments={'Path: A',}},
-		body="Hattori Ningi +3",
+		head={ name="Adhemar Bonnet +1", augments={'STR+12','DEX+12','Attack+20',}},
+		body="Mpaca's Doublet",
 		hands={ name="Ryuo Tekko +1", augments={'DEX+12','Accuracy+25','"Dbl.Atk."+4',}},
-		legs={ name="Mpaca's Hose", augments={'Path: A',}},
-		feet="Ken. Sune-Ate +1",
-		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
-		waist="Fotia Belt",
-		left_ear="Odr Earring",
-		right_ear={ name="Lugra Earring +1", augments={'Path: A',}},
-		left_ring="Gere Ring",
-		right_ring="Regal Ring",
-		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}
-		
-	sets.precast.WS['Evisceration'].ATKCAP = {
-		ammo="Yetshila +1",
-		head={ name="Blistering Sallet +1", augments={'Path: A',}},
-		body="Hattori Ningi +3",
-		hands={ name="Ryuo Tekko +1", augments={'DEX+12','Accuracy+25','"Dbl.Atk."+4',}},
-		legs={ name="Mpaca's Hose", augments={'Path: A',}},
+		legs="Mpaca's Hose",
 		feet="Ken. Sune-Ate +1",
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
 		left_ear="Odr Earring",
-		right_ear={ name="Hattori Earring +2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Store TP"+8','DEX+15 AGI+15',}},
+		right_ear="Lugra Earring +1",
 		left_ring="Gere Ring",
-		right_ring="Begrudging Ring",
-		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},}
+		right_ring="Ephramad's Ring",
+		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+		
+	sets.precast.WS['Evisceration'].ATKCAP = {
+		ammo="Yetshila +1",
+		head={ name="Adhemar Bonnet +1", augments={'STR+12','DEX+12','Attack+20',}},
+		body="Mpaca's Doublet",
+		hands={ name="Ryuo Tekko +1", augments={'DEX+12','Accuracy+25','"Dbl.Atk."+4',}},
+		legs="Mpaca's Hose",
+		feet="Ken. Sune-Ate +1",
+		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
+		waist="Fotia Belt",
+		left_ear="Odr Earring",
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Store TP"+5',}},
+		left_ring="Gere Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+		
+	sets.precast.WS['Exenterator'] = {
+		ammo="Coiste Bodhar",
+		head="Mpaca's Cap",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Hattori Kyahan +2",
+		neck="Fotia Gorget",
+		waist="Fotia Belt",
+		left_ear="Lugra Earring +1",
+		right_ear="Alabaster Earring",
+		left_ring="Gere Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
+		
+	sets.precast.WS['Exenterator'].ATKCAP = {
+		ammo="Crepuscular Pebble",
+		head="Hachi. Hatsu. +4",
+		body="Malignance Tabard",
+		hands="Malignance Gloves",
+		legs="Mpaca's Hose",
+		feet="Hattori Kyahan +2",
+		neck={ name="Ninja Nodowa +2", augments={'Path: A',}},
+		waist="Fotia Belt",
+		left_ear="Alabaster Earring",
+		right_ear={ name="Hattori Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+14','Mag. Acc.+14','"Store TP"+5',}},
+		left_ring="Gere Ring",
+		right_ring="Ephramad's Ring",
+		back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},}
 		
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
@@ -611,11 +838,11 @@ function init_gear_sets()
 		
     sets.midcast.EnfeeblingNinjutsu = {
 		ammo="Yamarang",
-		head="Hachiya Hatsu. +3",
+		head="Hachi. Hatsu. +4",
 		body="Mpaca's Doublet",
 		hands="Hattori Tekko +2",
 		legs="Mpaca's Hose",
-		feet="Hachiya Kyahan +3",
+		feet="Hachiya Kyahan +4",
 		neck="Null Loop",
 		waist="Null Belt",
 		left_ear="Alabaster Earring",
@@ -853,7 +1080,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 	
-	sets.NightMovement = {feet="Hachiya Kyahan +3"}
+	sets.NightMovement = {feet="Hachiya Kyahan +4"}
 	sets.DayMovement = {right_ring="Shneddick Ring",}
 	
 	sets.TreasureHunter = {
@@ -954,7 +1181,7 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 					end
 				end
 			end
-			if state.WeaponSet.value == "Kaja_Tachi" or state.WeaponSet.value == "Hachimonji" then
+			if state.WeaponSet.value == "Kaja_Tachi" then
 				if player.tp > 2900 then
 					if spell.english == "Blade: Chi" or spell.english == "Blade: Teki" or spell.english == "Blade: To" or spell.english == "Blade: Ei" or spell.english == "Blade: Yu" or 
 						spell.english == "Tachi: Jinpu" or spell.english == "Tachi: Kagero" or spell.english == "Tachi: Goten" or spell.english == "Tachi: Koki" or spell.english == "Aeolian Edge" then
